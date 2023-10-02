@@ -44,6 +44,8 @@ export const useStream = async(state, dispatch) => {
 			if (jsonData == "[DONE]") 
 			{
 				stream_chat.close();
+				// state.messages.push(state.response);
+				state.user = 'agent';
 
 				return dispatch({ type: 'STOP_AGENT_STREAM' });
 			} 
@@ -78,6 +80,6 @@ export const usePost = async(state, dispatch) => {
 	formData.append("links", "");
 	formData.append("temperature", "0.1");
 
-	const res = await useFetch(apiUrl, 'POST', {data: formData, headers});
+	await useFetch(apiUrl, 'POST', {data: formData, headers});
 	await useStream(state, dispatch);
 }
