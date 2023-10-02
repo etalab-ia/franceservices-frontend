@@ -63,7 +63,7 @@
 
 	/* AGENT */
 
-	.agent-chat {
+	.chat {
 		@apply flex;
 		@apply flex-col;
 		@apply pb-[4vw];
