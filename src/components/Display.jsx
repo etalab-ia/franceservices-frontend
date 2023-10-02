@@ -3,8 +3,6 @@ import React from 'react'
 export function Display(props) {
 
 	const	{ state, dispatch } = props;
-
-	console.log(state.messages)
 	
 	return (
 		<div className="agent-chat">
