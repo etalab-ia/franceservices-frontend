@@ -48,23 +48,20 @@
 	.user-chat {
 		@apply bg-[#F5F5FE];
 		@apply flex;
-		@apply justify-end;
 		@apply w-fit;
 		@apply p-4;
 		@apply rounded-[90px];
 		@apply mt-0;
 		@apply ml-auto;
-	}
-
-	.agent-chat {
-		@apply flex;
-		@apply flex-col;
-		@apply pb-[4vw];
+		@apply mb-[4vw];
 	}
 
 	/* AGENT */
 
 	.agent-chat {
+		@apply flex;
+		@apply flex-col;
+		@apply pb-[4vw];
 		@apply border;
 		@apply h-[550px];
 		@apply w-[648px];
