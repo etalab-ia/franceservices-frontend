@@ -11,7 +11,7 @@ export function Display(props) {
 					return ;
 				else if (message.sender === 'user')
 					return <div className='user-chat' key={index}>{message.text}</div>
-				return <div className='mb-[4vw]' key={index}>{message.text}</div>
+				return <div className='agent-chat' key={index}>{message.text}</div>
 			})}
 			{state.response}
 		</div>
