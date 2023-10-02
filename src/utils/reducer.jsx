@@ -35,6 +35,7 @@ export const bodyInput = <Input
 export const initialState = {
 	question: initialQuestion,
 	availableFields: initialFields,
+	messages: [],
 
 	userFields: [bodyInput],
 	sheets: [],
@@ -49,6 +50,7 @@ export const initialState = {
 	generate: false,
 	userEdition: false,
 	isEditable: false,
+	user: 'user',
 }
 
 export const reducer = (state, action) => {
@@ -61,6 +63,7 @@ export const reducer = (state, action) => {
 		case 'SET_USER_TEXT':
 			return {
 				...state,
+				user: 'user',
 				question: {
 					...state.question,
 					user_text: action.nextUserText,
@@ -158,6 +161,7 @@ export const reducer = (state, action) => {
 		case 'GET_AGENT_STREAM':
 			return {
 				...state,
+				user: 'agent',
 				response: [...state.response, action.nextResponse],
 			}
 		case 'EDIT_AGENT_STREAM':
@@ -186,6 +190,7 @@ export const reducer = (state, action) => {
 			return {
 				...state,
 				isStoppable: false,
+				user: 'agent'
 			}
 	  	default: {
 			return state
