@@ -16,11 +16,18 @@ export function UserMessage(props) {
 	const	handleClick = () => {
 		dispatch({ type: 'SET_USER_TEXT', nextUserText: currQuestion});
 
-		const newMessage = {
+			
+		const joinedRes = state.response.join('');
+		const newAgentMessage = {
+			text: joinedRes,
+			sender: 'agent'
+		}
+		dispatch({ type: 'SET_MESSAGES', nextMessage: newAgentMessage })
+		const newUserMessage = {
 			text: currQuestion,
 			sender: 'user'
 		}
-		dispatch({ type: 'SET_MESSAGES', nextMessage: newMessage })
+		dispatch({ type: 'SET_MESSAGES', nextMessage: newUserMessage })
 
 		usePost(state, dispatch);
 	}

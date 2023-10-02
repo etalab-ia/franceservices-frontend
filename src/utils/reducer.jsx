@@ -55,7 +55,6 @@ export const initialState = {
 export const reducer = (state, action) => {
 	switch (action.type) {
 		case 'SET_MESSAGES': 
-		console.log('next: ', action.nextMessage)
 			return {
 				...state,
 				messages: [...state.messages, action.nextMessage]
