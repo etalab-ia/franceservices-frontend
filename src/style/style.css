@@ -7,7 +7,7 @@
 	/* GLOBAL */
 
 	.header-container {
-		@apply fixed;
+		@apply sticky;
 		@apply top-0;
 		@apply w-full;
 		@apply z-10;
@@ -15,7 +15,6 @@
 
 	.wrapper-container {
 		@apply flex;
-		@apply items-center;
 		@apply w-screen;
 		@apply h-screen;
 	}
@@ -36,17 +35,42 @@
 	.user-chat {
 		@apply flex;
 		@apply w-[1200px];
-		@apply p-6;
+		/* @apply p-6; */
 	}
 
 	/* AGENT */
 
 	.agent-chat {
 		@apply border;
-		@apply p-6;
+		/* @apply p-6; */
 		@apply h-[550px];
 		@apply w-[1150px];
 		@apply whitespace-pre-wrap;
+		@apply text-justify;
+	}
+
+	/* CHATBOT PAGE */
+	.banner-bot {
+		@apply w-screen;
+		@apply h-[148px];
+		@apply bg-[#F5F5FE];
+		@apply flex;
+		@apply flex-row;
+		@apply items-center;
+		@apply justify-center;
+		@apply text-[#3A3A3A];
+	}
+
+	.main-title {
+		@apply w-[384px];
+		@apply text-2xl;
+		@apply font-bold;
+		@apply text-center;
+	}
+
+	.subtitle {
+		@apply w-[384px];
+		@apply text-sm;
 		@apply text-justify;
 	}
 }

@@ -8,9 +8,9 @@ import { Root } from "./components/Root"
 startReactDsfr({ "defaultColorScheme": "system", Link });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
-        <BrowserRouter>
-            <Root />
-        </BrowserRouter>
-    </React.StrictMode>
+	<React.StrictMode>
+		<BrowserRouter>
+			<Root />
+		</BrowserRouter>
+	</React.StrictMode>
 );

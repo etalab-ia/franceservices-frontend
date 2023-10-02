@@ -23,5 +23,5 @@ export const Root = () => {
 			<Route path="/chat" element={<Chatbot />}/>
 			<Route path="*" element={<h1>404</h1>} />
 		</Routes>
-  </>
+  	</>
 }
