@@ -15,7 +15,13 @@ export function UserMessage(props) {
 
 	const	handleClick = () => {
 		dispatch({ type: 'SET_USER_TEXT', nextUserText: currQuestion});
-		state.messages.push(currQuestion);
+
+		const newMessage = {
+			text: currQuestion,
+			sender: 'user'
+		}
+		dispatch({ type: 'SET_MESSAGES', nextMessage: newMessage })
+
 		usePost(state, dispatch);
 	}
 

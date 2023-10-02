@@ -50,11 +50,16 @@ export const initialState = {
 	generate: false,
 	userEdition: false,
 	isEditable: false,
-	user: 'user',
 }
 
 export const reducer = (state, action) => {
 	switch (action.type) {
+		case 'SET_MESSAGES': 
+		console.log('next: ', action.nextMessage)
+			return {
+				...state,
+				messages: [...state.messages, action.nextMessage]
+			};
 		case 'SET_INSTITUTIONS':
 			return {
 				...state,
@@ -63,7 +68,6 @@ export const reducer = (state, action) => {
 		case 'SET_USER_TEXT':
 			return {
 				...state,
-				user: 'user',
 				question: {
 					...state.question,
 					user_text: action.nextUserText,
@@ -87,7 +91,6 @@ export const reducer = (state, action) => {
 				...state,
 				question: initialQuestion,
 			}
-
 		case 'IMPORT': {
 			return {
 				...state,
@@ -161,7 +164,6 @@ export const reducer = (state, action) => {
 		case 'GET_AGENT_STREAM':
 			return {
 				...state,
-				user: 'agent',
 				response: [...state.response, action.nextResponse],
 			}
 		case 'EDIT_AGENT_STREAM':
@@ -190,7 +192,6 @@ export const reducer = (state, action) => {
 			return {
 				...state,
 				isStoppable: false,
-				user: 'agent'
 			}
 	  	default: {
 			return state

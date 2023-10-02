@@ -43,9 +43,16 @@ export const useStream = async(state, dispatch) => {
 
 			if (jsonData == "[DONE]") 
 			{
+				const joinedRes = state.response.join('');
+				
 				stream_chat.close();
 				// state.messages.push(state.response);
-				state.user = 'agent';
+				const newMessage = {
+					text: joinedRes,
+					sender: 'agent'
+				}
+				console.log('new: ', newMessage)
+				dispatch({ type: 'SET_MESSAGES', nextMessage: newMessage })
 
 				return dispatch({ type: 'STOP_AGENT_STREAM' });
 			} 
