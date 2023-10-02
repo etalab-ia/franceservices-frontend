@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+	/* GLOBAL */
+
+	.header-container {
+		@apply fixed;
+		@apply top-0;
+		@apply w-full;
+		@apply z-10;
+	}
+
+	.wrapper-container {
+		@apply flex;
+		@apply items-center;
+		@apply w-screen;
+		@apply h-screen;
+	}
+
+	/* USER */
+
+	.user-tools {
+		@apply flex;
+		@apply flex-col;
+		@apply items-center;
+		@apply bg-amber-300;
+		@apply w-[69px];
+		@apply ml-20;
+		@apply justify-center;
+		@apply bg-[#F5F5FE];
+	}
+
+	.user-chat {
+		@apply flex;
+		@apply w-[1200px];
+		@apply p-6;
+	}
+
+	/* AGENT */
+
+	.agent-chat {
+		@apply border;
+		@apply p-6;
+		@apply h-[550px];
+		@apply w-[1150px];
+		@apply whitespace-pre-wrap;
+		@apply text-justify;
+	}
+}
