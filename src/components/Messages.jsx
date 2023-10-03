@@ -1,5 +1,6 @@
 import { Display } from './Display';
 import { UserMessage } from '../components/UserMessage';
+import { UserTools } from './UserTools';
 
 export function Messages(props) {
 
@@ -7,7 +8,7 @@ export function Messages(props) {
 
 	return (
 		<div className="wrapper-container">
-		 	{/* <UserTools /> */}
+		 	<UserTools />
 		 	<div className="chat-container">
 		 		<Display
 		 			state={state}

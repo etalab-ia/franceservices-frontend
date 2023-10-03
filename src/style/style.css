@@ -22,7 +22,7 @@
 
 	/* USER */
 
-	.user-tools {
+	.side-tools-container {
 		@apply flex;
 		@apply flex-col;
 		@apply items-center;
@@ -30,6 +30,16 @@
 		@apply ml-20;
 		@apply justify-center;
 		@apply bg-[#F5F5FE];
+	}
+
+	.side-tools {
+		@apply w-[54px];
+		@apply h-[54px];
+		@apply flex;
+		@apply items-center;
+		@apply justify-center;
+		@apply rounded;
+		@apply my-[7px];
 	}
 
 	.chat-container {
@@ -70,7 +80,7 @@
 		@apply flex-col;
 		@apply pb-8;
 		/* @apply border; */
-		@apply h-[370px];
+		@apply h-[180px];
 		@apply w-[793px];
 		@apply whitespace-pre-wrap;
 		@apply text-justify;
