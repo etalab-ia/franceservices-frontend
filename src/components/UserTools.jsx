@@ -1,14 +1,18 @@
+import saved from "../../icons/usertools/saved.svg"
+import history from "../../icons/usertools/history.svg"
+import conversation from "../../icons/usertools/conversation.svg"
+import question from "../../icons/usertools/question.svg"
+
 export function UserTools(props) {
 
 	const	{ state, dispatch } = props;
 
 	return (
-		<div className="user-tools">
-			{/* <button style={{ color: "#9090E7", width: "54px", height: "54px", display: "flex", alignItems: "center", justifyContent: "center" }} className="fr-icon-home-4-fill"></button>
-			<button style={{ backgroundColor: "#6A6AF4", color: "white", width: "54px", height: "54px", display: "flex", alignItems: "center", justifyContent: "center" }} className="fr-icon-message-2-line"></button>
-			<button style={{ color: "#9090E7", width: "54px", height: "54px", display: "flex", alignItems: "center", justifyContent: "center" }} className="fr-icon-pen-nib-fill"></button>
-			<button style={{ color: "#9090E7", width: "54px", height: "54px", display: "flex", alignItems: "center", justifyContent: "center" }} className="fr-icon-zoom-in-fill"></button>
-			<button style={{ color: "#9090E7", width: "54px", height: "54px", display: "flex", alignItems: "center", justifyContent: "center" }} className="fr-icon-question-mark"></button> */}
+		<div className="side-tools-container">
+			<button className="side-tools bg-[#6A6AF4]" ><img src={conversation} alt="Conversation button" /></button>
+			<button className="side-tools"><img src={history} alt="Logo" /></button>
+			<button className="side-tools"><img src={saved} alt="Logo" /></button>
+			<div className="side-tools"><img src={question} alt="Logo" /></div>
 		</div>
 	);
 }
