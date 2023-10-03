@@ -2,7 +2,7 @@ import React from 'react'
 import { useReducer } from 'react';
 import { initialState, reducer } from '../utils/reducer';
 import { Banner } from '../components/Banner';
-import { Chat } from '../components/Chat';
+import { Messages } from '../components/Messages';
 import { UserTools } from '../components/UserTools';
 
 export function Chatbot() {
@@ -12,7 +12,7 @@ export function Chatbot() {
 	return (
 		<>
 			<Banner />
-			<Chat state={state} dispatch={dispatch} />
+			<Messages state={state} dispatch={dispatch} />
 			{/* <UserTools state={state} dispatch={dispatch} /> */}
 		</>
 	);

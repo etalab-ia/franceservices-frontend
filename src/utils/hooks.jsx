@@ -49,6 +49,8 @@ export const useStream = async(state, dispatch) => {
 			} 
 			else 
 			{
+				// if (state.response.length === 0 && jsonData === "\n")
+				// 	return ;
 				return dispatch({ type: 'GET_AGENT_STREAM', nextResponse: jsonData });
 			}
 		} catch(error) {

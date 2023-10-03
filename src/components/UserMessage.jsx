@@ -17,17 +17,9 @@ export function UserMessage(props) {
 		dispatch({ type: 'SET_USER_TEXT', nextUserText: currQuestion});
 
 			
-		const joinedRes = state.response.join('');
-		const newAgentMessage = {
-			text: joinedRes,
-			sender: 'agent'
-		}
-		dispatch({ type: 'SET_MESSAGES', nextMessage: newAgentMessage })
-		const newUserMessage = {
-			text: currQuestion,
-			sender: 'user'
-		}
-		dispatch({ type: 'SET_MESSAGES', nextMessage: newUserMessage })
+		const joinedRes = state.response.slice(1).join('');
+		dispatch({ type: 'SET_MESSAGES', nextMessage: { text: joinedRes, sender: 'agent'} })
+		dispatch({ type: 'SET_MESSAGES', nextMessage: { text: currQuestion, sender: 'user'} })
 
 		usePost(state, dispatch);
 	}
