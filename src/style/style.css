@@ -70,7 +70,7 @@
 		@apply flex-col;
 		@apply pb-8;
 		/* @apply border; */
-		/* @apply h-[550px]; */
+		@apply h-[370px];
 		@apply w-[793px];
 		@apply whitespace-pre-wrap;
 		@apply text-justify;
@@ -78,12 +78,14 @@
 		@apply overflow-x-hidden;
 
 	}
+	
 
 	/* CHATBOT PAGE */
 	.banner-bot {
 		@apply w-screen;
-		@apply pt-6;
-		@apply pb-10;
+		@apply h-[148px];
+		/* @apply pt-6; */
+		/* @apply pb-10; */
 		@apply bg-[#F5F5FE];
 		@apply flex;
 		@apply flex-row;
@@ -92,11 +94,18 @@
 		@apply text-[#3A3A3A];
 	}
 
+	.breadcrumb-container {
+		@apply p-0;
+		@apply m-0;
+		@apply pr-16;
+
+	}
+
 	.main-title {
 		@apply w-[384px];
+		@apply py-6;
 		@apply text-2xl;
 		@apply font-bold;
-		@apply text-center;
 	}
 
 	.subtitle {
