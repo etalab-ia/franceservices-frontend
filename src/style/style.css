@@ -17,7 +17,7 @@
 		@apply flex;
 		@apply w-screen;
 		@apply flex-col;
-		@apply pt-[5vw];
+		@apply pt-10;
 	}
 
 	/* USER */
@@ -41,8 +41,8 @@
 	.user-question {
 		@apply flex;
 		@apply w-[792px];
-		@apply pb-[3vw];
-		@apply pt-[4vw];
+		@apply pb-6;
+		@apply pt-8;
 	}
 
 	.user-chat {
@@ -53,11 +53,13 @@
 		@apply rounded-[90px];
 		@apply mt-0;
 		@apply ml-auto;
-		@apply mb-[4vw];
+		@apply mb-8;
+		@apply text-justify;
 	}
 
 	.agent-chat {
-		@apply mb-[4vw];
+		@apply mb-8;
+		@apply py-4;
 		@apply text-justify;
 	}
 
@@ -66,23 +68,22 @@
 	.chat {
 		@apply flex;
 		@apply flex-col;
-		@apply pb-[4vw];
-		@apply border;
-		@apply h-[550px];
-		@apply w-[648px];
+		@apply pb-8;
+		/* @apply border; */
+		/* @apply h-[550px]; */
+		@apply w-[793px];
 		@apply whitespace-pre-wrap;
 		@apply text-justify;
 		@apply overflow-y-auto;
 		@apply overflow-x-hidden;
-		@apply p-[1vw];
 
 	}
 
 	/* CHATBOT PAGE */
 	.banner-bot {
 		@apply w-screen;
-		@apply pt-[3vw];
-		@apply pb-[5vw];
+		@apply pt-6;
+		@apply pb-10;
 		@apply bg-[#F5F5FE];
 		@apply flex;
 		@apply flex-row;

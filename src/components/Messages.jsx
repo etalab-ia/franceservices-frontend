@@ -11,7 +11,6 @@ export function Messages(props) {
 		 	<div className="chat-container">
 		 		<Display
 		 			state={state}
-		 			dispatch={dispatch}
 		 		/>
 		 		<UserMessage 
 		 			state={state}
