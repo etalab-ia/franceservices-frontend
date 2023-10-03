@@ -1,11 +1,21 @@
 import { Avatar } from "./Avatar";
-
+import { useEffect } from "react";
 export function Display(props) {
 
 	const	{ state } = props;
+
+	const scrollToBottom = () => {
+		const	chatElement = document.getElementById("chat");
+		
+		chatElement.scrollTop = chatElement.scrollHeight;
+	};
+
+	useEffect(() => {
+		scrollToBottom();
+	}, [state.response]);
 	
 	return (
-		<div className="chat">
+		<div className="chat" id="chat">
 			{state.messages.map((message, index) => {
 				if (index === 0)
 					return ;
