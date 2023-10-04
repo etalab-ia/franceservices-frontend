@@ -35,9 +35,9 @@ export function Display(props) {
 				<Message key={index} sender={message.sender} text={message.text} />
 			))}
 			{state.response.length !== 0 && (
-				<div className="flex flex-row">
+				<div className="streaming-container">
 					<Avatar user="agent" />
-					<div className="w-[644px] ml-[16px] py-4 text-justify">
+					<div className="streaming">
 						{state.response.slice(1).map((item, index) => (
 							<span key={index}>{item}</span>
 						))}

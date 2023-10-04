@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export function UserMessage(props) {
 
-	const { state, dispatch } = props;
+	const	{ state, dispatch } = props;
 	const	[currQuestion, setCurrQuestion] = useState('');
 
 	const	handleChange = (e) => {
