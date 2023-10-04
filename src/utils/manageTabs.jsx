@@ -20,6 +20,7 @@ export function InitTabs(props) {
 			components: [
 				<Display
 					 state={state}
+					 dispatch={dispatch}
 				 />,
 				 <UserMessage 
 					 state={state}
@@ -33,6 +34,7 @@ export function InitTabs(props) {
 			components: [
 				<Display
 					 state={state}
+					 dispatch={dispatch}
 				/>,
 			]
 		},
@@ -42,6 +44,7 @@ export function InitTabs(props) {
 			components: [
 				<Display
 					 state={state}
+					 dispatch={dispatch}
 				 />,
 				 <UserMessage 
 					 state={state}
