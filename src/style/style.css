@@ -50,6 +50,18 @@
 		@apply pt-10;
 	}
 
+	.streaming-container {
+		@apply flex;
+		@apply flex-row;
+	}
+
+	.streaming {
+		@apply w-[644px];
+		@apply ml-[16px];
+		@apply py-4;
+		@apply text-justify;
+	}
+
 	.user-question {
 		@apply flex;
 		@apply w-[792px];

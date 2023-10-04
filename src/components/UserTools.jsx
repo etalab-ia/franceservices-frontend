@@ -1,15 +1,12 @@
 import { animated } from '@react-spring/web'
-import { sideButtonsProps } from '../constants/sideButtons';
-import { useState } from 'react';
-import question from "../../icons/usertools/question.svg"
+import { sideButtonsProps, sideInformationProps } from '../constants/sideButtons';
 
 export function UserTools(props) {
 
 	const	{ state, dispatch } = props;
-	const [activeButton, setActiveButton] = useState(0);
 
 	const handleClick = (index) => {
-		setActiveButton(index);
+		dispatch({ type: 'SET_ACTIVE_TAB', nextActiveTab: index})
 	};
 
 	return (
@@ -18,11 +15,11 @@ export function UserTools(props) {
 				<animated.button
 					key={index}
 					className='side-tools'
-					style={{ backgroundColor: index === activeButton ? "#6A6AF4" : "#F5F5FE"}}
+					style={{ backgroundColor: index === state.activeTab ? "#6A6AF4" : "#F5F5FE"}}
 					onClick={() => handleClick(index)}
 				>
 					<img 
-						style={{filter: index === activeButton ? "brightness(0) invert(1)" : "none"}} 
+						style={{filter: index === state.activeTab ? "brightness(0) invert(1)" : "none"}} 
 						src={buttonProps.image}
 						alt={buttonProps.alt}
 						title={buttonProps.title}
@@ -30,9 +27,9 @@ export function UserTools(props) {
 				</animated.button>
 			))}
 			<animated.div className='side-tools'>
-				<img src={question}
-				alt="Bouton d'informations"
-				title="Informations"/>
+				<img src={sideInformationProps.image}
+				alt={sideInformationProps.alt}
+				title={sideInformationProps.title}/>
 			</animated.div>
 		</div>
 	);

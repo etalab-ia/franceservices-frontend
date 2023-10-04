@@ -50,10 +50,16 @@ export const initialState = {
 	generate: false,
 	userEdition: false,
 	isEditable: false,
+	activeTab: 0,
 }
 
 export const reducer = (state, action) => {
 	switch (action.type) {
+		case 'SET_ACTIVE_TAB':
+			return {
+				...state,
+				activeTab: action.nextActiveTab
+			}
 		case 'SET_MESSAGES': 
 			return {
 				...state,
