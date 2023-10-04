@@ -1,12 +1,12 @@
 import { Display } from "../components/Display";
+import { UserChatTools } from "../components/UserChatTools";
 import { UserMessage } from "../components/UserMessage";
 import React from "react";
 
 export function	TabContent({ content }) {
 
-	return <div className={content.className}>{content.components.map((component, index) => 
-			{return <React.Fragment key={index}>{component}</React.Fragment>})}
-	</div>;
+	return content.components.map((component, index) => 
+			{return <React.Fragment key={index}>{component}</React.Fragment>})
 }
 
 export function InitTabs(props) {

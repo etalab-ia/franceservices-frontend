@@ -3,7 +3,6 @@ import { useReducer } from 'react';
 import { initialState, reducer } from '../utils/reducer';
 import { Banner } from '../components/Banner';
 import { Messages } from '../components/Messages';
-import { UserTools } from '../components/UserTools';
 
 export function Chatbot() {
 
@@ -13,7 +12,6 @@ export function Chatbot() {
 		<>
 			<Banner />
 			<Messages state={state} dispatch={dispatch} />
-			{/* <UserTools state={state} dispatch={dispatch} /> */}
 		</>
 	);
 }
