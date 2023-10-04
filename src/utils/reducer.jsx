@@ -188,10 +188,10 @@ export const reducer = (state, action) => {
 			}
 		case 'REDO_AGENT_STREAM':
 			return {
-			...state,
-			response: '',
-			isEditable: false,
-			isStoppable: true,
+				...state,
+				response: [],
+				isEditable: false,
+				isStoppable: true,
 			}
 		case 'STOP_AGENT_STREAM':
 			return {
