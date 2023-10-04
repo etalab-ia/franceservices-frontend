@@ -16,8 +16,8 @@
 	.wrapper-container {
 		@apply flex;
 		@apply w-screen;
-		@apply flex-col;
-		@apply pt-10;
+		@apply flex-row;
+		@apply h-[588px]
 	}
 
 	/* USER */
@@ -45,7 +45,9 @@
 	.chat-container {
 		@apply flex;
 		@apply flex-col;
+		@apply w-screen;
 		@apply items-center;
+		@apply pt-10;
 	}
 
 	.user-question {
@@ -80,7 +82,7 @@
 		@apply flex-col;
 		@apply pb-8;
 		/* @apply border; */
-		@apply h-[180px];
+		@apply h-[600px];
 		@apply w-[793px];
 		@apply whitespace-pre-wrap;
 		@apply text-justify;

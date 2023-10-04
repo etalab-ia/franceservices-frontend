@@ -8,7 +8,9 @@ export function Messages(props) {
 
 	return (
 		<div className="wrapper-container">
-		 	<UserTools />
+			<div className='flex justify-center items-center'>
+		 		<UserTools />
+			</div>
 		 	<div className="chat-container">
 		 		<Display
 		 			state={state}
