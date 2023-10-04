@@ -10,25 +10,21 @@ export const	chatbotProps = {
 
 export const	userChatToolsProps = [
 	{
-		className: "",
 		image: evaluate,
 		alt: "Evaluer la réponse",
 		title: "Evaluer la réponse",
 	},
 	{
-		className: "ml-3",
 		image: redo,
 		alt: "Re-générer la réponse",
 		title: "Re-générer la réponse",
 	},
 	{
-		className: "ml-3",
 		image: bookmark,
 		alt: "Enregistrer la réponse",
 		title: "Enregistrer la réponse",
 	},
 	{
-		className: "ml-3 mr-5",
 		image: copy,
 		alt: "Copier la réponse",
 		title: "Copier la réponse",
