@@ -56,7 +56,7 @@
 	}
 
 	.streaming {
-		@apply w-[644px];
+		@apply w-[649px];
 		@apply ml-[16px];
 		@apply py-4;
 		@apply text-justify;
@@ -81,10 +81,38 @@
 		@apply text-justify;
 	}
 
+	.user-chat-tools-container {
+		@apply h-[56px];
+		@apply flex;
+		@apply items-center;
+	}
+
 	.agent-chat {
 		@apply mb-8;
 		@apply py-4;
 		@apply text-justify;
+	}
+
+	.user-avatar {
+		@apply bg-[#F5F5FE];
+		@apply rounded-[90px];
+		@apply w-[56px];
+		@apply h-[56px];
+		@apply flex;
+		@apply justify-center;
+		@apply items-center;
+		@apply text-center;
+	}
+
+	.agent-avatar {
+		@apply bg-[#F5F5FE];
+		@apply rounded-[90px];
+		@apply w-[56px];
+		@apply h-[56px];
+		@apply flex;
+		@apply justify-center;
+		@apply items-center;
+		@apply text-center;
 	}
 
 	/* AGENT */
@@ -95,7 +123,9 @@
 		@apply pb-8;
 		/* @apply border; */
 		@apply h-[600px];
-		@apply w-[793px];
+		/* @apply w-[793px]; */
+		@apply w-[905px];
+		@apply mr-[112px];
 		@apply whitespace-pre-wrap;
 		@apply text-justify;
 		@apply overflow-y-auto;
@@ -108,8 +138,6 @@
 	.banner-bot {
 		@apply w-screen;
 		@apply h-[148px];
-		/* @apply pt-6; */
-		/* @apply pb-10; */
 		@apply bg-[#F5F5FE];
 		@apply flex;
 		@apply flex-row;

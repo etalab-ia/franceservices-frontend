@@ -6,7 +6,7 @@ export function Avatar(props) {
 	const	{ user } = props;
 	
 	return (
-        <div className="bg-[#F5F5FE] rounded-[90px] w-[56px] h-[56px] flex justify-center items-center text-center">
+        <div className={user === 'agent' ? "agent-avatar" : "user-avatar"}>
             {user === 'agent' ? 
                 <div><img src={agentAvatar} alt="Logo" /></div> 
                 :
