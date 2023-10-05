@@ -2,14 +2,14 @@ import { Avatar } from "./Avatar";
 import { useEffect } from "react";
 import { UserChatTools } from "./UserChatTools";
 
-function Message({ sender, text, state, dispatch }) {
+function Message({ sender, text, props }) {
 	const	isUser = sender === "user";
 	const	classNames = isUser ? "flex flex-row mr-0 ml-auto" : "flex flex-row";
 
 	return (
 		<div className={classNames}>
 			{!isUser && <div className="flex flex-row">
-				<UserChatTools state={state} dispatch={dispatch}/>
+				<UserChatTools state={props.state} dispatch={props.dispatch}/>
 					<Avatar user={sender} />
 			</div>}
 			<div className={`w-[644px] ${isUser ? "mr-[16px]" : "ml-[16px]"}`}>
@@ -36,7 +36,7 @@ export function Display(props) {
 	return (
 		<div className="chat" id="chat">
 			{state.messages.slice(1).map((message, index) => (
-				<Message key={index} sender={message.sender} text={message.text} state={state} />
+				<Message key={index} sender={message.sender} text={message.text} props={props} />
 			))}
 			{state.response.length !== 0 && (
 				<div className="streaming-container">
