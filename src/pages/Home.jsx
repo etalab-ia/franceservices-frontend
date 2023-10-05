@@ -1,8 +1,6 @@
 export function Home() {
 
 	return (
-		<div className="wrapper-container">
-			Home
-		</div>
+		<div className="wrapper-container"></div>
 	);
 }
