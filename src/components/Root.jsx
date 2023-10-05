@@ -11,19 +11,14 @@ import { ResetPassword } from "../pages/ResetPassword";
 import { initialState } from "../constants/state";
 import { quickAccessItemsFunc } from "../constants/headerProps";
 import { useEffect } from "react";
+import { checkConnexion } from "../utils/localStorage";
 
 export const Root = () => {
 
 	const	navigationData = navFunc();
 	const	[state, dispatch] = useReducer(reducer, initialState);
 	
-	useEffect(() => {
-		const authToken = localStorage.getItem('authToken');
-
-		if (authToken) {
-		  dispatch({ type: 'LOGIN', nextUserToken: authToken });
-		}
-	  }, [dispatch]);
+	useEffect(() => { checkConnexion(dispatch) }, [dispatch]);
 
 	return <div className="h-screen">
 		<Header className="header-container"

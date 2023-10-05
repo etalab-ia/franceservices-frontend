@@ -55,6 +55,7 @@ export function	Login(props) {
 		  	dispatch({ type: 'LOGIN', nextUserToken: res.token });
 	  
 			localStorage.setItem('authToken', res.token);
+			localStorage.setItem('username', state.username);
 		} catch(error) {
 		  console.error('An error occurred: ', error);
 		}
