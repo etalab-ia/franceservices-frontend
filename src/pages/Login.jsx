@@ -39,19 +39,26 @@ export function	Login(props) {
 		checkId();
 	}
 
-	const handleClick = async() => {
+	const handleClick = async () => {
 		const data = {
-			username: state.username,
-			email: state.email,
-			password: state.password
+		  username: state.username,
+		  email: state.email,
+		  password: state.password
+		};
+	  
+		try {
+			const res = await useFetch(signinUrl, 'POST', {
+				data: JSON.stringify(data),
+				headers: { 'Content-Type': 'application/json' }
+			});
+	  
+		  	dispatch({ type: 'LOGIN', nextUserToken: res.token });
+	  
+			localStorage.setItem('authToken', res.token);
+		} catch(error) {
+		  console.error('An error occurred: ', error);
 		}
-
-		await useFetch(signinUrl, 'POST', {
-			data: JSON.stringify(data), 
-			headers: { 'Content-Type': 'application/json' }
-		})
-		.then(res => dispatch({ type: 'LOGIN', nextUserToken: res.token }));
-	}
+	};
 
 	return (
 		<div className="login-container">
