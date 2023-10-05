@@ -1,60 +1,11 @@
-import { Input } from "@codegouvfr/react-dsfr/Input";
-
-export const initialQuestion = {
-	institution: '',
-	title: '',
-	user_text: '',
-	context: '',
-	links: '',
-	temperature: 0.1,
-}
-
-const initialFields = [
-	{
-		title: "title",
-		value: "Titre du message",
-		isChecked: false,
-	},
-	{
-		title: "institution",
-		value: "Administration concernée",
-		isChecked: false,
-	}
-];
-
-export const bodyInput = <Input
-	textArea={true}
-	label="Corps du message"
-	name="user_text"
-	nativeTextAreaProps= {{
-		name: "user_text",
-		style:{backgroundColor: "#E3E3FD", height: "500px"}}
-	}
-/>
-
-export const initialState = {
-	question: initialQuestion,
-	availableFields: initialFields,
-	messages: [],
-
-	userFields: [bodyInput],
-	sheets: [],
-	experiences: [],
-	response: [],
-	import: [],
-	institutions: [],
-
-	isDisable: true,
-	isStoppable: true,
-
-	generate: false,
-	userEdition: false,
-	isEditable: false,
-	activeTab: 0,
-}
-
 export const reducer = (state, action) => {
 	switch (action.type) {
+		case "LOGIN":
+      		return { ...state, isLogin: true };
+		case "SET_USER":
+      		return { ...state, username: action.nextUsername, email: action.nextEmail };
+		case "SET_PASSWORD":
+      		return { ...state, password: action.nextPassword };
 		case 'SET_ACTIVE_TAB':
 			return {
 				...state,
@@ -77,19 +28,19 @@ export const reducer = (state, action) => {
 					...state.question,
 					user_text: action.nextUserText,
 				},
-				isDisable: action.nextUserText.length === 0 &&
-					(state.question.institution || 
-					state.institutions.includes(state.question.institution)),
+				// isDisable: action.nextUserText.length === 0 &&
+				// 	(state.question.institution || 
+				// 	state.institutions.includes(state.question.institution)),
 			}
 		case 'INSTITUTION_NOT_FOUND':
 			return {
 				...state,
-				isDisable: true
+				// isDisable: true
 			}
 		case 'INSTITUTION_FOUND':
 			return {
 				...state,
-				isDisable: false
+				// isDisable: false
 			}
 		case 'RESET_QUESTION_FIELDS':
 			return {

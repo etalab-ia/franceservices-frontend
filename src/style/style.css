@@ -20,6 +20,14 @@
 		@apply h-[588px]
 	}
 
+	.login-container {
+		@apply flex;
+		@apply flex-col;
+		@apply items-center;
+		@apply justify-center;
+		@apply m-10;
+	}
+
 	/* USER */
 
 	.side-tools-container {
