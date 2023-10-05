@@ -1,10 +1,10 @@
 // POST USER QUESTION / GET AGENT RESPONSE
-export const	apiUrl = "http://142.44.40.218/api/v2/fabrique"
-export const	streamUrl = "http://142.44.40.218/api/v2/fabrique_stream"
+export const	apiUrl = "http://142.44.51.104/api/api/fabrique"
+export const	streamUrl = "http://142.44.51.104/api/api/fabrique_stream"
 
 // POST USER QUESTION / GET RELATED SHEETS & EXPERIENCES
-export const	sheetsUrl = "http://142.44.40.218/api/v2/search/sheets"
-export const	experiencesUrl = "http://142.44.40.218/api/v2/search/experiences"
+export const	sheetsUrl = "http://142.44.51.104/api/api/search/sheets"
+export const	experiencesUrl = "http://142.44.51.104/api/api/search/experiences"
 
 // IMPORT EXPERIENCES
 export const	importUrl = "https://opendata.plus.transformation.gouv.fr/api/explore/v2.1/catalog/datasets/export-expa-c-riences/records?limit=10"
@@ -13,7 +13,7 @@ export const	importUrl = "https://opendata.plus.transformation.gouv.fr/api/explo
 export  const	institutionsUrl = "https://gpt.datascience.etalab.studio/api/institutions"
 
 // STOP GENERATION
-export const	stopGenerationUrl = "http://142.44.40.218/api/v2/fabrique_stop"
+export const	stopGenerationUrl = "http://142.44.51.104/api/api/fabrique_stop"
 
 // SIGNIN
 export const	signinUrl = "http://142.44.40.218/api/v2/sign_in"

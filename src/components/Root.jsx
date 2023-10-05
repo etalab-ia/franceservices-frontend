@@ -28,7 +28,7 @@ export const Root = () => {
 		<Routes>
 			<Route path="/login" element={!state.isLogin ? <Login state={state} dispatch={dispatch}/> : <Navigate to="/" />}/>
 			<Route path="/" element={!state.isLogin ? <Navigate to="/login" /> : <Home />}/>
-			<Route path="/chat" element={!state.isLogin ? <Navigate to="/chat" /> : <Chatbot state={state} dispatch={dispatch}/>}/>
+			<Route path="/chat" element={!state.isLogin ? <Navigate to="/login" /> : <Chatbot state={state} dispatch={dispatch}/>}/>
 			<Route path="/signup" element={<Signup state={state} dispatch={dispatch} />} />
 			<Route path="/reset-password" element={<ResetPassword state={state} dispatch={dispatch}/>} />
 			<Route path="*" element={<h1>404</h1>} />
