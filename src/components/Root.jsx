@@ -9,22 +9,21 @@ import { Login } from "../pages/Login";
 import { Signup } from "../pages/Signup";
 import { ResetPassword } from "../pages/ResetPassword";
 import { initialState } from "../constants/state";
+import { quickAccessItemsFunc } from "../constants/headerProps";
 
 export const Root = () => {
 
 	const	navigationData = navFunc();
 	const	[state, dispatch] = useReducer(reducer, initialState);
 
-
 	return <div className="h-screen">
 		<Header className="header-container"
 			brandTop={<>INTITULE<br />OFFICIEL</>}
 			serviceTitle="Miaou"
 			serviceTagline="Le module d'Intelligence Artificielle Orienté Usager"
-			homeLinkProps={{
-				"to": "/login",
-			}}
+			homeLinkProps={{ "to": "/login" }}
 			navigation={state.isLogin ? navigationData : null}
+			quickAccessItems={ state.isLogin ? quickAccessItemsFunc(state, dispatch) : [] }
 		/>
 		<Routes>
 			<Route path="/login" element={!state.isLogin ? <Login state={state} dispatch={dispatch}/> : <Navigate to="/" />}/>

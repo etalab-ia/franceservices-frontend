@@ -15,9 +15,9 @@ export function	Login(props) {
 
 	const	checkId = () => {
 		if (id.includes("@"))
-			dispatch({ type: 'SET_USER', nextUsername: '', nextEmail: id })
+			dispatch({ type: 'SET_USER', nextUsername: null, nextEmail: id })
 		else 
-			dispatch({ type: 'SET_USER', nextUsername: id, nextEmail: '' })
+			dispatch({ type: 'SET_USER', nextUsername: id, nextEmail: null})
 	}
 
 	const	checkIfCompletedFields = () => {

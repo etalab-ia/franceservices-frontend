@@ -55,5 +55,5 @@ export const	initialState = {
 	username: "",
 	password: "",
 	email: "",
-	token: ""
+	userToken: ""
 }

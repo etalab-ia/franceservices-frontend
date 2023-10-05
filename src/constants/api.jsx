@@ -17,5 +17,6 @@ export const	stopGenerationUrl = "http://142.44.40.218/api/v2/fabrique_stop"
 
 // SIGNIN
 export const	signinUrl = "http://142.44.40.218/api/v2/sign_in"
+export const	signoutUrl = "http://142.44.40.218/api/v2/sign_out"
 export const	signupUrl = "http://142.44.40.218/api/v2/user/me"
 export const	resetPasswordUrl = "http://142.44.40.218/api/v2/send_reset_password_email"

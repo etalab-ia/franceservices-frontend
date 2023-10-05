@@ -1,5 +1,9 @@
+import { initialState } from "../constants/state";
+
 export const reducer = (state, action) => {
 	switch (action.type) {
+		case "LOGOUT":
+      		return initialState;
 		case "LOGIN":
       		return { ...state, isLogin: true, userToken: action.nextUserToken };
 		case "SET_USER":
