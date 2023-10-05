@@ -39,6 +39,7 @@ export const useStream = async(state, dispatch) => {
 	stream_chat.onmessage = function (e) 
 	{
 		try {
+
 			const	jsonData = JSON.parse(e.data);
 
 			if (jsonData == "[DONE]") 

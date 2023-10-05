@@ -31,29 +31,34 @@ function handleCopy(state, dispatch) {
 	return navigator.clipboard.writeText(joinedRes);
 }
 
-export const	userChatToolsProps = [
-	{
-		image: evaluate,
-		alt: "Evaluer la réponse",
-		title: "Evaluer la réponse",
-		onClick: handleEvaluate,
-	},
-	{
-		image: redo,
-		alt: "Re-générer la réponse",
-		title: "Re-générer la réponse",
-		onClick: handleRedo,
-	},
-	{
-		image: bookmark,
-		alt: "Enregistrer la réponse",
-		title: "Enregistrer la réponse",
-		onClick: handleSaved,
-	},
-	{
-		image: copy,
-		alt: "Copier la réponse",
-		title: "Copier la réponse",
-		onClick: handleCopy,
-	},
-]
+export	function userChatToolsFunc(state, dispatch) {
+
+	const	userChatToolsProps = [
+		{
+			image: evaluate,
+			alt: "Evaluer la réponse",
+			title: "Evaluer la réponse",
+			onClick: () => handleEvaluate(state, dispatch),
+		},
+		{
+			image: redo,
+			alt: "Re-générer la réponse",
+			title: "Re-générer la réponse",
+			onClick: () => handleRedo(state, dispatch),
+		},
+		{
+			image: bookmark,
+			alt: "Enregistrer la réponse",
+			title: "Enregistrer la réponse",
+			onClick: () => handleSaved(state, dispatch),
+		},
+		{
+			image: copy,
+			alt: "Copier la réponse",
+			title: "Copier la réponse",
+			onClick: () => handleCopy(state, dispatch),
+		},
+	]
+
+	return userChatToolsProps;
+}
