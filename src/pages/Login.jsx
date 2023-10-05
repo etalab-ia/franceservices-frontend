@@ -5,12 +5,12 @@ import { loginFields } from "../constants/inputFields";
 import { useState } from "react";
 import { signinUrl } from "../constants/api";
 import { useFetch } from "../utils/hooks";
-import { Navigate } from "react-router-dom";
 
 export function	Login(props) {
 
 	const	{ state, dispatch } = props;
 	const	[isDisable, setIsDisable] = useState(true);
+	const	[password, setPassword] = useState('');
 	const	[id, setId] = useState('');
 
 	const	checkId = () => {
@@ -21,7 +21,7 @@ export function	Login(props) {
 	}
 
 	const	checkIfCompletedFields = () => {
-		if (state.password.length && (state.username.length || state.email.length))
+		if (password.length && (state.username.length || state.email.length))
 			setIsDisable(false);
 		else
 			setIsDisable(true);
@@ -33,7 +33,7 @@ export function	Login(props) {
 		if (e.target.name === "username")
 			setId(e.target.value);
 		else
-			dispatch({ type: 'SET_PASSWORD', nextPassword: e.target.value })
+			setPassword(e.target.value);
 
 		checkIfCompletedFields();
 		checkId();
@@ -43,7 +43,7 @@ export function	Login(props) {
 		const data = {
 		  username: state.username,
 		  email: state.email,
-		  password: state.password
+		  password: password
 		};
 	  
 		try {

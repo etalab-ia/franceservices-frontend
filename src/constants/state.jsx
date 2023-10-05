@@ -53,7 +53,6 @@ export const	initialState = {
 	activeTab: 0,
 	isLogin: false,
 	username: "",
-	password: "",
 	email: "",
 	userToken: ""
 }

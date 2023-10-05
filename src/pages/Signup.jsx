@@ -9,6 +9,7 @@ import { signupUrl } from "../constants/api";
 export function Signup(props) {
 
 	const	{ state, dispatch } = props;
+	const	[password, setPassword] = useState('');
 	const	[confPassword, setConfPassword] = useState('');
 
 	const	handleChange = (e) => {
@@ -17,7 +18,7 @@ export function Signup(props) {
 		if (e.target.name === "username")
 			dispatch({ type: 'SET_USERNAME', nextUsername: e.target.value });
 		else if (e.target.name === "password")
-			dispatch({ type: 'SET_PASSWORD', nextPassword: e.target.value });
+			setPassword(e.target.value);
 		else if (e.target.name === "confirmationPassword")
 			setConfPassword(e.target.value);
 		else if (e.target.name === "email")
@@ -25,14 +26,14 @@ export function Signup(props) {
 	}
 
 	const	handleValidatePassword = () => {
-		return state.username && state.email && state.password && confPassword === state.password;	
+		return state.username && state.email && password && confPassword === password;	
 	}
 
 	const	handleClick = async() => {
 		const data = {
 			username: state.username,
 			email: state.email,
-			password: state.password
+			password: password
 		}
 
 		await useFetch(signupUrl, 'POST', {data: JSON.stringify(data), headers: { 'Content-Type': 'application/json' }});
