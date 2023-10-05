@@ -4,6 +4,10 @@ export const reducer = (state, action) => {
       		return { ...state, isLogin: true };
 		case "SET_USER":
       		return { ...state, username: action.nextUsername, email: action.nextEmail };
+		case "SET_USERNAME":
+			return { ...state, username: action.nextUsername };
+		case "SET_EMAIL":
+      		return { ...state, email: action.nextEmail };
 		case "SET_PASSWORD":
       		return { ...state, password: action.nextPassword };
 		case 'SET_ACTIVE_TAB':

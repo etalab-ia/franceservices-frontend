@@ -33,7 +33,7 @@ export const loginFields = [
 	{
 		hintText: "Nom d'utilisateur",
 		nativeInputProps: {
-			placeholder: "BenoîtDupont",
+			placeholder: "BenoîtDupont ou benoitdupont@mail.com",
 			name: "username"
 		}
 	},

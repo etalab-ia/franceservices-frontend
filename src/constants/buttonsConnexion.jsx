@@ -22,13 +22,13 @@ export const initButtonsLogin = (handleClick, isDisable) => {
 	return buttonsLogin;
 }
 
-export const initButtonsSignup = (handleValidatePassword) => {
+export const initButtonsSignup = (handleValidatePassword, handleClick) => {
 
 	const buttonsSignup = [
 		{
 			disabled: !handleValidatePassword(),
 			children: 'Créer un compte',
-			onClick: () => (window.location.href = '/')
+			onClick: handleClick,
 		},
 		{
 			children: 'Retour',
@@ -41,13 +41,13 @@ export const initButtonsSignup = (handleValidatePassword) => {
 	return buttonsSignup;
 }
 
-export const initButtonsReset = (isDisable) => {
+export const initButtonsReset = (isDisable, handleClick) => {
 
 	const buttonsReset = [
 		{
 			disabled: isDisable,
 			children: 'Soumettre',
-			onClick: () => (window.location.href = '/') 
+			onClick: handleClick
 		},
 		{
 			children: 'Retour',
