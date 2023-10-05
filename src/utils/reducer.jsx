@@ -3,17 +3,15 @@ import { initialState } from "../constants/state";
 export const reducer = (state, action) => {
 	switch (action.type) {
 		case "LOGOUT":
-      		return initialState;
+	  		return initialState;
 		case "LOGIN":
-      		return { ...state, isLogin: true, userToken: action.nextUserToken };
+	  		return { ...state, isLogin: true, userToken: action.nextUserToken };
 		case "SET_USER":
-      		return { ...state, username: action.nextUsername, email: action.nextEmail };
+	  		return { ...state, username: action.nextUsername, email: action.nextEmail };
 		case "SET_USERNAME":
 			return { ...state, username: action.nextUsername };
 		case "SET_EMAIL":
-      		return { ...state, email: action.nextEmail };
-		case "SET_PASSWORD":
-      		return { ...state, password: action.nextPassword };
+	  		return { ...state, email: action.nextEmail };
 		case 'SET_ACTIVE_TAB':
 			return {
 				...state,
