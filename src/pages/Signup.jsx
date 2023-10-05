@@ -3,6 +3,8 @@ import { ButtonsGroup } from "@codegouvfr/react-dsfr/ButtonsGroup";
 import { useState } from "react";
 import { signupFields } from "../constants/inputFields";
 import { initButtonsSignup } from "../constants/buttonsConnexion";
+import { useFetch } from "../utils/hooks";
+import { signupUrl } from "../constants/api";
 
 export function Signup(props) {
 
@@ -13,17 +15,28 @@ export function Signup(props) {
 		e.preventDefault();
 
 		if (e.target.name === "username")
-			state.username = e.target.value;
+			dispatch({ type: 'SET_USERNAME', nextUsername: e.target.value });
 		else if (e.target.name === "password")
-			state.password = e.target.value;
+			dispatch({ type: 'SET_PASSWORD', nextPassword: e.target.value });
 		else if (e.target.name === "confirmationPassword")
 			setConfPassword(e.target.value);
 		else if (e.target.name === "email")
-			state.email = e.target.value;
+			dispatch({ type: 'SET_EMAIL', nextEmail: e.target.value });
 	}
 
 	const	handleValidatePassword = () => {
 		return state.username && state.email && state.password && confPassword === state.password;	
+	}
+
+	const	handleClick = async() => {
+
+		const data = {
+			username: state.username,
+			email: state.email,
+			password: state.password
+		}
+
+		await useFetch(signupUrl, 'POST', {data: JSON.stringify(data), headers: { 'Content-Type': 'application/json' }});
 	}
 	
 	return (
@@ -36,7 +49,7 @@ export function Signup(props) {
 				/>
 			})}
 			<ButtonsGroup className="container" style={{width: 500}}
-				buttons={initButtonsSignup(handleValidatePassword)}
+				buttons={initButtonsSignup(handleValidatePassword, handleClick)}
 			/>
 		</div>
 	)
