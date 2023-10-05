@@ -5,6 +5,7 @@ import { loginFields } from "../constants/inputFields";
 import { useState } from "react";
 import { signinUrl } from "../constants/api";
 import { useFetch } from "../utils/hooks";
+import { Navigate } from "react-router-dom";
 
 export function	Login(props) {
 
@@ -38,16 +39,18 @@ export function	Login(props) {
 		checkId();
 	}
 
-	const handleClick = async(e) => {
-		e.preventDefault();
-
+	const handleClick = async() => {
 		const data = {
 			username: state.username,
 			email: state.email,
 			password: state.password
 		}
 
-		await useFetch(signinUrl, 'POST', {data: JSON.stringify(data), headers: { 'Content-Type': 'application/json' }});
+		await useFetch(signinUrl, 'POST', {
+			data: JSON.stringify(data), 
+			headers: { 'Content-Type': 'application/json' }
+		})
+		.then(res => dispatch({ type: 'LOGIN', nextUserToken: res.token }));
 	}
 
 	return (
