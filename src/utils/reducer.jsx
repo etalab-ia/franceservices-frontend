@@ -1,7 +1,7 @@
 export const reducer = (state, action) => {
 	switch (action.type) {
 		case "LOGIN":
-      		return { ...state, isLogin: true };
+      		return { ...state, isLogin: true, userToken: action.nextUserToken };
 		case "SET_USER":
       		return { ...state, username: action.nextUsername, email: action.nextEmail };
 		case "SET_USERNAME":

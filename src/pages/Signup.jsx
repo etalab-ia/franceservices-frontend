@@ -29,7 +29,6 @@ export function Signup(props) {
 	}
 
 	const	handleClick = async() => {
-
 		const data = {
 			username: state.username,
 			email: state.email,
