@@ -47,25 +47,27 @@ export function	Login(props) {
 		  password: password
 		};
 	  
-		try {
-				const res = await useFetch(signinUrl, 'POST', {
-					data: JSON.stringify(data),
-					headers: { 'Content-Type': 'application/json' }
-				});
+		try 
+		{
+			const res = await useFetch(signinUrl, 'POST', {
+				data: JSON.stringify(data),
+				headers: { 'Content-Type': 'application/json' }
+			});
 
-				if (res.status && res.status !== 200){
-					console.log(res.status)
-					return dispatch({ type: 'LOGIN_FAILED' });}
+			if (res.status && res.status !== 200)
+				return dispatch({ type: 'LOGIN_FAILED' });
 
-				dispatch({ type: 'LOGIN', nextUserToken: res.token });
-		
-				localStorage.setItem('authToken', res.token);
-				localStorage.setItem('username', state.username);
-			} catch(error) {
-				console.error('An error occurred: ', error);
+			dispatch({ type: 'LOGIN', nextUserToken: res.token });
 
-				return error;
-			}
+			localStorage.setItem('authToken', res.token);
+			localStorage.setItem('username', state.username);
+		} 
+		catch(error)
+		{
+			console.error('An error occurred: ', error);
+
+			return error;
+		}
 	};
 
 	return (
