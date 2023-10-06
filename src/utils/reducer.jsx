@@ -4,8 +4,10 @@ export const reducer = (state, action) => {
 	switch (action.type) {
 		case "LOGOUT":
 	  		return initialState;
-		case "LOGIN_FAILED":
-			return { ...state, isLogin: false, loginFailed: true };
+		case "AUTH_FAILED":
+			return { ...state, isLogin: false, authFailed: true };
+		case "RESET_AUTH_FAILED":
+			return { ...state, authFailed: false };
 		case "LOGIN":
 	  		return { ...state, isLogin: true, userToken: action.nextUserToken };
 		case "SET_USER":
@@ -15,15 +17,9 @@ export const reducer = (state, action) => {
 		case "SET_EMAIL":
 	  		return { ...state, email: action.nextEmail };
 		case 'SET_ACTIVE_TAB':
-			return {
-				...state,
-				activeTab: action.nextActiveTab
-			}
+			return { ...state, activeTab: action.nextActiveTab };
 		case 'SET_MESSAGES': 
-			return {
-				...state,
-				messages: [...state.messages, action.nextMessage]
-			};
+			return { ...state, messages: [...state.messages, action.nextMessage] };
 		case 'SET_INSTITUTIONS':
 			return {
 				...state,

@@ -5,7 +5,7 @@ import { loginFields } from "../constants/inputFields";
 import { useState } from "react";
 import { signinUrl } from "../constants/api";
 import { useFetch } from "../utils/hooks";
-import { LoginFailed } from "../components/LoginFailed";
+import { AuthFailed } from "../components/AuthFailed";
 
 export function	Login(props) {
 
@@ -46,6 +46,8 @@ export function	Login(props) {
 		  email: state.email,
 		  password: password
 		};
+		
+		dispatch({ type: 'RESET_AUTH_FAILED' });
 	  
 		try 
 		{
@@ -55,7 +57,7 @@ export function	Login(props) {
 			});
 
 			if (res.status && res.status !== 200)
-				return dispatch({ type: 'LOGIN_FAILED' });
+				return dispatch({ type: 'AUTH_FAILED' });
 
 			dispatch({ type: 'LOGIN', nextUserToken: res.token });
 
@@ -72,7 +74,10 @@ export function	Login(props) {
 
 	return (
 		<div className="login-container">
-			{state.loginFailed ? <LoginFailed /> : null}
+			{state.authFailed ? 
+				<AuthFailed>Nom d'utilisateur ou mot de passe invalide.</AuthFailed>
+				: null
+			}
 			{loginFields.map((field, key) => {
 				return <Input className="w-[500px]"
 					key={key}

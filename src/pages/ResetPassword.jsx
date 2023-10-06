@@ -1,4 +1,3 @@
-import { signupFields } from "../constants/inputFields";
 import Input from "@codegouvfr/react-dsfr/Input";
 import ButtonsGroup from "@codegouvfr/react-dsfr/ButtonsGroup";
 import { useState } from "react";
