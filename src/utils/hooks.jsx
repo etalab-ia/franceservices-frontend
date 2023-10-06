@@ -3,11 +3,11 @@ import { EventSourcePolyfill } from 'event-source-polyfill';
 
 export const useFetch = async(url, method, props) => {
 
-	const { data, headers } = props;
+	const	{ data, headers } = props;
 	const	credentials = url === importUrl ? 'omit' : 'include';
 
-	try {
-						
+	try 
+	{				
 		const response = await fetch(url, {
 			method: method,
 			credentials: credentials,
@@ -15,16 +15,17 @@ export const useFetch = async(url, method, props) => {
 			body: data === undefined ? {} : data
 		})
 		
-		if (url === stopGenerationUrl || url.includes("start")) {
+		if (url === stopGenerationUrl || url.includes("start"))
 			return response;
-		}
 		else {
 			const jsonData = await response.json();
 
 			return jsonData;
 		}
 
-	} catch (error) {
+	} 
+	catch (error)
+	{
 		console.error('An error occurred: ', error);
 
 		return error;

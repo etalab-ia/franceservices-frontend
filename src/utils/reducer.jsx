@@ -4,6 +4,8 @@ export const reducer = (state, action) => {
 	switch (action.type) {
 		case "LOGOUT":
 	  		return initialState;
+		case "LOGIN_FAILED":
+			return { ...state, isLogin: false, loginFailed: true };
 		case "LOGIN":
 	  		return { ...state, isLogin: true, userToken: action.nextUserToken };
 		case "SET_USER":
@@ -34,9 +36,9 @@ export const reducer = (state, action) => {
 					...state.question,
 					user_text: action.nextUserText,
 				},
-				// isDisable: action.nextUserText.length === 0 &&
-				// 	(state.question.institution || 
-				// 	state.institutions.includes(state.question.institution)),
+				isDisable: action.nextUserText.length === 0 &&
+					(state.question.institution || 
+					state.institutions.includes(state.question.institution)),
 			}
 		case 'INSTITUTION_NOT_FOUND':
 			return {

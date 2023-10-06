@@ -5,6 +5,7 @@ import { loginFields } from "../constants/inputFields";
 import { useState } from "react";
 import { signinUrl } from "../constants/api";
 import { useFetch } from "../utils/hooks";
+import { LoginFailed } from "../components/LoginFailed";
 
 export function	Login(props) {
 
@@ -46,23 +47,32 @@ export function	Login(props) {
 		  password: password
 		};
 	  
-		try {
+		try 
+		{
 			const res = await useFetch(signinUrl, 'POST', {
 				data: JSON.stringify(data),
 				headers: { 'Content-Type': 'application/json' }
 			});
-	  
-		  	dispatch({ type: 'LOGIN', nextUserToken: res.token });
-	  
+
+			if (res.status && res.status !== 200)
+				return dispatch({ type: 'LOGIN_FAILED' });
+
+			dispatch({ type: 'LOGIN', nextUserToken: res.token });
+
 			localStorage.setItem('authToken', res.token);
 			localStorage.setItem('username', state.username);
-		} catch(error) {
-		  console.error('An error occurred: ', error);
+		} 
+		catch(error)
+		{
+			console.error('An error occurred: ', error);
+
+			return error;
 		}
 	};
 
 	return (
 		<div className="login-container">
+			{state.loginFailed ? <LoginFailed /> : null}
 			{loginFields.map((field, key) => {
 				return <Input className="w-[500px]"
 					key={key}
