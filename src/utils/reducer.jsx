@@ -34,9 +34,9 @@ export const reducer = (state, action) => {
 					...state.question,
 					user_text: action.nextUserText,
 				},
-				// isDisable: action.nextUserText.length === 0 &&
-				// 	(state.question.institution || 
-				// 	state.institutions.includes(state.question.institution)),
+				isDisable: action.nextUserText.length === 0 &&
+					(state.question.institution || 
+					state.institutions.includes(state.question.institution)),
 			}
 		case 'INSTITUTION_NOT_FOUND':
 			return {
