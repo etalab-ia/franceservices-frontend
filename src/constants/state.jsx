@@ -54,5 +54,5 @@ export const	initialState = {
 	isLogin: false,
 	username: "",
 	email: "",
-	userToken: ""
+	userToken: "",
 }
