@@ -13,11 +13,19 @@ export const useFetch = async(url, method, props) => {
 			headers,
 			body: data === undefined ? {} : data
 		})
+
+		console.log(response.status)
+		if (response.status !== 200) {
+			console.log('err')
+			throw new Error(`${url}: ` + response.status);
+		}
 		
 		if (url === apiUrl || url === stopGenerationUrl) {
+			console.log('ok')
 			return response;
 		}
 		else {
+			console.log('else')
 			const jsonData = await response.json();
 
 			return jsonData;

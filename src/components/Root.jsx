@@ -20,6 +20,8 @@ export const Root = () => {
 	
 	useEffect(() => { checkConnexion(dispatch) }, [dispatch]);
 
+	console.log('ici: ', state.isLogin)
+
 	return <div className="h-screen">
 		<Header className="header-container"
 			brandTop={<>INTITULE<br />OFFICIEL</>}
