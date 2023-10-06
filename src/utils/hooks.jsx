@@ -2,11 +2,11 @@ import { apiUrl, streamUrl, stopGenerationUrl, importUrl } from "../constants/ap
 
 export const useFetch = async(url, method, props) => {
 
-	const { data, headers } = props;
+	const	{ data, headers } = props;
 	const	credentials = url === importUrl ? 'omit' : 'include';
 
-	try {
-						
+	try 
+	{				
 		const response = await fetch(url, {
 			method: method,
 			credentials: credentials,
@@ -14,24 +14,20 @@ export const useFetch = async(url, method, props) => {
 			body: data === undefined ? {} : data
 		})
 
-		console.log(response.status)
-		if (response.status !== 200) {
-			console.log('err')
-			throw new Error(`${url}: ` + response.status);
-		}
-		
-		if (url === apiUrl || url === stopGenerationUrl) {
-			console.log('ok')
+		if (response.status !== 200) 
 			return response;
-		}
+		
+		if (url === apiUrl || url === stopGenerationUrl) 
+			return response;
 		else {
-			console.log('else')
 			const jsonData = await response.json();
 
 			return jsonData;
 		}
 
-	} catch (error) {
+	} 
+	catch (error)
+	{
 		console.error('An error occurred: ', error);
 
 		return error;
