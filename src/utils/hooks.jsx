@@ -1,5 +1,4 @@
-import { apiUrl, stopGenerationUrl, importUrl } from "../constants/api";
-import { EventSourcePolyfill } from 'event-source-polyfill';
+import { apiUrl, streamUrl, stopGenerationUrl, importUrl } from "../constants/api";
 
 export const useFetch = async(url, method, props) => {
 
@@ -15,7 +14,7 @@ export const useFetch = async(url, method, props) => {
 			body: data === undefined ? {} : data
 		})
 		
-		if (url === stopGenerationUrl || url.includes("start")) {
+		if (url === apiUrl || url === stopGenerationUrl) {
 			return response;
 		}
 		else {
@@ -31,11 +30,9 @@ export const useFetch = async(url, method, props) => {
 	}
 }
 
-export const useStream = async(state, dispatch, id) => {
-	
-	const   stream_chat = new EventSourcePolyfill(apiUrl + "/" + id + "/start", {
-		headers: { 'Authorization': `Bearer ${state.userToken}` } 
-	});
+export const useStream = async(state, dispatch) => {
+
+	const   stream_chat = new EventSource(streamUrl, { withCredentials: true })
 
 	dispatch({ type: 'RESET_AGENT_STREAM' });
 
@@ -44,7 +41,6 @@ export const useStream = async(state, dispatch, id) => {
 		try {
 
 			const	jsonData = JSON.parse(e.data);
-			console.log(jsonData, ' ', e.data)
 
 			if (jsonData == "[DONE]") 
 			{
@@ -73,16 +69,16 @@ export const useStream = async(state, dispatch, id) => {
 	}
 }
 
-export async function	usePost(state, dispatch) {
-	const	headers = { 
-		'Content-Type': 'application/json', 
-		'Authorization': `Bearer ${state.userToken}` 
-	};
-	const	data = {
-		user_text: state.question.user_text,
-		temperature: "0.1",
-	}
-	const	res = await useFetch(apiUrl, 'POST', {data: JSON.stringify(data), headers});
-	
-	await useStream(state, dispatch, res.id);
+export const usePost = async(state, dispatch) => {
+
+	const	formData = new URLSearchParams();
+	const	headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
+
+	formData.append("user_text", state.question.user_text);
+	formData.append("context", "");
+	formData.append("links", "");
+	formData.append("temperature", "0.1");
+
+	await useFetch(apiUrl, 'POST', {data: formData, headers});
+	await useStream(state, dispatch);
 }
