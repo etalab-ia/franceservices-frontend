@@ -44,6 +44,7 @@ export const initButtonsSignup = (handleValidatePassword, handleClick) => {
 export const initButtonsReset = (isDisable, handleClick) => {
 
 	const buttonsReset = [
+		// onClick
 		{
 			disabled: isDisable,
 			children: 'Soumettre',
