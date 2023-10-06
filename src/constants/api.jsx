@@ -1,5 +1,7 @@
+
 // POST USER QUESTION / GET AGENT RESPONSE
-export const	apiUrl = "http://142.44.40.218/api/v2/stream"
+export const	apiUrl = "http://142.44.51.104/api/api/fabrique"
+export const	streamUrl = "http://142.44.51.104/api/api/fabrique_stream"
 
 // POST USER QUESTION / GET RELATED SHEETS & EXPERIENCES
 export const	sheetsUrl = "http://142.44.51.104/api/api/search/sheets"
