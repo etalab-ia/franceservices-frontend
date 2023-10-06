@@ -13,6 +13,16 @@
 		@apply z-10;
 	}
 
+	.login-failed {
+		@apply bg-red-100;
+		@apply w-[500px];
+		@apply flex;
+		@apply justify-center,
+		@apply p-2;
+		@apply m-4;
+		@apply font-bold;
+	}
+
 	.wrapper-container {
 		@apply flex;
 		@apply w-screen;
