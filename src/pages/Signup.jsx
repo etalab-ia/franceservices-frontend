@@ -5,6 +5,7 @@ import { signupFields } from "../constants/inputFields";
 import { initButtonsSignup } from "../constants/buttonsConnexion";
 import { useFetch } from "../utils/hooks";
 import { signupUrl } from "../constants/api";
+import { AuthFailed } from "../components/AuthFailed";
 
 export function Signup(props) {
 
@@ -30,17 +31,24 @@ export function Signup(props) {
 	}
 
 	const	handleClick = async() => {
-		const data = {
+		const	data = {
 			username: state.username,
 			email: state.email,
 			password: password
 		}
 
-		await useFetch(signupUrl, 'POST', {data: JSON.stringify(data), headers: { 'Content-Type': 'application/json' }});
+		const	res = await useFetch(signupUrl, 'POST', {data: JSON.stringify(data), headers: { 'Content-Type': 'application/json' }});
+
+		if (res.status && res.status !== 200)
+			return dispatch({ type: 'AUTH_FAILED' });
 	}
 	
 	return (
 		<div className="login-container">
+			{state.authFailed ? 
+				<AuthFailed>Courriel invalide.</AuthFailed>
+				: null
+			}
 			{signupFields.map((input, key) => {
 				return <Input className="w-[500px]"
 					key={key}
