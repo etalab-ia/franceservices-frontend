@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { apiUrl, stopGenerationUrl, importUrl } from "../constants/api";
 import { EventSourcePolyfill } from 'event-source-polyfill';
 
