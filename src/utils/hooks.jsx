@@ -34,7 +34,8 @@ export const useFetch = async(url, method, props) => {
 export const useStream = async(state, dispatch, id) => {
 	
 	const   stream_chat = new EventSourcePolyfill(apiUrl + "/" + id + "/start", {
-		headers: { 'Authorization': `Bearer ${state.userToken}` } 
+		headers: { 'Authorization': `Bearer ${state.userToken}` },
+		withCredentials: true,
 	});
 
 	dispatch({ type: 'RESET_AGENT_STREAM' });
@@ -42,9 +43,7 @@ export const useStream = async(state, dispatch, id) => {
 	stream_chat.onmessage = function (e) 
 	{
 		try {
-
 			const	jsonData = JSON.parse(e.data);
-			console.log(jsonData, ' ', e.data)
 
 			if (jsonData == "[DONE]") 
 			{
