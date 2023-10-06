@@ -2,7 +2,7 @@ import Input from "@codegouvfr/react-dsfr/Input";
 import { ButtonsGroup } from "@codegouvfr/react-dsfr/ButtonsGroup";
 import { initButtonsLogin } from "../constants/buttonsConnexion";
 import { loginFields } from "../constants/inputFields";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { signinUrl } from "../constants/api";
 import { useFetch } from "../utils/hooks";
 import { AuthFailed } from "../components/AuthFailed";
@@ -13,6 +13,11 @@ export function	Login(props) {
 	const	[isDisable, setIsDisable] = useState(true);
 	const	[password, setPassword] = useState('');
 	const	[id, setId] = useState('');
+
+	useEffect(() => {
+		checkId();
+		checkIfCompletedFields();
+	}, [password])
 
 	const	checkId = () => {
 		if (id.includes("@"))
@@ -33,11 +38,11 @@ export function	Login(props) {
 
 		if (e.target.name === "username")
 			setId(e.target.value);
-		else
+		if (e.target.name === "password")
 			setPassword(e.target.value);
 
-		checkIfCompletedFields();
 		checkId();
+		checkIfCompletedFields();
 	}
 
 	const handleClick = async () => {
