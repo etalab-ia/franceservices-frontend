@@ -14,6 +14,9 @@ export const useFetch = async(url, method, props) => {
 			headers,
 			body: data === undefined ? {} : data
 		})
+
+		if (response.status !== 200) 
+			return response;
 		
 		if (url === stopGenerationUrl || url.includes("start"))
 			return response;
