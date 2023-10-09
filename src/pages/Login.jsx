@@ -27,7 +27,7 @@ export function	Login(props) {
 	}
 
 	const	checkIfCompletedFields = () => {
-		if (password.length && (state.username.length || state.email.length))
+		if (password.length && ((state.username && state.username.length) || (state.email && state.email.length)))
 			setIsDisable(false);
 		else
 			setIsDisable(true);
@@ -45,6 +45,11 @@ export function	Login(props) {
 		checkIfCompletedFields();
 	}
 
+	const	storeAuth = (token, username) => {
+		localStorage.setItem('authToken', token);
+		localStorage.setItem('username', username);
+	}
+
 	const handleClick = async () => {
 		const data = {
 		  username: state.username,
@@ -56,7 +61,7 @@ export function	Login(props) {
 	  
 		try 
 		{
-			const res = await useFetch(signinUrl, 'POST', {
+			const	res = await useFetch(signinUrl, 'POST', {
 				data: JSON.stringify(data),
 				headers: { 'Content-Type': 'application/json' }
 			});
@@ -65,9 +70,7 @@ export function	Login(props) {
 				return dispatch({ type: 'AUTH_FAILED' });
 
 			dispatch({ type: 'LOGIN', nextUserToken: res.token });
-
-			localStorage.setItem('authToken', res.token);
-			localStorage.setItem('username', state.username);
+			storeAuth(res.token, state.username);
 		} 
 		catch(error)
 		{
@@ -85,6 +88,7 @@ export function	Login(props) {
 			}
 			{loginFields.map((field, key) => {
 				return <Input className="w-[500px]"
+					iconId={field.iconId}
 					key={key}
 					hintText={field.hintText}
 					nativeInputProps={{...field.nativeInputProps, onChange: handleChange}}
