@@ -41,7 +41,7 @@ export const loginFields = [
 		hintText: "Mot de passe",
 		nativeInputProps: {
 			name: "password",
-			type: "password"
+			type: "password",
 		}
 	}
 ]
