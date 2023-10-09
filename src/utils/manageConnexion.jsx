@@ -8,7 +8,7 @@ const	rmAuth = () => {
 }
 
 export const    handleSignout = async(state, dispatch) => {
-	await useFetch(signoutUrl, 'POST', {headers: { "Authorization": `Bearer ${state.userToken}`}})
+	await useFetch(signoutUrl, 'POST', { headers: { "Authorization": `Bearer ${state.userToken}`} })
 		.then(rmAuth())
 		.then(res => dispatch({ type: 'LOGOUT', nextUserToken: res.userToken }));
 
