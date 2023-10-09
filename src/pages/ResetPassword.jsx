@@ -4,22 +4,25 @@ import { useState } from "react";
 import { initButtonsReset } from "../constants/buttonsConnexion";
 import { resetPasswordUrl } from "../constants/api";
 import { useFetch } from "../utils/hooks";
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-export function ResetPassword(props) {
+export function ResetPassword() {
 
-	const   { state, dispatch } = props;
+	const	auth = useSelector((state) => state.auth);
+	const	dispatch = useDispatch();
 	const	[isDisable, setIsDisable] = useState(true);
 
 	const	handleChange = (e) => {
 		e.preventDefault();
 
 		dispatch({ type: 'SET_EMAIL', nextEmail: e.target.value })
-		setIsDisable(!(state.email && state.email.includes("@")))
+		setIsDisable(!(auth.email && auth.email.includes("@")))
 	}
 
 	const	handleClick = async() => {
 		await useFetch(resetPasswordUrl, 'POST', {
-			data: JSON.stringify({email: state.email}), 
+			data: JSON.stringify({email: auth.email}), 
 			headers: { 'Content-Type': 'application/json' }
 		});
 	}

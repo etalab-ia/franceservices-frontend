@@ -6,10 +6,13 @@ import { initButtonsSignup } from "../constants/buttonsConnexion";
 import { useFetch } from "../utils/hooks";
 import { signupUrl } from "../constants/api";
 import { AuthFailed } from "../components/AuthFailed";
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-export function Signup(props) {
+export function Signup() {
 
-	const	{ state, dispatch } = props;
+	const	auth = useSelector((state) => state.auth);
+	const	dispatch = useDispatch();
 	const	[password, setPassword] = useState('');
 	const	[confPassword, setConfPassword] = useState('');
 
@@ -27,17 +30,20 @@ export function Signup(props) {
 	}
 
 	const	handleValidatePassword = () => {
-		return state.username && state.email && password && confPassword === password;	
+		return auth.username && auth.email && password && confPassword === password;	
 	}
 
 	const	handleClick = async() => {
 		const	data = {
-			username: state.username,
-			email: state.email,
+			username: auth.username,
+			email: auth.email,
 			password: password
 		}
 
-		const	res = await useFetch(signupUrl, 'POST', {data: JSON.stringify(data), headers: { 'Content-Type': 'application/json' }});
+		const	res = await useFetch(signupUrl, 'POST', {
+			data: JSON.stringify(data),
+			headers: { 'Content-Type': 'application/json' }
+		});
 
 		if (res.status && res.status !== 200)
 			return dispatch({ type: 'AUTH_FAILED' });
@@ -45,7 +51,7 @@ export function Signup(props) {
 	
 	return (
 		<div className="login-container">
-			{state.authFailed ? 
+			{auth.authFailed ? 
 				<AuthFailed>Courriel invalide.</AuthFailed>
 				: null
 			}
