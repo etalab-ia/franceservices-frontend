@@ -1,7 +1,9 @@
 import { apiUrl, stopGenerationUrl, importUrl } from "../constants/api";
 import { EventSourcePolyfill } from 'event-source-polyfill';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-export const useFetch = async(url, method, props) => {
+export const		useFetch = async(url, method, props) => {
 
 	const	{ data, headers } = props;
 	const	credentials = url === importUrl ? 'omit' : 'include';
@@ -15,7 +17,7 @@ export const useFetch = async(url, method, props) => {
 			body: data === undefined ? {} : data
 		})
 
-		if (response.status !== 200) 
+		if (response.status !== 200)
 			return response;
 		
 		if (url === stopGenerationUrl || url.includes("start"))
@@ -35,10 +37,9 @@ export const useFetch = async(url, method, props) => {
 	}
 }
 
-export const useStream = async(state, dispatch, id) => {
-	
+export const		useStream = async(auth, dispatch, id) => {
 	const   stream_chat = new EventSourcePolyfill(apiUrl + "/" + id + "/start", {
-		headers: { 'Authorization': `Bearer ${state.userToken}` },
+		headers: { 'Authorization': `Bearer ${auth.userToken}` },
 		withCredentials: true,
 	});
 
@@ -76,16 +77,16 @@ export const useStream = async(state, dispatch, id) => {
 	}
 }
 
-export async function	usePost(state, dispatch) {
+export async function	usePost(auth, user, dispatch) {
 	const	headers = { 
 		'Content-Type': 'application/json', 
-		'Authorization': `Bearer ${state.userToken}` 
+		'Authorization': `Bearer ${auth.userToken}` 
 	};
 	const	data = {
-		user_text: state.question.user_text,
+		user_text: user.question.user_text,
 		temperature: "0.1",
 	}
 	const	res = await useFetch(apiUrl, 'POST', {data: JSON.stringify(data), headers});
 	
-	await useStream(state, dispatch, res.id);
+	await useStream(auth, dispatch, res.id);
 }

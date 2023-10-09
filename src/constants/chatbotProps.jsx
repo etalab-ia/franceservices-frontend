@@ -4,59 +4,57 @@ import bookmark from "../../icons/usertools/bookmark.svg"
 import copy from "../../icons/usertools/copy.svg"
 import { usePost } from "../utils/hooks";
 
-export const	chatbotProps = {
+export const		chatbotProps = {
 	mainTitle: "Chatbot administratif",
 	subtitle: "Ce chat vous permet de trouver des informations de premier niveau à des questions de nature administrative que vous vous posez.",
 }
 
-function handleEvaluate(state, dispatch) {
-
+function			handleEvaluate() {
 	return alert('evaluate');
 }
 
-async function handleRedo(state, dispatch) {
-	usePost(state, dispatch);
+async function		handleRedo(auth, user, dispatch) {
+	usePost(auth, user, dispatch);
 
 	return dispatch({ type: 'REDO_AGENT_STREAM' });
 }
 
-function handleSaved(state, dispatch) {
-
+function			handleSaved() {
 	return alert('saved');
 }
 
-function handleCopy(state, dispatch) {
-	const	joinedRes = state.response.join('')
+function			handleCopy(stream) {
+	const	joinedRes = stream.response.join('')
 
 	return navigator.clipboard.writeText(joinedRes);
 }
 
-export	function userChatToolsFunc(state, dispatch) {
+export	function	userChatToolsFunc(state, dispatch) {
 
 	const	userChatToolsProps = [
 		{
 			image: evaluate,
 			alt: "Evaluer la réponse",
 			title: "Evaluer la réponse",
-			onClick: () => handleEvaluate(state, dispatch),
+			onClick: handleEvaluate,
 		},
 		{
 			image: redo,
 			alt: "Re-générer la réponse",
 			title: "Re-générer la réponse",
-			onClick: () => handleRedo(state, dispatch),
+			onClick: () => handleRedo(state.auth, state.user, dispatch),
 		},
 		{
 			image: bookmark,
 			alt: "Enregistrer la réponse",
 			title: "Enregistrer la réponse",
-			onClick: () => handleSaved(state, dispatch),
+			onClick: handleSaved,
 		},
 		{
 			image: copy,
 			alt: "Copier la réponse",
 			title: "Copier la réponse",
-			onClick: () => handleCopy(state, dispatch),
+			onClick: () => handleCopy(state.stream),
 		},
 	]
 

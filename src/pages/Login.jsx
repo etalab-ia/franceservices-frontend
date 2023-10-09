@@ -6,10 +6,13 @@ import { useEffect, useState } from "react";
 import { signinUrl } from "../constants/api";
 import { useFetch } from "../utils/hooks";
 import { AuthFailed } from "../components/AuthFailed";
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-export function	Login(props) {
+export function	Login() {
 
-	const	{ state, dispatch } = props;
+	const	auth = useSelector((state) => state.auth);
+	const	dispatch = useDispatch();
 	const	[isDisable, setIsDisable] = useState(true);
 	const	[password, setPassword] = useState('');
 	const	[id, setId] = useState('');
@@ -27,7 +30,7 @@ export function	Login(props) {
 	}
 
 	const	checkIfCompletedFields = () => {
-		if (password.length && ((state.username && state.username.length) || (state.email && state.email.length)))
+		if (password.length && ((auth.username && auth.username.length) || (auth.email && auth.email.length)))
 			setIsDisable(false);
 		else
 			setIsDisable(true);
@@ -52,8 +55,8 @@ export function	Login(props) {
 
 	const handleClick = async () => {
 		const data = {
-		  username: state.username,
-		  email: state.email,
+		  username: auth.username,
+		  email: auth.email,
 		  password: password
 		};
 		
@@ -70,7 +73,7 @@ export function	Login(props) {
 				return dispatch({ type: 'AUTH_FAILED' });
 
 			dispatch({ type: 'LOGIN', nextUserToken: res.token });
-			storeAuth(res.token, state.username);
+			storeAuth(res.token, auth.username);
 		} 
 		catch(error)
 		{
@@ -82,7 +85,7 @@ export function	Login(props) {
 
 	return (
 		<div className="login-container">
-			{state.authFailed ? 
+			{auth.authFailed ? 
 				<AuthFailed>Nom d'utilisateur ou mot de passe invalide.</AuthFailed>
 				: null
 			}

@@ -1,15 +1,17 @@
 import { Avatar } from "./Avatar";
 import { useEffect } from "react";
+import { scrollToBottom } from "../utils/manageEffects";
 import { UserChatTools } from "./UserChatTools";
+import { useSelector } from 'react-redux';
 
-function Message({ sender, text, props }) {
+function Message({ sender, text }) {
 	const	isUser = sender === "user";
-	const	classNames = isUser ? "flex flex-row mr-0 ml-auto" : "flex flex-row";
+	const	classNames = isUser ? "user-message" : "row-message";
 
 	return (
 		<div className={classNames}>
-			{!isUser && <div className="flex flex-row">
-				<UserChatTools state={props.state} dispatch={props.dispatch}/>
+			{!isUser && <div className="row-message">
+				<UserChatTools />
 					<Avatar user={sender} />
 			</div>}
 			<div className={`w-[644px] ${isUser ? "mr-[16px]" : "ml-[16px]"}`}>
@@ -21,29 +23,22 @@ function Message({ sender, text, props }) {
 }
 
 export function Display(props) {
-  	const	{ state, dispatch } = props;
+	const	history = useSelector((state) => state.history);
+	const	stream = useSelector((state) => state.stream);
 
-	const scrollToBottom = () => {
-		const	chatElement = document.getElementById("chat");
-
-		chatElement.scrollTop = chatElement.scrollHeight;
-	};
-
-	useEffect(() => {
-		scrollToBottom();
-	}, [state.response]);
+	useEffect(() => { scrollToBottom(); }, [stream.response]);
 
 	return (
 		<div className="chat" id="chat">
-			{state.messages.slice(1).map((message, index) => (
+			{history.messages.slice(1).map((message, index) => (
 				<Message key={index} sender={message.sender} text={message.text} props={props} />
 			))}
-			{state.response.length !== 0 && (
+			{stream.response.length !== 0 && (
 				<div className="streaming-container">
-					<UserChatTools state={state} dispatch={dispatch}/>
+					<UserChatTools />
 					<Avatar user="agent" />
 					<div className="streaming">
-						{state.response.slice(1).map((item, index) => (
+						{stream.response.slice(1).map((item, index) => (
 							<span key={index}>{item}</span>
 						))}
 					</div>

@@ -38,7 +38,19 @@
 		@apply m-10;
 	}
 
+	.row-message {
+		@apply flex;
+		@apply flex-row;
+	}
+
 	/* USER */
+
+	.user-message {
+		@apply flex;
+		@apply flex-row;
+		@apply mr-0;
+		@apply ml-auto;
+	}
 
 	.side-tools-container {
 		@apply flex;
