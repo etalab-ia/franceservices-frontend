@@ -8,7 +8,6 @@ export function	TabContent({ content }) {
 }
 
 export function	initTabs() {
-
 	const	TabsProps = [
 		{
 			id: "chatbot-tab",

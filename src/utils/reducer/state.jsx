@@ -4,7 +4,7 @@ export const	initialQuestion = {
 	user_text: '',
 	context: '',
 	links: '',
-	temperature: 0.1,
+	temperature: '0.1',
 }
 
 export const	initialAuth = {
