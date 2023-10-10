@@ -2,10 +2,11 @@ import Input from "@codegouvfr/react-dsfr/Input";
 import ButtonsGroup from "@codegouvfr/react-dsfr/ButtonsGroup";
 import { useState } from "react";
 import { initButtonsReset } from "../constants/buttonsConnexion";
-import { resetPasswordUrl } from "../constants/api";
+import { resetPasswordMailUrl } from "../constants/api";
 import { useFetch } from "../utils/hooks";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { Navigate } from "react-router-dom";
 
 export function ResetPassword() {
 
@@ -17,14 +18,22 @@ export function ResetPassword() {
 		e.preventDefault();
 
 		dispatch({ type: 'SET_EMAIL', nextEmail: e.target.value })
-		setIsDisable(!(auth.email && auth.email.includes("@")))
+		setIsDisable(!(auth.email.length && auth.email.includes("@")))
 	}
 
 	const	handleClick = async() => {
-		await useFetch(resetPasswordUrl, 'POST', {
-			data: JSON.stringify({email: auth.email}), 
+		console.log('click')
+		const res = await useFetch(resetPasswordMailUrl, 'POST', {
+			data: JSON.stringify({ email: auth.email }), 
 			headers: { 'Content-Type': 'application/json' }
 		});
+
+		console.log('res: ', res)
+
+		if (res.status && res.status !== 200)
+			return dispatch({ type: 'AUTH_FAILED' });
+		
+		return <Navigate to="/login" />
 	}
 
 	return (
@@ -33,7 +42,7 @@ export function ResetPassword() {
 				className="w-[500px]"
 				hintText="Email"
 				nativeInputProps={{
-					placeholder: "benoitdupont@mail.com",
+					placeholder: "camille@mail.com",
 					onChange: handleChange,
 				}}
 			/>

@@ -2,14 +2,14 @@ export const signupFields = [
 	{
 		hintText: "Nom d'utilisateur",
 		nativeInputProps: {
-			placeholder: "BenoîtDupont",
+			placeholder: "Camille",
 			name: "username"
 		}
 	},
 	{
 		hintText: "Courriel",
 		nativeInputProps: {
-			placeholder: "exemple@email.fr",
+			placeholder: "camille@mail.com",
 			name: "email"
 		}
 	},
@@ -33,7 +33,7 @@ export const loginFields = [
 	{
 		hintText: "Nom d'utilisateur",
 		nativeInputProps: {
-			placeholder: "BenoîtDupont ou benoitdupont@mail.com",
+			placeholder: "Camille ou camille@mail.com",
 			name: "username"
 		}
 	},
