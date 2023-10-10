@@ -8,6 +8,7 @@ import { useFetch } from "../utils/hooks";
 import { AuthFailed } from "../components/AuthFailed";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { usenameOrPasswordError } from "../constants/errorMessages";
 
 export function	Login() {
 
@@ -86,7 +87,7 @@ export function	Login() {
 	return (
 		<div className="login-container">
 			{auth.authFailed ? 
-				<AuthFailed>Nom d'utilisateur ou mot de passe invalide.</AuthFailed>
+				<AuthFailed>{usenameOrPasswordError}</AuthFailed>
 				: null
 			}
 			{loginFields.map((field, key) => {

@@ -6,6 +6,7 @@ import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 import { Signup } from "../pages/Signup";
 import { ResetPassword } from "../pages/ResetPassword";
+import { NewPassword } from "../pages/NewPassword";
 import { quickAccessItemsFunc } from "../constants/headerProps";
 import { useEffect } from "react";
 import { checkConnexion } from "../utils/localStorage";
@@ -35,6 +36,7 @@ export const Root = () => {
 			<Route path="/chat" element={!auth.isLogin ? <Navigate to="/login" /> : <Chatbot />}/>
 			<Route path="/signup" element={<Signup />} />
 			<Route path="/reset-password" element={<ResetPassword />} />
+			<Route path="/new-password" element={<NewPassword />} />
 			<Route path="*" element={<h1>404</h1>} />
 		</Routes>
   	</div>

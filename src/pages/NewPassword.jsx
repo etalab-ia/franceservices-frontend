@@ -4,14 +4,14 @@ import { useState } from "react";
 import { signupFields } from "../constants/inputFields";
 import { initButtonsSignup } from "../constants/buttonsConnexion";
 import { useFetch } from "../utils/hooks";
-import { signupUrl } from "../constants/api";
+import { resetPasswordUrl } from "../constants/api";
 import { AuthFailed } from "../components/AuthFailed";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { invalidEmail } from "../constants/errorMessages";
+import { changePasswordFailed } from "../constants/errorMessages";
 import { Navigate } from "react-router-dom";
 
-export function Signup() {
+export function NewPassword() {
 
 	const	auth = useSelector((state) => state.auth);
 	const	dispatch = useDispatch();
@@ -21,45 +21,42 @@ export function Signup() {
 	const	handleChange = (e) => {
 		e.preventDefault();
 
-		if (e.target.name === "username")
-			dispatch({ type: 'SET_USERNAME', nextUsername: e.target.value });
-		else if (e.target.name === "password")
+		if (e.target.name === "password")
 			setPassword(e.target.value);
 		else if (e.target.name === "confirmationPassword")
 			setConfPassword(e.target.value);
-		else if (e.target.name === "email")
-			dispatch({ type: 'SET_EMAIL', nextEmail: e.target.value });
 	}
 
 	const	handleValidatePassword = () => {
-		return auth.username.length && auth.email.length && auth.email.includes("@") && password.length && confPassword === password;	
+		return password.length && confPassword === password;	
 	}
 
 	const	handleClick = async() => {
 		const	data = {
-			username: auth.username,
-			email: auth.email,
+			token: "",
 			password: password
 		}
 
-		const	res = await useFetch(signupUrl, 'POST', {
+		const	res = await useFetch(resetPasswordUrl, 'POST', {
 			data: JSON.stringify(data),
 			headers: { 'Content-Type': 'application/json' }
 		});
 
 		if (res.status && res.status !== 200)
 			return dispatch({ type: 'AUTH_FAILED' });
-		
+
 		return <Navigate to="/login" />
 	}
 	
 	return (
 		<div className="login-container">
 			{auth.authFailed ? 
-				<AuthFailed>{invalidEmail}</AuthFailed>
+				<AuthFailed>{changePasswordFailed}</AuthFailed>
 				: null
 			}
 			{signupFields.map((input, key) => {
+				if (key < 2)
+					return null;
 				return <Input className="w-[500px]"
 					key={key}
 					hintText={input.hintText}
@@ -67,7 +64,7 @@ export function Signup() {
 				/>
 			})}
 			<ButtonsGroup className="container w-[500px]"
-				buttons={initButtonsSignup(handleValidatePassword, handleClick, 'Créer un compte')}
+				buttons={initButtonsSignup(handleValidatePassword, handleClick, 'Changer de mot de passe')}
 			/>
 		</div>
 	)

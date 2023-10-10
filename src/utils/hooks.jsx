@@ -7,7 +7,7 @@ export const	useFetch = async(url, method, props) => {
 	const		credentials = url === importUrl ? 'omit' : 'include';
 
 	try 
-	{				
+	{
 		const response = await fetch(url, {
 			method: method,
 			credentials: credentials,
@@ -16,7 +16,7 @@ export const	useFetch = async(url, method, props) => {
 		})
 		
 		if (response.status !== 200 || url === stopGenerationUrl || url.includes("start"))
-			return response;
+			return response;			
 		else
 		{
 			const jsonData = await response.json();
