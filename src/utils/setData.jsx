@@ -47,3 +47,10 @@ export const	getSheets = async(question, auth, dispatch) => {
 
 	dispatch({ type: 'SET_SHEETS', nextSheets: sheetsResp });
 }
+
+export const	getSheetId = (url) => {
+	const	splitUrl = url.split("vosdroits/");
+	const	sheetId = splitUrl[1];
+
+	return sheetId;
+}

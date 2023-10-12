@@ -35,7 +35,7 @@ export function	UserFeedbackButtons(props) {
 	const	handleNewReason = (e) => { setOtherReason(e.target.value); }
 	
 	return (
-		<div className="flex flex-col">
+		<div className="col-message">
 		<div className="user-feedback-buttons-container">
 			{buttonsType.map((button, index) => (
 				<div key={index}>
