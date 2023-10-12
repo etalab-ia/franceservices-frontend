@@ -6,9 +6,11 @@ import { tabsReducer } from "./tabs";
 import { userReducer } from "./userReducer";
 import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
+import { feedbackReducer } from "./feedback";
 
 const           reducer = combineReducers({
 	auth: authReducer,
+	feedback: feedbackReducer,
 	history: historyReducer,
 	institutions: institutionsReducer,
 	stream: streamReducer,

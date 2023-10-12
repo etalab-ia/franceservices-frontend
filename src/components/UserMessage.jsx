@@ -4,10 +4,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { getSheets } from "../utils/setData";
 
 export function UserMessage() {
 
 	const	auth = useSelector((state) => state.auth);
+	const	question = useSelector((state) => state.user.question);
 	const	stream = useSelector((state) => state.stream);
 	const	user = useSelector((state) => state.user);
 	const	dispatch = useDispatch();
@@ -29,6 +31,7 @@ export function UserMessage() {
 		dispatch({ type: 'SET_MESSAGES', nextMessage: { text: currQuestion, sender: 'user'} })
 
 		usePost(auth, user, dispatch);
+		getSheets(question, auth, dispatch);
 	}
 
 	return (

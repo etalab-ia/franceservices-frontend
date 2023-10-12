@@ -1,6 +1,6 @@
 import { initialQuestion } from "./state"
 
-export const	userReducer = (state = { question: initialQuestion }, action) => {
+export const	userReducer = (state = { question: initialQuestion, sheets: [] }, action) => {
 	switch (action.type) {
 		case 'SET_USER_TITLE':
 			return {
@@ -25,6 +25,11 @@ export const	userReducer = (state = { question: initialQuestion }, action) => {
 					...state.question,
 					user_text: action.nextUserText
 				}
+			}
+		case 'SET_SHEETS':
+			return {
+				...state,
+				sheets: action.nextSheets,
 			}
 		case 'RESET_USER_QUESTION':
 			return {

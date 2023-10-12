@@ -1,0 +1,1 @@
+export const    askingSheetsNeeded = `Souhaitez-vous obtenir les liens vers les sources utilisées dans ce résultat ?`;

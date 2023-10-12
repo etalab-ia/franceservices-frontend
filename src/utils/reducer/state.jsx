@@ -4,7 +4,7 @@ export const	initialQuestion = {
 	user_text: '',
 	context: '',
 	links: '',
-	// temperature: 0.1,
+	temperature: 1,
 }
 
 export const	initialAuth = {
@@ -18,4 +18,5 @@ export const	initialAuth = {
 export const	initialStream = {
 	response: [],
 	isStoppable: true,
+	isStreaming: true,
 }
