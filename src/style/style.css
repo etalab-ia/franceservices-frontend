@@ -79,6 +79,7 @@
 		@apply my-4;
 		@apply p-6;
 		@apply border-2;
+		@apply border-solid;
 		@apply border-[#DD];
 	}
 

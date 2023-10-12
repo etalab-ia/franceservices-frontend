@@ -11,7 +11,7 @@ export function Sheets(props) {
 	return (
 		<div className="col-message">
 			<div className="row-message mt-12">
-				<UserChatTools />
+				<UserChatTools type='sheets'/>
 				<Avatar user='agent' />
 				<div className='ml-4'>
 					<div className="py-4">{askingSheetsNeeded}</div>
