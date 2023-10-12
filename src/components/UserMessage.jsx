@@ -15,7 +15,7 @@ export function UserMessage() {
 	const	dispatch = useDispatch();
 	const	[currQuestion, setCurrQuestion] = useState('');
 	
-	useEffect(() => {}, [stream])
+	useEffect(() => {}, [stream]);
 
 	const	handleChange = (e) => {
 		e.preventDefault();
@@ -29,10 +29,14 @@ export function UserMessage() {
 		dispatch({ type: 'SET_USER_TEXT', nextUserText: currQuestion});
 		dispatch({ type: 'SET_MESSAGES', nextMessage: { text: joinedRes, sender: 'agent'} })
 		dispatch({ type: 'SET_MESSAGES', nextMessage: { text: currQuestion, sender: 'user'} })
+	}
 
+	useEffect(() => {
+		if (!question.user_text.length)
+			return ;
 		usePost(auth, user, dispatch);
 		getSheets(question, auth, dispatch);
-	}
+	  }, [question]);
 
 	return (
 		<SearchBar

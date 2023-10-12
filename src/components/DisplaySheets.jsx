@@ -1,5 +1,7 @@
 import { useSelector } from 'react-redux';
+import { TagSheets } from './TagSheets';
 import arrowRight from "../../icons/sheets/arrowRight.svg";
+import { getSheetId } from '../utils/setData';
 
 export function	DisplaySheets() {
 	const	sheets = useSelector((state) => state.user.sheets);
@@ -7,12 +9,13 @@ export function	DisplaySheets() {
 	return (
 		<div>
 			{sheets.map((sheet, index) => {
-				return <div className="user-feedback-container my-4 p-8 border-2 border-[#DD]" key={index}>
-					<h1 className="text-xl font-bold text-[#000091] py-3">{sheet.title}</h1>
-					<p>{sheet.introduction}</p>
-					<a href={sheet.url} target="_blank">
-						<button className="flex justify-end"><img src={arrowRight} alt="Accéder à la page" /></button>
-					</a>
+				return <div className="user-feedback-container sheets-container" key={index}>
+					<TagSheets sheetId={getSheetId(sheet.url)}/>
+					<h1 className="sheet-title">{sheet.title}</h1>
+					<p className='py-3'>{sheet.introduction}</p>
+					<div className='sheet-url'>
+						<a href={sheet.url}><img src={arrowRight} alt="Accéder à la page" /></a>
+					</div>
 				</div>
 			})}
 		</div>
