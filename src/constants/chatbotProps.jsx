@@ -29,7 +29,7 @@ function			handleCopy(stream) {
 	return navigator.clipboard.writeText(joinedRes);
 }
 
-export	function	userChatToolsFunc(state, dispatch) {
+export	function	userChatToolsFunc(state, dispatch, type) {
 
 	const	userChatToolsProps = [
 		{
@@ -57,6 +57,14 @@ export	function	userChatToolsFunc(state, dispatch) {
 			onClick: () => handleCopy(state.stream),
 		},
 	]
+	const typeToButtonsMap = {
+		default: [0, 1, 2, 3],
+		quality: [1],
+		sheets: [2],
+	};
 
-	return userChatToolsProps;
+	const	visibleButtonIndices = typeToButtonsMap[type] || typeToButtonsMap.default;
+	const	visibleButtonsProps = userChatToolsProps.filter((button, index) => visibleButtonIndices.includes(index));
+
+	return visibleButtonsProps;
 }

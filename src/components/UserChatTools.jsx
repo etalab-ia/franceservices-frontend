@@ -4,7 +4,7 @@ import { animated } from '@react-spring/web'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
-export function UserChatTools() {
+export function UserChatTools({ type }) {
 	const	auth = useSelector((state) => state.auth);
 	const	stream = useSelector((state) => state.stream);
 	const	user = useSelector((state) => state.user);
@@ -16,9 +16,11 @@ export function UserChatTools() {
 		setTimeout(() => setIsSelected(null), 100);
 	};
 
+	const test = type ? "ml-[84px]" : ""
+
 	return (
-		<div className="user-chat-tools-container">
-		  	{userChatToolsFunc({ auth, stream, user }, dispatch).map((tool, index) => (
+		<div className={`user-chat-tools-container ${test}`}>
+		  	{userChatToolsFunc({ auth, stream, user }, dispatch, type).map((tool, index) => (
 				<animated.button 
 					disabled={stream.isStoppable}
 					key={index} className="mr-3"
