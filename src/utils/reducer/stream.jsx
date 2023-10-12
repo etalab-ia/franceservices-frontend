@@ -5,12 +5,14 @@ export const	streamReducer = (state = initialStream, action) => {
 		case 'GET_AGENT_STREAM':
 			return {
 				...state,
+				isStreaming: true,
 				response: [...state.response, action.nextResponse]
 			}
 		case 'STOP_AGENT_STREAM':
 			return {
 				...state,
-				isStoppable: false
+				isStoppable: false,
+				isStreaming: false,
 			}
 		case 'REDO_AGENT_STREAM':
 			return {

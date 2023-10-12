@@ -22,13 +22,10 @@ export function ResetPassword() {
 	}
 
 	const	handleClick = async() => {
-		console.log('click')
 		const res = await useFetch(resetPasswordMailUrl, 'POST', {
 			data: JSON.stringify({ email: auth.email }), 
 			headers: { 'Content-Type': 'application/json' }
 		});
-
-		console.log('res: ', res)
 
 		if (res.status && res.status !== 200)
 			return dispatch({ type: 'AUTH_FAILED' });

@@ -86,10 +86,7 @@ export function	Login() {
 
 	return (
 		<div className="login-container">
-			{auth.authFailed ? 
-				<AuthFailed>{usenameOrPasswordError}</AuthFailed>
-				: null
-			}
+			{auth.authFailed && <AuthFailed>{usenameOrPasswordError}</AuthFailed>}
 			{loginFields.map((field, key) => {
 				return <Input className="w-[500px]"
 					iconId={field.iconId}

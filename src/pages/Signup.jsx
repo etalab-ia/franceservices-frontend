@@ -55,10 +55,7 @@ export function Signup() {
 	
 	return (
 		<div className="login-container">
-			{auth.authFailed ? 
-				<AuthFailed>{invalidEmail}</AuthFailed>
-				: null
-			}
+			{auth.authFailed && <AuthFailed>{invalidEmail}</AuthFailed>}
 			{signupFields.map((input, key) => {
 				return <Input className="w-[500px]"
 					key={key}

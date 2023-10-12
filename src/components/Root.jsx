@@ -24,10 +24,10 @@ export const Root = () => {
 	return <div className="h-screen">
 		<Header className="header-container"
 			brandTop={<>INTITULE<br />OFFICIEL</>}
-			serviceTitle="Miaou"
+			serviceTitle="ALBERT"
 			serviceTagline="Le module d'Intelligence Artificielle Orienté Usager"
 			homeLinkProps={{ "to": "/login" }}
-			navigation={auth.isLogin ? navigationData : null}
+			navigation={auth.isLogin && navigationData}
 			quickAccessItems={ auth.isLogin ? quickAccessItemsFunc(auth, dispatch) : [] }
 		/>
 		<Routes>

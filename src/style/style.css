@@ -43,6 +43,11 @@
 		@apply flex-row;
 	}
 
+	.col-message {
+		@apply flex;
+		@apply flex-col;
+	}
+
 	/* USER */
 
 	.user-message {
@@ -86,8 +91,8 @@
 	}
 
 	.streaming {
-		@apply w-[649px];
-		@apply ml-[16px];
+		@apply w-[648px];
+		@apply ml-4;
 		@apply py-4;
 		@apply text-justify;
 	}
@@ -109,6 +114,34 @@
 		@apply ml-auto;
 		@apply mb-8;
 		@apply text-justify;
+	}
+
+	.user-feedback-container {
+		@apply ml-[182px];
+		@apply flex;
+		@apply flex-col;
+		@apply w-[648px];
+	}
+	
+	.user-feedback-buttons-container {
+		@apply flex;
+		@apply flex-wrap;
+		@apply mb-4;
+	}
+
+	.user-feedback-buttons {
+		@apply flex;
+		@apply flex-row;
+		@apply mr-4;
+		@apply py-2;
+		@apply px-4;
+		@apply justify-center;
+		@apply content-center;
+		@apply rounded-[90px];
+		@apply border-2;
+		@apply border-[#6A6AF4];
+		@apply my-2;
+		@apply bg-red-200;
 	}
 
 	.user-chat-tools-container {

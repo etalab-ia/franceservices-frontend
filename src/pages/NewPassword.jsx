@@ -50,10 +50,7 @@ export function NewPassword() {
 	
 	return (
 		<div className="login-container">
-			{auth.authFailed ? 
-				<AuthFailed>{changePasswordFailed}</AuthFailed>
-				: null
-			}
+			{auth.authFailed && <AuthFailed>{changePasswordFailed}</AuthFailed>}
 			{signupFields.map((input, key) => {
 				if (key < 2)
 					return null;

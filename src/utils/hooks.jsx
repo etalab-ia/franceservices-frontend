@@ -1,10 +1,10 @@
-import { apiUrl, stopGenerationUrl, importUrl } from "../constants/api";
+import { apiUrl, stopGenerationUrl } from "../constants/api";
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import { setHeaders, setUserQuestion } from "./setData";
 
 export const	useFetch = async(url, method, props) => {
 	const		{ data, headers } = props;
-	const		credentials = url === importUrl ? 'omit' : 'include';
+	const		credentials = 'include';
 
 	try 
 	{
