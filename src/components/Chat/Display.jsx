@@ -1,11 +1,11 @@
 import { Avatar } from "./Avatar";
 import { useEffect, useState } from "react";
-import { scrollToBottom } from "../utils/manageEffects";
-import { UserChatTools } from "./UserChatTools";
+import { scrollToBottom } from "../../utils/manageEffects";
+import { UserChatTools } from "../User/UserChatTools";
 import { useSelector } from 'react-redux';
-import { UserExperience } from "./UserExperience";
-import { Sheets } from "./Sheets";
-import { NOT_SET } from "../constants/status";
+import { UserExperience } from "../Feedbacks/UserExperience";
+import { Sheets } from "../Sheets/Sheets";
+import { NOT_SET } from "../../constants/status";
 
 function Message({ sender, text }) {
 	const	isUser = sender === "user";

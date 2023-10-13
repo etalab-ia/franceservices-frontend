@@ -5,7 +5,7 @@ import { loginFields } from "../constants/inputFields";
 import { useEffect, useState } from "react";
 import { signinUrl } from "../constants/api";
 import { useFetch } from "../utils/hooks";
-import { AuthFailed } from "../components/AuthFailed";
+import { AuthFailed } from "../components/Auth/AuthFailed";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { usenameOrPasswordError } from "../constants/errorMessages";

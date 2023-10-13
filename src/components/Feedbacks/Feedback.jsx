@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { UserSatisfaction } from "./UserSatisfaction";
 import { UserFeedback } from "./UserFeedback";
-import { NOT_SET } from "../constants/status";
+import { NOT_SET } from "../../constants/status";
 
 export function	Feedback() {
 

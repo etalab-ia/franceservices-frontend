@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { TagSheets } from './TagSheets';
-import arrowRight from "../../icons/sheets/arrowRight.svg";
-import { getSheetId } from '../utils/setData';
+import arrowRight from "../../../icons/sheets/arrowRight.svg";
+import { getSheetId } from '../../utils/setData';
 
 export function	DisplaySheets() {
 	const	sheets = useSelector((state) => state.user.sheets);

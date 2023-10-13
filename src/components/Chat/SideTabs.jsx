@@ -1,7 +1,7 @@
 import { animated } from '@react-spring/web'
-import { sideButtonsProps, sideInformationProps } from '../constants/sideButtons';
+import { sideButtonsProps, sideInformationProps } from '../../constants/sideButtons';
 
-export function UserTools(props) {
+export function SideTabs(props) {
 
 	const	{ state, dispatch } = props;
 
