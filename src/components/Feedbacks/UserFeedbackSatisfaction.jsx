@@ -1,9 +1,9 @@
 import { primaryButtons } from "../../constants/feedback";
 import { animated } from '@react-spring/web'
 
-export function UserSatisfaction(props) {
+export function UserFeedbackSatisfaction(props) {
 
-	const	{ activeTab, setActiveTab } = props;
+	const	{ activeTab, setActiveTab, isConfirmed } = props;
 
 	const	handleClick = (index) => {
 		if (activeTab === index)
@@ -16,6 +16,7 @@ export function UserSatisfaction(props) {
 		<div className="row-message">
 			{primaryButtons.map((button, index) => {
 				return <animated.button title={button.type} onClick={() => handleClick(index)} key={index} className="user-feedback-buttons"
+							disabled={isConfirmed}
 						style={{ 
 							backgroundColor: index === activeTab ? "#6A6AF4" : "white", 
 							borderStyle: "solid"
