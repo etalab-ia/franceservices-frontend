@@ -1,11 +1,11 @@
 import { Avatar } from "./Avatar";
-import { useEffect, useState } from "react";
-import { scrollToBottom } from "../../utils/manageEffects";
+import { useState } from "react";
 import { UserChatTools } from "../User/UserChatTools";
 import { useSelector } from 'react-redux';
 import { UserExperience } from "../Feedbacks/UserExperience";
 import { Sheets } from "../Sheets/Sheets";
 import { NOT_SET } from "../../constants/status";
+import { DisplayStream } from "../Stream/DisplayStream";
 
 function Message({ sender, text }) {
 	const	isUser = sender === "user";
@@ -30,8 +30,6 @@ export function Display(props) {
 	const	stream = useSelector((state) => state.stream);
 	const   [display, setDisplay] = useState(NOT_SET);
 
-	useEffect(() => { scrollToBottom(); setDisplay(NOT_SET); }, [stream.response]);
-
 	return (
 		<div className="chat" id="chat">
 			{history.messages.slice(1).map((message, index) => (
@@ -42,11 +40,7 @@ export function Display(props) {
 					<div className="streaming-container">
 						<UserChatTools />
 						<Avatar user="agent" />
-						<div className="streaming">
-							{stream.response.slice(1).map((item, index) => (
-								<span key={index}>{item}</span>
-							))}
-						</div>
+						<DisplayStream setDisplay={setDisplay}/>
 					</div>
 					{!stream.isStreaming && display && <Sheets display={display} setDisplay={setDisplay}/>}
 					{!stream.isStreaming && !display && <UserExperience />}

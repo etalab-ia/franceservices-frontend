@@ -24,10 +24,8 @@ export function UserMessage() {
 	}
 
 	const	handleClick = () => {
-		const joinedRes = stream.response.slice(1).join('');
-
 		dispatch({ type: 'SET_USER_TEXT', nextUserText: currQuestion});
-		dispatch({ type: 'SET_MESSAGES', nextMessage: { text: joinedRes, sender: 'agent'} })
+		dispatch({ type: 'SET_MESSAGES', nextMessage: stream.historyStream })
 		dispatch({ type: 'SET_MESSAGES', nextMessage: { text: currQuestion, sender: 'user'} })
 	}
 
