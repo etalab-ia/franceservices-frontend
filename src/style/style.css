@@ -181,10 +181,9 @@
 		@apply w-[648px];
 	}
 	
-	.user-feedback-buttons-container {
+	.wrap-message {
 		@apply flex;
 		@apply flex-wrap;
-		@apply mb-4;
 	}
 
 	.user-feedback-buttons {
@@ -199,6 +198,19 @@
 		@apply border-solid;
 		@apply border-2;
 		@apply border-[#6A6AF4];
+		@apply my-2;
+	}
+
+	.user-feedback-resume {
+		@apply flex;
+		@apply flex-row;
+		@apply mr-4;
+		@apply py-2;
+		@apply px-4;
+		@apply justify-center;
+		@apply content-center;
+		@apply rounded-[90px];
+		@apply bg-[#E5E5E5];
 		@apply my-2;
 	}
 
