@@ -17,6 +17,7 @@ export const	initialAuth = {
 
 export const	initialStream = {
 	response: [],
+	historyStream: [],
 	isStoppable: true,
 	isStreaming: true,
 }

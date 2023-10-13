@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { askingReason, primaryButtons, thankFeedback } from "../../constants/feedback";
+import { askingReason, primaryButtons } from "../../constants/feedback";
 import { UserFeedbackOptions } from "./UserFeedbackOptions";
 import { UserFeedbackThanks } from "./UserFeedbackThanks";
 import { UserFeedbackResume } from "./UserFeedbackResume";
