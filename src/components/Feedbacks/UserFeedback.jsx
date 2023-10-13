@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { askingReason, primaryButtons, thankFeedback } from "../constants/feedback";
+import { askingReason, primaryButtons, thankFeedback } from "../../constants/feedback";
 import { UserFeedbackButtons } from "./UserFeedbackButtons";
 
 export function	UserFeedback(props) {

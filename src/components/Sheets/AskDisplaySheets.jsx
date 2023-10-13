@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { animated } from '@react-spring/web'
-import { styleButton } from "../style/style";
-import { NOT_SET } from "../constants/status";
+import { styleButton } from "../../style/style";
+import { NOT_SET } from "../../constants/status";
 
 export function	AskDisplaySheets(props) {
 

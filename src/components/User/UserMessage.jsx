@@ -1,10 +1,10 @@
 import { SearchBar } from "@codegouvfr/react-dsfr/SearchBar";
-import { usePost } from "../utils/hooks";
+import { usePost } from "../../utils/hooks";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { getSheets } from "../utils/setData";
+import { getSheets } from "../../utils/setData";
 
 export function UserMessage() {
 

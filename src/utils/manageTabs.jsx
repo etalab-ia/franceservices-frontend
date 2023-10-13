@@ -1,6 +1,6 @@
 import React from "react";
-import { Display } from "../components/Display";
-import { UserMessage } from "../components/UserMessage";
+import { Display } from "../components/Chat/Display";
+import { UserMessage } from "../components/User/UserMessage";
 
 export function	TabContent({ content }) {
 	return content.components.map((component, index) => 

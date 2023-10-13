@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { satisfiedButtons, unsatisfiedButtons } from "../constants/feedback";
+import { satisfiedButtons, unsatisfiedButtons } from "../../constants/feedback";
 import { animated } from '@react-spring/web';
-import { styleButton, styleParagraph } from "../style/style";
+import { styleButton, styleParagraph } from "../../style/style";
 import { useDispatch } from 'react-redux';
 import { Input } from "@codegouvfr/react-dsfr/Input";
 

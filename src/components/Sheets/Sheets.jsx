@@ -1,6 +1,6 @@
-import { Avatar } from "./Avatar";
-import { UserChatTools } from "./UserChatTools";
-import { askingSheetsNeeded } from "../constants/sheets";
+import { Avatar } from "../Chat/Avatar";
+import { UserChatTools } from "../User/UserChatTools";
+import { askingSheetsNeeded } from "../../constants/sheets";
 import { AskDisplaySheets } from "./AskDisplaySheets";
 import { DisplaySheets } from "./DisplaySheets";
 

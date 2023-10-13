@@ -1,4 +1,4 @@
-import { primaryButtons } from "../constants/feedback";
+import { primaryButtons } from "../../constants/feedback";
 import { animated } from '@react-spring/web'
 
 export function UserSatisfaction(props) {

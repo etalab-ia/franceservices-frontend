@@ -1,16 +1,16 @@
-import { UserTools } from './UserChatTabs';
-import { initTabs, TabContent } from '../utils/manageTabs';
+import { SideTabs } from './SideTabs';
+import { initTabs, TabContent } from '../../utils/manageTabs';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
-export function Messages() {
+export function MessagesContainer() {
 	const	tabs = useSelector((state) => state.tabs);
 	const	dispatch = useDispatch();
 
 	return (
 		<div className="wrapper-container">
 			<div className='flex justify-center items-center'>
-		 		<UserTools state={tabs} dispatch={dispatch}/>
+		 		<SideTabs state={tabs} dispatch={dispatch}/>
 			</div>
 			<div className='chat-container'>
 				{tabs.activeTab === 0 && <TabContent content={initTabs()[0]} />}

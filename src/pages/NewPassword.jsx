@@ -5,7 +5,7 @@ import { signupFields } from "../constants/inputFields";
 import { initButtonsSignup } from "../constants/buttonsConnexion";
 import { useFetch } from "../utils/hooks";
 import { resetPasswordUrl } from "../constants/api";
-import { AuthFailed } from "../components/AuthFailed";
+import { AuthFailed } from "../components/Auth/AuthFailed";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { changePasswordFailed } from "../constants/errorMessages";

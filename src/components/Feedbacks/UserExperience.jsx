@@ -1,7 +1,7 @@
-import { Avatar } from "./Avatar";
-import { UserChatTools } from "./UserChatTools";
+import { Avatar } from "../Chat/Avatar";
+import { UserChatTools } from "../User/UserChatTools";
 import { Feedback } from "./Feedback";
-import { askingQuality } from "../constants/feedback";
+import { askingQuality } from "../../constants/feedback";
 
 export function UserExperience() {
 	return (

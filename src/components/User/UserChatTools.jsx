@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { userChatToolsFunc } from "../constants/chatbotProps";
+import { userChatToolsFunc } from "../../constants/chatbotProps";
 import { animated } from '@react-spring/web'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -16,10 +16,10 @@ export function UserChatTools({ type }) {
 		setTimeout(() => setIsSelected(null), 100);
 	};
 
-	const test = type ? "ml-[84px]" : ""
+	const extraMargin = type ? "ml-[84px]" : ""
 
 	return (
-		<div className={`user-chat-tools-container ${test}`}>
+		<div className={`user-chat-tools-container ${extraMargin}`}>
 		  	{userChatToolsFunc({ auth, stream, user }, dispatch, type).map((tool, index) => (
 				<animated.button 
 					disabled={stream.isStoppable}

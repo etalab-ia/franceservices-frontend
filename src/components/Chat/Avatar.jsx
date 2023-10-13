@@ -1,5 +1,5 @@
-import agentAvatar from "../../icons/others/agent-avatar.svg"
-import userAvatar from "../../icons/user/user-avatar.svg"
+import agentAvatar from "../../../icons/others/agent-avatar.svg"
+import userAvatar from "../../../icons/user/user-avatar.svg"
 
 export function Avatar(props) {
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { chatbotProps } from '../constants/chatbotProps';
+import { chatbotProps } from '../../constants/chatbotProps';
 import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
 
 export function Banner() {
