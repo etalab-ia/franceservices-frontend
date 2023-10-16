@@ -32,7 +32,7 @@ export const	ButtonsOptions = ({ isFirst, buttonsType, reasons, setReasons, disp
 						</p>
 					</animated.button>
 				</div>
-})}
+            })}
 		</div>	
 	)
 }

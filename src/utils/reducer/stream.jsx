@@ -28,6 +28,11 @@ export const	streamReducer = (state = initialStream, action) => {
 				...state,
 				response: []
 			}
+		case 'RESET_STREAM_HISTORY':
+			return {
+				...state,
+				historyStream: [],
+			}
 	  	default: { return state };
 	}
 }
