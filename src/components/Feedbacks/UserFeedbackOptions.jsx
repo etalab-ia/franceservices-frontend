@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { satisfiedButtons, unsatisfiedButtons } from "../../constants/feedback";
-import { animated } from '@react-spring/web';
-import { styleButton, styleParagraph } from "../../style/style";
 import { useDispatch } from 'react-redux';
-import { Input } from "@codegouvfr/react-dsfr/Input";
 import { useKeyPress } from "../../utils/manageEffects";
 import { UserFeedbackResume } from "./UserFeedbackResume";
 import { useSelector } from 'react-redux';
+import { ButtonsOptions } from "./ButtonsOptions";
+import { ConfirmationButton } from "./ConfirmationButton";
+import { InputOption } from "./InputOption";
 
-export function	UserFeedbackOptions(props) {
+export function	UserFeedbackOptions({ activeTab, isFirst, setIsConfirmed }) {
 
-	const	{ activeTab, isFirst, setIsConfirmed } = props;
 	const	[reasons, setReasons] = useState([]);
 	const	[otherReason, setOtherReason] = useState('');
 	const	[buttonsType, setButtonsType] = useState(activeTab === 0 ? satisfiedButtons : unsatisfiedButtons);
+	const	feedback = useSelector((state) => state.feedback);
 	const	dispatch = useDispatch();
 
 	useEffect(() => {
@@ -31,65 +31,29 @@ export function	UserFeedbackOptions(props) {
 		}
 	});
 
-	const	handleClick = (index) => {
-		if (reasons.includes(buttonsType[index]))
-		{
-			setReasons(reasons.filter(reason => reason !== buttonsType[index]));
-			dispatch({ type: 'RM_FEEDBACK', rmFeedback: buttonsType[index] });
-		}
-		else
-		{
-			setReasons([...reasons, buttonsType[index]]);
-			if (buttonsType[index] === 'Autre raison')
-				return ;
-			dispatch({ type: 'SET_NEW_FEEDBACK', nextFeedback: buttonsType[index] });
-		}
-	}
-
-	const	handleConfirm = () => {
-		otherReason && !reasons.includes(otherReason) && dispatch({ type: 'SET_NEW_FEEDBACK', nextFeedback: otherReason });		
-		setIsConfirmed(true);
-	}
-
-	const	handleNewReason = (e) => { setOtherReason(e.target.value); }
 
 	return (
 		<div className="col-message">
-			<div className="wrap-message">
-				{isFirst && buttonsType.map((button, index) => (
-					<div key={index}>
-						<animated.button
-							className="user-feedback-buttons"
-							style={styleButton(buttonsType[index], reasons)}
-							onClick={() => handleClick(index)}
-						>
-							<p style={styleParagraph(buttonsType[index], reasons)}>
-								{button}
-							</p>
-						</animated.button>
-					</div>
-				))}
-			</div>	
-			{reasons.includes('Autre raison') || !isFirst &&
-				<Input
-					className="w-[500px]"
-					onChange={handleNewReason}
-					iconId="fr-icon-arrow-right-line"
-					nativeInputProps={{
-						name: 'otherReason',
-						placeholder: 'Donner d’autres raisons, autant que vous le souhaitez.'
-					}}
-				/>}
+			<ButtonsOptions
+				isFirst={isFirst}
+				buttonsType={buttonsType}
+				reasons={reasons}
+				setReasons={setReasons}
+				dispatch={dispatch}
+			/>
+			<InputOption 
+				reasons={reasons} 
+				setOtherReason={setOtherReason} 
+				isFirst={isFirst}
+			/>
 			<UserFeedbackResume />
-			<button
-				onClick={handleConfirm}
-				className="px-2 py-1 mt-2 font-bold w-fit"
-				style={{
-					border: reasons.length ? "1px #000091 solid" : "1px grey solid",
-					color:  reasons.length ? "#000091" : "grey"
-				}}>
-					Confirmer
-			</button>
+			<ConfirmationButton 
+				reasons={reasons}
+				otherReason={otherReason}
+				feedback={feedback}
+				dispatch={dispatch}
+				setIsConfirmed={setIsConfirmed}
+			/>
 			</div>
 	);
 }
