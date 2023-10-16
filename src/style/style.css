@@ -198,7 +198,18 @@
 		@apply border-solid;
 		@apply border-2;
 		@apply border-[#6A6AF4];
+		@apply text-[#6A6AF4];
 		@apply my-2;
+	}
+
+	.user-feedback-confirmation-button {
+		@apply px-2;
+		@apply py-1;
+		@apply mt-2;
+		@apply font-bold;
+		@apply w-fit;
+		@apply border-solid;
+		@apply border-2;
 	}
 
 	.user-feedback-resume {

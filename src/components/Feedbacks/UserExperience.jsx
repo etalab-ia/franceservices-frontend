@@ -4,7 +4,7 @@ import { Feedback } from "./Feedback";
 import { askingQuality, redoAskingQuality } from "../../constants/feedback";
 import { useSelector } from 'react-redux';
 
-const	AskingResponseQuality = ({ history, historyLocal, tabsLen }) => {
+const	AskingResponseQuality = ({ history, tabsLen }) => {
 
 	return (
 	<div className='ml-4'>
@@ -16,12 +16,9 @@ const	AskingResponseQuality = ({ history, historyLocal, tabsLen }) => {
 }
 
 export function UserExperience() {
+	const	stream = useSelector((state) => state.stream);
 	const	history = useSelector((state) => state.history);
-
-	// TODO: delete local variables
-	// const	historyLocal = [];
-	const	historyLocal = ["tab 1", "tab 2", "tab 3"];
-	const	tabsLen = historyLocal.length + 1;
+	const	tabsLen = stream.historyStream.length;
 
 	return (
 		<div className="col-message mt-12">
@@ -29,7 +26,7 @@ export function UserExperience() {
 				<div className="row-message">
 					<UserChatTools type='quality'/>
 					<Avatar user='agent' />
-					<AskingResponseQuality history={history} historyLocal={historyLocal} tabsLen={tabsLen}/>
+					<AskingResponseQuality history={history} tabsLen={tabsLen}/>
 				</div>
 				<Feedback isFirst={tabsLen === 1}/>
 			</div>}

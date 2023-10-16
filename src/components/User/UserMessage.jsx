@@ -25,7 +25,8 @@ export function UserMessage() {
 
 	const	handleClick = () => {
 		dispatch({ type: 'SET_USER_TEXT', nextUserText: currQuestion});
-		dispatch({ type: 'SET_MESSAGES', nextMessage: stream.historyStream })
+		if (stream.historyStream.length)
+			dispatch({ type: 'SET_MESSAGES', nextMessage: stream.historyStream });
 		dispatch({ type: 'SET_MESSAGES', nextMessage: { text: currQuestion, sender: 'user'} })
 	}
 

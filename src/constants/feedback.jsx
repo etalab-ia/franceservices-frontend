@@ -53,5 +53,6 @@ export const	unsatisfiedButtons = [
 
 export const	askingQuality = `Quelle est la qualité de ce message ?`;
 export const	redoAskingQuality = `Cette réponse est-elle mieux ou moins bien ?`;
-export const	askingReason = (type) => `Pour quelles raisons trouvez-vous ce résultat ${type} ?`;
+export const	askingQualityPrecisions = (type) => `Pour quelles raisons trouvez-vous ce résultat ${type} ?`;
+export const	askingReasons = `Donner d’autres raisons, autant que vous le souhaitez.`;
 export const	thankFeedback = `Merci pour votre retour ! Il permettra d’améliorer les futurs résultats.`;

@@ -6,50 +6,38 @@ import previous from "../../../icons/usertools/previous.svg";
 import next from "../../../icons/usertools/next.svg";
 import { useDispatch } from 'react-redux';
 
-// const history = [];
-const history = ["tab 1", "tab 2", "tab 3"];
-const stream = ["Ceci est un streaming"];
-
-const Stream = () => {
+const Stream = ({ response }) => {
 	return <div>
-		{stream.map((res, index) => {
-			return <div key={index}>{res}</div>
-		})}
-		{/* {response.slice(1).map((item, index) => (
+		{response.slice(1).map((item, index) => (
 			<span key={index}>{item}</span>
-		))} */}
+		))}
 	</div>
 }
 
-const HistoryStream = ({ index }) => {
+const HistoryStream = ({ history, index }) => {
 	return <div>{history[index - 1]}</div>
 }
 
-export function DisplayStream(props) {
-	const	{ setDisplay } = props;
+export function DisplayStream({ setDisplay }) {
 	const	stream = useSelector((state) => state.stream);
-	const	tabsLen = history.length + 1;
-	const	[activeTab, setActiveTab] = useState(tabsLen);
+	const	tabsLen = stream.historyStream.length;
+	const	[activeTab, setActiveTab] = useState(tabsLen + 1);
 	const	dispatch = useDispatch();
-	// const	[activeTab, setActiveTab] = useState(stream.historyStream.length);
 
-	// TODO: replace local variable
-	useEffect(() => { scrollToBottom(); setDisplay(NOT_SET); }, [stream.response]);
+	useEffect(() => { dispatch({ type: 'SWITCH_TAB', nextTab: activeTab })}, []);
 	useEffect(() => { dispatch({ type: 'SWITCH_TAB', nextTab: activeTab }) }, [activeTab]);
+	useEffect(() => { scrollToBottom(); setDisplay(NOT_SET); }, [stream.response]);
 	
 	const	handleClick = (activeTab, setActiveTab, step) => { setActiveTab(activeTab + step); }
-
-	// console.log(activeTab, ' len: ', tabsLen);
 
 	return (
 		<div>
 			<div className="streaming">
-				{activeTab === tabsLen ?
-					<Stream /> : <HistoryStream index={activeTab}/>
+				{!stream.historyStream.length || stream.response.length ?
+					<Stream response={stream.response}/> : <HistoryStream history={stream.historyStream} index={activeTab}/>
 				}
 			</div>
-			{/* <Stream response={stream.response}/> */}
-			{history.length > 0 && <div className="row-message ml-4 mt-1">
+			{stream.historyStream.length > 1 && <div className="row-message ml-4 mt-1">
 				{activeTab > 1 && <button className="mr-2" onClick={() => handleClick(activeTab, setActiveTab, -1)}><img src={previous}/></button>}
 				<p className="text-[#666] text-sm font-medium">{activeTab} / {tabsLen}</p>
 				{activeTab < tabsLen && <button className="ml-2" onClick={() => handleClick(activeTab, setActiveTab, 1)}><img src={next}/></button>}

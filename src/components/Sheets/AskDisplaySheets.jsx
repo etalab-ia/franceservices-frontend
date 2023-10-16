@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { animated } from '@react-spring/web'
-import { styleButton } from "../../style/style";
 import { NOT_SET } from "../../constants/status";
 
 export function	AskDisplaySheets(props) {
@@ -26,9 +25,9 @@ export function	AskDisplaySheets(props) {
 		<div className="user-feedback-container">
 			<div className="row-message">
 				{buttons.map((button, index) => {
-					return (<animated.button onClick={() => handleClick(index)} key={index} className="user-feedback-buttons"
-							style={styleButton(index, activeTab)}
-						>
+					const	classNames = index === activeTab ? "bg-[#6A6AF4]" : "bg-[white]";
+
+					return (<animated.button onClick={() => handleClick(index)} key={index} className={`user-feedback-buttons ${classNames}`}>
 							<p style={{color: index === activeTab ? "white" : "#6A6AF4" }}>{button}</p>
 						</animated.button>
 				)})}
