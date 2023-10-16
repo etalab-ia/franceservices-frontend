@@ -35,7 +35,7 @@ export function Display(props) {
 			{history.messages.slice(1).map((message, index) => (
 				<Message key={index} sender={message.sender} text={message.text} props={props} />
 			))}
-			{stream.response.length !== 0 && (
+			{/* {stream.response.length !== 0 && ( */}
 				<div>
 					<div className="streaming-container">
 						<UserChatTools />
@@ -44,8 +44,10 @@ export function Display(props) {
 					</div>
 					{!stream.isStreaming && display && <Sheets display={display} setDisplay={setDisplay}/>}
 					{!stream.isStreaming && !display && <UserExperience />}
+					{/* TODO: delete duplicate comp */}
+					<UserExperience />
 				</div>
-			)}
+			{/* )} */}
 		</div>
 	);
 }

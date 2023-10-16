@@ -1,20 +1,18 @@
-import { primaryButtons } from "../../constants/feedback";
+import { primaryButtons, secondaryButtons } from "../../constants/feedback";
 import { animated } from '@react-spring/web'
 
 export function UserFeedbackSatisfaction(props) {
 
-	const	{ activeTab, setActiveTab, isConfirmed } = props;
+	const	{ activeTab, isFirst, setActiveTab, isConfirmed } = props;
+	const	buttons = isFirst ? primaryButtons : secondaryButtons;
 
 	const	handleClick = (index) => {
-		if (activeTab === index)
-			setActiveTab(-1);
-		else
-			setActiveTab(index);
+		activeTab === index ? setActiveTab(-1) : setActiveTab(index);
 	}
 
 	return (
 		<div className="row-message">
-			{primaryButtons.map((button, index) => {
+			{buttons.map((button, index) => {
 				return <animated.button title={button.type} onClick={() => handleClick(index)} key={index} className="user-feedback-buttons"
 							disabled={isConfirmed}
 						style={{ 
