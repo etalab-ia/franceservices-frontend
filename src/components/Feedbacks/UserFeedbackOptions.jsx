@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 
 export function	UserFeedbackOptions(props) {
 
-	const	{ activeTab, setIsConfirmed } = props;
+	const	{ activeTab, isFirst, setIsConfirmed } = props;
 	const	[reasons, setReasons] = useState([]);
 	const	[otherReason, setOtherReason] = useState('');
 	const	[buttonsType, setButtonsType] = useState(activeTab === 0 ? satisfiedButtons : unsatisfiedButtons);
@@ -56,7 +56,7 @@ export function	UserFeedbackOptions(props) {
 	return (
 		<div className="col-message">
 			<div className="wrap-message">
-				{buttonsType.map((button, index) => (
+				{isFirst && buttonsType.map((button, index) => (
 					<div key={index}>
 						<animated.button
 							className="user-feedback-buttons"
@@ -70,7 +70,7 @@ export function	UserFeedbackOptions(props) {
 					</div>
 				))}
 			</div>	
-			{reasons.includes('Autre raison') &&
+			{reasons.includes('Autre raison') || !isFirst &&
 				<Input
 					className="w-[500px]"
 					onChange={handleNewReason}
