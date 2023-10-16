@@ -24,7 +24,7 @@ export function DisplayStream({ setDisplay }) {
 	const	[activeTab, setActiveTab] = useState(tabsLen + 1);
 	const	dispatch = useDispatch();
 
-	useEffect(() => { dispatch({ type: 'SWITCH_TAB', nextTab: activeTab })}, []);
+	useEffect(() => { dispatch({ type: 'SWITCH_TAB', nextTab: activeTab }) }, []);
 	useEffect(() => { dispatch({ type: 'SWITCH_TAB', nextTab: activeTab }) }, [activeTab]);
 	useEffect(() => { scrollToBottom(); setDisplay(NOT_SET); }, [stream.response]);
 	
@@ -39,7 +39,7 @@ export function DisplayStream({ setDisplay }) {
 			</div>
 			{stream.historyStream.length > 1 && <div className="row-message ml-4 mt-1">
 				{activeTab > 1 && <button className="mr-2" onClick={() => handleClick(activeTab, setActiveTab, -1)}><img src={previous}/></button>}
-				<p className="text-[#666] text-sm font-medium">{activeTab} / {tabsLen}</p>
+				<p className="streaming-tabs">{activeTab} / {tabsLen}</p>
 				{activeTab < tabsLen && <button className="ml-2" onClick={() => handleClick(activeTab, setActiveTab, 1)}><img src={next}/></button>}
 			</div>}
 		</div>

@@ -263,4 +263,10 @@
 		@apply py-4;
 		@apply text-justify;
 	}
+
+	.streaming-tabs {
+		@apply text-[#666];
+		@apply text-sm;
+		@apply font-medium;
+	}
 }
