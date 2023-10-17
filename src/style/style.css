@@ -179,6 +179,7 @@
 		@apply flex;
 		@apply flex-col;
 		@apply w-[648px];
+		@apply pb-8;
 	}
 	
 	.wrap-message {

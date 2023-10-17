@@ -10,7 +10,7 @@ export function	DisplayRessources() {
 		<>
 		{!isConfirmed &&
 			<div>
-				<p className="mt-4">{askingDocumentationChoice}</p>
+				<p>{askingDocumentationChoice}</p>
 				<RessourceOptions />
 				{/* <UserFeedbackResume /> */}
 				<ConfirmationButton setIsConfirmed={setIsConfirmed}/>
