@@ -2,7 +2,7 @@ import Input from "@codegouvfr/react-dsfr/Input";
 import { ButtonsGroup } from "@codegouvfr/react-dsfr/ButtonsGroup";
 import { useState } from "react";
 import { signupFields } from "../constants/inputFields";
-import { initButtonsSignup } from "../constants/buttonsConnexion";
+import { initButtonsSignup } from "../constants/connexion";
 import { useFetch } from "../utils/hooks";
 import { resetPasswordUrl } from "../constants/api";
 import { AuthFailed } from "../components/Auth/AuthFailed";

@@ -10,13 +10,12 @@ export function UserChatTools({ type }) {
 	const	user = useSelector((state) => state.user);
 	const	dispatch = useDispatch();
 	const	[isSelected, setIsSelected] = useState();
+	const 	extraMargin = type ? "ml-[84px]" : "";
 
 	const handleClick = (index) => {
 		setIsSelected(index);
 		setTimeout(() => setIsSelected(null), 100);
 	};
-
-	const extraMargin = type ? "ml-[84px]" : ""
 
 	return (
 		<div className={`user-chat-tools-container ${extraMargin}`}>

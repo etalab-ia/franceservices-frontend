@@ -3,16 +3,18 @@ import { historyReducer } from "./history";
 import { institutionsReducer } from "./institutions";
 import { streamReducer } from "./stream";
 import { tabsReducer } from "./tabs";
-import { userReducer } from "./userReducer";
+import { userReducer } from "./user";
 import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { feedbackReducer } from "./feedback";
+import { ressourcesReducer } from "./ressources";
 
 const           reducer = combineReducers({
 	auth: authReducer,
 	feedback: feedbackReducer,
 	history: historyReducer,
 	institutions: institutionsReducer,
+	ressources: ressourcesReducer,
 	stream: streamReducer,
 	tabs: tabsReducer,
 	user: userReducer,

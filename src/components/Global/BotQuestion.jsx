@@ -2,9 +2,7 @@ import { useState } from "react";
 import { animated } from '@react-spring/web'
 import { NOT_SET } from "../../constants/status";
 
-export function	AskDisplaySheets(props) {
-
-	const	{ setDisplay } = props;
+export function	BotQuestion({ setDisplay }) {
 	const	[activeTab, setActiveTab] = useState(NOT_SET);
 	const   buttons = ['Oui', 'Non'];
 
@@ -27,10 +25,10 @@ export function	AskDisplaySheets(props) {
 				{buttons.map((button, index) => {
 					const	classNames = index === activeTab ? "bg-[#6A6AF4]" : "bg-[white]";
 
-					return (<animated.button onClick={() => handleClick(index)} key={index} className={`user-feedback-buttons ${classNames}`}>
+					return <animated.button onClick={() => handleClick(index)} key={index} className={`user-feedback-buttons ${classNames}`}>
 							<p style={{color: index === activeTab ? "white" : "#6A6AF4" }}>{button}</p>
 						</animated.button>
-				)})}
+				})}
 			</div>
 		</div>
 	);

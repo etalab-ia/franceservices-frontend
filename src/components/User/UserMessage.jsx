@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 import { getSheets } from "../../utils/setData";
 
 export function UserMessage() {
-
 	const	auth = useSelector((state) => state.auth);
 	const	question = useSelector((state) => state.user.question);
 	const	stream = useSelector((state) => state.stream);

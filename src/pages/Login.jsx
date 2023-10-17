@@ -1,6 +1,6 @@
 import Input from "@codegouvfr/react-dsfr/Input";
 import { ButtonsGroup } from "@codegouvfr/react-dsfr/ButtonsGroup";
-import { initButtonsLogin } from "../constants/buttonsConnexion";
+import { initButtonsLogin } from "../constants/connexion";
 import { loginFields } from "../constants/inputFields";
 import { useEffect, useState } from "react";
 import { signinUrl } from "../constants/api";

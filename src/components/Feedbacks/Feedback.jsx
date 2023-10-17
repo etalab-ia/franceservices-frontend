@@ -4,7 +4,6 @@ import { UserFeedbackInput } from "./UserFeedbackInput";
 import { NOT_SET } from "../../constants/status";
 
 export function	Feedback({ isFirst }) {
-
 	const	[activeTab, setActiveTab] = useState(NOT_SET);
 	const	[isConfirmed, setIsConfirmed] = useState(false);
 
