@@ -1,4 +1,4 @@
-export const	ressourcesReducer = (state = { choices: [] }, action) => {
+export const	ressourcesReducer = (state = { choices: [], isConfirmed: false }, action) => {
 	switch (action.type) {
 		case "SET_NEW_RESSOURCE":
 	  		return {
@@ -9,8 +9,16 @@ export const	ressourcesReducer = (state = { choices: [] }, action) => {
 	  		return {
 				choices: state.choices.filter(reason => reason !== action.rmChoice)
 			};
+		case "CONFIRM_RESSOURCE":
+	  		return {
+				...state,
+				isConfirmed: true
+			};
 		case "RESET_RESSOURCE":
-	  		return { choices: [] };
+	  		return {
+				choices: [],
+				isConfirmed: false,
+			};
 	  	default: { return state };
 	}
 }
