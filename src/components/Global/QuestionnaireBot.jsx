@@ -6,7 +6,7 @@ export function	QuestionnaireBot({ setDisplay, question, type }) {
 
     return (
 		<div className="col-message">
-			<div className="row-message mt-12">
+			<div className="row-message">
 				<UserChatTools type={type}/>
 				<Avatar user='agent' />
 				<div className='ml-4'>
