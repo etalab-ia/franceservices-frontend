@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { animated } from '@react-spring/web'
 import { NOT_SET } from "../../constants/status";
+import { useDispatch } from "react-redux";
 
 export function	BotQuestion({ setDisplay }) {
 	const	[activeTab, setActiveTab] = useState(NOT_SET);
 	const   buttons = ['Oui', 'Non'];
+	const	dispatch = useDispatch();
 
 	const	handleClick = async(index) => {
 		if (activeTab === index)
@@ -16,6 +18,7 @@ export function	BotQuestion({ setDisplay }) {
 		{
 			setActiveTab(index);
 			index === 0 ? setDisplay(true) : setDisplay(false);
+			index === 1 && dispatch({ type: 'CONFIRM_RESSOURCE' });
 		}
 	}
 

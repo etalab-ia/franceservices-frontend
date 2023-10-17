@@ -9,6 +9,7 @@ import { getSheets } from "../../utils/setData";
 export function UserMessage() {
 	const	auth = useSelector((state) => state.auth);
 	const	question = useSelector((state) => state.user.question);
+	const	ressources = useSelector((state) => state.ressources);
 	const	stream = useSelector((state) => state.stream);
 	const	user = useSelector((state) => state.user);
 	const	dispatch = useDispatch();
@@ -31,11 +32,11 @@ export function UserMessage() {
 	}
 
 	useEffect(() => {
-		if (!question.user_text.length)
+		if (!question.user_text.length || !ressources.isConfirmed)
 			return ;
 		usePost(auth, user, dispatch);
 		getSheets(question, auth, dispatch);
-	  }, [question]);
+	  }, [ressources.isConfirmed]);
 
 	return (
 		<SearchBar
