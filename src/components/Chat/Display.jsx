@@ -6,6 +6,7 @@ import { UserExperience } from "../Feedbacks/UserExperience";
 import { Sheets } from "../Sheets/Sheets";
 import { NOT_SET } from "../../constants/status";
 import { DisplayStream } from "../Stream/DisplayStream";
+import { Ressources } from "../Ressources/Ressources";
 
 function Message({ sender, text }) {
 	const	isUser = sender === "user";
@@ -35,6 +36,7 @@ export function Display(props) {
 			{history.messages.map((message, index) => (
 				<Message key={index} sender={message.sender} text={message.text} props={props} />
 			))}
+			{history.messages.length !== 0 && <Ressources />}
 			{stream.response.length !== 0 && (
 				<div>
 					<div className="streaming-container">

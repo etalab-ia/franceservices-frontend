@@ -7,7 +7,7 @@ import { Login } from "../pages/Login";
 import { Signup } from "../pages/Signup";
 import { ResetPassword } from "../pages/ResetPassword";
 import { NewPassword } from "../pages/NewPassword";
-import { quickAccessItemsFunc } from "../constants/headerProps";
+import { quickAccessItemsFunc } from "../constants/header";
 import { useEffect } from "react";
 import { checkConnexion } from "../utils/localStorage";
 import { useSelector } from 'react-redux';

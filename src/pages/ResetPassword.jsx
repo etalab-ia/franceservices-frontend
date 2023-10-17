@@ -1,7 +1,7 @@
 import Input from "@codegouvfr/react-dsfr/Input";
 import ButtonsGroup from "@codegouvfr/react-dsfr/ButtonsGroup";
 import { useState } from "react";
-import { initButtonsReset } from "../constants/buttonsConnexion";
+import { initButtonsReset } from "../constants/connexion";
 import { resetPasswordMailUrl } from "../constants/api";
 import { useFetch } from "../utils/hooks";
 import { useSelector } from 'react-redux';

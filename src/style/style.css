@@ -209,7 +209,8 @@
 		@apply font-bold;
 		@apply w-fit;
 		@apply border-solid;
-		@apply border-2;
+		@apply border-[1px];
+		@apply border-[#DDD];
 	}
 
 	.user-feedback-resume {

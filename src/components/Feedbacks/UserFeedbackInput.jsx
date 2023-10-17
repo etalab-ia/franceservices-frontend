@@ -3,9 +3,7 @@ import { UserFeedbackOptions } from "./UserFeedbackOptions";
 import { UserFeedbackThanks } from "./UserFeedbackThanks";
 import { UserFeedbackResume } from "./UserFeedbackResume";
 
-export function	UserFeedbackInput(props) {
-
-	const   { activeTab, isFirst, isConfirmed, setIsConfirmed } = props;
+export function	UserFeedbackInput({ activeTab, isFirst, isConfirmed, setIsConfirmed }) {
 	const	buttons = isFirst ? primaryButtons : secondaryButtons;
 	
 	return (

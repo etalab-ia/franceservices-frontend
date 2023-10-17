@@ -1,16 +1,16 @@
 export const	feedbackReducer = (state = { reasons: [] }, action) => {
 	switch (action.type) {
 		case "SET_NEW_FEEDBACK":
-	  		return {
-                ...state, 
-                reasons: [...state.reasons, action.nextFeedback]
-            };
+			return {
+				...state, 
+				reasons: [...state.reasons, action.nextFeedback]
+			};
 		case "RM_FEEDBACK":
-	  		return {
+			return {
 				reasons: state.reasons.filter(reason => reason !== action.rmFeedback)
-            };
+			};
 		case "RESET_FEEDBACK":
-	  		return { reasons: [] };
-	  	default: { return state };
+			return { reasons: [] };
+		default: { return state };
 	}
 }
