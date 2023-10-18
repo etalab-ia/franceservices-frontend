@@ -37,7 +37,7 @@ export function DisplayStream({ setDisplay }) {
 					<Stream response={stream.response}/> : <HistoryStream history={stream.historyStream} index={activeTab}/>
 				}
 			</div>
-			{stream.historyStream.length > 1 && <div className="row-message ml-4 mt-1">
+			{!stream.isStreaming && stream.historyStream.length > 1 && <div className="row-message ml-4 mt-1">
 				{activeTab > 1 && <button className="mr-2" onClick={() => handleClick(activeTab, setActiveTab, -1)}><img src={previous}/></button>}
 				<p className="streaming-tabs">{activeTab} / {tabsLen}</p>
 				{activeTab < tabsLen && <button className="ml-2" onClick={() => handleClick(activeTab, setActiveTab, 1)}><img src={next}/></button>}
