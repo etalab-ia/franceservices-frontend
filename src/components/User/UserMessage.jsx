@@ -32,7 +32,7 @@ export function UserMessage() {
 	}
 
 	useEffect(() => {
-		if (!question.user_text.length || !ressources.isConfirmed)
+		if (!question.user_text.length || !ressources.isConfirmed || !stream.isStreaming)
 			return ;
 		usePost(auth, user, dispatch);
 		getSheets(question, auth, dispatch);
