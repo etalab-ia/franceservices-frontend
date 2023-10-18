@@ -19,11 +19,11 @@ export function	initTabs() {
 			className:"chat-container",
 			components: [ <Display /> ]
 		},
-		{
-			id: "saved-tab",
-			className:"chat-container",
-			components: [ <Display />, <UserMessage /> ]
-		}
+		// {
+		// 	id: "saved-tab",
+		// 	className:"chat-container",
+		// 	components: [ <Display />, <UserMessage /> ]
+		// }
 	]
 
 	return TabsProps;

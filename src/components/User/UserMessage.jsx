@@ -10,6 +10,7 @@ export function UserMessage() {
 	const	auth = useSelector((state) => state.auth);
 	const	question = useSelector((state) => state.user.question);
 	const	ressources = useSelector((state) => state.ressources);
+	const	history = useSelector((state) => state.history);
 	const	stream = useSelector((state) => state.stream);
 	const	user = useSelector((state) => state.user);
 	const	dispatch = useDispatch();
@@ -25,6 +26,7 @@ export function UserMessage() {
 
 	const	handleClick = () => {
 		dispatch({ type: 'SET_USER_TEXT', nextUserText: currQuestion});
+		
 		if (stream.historyStream.length)
 			dispatch({ type: 'SET_MESSAGES', nextMessage: { text: stream.historyStream, sender: 'agent' } });
 		dispatch({ type: 'RESET_STREAM_HISTORY' });
@@ -32,11 +34,11 @@ export function UserMessage() {
 	}
 
 	useEffect(() => {
-		if (!question.user_text.length || !ressources.isConfirmed || !stream.isStreaming)
+		if (!question.user_text.length || !ressources.isConfirmed || stream.isStreaming)
 			return ;
 		usePost(auth, user, dispatch);
 		getSheets(question, auth, dispatch);
-	  }, [ressources.isConfirmed]);
+	  }, [question, ressources.isConfirmed]);
 
 	return (
 		<SearchBar

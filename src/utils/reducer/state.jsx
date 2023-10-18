@@ -19,5 +19,5 @@ export const	initialStream = {
 	response: [],
 	historyStream: [],
 	isStoppable: true,
-	isStreaming: true,
+	isStreaming: false,
 }

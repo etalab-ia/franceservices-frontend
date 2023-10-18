@@ -15,7 +15,7 @@ export function MessagesContainer() {
 			<div className='chat-container'>
 				{tabs.activeTab === 0 && <TabContent content={initTabs()[0]} />}
 				{tabs.activeTab === 1 && <TabContent content={initTabs()[1]} />}
-				{tabs.activeTab === 2 && <TabContent content={initTabs()[2]} />}
+				{/* {tabs.activeTab === 2 && <TabContent content={initTabs()[2]} />} */}
 			</div>
 		</div>
 	);

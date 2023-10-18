@@ -15,7 +15,8 @@ export const	streamReducer = (state = initialStream, action) => {
 				...state,
 				historyStream: [...state.historyStream, joinedRes],
 				isStoppable: false,
-				isStreaming: false,				
+				isStreaming: false,
+				response: [],
 			}
 		case 'REDO_AGENT_STREAM':
 			return {
