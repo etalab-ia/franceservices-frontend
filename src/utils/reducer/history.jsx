@@ -5,6 +5,11 @@ export const	historyReducer = (state = { messages: [], activeTab: 1 }, action) =
 				...state,
 				messages: [...state.messages, action.nextMessage]
 			}
+		case 'RESET_MESSAGES': 
+			return {
+				messages: [],
+				activeTab: 1,
+			}
 		case 'SWITCH_TAB':
 			return {
 				...state,

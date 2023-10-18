@@ -7,37 +7,32 @@ import { Sheets } from "../Sheets/Sheets";
 import { NOT_SET } from "../../constants/status";
 import { DisplayStream } from "../Stream/DisplayStream";
 import { Ressources } from "../Ressources/Ressources";
+import { DisplayArrayMessages } from "./DisplayArrayMessages";
+import { DisplaySingleMessage } from "./DisplaySingleMessage";
 
-function Message({ sender, text }) {
-	const	isUser = sender === "user";
-	const	classNames = isUser ? "user-message" : "row-message";
-
-	return (
-		<div className={classNames}>
-			{!isUser && <div className="row-message">
-				<UserChatTools />
-				<Avatar user={sender} />
-			</div>}
-			<div className={`w-[648px] ${isUser ? "mr-4" : "ml-4"}`}>
-				<div className={isUser ? "user-chat" : "agent-chat"}>{text}</div>
-			</div>
-			{isUser && <Avatar user={sender} />}
-		</div>
-	);
-}
-
-export function Display(props) {
+export function Display() {
 	const	history = useSelector((state) => state.history);
 	const	stream = useSelector((state) => state.stream);
+	const	tabs = useSelector((state) => state.tabs);
 	const   [display, setDisplay] = useState(NOT_SET);
 
 	return (
 		<div className="chat" id="chat">
-			{history.messages.map((message, index) => (
-				<Message key={index} sender={message.sender} text={message.text} props={props} />
-			))}
+			{history.messages.map((message, index) => {
+				return Array.isArray(message.text) ? 
+				<DisplayArrayMessages
+					key={index}
+					messages={message.text}
+				/>
+				:
+				<DisplaySingleMessage
+					key={index}
+					sender={message.sender}
+					text={message.text}
+				/>
+			})}
 			{history.messages.length !== 0 && <Ressources />}
-			{stream.response.length !== 0 && (
+			{(stream.response.length !== 0 || stream.historyStream.length !== 0) && tabs.activeTab === 0 && (
 				<div>
 					<div className="streaming-container">
 						<UserChatTools />
