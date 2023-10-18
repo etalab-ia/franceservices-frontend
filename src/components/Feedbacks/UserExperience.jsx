@@ -4,7 +4,7 @@ import { Feedback } from "./Feedback";
 import { askingQuality, redoAskingQuality } from "../../constants/feedback";
 import { useSelector } from 'react-redux';
 
-const	AskingResponseQuality = ({ history, tabsLen }) => {
+const	AskingResponseQuality = ({ tabsLen }) => {
 
 	return (
 	<div className='ml-4'>
@@ -26,7 +26,7 @@ export function UserExperience() {
 				<div className="row-message">
 					<UserChatTools type='quality'/>
 					<Avatar user='agent' />
-					<AskingResponseQuality history={history} tabsLen={tabsLen}/>
+					<AskingResponseQuality tabsLen={tabsLen}/>
 				</div>
 				<Feedback isFirst={tabsLen === 1}/>
 			</div>}
