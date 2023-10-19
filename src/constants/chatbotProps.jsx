@@ -2,7 +2,9 @@ import evaluate from "../../icons/usertools/evaluate.svg"
 import redo from "../../icons/usertools/redo.svg"
 import bookmark from "../../icons/usertools/bookmark.svg"
 import copy from "../../icons/usertools/copy.svg"
+import history from "../../icons/chatbotTabs/history.svg"
 import { usePost } from "../utils/hooks";
+import archive from "../../icons/archives/archive.svg";
 
 export const		chatbotProps = {
 	mainTitle: "Chatbot administratif",
@@ -68,3 +70,8 @@ export	function	userChatToolsFunc(state, dispatch, type) {
 
 	return visibleButtonsProps;
 }
+
+export const	redoUserQuestion = `Voulez-vous poser une nouvelle question ?`;
+export const	notifyArchiving = (title) => (
+	<p className="row-message ml-[114px] flex justify-center text-[#929292]">Cette conversation a été archivée <img src={archive} alt="Logo associé à l'archivage"/> comme {title}</p>
+);

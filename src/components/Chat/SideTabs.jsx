@@ -14,8 +14,7 @@ export function SideTabs(props) {
 			{sideButtonsProps.map((buttonProps, index) => (
 				<animated.button
 					key={index}
-					className='side-tools'
-					style={{ backgroundColor: index === state.activeTab ? "#6A6AF4" : "#F5F5FE"}}
+					className={`side-tools ${index === state.activeTab ? 'bg-purple' : ''}`}
 					onClick={() => handleClick(index)}
 				>
 					<img 

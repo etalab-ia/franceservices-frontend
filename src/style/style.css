@@ -3,6 +3,99 @@
 @tailwind utilities;
 
 @layer base {
+	/* BORDERS */
+	.border {
+		@apply border-2;
+		@apply border-solid;
+	}
+
+	/* COLORS */
+
+	/* Light purple */
+	.bg-light-purple {
+		@apply bg-[#F5F5FE];
+	}
+
+	.text-light-purple {
+		@apply text-[#F5F5FE];
+	}
+
+	.border-light-purple {
+		@apply border;
+		@apply border-[#F5F5FE];
+	}
+
+	/* Normal purple */
+	.bg-purple {
+		@apply bg-[#6A6AF4];
+	}
+
+	.text-purple {
+		@apply text-[#6A6AF4];
+	}
+
+	.border-purple {
+		@apply border;
+		@apply border-[#6A6AF4];
+	}
+
+	/* Dark purple */
+	.bg-dark-purple {
+		@apply bg-[#000091];
+	}
+
+	.text-dark-purple {
+		@apply text-[#000091];
+	}
+
+	.border-dark-purple {
+		@apply border;
+		@apply border-[#000091];
+	}
+
+	/* Grey */
+
+	/* Light grey */
+	.bg-light-grey {
+		@apply bg-[#EEEEEE];
+	}
+
+	.text-light-grey {
+		@apply text-[#EEEEEE];
+	}
+
+	.border-light-grey {
+		@apply border;
+		@apply border-[#EEEEEE];
+	}
+
+	/* Normal grey */
+	.bg-grey {
+		@apply bg-[#666];
+	}
+
+	.text-grey {
+		@apply text-[#666];
+	}
+
+	.border-grey {
+		@apply border;
+		@apply border-[#666];
+	}
+
+	/* Dark grey */
+	.bg-dark-grey {
+		@apply bg-[#3A3A3A];
+	}
+
+	.text-dark-grey {
+		@apply text-[#3A3A3A];
+	}
+
+	.border-dark-grey {
+		@apply border;
+		@apply border-[#3A3A3A];
+	}
 
 	/* GLOBAL */
 
@@ -31,7 +124,7 @@
 	}
 
 	.avatar {
-		@apply bg-[#F5F5FE];
+		@apply bg-light-purple;
 		@apply rounded-[90px];
 		@apply w-[56px];
 		@apply h-[56px];
@@ -46,12 +139,12 @@
 	.banner-bot {
 		@apply w-screen;
 		@apply h-[148px];
-		@apply bg-[#F5F5FE];
+		@apply bg-light-purple;
 		@apply flex;
 		@apply flex-row;
 		@apply items-center;
 		@apply justify-center;
-		@apply text-[#3A3A3A];
+		@apply text-dark-grey;
 	}
 
 	.breadcrumb-container {
@@ -78,15 +171,14 @@
 	.sheets-container {
 		@apply my-4;
 		@apply p-6;
-		@apply border-2;
-		@apply border-solid;
-		@apply border-[#DD];
+		@apply border;
+		@apply border-light-grey;
 	}
 
 	.sheet-title {
 		@apply text-xl;
 		@apply font-bold;
-		@apply text-[#000091];
+		@apply text-dark-purple;
 		@apply py-3;
 	}
 
@@ -142,7 +234,7 @@
 		@apply w-[69px];
 		@apply ml-20;
 		@apply justify-center;
-		@apply bg-[#F5F5FE];
+		@apply bg-light-purple;
 	}
 
 	.side-tools {
@@ -163,7 +255,7 @@
 	}
 
 	.user-chat {
-		@apply bg-[#F5F5FE];
+		@apply bg-light-purple;
 		@apply flex;
 		@apply w-fit;
 		@apply p-4;
@@ -196,10 +288,8 @@
 		@apply justify-center;
 		@apply content-center;
 		@apply rounded-[90px];
-		@apply border-solid;
-		@apply border-2;
-		@apply border-[#6A6AF4];
-		@apply text-[#6A6AF4];
+		@apply border-purple;
+		@apply text-purple;
 		@apply my-2;
 	}
 
@@ -267,7 +357,7 @@
 	}
 
 	.streaming-tabs {
-		@apply text-[#666];
+		@apply text-grey;
 		@apply text-sm;
 		@apply font-medium;
 	}
