@@ -20,14 +20,14 @@ export const	ButtonsOptions = ({ isFirst, buttonsType, reasons, setReasons, disp
 	return (
 		<div className="wrap-message">
 			{isFirst && buttonsType.map((button, index) => {
-				const classNames = reasons.includes(buttonsType[index]) ? "bg-[#6A6AF4]" : "bg-[white]";
+				const classNames = reasons.includes(buttonsType[index]) ? "bg-purple" : "bg-[white]";
 				
 				return <div key={index}>
 					<animated.button
 						className={`user-feedback-buttons ${classNames}`}
 						onClick={() => handleClick(index)}
 					>
-						<p className={reasons.includes(buttonsType[index]) ? "text-white" : "text-#6A6AF4"}>
+						<p className={reasons.includes(buttonsType[index]) ? "text-white" : "text-purple"}>
 							{button}
 						</p>
 					</animated.button>

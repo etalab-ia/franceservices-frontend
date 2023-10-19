@@ -4,7 +4,7 @@ export const	ConfirmationButton = ({ reasons, otherReason, feedback, dispatch, s
 		otherReason && !reasons.includes(otherReason) && dispatch({ type: 'SET_NEW_FEEDBACK', nextFeedback: otherReason });		
 		setIsConfirmed(true);
 	}
-    const   classNames = feedback.reasons.length ? `text-[#000091]` : `text-[#929292]`;
+    const   classNames = feedback.reasons.length ? `text-dark-purple` : `text-[#929292]`;
 
 	return (
 		<button onClick={handleConfirm} className={`user-feedback-confirmation-button ${classNames}`}>

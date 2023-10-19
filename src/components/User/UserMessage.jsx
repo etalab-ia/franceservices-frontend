@@ -34,10 +34,11 @@ export function UserMessage() {
 	}
 
 	useEffect(() => {
-		if (!question.user_text.length || !ressources.isConfirmed || stream.isStreaming)
+		if (!question.user_text.length || !ressources.isConfirmed)
 			return ;
 		usePost(auth, user, dispatch);
 		getSheets(question, auth, dispatch);
+		dispatch({ type: 'RESET_QUESTION_FIELDS' });
 	  }, [question, ressources.isConfirmed]);
 
 	return (

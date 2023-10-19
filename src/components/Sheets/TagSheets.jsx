@@ -6,7 +6,7 @@ export function	TagSheets(props) {
 	return (
 		<div className="flex flex-wrap">
 			{tags.map((tag, index) => {
-				return <div className="bg-[#EEEEEE] px-2 m-1 rounded-[90px]" key={index}>
+				return <div className="bg-light-grey px-2 m-1 rounded-[90px]" key={index}>
 					{tag}
 				</div>
 			})}

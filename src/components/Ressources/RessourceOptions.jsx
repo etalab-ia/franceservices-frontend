@@ -23,14 +23,14 @@ export function	RessourceOptions() {
 	return (
 		<div className="wrap-message">
 			{ressourceButtons.map((button, index) => {
-				const classNames = ressources.includes(ressourceButtons[index]) ? "bg-[#6A6AF4]" : "bg-[white]";
+				const classNames = ressources.includes(ressourceButtons[index]) ? "bg-purple" : "bg-[white]";
 				
 				return <div key={index}>
 					<animated.button
 						className={`user-feedback-buttons ${classNames}`}
 						onClick={() => handleClick(index)}
 					>
-						<p className={ressources.includes(ressourceButtons[index]) ? "text-white" : "text-#6A6AF4"}>
+						<p className={ressources.includes(ressourceButtons[index]) ? "text-white" : "text-purple"}>
 							{button}
 						</p>
 					</animated.button>

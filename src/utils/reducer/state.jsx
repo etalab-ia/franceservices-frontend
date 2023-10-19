@@ -4,7 +4,7 @@ export const	initialQuestion = {
 	user_text: '',
 	context: '',
 	links: '',
-	temperature: 20,
+	temperature: 10,
 }
 
 export const	initialAuth = {
@@ -21,3 +21,18 @@ export const	initialStream = {
 	isStoppable: true,
 	isStreaming: false,
 }
+
+export const	initialArchive = [
+	{
+		title: '',
+		themes: [],
+		date: '',
+		source: false,
+	},
+	{
+		title: '',
+		themes: [],
+		date: '',
+		source: false,
+	}
+]	

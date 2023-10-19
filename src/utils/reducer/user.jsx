@@ -31,12 +31,6 @@ export const	userReducer = (state = { question: initialQuestion, sheets: [] }, a
 				...state,
 				sheets: action.nextSheets,
 			}
-		case 'RESET_USER_QUESTION':
-			return {
-				...state,
-				sheets: [],
-				experiences: [],
-			}
 		case 'RESET_QUESTION_FIELDS':
 			return {
 				...state,
