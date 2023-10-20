@@ -1,6 +1,7 @@
 import React from "react";
 import { Display } from "../components/Chat/Display";
 import { UserMessage } from "../components/User/UserMessage";
+import { DisplayArchiveTabs } from "../components/Archive/DisplayArchiveTab";
 
 export function	TabContent({ content }) {
 	return content.components.map((component, index) => 
@@ -17,7 +18,7 @@ export function	initTabs() {
 		{
 			id: "history-tab",
 			className:"chat-container",
-			components: [ <Display /> ]
+			components: [ <DisplayArchiveTabs /> ]
 		},
 		// {
 		// 	id: "saved-tab",
@@ -28,3 +29,18 @@ export function	initTabs() {
 
 	return TabsProps;
 }
+
+export const	archiveTabsTitle = [
+	{
+		name: "Nom de la conversation"
+	},
+	{
+		name: "Thèmes"
+	},
+	{
+		name: "Date"
+	},
+	{
+		name: "Source"
+	},
+]

@@ -11,6 +11,8 @@ export function ChatFollowUp({ stream, tabs }) {
 	const	conditionDiv = (stream.response.length !== 0 || stream.historyStream.length !== 0) && tabs.activeTab === 0;
 	const   [display, setDisplay] = useState(NOT_SET);
 
+	console.log(tabs.activeTab)
+
 	return (
 		<>
 			{conditionDiv && (
@@ -22,7 +24,7 @@ export function ChatFollowUp({ stream, tabs }) {
 					</div>
 					{!stream.isStreaming && display && <Sheets display={display} setDisplay={setDisplay}/>}
 					{!stream.isStreaming && !display && <UserExperience />}
-					{!stream.isStreaming && <NewQuestion />}
+					{!stream.isStreaming && <NewQuestion tabs={tabs}/>}
 				</div>
 			)}
 		</>

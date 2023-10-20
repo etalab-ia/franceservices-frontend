@@ -361,4 +361,16 @@
 		@apply text-sm;
 		@apply font-medium;
 	}
+
+	/* ARCHIVE PAGE */
+
+	.archive-tabs {
+		@apply table-fixed;
+		@apply w-[792px];
+		@apply border-collapse;
+	}
+	
+	.archive-tabs-title {
+		@apply border-b-2 border-[#3A3A3A] p-4 text-left;
+	}
 }

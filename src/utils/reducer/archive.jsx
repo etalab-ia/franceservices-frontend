@@ -1,18 +1,20 @@
-import { initialArchive } from "./state";
-
 export const	archiveReducer = (state = [], action) => {
 	switch (action.type) {
 		case 'SET_ARCHIVE': {
-			console.log('new state, old: ', state)
-			return [...state, {
+			const	lastIndex = state.length > 0 ? state.length - 1 : state.length;
+
+			return [
+				...state,
+				{
 				title: `Archive n°${state.length}`,
 				date: action.nextDate,
 				themes: action.nextThemes,
 				source: action.nextSource,
-			}]
-		}
+				messages: state.length > 0 ? [...state[lastIndex].messages, action.nextMessages] : [action.nextMessages],
+				},
+			];
+			}
 		case 'SET_SOURCE': {
-			console.log('set source')
 			const	lastIndex = state.length - 1;
 			const	newState = state.map((item, i) => {
 				if (i === lastIndex) {
