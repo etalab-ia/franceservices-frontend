@@ -15,7 +15,7 @@ export function	DisplaySheets() {
 					<h1 className="sheet-title">{sheet.title}</h1>
 					<p className='py-3'>{sheet.introduction}</p>
 					<div className='sheet-url'>
-						<a onClick={() => OpenUrlInNewTab(sheet.url)}><img className='hover:cursor-pointer'  src={arrowRight} alt="Accéder à la page"/></a>
+						<a onClick={() => OpenUrlInNewTab(sheet.url)}><img className='hover:cursor-pointer' src={arrowRight} alt="Accéder à la page"/></a>
 					</div>
 				</div>
 			})}

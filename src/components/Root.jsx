@@ -25,7 +25,7 @@ export const Root = () => {
 		<Header className="header-container"
 			brandTop={<>INTITULE<br />OFFICIEL</>}
 			serviceTitle="ALBERT"
-			serviceTagline="Le module d'Intelligence Artificielle Orienté Usager"
+			serviceTagline="Le module d'Intelligence Artificielle orienté usager"
 			homeLinkProps={{ "to": "/login" }}
 			navigation={auth.isLogin && navigationData}
 			quickAccessItems={ auth.isLogin ? quickAccessItemsFunc(auth, dispatch) : [] }

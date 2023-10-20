@@ -24,7 +24,7 @@ export function Display() {
 						text={message.text}
 					/>
 			})}
-			{history.messages.length !== 0 && <Ressources />}
+			{history.messages.length !== 0 && !tabs.activeTab && <Ressources />}
 			<ChatFollowUp stream={stream} tabs={tabs}/>
 		</div>
 	);
