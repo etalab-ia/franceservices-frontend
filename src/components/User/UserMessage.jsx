@@ -31,7 +31,7 @@ export function UserMessage() {
 			dispatch({ type: 'SET_MESSAGES', nextMessage: { text: stream.historyStream, sender: 'agent' } });
 		dispatch({ type: 'RESET_STREAM_HISTORY' });
 		dispatch({ type: 'RESET_USER_CHOICES' });
-		dispatch({ type: 'SET_MESSAGES', nextMessage: { text: currQuestion, sender: 'user'} })
+		dispatch({ type: 'SET_MESSAGES', nextMessage: { text: currQuestion, sender: 'user' } });
 	}
 
 	useEffect(() => {
