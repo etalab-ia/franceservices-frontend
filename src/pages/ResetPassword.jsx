@@ -6,7 +6,6 @@ import { resetPasswordMailUrl } from "../constants/api";
 import { useFetch } from "../utils/hooks";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { Navigate } from "react-router-dom";
 
 export function ResetPassword() {
 
@@ -30,7 +29,7 @@ export function ResetPassword() {
 		if (res.status && res.status !== 200)
 			return dispatch({ type: 'AUTH_FAILED' });
 		
-		return <Navigate to="/login" />
+		return window.location.href = '/login';
 	}
 
 	return (

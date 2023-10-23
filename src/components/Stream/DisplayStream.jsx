@@ -14,7 +14,7 @@ const Stream = ({ response }) => {
 	</div>
 }
 
-export function DisplayStream({ setDisplay }) {
+export function DisplayStream() {
 	const	stream = useSelector((state) => state.stream);
 	const	tabs = useSelector((state) => state.tabs);
 	const	tabsLen = stream.historyStream.length;
@@ -25,7 +25,7 @@ export function DisplayStream({ setDisplay }) {
 
 	useEffect(() => setActiveTab(tabsLen), [tabsLen])
 	useEffect(() => { dispatch({ type: 'SWITCH_TAB', nextTab: activeTab }) }, []);
-	useEffect(() => { scrollToBottom(); setDisplay(NOT_SET); }, [stream.response]);
+	useEffect(() => { scrollToBottom(); }, [stream.response]);
 
 	return (
 		<div>

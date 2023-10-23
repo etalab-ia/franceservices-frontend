@@ -1,16 +1,16 @@
-import { useState } from "react";
 import { UserFeedbackSatisfaction } from "./UserFeedbackSatisfaction";
 import { UserFeedbackInput } from "./UserFeedbackInput";
 import { NOT_SET } from "../../constants/status";
+import { useSelector } from "react-redux";
 
 export function	Feedback({ isFirst }) {
-	const	[activeTab, setActiveTab] = useState(NOT_SET);
-	const	[isConfirmed, setIsConfirmed] = useState(false);
+	const	user = useSelector((state) => state.user);
+	const	feedback = useSelector((state) => state.feedback);
 
 	return (
 		<div className="user-feedback-container">
-			<UserFeedbackSatisfaction activeTab={activeTab} isFirst={isFirst} setActiveTab={setActiveTab} isConfirmed={isConfirmed}/>
-			{activeTab !== -1 && <UserFeedbackInput activeTab={activeTab} isFirst={isFirst} isConfirmed={isConfirmed} setIsConfirmed={setIsConfirmed}/>}
+			<UserFeedbackSatisfaction isFirst={isFirst} isConfirmed={feedback.isConfirmed}/>
+			{user.choices.feedback !== NOT_SET && <UserFeedbackInput activeTab={user.choices.feedback} isFirst={isFirst} />}
 		</div>
 	);
 }

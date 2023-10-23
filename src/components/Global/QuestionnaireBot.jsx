@@ -2,7 +2,7 @@ import { UserChatTools } from "../User/UserChatTools";
 import { Avatar } from "../Chat/Avatar";
 import { BotQuestion } from "./BotQuestion";
 
-export function	QuestionnaireBot({ setDisplay, question, type }) {
+export function	QuestionnaireBot({ id, question, type }) {
 
     return (
 		<div className="col-message">
@@ -13,7 +13,7 @@ export function	QuestionnaireBot({ setDisplay, question, type }) {
 					<div className="py-4">{question}</div>
 				</div>
 			</div>
-			<BotQuestion setDisplay={setDisplay} />
+			<BotQuestion id={id} />
 		</div>
 	);
 }

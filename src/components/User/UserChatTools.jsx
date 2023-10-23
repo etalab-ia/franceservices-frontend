@@ -10,7 +10,7 @@ export function UserChatTools({ type }) {
 	const	user = useSelector((state) => state.user);
 	const	dispatch = useDispatch();
 	const	[isSelected, setIsSelected] = useState();
-	const 	extraMargin = type ? "ml-[84px]" : "";
+	const 	extraMargin = type ? "ml-[110px]" : "";
 
 	const handleClick = (index) => {
 		setIsSelected(index);
