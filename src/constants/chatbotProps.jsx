@@ -34,24 +34,24 @@ function			handleCopy(stream) {
 export	function	userChatToolsFunc(state, dispatch, type) {
 
 	const	userChatToolsProps = [
-		{
-			image: evaluate,
-			alt: "Evaluer la réponse",
-			title: "Evaluer la réponse",
-			onClick: handleEvaluate,
-		},
+		// {
+		// 	image: evaluate,
+		// 	alt: "Evaluer la réponse",
+		// 	title: "Evaluer la réponse",
+		// 	onClick: handleEvaluate,
+		// },
 		{
 			image: redo,
 			alt: "Re-générer la réponse",
 			title: "Re-générer la réponse",
 			onClick: () => handleRedo(state.auth, state.user, dispatch),
 		},
-		{
-			image: bookmark,
-			alt: "Enregistrer la réponse",
-			title: "Enregistrer la réponse",
-			onClick: handleSaved,
-		},
+		// {
+		// 	image: bookmark,
+		// 	alt: "Enregistrer la réponse",
+		// 	title: "Enregistrer la réponse",
+		// 	onClick: handleSaved,
+		// },
 		{
 			image: copy,
 			alt: "Copier la réponse",

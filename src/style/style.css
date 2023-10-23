@@ -271,7 +271,7 @@
 		@apply flex;
 		@apply flex-col;
 		@apply w-[648px];
-		@apply pb-8;
+		@apply pb-4;
 	}
 	
 	.wrap-message {
@@ -321,6 +321,7 @@
 		@apply h-[56px];
 		@apply flex;
 		@apply items-center;
+		@apply ml-[54px];
 	}
 
 	/* AGENT */
@@ -372,5 +373,21 @@
 	
 	.archive-tabs-title {
 		@apply border-b-2 border-[#3A3A3A] p-4 text-left;
+	}
+
+	.archive-body {
+		@apply p-4;
+		@apply w-auto;
+		@apply text-left;
+	}
+
+	.archive-tags {
+		@apply px-2;
+		@apply w-fit;
+		@apply justify-center;
+		@apply content-center;
+		@apply rounded-[90px];
+		@apply bg-[#E5E5E5];
+		@apply m-2;
 	}
 }

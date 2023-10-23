@@ -25,11 +25,11 @@ export function SideTabs(props) {
 					/>
 				</animated.button>
 			))}
-			<animated.div className='side-tools'>
+			{/* <animated.div className='side-tools'>
 				<img src={sideInformationProps.image}
 				alt={sideInformationProps.alt}
 				title={sideInformationProps.title}/>
-			</animated.div>
+			</animated.div> */}
 		</div>
 	);
 }

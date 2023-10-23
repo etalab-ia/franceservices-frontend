@@ -1,17 +1,19 @@
+import { useSelector } from "react-redux";
 import { askingSheetsNeeded } from "../../constants/sheets";
 import { QuestionnaireBot } from "../Global/QuestionnaireBot";
 import { DisplaySheets } from "./DisplaySheets";
 
-export function Sheets({ display, setDisplay }) {
+export function Sheets() {
+	const	user = useSelector((state) => state.user);
 
 	return (
-		<div className="col-message">
+		<div className="col-message mt-8">
 			<QuestionnaireBot 
-				setDisplay={setDisplay}
+				id='sheets'
 				question={askingSheetsNeeded}
 				type={'sheets'}
 			/>
-			{display === true && <DisplaySheets />}
+			{!user.choices.sheets && <DisplaySheets />}
 		</div>
 	);
 }

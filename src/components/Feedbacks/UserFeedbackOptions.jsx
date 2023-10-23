@@ -8,8 +8,7 @@ import { ButtonsOptions } from "./ButtonsOptions";
 import { ConfirmationButton } from "./ConfirmationButton";
 import { InputOption } from "./InputOption";
 
-export function	UserFeedbackOptions({ activeTab, isFirst, setIsConfirmed }) {
-
+export function	UserFeedbackOptions({ activeTab, isFirst }) {
 	const	[reasons, setReasons] = useState([]);
 	const	[otherReason, setOtherReason] = useState('');
 	const	[buttonsType, setButtonsType] = useState(activeTab === 0 ? satisfiedButtons : unsatisfiedButtons);
@@ -52,7 +51,6 @@ export function	UserFeedbackOptions({ activeTab, isFirst, setIsConfirmed }) {
 				otherReason={otherReason}
 				feedback={feedback}
 				dispatch={dispatch}
-				setIsConfirmed={setIsConfirmed}
 			/>
 			</div>
 	);

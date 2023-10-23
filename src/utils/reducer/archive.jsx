@@ -6,11 +6,11 @@ export const	archiveReducer = (state = [], action) => {
 			return [
 				...state,
 				{
-				title: `Archive n°${state.length}`,
-				date: action.nextDate,
-				themes: action.nextThemes,
-				source: action.nextSource,
-				messages: state.length > 0 ? [...state[lastIndex].messages, action.nextMessages] : [action.nextMessages],
+					title: `Archive n°${state.length}`,
+					date: action.nextDate,
+					themes: action.nextThemes,
+					source: action.nextSource,
+					messages: state.length > 0 ? [...state[lastIndex].messages, action.nextMessages] : [action.nextMessages],
 				},
 			];
 			}

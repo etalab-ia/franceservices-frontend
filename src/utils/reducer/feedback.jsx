@@ -1,4 +1,4 @@
-export const	feedbackReducer = (state = { reasons: [] }, action) => {
+export const	feedbackReducer = (state = { reasons: [], isConfirmed: false }, action) => {
 	switch (action.type) {
 		case "SET_NEW_FEEDBACK":
 			return {
@@ -9,8 +9,16 @@ export const	feedbackReducer = (state = { reasons: [] }, action) => {
 			return {
 				reasons: state.reasons.filter(reason => reason !== action.rmFeedback)
 			};
+		case "CONFIRM_FEEDBACKS":
+			return {
+				...state,
+				isConfirmed: true,
+			}
 		case "RESET_FEEDBACK":
-			return { reasons: [] };
+			return {
+				reasons: [],
+				isConfirmed: false,
+			};
 		default: { return state };
 	}
 }

@@ -16,7 +16,7 @@ export function	RessourceOptions() {
 		else
 		{
 			setRessources([...ressources, ressourceButtons[index]]);
-			dispatch({ type: 'SET_NEW_RESSOURCE', nextRessource: ressourceButtons[index] });
+			dispatch({ type: 'SET_NEW_RESSOURCE', nextChoice: ressourceButtons[index] });
 		}
 	}
 

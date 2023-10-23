@@ -9,7 +9,6 @@ import { AuthFailed } from "../components/Auth/AuthFailed";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { changePasswordFailed } from "../constants/errorMessages";
-import { Navigate } from "react-router-dom";
 
 export function NewPassword() {
 
@@ -45,7 +44,7 @@ export function NewPassword() {
 		if (res.status && res.status !== 200)
 			return dispatch({ type: 'AUTH_FAILED' });
 
-		return <Navigate to="/login" />
+		return window.location.href = '/login';
 	}
 	
 	return (

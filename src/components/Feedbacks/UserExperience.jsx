@@ -21,10 +21,10 @@ export function UserExperience() {
 	const	tabsLen = stream.historyStream.length;
 
 	return (
-		<div className="col-message mt-12">
+		<div className="col-message mt-8">
 			{history.activeTab === tabsLen && <div>
 				<div className="row-message">
-					<UserChatTools type='quality'/>
+					<UserChatTools type='sheets'/>
 					<Avatar user='agent' />
 					<AskingResponseQuality tabsLen={tabsLen}/>
 				</div>

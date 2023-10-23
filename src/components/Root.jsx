@@ -31,8 +31,8 @@ export const Root = () => {
 			quickAccessItems={ auth.isLogin ? quickAccessItemsFunc(auth, dispatch) : [] }
 		/>
 		<Routes>
-			<Route path="/login" element={!auth.isLogin ? <Login /> : <Navigate to="/" />}/>
-			<Route path="/" element={!auth.isLogin ? <Navigate to="/login" /> : <Home />}/>
+			<Route path="/login" element={!auth.isLogin ? <Login /> : <Navigate to="/chat" />}/>
+			{/* <Route path="/" element={!auth.isLogin ? <Navigate to="/login" /> : <Home />}/> */}
 			<Route path="/chat" element={!auth.isLogin ? <Navigate to="/login" /> : <Chatbot />}/>
 			<Route path="/signup" element={<Signup />} />
 			<Route path="/reset-password" element={<ResetPassword />} />

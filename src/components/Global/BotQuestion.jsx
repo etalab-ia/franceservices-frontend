@@ -1,23 +1,18 @@
-import { useState } from "react";
 import { animated } from '@react-spring/web'
 import { NOT_SET } from "../../constants/status";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-export function	BotQuestion({ setDisplay }) {
-	const	[activeTab, setActiveTab] = useState(NOT_SET);
+export function	BotQuestion({ id }) {
+	const	user = useSelector((state) => state.user);
 	const   buttons = ['Oui', 'Non'];
 	const	dispatch = useDispatch();
 
 	const	handleClick = async(index) => {
-		if (activeTab === index)
-		{
-			setActiveTab(NOT_SET);
-			setDisplay(NOT_SET);
-		}
+		if (user.choices[id] === index)
+			dispatch({ type: 'SET_USER_CHOICES', nextKey: id, nextValue: NOT_SET });
 		else
 		{
-			setActiveTab(index);
-			index === 0 ? setDisplay(true) : setDisplay(false);
+			dispatch({ type: 'SET_USER_CHOICES', nextKey: id, nextValue: index });
 			index === 1 && dispatch({ type: 'CONFIRM_RESSOURCE' });
 		}
 	}
@@ -26,10 +21,11 @@ export function	BotQuestion({ setDisplay }) {
 		<div className="user-feedback-container">
 			<div className="row-message">
 				{buttons.map((button, index) => {
-					const	classNames = index === activeTab ? `bg-purple` : `bg-[white]`;
+					const	classNames = index === user.choices[id] ? `bg-purple` : `bg-[white]`;
+					const	cursor = user.choices[id] !== NOT_SET && id !== 'newQuestion' ? 'cursor-not-allowed' : 'cursor-pointer';
 
-					return <animated.button onClick={() => handleClick(index)} key={index} className={`user-feedback-buttons ${classNames}`}>
-							<p className={index === activeTab ? `text-white` : `text-purple`}>{button}</p>
+					return <animated.button disabled={user.choices[id] !== NOT_SET && id !== 'newQuestion'} onClick={() => handleClick(index)} key={index} className={`user-feedback-buttons ${classNames} ${cursor}`}>
+							<p className={index === user.choices[id] ? `text-white` : `text-purple`}>{button}</p>
 						</animated.button>
 				})}
 			</div>

@@ -1,6 +1,6 @@
-import { initialQuestion } from "./state"
+import { initialQuestion, initialUserChoices } from "./state"
 
-export const	userReducer = (state = { question: initialQuestion, sheets: [] }, action) => {
+export const	userReducer = (state = { question: initialQuestion, choices: initialUserChoices, sheets: [] }, action) => {
 	switch (action.type) {
 		case 'SET_USER_TITLE':
 			return {
@@ -31,10 +31,29 @@ export const	userReducer = (state = { question: initialQuestion, sheets: [] }, a
 				...state,
 				sheets: action.nextSheets,
 			}
+		case 'SET_INPUT_VISIBILITY':
+			return {
+				...state,
+				inputVisibility: action.nextVisibility,
+			}
 		case 'RESET_QUESTION_FIELDS':
 			return {
 				...state,
 				question: initialQuestion
+			}
+		case 'RESET_USER_CHOICES':
+			return {
+				...state,
+				choices: initialUserChoices,
+				sheets: [],
+			}
+		case 'SET_USER_CHOICES':
+			return {
+				...state,
+				choices: {
+					...state.choices,
+					[action.nextKey]: action.nextValue,
+				}
 			}
 	  	default: { return state };
 	}

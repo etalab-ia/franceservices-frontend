@@ -3,8 +3,5 @@ export const	askingDocumentationChoice = "Quelle(s) base(s) souhaitez-vous utili
 
 export const	ressourceButtons = [
 	'service-public.fr',
-	'source A',
-	'source B',
-	'source C',
-	'source D',
+	'transformation.gouv.fr',
 ]

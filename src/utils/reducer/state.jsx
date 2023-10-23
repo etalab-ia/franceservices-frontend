@@ -1,3 +1,5 @@
+import { NOT_SET } from "../../constants/status"
+
 export const	initialQuestion = {
 	institution: '',
 	title: '',
@@ -5,6 +7,13 @@ export const	initialQuestion = {
 	context: '',
 	links: '',
 	temperature: 10,
+}
+
+export const	initialUserChoices = {
+	ressources: NOT_SET,
+	sheets: NOT_SET,
+	feedback: NOT_SET,
+	newQuestion: NOT_SET,
 }
 
 export const	initialAuth = {

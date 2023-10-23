@@ -8,7 +8,6 @@ export const	ConfirmationButton = ({ setIsConfirmed }) => {
 	const	handleConfirm = () => { 
 		setIsConfirmed(true);
 		dispatch({ type: 'CONFIRM_RESSOURCE' });
-		// dispatch({ type: 'SET_SOURCE', newSource: true});
 	}
 
 	return (
