@@ -6,7 +6,8 @@ export const	archiveReducer = (state = [], action) => {
 			return [
 				...state,
 				{
-					title: `Archive n°${state.length}`,
+					// TODO: set user_text as title ?
+					title: `Archive n°${state.length + 1}`,
 					date: action.nextDate,
 					themes: action.nextThemes,
 					source: action.nextSource,
@@ -32,7 +33,7 @@ export const	archiveReducer = (state = [], action) => {
 		case 'SET_TITLE': 
 			return {
 				...state,
-				title: `Archive n°${state.length}`
+				title: `Archive n°${state.length + 1}`
 			}
 	  	default: { return state };
 	}

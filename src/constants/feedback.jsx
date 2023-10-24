@@ -37,8 +37,6 @@ export const	satisfiedButtons = [
 	'Apporte un nouveau vocabulaire',
 	'Clair',
 	'Synthétique',
-	'Argument n°x',
-	'Argument n°y',
 	'Autre raison'
 ]
 
@@ -47,7 +45,6 @@ export const	unsatisfiedButtons = [
 	'Trop long',
 	'Incohérent',
 	'Fautes de grammaire',
-	'Argument n°y',
 	'Autre raison'
 ]
 
