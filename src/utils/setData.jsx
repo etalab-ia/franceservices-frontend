@@ -8,7 +8,9 @@ export const	setUserQuestion = (question) => {
 		user_text: question.user_text,
 		context: question.context,
 		links: question.links,
-		temperature: question.temperature
+		temperature: question.temperature,
+		model_name: "fabrique-miaou",
+		// mode: "simple"
 	};
 
 	return data;

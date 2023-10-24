@@ -14,6 +14,7 @@ export const	initialUserChoices = {
 	sheets: NOT_SET,
 	feedback: NOT_SET,
 	newQuestion: NOT_SET,
+	oldQuestion: NOT_SET,
 }
 
 export const	initialAuth = {
