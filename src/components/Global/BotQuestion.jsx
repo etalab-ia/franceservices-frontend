@@ -24,9 +24,9 @@ export function	BotQuestion({ id }) {
 					const	classNames = index === user.choices[id] ? `bg-purple` : `bg-[white]`;
 					const	cursor = user.choices[id] !== NOT_SET ? 'cursor-not-allowed' : 'cursor-pointer';
 
-					return <animated.button disabled={user.choices[id] !== NOT_SET} onClick={() => handleClick(index)} key={index} className={`user-feedback-buttons ${classNames} ${cursor}`}>
-							<p className={index === user.choices[id] ? `text-white` : `text-purple`}>{button}</p>
-						</animated.button>
+					return <button disabled={user.choices[id] !== NOT_SET} onClick={() => handleClick(index)} key={index} className={`user-feedback-buttons ${classNames} ${cursor}`}>
+							<p className={index === user.choices[id] ? `text-white text-center` : `text-purple text-center`}>{button}</p>
+						</button>
 				})}
 			</div>
 		</div>
