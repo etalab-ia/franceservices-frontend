@@ -18,6 +18,7 @@ export const	archiveReducer = (state = [], action) => {
 			];
 			}
 		case 'SET_SELECTED_ARCHIVE': {
+			console.log('set selected')
 			const { title } = action;
 			const indexToUpdate = state.findIndex((item) => item.title === title);
 
@@ -29,6 +30,7 @@ export const	archiveReducer = (state = [], action) => {
 				...state[indexToUpdate],
 				selectedArchive: action.nextSelectedArchive,
 			};
+			console.log('here selectedArchive: ', selectedArchive)
 
 			return [
 				...state.slice(0, indexToUpdate), 
