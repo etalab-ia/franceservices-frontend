@@ -32,7 +32,7 @@ export const Root = () => {
 		/>
 		<Routes>
 			<Route path="/login" element={!auth.isLogin ? <Login /> : <Navigate to="/chat" />}/>
-			{/* <Route path="/" element={!auth.isLogin ? <Navigate to="/login" /> : <Home />}/> */}
+			<Route path="/" element={!auth.isLogin ? <Navigate to="/login" /> : <Navigate to="/chat" />}/>
 			<Route path="/chat" element={!auth.isLogin ? <Navigate to="/login" /> : <Chatbot />}/>
 			<Route path="/signup" element={<Signup />} />
 			<Route path="/reset-password" element={<ResetPassword />} />
