@@ -11,7 +11,7 @@ export  function DisplayArchiveBody() {
 		setSelected(index);
 		if (index === selected) {
 			dispatch({ type: 'SET_SELECTED_ARCHIVE', nextSelectedArchive: selected });
-			console.log('archive: ', archive)
+			console.log('archive: ', archive, ' selected: ', selected)
 		}
 	}
 

@@ -13,30 +13,30 @@ export const	archiveReducer = (state = [], action) => {
 					date: action.nextDate,
 					themes: action.nextThemes,
 					source: action.nextSource,
+					selectedArchive: NOT_SET,
 					messages: state.length > 0 ? [...state[lastIndex].messages, action.nextMessages] : [action.nextMessages],
 				},
 			];
 			}
 		case 'SET_SELECTED_ARCHIVE': {
-			console.log('set selected')
-			const { title } = action;
-			const indexToUpdate = state.findIndex((item) => item.title === title);
+			const indexToUpdate = state[action.nextSelectedArchive]; //state.findIndex((item) => item.title === title);
 
-			console.log('indexToUpdate: ', indexToUpdate)
-			if (indexToUpdate === -1) {
+			if (!indexToUpdate) {
+				console.log('no index to update')
 				return state;
 			}
 
 			const updatedItem = {
-				...state[indexToUpdate],
+				...state[action.nextSelectedArchive],
 				selectedArchive: action.nextSelectedArchive,
 			};
-			console.log('here selectedArchive: ', selectedArchive)
+
+			console.log('up: ', updatedItem)
 
 			return [
-				...state.slice(0, indexToUpdate), 
+				...state.slice(0, action.nextSelectedArchive), 
 				updatedItem,
-				...state.slice(indexToUpdate + 1),
+				...state.slice(action.nextSelectedArchive + 1),
 			];
 		}
 	  	default: { return state };
