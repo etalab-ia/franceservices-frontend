@@ -22,6 +22,7 @@ export const	archiveReducer = (state = [], action) => {
 			const { title } = action;
 			const indexToUpdate = state.findIndex((item) => item.title === title);
 
+			console.log('indexToUpdate: ', indexToUpdate)
 			if (indexToUpdate === -1) {
 				return state;
 			}
