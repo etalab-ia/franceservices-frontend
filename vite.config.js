@@ -11,5 +11,6 @@ export default defineConfig({
     host: true, 
     strictPort: true,
     port: 4173,
-  }
+  },
+  base: "/albert"
 })
