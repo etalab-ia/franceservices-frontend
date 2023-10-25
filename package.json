@@ -5,7 +5,7 @@
   "type": "module",
   "homepage": "http://***REMOVED***/albert/",
   "scripts": {
-    "dev": "tailwindcss -i ./src/style/style.css -o ./dist/style.css && vite",
+    "dev": "vite && tailwindcss -i ./src/style/style.css -o ./dist/style.css",
     "build": "vite build && tailwindcss -i ./src/style/style.css -o ./dist/style.css",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
