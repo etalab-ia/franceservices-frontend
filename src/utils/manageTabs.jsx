@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Display } from "../components/Chat/Display";
 import { UserMessage } from "../components/User/UserMessage";
 import { DisplayArchiveTabs } from "../components/Archive/DisplayArchiveTab";
@@ -11,12 +11,18 @@ export function	TabContent({ content }) {
 }
 
 export function	initTabs() {
+	console.log('init tabs');
 	const	archive = useSelector((state) => state.archive);
 	const	history = useSelector((state) => state.history);
+	const	[summary, setSummary] = useState(true);
+	
+	archive.map((item) => {
+		if (item.selectedArchive !== NOT_SET) {
+			setSummary(false);
+		}
+	});
 
 	
-	useEffect(() => {console.log('selected: ', archive)}, [archive.selectedArchive])
-
 	const	TabsProps = [
 		{
 			id: "chatbot-tab",
@@ -26,7 +32,8 @@ export function	initTabs() {
 		{
 			id: "history-tab",
 			className:"chat-container",
-			components: archive.map((item) => item.selectedArchive !== NOT_SET ? [<Display messages={item.messages}/>] : [ <DisplayArchiveTabs /> ])
+			isSummary: summary,
+			components: [ <DisplayArchiveTabs /> ],
 		},
 		// {
 		// 	id: "saved-tab",
@@ -34,6 +41,8 @@ export function	initTabs() {
 		// 	components: [ <Display />, <UserMessage /> ]
 		// }
 	]
+
+	console.log('going to return: ', TabsProps)
 
 	return TabsProps;
 }

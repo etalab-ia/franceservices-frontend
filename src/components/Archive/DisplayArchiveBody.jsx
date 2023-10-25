@@ -6,19 +6,26 @@ export  function DisplayArchiveBody() {
 	const	archive = useSelector((state) => state.archive);
 	const	[selected, setSelected] = useState(NOT_SET);
 	const	dispatch = useDispatch();
+	const	[doubleSelected, setDoubleSelected] = useState(false);
 
 	const	handleClick = (index) => {
 		setSelected(index);
-		if (index === selected) {
-			dispatch({ type: 'SET_SELECTED_ARCHIVE', nextSelectedArchive: selected });
-			console.log('archive: ', archive, ' selected: ', selected)
-		}
+		// if (index === selected) {
+		// 	dispatch({ type: 'SET_SELECTED_ARCHIVE', nextSelectedArchive: selected });
+		// 	console.log('archive: ', archive, ' selected: ', selected)
+		// 	setDoubleSelected(true);
+		// 	console.log('double')
+		// }
 	}
 
+	console.log('display archive body')
 
-	return <tbody>
+	return <>
+	{!doubleSelected &&
+	<tbody>
 		{archive.map((item, index) => {
 			const	classNames = index === selected ? 'bg-[#F5F5FE]' : 'bg-white';
+			
 			return <tr key={index} onClick={() => handleClick(index)} className={classNames}>
 				<td className="archive-body">{item.title}</td>
 				<td className="archive-body text-[11px] flex flex-wrap">{item.themes.map((theme, index) => {
@@ -28,5 +35,5 @@ export  function DisplayArchiveBody() {
 				<td className="archive-body">{item.source ? 'Oui' : 'Non'}</td>
 			</tr>
 		})}
-  </tbody>
+  </tbody>}</>
 }
