@@ -2,12 +2,13 @@ import { SideTabs } from './SideTabs';
 import { initTabs, TabContent } from '../../utils/manageTabs';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export function MessagesContainer() {
 	const	tabs = useSelector((state) => state.tabs);
 	const	archive = useSelector((state) => state.archive);
 	const	dispatch = useDispatch();
+	const	[chatTabs, setChatTabs] = useState(initTabs());
 	
 	useEffect(() => {console.log('selected: ', archive)}, [archive.selectedArchive])
 
