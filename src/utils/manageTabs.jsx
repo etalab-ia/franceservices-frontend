@@ -26,7 +26,7 @@ export function	initTabs() {
 		{
 			id: "history-tab",
 			className:"chat-container",
-			components: archive.selectedArchive && archive.selectedArchive !== NOT_SET ? [<Display messages={archive[archive.selectedArchive].messages}/>] : [ <DisplayArchiveTabs /> ]
+			components: archive.map((item) => item.selectedArchive !== NOT_SET ? [<Display messages={item.messages}/>] : [ <DisplayArchiveTabs /> ])
 		},
 		// {
 		// 	id: "saved-tab",
