@@ -29,7 +29,7 @@ export function ResetPassword() {
 		if (res.status && res.status !== 200)
 			return dispatch({ type: 'AUTH_FAILED' });
 		
-		return window.location.href = '/login';
+		return window.location.href = '/albert/login';
 	}
 
 	return (
