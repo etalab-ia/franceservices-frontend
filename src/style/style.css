@@ -291,6 +291,7 @@
 		@apply border-purple;
 		@apply text-purple;
 		@apply my-2;
+		@apply max-h-[40px];
 	}
 
 	.user-feedback-confirmation-button {
@@ -315,6 +316,7 @@
 		@apply rounded-[90px];
 		@apply bg-[#E5E5E5];
 		@apply my-2;
+		@apply max-h-[40px];
 	}
 
 	.user-chat-tools-container {
