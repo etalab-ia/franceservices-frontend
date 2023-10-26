@@ -1,0 +1,1 @@
+export const    summaryButton = 'Retour au sommaire des archives';

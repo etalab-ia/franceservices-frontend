@@ -5,7 +5,6 @@ export const	archiveReducer = (state = [], action) => {
 		case 'SET_ARCHIVE': {
 			const	lastIndex = state.length > 0 ? state.length - 1 : state.length;
 
-			console.log('set archive')
 			return [
 				...state,
 				{
