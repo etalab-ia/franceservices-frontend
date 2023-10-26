@@ -37,11 +37,13 @@ export const	satisfiedButtons = [
 	'Apporte un nouveau vocabulaire',
 	'Clair',
 	'Synthétique',
+	'Sources fiables',
 	'Autre raison'
 ]
 
 export const	unsatisfiedButtons = [
 	'Les éléments sont faux',
+	'Manque de sources',
 	'Trop long',
 	'Incohérent',
 	'Fautes de grammaire',

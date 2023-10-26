@@ -39,6 +39,7 @@ export function UserMessage() {
 			return ;
 		dispatch({ type: 'SET_INPUT_VISIBILITY', nextVisibility: 'hidden' });
 		usePost(auth, user, dispatch);
+		dispatch({ type: 'RESET_FEEDBACK'});
 		getSheets(question, auth, dispatch);
 		dispatch({ type: 'RESET_QUESTION_FIELDS' });
 	  }, [question, ressources.isConfirmed]);

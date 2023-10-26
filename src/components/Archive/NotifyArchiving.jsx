@@ -30,8 +30,6 @@ export function NotifyArchiving() {
 			nextMessages: updatedMessage,
 		});
 		dispatch({ type: 'RESET_RESSOURCE'});
-		// TODO: see where to put reset feedback
-		dispatch({ type: 'RESET_FEEDBACK'});
 		dispatch({ type: 'SET_USER_CHOICES', nextKey: 'oldQuestion', nextValue: user.choices.newQuestion });
 	}, [user.choices.newQuestion])
 
