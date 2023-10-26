@@ -4,7 +4,7 @@ import { DisplayArrayMessages } from "./DisplayArrayMessages";
 import { DisplaySingleMessage } from "./DisplaySingleMessage";
 import { ChatFollowUp } from "./ChatFollowUp";
 
-export function Display({ messages }) {
+export function Display({ messages, isArchive }) {
 	const	stream = useSelector((state) => state.stream);
 	const	tabs = useSelector((state) => state.tabs);
 
@@ -15,12 +15,14 @@ export function Display({ messages }) {
 					<DisplayArrayMessages
 						key={index}
 						messages={message.text}
+						isArchive={isArchive}
 					/>
 					:
 					<DisplaySingleMessage
 						key={index}
 						sender={message.sender}
 						text={message.text}
+						isArchive={isArchive}
 					/>
 			})}
 			{messages.length !== 0 && !tabs.activeTab && <Ressources />}

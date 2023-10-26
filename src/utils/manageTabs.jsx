@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Display } from "../components/Chat/Display";
 import { UserMessage } from "../components/User/UserMessage";
 import { DisplayArchiveTabs } from "../components/Archive/DisplayArchiveTab";
 import { useSelector } from "react-redux";
-import { NOT_SET } from "../constants/status";
 
 export function	TabContent({ content }) {
 	return content.components.map((component, index) => 
@@ -11,21 +10,13 @@ export function	TabContent({ content }) {
 }
 
 export function	initTabs() {
-	// console.log('init tabs');
-	const	archive = useSelector((state) => state.archive);
 	const	history = useSelector((state) => state.history);
-	
-	archive.map((item) => {
-		if (item.selectedArchive !== NOT_SET) {
-			setSummary(false);
-		}
-	});
 
 	const	TabsProps = [
 		{
 			id: "chatbot-tab",
 			className:"chat-container",
-			components: [ <Display messages={history.messages}/>, <UserMessage /> ]
+			components: [ <Display messages={history.messages} isArchive={false}/>, <UserMessage /> ]
 		},
 		{
 			id: "history-tab",
@@ -43,16 +34,8 @@ export function	initTabs() {
 }
 
 export const	archiveTabsTitle = [
-	{
-		name: "Nom de la conversation"
-	},
-	{
-		name: "Thèmes"
-	},
-	{
-		name: "Date"
-	},
-	{
-		name: "Source"
-	},
+	{ name: "Nom de la conversation" },
+	{ name: "Thèmes" },
+	{ name: "Date" },
+	{ name: "Source" },
 ]

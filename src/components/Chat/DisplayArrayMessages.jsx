@@ -8,7 +8,7 @@ import next from "../../../icons/usertools/next.svg";
 import { StreamingMessage } from "./StreamingMessage";
 import { DisplayMessageTab } from "./DisplayMessageTab";
 
-export function DisplayArrayMessages({ messages }) {
+export function DisplayArrayMessages({ messages, isArchive }) {
 	const	tabsLen = messages.length;
 	const	conditionTab = messages.length > 1;
 	const	[activeTab, setActiveTab] = useState(tabsLen + 1);
@@ -18,7 +18,8 @@ export function DisplayArrayMessages({ messages }) {
 
 	return (
 		<div className="streaming-container">
-			<UserChatTools />
+			{isArchive && <UserChatTools type='sheets' />}
+			{!isArchive && <UserChatTools />}
 			<Avatar user="agent" />
 			<div>
 				<StreamingMessage>{messages[activeTab - 1]}</StreamingMessage>

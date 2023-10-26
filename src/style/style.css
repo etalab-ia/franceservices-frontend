@@ -331,8 +331,8 @@
 	.chat {
 		@apply flex;
 		@apply flex-col;
-		@apply pb-8;
-		@apply h-[600px];
+		/* @apply pb-8; */
+		@apply h-[450px];
 		@apply w-[905px];
 		@apply mr-[112px];
 		@apply whitespace-pre-wrap;
