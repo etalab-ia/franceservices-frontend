@@ -11,10 +11,9 @@ export function	TabContent({ content }) {
 }
 
 export function	initTabs() {
-	console.log('init tabs');
+	// console.log('init tabs');
 	const	archive = useSelector((state) => state.archive);
 	const	history = useSelector((state) => state.history);
-	const	[summary, setSummary] = useState(true);
 	
 	archive.map((item) => {
 		if (item.selectedArchive !== NOT_SET) {
@@ -22,7 +21,6 @@ export function	initTabs() {
 		}
 	});
 
-	
 	const	TabsProps = [
 		{
 			id: "chatbot-tab",
@@ -32,7 +30,6 @@ export function	initTabs() {
 		{
 			id: "history-tab",
 			className:"chat-container",
-			isSummary: summary,
 			components: [ <DisplayArchiveTabs /> ],
 		},
 		// {
@@ -41,8 +38,6 @@ export function	initTabs() {
 		// 	components: [ <Display />, <UserMessage /> ]
 		// }
 	]
-
-	console.log('going to return: ', TabsProps)
 
 	return TabsProps;
 }
