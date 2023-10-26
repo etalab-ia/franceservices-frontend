@@ -1,20 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { notifyArchiving } from "../../constants/chatbotProps";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { NOT_SET } from "../../constants/status";
 import { tags } from "../../constants/tags";
 
 export function NotifyArchiving() {
-
 	const	archive = useSelector((state) => state.archive);
 	const   history = useSelector((state) => state.history);
 	const   stream = useSelector((state) => state.stream);
 	const   ressources = useSelector((state) => state.ressources);
 	const   user = useSelector((state) => state.user);
 	const	dispatch = useDispatch();
-	const	[index, setIndex] = useState(NOT_SET);
-	// TODO: change with new parameters receive from getSheets()
 
 	useEffect(() => {
 		if (user.choices.oldQuestion === user.choices.newQuestion)
@@ -22,13 +18,16 @@ export function NotifyArchiving() {
 
 		const	shuffled = tags.sort(() => 0.5 - Math.random());
 		const	selected = shuffled.slice(0, 3);
+		const	userMessage = history.messages[history.messages.length - 1]
+		const	agentMessage = { text: stream.historyStream[0], sender: 'agent' }
+		const	updatedMessage = [ userMessage, agentMessage ];
 
 		dispatch({ 
 			type: 'SET_ARCHIVE',
 			nextDate: new Date().toLocaleDateString('fr'), 
 			nextThemes: selected,
 			nextSource: ressources.choices.length !== 0 ? true : false,
-			nextMessages: { history: history.messages[0], stream: { text: stream.historyStream[0], sender: 'agent' } }
+			nextMessages: updatedMessage,
 		});
 		dispatch({ type: 'RESET_RESSOURCE'});
 		// TODO: see where to put reset feedback

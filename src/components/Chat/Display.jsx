@@ -8,8 +8,6 @@ export function Display({ messages }) {
 	const	stream = useSelector((state) => state.stream);
 	const	tabs = useSelector((state) => state.tabs);
 
-	console.log('going to display')
-
 	return (
 		<div className="chat" id="chat">
 			{messages.map((message, index) => {
