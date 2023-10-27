@@ -1,15 +1,11 @@
 import { NOT_SET } from "../../constants/status";
 
-export const	ressourcesReducer = (state = { choices: [], isConfirmed: NOT_SET }, action) => {
+export const	ressourcesReducer = (state = { choices: '', isConfirmed: NOT_SET }, action) => {
 	switch (action.type) {
-		case "SET_NEW_RESSOURCE":
+		case "SET_RESSOURCE":
 	  		return {
 				...state, 
-				choices: [...state.choices, action.nextChoice]
-			};
-		case "RM_RESSOURCE":
-	  		return {
-				choices: state.choices.filter(reason => reason !== action.rmChoice)
+				choices: action.nextChoice
 			};
 		case "CONFIRM_RESSOURCE":
 	  		return {
@@ -18,7 +14,7 @@ export const	ressourcesReducer = (state = { choices: [], isConfirmed: NOT_SET },
 			};
 		case "RESET_RESSOURCE":
 	  		return {
-				choices: [],
+				choices: '',
 				isConfirmed: NOT_SET,
 			};
 	  	default: { return state };

@@ -1,10 +1,10 @@
 import { NOT_SET } from "../../constants/status"
 
 export const	initialQuestion = {
-	model_name: "fabrique-reference",
-	mode: '',
+	model_name: "albert-light",
+	mode: 'simple',
 	query: '',
-	// limit: 0,
+	limit: 0,
 	user_text: '',
 	context: '',
 	institution: '',
