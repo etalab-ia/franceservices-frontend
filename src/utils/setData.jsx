@@ -9,7 +9,7 @@ export const	setUserQuestion = (question) => {
 		context: question.context,
 		links: question.links,
 		temperature: question.temperature,
-		model_name: "fabrique-miaou",
+		model_name: "fabrique-reference",
 		// mode: "simple"
 	};
 
