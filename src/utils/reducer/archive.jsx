@@ -3,21 +3,25 @@ import { NOT_SET } from "../../constants/status";
 export const	archiveReducer = (state = [], action) => {
 	switch (action.type) {
 		case 'SET_ARCHIVE': {
-			const	lastIndex = state.length > 0 ? state.length - 1 : state.length;
-
+			if (state.length === 0)
+				return state;
+	  
+			const lastIndex = state.length - 1;
+	  
 			return [
-				...state,
-				{
-					// TODO: set user_text as title ?
-					title: `Archive n°${state.length + 1}`,
+			  	...state.slice(0, lastIndex),
+			  	{
+					...state[lastIndex],
 					date: action.nextDate,
 					themes: action.nextThemes,
 					source: action.nextSource,
 					selectedArchive: NOT_SET,
-					messages: state.length > 0 ? [...state[lastIndex].messages, action.nextMessages] : [action.nextMessages],
-				},
+					messages: state[lastIndex].messages
+					? [...state[lastIndex].messages, action.nextMessages]
+					: [action.nextMessages],
+			 	},
 			];
-			}
+		}
 		case 'SET_SELECTED_ARCHIVE': {
 			const indexToUpdate = state[action.nextSelectedArchive];
 
@@ -35,6 +39,12 @@ export const	archiveReducer = (state = [], action) => {
 				updatedItem,
 				...state.slice(action.nextSelectedArchive + 1),
 			];
+		}
+		case 'SET_ARCHIVE_TITLE': {
+			return [
+				...state,
+				{ title: action.nextTitle, }
+			]
 		}
 	  	default: { return state };
 	}

@@ -332,13 +332,15 @@
 		@apply flex;
 		@apply flex-col;
 		/* @apply pb-8; */
-		@apply h-[450px];
+		/* @apply h-[450px]; */
 		@apply w-[905px];
 		@apply mr-[112px];
 		@apply whitespace-pre-wrap;
 		@apply text-justify;
 		@apply overflow-y-auto;
 		@apply overflow-x-hidden;
+		@apply min-h-[550px];
+		/* @apply bg-red-200; */
 	}
 	
 	.agent-chat {
@@ -381,6 +383,7 @@
 		@apply p-4;
 		@apply w-auto;
 		@apply text-left;
+		@apply border-b-[1px] border-[#DDD] p-4 text-left;
 	}
 
 	.archive-tags {
