@@ -41,6 +41,7 @@ export function UserMessage() {
 		usePost(auth, user, dispatch);
 		dispatch({ type: 'RESET_FEEDBACK'});
 		getSheets(question, auth, dispatch);
+		dispatch({ type: 'SET_ARCHIVE_TITLE', nextTitle: question.user_text });
 		dispatch({ type: 'RESET_QUESTION_FIELDS' });
 	  }, [question, ressources.isConfirmed]);
 

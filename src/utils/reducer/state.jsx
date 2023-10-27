@@ -1,10 +1,14 @@
 import { NOT_SET } from "../../constants/status"
 
 export const	initialQuestion = {
-	institution: '',
-	title: '',
+	model_name: "fabrique-reference",
+	mode: '',
+	query: '',
+	// limit: 0,
 	user_text: '',
 	context: '',
+	institution: '',
+	// title: '',
 	links: '',
 	temperature: 10,
 }
@@ -31,18 +35,3 @@ export const	initialStream = {
 	isStoppable: true,
 	isStreaming: false,
 }
-
-export const	initialArchive = [
-	{
-		title: '',
-		themes: [],
-		date: '',
-		source: false,
-	},
-	{
-		title: '',
-		themes: [],
-		date: '',
-		source: false,
-	}
-]	

@@ -14,8 +14,6 @@ export function UserFeedbackSatisfaction({ isFirst, isConfirmed }) {
 			dispatch({ type: 'SET_USER_CHOICES', nextKey: 'feedback', nextValue: index });
 	}
 
-	console.log('is conf: ', isConfirmed)
-
 	return (
 		<div className="row-message">
 			{buttons.map((button, index) => {
