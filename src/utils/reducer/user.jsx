@@ -10,6 +10,19 @@ export const	userReducer = (state = { question: initialQuestion, choices: initia
 					title: action.nextTitle
 				}
 			}
+		case 'SET_USER_MODEL_NAME_CHOICE':
+			const	limit = 3;
+			const	rag = action.nextModelName === 'albert-light' ? 'rag' : 'simple';
+
+			return {
+				...state,
+				question: {
+					...state.question,
+					model_name: action.nextModelName,
+					limit: limit,
+					mode: rag,
+				}
+			}
 		case 'SET_USER_INSTITUTION':
 			return {
 				...state,
@@ -23,7 +36,8 @@ export const	userReducer = (state = { question: initialQuestion, choices: initia
 				...state,
 				question: {
 					...state.question,
-					user_text: action.nextUserText
+					user_text: action.nextUserText,
+					query: action.nextUserText
 				}
 			}
 		case 'SET_SHEETS':

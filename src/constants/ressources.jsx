@@ -2,6 +2,12 @@ export const	askingSpecificDocumentation = "Voulez-vous utiliser une base docume
 export const	askingDocumentationChoice = "Quelle(s) base(s) souhaitez-vous utiliser ?";
 
 export const	ressourceButtons = [
-	'service-public.fr',
-	'transformation.gouv.fr',
+	{
+		name: 'service-public.fr',
+		model_name: 'albert-light'
+	},
+	{
+		name: 'transformation.gouv.fr',
+		model_name: 'fabrique-reference'
+	},
 ]
