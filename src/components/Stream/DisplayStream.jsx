@@ -8,10 +8,15 @@ import { StreamingMessage } from "../Chat/StreamingMessage";
 
 const Stream = ({ response }) => {
 	return <div className="streaming">
-		{response.slice(1).map((item, index) => (
+		{response.map((item, index) => (
 			<span key={index}>{item}</span>
 		))}
 	</div>
+	// return <div className="streaming">
+	// 	{response.slice(1).map((item, index) => (
+	// 		<span key={index}>{item}</span>
+	// 	))}
+	// </div>
 }
 
 export function DisplayStream() {
