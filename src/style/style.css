@@ -249,9 +249,10 @@
 
 	.user-question {
 		@apply flex;
-		@apply w-[792px];
 		@apply pb-6;
 		@apply pt-8;
+		/* @apply w-[792px]; */
+		@apply w-[900px];
 	}
 
 	.user-chat {
@@ -333,7 +334,8 @@
 		@apply flex-col;
 		/* @apply pb-8; */
 		/* @apply h-[450px]; */
-		@apply w-[905px];
+		@apply w-[1000px];
+		/* @apply w-[905px]; */
 		@apply mr-[112px];
 		@apply whitespace-pre-wrap;
 		@apply text-justify;
@@ -371,7 +373,7 @@
 
 	.archive-tabs {
 		@apply table-fixed;
-		@apply w-[792px];
+		@apply w-[1000px];
 		@apply border-collapse;
 	}
 	

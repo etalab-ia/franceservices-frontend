@@ -18,6 +18,8 @@ function			handleEvaluate() {
 async function		handleRedo(auth, user, dispatch) {
 	usePost(auth, user, dispatch);
 
+	console.log('user: ', user);
+
 	return dispatch({ type: 'REDO_AGENT_STREAM' });
 }
 

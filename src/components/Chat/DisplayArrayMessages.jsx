@@ -3,8 +3,6 @@ import { useState } from "react";
 import { UserChatTools } from "../User/UserChatTools";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import previous from "../../../icons/usertools/previous.svg";
-import next from "../../../icons/usertools/next.svg";
 import { StreamingMessage } from "./StreamingMessage";
 import { DisplayMessageTab } from "./DisplayMessageTab";
 
@@ -19,7 +17,7 @@ export function DisplayArrayMessages({ messages, isArchive }) {
 	return (
 		<div className="streaming-container">
 			{isArchive && <UserChatTools type='sheets' />}
-			{!isArchive && <UserChatTools />}
+			{!isArchive && <UserChatTools type='sheets' />}
 			<Avatar user="agent" />
 			<div>
 				<StreamingMessage>{messages[activeTab - 1]}</StreamingMessage>

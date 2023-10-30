@@ -1,18 +1,16 @@
-import { animated } from '@react-spring/web'
 import { sideButtonsProps, sideInformationProps } from '../../constants/sideButtons';
 
 export function SideTabs(props) {
-
 	const	{ state, dispatch } = props;
 
 	const handleClick = (index) => {
-		dispatch({ type: 'SET_ACTIVE_TAB', nextActiveTab: index})
+		dispatch({ type: 'SET_ACTIVE_TAB', nextActiveTab: index});
 	};
 
 	return (
 		<div className="side-tools-container ">
 			{sideButtonsProps.map((buttonProps, index) => (
-				<animated.button
+				<button
 					key={index}
 					className={`side-tools ${index === state.activeTab ? 'bg-purple' : ''}`}
 					onClick={() => handleClick(index)}
@@ -23,13 +21,13 @@ export function SideTabs(props) {
 						alt={buttonProps.alt}
 						title={buttonProps.title}
 					/>
-				</animated.button>
+				</button>
 			))}
-			{/* <animated.div className='side-tools'>
+			{/* <div className='side-tools'>
 				<img src={sideInformationProps.image}
 				alt={sideInformationProps.alt}
 				title={sideInformationProps.title}/>
-			</animated.div> */}
+			</div> */}
 		</div>
 	);
 }

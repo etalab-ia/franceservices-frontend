@@ -1,11 +1,14 @@
-import { animated } from '@react-spring/web'
 import { NOT_SET } from "../../constants/status";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from 'react';
+import { scrollToBottom } from '../../utils/manageEffects';
 
 export function	BotQuestion({ id }) {
 	const	user = useSelector((state) => state.user);
 	const   buttons = ['Oui', 'Non'];
 	const	dispatch = useDispatch();
+	
+	useEffect(() => { scrollToBottom(); }, [user]);
 
 	const	handleClick = async(index) => {
 		if (user.choices[id] === index)
