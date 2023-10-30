@@ -8,7 +8,6 @@ export function NotifyArchiving() {
 	const	archive = useSelector((state) => state.archive);
 	const   history = useSelector((state) => state.history);
 	const   stream = useSelector((state) => state.stream);
-	const   ressources = useSelector((state) => state.ressources);
 	const   user = useSelector((state) => state.user);
 	const	dispatch = useDispatch();
 
@@ -26,7 +25,7 @@ export function NotifyArchiving() {
 			type: 'SET_ARCHIVE',
 			nextDate: new Date().toLocaleDateString('fr'), 
 			nextThemes: selected,
-			nextSource: ressources.choices.length !== 0 ? true : false,
+			nextSource: user.question.model_name,
 			nextMessages: updatedMessage,
 		});
 		dispatch({ type: 'RESET_RESSOURCE'});
