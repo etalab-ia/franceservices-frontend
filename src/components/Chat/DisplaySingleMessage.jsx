@@ -9,7 +9,7 @@ export const	DisplaySingleMessage = ({ sender, text, isArchive }) => {
 		<div className={classNames}>
 			{!isUser && <div className="row-message">
 				{isArchive && <UserChatTools type='sheets' />}
-				{!isArchive && <UserChatTools />}
+				{!isArchive && <UserChatTools type='sheets' />}
 				<Avatar user={sender} />
 			</div>}
 			<div className={`w-[648px] ${isUser ? "mr-4" : "ml-4"}`}>

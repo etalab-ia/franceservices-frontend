@@ -42,6 +42,7 @@ export function UserMessage() {
 		dispatch({ type: 'RESET_FEEDBACK'});
 		getSheets(question, auth, dispatch);
 		dispatch({ type: 'SET_ARCHIVE_TITLE', nextTitle: question.user_text });
+		// TODO: change because redo is impossible
 		dispatch({ type: 'RESET_QUESTION_FIELDS' });
 	  }, [question, ressources.isConfirmed]);
 

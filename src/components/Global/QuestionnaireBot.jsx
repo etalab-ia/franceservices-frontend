@@ -1,8 +1,12 @@
 import { UserChatTools } from "../User/UserChatTools";
 import { Avatar } from "../Chat/Avatar";
 import { BotQuestion } from "./BotQuestion";
+import { useEffect } from "react";
+import { scrollToBottom } from "../../utils/manageEffects";
 
 export function	QuestionnaireBot({ id, question, type }) {
+	
+	useEffect(() => { scrollToBottom(); }, [question]);
 
     return (
 		<div className="col-message">

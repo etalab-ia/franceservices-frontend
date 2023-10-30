@@ -36,7 +36,7 @@ export function NotifyArchiving() {
 	return (
 		<div>
 			{notifyArchiving(`Archive n°${archive.length}`)}
-			<div className="ml-[114px] mt-[36px] border-t-4 border-[#000091] w-[792px]"></div>
+			<div className="ml-[114px] mt-[36px] border-t-4 border-[#000091] w-[1000px]"></div>
 		</div>
 	);
 }

@@ -51,6 +51,7 @@ export const	userReducer = (state = { question: initialQuestion, choices: initia
 				inputVisibility: action.nextVisibility,
 			}
 		case 'RESET_QUESTION_FIELDS':
+			console.log('reset question')
 			return {
 				...state,
 				question: initialQuestion

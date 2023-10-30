@@ -22,24 +22,6 @@ export const	archiveReducer = (state = [], action) => {
 			 	},
 			];
 		}
-		case 'SET_SELECTED_ARCHIVE': {
-			const indexToUpdate = state[action.nextSelectedArchive];
-
-			if (!indexToUpdate) {
-				return state;
-			}
-
-			const updatedItem = {
-				...state[action.nextSelectedArchive],
-				selectedArchive: action.nextSelectedArchive,
-			};
-
-			return [
-				...state.slice(0, action.nextSelectedArchive), 
-				updatedItem,
-				...state.slice(action.nextSelectedArchive + 1),
-			];
-		}
 		case 'SET_ARCHIVE_TITLE': {
 			return [
 				...state,
