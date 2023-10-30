@@ -1,3 +1,4 @@
+import { ressourceButtons } from "../../constants/ressources";
 import { NOT_SET } from "../../constants/status";
 
 export const	archiveReducer = (state = [], action) => {
@@ -6,7 +7,8 @@ export const	archiveReducer = (state = [], action) => {
 			if (state.length === 0)
 				return state;
 	  
-			const lastIndex = state.length - 1;
+			const	lastIndex = state.length - 1;
+			const	source = action.nextSource === ressourceButtons[0].model_name ? ressourceButtons[0].name : ressourceButtons[1].name;
 	  
 			return [
 			  	...state.slice(0, lastIndex),
@@ -14,7 +16,7 @@ export const	archiveReducer = (state = [], action) => {
 					...state[lastIndex],
 					date: action.nextDate,
 					themes: action.nextThemes,
-					source: action.nextSource,
+					source: source,
 					selectedArchive: NOT_SET,
 					messages: state[lastIndex].messages
 					? [...state[lastIndex].messages, action.nextMessages]
