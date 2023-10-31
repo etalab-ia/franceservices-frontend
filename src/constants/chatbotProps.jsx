@@ -15,10 +15,10 @@ function			handleEvaluate() {
 	return alert('evaluate');
 }
 
-async function		handleRedo(auth, user, dispatch) {
-	usePost(auth, user.question, dispatch);
+async function		handleRedo(auth, archive, dispatch) {
+	const	index = archive.length - 1;
 
-	console.log('user: ', user);
+	usePost(auth, archive[index].question, dispatch);
 
 	return dispatch({ type: 'REDO_AGENT_STREAM' });
 }
@@ -46,7 +46,7 @@ export	function	userChatToolsFunc(state, dispatch, type) {
 			image: redo,
 			alt: "Re-générer la réponse",
 			title: "Re-générer la réponse",
-			onClick: () => handleRedo(state.auth, state.user, dispatch),
+			onClick: () => handleRedo(state.auth, state.archive, dispatch),
 		},
 		// {
 		// 	image: bookmark,

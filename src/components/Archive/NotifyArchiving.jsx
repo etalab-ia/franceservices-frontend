@@ -21,8 +21,6 @@ export function NotifyArchiving() {
 		const	agentMessage = { text: stream.historyStream[0], sender: 'agent' }
 		const	updatedMessage = [ userMessage, agentMessage ];
 
-		console.log('q: ', user.question)
-
 		dispatch({ 
 			type: 'SET_ARCHIVE',
 			nextDate: new Date().toLocaleDateString('fr'), 

@@ -19,7 +19,7 @@ export  function DisplayArchiveBody({ setIndex, setArchiveToDisplay }) {
 	return <tbody>
 		{archive.map((item, index) => {
 			const	classNames = index === selected ? 'bg-[#F5F5FE]' : 'bg-white';
-			const	title = item.title.length > 50 ? item.title.slice(0, 50) + '...' : item.title;
+			const	title = item.question.query.length > 50 ? item.question.query.slice(0, 50) + '...' : item.question.query;
 
 			return item.themes && <tr key={index} onClick={() => handleClick(index)} className={classNames}>
 				<td className="archive-body">{title}</td>
