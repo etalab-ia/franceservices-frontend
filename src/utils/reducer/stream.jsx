@@ -10,7 +10,6 @@ export const	streamReducer = (state = initialStream, action) => {
 			}
 		case 'STOP_AGENT_STREAM':
 			const joinedRes = state.response.join('');
-			// const joinedRes = state.response.slice(1).join('');
 
 			return {
 				...state,

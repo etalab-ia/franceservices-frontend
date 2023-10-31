@@ -10,11 +10,11 @@ export function postNewQuestion(dispatch, auth, question) {
 	dispatch({ type: 'RESET_QUESTION_FIELDS' });
 }
 
-export function setNewQuestion(dispatch, newQuestion, agentResponse, choices) {
+export function setNewQuestion(dispatch, newQuestion, agentResponse) {
     dispatch({ type: 'SET_USER_TEXT', nextUserText: newQuestion });
 	agentResponse.length && dispatch({ type: 'SET_MESSAGES', nextMessage: { text: agentResponse, sender: 'agent' } });
     dispatch({ type: 'RESET_STREAM_HISTORY' });
-	dispatch({ type: 'SET_ARCHIVE_CHOICES', nextChoices: choices });
 	dispatch({ type: 'RESET_USER_CHOICES' });
+	dispatch({ type: 'RESET_RESSOURCE'});
 	dispatch({ type: 'SET_MESSAGES', nextMessage: { text: newQuestion, sender: 'user' } });
 }

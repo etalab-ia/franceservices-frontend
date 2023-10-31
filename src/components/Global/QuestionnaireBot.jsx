@@ -4,8 +4,7 @@ import { BotQuestion } from "./BotQuestion";
 import { useEffect } from "react";
 import { scrollToBottom } from "../../utils/manageEffects";
 
-export function	QuestionnaireBot({ id, question, type }) {
-	
+export function	QuestionnaireBot({ id, question, type, choice }) {
 	useEffect(() => { scrollToBottom(); }, [question]);
 
     return (
@@ -17,7 +16,7 @@ export function	QuestionnaireBot({ id, question, type }) {
 					<div className="py-4">{question}</div>
 				</div>
 			</div>
-			<BotQuestion id={id} />
+			<BotQuestion id={id} choice={choice}/>
 		</div>
 	);
 }

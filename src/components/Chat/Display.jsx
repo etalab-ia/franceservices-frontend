@@ -26,8 +26,8 @@ export function Display({ messages, isArchive, archive }) {
 						isArchive={isArchive}
 					/>
 			})}
-			{messages.length !== 0 && (!tabs.activeTab || archive !== NOT_SET) && <Ressources archive={archive}/>}
-			<ChatFollowUp stream={stream} tabs={tabs}/>
+			{((messages.length !== 0 && !tabs.activeTab) || archive !== NOT_SET) && <Ressources archive={archive}/>}
+			<ChatFollowUp stream={stream} tabs={tabs} archive={archive}/>
 		</div>
 	);
 }

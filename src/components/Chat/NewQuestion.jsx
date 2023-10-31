@@ -25,7 +25,7 @@ export function NewQuestion() {
 				<Avatar user='agent' />
 				<p className="flex items-center ml-4">{redoUserQuestion}</p>
 			</div>
-			<BotQuestion id='newQuestion'/>
+			<BotQuestion id='newQuestion' choice={user.choices.newQuestion}/>
 			{user.choices.newQuestion !== NOT_SET && <NotifyArchiving />}
 		</div>
 	);

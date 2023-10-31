@@ -16,7 +16,7 @@ const	AskingResponseQuality = ({ tabsLen }) => {
 	);
 }
 
-export function UserExperience() {
+export function UserExperience({ isArchive }) {
 	const	stream = useSelector((state) => state.stream);
 	const	history = useSelector((state) => state.history);
 	const	tabsLen = stream.historyStream.length;
@@ -29,9 +29,9 @@ export function UserExperience() {
 				<div className="row-message">
 					<UserChatTools type='sheets'/>
 					<Avatar user='agent' />
-					<AskingResponseQuality tabsLen={tabsLen}/>
+					<AskingResponseQuality tabsLen={tabsLen} />
 				</div>
-				<Feedback isFirst={tabsLen === 1}/>
+				<Feedback isFirst={tabsLen === 1} isArchive={isArchive}/>
 			</div>}
 		</div>
 	);
