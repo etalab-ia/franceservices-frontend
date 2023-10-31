@@ -21,12 +21,15 @@ export function NotifyArchiving() {
 		const	agentMessage = { text: stream.historyStream[0], sender: 'agent' }
 		const	updatedMessage = [ userMessage, agentMessage ];
 
+		console.log('q: ', user.question)
+
 		dispatch({ 
 			type: 'SET_ARCHIVE',
 			nextDate: new Date().toLocaleDateString('fr'), 
 			nextThemes: selected,
 			nextSource: user.question.model_name,
 			nextMessages: updatedMessage,
+			// nextUserChoices: user.choices,
 		});
 		dispatch({ type: 'RESET_RESSOURCE'});
 		dispatch({ type: 'SET_USER_CHOICES', nextKey: 'oldQuestion', nextValue: user.choices.newQuestion });

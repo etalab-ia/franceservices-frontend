@@ -16,7 +16,7 @@ function			handleEvaluate() {
 }
 
 async function		handleRedo(auth, user, dispatch) {
-	usePost(auth, user, dispatch);
+	usePost(auth, user.question, dispatch);
 
 	console.log('user: ', user);
 
