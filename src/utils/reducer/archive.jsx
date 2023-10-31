@@ -24,10 +24,12 @@ export const	archiveReducer = (state = [], action) => {
 			 	},
 			];
 		}
-		case 'SET_ARCHIVE_TITLE': {
+		case 'SET_ARCHIVE_QUESTION': {
 			return [
 				...state,
-				{ title: action.nextTitle, }
+				{
+					question: action.nextQuestion,
+				}
 			]
 		}
 	  	default: { return state };

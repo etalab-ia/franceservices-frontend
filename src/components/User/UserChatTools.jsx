@@ -8,6 +8,7 @@ export function UserChatTools({ type }) {
 	const	auth = useSelector((state) => state.auth);
 	const	stream = useSelector((state) => state.stream);
 	const	user = useSelector((state) => state.user);
+	const	archive = useSelector((state) => state.archive);
 	const	dispatch = useDispatch();
 	const	[isSelected, setIsSelected] = useState();
 	const 	extraMargin = type ? "ml-[110px]" : "";
@@ -19,7 +20,7 @@ export function UserChatTools({ type }) {
 
 	return (
 		<div className={`user-chat-tools-container ${extraMargin}`}>
-		  	{userChatToolsFunc({ auth, stream, user }, dispatch, type).map((tool, index) => (
+		  	{userChatToolsFunc({ auth, stream, archive }, dispatch, type).map((tool, index) => (
 				<animated.button 
 					disabled={stream.isStoppable}
 					key={index} className="mr-3"

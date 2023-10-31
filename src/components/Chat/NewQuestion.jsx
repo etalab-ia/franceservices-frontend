@@ -15,7 +15,6 @@ export function NewQuestion() {
 
 	useEffect(() => {
 		const	visibility = user.choices.newQuestion ? 'hidden' : 'visible';
-		dispatch({ type: 'RESET_QUESTION_FIELDS' });
 
 		dispatch({ type: 'SET_INPUT_VISIBILITY', nextVisibility: visibility });
 	}, [user.choices.newQuestion]);
