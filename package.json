@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite && tailwindcss -i ./src/style/style.css -o ./dist/style.css",
+    "dev": "vite && tailwindcss -i ./src/style/style.css -o ./style.css",
     "build": "vite build && tailwindcss -i ./src/style/style.css -o ./dist/style.css",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
