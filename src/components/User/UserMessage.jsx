@@ -38,7 +38,7 @@ export function UserMessage() {
 		if (!question.user_text.length || ressources.isConfirmed === NOT_SET)
 			return ;
 		dispatch({ type: 'SET_INPUT_VISIBILITY', nextVisibility: 'hidden' });
-		usePost(auth, user, dispatch);
+		usePost(auth, user.question, dispatch);
 		dispatch({ type: 'RESET_FEEDBACK'});
 		getSheets(question, auth, dispatch);
 		dispatch({ type: 'SET_ARCHIVE_TITLE', nextTitle: question.user_text });
