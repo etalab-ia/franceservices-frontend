@@ -11,6 +11,8 @@ export function ChatFollowUp({ stream, tabs }) {
 	const	conditionDiv = (stream.response.length !== 0 || stream.historyStream.length !== 0) && tabs.activeTab === 0;
 	const	user = useSelector((state) => state.user);
 
+	console.log('user: ', user);
+	
 	return (
 		<>
 			{conditionDiv && (
