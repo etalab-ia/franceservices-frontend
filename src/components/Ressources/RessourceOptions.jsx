@@ -1,9 +1,10 @@
 import { ressourceButtons } from "../../constants/ressources";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { NOT_SET } from "../../constants/status";
 
-export function	RessourceOptions() {
-	const	[ressource, setRessource] = useState();
+export function	RessourceOptions({ archive }) {
+	const	[ressource, setRessource] = archive !== NOT_SET ? useState(archive.source) : useState();
     const   dispatch = useDispatch();
 
     const	handleClick = (index) => {
@@ -14,14 +15,16 @@ export function	RessourceOptions() {
 	return (
 		<div className="wrap-message">
 			{ressourceButtons.map((button, index) => {
-				const classNames = ressource === button ? "bg-purple" : "bg-[white]";
-				
+				const	isSelected = (archive === NOT_SET && ressource === button || ressource === button.name);
+				const	classNames = isSelected ? "bg-purple" : "bg-[white]";
+
 				return <div key={index}>
 					<button
+						disabled={archive !== NOT_SET}
 						className={`user-feedback-buttons ${classNames}`}
 						onClick={() => handleClick(index)}
 					>
-						<p className={ressource === button ? "text-white" : "text-purple"}>
+						<p className={isSelected ? "text-white" : "text-purple"}>
 							{button.name}
 						</p>
 					</button>

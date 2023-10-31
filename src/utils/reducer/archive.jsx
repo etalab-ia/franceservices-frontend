@@ -8,7 +8,7 @@ export const	archiveReducer = (state = [], action) => {
 				return state;
 	  
 			const	lastIndex = state.length - 1;
-			const	source = action.nextSource === ressourceButtons[0].model_name ? ressourceButtons[0].name : ressourceButtons[1].name;
+			const	source = state[lastIndex].question.model_name === 'albert-light' ? 'service-public.fr' : 'transformation.gouv.fr';
 	  
 			return [
 			  	...state.slice(0, lastIndex),
@@ -25,11 +25,20 @@ export const	archiveReducer = (state = [], action) => {
 			];
 		}
 		case 'SET_ARCHIVE_QUESTION': {
+			const	lastIndex = state.length - 1;
+			
+			return [
+				...state.slice(0, lastIndex),
+				{
+				  ...state[lastIndex],
+				  question: action.nextQuestion
+			   },
+		  ];
+		}
+		case 'SET_ARCHIVE_CHOICES': {
 			return [
 				...state,
-				{
-					question: action.nextQuestion,
-				}
+				{ choices: action.nextChoices }
 			]
 		}
 	  	default: { return state };
