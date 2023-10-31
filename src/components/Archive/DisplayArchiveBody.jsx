@@ -27,7 +27,7 @@ export  function DisplayArchiveBody({ setIndex, setArchiveToDisplay }) {
 					return <div key={index} className="archive-tags">{theme}</div>
 				})}</td>
 				<td className="archive-body">{item.date}</td>
-				<td className="archive-body">{item.source ? item.source : 'Non'}</td>
+				<td className="archive-body">{item.source}</td>
 			</tr>
 		})}
 	</tbody>

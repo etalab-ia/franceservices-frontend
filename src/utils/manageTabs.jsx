@@ -3,6 +3,7 @@ import { Display } from "../components/Chat/Display";
 import { UserMessage } from "../components/User/UserMessage";
 import { DisplayArchiveTabs } from "../components/Archive/DisplayArchiveTab";
 import { useSelector } from "react-redux";
+import { NOT_SET } from "../constants/status";
 
 export function	TabContent({ content }) {
 	return content.components.map((component, index) => 
@@ -16,7 +17,7 @@ export function	initTabs() {
 		{
 			id: "chatbot-tab",
 			className:"chat-container",
-			components: [ <Display messages={history.messages} isArchive={false}/>, <UserMessage /> ]
+			components: [ <Display messages={history.messages} isArchive={false} archive={NOT_SET}/>, <UserMessage /> ]
 		},
 		{
 			id: "history-tab",

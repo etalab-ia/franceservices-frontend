@@ -9,6 +9,14 @@
 		@apply border-solid;
 	}
 
+	.archive-separation {
+		@apply ml-[114px];
+		@apply mt-[36px];
+		@apply border-t-4;
+		@apply border-[#000091];
+		@apply w-[1000px];
+	}
+
 	/* COLORS */
 
 	/* Light purple */

@@ -3,8 +3,9 @@ import { Ressources } from "../Ressources/Ressources";
 import { DisplayArrayMessages } from "./DisplayArrayMessages";
 import { DisplaySingleMessage } from "./DisplaySingleMessage";
 import { ChatFollowUp } from "./ChatFollowUp";
+import { NOT_SET } from '../../constants/status';
 
-export function Display({ messages, isArchive }) {
+export function Display({ messages, isArchive, archive }) {
 	const	stream = useSelector((state) => state.stream);
 	const	tabs = useSelector((state) => state.tabs);
 
@@ -25,7 +26,7 @@ export function Display({ messages, isArchive }) {
 						isArchive={isArchive}
 					/>
 			})}
-			{messages.length !== 0 && !tabs.activeTab && <Ressources />}
+			{messages.length !== 0 && (!tabs.activeTab || archive !== NOT_SET) && <Ressources archive={archive}/>}
 			<ChatFollowUp stream={stream} tabs={tabs}/>
 		</div>
 	);
