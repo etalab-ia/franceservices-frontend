@@ -12,11 +12,6 @@ const Stream = ({ response }) => {
 			<span key={index}>{item}</span>
 		))}
 	</div>
-	// return <div className="streaming">
-	// 	{response.slice(1).map((item, index) => (
-	// 		<span key={index}>{item}</span>
-	// 	))}
-	// </div>
 }
 
 export function DisplayStream() {

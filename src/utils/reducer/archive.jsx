@@ -1,4 +1,3 @@
-import { ressourceButtons } from "../../constants/ressources";
 import { NOT_SET } from "../../constants/status";
 
 export const	archiveReducer = (state = [], action) => {
@@ -14,6 +13,7 @@ export const	archiveReducer = (state = [], action) => {
 			  	...state.slice(0, lastIndex),
 			  	{
 					...state[lastIndex],
+					choices: action.nextChoices,
 					date: action.nextDate,
 					themes: action.nextThemes,
 					source: source,
@@ -25,21 +25,10 @@ export const	archiveReducer = (state = [], action) => {
 			];
 		}
 		case 'SET_ARCHIVE_QUESTION': {
-			const	lastIndex = state.length - 1;
-			
-			return [
-				...state.slice(0, lastIndex),
-				{
-				  ...state[lastIndex],
-				  question: action.nextQuestion
-			   },
-		  ];
-		}
-		case 'SET_ARCHIVE_CHOICES': {
 			return [
 				...state,
-				{ choices: action.nextChoices }
-			]
+				{ question: action.nextQuestion },
+		  ];
 		}
 	  	default: { return state };
 	}

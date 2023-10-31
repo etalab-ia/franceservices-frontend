@@ -105,6 +105,10 @@
 		@apply border-[#3A3A3A];
 	}
 
+	.chat-margin {
+		@apply mb-8;
+	}
+
 	/* GLOBAL */
 
 	.header-container {
@@ -271,7 +275,7 @@
 		@apply rounded-[90px];
 		@apply mt-0;
 		@apply ml-auto;
-		@apply mb-8;
+		@apply chat-margin;
 		@apply text-justify;
 	}
 
@@ -354,7 +358,7 @@
 	}
 	
 	.agent-chat {
-		@apply mb-8;
+		@apply chat-margin;
 		@apply py-4;
 		@apply text-justify;
 	}

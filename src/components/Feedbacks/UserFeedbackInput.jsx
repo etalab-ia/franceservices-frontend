@@ -4,13 +4,13 @@ import { UserFeedbackThanks } from "./UserFeedbackThanks";
 import { UserFeedbackResume } from "./UserFeedbackResume";
 import { useSelector } from "react-redux";
 
-export function	UserFeedbackInput({ activeTab, isFirst }) {
+export function	UserFeedbackInput({ activeTab, isFirst, isArchive }) {
 	const	buttons = isFirst ? primaryButtons : secondaryButtons;
 	const	feedback = useSelector((state) => state.feedback);
 	
 	return (
 		<>
-			{!feedback.isConfirmed ?
+			{!feedback.isConfirmed && !isArchive ?
 				<div>
 					<p className="mt-4">{askingQualityPrecisions(buttons[activeTab].type)}</p>
 					<UserFeedbackOptions activeTab={activeTab} isFirst={isFirst} />

@@ -8,7 +8,6 @@ export const	initialQuestion = {
 	user_text: '',
 	context: '',
 	institution: '',
-	// title: '',
 	links: '',
 	temperature: 10,
 }

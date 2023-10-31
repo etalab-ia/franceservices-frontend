@@ -4,7 +4,6 @@ import { NOT_SET } from "../../constants/status";
 
 export  function DisplayArchiveBody({ setIndex, setArchiveToDisplay }) {
 	const	archive = useSelector((state) => state.archive);
-	const	tabs = useSelector((state) => state.tabs);
 	const	[selected, setSelected] = useState(NOT_SET);
 	
 	const	handleClick = (index) => {

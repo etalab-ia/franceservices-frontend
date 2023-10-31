@@ -21,13 +21,12 @@ export function UserMessage() {
 	}
 
 	const	handleClick = () => {
-		setNewQuestion(dispatch, currQuestion, stream.historyStream, user.choices);
+		setNewQuestion(dispatch, currQuestion, stream.historyStream);
 	}
 
 	useEffect(() => {
 		if (!user.question.query.length || ressources.isConfirmed === NOT_SET)
 			return ;
-		console.log('here user choices: ', user.choices)
 		postNewQuestion(dispatch, auth, user.question);
 	  }, [user.question, ressources.isConfirmed]);
 

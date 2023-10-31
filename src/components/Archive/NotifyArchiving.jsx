@@ -7,7 +7,6 @@ import { setArchive } from "../../utils/archive";
 export function NotifyArchiving() {
 	const	archive = useSelector((state) => state.archive);
 	const   history = useSelector((state) => state.history);
-	const   stream = useSelector((state) => state.stream);
 	const   user = useSelector((state) => state.user);
 	const	lastIndex = archive.length - 1;
 	const	dispatch = useDispatch();
@@ -16,7 +15,7 @@ export function NotifyArchiving() {
 		if (user.choices.oldQuestion === user.choices.newQuestion)
 			return ;
 
-		setArchive(dispatch, history, stream, user.choices.newQuestion);
+		setArchive(dispatch, history, user.choices.newQuestion, user.choices);	
 	}, [user.choices.newQuestion])
 
 	return (

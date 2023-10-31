@@ -7,8 +7,8 @@ import { DisplayStream } from "../Stream/DisplayStream";
 import { NewQuestion } from "./NewQuestion";
 import { useSelector } from "react-redux";
 
-export function ChatFollowUp({ stream, tabs }) {
-	const	conditionDiv = (stream.response.length !== 0 || stream.historyStream.length !== 0) && tabs.activeTab === 0;
+export function ChatFollowUp({ stream, tabs, archive }) {
+	const	conditionDiv = ((stream.response.length !== 0 || stream.historyStream.length !== 0) && tabs.activeTab === 0) || archive != NOT_SET;
 	const	user = useSelector((state) => state.user);
 	
 	return (
@@ -20,8 +20,8 @@ export function ChatFollowUp({ stream, tabs }) {
 						<Avatar user="agent" />
 						<DisplayStream />
 					</div>
-					{!stream.isStreaming && user.choices.ressources !== NOT_SET && <Sheets />}
-					{!stream.isStreaming && user.choices.sheets !== NOT_SET && <UserExperience />}
+					{((!stream.isStreaming && user.choices.ressources !== NOT_SET) || archive !== NOT_SET) && <Sheets archive={archive}/>}
+					{!stream.isStreaming && user.choices.sheets !== NOT_SET && <UserExperience isArchive={archive !== NOT_SET}/>}
 					{!stream.isStreaming && user.choices.feedback !== NOT_SET && <NewQuestion />}
 				</div>
 			)}
