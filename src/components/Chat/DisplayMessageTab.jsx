@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import previous from "../../../icons/usertools/previous.svg";
 import next from "../../../icons/usertools/next.svg";
 

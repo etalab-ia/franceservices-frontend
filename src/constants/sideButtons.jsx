@@ -1,4 +1,4 @@
-import saved from "../../icons/chatbotTabs/saved.svg"
+// import saved from "../../icons/chatbotTabs/saved.svg"
 import history from "../../icons/chatbotTabs/history.svg"
 import conversation from "../../icons/chatbotTabs/conversation.svg"
 import question from "../../icons/chatbotTabs/question.svg"

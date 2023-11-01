@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { userChatToolsFunc } from "../../constants/chatbotProps";
-import { animated } from '@react-spring/web'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
@@ -21,7 +20,7 @@ export function UserChatTools({ type }) {
 	return (
 		<div className={`user-chat-tools-container ${extraMargin}`}>
 		  	{userChatToolsFunc({ auth, stream, archive }, dispatch, type).map((tool, index) => (
-				<animated.button 
+				<button 
 					disabled={stream.isStoppable}
 					key={index} className="mr-3"
 					style={{
@@ -38,7 +37,7 @@ export function UserChatTools({ type }) {
 						alt={tool.alt}
 						title={tool.title}
 					/>
-				</animated.button>
+				</button>
 		  	))}
 		</div>
 	);

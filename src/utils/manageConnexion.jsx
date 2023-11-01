@@ -1,6 +1,33 @@
 import { signoutUrl } from "../constants/api";
 import { useFetch } from "./hooks";
 import { Navigate } from "react-router-dom";
+import { userUrl } from "../constants/api";
+
+export const	storeAuth = (token, username) => {
+	localStorage.setItem('authToken', token);
+	localStorage.setItem('username', username);
+}
+
+export const	setUserInfos = async(token, auth, dispatch) => {
+	const	userInfos = await useFetch(userUrl, 'GET', {
+		headers: { 
+			'Authorization': `Bearer ${token}`
+		},
+		data: null,
+	});
+
+	if (auth.email === null)
+		dispatch({ type: 'SET_EMAIL', nextEmail: userInfos.email });
+	else if (auth.username === null)
+		dispatch({ type: 'SET_USERNAME', nextUsername: userInfos.username })
+}
+
+export const	checkId = (id, dispatch) => {
+	if (id.includes("@"))
+		dispatch({ type: 'SET_USER', nextUsername: null, nextEmail: id })
+	else 
+		dispatch({ type: 'SET_USER', nextUsername: id, nextEmail: null})
+}
 
 const	rmAuth = () => {
 	localStorage.removeItem('authToken');
