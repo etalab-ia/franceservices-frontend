@@ -15,8 +15,27 @@ function			handleEvaluate() {
 	return alert('evaluate');
 }
 
-async function		handleRedo(auth, archive, dispatch) {
+async function		handleRedo(auth, archive, feedback, dispatch) {
 	const	index = archive.length - 1;
+	
+	console.log('feedback redo: ', feedback.reasons);
+
+	/*
+		if reasons.include 'Les éléments sont faux'
+			??
+			ask precisions to redo response?
+		else if 'Manque de sources'
+			model_name: DG, mode: rag, lim: lim += 2;
+		else if 'Trop long'
+			model_name: DG, mode: 'simple', query : 'Résume ceci: ' + query n-1;
+		else if 'Incohérent'
+			model_name: DG, mode: 'rag', lim: lim += 2, query: 'reformule ceci: ' + query n-1;
+		else if 'Fautes de grammaire' -> NO / pure feedback;
+		else if 'Sources inexactes'
+			ask precisions to user (email/phone nb/link?)
+			send POST req -> /suspiciousLink
+		
+	*/
 
 	usePost(auth, archive[index].question, dispatch);
 
@@ -46,7 +65,7 @@ export	function	userChatToolsFunc(state, dispatch, type) {
 			image: redo,
 			alt: "Re-générer la réponse",
 			title: "Re-générer la réponse",
-			onClick: () => handleRedo(state.auth, state.archive, dispatch),
+			onClick: () => handleRedo(state.auth, state.archive, state.feedback, dispatch),
 		},
 		// {
 		// 	image: bookmark,
