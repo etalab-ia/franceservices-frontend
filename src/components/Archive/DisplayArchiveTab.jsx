@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DisplayArchiveBody } from "./DisplayArchiveBody";
 import { DisplayArchiveHead } from "./DisplayArchiveHead";
 import { NOT_SET } from "../../constants/status";

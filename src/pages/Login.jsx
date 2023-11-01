@@ -9,26 +9,21 @@ import { AuthFailed } from "../components/Auth/AuthFailed";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { usenameOrPasswordError } from "../constants/errorMessages";
+import { storeAuth } from "../utils/manageConnexion";
+import { setUserInfos } from "../utils/manageConnexion";
+import { checkId } from "../utils/manageConnexion";
 
 export function	Login() {
-
 	const	auth = useSelector((state) => state.auth);
-	const	dispatch = useDispatch();
 	const	[isDisable, setIsDisable] = useState(true);
 	const	[password, setPassword] = useState('');
 	const	[id, setId] = useState('');
+	const	dispatch = useDispatch();
 
 	useEffect(() => {
-		checkId();
+		checkId(id, dispatch);
 		checkIfCompletedFields();
 	}, [password])
-
-	const	checkId = () => {
-		if (id.includes("@"))
-			dispatch({ type: 'SET_USER', nextUsername: null, nextEmail: id })
-		else 
-			dispatch({ type: 'SET_USER', nextUsername: id, nextEmail: null})
-	}
 
 	const	checkIfCompletedFields = () => {
 		if (password.length && ((auth.username && auth.username.length) || (auth.email && auth.email.length)))
@@ -45,13 +40,8 @@ export function	Login() {
 		if (e.target.name === "password")
 			setPassword(e.target.value);
 
-		checkId();
+		checkId(id, dispatch);
 		checkIfCompletedFields();
-	}
-
-	const	storeAuth = (token, username) => {
-		localStorage.setItem('authToken', token);
-		localStorage.setItem('username', username);
 	}
 
 	const handleClick = async () => {
@@ -75,13 +65,15 @@ export function	Login() {
 
 			dispatch({ type: 'LOGIN', nextUserToken: res.token });
 			storeAuth(res.token, auth.username);
+			setUserInfos(res.token, auth, dispatch);
 		} 
 		catch(error)
 		{
 			console.error('An error occurred: ', error);
-
-			return error;
+			
+			return dispatch({ type: 'AUTH_FAILED' });
 		}
+
 	};
 
 	return (

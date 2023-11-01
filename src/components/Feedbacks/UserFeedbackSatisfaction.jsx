@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { primaryButtons, secondaryButtons } from "../../constants/feedback";
-import { NOT_SET } from "../../constants/status";
 
 export function UserFeedbackSatisfaction({ isFirst, isConfirmed, isArchive }) {
 	const	user = useSelector((state) => state.user);
