@@ -1,5 +1,3 @@
-import { NOT_SET } from "../../constants/status";
-
 export const	archiveReducer = (state = [], action) => {
 	switch (action.type) {
 		case 'SET_ARCHIVE': {
@@ -15,12 +13,9 @@ export const	archiveReducer = (state = [], action) => {
 					...state[lastIndex],
 					choices: action.nextChoices,
 					date: action.nextDate,
-					themes: action.nextThemes,
+					tags:action.nextTags,
 					source: source,
-					selectedArchive: NOT_SET,
-					messages: state[lastIndex].messages
-					? [...state[lastIndex].messages, action.nextMessages]
-					: [action.nextMessages],
+					agentResponse: action.nextAgentResponse,
 			 	},
 			];
 		}

@@ -18,7 +18,7 @@ export function ChatFollowUp({ stream, tabs, archive }) {
 					<div className="streaming-container">
 						<UserChatTools />
 						<Avatar user="agent" />
-						<DisplayStream />
+						<DisplayStream stream={stream} tabs={tabs} archive={archive}/>
 					</div>
 					{((!stream.isStreaming && user.choices.ressources !== NOT_SET) || archive !== NOT_SET) && <Sheets archive={archive}/>}
 					{!stream.isStreaming && user.choices.sheets !== NOT_SET && <UserExperience isArchive={archive !== NOT_SET}/>}
