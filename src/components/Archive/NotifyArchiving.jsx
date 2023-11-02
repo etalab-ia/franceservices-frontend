@@ -6,7 +6,6 @@ import { setArchive } from "../../utils/archive";
 
 export function NotifyArchiving() {
 	const	archive = useSelector((state) => state.archive);
-	const   history = useSelector((state) => state.history);
 	const   user = useSelector((state) => state.user);
 	const   stream = useSelector((state) => state.stream);
 	const	lastIndex = archive.length - 1;

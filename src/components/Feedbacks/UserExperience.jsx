@@ -18,14 +18,13 @@ const	AskingResponseQuality = ({ tabsLen }) => {
 
 export function UserExperience({ isArchive }) {
 	const	stream = useSelector((state) => state.stream);
-	const	history = useSelector((state) => state.history);
 	const	tabsLen = stream.historyStream.length;
 
 	useEffect(() => { scrollToBottom(); }, [stream, history, tabsLen]);
 
 	return (
 		<div className="col-message mt-8">
-			{history.activeTab === tabsLen && <div>
+			{stream.activeTab === tabsLen && <div>
 				<div className="row-message">
 					<UserChatTools type='sheets'/>
 					<Avatar user='agent' />

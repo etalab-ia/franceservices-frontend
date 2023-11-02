@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Display } from "../components/Chat/Display";
 import { UserMessage } from "../components/User/UserMessage";
 import { DisplayArchiveTabs } from "../components/Archive/DisplayArchiveTab";
@@ -11,13 +11,13 @@ export function	TabContent({ content }) {
 }
 
 export function	initTabs() {
-	const	history = useSelector((state) => state.history);
-
+	const	user = useSelector((state) => state.user);
+	
 	const	TabsProps = [
 		{
 			id: "chatbot-tab",
 			className:"chat-container",
-			components: [ <Display messages={history.messages} isArchive={false} archive={NOT_SET}/>, <UserMessage /> ]
+			components: [ <Display messages={user.messages} archive={NOT_SET}/>, <UserMessage /> ]
 		},
 		{
 			id: "history-tab",

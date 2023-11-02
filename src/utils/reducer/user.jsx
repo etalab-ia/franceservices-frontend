@@ -1,6 +1,6 @@
 import { initialQuestion, initialUserChoices } from "./state"
 
-export const	userReducer = (state = { question: initialQuestion, choices: initialUserChoices, sheets: [] }, action) => {
+export const	userReducer = (state = { question: initialQuestion, choices: initialUserChoices, sheets: [], messages: [] }, action) => {
 	switch (action.type) {
 		case 'SET_USER_MODEL_NAME_CHOICE':
 			const	limit = 3;
@@ -52,6 +52,16 @@ export const	userReducer = (state = { question: initialQuestion, choices: initia
 					...state.choices,
 					[action.nextKey]: action.nextValue,
 				}
+			}
+		case 'SET_MESSAGES': 
+			return {
+				...state,
+				messages: [...state.messages, action.nextMessage]
+			}
+		case 'RESET_MESSAGES': 
+			return {
+				...state,
+				messages: [],
 			}
 	  	default: { return state };
 	}
