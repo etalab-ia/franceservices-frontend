@@ -5,7 +5,7 @@ import { DisplaySingleMessage } from "./DisplaySingleMessage";
 import { ChatFollowUp } from "./ChatFollowUp";
 import { NOT_SET } from '../../constants/status';
 
-export function Display({ messages, isArchive, archive }) {
+export function Display({ messages, archive }) {
 	const	stream = useSelector((state) => state.stream);
 	const	tabs = useSelector((state) => state.tabs);
 
@@ -16,14 +16,14 @@ export function Display({ messages, isArchive, archive }) {
 					<DisplayArrayMessages
 						key={index}
 						messages={message.text}
-						isArchive={isArchive}
+						isArchive={archive !== NOT_SET}
 					/>
 					:
 					<DisplaySingleMessage
 						key={index}
 						sender={message.sender}
 						text={message.text}
-						isArchive={isArchive}
+						isArchive={archive !== NOT_SET}
 					/>
 			})}
 			{((messages.length !== 0 && !tabs.activeTab) || archive !== NOT_SET) && <Ressources archive={archive}/>}

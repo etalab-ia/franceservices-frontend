@@ -33,4 +33,5 @@ export const	initialStream = {
 	historyStream: [],
 	isStoppable: true,
 	isStreaming: false,
+	activeTab: 1
 }

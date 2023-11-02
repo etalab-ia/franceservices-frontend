@@ -18,7 +18,7 @@ function			handleEvaluate() {
 async function		handleRedo(auth, archive, feedback, dispatch) {
 	const	index = archive.length - 1;
 	
-	// console.log('feedback redo: ', feedback.reasons);
+	console.log('feedback redo: ', feedback.reasons);
 
 	/*
 		if reasons.include 'Les éléments sont faux'
