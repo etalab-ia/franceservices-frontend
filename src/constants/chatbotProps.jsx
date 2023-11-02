@@ -18,7 +18,7 @@ function			handleEvaluate() {
 async function		handleRedo(auth, archive, feedback, dispatch) {
 	const	index = archive.length - 1;
 	
-	console.log('feedback redo: ', feedback.reasons);
+	// console.log('feedback redo: ', feedback.reasons);
 
 	/*
 		if reasons.include 'Les éléments sont faux'
@@ -34,7 +34,6 @@ async function		handleRedo(auth, archive, feedback, dispatch) {
 		else if 'Sources inexactes'
 			ask precisions to user (email/phone nb/link?)
 			send POST req -> /suspiciousLink
-		
 	*/
 
 	usePost(auth, archive[index].question, dispatch);
