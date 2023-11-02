@@ -8,10 +8,9 @@ import { Button } from "@codegouvfr/react-dsfr/Button";
 import { summaryButton } from "../../constants/archive";
 
 export function DisplayArchiveTabs() {
-	const	[index, setIndex] = useState(NOT_SET);
 	const	[archiveToDisplay, setArchiveToDisplay] = useState(NOT_SET);
 	const	archive = useSelector((state) => state.archive);
-	const	selectedMessages = archiveToDisplay !== NOT_SET ? archive[archiveToDisplay].messages : [];
+	const	selectedMessages = archiveToDisplay !== NOT_SET ? [{ text: archive[archiveToDisplay].question.query, sender: 'user'}] : [];
 
 	const	handleClick = () => {
 		setArchiveToDisplay(NOT_SET);
@@ -22,11 +21,11 @@ export function DisplayArchiveTabs() {
 			{archiveToDisplay === NOT_SET ?
 				<table className="archive-tabs">
 					<DisplayArchiveHead />
-					<DisplayArchiveBody setIndex={setIndex} setArchiveToDisplay={setArchiveToDisplay} />
+					<DisplayArchiveBody setArchiveToDisplay={setArchiveToDisplay} />
 				</table>
 				:
 				<div>
-					<Display messages={selectedMessages[index]} isArchive={true} archive={archive[archiveToDisplay]}/>
+					<Display messages={selectedMessages} isArchive={true} archive={archive[archiveToDisplay]}/>
 					<Button className="ml-[170px] my-6" onClick={handleClick} priority="tertiary">
 						{summaryButton}
 					</Button>
