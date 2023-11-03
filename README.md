@@ -14,11 +14,35 @@
 
 [Tailwind](https://tailwindcss.com/) 👉 efficient, fast | [Installation](https://tailwindcss.com/docs/installation)
 
+## Launch project
+
+Scripts are available in `package.json`
+
+Install dependencies:<br/><br/>
+`npm i`
+
+### Dev mode
+
+Create tailwind file:<br/><br/>
+`npx tailwind -i src/style/styles.css -o style.css`
+
+Launch dev mode:<br/><br/>
+`npm run dev`
+
+### Production
+
+`npm run build && npm run preview`
+
 ## 🎯 General objective
 
 Develop a conversational agent interface to provide users with legal and administrative information.
 
 ### Architecture
+
+The project is composed as follows:<br/><br/>
+- [x] At the root: `index.html` launches `src/main.jsx`.<br/>
+- [x] In src/ several folders: components, pages, constants, utilities, style.
+- [x] Each component itself belongs to a folder according to its utility (for authentication, for chat, for archives...).
 
 ### State management
 
@@ -31,7 +55,6 @@ States:
 - [x] ``archive``: store previous conversations
 - [x] ``auth``: user information & user token
 - [x] ``feedback``: information on the quality of the response submitted to the user and returned to the model in order to adapt response re-generation
-- [x] ``history``: previous generated messages
 - [x] ``institutions``
 - [x] ``ressources``: user-selected additional links
 - [x] ``stream``: robot-generated stream management
