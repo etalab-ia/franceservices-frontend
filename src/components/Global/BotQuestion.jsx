@@ -1,15 +1,12 @@
 import { NOT_SET } from "../../constants/status";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from 'react';
-import { scrollToBottom } from '../../utils/manageEffects';
+import { useState } from 'react';
 
 export function	BotQuestion({ id, choice }) {
 	const	user = useSelector((state) => state.user);
 	const   buttons = ['Oui', 'Non'];
 	const	[buttonChoice, setButtonChoice] = choice === NOT_SET ? useState(NOT_SET) : useState(choice);
 	const	dispatch = useDispatch();
-	
-	useEffect(() => { scrollToBottom(); }, [user]);
 
 	const	handleClick = async(index) => {
 		if (user.choices[id] === index)

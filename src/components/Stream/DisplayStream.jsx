@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { scrollToBottom } from "../../utils/manageEffects";
-import { useSelector } from 'react-redux';
 import { NOT_SET } from "../../constants/status";
 import { useDispatch } from 'react-redux';
 import { DisplayMessageTab } from "../Chat/DisplayMessageTab";
@@ -23,7 +21,6 @@ export function DisplayStream({ stream, tabs, archive }) {
 
 	useEffect(() => setActiveTab(tabsLen), [tabsLen])
 	useEffect(() => { dispatch({ type: 'SWITCH_TAB', nextTab: activeTab }) }, []);
-	useEffect(() => { scrollToBottom(); }, [stream.response]);
 
 	return (
 		<div>

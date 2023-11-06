@@ -3,8 +3,6 @@ import { UserChatTools } from "../User/UserChatTools";
 import { Feedback } from "./Feedback";
 import { askingQuality, redoAskingQuality } from "../../constants/feedback";
 import { useSelector } from 'react-redux';
-import { useEffect } from "react";
-import { scrollToBottom } from "../../utils/manageEffects";
 
 const	AskingResponseQuality = ({ tabsLen }) => {
 	return (
@@ -19,8 +17,6 @@ const	AskingResponseQuality = ({ tabsLen }) => {
 export function UserExperience({ isArchive }) {
 	const	stream = useSelector((state) => state.stream);
 	const	tabsLen = stream.historyStream.length;
-
-	useEffect(() => { scrollToBottom(); }, [stream, history, tabsLen]);
 
 	return (
 		<div className="col-message mt-8">
