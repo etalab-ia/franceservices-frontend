@@ -1,9 +1,7 @@
 import { useEffect } from "react";
 
 export const	scrollToBottom = () => {
-	const	chatElement = document.getElementById("chat");
-
-	chatElement.scrollTop = chatElement.scrollHeight;
+	window.scrollTo(0, document.body.scrollHeight);
 }
 
 export const useKeyPress = (callback) => {

@@ -5,13 +5,10 @@ import { Avatar } from "./Avatar";
 import { NOT_SET } from "../../constants/status";
 import { NotifyArchiving } from "../Archive/NotifyArchiving";
 import { useDispatch, useSelector } from "react-redux";
-import { scrollToBottom } from "../../utils/manageEffects";
 
 export function NewQuestion() {
 	const	user = useSelector((state) => state.user);
 	const	dispatch = useDispatch();
-	
-	useEffect(() => { scrollToBottom(); }, [user]);
 
 	useEffect(() => {
 		const	visibility = user.choices.newQuestion ? 'hidden' : 'visible';

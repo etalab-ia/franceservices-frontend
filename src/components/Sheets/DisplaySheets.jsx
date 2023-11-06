@@ -3,13 +3,9 @@ import { TagSheets } from './TagSheets';
 import arrowRight from "../../../icons/sheets/arrowRight.svg";
 import { getSheetId } from '../../utils/setData';
 import { OpenUrlInNewTab } from '../../utils/manageEffects';
-import { scrollToBottom } from '../../utils/manageEffects';
-import { useEffect } from 'react';
 
 export function	DisplaySheets() {
 	const	sheets = useSelector((state) => state.user.sheets);
-
-	useEffect(() => { scrollToBottom(); }, [sheets]);
 
 	return (
 		<div>

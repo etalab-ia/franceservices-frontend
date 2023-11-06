@@ -5,7 +5,7 @@ import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
 export function Banner() {
 
 	return (
-		<div className='banner-bot'>
+		<div className='banner-bot' id='banner'>
 			<div>
 				<h1 className='main-title'>{chatbotProps.mainTitle}</h1>
 				<Breadcrumb className='breadcrumb-container'

@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NOT_SET } from "../../constants/status";
 
-export  function DisplayArchiveBody({ setArchiveToDisplay }) {
+export  function DisplayArchiveBody() {
 	const	archive = useSelector((state) => state.archive);
 	const	[selected, setSelected] = useState(NOT_SET);
+	const	dispatch = useDispatch();
+
+	console.log('archive are: ', archive)
 	
 	const	handleClick = (index) => {
 		if (index === selected)
-			setArchiveToDisplay(index);
+			dispatch({ type: 'SET_ARCHIVE_TAB', nextArchiveTab: index });
 		setSelected(index);
 	}
 

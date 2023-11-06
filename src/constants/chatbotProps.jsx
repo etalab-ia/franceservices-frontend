@@ -37,6 +37,7 @@ async function		handleRedo(auth, archive, feedback, dispatch) {
 	*/
 
 	usePost(auth, archive[index].question, dispatch);
+	dispatch({ type: 'RESET_FEEDBACK' });
 
 	return dispatch({ type: 'REDO_AGENT_STREAM' });
 }

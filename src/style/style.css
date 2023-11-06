@@ -115,14 +115,15 @@
 		@apply sticky;
 		@apply top-0;
 		@apply w-full;
-		@apply z-10;
+		/* @apply z-10; */
 	}
 
 	.wrapper-container {
 		@apply flex;
 		@apply w-screen;
 		@apply flex-row;
-		@apply h-[588px]
+		/* @apply bottom-0;
+		@apply fixed; */
 	}
 
 	.row-message {
@@ -227,7 +228,7 @@
 		@apply flex-col;
 		@apply w-screen;
 		@apply items-center;
-		@apply pt-10;
+		/* @apply pt-10; */
 	}
 
 	/* USER */
@@ -244,9 +245,11 @@
 		@apply flex-col;
 		@apply items-center;
 		@apply w-[69px];
-		@apply ml-20;
+		@apply ml-6;
 		@apply justify-center;
 		@apply bg-light-purple;
+		@apply rounded;
+		@apply mt-[134px];
 	}
 
 	.side-tools {
@@ -261,8 +264,10 @@
 
 	.user-question {
 		@apply flex;
-		@apply pb-6;
-		@apply pt-8;
+		@apply bottom-0;
+		@apply mb-6;
+		@apply mt-8;
+		@apply bg-yellow-200;
 		/* @apply w-[792px]; */
 		@apply w-[900px];
 	}
@@ -344,7 +349,7 @@
 	.chat {
 		@apply flex;
 		@apply flex-col;
-		/* @apply pb-8; */
+		@apply pt-8;
 		/* @apply h-[450px]; */
 		@apply w-[1000px];
 		/* @apply w-[905px]; */
@@ -353,7 +358,7 @@
 		@apply text-justify;
 		@apply overflow-y-auto;
 		@apply overflow-x-hidden;
-		@apply min-h-[550px];
+		/* @apply min-h-[450px]; */
 		/* @apply bg-red-200; */
 	}
 	
