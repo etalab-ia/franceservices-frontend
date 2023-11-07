@@ -20,7 +20,7 @@ export function UserChatTools({ type }) {
 
 	return (
 		<div className={`user-chat-tools-container ${extraMargin}`}>
-		  	{userChatToolsFunc({ auth, stream, archive, feedback }, dispatch, type).map((tool, index) => (
+		  	{userChatToolsFunc({ auth, stream, archive, feedback, user }, dispatch, type).map((tool, index) => (
 				<button 
 					disabled={stream.isStoppable}
 					key={index} className="mr-3"

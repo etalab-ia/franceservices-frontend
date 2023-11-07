@@ -80,7 +80,6 @@ export const	useStream = async(auth, dispatch, id) => {
 }
 
 export async function	usePost(auth, question, dispatch) {
-	console.log('post')
 	const	headers = setHeaders(auth.userToken, false);
 	const	data = setUserQuestion(question);
 	const	res = await useFetch(apiUrl, 'POST', {data: JSON.stringify(data), headers});

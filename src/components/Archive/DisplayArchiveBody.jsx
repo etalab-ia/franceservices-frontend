@@ -6,8 +6,6 @@ export  function DisplayArchiveBody() {
 	const	archive = useSelector((state) => state.archive);
 	const	[selected, setSelected] = useState(NOT_SET);
 	const	dispatch = useDispatch();
-
-	console.log('archive are: ', archive)
 	
 	const	handleClick = (index) => {
 		if (index === selected)
