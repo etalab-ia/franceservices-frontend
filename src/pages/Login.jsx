@@ -9,6 +9,7 @@ import { AuthFailed } from "../components/Auth/AuthFailed";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { usenameOrPasswordError } from "../constants/errorMessages";
+import { setUserInfos } from "../utils/manageConnexion";
 
 export function	Login() {
 
@@ -74,6 +75,7 @@ export function	Login() {
 				return dispatch({ type: 'AUTH_FAILED' });
 
 			dispatch({ type: 'LOGIN', nextUserToken: res.token });
+			setUserInfos(res.token, auth, dispatch);
 			storeAuth(res.token, auth.username);
 		} 
 		catch(error)
