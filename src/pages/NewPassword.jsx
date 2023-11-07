@@ -31,6 +31,7 @@ export function NewPassword() {
 	}
 
 	const	handleClick = async() => {
+		// TODO: add token from url
 		const	data = {
 			token: "",
 			password: password

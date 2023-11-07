@@ -18,11 +18,6 @@ export function DisplayArchiveTabs() {
 		dispatch({ type: 'RESET_ARCHIVE_TAB' });
 	}
 
-	// useEffect(() => {
-	// 	dispatch({ type: 'RESET_ARCHIVE_TAB' });
-	// 	console.log('click')
-	// }, [tabs.activeTab])
-
 	return (
 		<>
 			{tabs.archiveTab === NOT_SET ?

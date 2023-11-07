@@ -5,6 +5,7 @@ import copy from "../../icons/usertools/copy.svg"
 import history from "../../icons/chatbotTabs/history.svg"
 import { usePost } from "../utils/hooks";
 import archive from "../../icons/archives/archive.svg";
+import { useEffect } from "react"
 
 export const		chatbotProps = {
 	mainTitle: "Chatbot administratif",
@@ -15,28 +16,35 @@ function			handleEvaluate() {
 	return alert('evaluate');
 }
 
-async function		handleRedo(auth, archive, feedback, dispatch) {
+async function		handleRedo(state, dispatch) {
+	// USER
+
+	const	{ auth, archive, feedback, user } = state;
 	const	index = archive.length - 1;
+	let		newText = archive[index].question.query;
+	let		newLimit = 0;
+	let		newMode = 'simple';
 	
-	console.log('feedback redo: ', feedback.reasons);
+	if (feedback.reasons.includes('Trop long'))
+	{
+		newText = 'Résume ce texte : ' + archive[index].agentResponse;
+	}
+	else if (feedback.reasons.includes('Incohérent'))
+	{
+		newText = 'Reformule ce texte : ' + archive[index].agentResponse;
+	}
+	else if (feedback.reasons.includes('Manque de sources'))
+	{
+		newLimit = user.question.limit === 0 ? 3 : archive[index].question.limit + 2;
+		newMode = 'rag';
+	}
+	// else if (feedback.reasons.includes('Les éléments sont faux'))
+	// {
+	// 		TODO: proposer to user to underline errors ?
+	// }
 
-	/*
-		if reasons.include 'Les éléments sont faux'
-			??
-			ask precisions to redo response?
-		else if 'Manque de sources'
-			model_name: DG, mode: rag, lim: lim += 2;
-		else if 'Trop long'
-			model_name: DG, mode: 'simple', query : 'Résume ceci: ' + query n-1;
-		else if 'Incohérent'
-			model_name: DG, mode: 'rag', lim: lim += 2, query: 'reformule ceci: ' + query n-1;
-		else if 'Fautes de grammaire' -> NO / pure feedback;
-		else if 'Sources inexactes'
-			ask precisions to user (email/phone nb/link?)
-			send POST req -> /suspiciousLink
-	*/
-
-	usePost(auth, archive[index].question, dispatch);
+	dispatch({ type: 'SET_USER_MODEL_NAME_CHOICE', nextModelName: 'albert-light', nextMode: newMode, nextLimit: newLimit });
+	dispatch({ type: 'SET_USER_TEXT', nextUserText: newText });
 	dispatch({ type: 'RESET_FEEDBACK' });
 
 	return dispatch({ type: 'REDO_AGENT_STREAM' });
@@ -65,7 +73,7 @@ export	function	userChatToolsFunc(state, dispatch, type) {
 			image: redo,
 			alt: "Re-générer la réponse",
 			title: "Re-générer la réponse",
-			onClick: () => handleRedo(state.auth, state.archive, state.feedback, dispatch),
+			onClick: () => handleRedo(state, dispatch),
 		},
 		// {
 		// 	image: bookmark,

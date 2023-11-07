@@ -8,7 +8,10 @@ export function	RessourceOptions({ archive }) {
     const   dispatch = useDispatch();
 
     const	handleClick = (index) => {
-		dispatch({ type: 'SET_USER_MODEL_NAME_CHOICE', nextModelName: ressourceButtons[index].model_name });
+		const	mode = ressourceButtons[index].model_name === 'albert-light' ? 'rag' : 'simple';
+		const	limit = mode === 'rag' ? 3 : 0;
+		
+		dispatch({ type: 'SET_USER_MODEL_NAME_CHOICE', nextModelName: ressourceButtons[index].model_name, nextMode: mode, nextLimit: limit });
 		setRessource(ressourceButtons[index]);
 	}
 

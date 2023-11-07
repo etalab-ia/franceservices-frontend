@@ -32,7 +32,7 @@ export function UserMessage() {
 
 	return (
 		<SearchBar
-			className={`user-question ${user.inputVisibility} bg-green-200`}
+			className={`user-question ${user.inputVisibility}`}
 			label="Poser votre question"
 			onButtonClick={handleClick}
 			onChange={handleChange}

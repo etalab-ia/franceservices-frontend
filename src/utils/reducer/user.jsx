@@ -3,16 +3,13 @@ import { initialQuestion, initialUserChoices } from "./state"
 export const	userReducer = (state = { question: initialQuestion, choices: initialUserChoices, sheets: [], messages: [] }, action) => {
 	switch (action.type) {
 		case 'SET_USER_MODEL_NAME_CHOICE':
-			const	limit = 3;
-			const	rag = action.nextModelName === 'albert-light' ? 'rag' : 'simple';
-
 			return {
 				...state,
 				question: {
 					...state.question,
 					model_name: action.nextModelName,
-					limit: limit,
-					mode: rag,
+					limit: action.nextLimit,
+					mode: action.nextMode,
 				}
 			}
 		case 'SET_USER_TEXT':
