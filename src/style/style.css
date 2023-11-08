@@ -173,7 +173,6 @@
 
 	.main-title {
 		@apply w-[384px];
-		@apply py-6;
 		@apply text-2xl;
 		@apply font-bold;
 	}
