@@ -135,6 +135,11 @@
 		@apply flex;
 		@apply flex-col;
 	}
+	
+	.wrap-message {
+		@apply flex;
+		@apply flex-wrap;
+	}
 
 	.avatar {
 		@apply bg-light-purple;
@@ -268,7 +273,6 @@
 		@apply mb-6;
 		@apply mt-8;
 		@apply bg-yellow-200;
-		/* @apply w-[792px]; */
 		@apply w-[900px];
 	}
 
@@ -277,7 +281,7 @@
 		@apply flex;
 		@apply w-fit;
 		@apply p-4;
-		@apply rounded-[90px];
+		@apply rounded-[30px];
 		@apply mt-0;
 		@apply ml-auto;
 		@apply chat-margin;
@@ -290,11 +294,6 @@
 		@apply flex-col;
 		@apply w-[648px];
 		@apply pb-4;
-	}
-	
-	.wrap-message {
-		@apply flex;
-		@apply flex-wrap;
 	}
 
 	.user-feedback-buttons {

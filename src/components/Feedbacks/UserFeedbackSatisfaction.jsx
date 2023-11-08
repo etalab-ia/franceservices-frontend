@@ -17,7 +17,7 @@ export function UserFeedbackSatisfaction({ isFirst, isConfirmed, isArchive }) {
 							className={`user-feedback-buttons border-solid ${index === user.choices.feedback ? 'bg-purple' : 'bg-white'}`}
 							disabled={isConfirmed || isArchive}
 					>
-						<img className="mr-2" style={{ filter: index === user.choices.feedback ? "brightness(0) invert(1)" : "none" }} src={button.img}/>
+						<img className={index === user.choices.feedback ? "mr-2 brightness-0 invert-[1]" : "mr-2"} src={button.img}/>
 						<p className={`${index === user.choices.feedback ? 'text-white' : 'text-purple'}`}>{button.name}</p>
 					</button>
 			})}
