@@ -21,7 +21,7 @@ export const	setSheetsData = (user_text) => {
 	const data = JSON.stringify({
 		name: 'sheets',
 		query: user_text,
-		limit: 4,
+		limit: 5,
 		similarity: "e5",
 		institution: ''
 	});
