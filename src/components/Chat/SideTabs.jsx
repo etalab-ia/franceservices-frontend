@@ -14,8 +14,8 @@ export function SideTabs({ state, dispatch }) {
 						className={`side-tools ${index === state.activeTab ? 'bg-purple' : ''}`}
 						onClick={() => handleClick(index)}
 					>
-						<img 
-							style={{filter: index === state.activeTab ? "brightness(0) invert(1)" : "none"}} 
+						<img
+							className={index === state.activeTab ? "brightness-0 invert-[1]" : ""}
 							src={buttonProps.image}
 							alt={buttonProps.alt}
 							title={buttonProps.title}

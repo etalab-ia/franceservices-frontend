@@ -23,11 +23,7 @@ export function UserChatTools({ type }) {
 		  	{userChatToolsFunc({ stream, archive, feedback, user }, dispatch, type).map((tool, index) => (
 				<button 
 					disabled={stream.isStoppable}
-					key={index} className="mr-3"
-					style={{
-						opacity: index === isSelected ? 0 : 1,
-						boxShadow: index === isSelected ? '0 0 10px 3px rgba(0, 0, 0, 0.5)' : 'none',
-					}}
+					key={index} className={index === isSelected ? "mr-3 opacity-0" : "mr-3 opacity-[1]"}
 					onClick={() => { 
 						handleClick(index); 
 						tool.onClick({ auth, stream, user }, dispatch); 

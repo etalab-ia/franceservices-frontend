@@ -97,8 +97,7 @@ export function	Login() {
 					nativeInputProps={{...field.nativeInputProps, onChange: handleChange}}
 				/>
 			})}
-			<ButtonsGroup className="container"
-				style={{width: 500}}
+			<ButtonsGroup className="container w-[500px]"
 				buttons={initButtonsLogin(handleClick, isDisable)}
 			/>
 		</div>

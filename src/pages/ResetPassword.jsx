@@ -42,7 +42,7 @@ export function ResetPassword() {
 					onChange: handleChange,
 				}}
 			/>
-			<ButtonsGroup style={{width: 500}}
+			<ButtonsGroup className="w-[500px]"
 				buttons={initButtonsReset(isDisable, handleClick)}
 			/>
 		</div>
