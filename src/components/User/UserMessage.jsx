@@ -31,11 +31,17 @@ export function UserMessage() {
 	  }, [user.question, ressources.isConfirmed]);
 
 	return (
-		<SearchBar
-			className={`user-question ${user.inputVisibility}`}
-			label="Poser votre question"
-			onButtonClick={handleClick}
-			onChange={handleChange}
-		/>
+		<>
+			{user.inputVisibility === 'hidden' ?
+				<></>
+				:
+				<SearchBar
+					className='user-question'
+					label="Poser votre question"
+					onButtonClick={handleClick}
+					onChange={handleChange}
+				/>
+			}
+		</>
 	);
 }
