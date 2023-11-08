@@ -16,6 +16,8 @@ export function NewPassword() {
 	const	dispatch = useDispatch();
 	const	[password, setPassword] = useState('');
 	const	[confPassword, setConfPassword] = useState('');
+	const	urlParams = new URL(window.location.href);
+  	const	token = urlParams.searchParams.get('token');
 
 	const	handleChange = (e) => {
 		e.preventDefault();
@@ -31,9 +33,8 @@ export function NewPassword() {
 	}
 
 	const	handleClick = async() => {
-		// TODO: add token from url
 		const	data = {
-			token: "",
+			token: token,
 			password: password
 		}
 
