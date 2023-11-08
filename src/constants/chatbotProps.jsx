@@ -17,25 +17,24 @@ function			handleEvaluate() {
 }
 
 async function		handleRedo(state, dispatch) {
-	// USER
-
-	const	{ auth, archive, feedback, user } = state;
-	const	index = archive.length - 1;
-	let		newText = archive[index].question.query;
-	let		newLimit = 0;
+	const	{ stream, archive, feedback, user } = state;
+	const	archiveIndex = archive.length - 1;
+	const	streamIndex = stream.historyStream.length - 1;
+	let		newLimit = stream.historyStream.length ? user.question.limit : archive[index].question.limit;
+	let		newText = stream.historyStream.length ? stream.historyStream[streamIndex] : archive[archiveIndex].agentResponse;
 	let		newMode = 'simple';
 	
 	if (feedback.reasons.includes('Trop long'))
 	{
-		newText = 'Résume ce texte : ' + archive[index].agentResponse;
+		newText = 'Résume ce texte : ' + newText;
 	}
 	else if (feedback.reasons.includes('Incohérent'))
 	{
-		newText = 'Reformule ce texte : ' + archive[index].agentResponse;
+		newText = 'Reformule ce texte : ' + newText;
 	}
 	else if (feedback.reasons.includes('Manque de sources'))
 	{
-		newLimit = user.question.limit === 0 ? 3 : archive[index].question.limit + 2;
+		newLimit = newLimit === 0 ? 4 : newLimit + 2;
 		newMode = 'rag';
 	}
 	// else if (feedback.reasons.includes('Les éléments sont faux'))
