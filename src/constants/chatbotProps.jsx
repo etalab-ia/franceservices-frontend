@@ -34,7 +34,7 @@ async function		handleRedo(state, dispatch) {
 	}
 	else if (feedback.reasons.includes('Manque de sources'))
 	{
-		newLimit = newLimit === 0 ? 4 : newLimit + 2;
+		newLimit = newLimit === 0 ? 5 : newLimit + 2;
 		newMode = 'rag';
 	}
 	// else if (feedback.reasons.includes('Les éléments sont faux'))
