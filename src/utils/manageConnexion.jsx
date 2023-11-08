@@ -16,10 +16,8 @@ export const	setUserInfos = async(token, auth, dispatch) => {
 		data: null,
 	});
 
-	if (auth.email === null)
-		dispatch({ type: 'SET_EMAIL', nextEmail: userInfos.email });
-	else if (auth.username === null)
-		dispatch({ type: 'SET_USERNAME', nextUsername: userInfos.username })
+	dispatch({ type: 'SET_USER', nextEmail: userInfos.email, nextUsername: userInfos.username });
+	storeAuth(token, userInfos.username);
 }
 
 export const	checkId = (id, dispatch) => {
