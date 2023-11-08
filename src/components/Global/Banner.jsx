@@ -13,7 +13,7 @@ export function Banner() {
 					homeLinkProps={{ to: '/' }}
 					segments={[{
 							label: 'Trouver des informations',
-							linkProps: {}
+							linkProps: {},
 					},]}
 				/>
 			</div>
