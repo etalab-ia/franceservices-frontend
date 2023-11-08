@@ -55,11 +55,6 @@ export const	userReducer = (state = { question: initialQuestion, choices: initia
 				...state,
 				messages: [...state.messages, action.nextMessage]
 			}
-		case 'RESET_MESSAGES': 
-			return {
-				...state,
-				messages: [],
-			}
 	  	default: { return state };
 	}
 }
