@@ -101,5 +101,5 @@ export	function	userChatToolsFunc(state, dispatch, type) {
 
 export const	redoUserQuestion = `Voulez-vous poser une nouvelle question ?`;
 export const	notifyArchiving = (title) => (
-	<p className="row-message ml-[114px] flex justify-center text-[#929292]">Cette conversation a été archivée <img src={archive} alt="Logo associé à l'archivage"/> comme {title}</p>
+	<p className="row-message justify-center text-[#929292] text-center bg-red-200">Cette conversation a été archivée <img src={archive} alt="Logo associé à l'archivage"/> comme {title}</p>
 );
