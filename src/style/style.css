@@ -175,12 +175,14 @@
 		@apply w-[384px];
 		@apply text-2xl;
 		@apply font-bold;
+		@apply pt-9;
 	}
 
 	.subtitle {
 		@apply w-[384px];
 		@apply text-sm;
 		@apply text-justify;
+		@apply pt-6;
 	}
 
 	/* SHEETS */
