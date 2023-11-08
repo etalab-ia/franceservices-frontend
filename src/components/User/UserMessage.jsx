@@ -17,7 +17,7 @@ export function UserMessage() {
 	const	handleChange = (e) => {
 		e.preventDefault();
 
-		setCurrQuestion(e.target.value)
+		setCurrQuestion(e.target.value);
 	}
 
 	const	handleClick = () => {
