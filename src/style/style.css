@@ -383,6 +383,7 @@
 		@apply text-grey;
 		@apply text-sm;
 		@apply font-medium;
+		@apply m-0;
 	}
 
 	/* ARCHIVE PAGE */
