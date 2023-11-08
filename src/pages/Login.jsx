@@ -50,11 +50,6 @@ export function	Login() {
 		checkIfCompletedFields();
 	}
 
-	const	storeAuth = (token, username) => {
-		localStorage.setItem('authToken', token);
-		localStorage.setItem('username', username);
-	}
-
 	const handleClick = async () => {
 		const data = {
 		  username: auth.username,
@@ -76,7 +71,6 @@ export function	Login() {
 
 			dispatch({ type: 'LOGIN', nextUserToken: res.token });
 			setUserInfos(res.token, auth, dispatch);
-			storeAuth(res.token, auth.username);
 		} 
 		catch(error)
 		{
