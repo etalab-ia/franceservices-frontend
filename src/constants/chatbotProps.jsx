@@ -35,8 +35,11 @@ async function		handleRedo(state, dispatch) {
 	else if (feedback.reasons.includes('Manque de sources'))
 	{
 		newLimit = newLimit === 0 ? 5 : newLimit + 2;
+		newText = archive[archiveIndex].question.query;
 		newMode = 'rag';
 	}
+	else
+		newText = archive[archiveIndex].question.query;
 	// else if (feedback.reasons.includes('Les éléments sont faux'))
 	// {
 	// 		TODO: proposer to user to underline errors ?
