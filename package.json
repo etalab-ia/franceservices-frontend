@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && npx tailwindcss -i ./src/style/style.css -o style.css --minify",
+    "build": "vite build && npx tailwindcss -i ./src/style/style.css -o ./dist/style.css --minify",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "postinstall": "copy-dsfr-to-public",
