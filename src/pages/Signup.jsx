@@ -31,7 +31,7 @@ export function Signup() {
 	}
 
 	const	handleValidatePassword = () => {
-		return auth.username.length && auth.email.length && auth.email.includes("@") && password.length && confPassword === password;	
+		return auth.username && auth.username.length && auth.email.length && auth.email.includes("@") && password.length && confPassword === password;	
 	}
 
 	const	handleClick = async() => {
