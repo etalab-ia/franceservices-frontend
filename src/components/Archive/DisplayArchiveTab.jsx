@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { summaryButton } from "../../constants/archive";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 
 export function DisplayArchiveTabs() {
 	const	archive = useSelector((state) => state.archive);
