@@ -1,5 +1,4 @@
 import { authReducer } from "./auth";
-import { institutionsReducer } from "./institutions";
 import { streamReducer } from "./stream";
 import { tabsReducer } from "./tabs";
 import { userReducer } from "./user";
@@ -13,7 +12,6 @@ const           reducer = combineReducers({
 	archive: archiveReducer,
 	auth: authReducer,
 	feedback: feedbackReducer,
-	institutions: institutionsReducer,
 	ressources: ressourcesReducer,
 	stream: streamReducer,
 	tabs: tabsReducer,
