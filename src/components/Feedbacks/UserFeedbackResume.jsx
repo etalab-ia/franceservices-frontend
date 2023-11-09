@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 
 export function	UserFeedbackResume() {
-
 	const	feedback = useSelector((state) => state.feedback);
 
 	return (

@@ -11,7 +11,6 @@ export function UserChatTools({ type }) {
 	const	feedback = useSelector((state) => state.feedback);
 	const	dispatch = useDispatch();
 	const	[isSelected, setIsSelected] = useState();
-	const 	extraMargin = type ? "ml-[110px]" : "";
 
 	const handleClick = (index) => {
 		setIsSelected(index);
@@ -19,7 +18,7 @@ export function UserChatTools({ type }) {
 	};
 
 	return (
-		<div className={`user-chat-tools-container ${extraMargin}`}>
+		<div className={`user-chat-tools-container ${type ? "ml-[110px]" : ""}`}>
 		  	{userChatToolsFunc({ stream, archive, feedback, user }, dispatch, type).map((tool, index) => (
 				<button 
 					disabled={stream.isStoppable}

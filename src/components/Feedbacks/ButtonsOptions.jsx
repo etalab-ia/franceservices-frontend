@@ -1,5 +1,3 @@
-import { animated } from '@react-spring/web';
-
 export const	ButtonsOptions = ({ isFirst, buttonsType, reasons, setReasons, dispatch }) => {
 
 	const	handleClick = (index) => {
@@ -23,14 +21,14 @@ export const	ButtonsOptions = ({ isFirst, buttonsType, reasons, setReasons, disp
 				const classNames = reasons.includes(buttonsType[index]) ? "bg-purple" : "bg-[white]";
 				
 				return <div key={index}>
-					<animated.button
+					<button
 						className={`user-feedback-buttons ${classNames}`}
 						onClick={() => handleClick(index)}
 					>
 						<p className={reasons.includes(buttonsType[index]) ? "text-white" : "text-purple"}>
 							{button}
 						</p>
-					</animated.button>
+					</button>
 				</div>
 			})}
 		</div>	

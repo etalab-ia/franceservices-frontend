@@ -27,7 +27,7 @@ export function DisplayArchiveTabs() {
 				:
 				<div>
 					<Display messages={selectedMessages} archive={archive[tabs.archiveTab]}/>
-					<Button className="ml-[170px] my-6" onClick={handleClick} priority="tertiary">
+					<Button className="archive-summary-button" onClick={handleClick} priority="tertiary">
 						{summaryButton}
 					</Button>
 				</div>

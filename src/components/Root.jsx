@@ -2,7 +2,6 @@ import { Header } from "@codegouvfr/react-dsfr/Header";
 import { Chatbot } from "../pages/Chatbot";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { navFunc } from "../constants/router";
-// import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 import { Signup } from "../pages/Signup";
 import { ResetPassword } from "../pages/ResetPassword";
@@ -14,7 +13,6 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
 export const Root = () => {
-
 	const	navigationData = navFunc();
 	const	auth = useSelector((state) => state.auth);
 	const	dispatch = useDispatch();

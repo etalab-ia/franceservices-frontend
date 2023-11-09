@@ -1,12 +1,11 @@
 export function	TagSheets(props) {
-
 	const	{ sheetId } = props;
 	const	tags = ['Allocations destinées aux familles', 'Particulier', sheetId];
 
 	return (
-		<div className="flex flex-wrap">
+		<div className="wrap-message">
 			{tags.map((tag, index) => {
-				return <div className="bg-light-grey px-2 m-1 rounded-[90px]" key={index}>
+				return <div className="sheets-tags" key={index}>
 					{tag}
 				</div>
 			})}
