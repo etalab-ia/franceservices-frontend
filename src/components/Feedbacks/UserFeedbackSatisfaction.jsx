@@ -14,7 +14,7 @@ export function UserFeedbackSatisfaction({ isFirst, isConfirmed, isArchive }) {
 		<div className="row-message">
 			{buttons.map((button, index) => {
 				return <button title={button.type} onClick={() => handleClick(index)} key={index} 
-							className={`user-feedback-buttons border-solid ${index === user.choices.feedback ? 'bg-purple' : 'bg-white'}`}
+							className={`user-feedback-buttons ${index === user.choices.feedback ? 'bg-purple' : 'bg-white'}`}
 							disabled={isConfirmed || isArchive}
 					>
 						<img className={index === user.choices.feedback ? "mr-2 brightness-0 invert-[1]" : "mr-2"} src={button.img}/>

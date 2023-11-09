@@ -13,10 +13,15 @@ export function DisplayMessageTab({ isDisplayable, tabsLen, activeTab, setActive
 
 	return (
         <>
-		    {isDisplayable && <div className="row-message ml-4 mt-1">
-				{activeTab > 1 && <button className="mr-2" onClick={() => handleClick(activeTab, setActiveTab, -1)}><img src={previous}/></button>}
+		    {isDisplayable && <div className="messages-tabs">
+				{activeTab > 1 && <button className="mr-2" onClick={() => handleClick(activeTab, setActiveTab, -1)}>
+					<img src={previous}/>
+				</button>}
 				<p className="streaming-tabs">{activeTab} / {tabsLen}</p>
-				{activeTab < tabsLen && <button className="ml-2" onClick={() => handleClick(activeTab, setActiveTab, 1)}><img src={next}/></button>}
+				{activeTab < tabsLen && 
+				<button className="ml-2" onClick={() => handleClick(activeTab, setActiveTab, 1)}>
+					<img src={next}/>
+				</button>}
 			</div>}
         </>
 	);

@@ -19,7 +19,7 @@ export function NotifyArchiving() {
 
 	return (
 		<div>
-			<div className="ml-[114px] justify-center text-center">{notifyArchiving(`« ${title} »`)}</div>
+			<div className="archive-notification-text">{notifyArchiving(`« ${title} »`)}</div>
 			<div className="archive-separation"></div>
 		</div>
 	);

@@ -9,7 +9,7 @@ export function	RessourceOptions({ archive }) {
 
     const	handleClick = (index) => {
 		const	mode = ressourceButtons[index].model_name === 'albert-light' ? 'rag' : 'simple';
-		const	limit = mode === 'rag' ? 3 : 0;
+		const	limit = mode === 'rag' ? 5 : 0;
 		
 		dispatch({ type: 'SET_USER_MODEL_NAME_CHOICE', nextModelName: ressourceButtons[index].model_name, nextMode: mode, nextLimit: limit });
 		setRessource(ressourceButtons[index]);
@@ -19,7 +19,7 @@ export function	RessourceOptions({ archive }) {
 		<div className="wrap-message">
 			{ressourceButtons.map((button, index) => {
 				const	isSelected = (archive === NOT_SET && ressource === button || ressource === button.name);
-				const	classNames = isSelected ? "bg-purple" : "bg-[white]";
+				const	classNames = isSelected ? "bg-purple" : "bg-white";
 
 				return <div key={index}>
 					<button

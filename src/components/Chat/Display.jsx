@@ -8,9 +8,10 @@ import { NOT_SET } from '../../constants/status';
 export function Display({ messages, archive }) {
 	const	stream = useSelector((state) => state.stream);
 	const	tabs = useSelector((state) => state.tabs);
+	const	ressourcesCondition = ((messages.length !== 0 && !tabs.activeTab) || archive !== NOT_SET);
 
 	return (
-		<div className="chat min-h-[410px]">
+		<div className="chat">
 			{messages.map((message, index) => {
 				return Array.isArray(message.text) ? 
 					<DisplayArrayMessages
@@ -26,7 +27,7 @@ export function Display({ messages, archive }) {
 						isArchive={archive !== NOT_SET}
 					/>
 			})}
-			{((messages.length !== 0 && !tabs.activeTab) || archive !== NOT_SET) && <Ressources archive={archive}/>}
+			{ressourcesCondition && <Ressources archive={archive}/>}
 			<ChatFollowUp stream={stream} tabs={tabs} archive={archive}/>
 		</div>
 	);
