@@ -82,3 +82,8 @@ export const	redoUserQuestion = `Voulez-vous poser une nouvelle question ?`;
 export const	notifyArchiving = (title) => (
 	<>Cette conversation a été archivée <img src={archive} alt="Logo associé à l'archivage"/> comme {title}</>
 );
+
+export const	robotAvatarDescription = `Avatar du robot.`;
+export const	userAvatarDescription = `Avatar de l'utilisateur / utilisatrice.`;
+export const	previousImgDescription = `Bouton d'accès au message précédent généré par le robot.`;
+export const	nextImgDescription = `Bouton d'accès au message suivant généré par le robot.`;

@@ -1,4 +1,4 @@
-import { askingReasons } from "../../constants/feedback";
+import { askingReasons, feedbackAdditionalInput } from "../../constants/feedback";
 import { Input } from "@codegouvfr/react-dsfr/Input";
 
 export const	InputOption = ({ reasons, setOtherReason, isFirst }) => {
@@ -13,6 +13,7 @@ export const	InputOption = ({ reasons, setOtherReason, isFirst }) => {
 					onChange={handleNewReason}
 					iconId="fr-icon-arrow-right-line"
 					nativeInputProps={{
+						role: feedbackAdditionalInput,
 						name: 'otherReason',
 						placeholder: askingReasons
 					}}

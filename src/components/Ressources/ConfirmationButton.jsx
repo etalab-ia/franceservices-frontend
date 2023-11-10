@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { ressourcesConfirmationButton } from "../../constants/ressources";
 
 export const	ConfirmationButton = ({ setIsConfirmed }) => {
 	const	dispatch = useDispatch();
@@ -9,7 +10,7 @@ export const	ConfirmationButton = ({ setIsConfirmed }) => {
 	}
 
 	return (
-		<button onClick={handleConfirm} className={`user-feedback-confirmation-button`}>
+		<button role={ressourcesConfirmationButton} onClick={handleConfirm} className={`user-feedback-confirmation-button`}>
 			Confirmer
 		</button>
 	)

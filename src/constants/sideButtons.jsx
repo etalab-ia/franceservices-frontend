@@ -4,12 +4,12 @@ import conversation from "../../icons/chatbotTabs/conversation.svg"
 export const	sideButtonsProps = [
 	{
 		image: conversation,
-		alt: "Bouton de conversation",
+		alt: "Bouton d'accès à la conversation.",
 		title: "Conversation"
 	},
 	{ 
 		image: history,
-		alt: "Bouton d'historique",
+		alt: "Bouton d'accès aux archives.",
 		title: "Historique"
 	},
 ]

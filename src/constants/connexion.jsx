@@ -56,3 +56,5 @@ export const initButtonsReset = (isDisable, handleClick) => {
 
 	return buttonsReset;
 }
+
+export const	authFailedNotificationRole = `Notification d'échec d'authentification.`;
