@@ -3,6 +3,7 @@ import { notifyArchiving } from "../../constants/chatbotProps";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setArchive } from "../../utils/archive";
+import { archiveNotificationRole } from "../../constants/archive";
 
 export function NotifyArchiving() {
 	const   user = useSelector((state) => state.user);
@@ -18,7 +19,7 @@ export function NotifyArchiving() {
 	}, [user.choices.newQuestion])
 
 	return (
-		<div>
+		<div role={archiveNotificationRole}>
 			<div className="archive-notification-text">{notifyArchiving(`« ${title} »`)}</div>
 			<div className="archive-separation"></div>
 		</div>

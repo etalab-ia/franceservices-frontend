@@ -1,3 +1,5 @@
+import { feedbackButtonsChoice } from "../../constants/feedback";
+
 export const	ButtonsOptions = ({ isFirst, buttonsType, reasons, setReasons, dispatch }) => {
 
 	const	handleClick = (index) => {
@@ -22,6 +24,7 @@ export const	ButtonsOptions = ({ isFirst, buttonsType, reasons, setReasons, disp
 				
 				return <div key={index}>
 					<button
+						role={feedbackButtonsChoice(button)}
 						className={`user-feedback-buttons ${classNames}`}
 						onClick={() => handleClick(index)}
 					>

@@ -1,4 +1,4 @@
-import { ressourceButtons } from "../../constants/ressources";
+import { ressourceButtons, ressourcesChoiceButton } from "../../constants/ressources";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { NOT_SET } from "../../constants/status";
@@ -23,6 +23,7 @@ export function	RessourceOptions({ archive }) {
 
 				return <div key={index}>
 					<button
+						role={ressourcesChoiceButton(button.name)}
 						disabled={archive !== NOT_SET}
 						className={`user-feedback-buttons ${classNames}`}
 						onClick={() => handleClick(index)}

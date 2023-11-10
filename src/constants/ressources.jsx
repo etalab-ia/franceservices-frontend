@@ -11,3 +11,6 @@ export const	ressourceButtons = [
 		model_name: 'fabrique-reference'
 	},
 ]
+
+export const	ressourcesConfirmationButton = `Bouton de confirmation du choix de la base documentaire à utiliser.`;
+export const	ressourcesChoiceButton = (choice) => `Bouton du choix de la base documentaire à utiliser (${choice}).`;

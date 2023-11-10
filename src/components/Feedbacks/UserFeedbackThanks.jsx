@@ -1,9 +1,9 @@
-import { thankFeedback } from "../../constants/feedback";
+import { thankFeedback, thankFeedbackRole } from "../../constants/feedback";
 
 export function	UserFeedbackThanks() {
 
 	return (
-		<div className="row-message">
+		<div role={thankFeedbackRole} className="row-message">
 			<div className="pt-6">{thankFeedback}</div>
 		</div>
 	);

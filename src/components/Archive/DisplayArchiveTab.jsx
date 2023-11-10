@@ -4,7 +4,7 @@ import { NOT_SET } from "../../constants/status";
 import { Display } from "../Chat/Display";
 import { useSelector } from "react-redux";
 import { Button } from "@codegouvfr/react-dsfr/Button";
-import { summaryButton } from "../../constants/archive";
+import { summaryButton, summaryButtonDescription } from "../../constants/archive";
 import { useDispatch } from "react-redux";
 
 export function DisplayArchiveTabs() {
@@ -27,7 +27,7 @@ export function DisplayArchiveTabs() {
 				:
 				<div>
 					<Display messages={selectedMessages} archive={archive[tabs.archiveTab]}/>
-					<Button className="archive-summary-button" onClick={handleClick} priority="tertiary">
+					<Button title={summaryButtonDescription} className="archive-summary-button" onClick={handleClick} priority="tertiary">
 						{summaryButton}
 					</Button>
 				</div>

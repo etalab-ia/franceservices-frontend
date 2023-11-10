@@ -1,6 +1,7 @@
 import { NOT_SET } from "../../constants/status";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from 'react';
+import { botQuestionRole } from "../../constants/global";
 
 export function	BotQuestion({ id, choice }) {
 	const	user = useSelector((state) => state.user);
@@ -29,7 +30,7 @@ export function	BotQuestion({ id, choice }) {
 					const	classNames = index === buttonChoice ? `bg-purple` : `bg-[white]`;
 					const	cursor = buttonChoice !== NOT_SET ? 'cursor-not-allowed' : 'cursor-pointer';
 
-					return <button disabled={buttonChoice !== NOT_SET} onClick={() => handleClick(index)} key={index} className={`user-feedback-buttons ${classNames} ${cursor}`}>
+					return <button role={botQuestionRole} disabled={buttonChoice !== NOT_SET} onClick={() => handleClick(index)} key={index} className={`user-feedback-buttons ${classNames} ${cursor}`}>
 							<p className={index === buttonChoice ? `text-white text-center` : `text-purple text-center`}>{button}</p>
 						</button>
 				})}
