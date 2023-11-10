@@ -194,8 +194,20 @@
 
 	/* SHEETS */
 
+	.sheets-accordion {
+		@apply flex;
+		@apply ml-[114px];
+		@apply justify-center;
+		@apply pt-6;
+	}
+
+	.fr-accordion__btn {
+		@apply text-[#929292];
+		@apply text-sm;
+		@apply bg-white;
+	}
+
 	.sheets-container {
-		@apply user-feedback-container;
 		@apply my-4;
 		@apply p-6;
 		@apply border;

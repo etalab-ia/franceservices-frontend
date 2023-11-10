@@ -17,7 +17,7 @@ export const Root = () => {
 	const	auth = useSelector((state) => state.auth);
 	const	dispatch = useDispatch();
 
-	useEffect(() => { checkConnexion(dispatch); }, [dispatch]);
+	useEffect(() => { checkConnexion(auth, dispatch); }, [dispatch]);
 
 	return <div className="h-screen">
 		<Header className="header-container"
