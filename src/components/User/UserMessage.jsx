@@ -28,7 +28,14 @@ export function UserMessage() {
 		if (!user.question.query.length || ressources.isConfirmed === NOT_SET)
 			return ;
 		postNewQuestion(dispatch, auth, user.question);
-	  }, [user.question, ressources.isConfirmed]);
+	}, [user.question, ressources.isConfirmed]);
+
+	const	handleRenderInput = (params) => {
+		const	newParams = { maxLength: 800 };
+		const	updatedParams = { ...params, ...newParams };
+
+  		return <input {...updatedParams} />;
+	};
 
 	return (
 		<>
@@ -36,10 +43,11 @@ export function UserMessage() {
 				<></>
 				:
 				<SearchBar
-					className='user-question'
 					label="Poser votre question"
+					className='user-question'
 					onButtonClick={handleClick}
 					onChange={handleChange}
+					renderInput={handleRenderInput}
 				/>
 			}
 		</>
