@@ -448,7 +448,9 @@
 
 	.archive-notification-text {
 		@apply ml-[114px];
+		@apply flex;
 		@apply justify-center;
 		@apply text-center;
+		@apply text-[#929292];
 	}
 }
