@@ -8,11 +8,10 @@ import { useFetch } from "../utils/hooks";
 import { AuthFailed } from "../components/Auth/AuthFailed";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { usenameOrPasswordError } from "../constants/errorMessages";
+import { usernameOrPasswordError } from "../constants/errorMessages";
 import { setUserInfos } from "../utils/manageConnexion";
 
 export function	Login() {
-
 	const	auth = useSelector((state) => state.auth);
 	const	dispatch = useDispatch();
 	const	[isDisable, setIsDisable] = useState(true);
@@ -69,8 +68,8 @@ export function	Login() {
 			if (res.status && res.status !== 200)
 				return dispatch({ type: 'AUTH_FAILED' });
 
+			setUserInfos(res.token, dispatch);
 			dispatch({ type: 'LOGIN', nextUserToken: res.token });
-			setUserInfos(res.token, auth, dispatch);
 		} 
 		catch(error)
 		{
@@ -82,16 +81,17 @@ export function	Login() {
 
 	return (
 		<div className="login-container">
-			{auth.authFailed && <AuthFailed>{usenameOrPasswordError}</AuthFailed>}
 			{loginFields.map((field, key) => {
-				return <Input className="w-[500px]"
+				return <Input className="basic-width"
+					label={field.label}
 					iconId={field.iconId}
 					key={key}
 					hintText={field.hintText}
 					nativeInputProps={{...field.nativeInputProps, onChange: handleChange}}
 				/>
 			})}
-			<ButtonsGroup className="container w-[500px]"
+			{auth.authFailed && <AuthFailed>{usernameOrPasswordError}</AuthFailed>}
+			<ButtonsGroup className="basic-width"
 				buttons={initButtonsLogin(handleClick, isDisable)}
 			/>
 		</div>
