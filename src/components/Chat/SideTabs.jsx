@@ -1,4 +1,4 @@
-import { sideButtonsProps, sideInformationProps } from '../../constants/sideButtons';
+import { sideButtonsProps } from '../../constants/sideButtons';
 
 export function SideTabs({ state, dispatch }) {
 	const	handleClick = (index) => {
@@ -23,11 +23,6 @@ export function SideTabs({ state, dispatch }) {
 						/>
 					</button>
 				))}
-				{/* <div className='side-tools'>
-					<img src={sideInformationProps.image}
-					alt={sideInformationProps.alt}
-					title={sideInformationProps.title}/>
-				</div> */}
 			</div>
 		</div>
 	);

@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 
 export function ResetPassword() {
-
 	const	auth = useSelector((state) => state.auth);
 	const	dispatch = useDispatch();
 	const	[isDisable, setIsDisable] = useState(true);
@@ -35,14 +34,14 @@ export function ResetPassword() {
 	return (
 		<div className="login-container">
 			<Input
-				className="w-[500px]"
+				className="basic-width"
 				hintText="Email"
 				nativeInputProps={{
 					placeholder: "camille@mail.com",
 					onChange: handleChange,
 				}}
 			/>
-			<ButtonsGroup className="w-[500px]"
+			<ButtonsGroup className="basic-width"
 				buttons={initButtonsReset(isDisable, handleClick)}
 			/>
 		</div>

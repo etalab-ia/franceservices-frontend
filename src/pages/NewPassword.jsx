@@ -11,7 +11,6 @@ import { useDispatch } from 'react-redux';
 import { changePasswordFailed } from "../constants/errorMessages";
 
 export function NewPassword() {
-
 	const	auth = useSelector((state) => state.auth);
 	const	dispatch = useDispatch();
 	const	[password, setPassword] = useState('');
@@ -51,17 +50,17 @@ export function NewPassword() {
 	
 	return (
 		<div className="login-container">
-			{auth.authFailed && <AuthFailed>{changePasswordFailed}</AuthFailed>}
 			{signupFields.map((input, key) => {
 				if (key < 2)
 					return null;
-				return <Input className="w-[500px]"
+				return <Input className="basic-width"
 					key={key}
 					hintText={input.hintText}
 					nativeInputProps={{...input.nativeInputProps, onChange: handleChange}}
 				/>
 			})}
-			<ButtonsGroup className="container w-[500px]"
+			{auth.authFailed && <AuthFailed>{changePasswordFailed}</AuthFailed>}
+			<ButtonsGroup className="basic-width"
 				buttons={initButtonsSignup(handleValidatePassword, handleClick, 'Changer de mot de passe')}
 			/>
 		</div>

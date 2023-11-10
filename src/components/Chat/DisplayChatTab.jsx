@@ -10,14 +10,14 @@ export function DisplayChatTab() {
 	const	feedback = useSelector((state) => state.feedback);
 	const	ressources = useSelector((state) => state.ressources);
 	const	stream = useSelector((state) => state.stream);
-    const   dispatch = useDispatch();
+	const   dispatch = useDispatch();
 
-    useEffect(() => {scrollToBottom();}, [user, feedback, ressources, stream, dispatch]);
+	useEffect(() => {scrollToBottom();}, [user, feedback, ressources, stream, dispatch]);
 
 	return (
 		<>
 			<Display messages={user.messages} archive={NOT_SET}/>
-            <UserMessage />
+			<UserMessage />
 		</>
 	);
 }

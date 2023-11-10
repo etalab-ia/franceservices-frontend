@@ -3,12 +3,12 @@ import { useFetch } from "./hooks";
 import { Navigate } from "react-router-dom";
 import { userUrl } from "../constants/api";
 
-export const	storeAuth = (token, username) => {
+export const	storeAuth = async(token, username) => {
 	localStorage.setItem('authToken', token);
 	localStorage.setItem('username', username);
 }
 
-export const	setUserInfos = async(token, auth, dispatch) => {
+export const	setUserInfos = async(token, dispatch) => {
 	const	userInfos = await useFetch(userUrl, 'GET', {
 		headers: { 
 			'Authorization': `Bearer ${token}`
@@ -16,8 +16,8 @@ export const	setUserInfos = async(token, auth, dispatch) => {
 		data: null,
 	});
 
-	dispatch({ type: 'SET_USER', nextEmail: userInfos.email, nextUsername: userInfos.username });
 	storeAuth(token, userInfos.username);
+	dispatch({ type: 'SET_USER', nextEmail: userInfos.email, nextUsername: userInfos.username });
 }
 
 export const	checkId = (id, dispatch) => {

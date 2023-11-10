@@ -111,19 +111,20 @@
 
 	/* GLOBAL */
 
+	.basic-width {
+		@apply w-[500px];
+	}
+
 	.header-container {
 		@apply sticky;
 		@apply top-0;
 		@apply w-full;
-		/* @apply z-10; */
 	}
 
 	.wrapper-container {
 		@apply flex;
 		@apply w-screen;
 		@apply flex-row;
-		/* @apply bottom-0;
-		@apply fixed; */
 	}
 
 	.row-message {
@@ -152,6 +153,10 @@
 		@apply text-center;
 	}
 
+	.tags-font-size {
+		@apply text-[11px];
+	}
+
 	/* CHATBOT PAGE */
 
 	.banner-bot {
@@ -175,17 +180,32 @@
 		@apply w-[384px];
 		@apply text-2xl;
 		@apply font-bold;
-		@apply pt-9;
+		@apply m-0;
+		@apply leading-6;
+		@apply gap-1;
 	}
 
 	.subtitle {
 		@apply w-[384px];
 		@apply text-sm;
 		@apply text-justify;
-		@apply pt-6;
+		@apply m-0;
 	}
 
 	/* SHEETS */
+
+	.sheets-accordion {
+		@apply flex;
+		@apply ml-[114px];
+		@apply justify-center;
+		@apply pt-6;
+	}
+
+	.fr-accordion__btn {
+		@apply text-[#929292];
+		@apply text-sm;
+		@apply bg-white;
+	}
 
 	.sheets-container {
 		@apply my-4;
@@ -207,6 +227,13 @@
 		@apply no-underline;
 	}
 
+	.sheets-tags {
+		@apply bg-light-grey;
+		@apply px-2;
+		@apply m-1;
+		@apply rounded-[90px];
+	}
+
 	/* AUTH */
 
 	.login-container {
@@ -218,13 +245,16 @@
 	}
 
 	.login-failed {
-		@apply bg-red-100;
-		@apply w-[500px];
+		@apply basic-width;
+		@apply mt-0;
+		@apply mb-4;
+	}
+
+	.login-infos {
+		@apply basic-width;
 		@apply flex;
-		@apply justify-center;
-		@apply p-2;
-		@apply m-4;
-		@apply font-bold;
+		@apply text-[#0063CB];
+		@apply mb-4;
 	}
 
 	/* GLOBAL CHAT */
@@ -234,7 +264,6 @@
 		@apply flex-col;
 		@apply w-screen;
 		@apply items-center;
-		/* @apply pt-10; */
 	}
 
 	/* USER */
@@ -349,16 +378,13 @@
 		@apply flex;
 		@apply flex-col;
 		@apply pt-8;
-		/* @apply h-[450px]; */
 		@apply w-[1000px];
-		/* @apply w-[905px]; */
 		@apply mr-[112px];
 		@apply whitespace-pre-wrap;
 		@apply text-justify;
 		@apply overflow-y-auto;
 		@apply overflow-x-hidden;
-		/* @apply min-h-[450px]; */
-		/* @apply bg-red-200; */
+		@apply min-h-[410px];
 	}
 	
 	.agent-chat {
@@ -384,6 +410,18 @@
 		@apply text-sm;
 		@apply font-medium;
 		@apply m-0;
+	}
+
+	.messages-tabs {
+		@apply row-message;
+		@apply ml-4;
+		@apply mt-1;
+	}
+
+	.redo-question {
+		@apply flex;
+		@apply items-center;
+		@apply ml-4;
 	}
 
 	/* ARCHIVE PAGE */
@@ -413,5 +451,18 @@
 		@apply rounded-[90px];
 		@apply bg-[#E5E5E5];
 		@apply m-2;
+	}
+
+	.archive-summary-button {
+		@apply ml-[170px];
+		@apply my-6;
+	}
+
+	.archive-notification-text {
+		@apply ml-[114px];
+		@apply flex;
+		@apply justify-center;
+		@apply text-center;
+		@apply text-[#929292];
 	}
 }
