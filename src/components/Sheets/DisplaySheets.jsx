@@ -8,6 +8,7 @@ import { accordionDescription, accordionLabel, sheetsImgDescription } from '../.
 
 export function	DisplaySheets() {
 	const	sheets = useSelector((state) => state.user.sheets);
+	const	el = document.getElementsByClassName("fr-accordion__btn");
 
 	return (
 		<div className='sheets-accordion'>
