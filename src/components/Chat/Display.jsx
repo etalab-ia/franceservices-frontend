@@ -24,7 +24,6 @@ export function Display({ messages, archive }) {
 						key={index}
 						sender={message.sender}
 						text={message.text}
-						isArchive={archive !== NOT_SET}
 					/>
 			})}
 			{ressourcesCondition && <Ressources archive={archive}/>}

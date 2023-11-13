@@ -19,7 +19,7 @@ export function ChatFollowUp({ stream, tabs, archive }) {
 			{conditionDiv && (
 				<div>
 					<div className="streaming-container">
-						<UserChatTools />
+						<UserChatTools isArchive={archive}/>
 						<Avatar user="agent" />
 						<DisplayStream stream={stream} tabs={tabs} archive={archive}/>
 					</div>
