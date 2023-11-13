@@ -1,17 +1,11 @@
-import { UserChatTools } from "../User/UserChatTools";
 import { Avatar } from "./Avatar";
 
-export const	DisplaySingleMessage = ({ sender, text, isArchive }) => {
+export const	DisplaySingleMessage = ({ sender, text }) => {
 	const	isUser = sender === "user";
 	const	classNames = isUser ? "user-message" : "row-message";
 
 	return (
 		<div className={classNames}>
-			{!isUser && <div className="row-message">
-				{isArchive && <UserChatTools type='sheets' />}
-				{!isArchive && <UserChatTools type='sheets' />}
-				<Avatar user={sender} />
-			</div>}
 			<div className={`w-[648px] ${isUser ? "mr-4" : "ml-4"}`}>
 				<div className={isUser ? "user-chat" : "agent-chat"}>{text}</div>
 			</div>
