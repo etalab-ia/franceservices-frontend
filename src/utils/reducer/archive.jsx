@@ -25,6 +25,20 @@ export const	archiveReducer = (state = [], action) => {
 				{ question: action.nextQuestion },
 		  ];
 		}
+		case 'SET_ARCHIVE_MESSAGES': {
+			if (state.length === 0)
+				return state;
+	  
+			const	lastIndex = state.length - 1;
+
+			return [
+				...state.slice(0, lastIndex),
+				{
+					...state[lastIndex],
+					agentResponse: action.nextAgentResponse,
+				}
+			]
+		}
 	  	default: { return state };
 	}
 }
