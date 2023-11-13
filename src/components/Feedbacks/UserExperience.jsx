@@ -1,5 +1,4 @@
 import { Avatar } from "../Chat/Avatar";
-import { UserChatTools } from "../User/UserChatTools";
 import { Feedback } from "./Feedback";
 import { askingQuality, redoAskingQuality } from "../../constants/feedback";
 import { useSelector } from 'react-redux';
@@ -21,8 +20,7 @@ export function UserExperience({ isArchive }) {
 	return (
 		<div className="col-message mt-8">
 			{stream.activeTab === tabsLen && <div>
-				<div className="row-message">
-					<UserChatTools type='sheets'/>
+				<div className="row-message ml-[110px]">
 					<Avatar user='agent' />
 					<AskingResponseQuality tabsLen={tabsLen} />
 				</div>

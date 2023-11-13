@@ -27,7 +27,7 @@ export function UserMessage() {
 	useEffect(() => {
 		if (!user.question.query.length || ressources.isConfirmed === NOT_SET)
 			return ;
-		postNewQuestion(dispatch, auth, user.question);
+		postNewQuestion(dispatch, auth, user.question, user.choices.newQuestion);
 	}, [user.question, ressources.isConfirmed]);
 
 	const	handleRenderInput = (params) => {

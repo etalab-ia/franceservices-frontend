@@ -68,8 +68,8 @@ export function	Login() {
 			if (res.status && res.status !== 200)
 				return dispatch({ type: 'AUTH_FAILED' });
 
-			setUserInfos(res.token, dispatch);
 			dispatch({ type: 'LOGIN', nextUserToken: res.token });
+			setUserInfos(res.token, dispatch);
 		} 
 		catch(error)
 		{

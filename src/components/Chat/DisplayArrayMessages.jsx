@@ -16,8 +16,7 @@ export function DisplayArrayMessages({ messages, isArchive }) {
 
 	return (
 		<div className="streaming-container">
-			{isArchive && <UserChatTools type='sheets' />}
-			{!isArchive && <UserChatTools type='sheets' />}
+			<UserChatTools type='sheets' isArchive={isArchive}/>
 			<Avatar user="agent" />
 			<div>
 				<StreamingMessage>{messages[activeTab - 1]}</StreamingMessage>

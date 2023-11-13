@@ -53,12 +53,14 @@ export	function	userChatToolsFunc(state, dispatch, type) {
 
 	const	userChatToolsProps = [
 		{
+			name: "redo",
 			image: redo,
 			alt: "Re-générer la réponse",
 			title: "Re-générer la réponse",
 			onClick: () => handleRedo(state, dispatch),
 		},
 		{
+			name: "copy",
 			image: copy,
 			alt: "Copier la réponse",
 			title: "Copier la réponse",
