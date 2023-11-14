@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import { Ressources } from "../Ressources/Ressources";
 import { DisplayArrayMessages } from "./DisplayArrayMessages";
 import { DisplaySingleMessage } from "./DisplaySingleMessage";
 import { ChatFollowUp } from "./ChatFollowUp";
@@ -8,7 +7,6 @@ import { NOT_SET } from '../../constants/status';
 export function Display({ messages, archive }) {
 	const	stream = useSelector((state) => state.stream);
 	const	tabs = useSelector((state) => state.tabs);
-	const	ressourcesCondition = ((messages.length !== 0 && !tabs.activeTab) || archive !== NOT_SET);
 
 	return (
 		<div className="chat">
@@ -26,7 +24,6 @@ export function Display({ messages, archive }) {
 						text={message.text}
 					/>
 			})}
-			{ressourcesCondition && <Ressources archive={archive}/>}
 			<ChatFollowUp stream={stream} tabs={tabs} archive={archive}/>
 		</div>
 	);
