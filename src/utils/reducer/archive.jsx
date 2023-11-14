@@ -25,6 +25,19 @@ export const	archiveReducer = (state = [], action) => {
 				{ question: action.nextQuestion },
 		  ];
 		}
+		case 'SET_ARCHIVE_LIMIT': {
+			const	lastIndex = state.length - 1;
+			return [
+				...state.slice(0, lastIndex),
+				{
+					...state[lastIndex],
+					question: {
+						...state.question,
+						limit: action.nextLimit
+					}
+				},
+		  ];
+		}
 		case 'SET_ARCHIVE_MESSAGES': {
 			if (state.length === 0)
 				return state;
