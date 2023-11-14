@@ -8,11 +8,10 @@ export const		chatbotProps = {
 }
 
 async function		handleRedo(state, dispatch) {
-	const	{ stream, archive, feedback, user } = state;
+	const	{ archive, feedback } = state;
 	const	archiveIndex = archive.length - 1;
-	const	streamIndex = stream.historyStream.length - 1;
-	let		newLimit = stream.historyStream.length ? user.question.limit : archive[index].question.limit;
-	let		newText = stream.historyStream.length ? stream.historyStream[streamIndex] : archive[archiveIndex].agentResponse;
+	let		newLimit = archive[archiveIndex].question.limit;
+	let		newText = archive[archiveIndex].agentResponse;
 	let		newMode = 'simple';
 	
 	if (feedback.reasons.includes('Trop long'))
@@ -20,14 +19,15 @@ async function		handleRedo(state, dispatch) {
 		newText = 'Résume ce texte : ' + newText;
 	}
 	else if (feedback.reasons.includes('Incohérent'))
-	{
 		newText = 'Reformule ce texte : ' + newText;
-	}
 	else if (feedback.reasons.includes('Manque de sources'))
 	{
 		newLimit = newLimit === 0 ? 5 : newLimit + 2;
-		newText = archive[archiveIndex].question.query;
 		newMode = 'rag';
+		if (feedback.reasons.includes('Trop long'))
+			newText = 'Résume ce texte : ' + newText;
+		else
+			newText = archive[archiveIndex].question.query;
 	}
 	else
 		newText = archive[archiveIndex].question.query;
@@ -38,6 +38,7 @@ async function		handleRedo(state, dispatch) {
 
 	dispatch({ type: 'SET_USER_MODEL_NAME_CHOICE', nextModelName: 'albert-light', nextMode: newMode, nextLimit: newLimit });
 	dispatch({ type: 'SET_USER_TEXT', nextUserText: newText });
+	dispatch({ type: 'SET_ARCHIVE_LIMIT', nextLimit: newLimit });
 	dispatch({ type: 'RESET_FEEDBACK' });
 
 	return dispatch({ type: 'REDO_AGENT_STREAM' });
