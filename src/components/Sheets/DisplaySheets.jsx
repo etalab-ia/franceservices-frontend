@@ -11,12 +11,9 @@ export function	DisplaySheets() {
 	const	el = document.getElementsByClassName("fr-accordion__btn");
 
 	return (
-		<div className='sheets-accordion'>
-			<Accordion
-				title={accordionDescription}
-				label={accordionLabel}
-				className='w-[756px]'
-			>
+		<div className='col-message py-10 pr-10'>
+			<h1 className='color-[#161616] text-xl font-bold leading-7'>Fiches service-public.fr associées avec la réponse</h1>
+			<div className='col-message'>
 				{sheets.map((sheet, index) => {
 					return <div className="sheets-container" key={index}>
 						<TagSheets sheetId={getSheetId(sheet.url)}/>
@@ -29,7 +26,7 @@ export function	DisplaySheets() {
 						</div>
 					</div>
 				})}
-		</Accordion>
-	  </div>
+			</div>
+		</div>
 	);
 }

@@ -11,7 +11,7 @@
 
 	.archive-separation {
 		@apply ml-[114px];
-		@apply mt-[36px];
+		@apply my-[36px];
 		@apply border-t-4;
 		@apply border-[#000091];
 		@apply w-[1000px];
@@ -125,6 +125,7 @@
 		@apply flex;
 		@apply w-screen;
 		@apply flex-row;
+		/* @apply bg-red-200; */
 	}
 
 	.row-message {
@@ -196,7 +197,7 @@
 
 	.sheets-accordion {
 		@apply flex;
-		@apply ml-[114px];
+		/* @apply ml-[114px]; */
 		@apply justify-center;
 		@apply pt-6;
 	}
@@ -300,9 +301,7 @@
 	.user-question {
 		@apply flex;
 		@apply bottom-0;
-		@apply mb-6;
-		@apply mt-8;
-		@apply w-[900px];
+		@apply w-4/5;
 	}
 
 	.user-chat {
@@ -377,14 +376,14 @@
 	.chat {
 		@apply flex;
 		@apply flex-col;
-		@apply pt-8;
-		@apply w-[1000px];
-		@apply mr-[112px];
+		/* @apply pt-8; */
+		/* @apply w-[1000px]; */
+		@apply mr-[110px];
 		@apply whitespace-pre-wrap;
 		@apply text-justify;
 		@apply overflow-y-auto;
 		@apply overflow-x-hidden;
-		@apply min-h-[410px];
+		@apply min-h-[550px];
 	}
 	
 	.agent-chat {
@@ -396,6 +395,7 @@
 	.streaming-container {
 		@apply flex;
 		@apply flex-row;
+		@apply mb-4;
 	}
 
 	.streaming {
