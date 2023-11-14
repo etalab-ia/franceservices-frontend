@@ -13,6 +13,6 @@ export const	stopGenerationUrl = "http://***REMOVED***/api/api/fabrique_stop"
 // SIGNIN
 export const	signinUrl = "http://***REMOVED***/api/v2/sign_in"
 export const	signoutUrl = "http://***REMOVED***/api/v2/sign_out"
-export const	signupUrl = "http://***REMOVED***/api/v2/user/me"
 export const	resetPasswordMailUrl = "http://***REMOVED***/api/v2/send_reset_password_email"
 export const	resetPasswordUrl = "http://***REMOVED***/api/v2/reset_password"
+export const    userUrl = "http://***REMOVED***/api/v2/user/me"

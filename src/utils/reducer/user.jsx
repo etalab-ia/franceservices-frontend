@@ -1,21 +1,15 @@
 import { initialQuestion, initialUserChoices } from "./state"
 
-export const	userReducer = (state = { question: initialQuestion, choices: initialUserChoices, sheets: [] }, action) => {
+export const	userReducer = (state = { question: initialQuestion, choices: initialUserChoices, sheets: [], messages: [] }, action) => {
 	switch (action.type) {
-		case 'SET_USER_TITLE':
+		case 'SET_USER_MODEL_NAME_CHOICE':
 			return {
 				...state,
 				question: {
 					...state.question,
-					title: action.nextTitle
-				}
-			}
-		case 'SET_USER_INSTITUTION':
-			return {
-				...state,
-				question: {
-					...state.question,
-					institution: action.nextInstitution
+					model_name: action.nextModelName,
+					limit: action.nextLimit,
+					mode: action.nextMode,
 				}
 			}
 		case 'SET_USER_TEXT':
@@ -23,7 +17,8 @@ export const	userReducer = (state = { question: initialQuestion, choices: initia
 				...state,
 				question: {
 					...state.question,
-					user_text: action.nextUserText
+					user_text: action.nextUserText,
+					query: action.nextUserText
 				}
 			}
 		case 'SET_SHEETS':
@@ -54,6 +49,11 @@ export const	userReducer = (state = { question: initialQuestion, choices: initia
 					...state.choices,
 					[action.nextKey]: action.nextValue,
 				}
+			}
+		case 'SET_MESSAGES': 
+			return {
+				...state,
+				messages: [...state.messages, action.nextMessage]
 			}
 	  	default: { return state };
 	}

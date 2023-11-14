@@ -12,7 +12,7 @@ export function NewQuestion() {
 
 	useEffect(() => {
 		const	visibility = user.choices.newQuestion ? 'hidden' : 'visible';
-		
+
 		dispatch({ type: 'SET_INPUT_VISIBILITY', nextVisibility: visibility });
 	}, [user.choices.newQuestion]);
 
@@ -20,9 +20,9 @@ export function NewQuestion() {
 		<div className="col-message">
 			<div className="row-message ml-[114px]">
 				<Avatar user='agent' />
-				<p className="flex items-center ml-4">{redoUserQuestion}</p>
+				<p className="redo-question">{redoUserQuestion}</p>
 			</div>
-			<BotQuestion id='newQuestion'/>
+			<BotQuestion id='newQuestion' choice={user.choices.newQuestion}/>
 			{user.choices.newQuestion !== NOT_SET && <NotifyArchiving />}
 		</div>
 	);

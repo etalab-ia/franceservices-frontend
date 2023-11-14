@@ -9,7 +9,7 @@ export const	streamReducer = (state = initialStream, action) => {
 				response: [...state.response, action.nextResponse]
 			}
 		case 'STOP_AGENT_STREAM':
-			const joinedRes = state.response.slice(1).join('');
+			const joinedRes = state.response.join('');
 
 			return {
 				...state,
@@ -27,12 +27,18 @@ export const	streamReducer = (state = initialStream, action) => {
 		case 'RESET_AGENT_STREAM':
 			return {
 				...state,
-				response: []
+				response: [],
 			}
 		case 'RESET_STREAM_HISTORY':
 			return {
 				...state,
 				historyStream: [],
+				activeTab: 1,
+			}
+		case 'SWITCH_TAB':
+			return {
+				...state,
+				activeTab: action.nextTab
 			}
 	  	default: { return state };
 	}

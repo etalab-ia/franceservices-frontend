@@ -1,28 +1,31 @@
 import { Avatar } from "./Avatar";
 import { UserChatTools } from "../User/UserChatTools";
 import { UserExperience } from "../Feedbacks/UserExperience";
-import { Sheets } from "../Sheets/Sheets";
 import { NOT_SET } from "../../constants/status";
 import { DisplayStream } from "../Stream/DisplayStream";
 import { NewQuestion } from "./NewQuestion";
 import { useSelector } from "react-redux";
+import { DisplaySheets } from "../Sheets/DisplaySheets";
 
-export function ChatFollowUp({ stream, tabs }) {
-	const	conditionDiv = (stream.response.length !== 0 || stream.historyStream.length !== 0) && tabs.activeTab === 0;
+export function ChatFollowUp({ stream, tabs, archive }) {
 	const	user = useSelector((state) => state.user);
+	const	conditionDiv = ((stream.response.length !== 0 || stream.historyStream.length !== 0) && tabs.activeTab === 0) || archive != NOT_SET;
+	const	sheetsCondition = ((!stream.isStreaming && user.choices.ressources !== NOT_SET) || archive !== NOT_SET);
+	const	userExperienceCondition = !stream.isStreaming && user.choices.ressources !== NOT_SET;
+	const	newQuestionCondition = !stream.isStreaming && user.choices.feedback !== NOT_SET;
 
 	return (
 		<>
 			{conditionDiv && (
 				<div>
 					<div className="streaming-container">
-						<UserChatTools />
+						<UserChatTools isArchive={archive}/>
 						<Avatar user="agent" />
-						<DisplayStream />
+						<DisplayStream stream={stream} tabs={tabs} archive={archive}/>
 					</div>
-					{!stream.isStreaming && user.choices.ressources !== NOT_SET && <Sheets />}
-					{!stream.isStreaming && user.choices.sheets !== NOT_SET && <UserExperience />}
-					{!stream.isStreaming && user.choices.feedback !== NOT_SET && <NewQuestion />}
+					{sheetsCondition && <DisplaySheets />}
+					{userExperienceCondition && <UserExperience isArchive={archive !== NOT_SET}/>}
+					{newQuestionCondition && <NewQuestion />}
 				</div>
 			)}
 		</>
