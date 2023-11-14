@@ -6,6 +6,7 @@ import { setArchive } from "../../utils/archive";
 import { archiveNotificationRole } from "../../constants/archive";
 
 export function NotifyArchiving() {
+	const   archive = useSelector((state) => state.archive);
 	const   user = useSelector((state) => state.user);
 	const   stream = useSelector((state) => state.stream);
 	const	title = user.messages[user.messages.length - 1].text.length > 50 ? user.messages[user.messages.length - 1].text.slice(0, 50) + '...' : user.messages[user.messages.length - 1].text;
