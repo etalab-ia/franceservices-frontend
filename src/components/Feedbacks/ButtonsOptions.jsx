@@ -1,4 +1,4 @@
-import { animated } from '@react-spring/web';
+import { feedbackButtonsChoice } from "../../constants/feedback";
 
 export const	ButtonsOptions = ({ isFirst, buttonsType, reasons, setReasons, dispatch }) => {
 
@@ -23,14 +23,15 @@ export const	ButtonsOptions = ({ isFirst, buttonsType, reasons, setReasons, disp
 				const classNames = reasons.includes(buttonsType[index]) ? "bg-purple" : "bg-[white]";
 				
 				return <div key={index}>
-					<animated.button
+					<button
+						role={feedbackButtonsChoice(button)}
 						className={`user-feedback-buttons ${classNames}`}
 						onClick={() => handleClick(index)}
 					>
 						<p className={reasons.includes(buttonsType[index]) ? "text-white" : "text-purple"}>
 							{button}
 						</p>
-					</animated.button>
+					</button>
 				</div>
 			})}
 		</div>	

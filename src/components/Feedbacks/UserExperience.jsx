@@ -1,34 +1,30 @@
 import { Avatar } from "../Chat/Avatar";
-import { UserChatTools } from "../User/UserChatTools";
 import { Feedback } from "./Feedback";
 import { askingQuality, redoAskingQuality } from "../../constants/feedback";
 import { useSelector } from 'react-redux';
 
 const	AskingResponseQuality = ({ tabsLen }) => {
-
 	return (
-	<div className='ml-4'>
-		<div className="py-4">
-			{tabsLen > 1 ? redoAskingQuality : askingQuality}
+		<div className='ml-4'>
+			<div className="py-4">
+				{tabsLen > 1 ? redoAskingQuality : askingQuality}
+			</div>
 		</div>
-	</div>
 	);
 }
 
-export function UserExperience() {
+export function UserExperience({ isArchive }) {
 	const	stream = useSelector((state) => state.stream);
-	const	history = useSelector((state) => state.history);
 	const	tabsLen = stream.historyStream.length;
 
 	return (
 		<div className="col-message mt-8">
-			{history.activeTab === tabsLen && <div>
-				<div className="row-message">
-					<UserChatTools type='sheets'/>
+			{stream.activeTab === tabsLen && <div>
+				<div className="row-message ml-[110px]">
 					<Avatar user='agent' />
-					<AskingResponseQuality tabsLen={tabsLen}/>
+					<AskingResponseQuality tabsLen={tabsLen} />
 				</div>
-				<Feedback isFirst={tabsLen === 1}/>
+				<Feedback isFirst={tabsLen === 1} isArchive={isArchive}/>
 			</div>}
 		</div>
 	);

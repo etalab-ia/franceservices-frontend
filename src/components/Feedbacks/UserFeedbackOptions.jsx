@@ -30,7 +30,6 @@ export function	UserFeedbackOptions({ activeTab, isFirst }) {
 		}
 	});
 
-
 	return (
 		<div className="col-message">
 			<ButtonsOptions
@@ -52,6 +51,6 @@ export function	UserFeedbackOptions({ activeTab, isFirst }) {
 				feedback={feedback}
 				dispatch={dispatch}
 			/>
-			</div>
+		</div>
 	);
 }

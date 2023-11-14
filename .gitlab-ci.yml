@@ -1,0 +1,34 @@
+stages:
+  - publish
+  - deploy
+
+publish-front:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "qds_deploy_2"
+      when: manual
+      allow_failure: true  # to avoid blocked state
+  image: docker:latest
+  stage: publish
+  services:
+    - docker:dind
+  script:
+    - cd . && docker build -t $CI_REGISTRY_IMAGE/front_albert:latest .
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker push $CI_REGISTRY_IMAGE/front_albert:latest
+
+deploy-front:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "qds_deploy_2"
+      when: manual
+      allow_failure: true  # to avoid blocked state
+  image: alpine:latest
+  stage: deploy
+  environment:
+    name: production
+  script:
+    - chmod og= $ID_RSA
+    - apk update && apk add openssh-client
+    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY"
+    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker pull $CI_REGISTRY_IMAGE/front_albert:latest"
+    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker container rm -f miaou-front-albert || true"
+    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker run -d -p 4174:4173 --name miaou-front-albert $CI_REGISTRY_IMAGE/front_albert:latest"

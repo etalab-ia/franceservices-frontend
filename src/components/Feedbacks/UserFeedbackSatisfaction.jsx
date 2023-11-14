@@ -1,32 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
-import { primaryButtons, secondaryButtons } from "../../constants/feedback";
-import { animated } from '@react-spring/web'
-import { NOT_SET } from "../../constants/status";
+import { primaryButtons, satisfactionButton, secondaryButtons } from "../../constants/feedback";
 
-export function UserFeedbackSatisfaction(props) {
-
-	const	{ isFirst, isConfirmed } = props;
+export function UserFeedbackSatisfaction({ isFirst, isConfirmed, isArchive }) {
 	const	user = useSelector((state) => state.user);
-	const	dispatch = useDispatch();
 	const	buttons = isFirst ? primaryButtons : secondaryButtons;
+	const	dispatch = useDispatch();
 
 	const	handleClick = (index) => {
-		if (user.choices.feedback === index)
-			dispatchEvent({ type: 'SET_USER_CHOICES', nextKey: 'feedback', nextValue: NOT_SET });
-		else
-			dispatch({ type: 'SET_USER_CHOICES', nextKey: 'feedback', nextValue: index });
+		dispatch({ type: 'SET_USER_CHOICES', nextKey: 'feedback', nextValue: index });
 	}
 
 	return (
 		<div className="row-message">
 			{buttons.map((button, index) => {
-				return <animated.button title={button.type} onClick={() => handleClick(index)} key={index} 
-							className={`user-feedback-buttons border-solid ${index === user.choices.feedback ? 'bg-purple' : 'bg-white'}`}
-							disabled={isConfirmed}
+				return <button title={button.type} onClick={() => handleClick(index)} key={index} 
+							className={`user-feedback-buttons ${index === user.choices.feedback ? 'bg-purple' : 'bg-white'}`}
+							disabled={isConfirmed || isArchive}
 					>
-						<img className="mr-2" style={{ filter: index === user.choices.feedback ? "brightness(0) invert(1)" : "none" }} src={button.img}/>
+						<img alt={satisfactionButton(button.type)} className={index === user.choices.feedback ? "mr-2 brightness-0 invert-[1]" : "mr-2"} src={button.img}/>
 						<p className={`${index === user.choices.feedback ? 'text-white' : 'text-purple'}`}>{button.name}</p>
-					</animated.button>
+					</button>
 			})}
 		</div>
 	);

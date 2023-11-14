@@ -4,13 +4,14 @@ import { useFetch } from "./hooks";
 export const	setUserQuestion = (question) => {
 	const	data = {
 		institution: question.institution,
-		title: question.title,
 		user_text: question.user_text,
+		query: question.query,
 		context: question.context,
 		links: question.links,
 		temperature: question.temperature,
-		model_name: "fabrique-miaou",
-		// mode: "simple"
+		model_name: question.model_name,
+		limit: question.limit,
+		mode: question.mode
 	};
 
 	return data;

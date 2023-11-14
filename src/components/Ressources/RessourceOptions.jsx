@@ -1,39 +1,37 @@
-import { ressourceButtons } from "../../constants/ressources";
+import { ressourceButtons, ressourcesChoiceButton } from "../../constants/ressources";
 import { useState } from "react";
-import { animated } from "@react-spring/web";
 import { useDispatch } from "react-redux";
+import { NOT_SET } from "../../constants/status";
 
-export function	RessourceOptions() {
-	const	[ressources, setRessources] = useState([]);
+export function	RessourceOptions({ archive }) {
+	const	[ressource, setRessource] = archive !== NOT_SET ? useState(archive.source) : useState();
     const   dispatch = useDispatch();
 
     const	handleClick = (index) => {
-		if (ressources.includes(ressourceButtons[index]))
-		{
-			setRessources(ressources.filter(ressource => ressource !== ressourceButtons[index]));
-			dispatch({ type: 'RM_RESSOURCE', rmRessource: ressourceButtons[index] });
-		}
-		else
-		{
-			setRessources([...ressources, ressourceButtons[index]]);
-			dispatch({ type: 'SET_NEW_RESSOURCE', nextChoice: ressourceButtons[index] });
-		}
+		const	mode = ressourceButtons[index].model_name === 'albert-light' ? 'rag' : 'simple';
+		const	limit = mode === 'rag' ? 5 : 0;
+		
+		dispatch({ type: 'SET_USER_MODEL_NAME_CHOICE', nextModelName: ressourceButtons[index].model_name, nextMode: mode, nextLimit: limit });
+		setRessource(ressourceButtons[index]);
 	}
 
 	return (
 		<div className="wrap-message">
 			{ressourceButtons.map((button, index) => {
-				const classNames = ressources.includes(ressourceButtons[index]) ? "bg-purple" : "bg-[white]";
-				
+				const	isSelected = (archive === NOT_SET && ressource === button || ressource === button.name);
+				const	classNames = isSelected ? "bg-purple" : "bg-white";
+
 				return <div key={index}>
-					<animated.button
+					<button
+						role={ressourcesChoiceButton(button.name)}
+						disabled={archive !== NOT_SET}
 						className={`user-feedback-buttons ${classNames}`}
 						onClick={() => handleClick(index)}
 					>
-						<p className={ressources.includes(ressourceButtons[index]) ? "text-white" : "text-purple"}>
-							{button}
+						<p className={isSelected ? "text-white" : "text-purple"}>
+							{button.name}
 						</p>
-					</animated.button>
+					</button>
 				</div>
 			})}
 		</div>	

@@ -1,35 +1,29 @@
-import { animated } from '@react-spring/web'
-import { sideButtonsProps, sideInformationProps } from '../../constants/sideButtons';
+import { sideButtonsProps } from '../../constants/sideButtons';
 
-export function SideTabs(props) {
-
-	const	{ state, dispatch } = props;
-
-	const handleClick = (index) => {
-		dispatch({ type: 'SET_ACTIVE_TAB', nextActiveTab: index})
+export function SideTabs({ state, dispatch }) {
+	const	handleClick = (index) => {
+		dispatch({ type: 'RESET_ARCHIVE_TAB', nextActiveTab: index});
+		dispatch({ type: 'SET_ACTIVE_TAB', nextActiveTab: index});
 	};
 
 	return (
-		<div className="side-tools-container ">
-			{sideButtonsProps.map((buttonProps, index) => (
-				<animated.button
-					key={index}
-					className={`side-tools ${index === state.activeTab ? 'bg-purple' : ''}`}
-					onClick={() => handleClick(index)}
-				>
-					<img 
-						style={{filter: index === state.activeTab ? "brightness(0) invert(1)" : "none"}} 
-						src={buttonProps.image}
-						alt={buttonProps.alt}
-						title={buttonProps.title}
-					/>
-				</animated.button>
-			))}
-			{/* <animated.div className='side-tools'>
-				<img src={sideInformationProps.image}
-				alt={sideInformationProps.alt}
-				title={sideInformationProps.title}/>
-			</animated.div> */}
+		<div>
+			<div className="side-tools-container">
+				{sideButtonsProps.map((buttonProps, index) => (
+					<button
+						key={index}
+						className={`side-tools ${index === state.activeTab ? 'bg-purple' : ''}`}
+						onClick={() => handleClick(index)}
+					>
+						<img
+							className={index === state.activeTab ? "brightness-0 invert-[1]" : ""}
+							src={buttonProps.image}
+							alt={buttonProps.alt}
+							title={buttonProps.title}
+						/>
+					</button>
+				))}
+			</div>
 		</div>
 	);
 }

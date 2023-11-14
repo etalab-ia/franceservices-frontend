@@ -9,6 +9,14 @@
 		@apply border-solid;
 	}
 
+	.archive-separation {
+		@apply ml-[114px];
+		@apply mt-[36px];
+		@apply border-t-4;
+		@apply border-[#000091];
+		@apply w-[1000px];
+	}
+
 	/* COLORS */
 
 	/* Light purple */
@@ -97,20 +105,26 @@
 		@apply border-[#3A3A3A];
 	}
 
+	.chat-margin {
+		@apply mb-8;
+	}
+
 	/* GLOBAL */
+
+	.basic-width {
+		@apply w-[500px];
+	}
 
 	.header-container {
 		@apply sticky;
 		@apply top-0;
 		@apply w-full;
-		@apply z-10;
 	}
 
 	.wrapper-container {
 		@apply flex;
 		@apply w-screen;
 		@apply flex-row;
-		@apply h-[588px]
 	}
 
 	.row-message {
@@ -122,6 +136,11 @@
 		@apply flex;
 		@apply flex-col;
 	}
+	
+	.wrap-message {
+		@apply flex;
+		@apply flex-wrap;
+	}
 
 	.avatar {
 		@apply bg-light-purple;
@@ -132,6 +151,10 @@
 		@apply justify-center;
 		@apply items-center;
 		@apply text-center;
+	}
+
+	.tags-font-size {
+		@apply text-[11px];
 	}
 
 	/* CHATBOT PAGE */
@@ -155,18 +178,34 @@
 
 	.main-title {
 		@apply w-[384px];
-		@apply py-6;
 		@apply text-2xl;
 		@apply font-bold;
+		@apply m-0;
+		@apply leading-6;
+		@apply gap-1;
 	}
 
 	.subtitle {
 		@apply w-[384px];
 		@apply text-sm;
 		@apply text-justify;
+		@apply m-0;
 	}
 
 	/* SHEETS */
+
+	.sheets-accordion {
+		@apply flex;
+		@apply ml-[114px];
+		@apply justify-center;
+		@apply pt-6;
+	}
+
+	.fr-accordion__btn {
+		@apply text-[#929292];
+		@apply text-sm;
+		@apply bg-white;
+	}
 
 	.sheets-container {
 		@apply my-4;
@@ -188,6 +227,13 @@
 		@apply no-underline;
 	}
 
+	.sheets-tags {
+		@apply bg-light-grey;
+		@apply px-2;
+		@apply m-1;
+		@apply rounded-[90px];
+	}
+
 	/* AUTH */
 
 	.login-container {
@@ -199,13 +245,16 @@
 	}
 
 	.login-failed {
-		@apply bg-red-100;
-		@apply w-[500px];
+		@apply basic-width;
+		@apply mt-0;
+		@apply mb-4;
+	}
+
+	.login-infos {
+		@apply basic-width;
 		@apply flex;
-		@apply justify-center;
-		@apply p-2;
-		@apply m-4;
-		@apply font-bold;
+		@apply text-[#0063CB];
+		@apply mb-4;
 	}
 
 	/* GLOBAL CHAT */
@@ -215,7 +264,6 @@
 		@apply flex-col;
 		@apply w-screen;
 		@apply items-center;
-		@apply pt-10;
 	}
 
 	/* USER */
@@ -232,9 +280,11 @@
 		@apply flex-col;
 		@apply items-center;
 		@apply w-[69px];
-		@apply ml-20;
+		@apply ml-6;
 		@apply justify-center;
 		@apply bg-light-purple;
+		@apply rounded;
+		@apply mt-[134px];
 	}
 
 	.side-tools {
@@ -249,9 +299,10 @@
 
 	.user-question {
 		@apply flex;
-		@apply w-[792px];
-		@apply pb-6;
-		@apply pt-8;
+		@apply bottom-0;
+		@apply mb-6;
+		@apply mt-8;
+		@apply w-[900px];
 	}
 
 	.user-chat {
@@ -259,10 +310,10 @@
 		@apply flex;
 		@apply w-fit;
 		@apply p-4;
-		@apply rounded-[90px];
+		@apply rounded-[30px];
 		@apply mt-0;
 		@apply ml-auto;
-		@apply mb-8;
+		@apply chat-margin;
 		@apply text-justify;
 	}
 
@@ -272,11 +323,6 @@
 		@apply flex-col;
 		@apply w-[648px];
 		@apply pb-4;
-	}
-	
-	.wrap-message {
-		@apply flex;
-		@apply flex-wrap;
 	}
 
 	.user-feedback-buttons {
@@ -331,18 +377,18 @@
 	.chat {
 		@apply flex;
 		@apply flex-col;
-		@apply pb-8;
-		@apply h-[600px];
-		@apply w-[905px];
+		@apply pt-8;
+		@apply w-[1000px];
 		@apply mr-[112px];
 		@apply whitespace-pre-wrap;
 		@apply text-justify;
 		@apply overflow-y-auto;
 		@apply overflow-x-hidden;
+		@apply min-h-[410px];
 	}
 	
 	.agent-chat {
-		@apply mb-8;
+		@apply chat-margin;
 		@apply py-4;
 		@apply text-justify;
 	}
@@ -363,13 +409,26 @@
 		@apply text-grey;
 		@apply text-sm;
 		@apply font-medium;
+		@apply m-0;
+	}
+
+	.messages-tabs {
+		@apply row-message;
+		@apply ml-4;
+		@apply mt-1;
+	}
+
+	.redo-question {
+		@apply flex;
+		@apply items-center;
+		@apply ml-4;
 	}
 
 	/* ARCHIVE PAGE */
 
 	.archive-tabs {
 		@apply table-fixed;
-		@apply w-[792px];
+		@apply w-[1000px];
 		@apply border-collapse;
 	}
 	
@@ -381,6 +440,7 @@
 		@apply p-4;
 		@apply w-auto;
 		@apply text-left;
+		@apply border-b-[1px] border-[#DDD] p-4 text-left;
 	}
 
 	.archive-tags {
@@ -391,5 +451,18 @@
 		@apply rounded-[90px];
 		@apply bg-[#E5E5E5];
 		@apply m-2;
+	}
+
+	.archive-summary-button {
+		@apply ml-[170px];
+		@apply my-6;
+	}
+
+	.archive-notification-text {
+		@apply ml-[114px];
+		@apply flex;
+		@apply justify-center;
+		@apply text-center;
+		@apply text-[#929292];
 	}
 }

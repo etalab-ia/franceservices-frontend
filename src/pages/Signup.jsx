@@ -4,18 +4,18 @@ import { useState } from "react";
 import { signupFields } from "../constants/inputFields";
 import { initButtonsSignup } from "../constants/connexion";
 import { useFetch } from "../utils/hooks";
-import { signupUrl } from "../constants/api";
+import { userUrl } from "../constants/api";
 import { AuthFailed } from "../components/Auth/AuthFailed";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { invalidEmail } from "../constants/errorMessages";
+import { invalidEmail, invalidPassword } from "../constants/errorMessages";
 
 export function Signup() {
-
 	const	auth = useSelector((state) => state.auth);
 	const	dispatch = useDispatch();
 	const	[password, setPassword] = useState('');
 	const	[confPassword, setConfPassword] = useState('');
+	const	[errorMesage, setErrorMessage] = useState('');
 
 	const	handleChange = (e) => {
 		e.preventDefault();
@@ -31,7 +31,7 @@ export function Signup() {
 	}
 
 	const	handleValidatePassword = () => {
-		return auth.username.length && auth.email.length && auth.email.includes("@") && password.length && confPassword === password;	
+		return auth.username && auth.username.length && auth.email.length && auth.email.includes("@") && password.length && confPassword === password;	
 	}
 
 	const	handleClick = async() => {
@@ -41,28 +41,35 @@ export function Signup() {
 			password: password
 		}
 
-		const	res = await useFetch(signupUrl, 'POST', {
+		const	res = await useFetch(userUrl, 'POST', {
 			data: JSON.stringify(data),
 			headers: { 'Content-Type': 'application/json' }
 		});
-
-		if (res.status && res.status !== 200)
-			return dispatch({ type: 'AUTH_FAILED' });
 		
-		return window.location.href = '/login';
+		if (res.status && res.status !== 200) {
+			const jsonData = await res.json();
+
+			jsonData.detail.map((data) => {
+				data.type === 'value_error' ? setErrorMessage(invalidEmail) : setErrorMessage(invalidPassword);
+			})
+			return dispatch({ type: 'AUTH_FAILED' });
+		}
+		
+		return window.location.href = '/albert/login';
 	}
 	
 	return (
 		<div className="login-container">
-			{auth.authFailed && <AuthFailed>{invalidEmail}</AuthFailed>}
 			{signupFields.map((input, key) => {
-				return <Input className="w-[500px]"
+				return <Input className="basic-width"
 					key={key}
+					label={input.label}
 					hintText={input.hintText}
 					nativeInputProps={{...input.nativeInputProps, onChange: handleChange}}
 				/>
 			})}
-			<ButtonsGroup className="container w-[500px]"
+			{auth.authFailed && <AuthFailed>{errorMesage}</AuthFailed>}
+			<ButtonsGroup className="basic-width"
 				buttons={initButtonsSignup(handleValidatePassword, handleClick, 'Créer un compte')}
 			/>
 		</div>
