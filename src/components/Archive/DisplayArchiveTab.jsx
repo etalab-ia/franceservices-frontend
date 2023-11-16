@@ -11,7 +11,6 @@ export function DisplayArchiveTabs() {
 	const	selectedMessages = tabs.archiveTab !== NOT_SET ? [{ text: archive[tabs.archiveTab].question.query, sender: 'user'}] : [];
 	const   ref = useRef();
 
-	console.log('ref: ', ref)
 	return (
 		<>
 			{tabs.archiveTab === NOT_SET ?

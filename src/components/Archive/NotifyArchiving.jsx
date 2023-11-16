@@ -16,7 +16,7 @@ export function NotifyArchiving() {
 		if (user.choices.oldQuestion === user.choices.newQuestion)
 			return ;
 
-		setArchive(dispatch, stream, user.choices.newQuestion, user.choices);	
+		setArchive(dispatch, stream, user.choices.newQuestion, user.choices, user.sheets);	
 	}, [user.choices.newQuestion])
 
 	return (

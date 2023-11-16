@@ -48,7 +48,6 @@ export const	getSheets = async(question, auth, dispatch) => {
 		headers: setHeaders(auth.userToken, false)
 	});
 
-	console.log('resp: ', sheetsResp)
 	dispatch({ type: 'SET_SHEETS', nextSheets: sheetsResp });
 }
 
