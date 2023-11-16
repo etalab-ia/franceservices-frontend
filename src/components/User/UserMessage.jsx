@@ -25,7 +25,7 @@ export function UserMessage() {
 	}
 
 	useEffect(() => {
-		if (!user.question.query.length || ressources.isConfirmed === NOT_SET)
+		if (!user.question.query.length)
 			return ;
 		postNewQuestion(dispatch, auth, user.question, user.choices.newQuestion);
 	}, [user.question, ressources.isConfirmed]);
@@ -38,7 +38,7 @@ export function UserMessage() {
 	};
 
 	return (
-		<>
+		<div className="flex justify-center">
 			{user.inputVisibility === 'hidden' ?
 				<></>
 				:
@@ -50,6 +50,6 @@ export function UserMessage() {
 					renderInput={handleRenderInput}
 				/>
 			}
-		</>
+		</div>
 	);
 }

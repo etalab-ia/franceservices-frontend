@@ -5,16 +5,19 @@
 @layer base {
 	/* BORDERS */
 	.border {
-		@apply border-2;
+		@apply border-4;
 		@apply border-solid;
 	}
 
 	.archive-separation {
-		@apply ml-[114px];
-		@apply mt-[36px];
+		@apply ml-[56px];
+		@apply my-[36px];
 		@apply border-t-4;
 		@apply border-[#000091];
-		@apply w-[1000px];
+		@apply w-[750px];
+		@apply flex;
+		@apply items-center;
+		@apply justify-center;
 	}
 
 	/* COLORS */
@@ -125,6 +128,7 @@
 		@apply flex;
 		@apply w-screen;
 		@apply flex-row;
+		/* @apply bg-red-200; */
 	}
 
 	.row-message {
@@ -194,21 +198,8 @@
 
 	/* SHEETS */
 
-	.sheets-accordion {
-		@apply flex;
-		@apply ml-[114px];
-		@apply justify-center;
-		@apply pt-6;
-	}
-
-	.fr-accordion__btn {
-		@apply text-[#929292];
-		@apply text-sm;
-		@apply bg-white;
-	}
-
 	.sheets-container {
-		@apply my-4;
+		@apply my-2;
 		@apply p-6;
 		@apply border;
 		@apply border-light-grey;
@@ -299,10 +290,8 @@
 
 	.user-question {
 		@apply flex;
-		@apply bottom-0;
-		@apply mb-6;
-		@apply mt-8;
-		@apply w-[900px];
+		/* @apply bottom-0; */
+		@apply w-[750px];
 	}
 
 	.user-chat {
@@ -312,16 +301,16 @@
 		@apply p-4;
 		@apply rounded-[30px];
 		@apply mt-0;
-		@apply ml-auto;
 		@apply chat-margin;
 		@apply text-justify;
+		@apply max-w-[648px];
 	}
 
 	.user-feedback-container {
-		@apply ml-[182px];
+		@apply ml-[128px];
 		@apply flex;
 		@apply flex-col;
-		@apply w-[648px];
+		@apply max-w-[648px];
 		@apply pb-4;
 	}
 
@@ -369,7 +358,7 @@
 		@apply h-[56px];
 		@apply flex;
 		@apply items-center;
-		@apply ml-[54px];
+		/* @apply ml-[54px]; */
 	}
 
 	/* AGENT */
@@ -377,20 +366,25 @@
 	.chat {
 		@apply flex;
 		@apply flex-col;
-		@apply pt-8;
-		@apply w-[1000px];
-		@apply mr-[112px];
+		/* @apply pt-8; */
+		/* @apply w-[1000px]; */
+		@apply pr-[56px];
 		@apply whitespace-pre-wrap;
 		@apply text-justify;
 		@apply overflow-y-auto;
 		@apply overflow-x-hidden;
-		@apply min-h-[410px];
+		@apply h-[550px];
 	}
 	
 	.agent-chat {
 		@apply chat-margin;
-		@apply py-4;
 		@apply text-justify;
+		@apply bg-light-purple;
+		@apply rounded-[30px];
+		@apply mt-0;
+		@apply ml-auto;
+		@apply p-4;
+		@apply max-w-[648px];
 	}
 
 	.streaming-container {
@@ -399,10 +393,15 @@
 	}
 
 	.streaming {
-		@apply w-[648px];
-		@apply ml-4;
-		@apply py-4;
+		@apply chat-margin;
 		@apply text-justify;
+		@apply bg-light-purple;
+		@apply rounded-[30px];
+		@apply mt-0;
+		@apply ml-auto;
+		@apply p-4;
+		@apply max-w-[648px];
+		@apply ml-4;
 	}
 
 	.streaming-tabs {
@@ -454,15 +453,16 @@
 	}
 
 	.archive-summary-button {
-		@apply ml-[170px];
-		@apply my-6;
+		/* @apply ml-14; */
+		@apply mt-4;
 	}
 
 	.archive-notification-text {
-		@apply ml-[114px];
+		@apply ml-[56px];
 		@apply flex;
 		@apply justify-center;
 		@apply text-center;
 		@apply text-[#929292];
+		@apply mb-4;
 	}
 }

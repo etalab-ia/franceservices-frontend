@@ -7,11 +7,18 @@ export function navFunc() {
 	
 	const navDefs = [
 		{
-			"text": "Accueil",
+			"text": "Poser une question",
 			"linkProps": {
 				"to": "/chat"
 			},
 			"isActive": currentPath === "/chat",
+		},
+		{
+			"text": "Historique",
+			"linkProps": {
+				"to": "/history"
+			},
+			"isActive": currentPath === "/history",
 		},
 	]
 	return navDefs;
@@ -19,6 +26,7 @@ export function navFunc() {
 
 const routeDefs = {
 	"home": defineRoute("/chat"),
+	"editor": defineRoute("/history"),
 };
 
 export const { RouteProvider, useRoute, routes } = createRouter(routeDefs);
