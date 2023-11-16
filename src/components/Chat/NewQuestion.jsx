@@ -18,9 +18,9 @@ export function NewQuestion() {
 
 	return (
 		<div className="col-message">
-			<div className="row-message ml-[114px]">
+			<div className="row-message ml-[56px]">
 				<Avatar user='agent' />
-				<p className="redo-question">{redoUserQuestion}</p>
+				<p className="redo-question streaming">{redoUserQuestion}</p>
 			</div>
 			<BotQuestion id='newQuestion' choice={user.choices.newQuestion}/>
 			{user.choices.newQuestion !== NOT_SET && <NotifyArchiving />}

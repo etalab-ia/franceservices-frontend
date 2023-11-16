@@ -9,7 +9,7 @@ export function Display({ messages, archive }) {
 	const	tabs = useSelector((state) => state.tabs);
 
 	return (
-		<div className="chat">
+		<div className="chat" id='chat'>
 			{messages.map((message, index) => {
 				return Array.isArray(message.text) ? 
 					<DisplayArrayMessages

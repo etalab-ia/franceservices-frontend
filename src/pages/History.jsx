@@ -1,11 +1,10 @@
-import { SideTabs } from './SideTabs';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { DisplayChatTab } from './DisplayChatTab';
 import { useEffect } from 'react';
-import { checkConnexion } from '../../utils/localStorage';
+import { checkConnexion } from '../utils/localStorage';
+import { DisplayArchiveTabs } from '../components/Archive/DisplayArchiveTab';
 
-export function MessagesContainer() {
+export function History() {
 	const	tabs = useSelector((state) => state.tabs);
 	const	auth = useSelector((state) => state.auth);
 	const	dispatch = useDispatch();
@@ -14,9 +13,8 @@ export function MessagesContainer() {
 
 	//	TODO: change height
 	return (
-		<div className={`wrapper-container col-message min-h-[654px]`}>
-			{tabs.activeTab === 0 && <DisplayChatTab />}
-			{/* {tabs.activeTab === 1 && <DisplayArchiveTabs />} */}
+		<div className={`wrapper-container col-message min-h-[654px] items-center mt-4`}>
+			<DisplayArchiveTabs />
 		</div>
 	);
 }

@@ -1,6 +1,6 @@
 export function	TagSheets(props) {
 	const	{ sheetId } = props;
-	const	tags = ['Allocations destinées aux familles', 'Particulier', sheetId];
+	const	tags = ['Question-réponse', 'Particulier', sheetId];
 
 	return (
 		<div className="wrap-message">
