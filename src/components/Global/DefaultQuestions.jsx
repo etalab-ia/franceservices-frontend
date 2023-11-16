@@ -6,7 +6,6 @@ export const    DefaultQuestions = () => {
     const   stream = useSelector((state) => state.stream);
 
     const   handleClick = (question) => {
-        console.log('stream is: ', stream)
         stream.historyStream[0] && dispatch({ type: 'SET_MESSAGES', nextMessage: { text: stream.historyStream[0], sender: 'agent' } });
         dispatch({ type: 'SET_USER_TEXT', nextUserText: question });
         dispatch({ type: 'SET_MESSAGES', nextMessage: { text: question, sender: 'user' } });
