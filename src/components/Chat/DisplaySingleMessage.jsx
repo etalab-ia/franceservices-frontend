@@ -1,3 +1,4 @@
+import { DefaultQuestions } from "../Global/DefaultQuestions";
 import { Avatar } from "./Avatar";
 
 export const	DisplaySingleMessage = ({ sender, text }) => {

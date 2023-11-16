@@ -25,9 +25,12 @@ export function UserMessage() {
 	}
 
 	useEffect(() => {
+		const lastIndex = stream.historyStream.length - 1;
+		console.log(stream.historyStream[lastIndex])
+		console.log('stream: ', stream)
 		if (!user.question.query.length)
 			return ;
-		postNewQuestion(dispatch, auth, user.question, user.choices.newQuestion);
+		postNewQuestion(dispatch, auth, user.question, user.choices.newQuestion, stream.historyStream[lastIndex]);
 	}, [user.question, ressources.isConfirmed]);
 
 	const	handleRenderInput = (params) => {
@@ -39,9 +42,9 @@ export function UserMessage() {
 
 	return (
 		<div className="flex justify-center">
-			{user.inputVisibility === 'hidden' ?
-				<></>
-				:
+			{/* {user.inputVisibility === 'hidden' ? */}
+				{/* <></>
+				: */}
 				<SearchBar
 					label="Poser votre question"
 					className='user-question'
@@ -49,7 +52,7 @@ export function UserMessage() {
 					onChange={handleChange}
 					renderInput={handleRenderInput}
 				/>
-			}
+			{/* } */}
 		</div>
 	);
 }

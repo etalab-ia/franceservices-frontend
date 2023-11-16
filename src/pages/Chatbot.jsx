@@ -10,7 +10,7 @@ export function Chatbot() {
 	const	dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch({ type: 'SET_USER_MODEL_NAME_CHOICE', nextModelName: 'albert-light', nextMode: 'rag', nextLimit: 9 });
+		dispatch({ type: 'SET_USER_MODEL_NAME_CHOICE', nextModelName: 'albert-light', nextMode: 'rag', nextLimit: 6 });
 		!user.messages.length && dispatch({ type: 'SET_MESSAGES', nextMessage: { text: initialChatbotMessage, sender: 'agent' } });
 		checkConnexion(auth, dispatch);
 	}, []);
