@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 const	AskingResponseQuality = ({ tabsLen }) => {
 	return (
-		<div className='streaming my-2'>
+		<div className='streaming my-2 mb-4'>
 			<div className="">
 				{tabsLen > 1 ? redoAskingQuality : askingQuality}
 			</div>

@@ -5,7 +5,7 @@ export function	UserFeedbackResume() {
 	const	feedback = useSelector((state) => state.feedback);
 
 	return (
-		<div role={feedbackResume} className="col-message">
+		<div role={feedbackResume} className="col-message mt-2">
 			<div className="wrap-message">
 				{feedback.reasons.map((button, index) => (
 					<div key={index} className="user-feedback-resume">
