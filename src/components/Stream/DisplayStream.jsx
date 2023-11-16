@@ -30,7 +30,7 @@ export function DisplayStream({ stream, tabs, archive }) {
 	useEffect(() => { dispatch({ type: 'SWITCH_TAB', nextTab: activeTab }) }, []);
 
 	return (
-		<div>
+		<div className="">
 			{conditionStream ?
 				archive === NOT_SET ?
 					<Stream response={stream.response}/>
