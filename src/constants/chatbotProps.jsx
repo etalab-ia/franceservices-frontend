@@ -96,4 +96,4 @@ export const	initialEditorMessage = `Bonjour, je suis Albert, un outil d’intel
 export const	initialChatbotMessage = `Bonjour, je suis Albert, l'outil d’intelligence artificielle interministériel prêt à répondre à vos questions administratives. Quelle est votre question aujourd'hui?
 
 Notez que je suis toujours en plein développement, et ne demande qu'à m'améliorer!`;
-export const	defaultQuestions = ["Comment obtenir une carte famille nombreuse ?", "Quelles sont les critères à remplir pour obtenir l'AAH ?"];
+export const	defaultQuestions = ["Comment obtenir une carte famille nombreuse ?", "Quels sont les critères à remplir pour obtenir l'AAH ?"];
