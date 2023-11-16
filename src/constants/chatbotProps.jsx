@@ -94,5 +94,6 @@ export const	nextImgDescription = `Bouton d'accès au message suivant généré 
 // TODO: improve bot messages
 export const	initialEditorMessage = `Bonjour, je suis Albert, un outil d’intelligence artificielle dont le but est de vous aider à répondre à des avis SP+. Merci de renseigner l'avis auquel répondre :`;
 export const	initialChatbotMessage = `Bonjour, je suis Albert, l'outil d’intelligence artificielle interministériel prêt à répondre à vos questions administratives. Quelle est votre question aujourd'hui?
+
 Notez que je suis toujours en plein développement, et ne demande qu'à m'améliorer!`;
 export const	defaultQuestions = ["Comment obtenir une carte famille nombreuse ?", "Quelles sont les critères à remplir pour obtenir l'AAH ?"];

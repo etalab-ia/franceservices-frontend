@@ -14,10 +14,9 @@ export function DisplayChatTab() {
 
 	useEffect(() => { scrollToBottom(); }, [user, feedback, stream, dispatch]);
 
-	// console.log(user.messages)
 	return (
 		<div className='row-message'>
-			<div className='my-10 w-3/5 px-6 mx-14 border'>
+			<div className='my-10 w-3/5 mx-14'>
 				<Display messages={user.messages} archive={NOT_SET}/>
 				<DefaultQuestions />
 				<UserMessage />
