@@ -11,8 +11,8 @@ export function	DisplaySheets() {
 	return (
 		<>
 			{sheets.length ?
-				<div className='w-[700px] pr-6 pt-2 max-h-[610px] overflow-y-auto overflow-x-hidden'>
-					<h1 className='color-[#161616] leading-7'>Fiches service-public.fr associées</h1>
+				<div className='w-[700px] pr-6 pt-7 max-h-[610px] overflow-y-auto overflow-x-hidden'>
+					{/* <h1 className='color-[#161616] leading-7'>Fiches service-public.fr associées</h1> */}
 						{sheets.map((sheet, index) => {
 							return <div className="sheets-container" key={index}>
 								<TagSheets sheet={sheet} sheetId={getSheetId(sheet.url)}/>

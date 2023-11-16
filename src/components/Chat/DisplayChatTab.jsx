@@ -5,7 +5,7 @@ import { UserMessage } from '../User/UserMessage';
 import { useEffect } from 'react';
 import { scrollToBottom } from '../../utils/manageEffects';
 import { DisplaySheets } from '../Sheets/DisplaySheets';
-
+import { DefaultQuestions } from '../Global/DefaultQuestions';
 export function DisplayChatTab() {
 	const	user = useSelector((state) => state.user);
 	const	feedback = useSelector((state) => state.feedback);
@@ -14,10 +14,12 @@ export function DisplayChatTab() {
 
 	useEffect(() => { scrollToBottom(); }, [user, feedback, stream, dispatch]);
 
+	// console.log(user.messages)
 	return (
 		<div className='row-message'>
 			<div className='my-10 w-3/5 px-6 mx-14 border'>
 				<Display messages={user.messages} archive={NOT_SET}/>
+				<DefaultQuestions />
 				<UserMessage />
 			</div>
 			<DisplaySheets />

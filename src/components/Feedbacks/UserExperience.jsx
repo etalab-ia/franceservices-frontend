@@ -19,13 +19,13 @@ export function UserExperience({ isArchive }) {
 
 	return (
 		<div className="col-message">
-			{stream.activeTab === tabsLen && <div>
+			{/* {stream.activeTab === tabsLen && <div>
 				<div className="row-message ml-[56px]">
 					<Avatar user='agent' />
 					<AskingResponseQuality tabsLen={tabsLen} />
 				</div>
 				<Feedback isFirst={tabsLen === 1} isArchive={isArchive}/>
-			</div>}
+			</div>} */}
 		</div>
 	);
 }

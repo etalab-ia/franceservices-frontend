@@ -18,12 +18,12 @@ export function ChatFollowUp({ stream, tabs, archive }) {
 			{conditionDiv && (
 				<div>
 					<div className="streaming-container">
-						<UserChatTools isArchive={archive}/>
+						<UserChatTools type='sheets' isArchive={archive}/>
 						<Avatar user="agent" />
 						<DisplayStream stream={stream} tabs={tabs} archive={archive}/>
 					</div>
 					{userExperienceCondition && <UserExperience isArchive={archive !== NOT_SET}/>}
-					{newQuestionCondition && <NewQuestion />}
+					{/* {newQuestionCondition && <NewQuestion />} */}
 				</div>
 			)}
 		</>

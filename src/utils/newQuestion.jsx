@@ -2,9 +2,9 @@ import { NOT_SET } from "../constants/status";
 import { usePost } from "./hooks";
 import { getSheets } from "./setData";
 
-export function postNewQuestion(dispatch, auth, question, isNewQuestion) {
+export function postNewQuestion(dispatch, auth, question, isNewQuestion, agentResponse) {
     dispatch({ type: 'SET_INPUT_VISIBILITY', nextVisibility: 'hidden' });
-	usePost(auth, question, dispatch);
+	usePost(auth, question, dispatch, agentResponse);
 	dispatch({ type: 'RESET_FEEDBACK'});
 	getSheets(question, auth, dispatch);
 	isNewQuestion === NOT_SET && dispatch({ type: 'SET_ARCHIVE_QUESTION', nextQuestion: question });
