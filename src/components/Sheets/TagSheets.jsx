@@ -1,14 +1,16 @@
-export function	TagSheets(props) {
-	const	{ sheetId } = props;
-	const	tags = ['Allocations destinées aux familles', 'Particulier', sheetId];
+export function	TagSheets({ sheet, sheetId }) {
+	const	themesArray = sheet.theme.split(', ');
+	const	uniqueThemesSet = new Set(themesArray);
+	const	uniqueThemesArray = Array.from(uniqueThemesSet);
+	const	tags = [ sheet.surtitre, ...uniqueThemesArray, sheetId ];
 
 	return (
 		<div className="wrap-message">
-			{tags.map((tag, index) => {
-				return <div className="sheets-tags" key={index}>
-					{tag}
-				</div>
-			})}
+				{tags.map((tag, index) => {
+					return <div className="sheets-tags" key={index}>
+						{tag}
+					</div>
+				})}
 		</div>
 	);
 }

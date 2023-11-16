@@ -19,7 +19,7 @@ export function UserChatTools({ type, isArchive }) {
 	};
 
 	return (
-		<div className={`user-chat-tools-container ${type ? "ml-[110px]" : ""}`}>
+		<div className={`user-chat-tools-container ${type ? "ml-[56px]" : ""}`}>
 		  	{userChatToolsFunc({ stream, archive, feedback }, dispatch, type).map((tool, index) => (
 				<button 
 					disabled={tool.name === 'redo' && (stream.isStoppable || isArchive !== NOT_SET)}

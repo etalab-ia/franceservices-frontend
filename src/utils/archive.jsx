@@ -1,8 +1,7 @@
-import { tags } from '../constants/tags';
-
-export const    setArchive = (dispatch, stream, newQuestion, choices) => {
-    const	shuffled = tags.sort(() => 0.5 - Math.random());
-	const	selected = shuffled.slice(0, 3);
+export const    setArchive = (dispatch, stream, newQuestion, choices, sheets) => {
+	const	themesArrays = sheets.map((sheet) => sheet.theme.split(', '));
+	const	uniqueThemesSet = new Set(themesArrays.flat());
+	const	selected = Array.from(uniqueThemesSet);
 
 	dispatch({ 
 		type: 'SET_ARCHIVE',

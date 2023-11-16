@@ -22,7 +22,7 @@ async function		handleRedo(state, dispatch) {
 		newText = 'Reformule ce texte : ' + newText;
 	else if (feedback.reasons.includes('Manque de sources'))
 	{
-		newLimit = newLimit === 0 ? 5 : newLimit + 2;
+		newLimit += 2;
 		newMode = 'rag';
 		if (feedback.reasons.includes('Trop long'))
 			newText = 'Résume ce texte : ' + newText;
@@ -90,3 +90,7 @@ export const	robotAvatarDescription = `Avatar du robot.`;
 export const	userAvatarDescription = `Avatar de l'utilisateur / utilisatrice.`;
 export const	previousImgDescription = `Bouton d'accès au message précédent généré par le robot.`;
 export const	nextImgDescription = `Bouton d'accès au message suivant généré par le robot.`;
+
+// TODO: improve bot messages
+export const	initialEditorMessage = `Bonjour, je suis Albert, un outil d’intelligence artificielle dont le but est de vous aider à répondre à des avis SP+. Merci de renseigner l'avis auquel répondre :`;
+export const	initialChatbotMessage = `Bonjour, je suis Albert, un outil d’intelligence artificielle dont le but est de vous aider à trouver des réponses à des questions administratives. Comment puis-je vous aider ?`;

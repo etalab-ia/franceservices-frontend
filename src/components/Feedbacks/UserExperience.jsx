@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux';
 
 const	AskingResponseQuality = ({ tabsLen }) => {
 	return (
-		<div className='ml-4'>
-			<div className="py-4">
+		<div className='streaming my-2 mb-4'>
+			<div className="">
 				{tabsLen > 1 ? redoAskingQuality : askingQuality}
 			</div>
 		</div>
@@ -18,9 +18,9 @@ export function UserExperience({ isArchive }) {
 	const	tabsLen = stream.historyStream.length;
 
 	return (
-		<div className="col-message mt-8">
+		<div className="col-message">
 			{stream.activeTab === tabsLen && <div>
-				<div className="row-message ml-[110px]">
+				<div className="row-message ml-[56px]">
 					<Avatar user='agent' />
 					<AskingResponseQuality tabsLen={tabsLen} />
 				</div>

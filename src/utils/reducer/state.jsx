@@ -2,14 +2,14 @@ import { NOT_SET } from "../../constants/status"
 
 export const	initialQuestion = {
 	model_name: "albert-light",
-	mode: 'simple',
+	mode: 'rag',
 	query: '',
-	limit: 0,
+	limit: 9,
 	user_text: '',
 	context: '',
 	institution: '',
 	links: '',
-	temperature: 20,
+	temperature: 10,
 }
 
 export const	initialUserChoices = {
