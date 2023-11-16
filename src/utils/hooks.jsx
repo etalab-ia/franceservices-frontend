@@ -32,7 +32,7 @@ export const	useFetch = async(url, method, props) => {
 	}
 }
 
-function	handleStreamMessage(e, dispatch, stream_chat, agentResponse) {
+function	handleStreamMessage(e, dispatch, stream_chat) {
 	try
 	{
 		const	jsonData = JSON.parse(e.data);
@@ -41,11 +41,6 @@ function	handleStreamMessage(e, dispatch, stream_chat, agentResponse) {
 		{
 			stream_chat.close();
 
-			console.log('ici done: ', agentResponse)
-
-
-			console.log('agent res: ', agentResponse)
-			// agentResponse && dispatch({ type: 'SET_MESSAGES', nextMessage: { text: agentResponse, sender: 'agent' } });
 			return dispatch({ type: 'STOP_AGENT_STREAM' });
 		} 
 		else 
@@ -69,7 +64,7 @@ function	handleStreamError(e, stream_chat) {
 	}
 }
 
-export const	useStream = async(auth, dispatch, id, agentResponse) => {
+export const	useStream = async(auth, dispatch, id) => {
 	const   stream_chat = new EventSourcePolyfill( `${apiUrl}/${id}/start`, {
 		headers: setHeaders(auth.userToken, true),
 		withCredentials: true,
@@ -77,17 +72,17 @@ export const	useStream = async(auth, dispatch, id, agentResponse) => {
 
 	dispatch({ type: 'RESET_AGENT_STREAM' });
 	stream_chat.onmessage = function(e) {
-		handleStreamMessage(e, dispatch, stream_chat, agentResponse);
+		handleStreamMessage(e, dispatch, stream_chat);
 	}
 	stream_chat.onerror = function (e) {
 		handleStreamError(e, stream_chat);
 	}
 }
 
-export async function	usePost(auth, question, dispatch, agentResponse) {
+export async function	usePost(auth, question, dispatch) {
 	const	headers = setHeaders(auth.userToken, false);
 	const	data = setUserQuestion(question);
 	const	res = await useFetch(apiUrl, 'POST', {data: JSON.stringify(data), headers});
 	
-	await useStream(auth, dispatch, res.id, agentResponse);
+	await useStream(auth, dispatch, res.id);
 }
