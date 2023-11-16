@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { summaryButton, summaryButtonDescription } from "../../constants/archive";
 import { useDispatch } from "react-redux";
+import { DisplaySheets } from "../Sheets/DisplaySheets";
+import { Download } from "@codegouvfr/react-dsfr/Download";
 
 export function DisplayArchiveTabs() {
 	const	archive = useSelector((state) => state.archive);
@@ -25,11 +27,24 @@ export function DisplayArchiveTabs() {
 					<DisplayArchiveBody />
 				</table>
 				:
-				<div>
-					<Display messages={selectedMessages} archive={archive[tabs.archiveTab]}/>
-					<Button title={summaryButtonDescription} className="archive-summary-button" onClick={handleClick} priority="tertiary">
-						{summaryButton}
-					</Button>
+				<div className="col-message">
+					<div className="row-message ml-14">
+						<Button iconId="fr-icon-arrow-left-s-line-double" title={summaryButtonDescription} className="archive-summary-button" onClick={handleClick} priority="tertiary"/>
+						<Button iconId="fr-icon-printer-line" title={summaryButtonDescription} className="archive-summary-button" onClick={handleClick} priority="tertiary"/>
+						<Download
+							details="JPG – 61,88 ko"
+							label="Télécharger le document lorem ipsum sit dolores amet"
+							linkProps={{
+								href: '[À MODIFIER]'
+							}}
+							/>
+					</div>
+					<div className='row-message'>
+						<div className='my-10 w-3/5 px-6 mx-14 border'>
+							<Display messages={selectedMessages} archive={archive[tabs.archiveTab]}/>
+						</div>
+						<DisplaySheets />
+					</div>
 				</div>
 			}
 		</>

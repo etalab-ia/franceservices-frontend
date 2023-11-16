@@ -4,7 +4,7 @@ export function	UserFeedbackThanks() {
 
 	return (
 		<div role={thankFeedbackRole} className="row-message">
-			<div className="pt-6">{thankFeedback}</div>
+			<div className="py-6">{thankFeedback}</div>
 		</div>
 	);
 }

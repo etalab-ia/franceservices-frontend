@@ -7,31 +7,18 @@ export function navFunc() {
 	
 	const navDefs = [
 		{
-			"isActive": currentPath === "/chat" || currentPath === "/history",
-			menuLinks: [
-			  	{
-					"linkProps": {
-						"to": "/chat"
-					},
-					text: 'Poser une question',
-					"isActive": currentPath === "/chat",
-				},
-				{
-					"linkProps": {
-						"to": "/history"
-					},
-					text: 'Historique',
-					"isActive": currentPath === "/history",
-			  	},
-			],
-			text: 'Poser une question'
+			"text": "Poser une question",
+			"linkProps": {
+				"to": "/chat"
+			},
+			"isActive": currentPath === "/chat",
 		},
 		{
-			"text": "Rédiger une réponse",
+			"text": "Historique",
 			"linkProps": {
-				"to": "/editor"
+				"to": "/history"
 			},
-			"isActive": currentPath === "/editor",
+			"isActive": currentPath === "/history",
 		},
 	]
 	return navDefs;
@@ -39,7 +26,7 @@ export function navFunc() {
 
 const routeDefs = {
 	"home": defineRoute("/chat"),
-	"editor": defineRoute("/editor"),
+	"editor": defineRoute("/history"),
 };
 
 export const { RouteProvider, useRoute, routes } = createRouter(routeDefs);

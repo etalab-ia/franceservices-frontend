@@ -22,7 +22,7 @@ async function		handleRedo(state, dispatch) {
 		newText = 'Reformule ce texte : ' + newText;
 	else if (feedback.reasons.includes('Manque de sources'))
 	{
-		newLimit = newLimit === 0 ? 5 : newLimit + 2;
+		newLimit += 2;
 		newMode = 'rag';
 		if (feedback.reasons.includes('Trop long'))
 			newText = 'Résume ce texte : ' + newText;

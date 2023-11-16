@@ -9,7 +9,7 @@ export function NotifyArchiving() {
 	const   archive = useSelector((state) => state.archive);
 	const   user = useSelector((state) => state.user);
 	const   stream = useSelector((state) => state.stream);
-	const	title = user.messages[user.messages.length - 1].text.length > 50 ? user.messages[user.messages.length - 1].text.slice(0, 50) + '...' : user.messages[user.messages.length - 1].text;
+	const	title = user.messages[user.messages.length - 1].text.length > 40 ? user.messages[user.messages.length - 1].text.slice(0, 40) + '...' : user.messages[user.messages.length - 1].text;
 	const	dispatch = useDispatch();
 
 	useEffect(() => {
@@ -22,7 +22,7 @@ export function NotifyArchiving() {
 	return (
 		<div role={archiveNotificationRole}>
 			<div className="archive-notification-text">{notifyArchiving(`« ${title} »`)}</div>
-			<div className="archive-separation"></div>
+			{/* <div className="archive-separation"></div> */}
 		</div>
 	);
 }
