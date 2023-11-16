@@ -20,7 +20,7 @@ export function NewQuestion() {
 		<div className="col-message">
 			<div className="row-message ml-[56px]">
 				<Avatar user='agent' />
-				<p className="redo-question streaming">{redoUserQuestion}</p>
+				<p className="redo-question streaming mb-4">{redoUserQuestion}</p>
 			</div>
 			<BotQuestion id='newQuestion' choice={user.choices.newQuestion}/>
 			{user.choices.newQuestion !== NOT_SET && <NotifyArchiving />}
