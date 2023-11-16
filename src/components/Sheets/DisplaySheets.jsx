@@ -15,7 +15,7 @@ export function	DisplaySheets() {
 					<h1 className='color-[#161616] leading-7'>Fiches service-public.fr associées</h1>
 						{sheets.map((sheet, index) => {
 							return <div className="sheets-container" key={index}>
-								<TagSheets sheetId={getSheetId(sheet.url)}/>
+								<TagSheets sheet={sheet} sheetId={getSheetId(sheet.url)}/>
 								<h1 className="sheet-title">{sheet.title}</h1>
 								<p className='py-3'>{sheet.introduction}</p>
 								<div className='sheet-url'>
