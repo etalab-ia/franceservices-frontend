@@ -55,7 +55,7 @@ export const	toolsTiles = [
 	{
 		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
 		desc: "Accéder",
-		linkProps: { href: '#' },
+		linkProps: { to: "/meeting" },
 		imageUrl: meeting,
 		title: "Préparer un rendez-vous",
 	},

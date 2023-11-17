@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux';
 import { History } from "../pages/History";
 import { Home } from "../pages/Home";
 import { Footer } from "@codegouvfr/react-dsfr/Footer";
+import { Meeting } from "../pages/Meeting";
 
 export const Root = () => {
 	const	navigationData = navFunc();
@@ -34,6 +35,7 @@ export const Root = () => {
 		/>
 		<Routes>
 			<Route path="/login" element={!auth.isLogin ? <Login /> : <Navigate to="/home" />}/>
+			<Route path="/meeting" element={!auth.isLogin ? <Navigate to="/login" /> : <Meeting />}/>
 			<Route path="/home" element={!auth.isLogin ? <Navigate to="/login" /> : <Home />}/>
 			<Route path="/" element={!auth.isLogin ? <Navigate to="/login" /> : <Navigate to="/chat" />}/>
 			<Route path="/chat" element={!auth.isLogin ? <Navigate to="/login" /> : <Chatbot />}/>
