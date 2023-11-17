@@ -5,8 +5,7 @@ export function navFunc() {
 	const	location = useLocation();
 	const	currentPath = location.pathname;
 	
-	const navDefs = [
-		{
+	const navDefs = [{
 			"text": "Accueil",
 			"linkProps": {
 				"to": "/home"
@@ -14,25 +13,37 @@ export function navFunc() {
 			"isActive": currentPath === "/home",
 		},
 		{
-			"text": "Préparer un rendez-vous",
-			"linkProps": {
-				"to": "/meeting"
-			},
-			"isActive": currentPath === "/meeting",
+			text: 'Mes outils',
+			"isActive": currentPath === "/chat" || currentPath === "/meeting",
+			menuLinks: [
+				{
+					"text": "Préparer un rendez-vous",
+					"linkProps": {
+						"to": "/meeting"
+					},
+					"isActive": currentPath === "/meeting",
+				},
+				{
+					"text": "Poser une question",
+					"linkProps": {
+						"to": "/chat"
+					},
+					"isActive": currentPath === "/chat",
+				},
+			]
 		},
 		{
-			"text": "Poser une question",
-			"linkProps": {
-				"to": "/chat"
-			},
-			"isActive": currentPath === "/chat",
-		},
-		{
-			"text": "Historique",
-			"linkProps": {
-				"to": "/history"
-			},
+			text: 'Mes ressources',
 			"isActive": currentPath === "/history",
+			menuLinks: [
+				{
+					"text": "Historique",
+					"linkProps": {
+						"to": "/history"
+					},
+					"isActive": currentPath === "/history",
+				},
+			]
 		},
 	]
 	return navDefs;
