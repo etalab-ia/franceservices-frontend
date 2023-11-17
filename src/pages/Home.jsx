@@ -1,21 +1,21 @@
 import { toolsTitle, ressourcesTitle } from "../constants/home";
-import { HomeContainer } from "../components/Home/HomeContainer";
-import { HomeDiv } from "../components/Home/HomeDiv";
-import { HomeTitle } from "../components/Home/HomeTitle";
 import { HomeTiles } from "../components/Home/HomeTiles";
 import { toolsTiles, ressourcesTiles } from "../constants/inputFields";
+import { GlobalRowContainer } from "../components/Global/GlobalRowContainer";
+import { GlobalDiv } from "../components/Global/GlobalDiv";
+import { GlobalTitle } from "../components/Global/GlobalTitle";
 
 export function Home() {
 	return (
-		<HomeContainer>
-			<HomeDiv>
-				<HomeTitle>{toolsTitle}</HomeTitle>
+		<GlobalRowContainer>
+			<GlobalDiv>
+				<GlobalTitle>{toolsTitle}</GlobalTitle>
 				<HomeTiles tiles={toolsTiles}/>
-			</HomeDiv>
-			<HomeDiv>
-				<HomeTitle>{ressourcesTitle}</HomeTitle>
+			</GlobalDiv>
+			<GlobalDiv>
+				<GlobalTitle>{ressourcesTitle}</GlobalTitle>
 				<HomeTiles tiles={ressourcesTiles}/>
-			</HomeDiv>
-		</HomeContainer>
+			</GlobalDiv>
+		</GlobalRowContainer>
 	);
 }

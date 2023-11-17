@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { NOT_SET } from "../../constants/status";
 import { postNewQuestion, setNewQuestion } from "../../utils/newQuestion";
 
 export function UserMessage() {
