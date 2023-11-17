@@ -14,6 +14,13 @@ export function navFunc() {
 			"isActive": currentPath === "/home",
 		},
 		{
+			"text": "Préparer un rendez-vous",
+			"linkProps": {
+				"to": "/meeting"
+			},
+			"isActive": currentPath === "/meeting",
+		},
+		{
 			"text": "Poser une question",
 			"linkProps": {
 				"to": "/chat"
@@ -32,7 +39,8 @@ export function navFunc() {
 }
 
 const routeDefs = {
-	"home": defineRoute("/chat"),
+	"home": defineRoute("/home"),
+	"meeting": defineRoute("/meeting"),
 	"chat": defineRoute("/chat"),
 	"editor": defineRoute("/history"),
 };
