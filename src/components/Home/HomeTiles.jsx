@@ -9,8 +9,8 @@ export const    TileContainer = ({ children }) => {
 export const    HomeTiles = ({ tiles }) => {
     return <div className="fr-grid-row">
         {tiles.map((tile, key) => {
-            return <TileContainer>
-                <Tile key={key}
+            return <TileContainer key={key}>
+                <Tile
                     className={tile.className}
                     desc={tile.desc}
                     enlargeLink
