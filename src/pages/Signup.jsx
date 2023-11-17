@@ -1,4 +1,3 @@
-import Input from "@codegouvfr/react-dsfr/Input";
 import { ButtonsGroup } from "@codegouvfr/react-dsfr/ButtonsGroup";
 import { useState } from "react";
 import { signupFields } from "../constants/inputFields";
@@ -9,6 +8,8 @@ import { AuthFailed } from "../components/Auth/AuthFailed";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { invalidEmail, invalidPassword } from "../constants/errorMessages";
+import { LoginContainer } from "../components/Auth/LoginContainer";
+import { LoginFields } from "../components/Auth/LoginFields";
 
 export function Signup() {
 	const	auth = useSelector((state) => state.auth);
@@ -59,19 +60,15 @@ export function Signup() {
 	}
 	
 	return (
-		<div className="login-container">
-			{signupFields.map((input, key) => {
-				return <Input className="basic-width"
-					key={key}
-					label={input.label}
-					hintText={input.hintText}
-					nativeInputProps={{...input.nativeInputProps, onChange: handleChange}}
-				/>
-			})}
+		<LoginContainer>
+			<LoginFields
+				fields={signupFields}
+				handleChange={handleChange}
+			/>
 			{auth.authFailed && <AuthFailed>{errorMesage}</AuthFailed>}
 			<ButtonsGroup className="basic-width"
 				buttons={initButtonsSignup(handleValidatePassword, handleClick, 'Créer un compte')}
 			/>
-		</div>
+		</LoginContainer>
 	)
 }

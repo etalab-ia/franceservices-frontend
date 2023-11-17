@@ -1,4 +1,3 @@
-import Input from "@codegouvfr/react-dsfr/Input";
 import { ButtonsGroup } from "@codegouvfr/react-dsfr/ButtonsGroup";
 import { useState } from "react";
 import { signupFields } from "../constants/inputFields";
@@ -9,6 +8,8 @@ import { AuthFailed } from "../components/Auth/AuthFailed";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { changePasswordFailed } from "../constants/errorMessages";
+import { LoginContainer } from "../components/Auth/LoginContainer";
+import { LoginFields } from "../components/Auth/LoginFields";
 
 export function NewPassword() {
 	const	auth = useSelector((state) => state.auth);
@@ -47,22 +48,19 @@ export function NewPassword() {
 
 		return window.location.href = '/albert/login';
 	}
+	const	fields = signupFields.slice(2, signupFields.length);
 	
 	return (
-		<div className="login-container">
-			{signupFields.map((input, key) => {
-				if (key < 2)
-					return null;
-				return <Input className="basic-width"
-					key={key}
-					hintText={input.hintText}
-					nativeInputProps={{...input.nativeInputProps, onChange: handleChange}}
-				/>
-			})}
+		<LoginContainer>
+			<LoginFields
+				fields={fields}
+				handleChange={handleChange}
+			/>
 			{auth.authFailed && <AuthFailed>{changePasswordFailed}</AuthFailed>}
-			<ButtonsGroup className="basic-width"
+			<ButtonsGroup 
+				className="basic-width"
 				buttons={initButtonsSignup(handleValidatePassword, handleClick, 'Changer de mot de passe')}
 			/>
-		</div>
+		</LoginContainer>
 	)
 }
