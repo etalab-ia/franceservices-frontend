@@ -21,7 +21,7 @@ export const	archiveReducer = (state = [], action) => {
 		}
 		case 'SET_ARCHIVE_QUESTION': {
 			const	lastIndex = state.length - 1;
-
+		
 			return [
 				...state.slice(0, lastIndex),
 				{ ...state[lastIndex],

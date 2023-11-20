@@ -13,7 +13,7 @@ export const	streamReducer = (state = initialStream, action) => {
 
 			return {
 				...state,
-				historyStream: [...state.historyStream, joinedRes],
+				historyStream: [joinedRes],
 				isStoppable: false,
 				isStreaming: false,
 				response: [],
