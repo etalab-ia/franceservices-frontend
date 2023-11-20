@@ -17,6 +17,7 @@ async function		handleRedo(state, dispatch) {
 	if (feedback.reasons.includes('Trop long'))
 	{
 		newText = 'Résume ce texte : ' + newText;
+		newLimit = 5;
 	}
 	else if (feedback.reasons.includes('Incohérent'))
 		newText = 'Reformule ce texte : ' + newText;
