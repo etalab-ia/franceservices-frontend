@@ -5,7 +5,7 @@ export function	TagSheets({ sheet, sheetId }) {
 	const	tags = [ sheet.surtitre, ...uniqueThemesArray, sheetId ];
 
 	return (
-		<div className="wrap-message">
+		<div className="wrap-message mb-4">
 				{tags.map((tag, index) => {
 					return <div className="sheets-tags" key={index}>
 						{tag}
