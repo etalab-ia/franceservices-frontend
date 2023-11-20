@@ -68,7 +68,7 @@ export function	MeetingSettings({ setGenerate }) {
 					<Input label="Administrations concernées"/>
 				</GlobalColContainer>
 			</GlobalRowContainer>
-			<Button className="w-full flex justify-center fr-mt-3w" onClick={handleClick}>
+			<Button className="w-full flex justify-center fr-mt-3w" onClick={handleClick} disabled={currQuestion.length === 0}>
 				{meetingGenerationPage}
 			</Button>
 		</GlobalDiv>
