@@ -8,6 +8,7 @@ import { postNewQuestion, setNewQuestion } from "../../utils/newQuestion";
 
 export function UserMessage() {
 	const	auth = useSelector((state) => state.auth);
+	const	archive = useSelector((state) => state.archive);
 	const	ressources = useSelector((state) => state.ressources);
 	const	stream = useSelector((state) => state.stream);
 	const	user = useSelector((state) => state.user);
@@ -39,9 +40,9 @@ export function UserMessage() {
 
 	return (
 		<div className="flex justify-center">
-			{user.inputVisibility === 'hidden' ?
-				<></>
-				:
+			{/* {user.inputVisibility === 'hidden' ? */}
+				{/* <></>
+				: */}
 				<SearchBar
 					label="Poser votre question"
 					className='user-question'
@@ -49,7 +50,7 @@ export function UserMessage() {
 					onChange={handleChange}
 					renderInput={handleRenderInput}
 				/>
-			}
+			{/* } */}
 		</div>
 	);
 }

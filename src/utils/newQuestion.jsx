@@ -7,8 +7,8 @@ export function postNewQuestion(dispatch, auth, question, isNewQuestion) {
 	usePost(auth, question, dispatch);
 	dispatch({ type: 'RESET_FEEDBACK'});
 	getSheets(question, auth, dispatch);
-	isNewQuestion === NOT_SET && dispatch({ type: 'SET_ARCHIVE_QUESTION', nextQuestion: question });
-	dispatch({ type: 'RESET_QUESTION_FIELDS' });
+	isNewQuestion !== 0 && dispatch({ type: 'SET_ARCHIVE_QUESTION', nextQuestion: question });
+	isNewQuestion !== 0 && dispatch({ type: 'RESET_QUESTION_FIELDS' });
 }
 
 export function setNewQuestion(dispatch, newQuestion, agentResponse) {

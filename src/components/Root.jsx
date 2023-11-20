@@ -12,6 +12,7 @@ import { checkConnexion } from "../utils/localStorage";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { History } from "../pages/History";
+import { Badge } from "@codegouvfr/react-dsfr/Badge";
 
 export const Root = () => {
 	const	navigationData = navFunc();
@@ -22,8 +23,8 @@ export const Root = () => {
 
 	return <div className="h-screen" id="screen">
 		<Header className="header-container" id="header"
-			brandTop={<>INTITULE<br />OFFICIEL</>}
-			serviceTitle="ALBERT"
+			brandTop="DINUM / Etalab"
+			serviceTitle={<>ALBERT{' '}<Badge as="span" noIcon severity="success">Beta</Badge></>}
 			serviceTagline="Le module d'Intelligence Artificielle orienté usager"
 			homeLinkProps={{ "to": "/login" }}
 			navigation={auth.isLogin && navigationData}
@@ -33,7 +34,7 @@ export const Root = () => {
 			<Route path="/login" element={!auth.isLogin ? <Login /> : <Navigate to="/chat" />}/>
 			<Route path="/" element={!auth.isLogin ? <Navigate to="/login" /> : <Navigate to="/chat" />}/>
 			<Route path="/chat" element={!auth.isLogin ? <Navigate to="/login" /> : <Chatbot />}/>
-			<Route path="/history" element={!auth.isLogin ? <Navigate to="/login" /> : <History />}/>
+			{/* <Route path="/history" element={!auth.isLogin ? <Navigate to="/login" /> : <History />}/> */}
 			<Route path="/signup" element={<Signup />} />
 			<Route path="/reset-password" element={<ResetPassword />} />
 			<Route path="/new-password" element={<NewPassword />} />

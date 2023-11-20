@@ -6,7 +6,7 @@ export const	DisplaySingleMessage = ({ sender, text }) => {
 
 	return (
 		<div className={classNames}>
-			{!isUser && <div className="ml-[56px]"><Avatar user="agent" /></div>}
+			{!isUser && <div className=""><Avatar user="agent" /></div>}
 			<div className={`${isUser ? "mr-4" : "ml-4"}`}>
 				<div className={isUser ? "user-chat" : "agent-chat"}>{text}</div>
 			</div>

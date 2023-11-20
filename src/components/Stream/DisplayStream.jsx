@@ -22,15 +22,15 @@ export function DisplayStream({ stream, tabs, archive }) {
 
 	useEffect(() => {
 		if (tabsLen != currLen) {
-			dispatch({ type: 'SET_ARCHIVE_MESSAGES', nextAgentResponse: stream.historyStream });
 			setCurrLen(tabsLen);
+			dispatch({ type: 'SET_ARCHIVE_MESSAGES', nextAgentResponse: stream.historyStream });
 		}
 		setActiveTab(tabsLen);
 	}, [tabsLen])
 	useEffect(() => { dispatch({ type: 'SWITCH_TAB', nextTab: activeTab }) }, []);
 
 	return (
-		<div>
+		<div className="">
 			{conditionStream ?
 				archive === NOT_SET ?
 					<Stream response={stream.response}/>
