@@ -18,7 +18,7 @@ export function NewQuestion() {
 
 	return (
 		<div className="col-message">
-			<div className="row-message ml-[56px]">
+			<div className="row-message ">
 				<Avatar user='agent' />
 				<p className="redo-question streaming mb-4">{redoUserQuestion}</p>
 			</div>

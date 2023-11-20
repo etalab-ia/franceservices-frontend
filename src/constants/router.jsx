@@ -13,13 +13,13 @@ export function navFunc() {
 			},
 			"isActive": currentPath === "/chat",
 		},
-		{
-			"text": "Historique",
-			"linkProps": {
-				"to": "/history"
-			},
-			"isActive": currentPath === "/history",
-		},
+		// {
+		// 	"text": "Historique",
+		// 	"linkProps": {
+		// 		"to": "/history"
+		// 	},
+		// 	"isActive": currentPath === "/history",
+		// },
 	]
 	return navDefs;
 }

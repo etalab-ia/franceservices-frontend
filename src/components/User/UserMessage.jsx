@@ -40,9 +40,9 @@ export function UserMessage() {
 
 	return (
 		<div className="flex justify-center">
-			{user.inputVisibility === 'hidden' ?
-				<></>
-				:
+			{/* {user.inputVisibility === 'hidden' ? */}
+				{/* <></>
+				: */}
 				<SearchBar
 					label="Poser votre question"
 					className='user-question'
@@ -50,7 +50,7 @@ export function UserMessage() {
 					onChange={handleChange}
 					renderInput={handleRenderInput}
 				/>
-			}
+			{/* } */}
 		</div>
 	);
 }
