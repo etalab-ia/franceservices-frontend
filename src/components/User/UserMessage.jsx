@@ -20,11 +20,11 @@ export function UserMessage() {
 	}
 
 	const	handleClick = () => {
-		setNewQuestion(dispatch, currQuestion, stream.historyStream);
+		setNewQuestion(dispatch, currQuestion, stream.historyStream, true);
 	}
 
 	useEffect(() => {
-		if (!user.question.query.length)
+		if (!user.question.query.length || !user.isChat)
 			return ;
 		postNewQuestion(dispatch, auth, user.question, user.choices.newQuestion);
 	}, [user.question, ressources.isConfirmed]);

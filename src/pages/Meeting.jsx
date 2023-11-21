@@ -1,3 +1,4 @@
+import { MeetingPage } from "../components/Meeting/MeetingPage";
 import { MeetingSettings } from "../components/Meeting/MeetingSettings";
 import { useState } from "react";
 
@@ -8,7 +9,7 @@ export function	Meeting() {
 		{!generate ?
 			<MeetingSettings setGenerate={setGenerate}/>
 			:
-			<div>coucou</div>
+			<MeetingPage />
 		}
 	</>
 }

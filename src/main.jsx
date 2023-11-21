@@ -10,11 +10,11 @@ import { store } from "./utils/reducer/reducer";
 startReactDsfr({ "defaultColorScheme": "system", Link });
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-	<React.StrictMode>
+	// <React.StrictMode>
 		<BrowserRouter basename="/albert">
 			<Provider store={store}>
 				<Root />
 			</Provider>
 		</BrowserRouter>
-	</React.StrictMode>
+	// </React.StrictMode>
 );

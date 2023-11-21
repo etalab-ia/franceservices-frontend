@@ -7,6 +7,11 @@ export const	scrollToBottom = () => {
 	// window.scrollTo(0, document.body.scrollHeight);
 }
 
+export const	handleTextareaResize = (e) => {
+	e.target.style.height = 'auto';
+	e.target.style.height = e.target.scrollHeight + 'px';
+};
+
 export const useKeyPress = (callback) => {
 	useEffect(() => {
 	  	const handleKeyPress = (e) => {

@@ -1,6 +1,6 @@
 import { initialQuestion, initialUserChoices } from "./state"
 
-export const	userReducer = (state = { question: initialQuestion, choices: initialUserChoices, sheets: [], messages: [] }, action) => {
+export const	userReducer = (state = { question: initialQuestion, choices: initialUserChoices, sheets: [], messages: [], isChat: false }, action) => {
 	switch (action.type) {
 		case 'SET_USER_MODEL_NAME_CHOICE':
 			return {
@@ -19,7 +19,8 @@ export const	userReducer = (state = { question: initialQuestion, choices: initia
 					...state.question,
 					user_text: action.nextUserText,
 					query: action.nextUserText
-				}
+				},
+				isChat: action.nextIsChat,
 			}
 		case 'SET_SHEETS':
 			return {
