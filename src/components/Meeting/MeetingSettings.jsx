@@ -1,70 +1,22 @@
-import { GlobalColContainer } from "../Global/GlobalColContainer";
 import { GlobalDiv } from "../Global/GlobalDiv";
-import { GlobalParagraph } from "../Global/GlobalParagraph";
 import { GlobalRowContainer } from "../Global/GlobalRowContainer";
-import { GlobalSubtitle } from "../Global/GlobalSubtitle";
-import { GlobalTitle } from "../Global/GlobalTitle";
-import { meetingGenerationPage, meetingInformations, meetingParagraph, meetingSubtitle, meetingTitle } from "../../constants/meeting";
-import { Input } from "@codegouvfr/react-dsfr/Input";
-import { Button } from "@codegouvfr/react-dsfr/Button";
 import { useState } from "react";
-import { setNewQuestion } from "../../utils/newQuestion";
-import { useDispatch, useSelector } from "react-redux";
-import { handleTextareaResize } from "../../utils/manageEffects";
+import { MeetingInformations } from "./MeetingInformations";
+import { MeetingButton } from "./MeetingButton";
 
 export function	MeetingSettings({ setGenerate }) {
-	const	dispatch = useDispatch();
-	const	stream = useSelector((state) => state.stream);
 	const	[currQuestion, setCurrQuestion] = useState('');
-	
-	const	handleChange = (e) => {
-		e.preventDefault();
-
-		setCurrQuestion(e.target.value);
-	}
-
-	const	handleClick = () => {
-		setNewQuestion(dispatch, currQuestion, stream.historyStream, false);
-        setGenerate(true);
-	}
 
 	return <GlobalRowContainer>
 		<GlobalDiv>
-			<GlobalTitle>{meetingTitle}</GlobalTitle>
-			<GlobalRowContainer>
-				<GlobalColContainer>
-					<GlobalSubtitle>{meetingSubtitle}</GlobalSubtitle>
-				</GlobalColContainer>
-				<GlobalColContainer>
-					<GlobalSubtitle>{meetingInformations}</GlobalSubtitle>
-				</GlobalColContainer>
-			</GlobalRowContainer>
-			<GlobalRowContainer>
-				<GlobalColContainer>
-					<GlobalParagraph>{meetingParagraph}</GlobalParagraph>
-				</GlobalColContainer>
-				<GlobalColContainer>
-					<Input className="fr-mb-2w" label="Thèmes associés"/>
-				</GlobalColContainer>
-			</GlobalRowContainer>
-			<GlobalRowContainer>
-				<GlobalColContainer>
-					<Input
-						id="text-area"
-						textArea
-						nativeTextAreaProps={{
-							onChange: handleChange,
-							onInputCapture: handleTextareaResize
-						}}
-					/>
-				</GlobalColContainer>
-				<GlobalColContainer>
-					<Input label="Administrations concernées"/>
-				</GlobalColContainer>
-			</GlobalRowContainer>
-			<Button className="w-full flex justify-center fr-mt-3w" onClick={handleClick} disabled={currQuestion.length === 0}>
-				{meetingGenerationPage}
-			</Button>
+			<MeetingInformations
+				setCurrQuestion={setCurrQuestion}
+			/>
+			<MeetingButton
+				isDisable={currQuestion.length === 0}
+				currQuestion={currQuestion}
+				setGenerate={setGenerate}
+			/>
 		</GlobalDiv>
 	</GlobalRowContainer>
 }
