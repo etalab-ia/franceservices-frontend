@@ -7,17 +7,16 @@ import { GlobalTitle } from "../Global/GlobalTitle";
 import { meetingGenerationPage, meetingInformations, meetingParagraph, meetingSubtitle, meetingTitle } from "../../constants/meeting";
 import { Input } from "@codegouvfr/react-dsfr/Input";
 import { Button } from "@codegouvfr/react-dsfr/Button";
-import { useEffect, useState } from "react";
-import { setNewQuestion, postNewQuestion } from "../../utils/newQuestion";
+import { useState } from "react";
+import { setNewQuestion } from "../../utils/newQuestion";
 import { useDispatch, useSelector } from "react-redux";
+import { handleTextareaResize } from "../../utils/manageEffects";
 
 export function	MeetingSettings({ setGenerate }) {
 	const	dispatch = useDispatch();
-	const	auth = useSelector((state) => state.auth);
 	const	stream = useSelector((state) => state.stream);
-	const	user = useSelector((state) => state.user);
 	const	[currQuestion, setCurrQuestion] = useState('');
-
+	
 	const	handleChange = (e) => {
 		e.preventDefault();
 
@@ -25,15 +24,9 @@ export function	MeetingSettings({ setGenerate }) {
 	}
 
 	const	handleClick = () => {
-		setNewQuestion(dispatch, currQuestion, stream.historyStream);
+		setNewQuestion(dispatch, currQuestion, stream.historyStream, false);
         setGenerate(true);
 	}
-
-	useEffect(() => {
-		if (!user.question.query.length)
-			return ;
-		postNewQuestion(dispatch, auth, user.question, user.choices.newQuestion);
-	}, [user.question]);
 
 	return <GlobalRowContainer>
 		<GlobalDiv>
@@ -57,10 +50,11 @@ export function	MeetingSettings({ setGenerate }) {
 			<GlobalRowContainer>
 				<GlobalColContainer>
 					<Input
+						id="text-area"
 						textArea
 						nativeTextAreaProps={{
 							onChange: handleChange,
-							style: {height: 300}
+							onInputCapture: handleTextareaResize
 						}}
 					/>
 				</GlobalColContainer>
