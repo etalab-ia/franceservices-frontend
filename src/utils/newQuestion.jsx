@@ -3,7 +3,6 @@ import { usePost } from "./hooks";
 import { getSheets } from "./setData";
 
 export function postNewQuestion(dispatch, auth, question, isNewQuestion) {
-	console.log('post new question')
     dispatch({ type: 'SET_INPUT_VISIBILITY', nextVisibility: 'hidden' });
 	usePost(auth, question, dispatch);
 	dispatch({ type: 'RESET_FEEDBACK'});
@@ -13,7 +12,6 @@ export function postNewQuestion(dispatch, auth, question, isNewQuestion) {
 }
 
 export function setNewQuestion(dispatch, newQuestion, agentResponse, isChat) {
-	console.log('set new question')
     dispatch({ type: 'SET_USER_TEXT', nextUserText: newQuestion, nextIsChat: isChat });
 	agentResponse.length && dispatch({ type: 'SET_MESSAGES', nextMessage: { text: agentResponse, sender: 'agent' } });
     dispatch({ type: 'RESET_STREAM_HISTORY' });

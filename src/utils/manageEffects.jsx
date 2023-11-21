@@ -3,6 +3,8 @@ import { useEffect } from "react";
 export const	scrollToBottom = () => {
 	const	chatDiv = document.getElementById("chat");
 
+	if (!chatDiv)
+		return ;
 	chatDiv.scrollTop = chatDiv.scrollHeight;
 	// window.scrollTo(0, document.body.scrollHeight);
 }
