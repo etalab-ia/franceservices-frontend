@@ -4,29 +4,49 @@ export const	meetingParagraph = `Des consignes et bons conseil pour créer un bo
 export const    meetingInformations = `Informations contextuelles`;
 export const    meetingGenerationPage = `Générer la page guide`;
 export const    meetingAppointmentInformations = `Informations sur le rendez-vous`;
+
 export const    meetingContacts = [
-    {
-        linkProps: { href: "#" },
-        title: <>
-            <p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">Contact général</p>
-            <p>Nom de l'organisme</p>
-        </>,
-        desc: <>
-            <p>E-mail</p>
-            <p>Numéro de téléphone</p>
-            <p>Horaires</p>
-        </>
-    },
-    {
-        linkProps: { href: "#" },
-        title: <>
-            <p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">Contact A+</p>
-            <p>Nom de l'organisme</p>
-        </>,
-        desc: <>
-            <p>E-mail</p>
-            <p>Numéro de téléphone</p>
-            <p>Horaires</p>
-        </>
-    }
+	{
+		linkProps: { href: "#" },
+		title: <>
+			<p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">Contact général</p>
+			<p>Nom de l'organisme</p>
+		</>,
+		desc: <>
+			<p>E-mail</p>
+			<p>Numéro de téléphone</p>
+			<p>Horaires</p>
+		</>
+	},
+	{
+		linkProps: { href: "#" },
+		title: <>
+			<p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">Contact A+</p>
+			<p>Nom de l'organisme</p>
+		</>,
+		desc: <>
+			<p>E-mail</p>
+			<p>Numéro de téléphone</p>
+			<p>Horaires</p>
+		</>
+	}
+]
+
+export const	meetingQR = [
+	{
+		title: "Une première question",
+		desc: "Une description de la question"
+	},
+	{
+		title: "Une deuxième question",
+		desc: "Une description de la question"
+	},
+	{
+		title: "Une troisième question",
+		desc: "Une description de la question"
+	},
+	{
+		title: "Une quatrième question",
+		desc: "Une description de la question"
+	},
 ]
