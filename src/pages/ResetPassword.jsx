@@ -6,6 +6,7 @@ import { resetPasswordMailUrl } from "../constants/api";
 import { useFetch } from "../utils/hooks";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { LoginContainer } from "../components/Auth/LoginContainer";
 
 export function ResetPassword() {
 	const	auth = useSelector((state) => state.auth);
@@ -32,7 +33,7 @@ export function ResetPassword() {
 	}
 
 	return (
-		<div className="login-container">
+		<LoginContainer>
 			<Input
 				className="basic-width"
 				hintText="Email"
@@ -44,6 +45,6 @@ export function ResetPassword() {
 			<ButtonsGroup className="basic-width"
 				buttons={initButtonsReset(isDisable, handleClick)}
 			/>
-		</div>
+		</LoginContainer>
 	)
 }

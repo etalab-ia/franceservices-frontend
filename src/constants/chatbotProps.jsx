@@ -38,7 +38,7 @@ async function		handleRedo(state, dispatch) {
 	// }
 
 	dispatch({ type: 'SET_USER_MODEL_NAME_CHOICE', nextModelName: 'albert-light', nextMode: newMode, nextLimit: newLimit });
-	dispatch({ type: 'SET_USER_TEXT', nextUserText: newText });
+	dispatch({ type: 'SET_USER_TEXT', nextUserText: newText, nextIsChat: true });
 	dispatch({ type: 'SET_ARCHIVE_LIMIT', nextLimit: newLimit });
 	dispatch({ type: 'RESET_FEEDBACK' });
 

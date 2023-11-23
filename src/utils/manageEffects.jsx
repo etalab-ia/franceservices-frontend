@@ -3,9 +3,16 @@ import { useEffect } from "react";
 export const	scrollToBottom = () => {
 	const	chatDiv = document.getElementById("chat");
 
+	if (!chatDiv)
+		return ;
 	chatDiv.scrollTop = chatDiv.scrollHeight;
 	// window.scrollTo(0, document.body.scrollHeight);
 }
+
+export const	handleTextareaResize = (e) => {
+	e.target.style.height = 'auto';
+	e.target.style.height = e.target.scrollHeight + 'px';
+};
 
 export const useKeyPress = (callback) => {
 	useEffect(() => {
