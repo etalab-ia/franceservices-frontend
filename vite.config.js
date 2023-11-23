@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from 'tailwindcss';
+import path from 'path';
 
 export default ({ mode }) => {
   const isProduction = mode === 'production';
@@ -11,6 +12,12 @@ export default ({ mode }) => {
     build: {
       outDir: 'dist',
       cssCodeSplit: false,
+      assetsInclude: ["dsfr/**"],
+    },
+    resolve: {
+      alias: {
+        '@dsfr': path.resolve(__dirname, './dsfr'),
+      },
     },
     server: {
       watch: {

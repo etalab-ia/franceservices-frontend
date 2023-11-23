@@ -1,6 +1,6 @@
-import meeting from "../../dsfr/artwork/pictograms/buildings/city-hall.svg"
-import question from "../../dsfr/artwork/pictograms/leisure/community.svg"
-import history from "../../dsfr/artwork/pictograms/document/document.svg"
+import meeting from "@dsfr/artwork/pictograms/buildings/city-hall.svg"
+import question from "@dsfr/artwork/pictograms/leisure/community.svg"
+import history from "@dsfr/artwork/pictograms/document/document.svg"
 
 export const signupFields = [
 	{
