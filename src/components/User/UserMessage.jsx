@@ -8,6 +8,7 @@ import { postNewQuestion, setNewQuestion } from "../../utils/newQuestion";
 
 export function UserMessage() {
 	const	auth = useSelector((state) => state.auth);
+	const	archive = useSelector((state) => state.archive);
 	const	ressources = useSelector((state) => state.ressources);
 	const	stream = useSelector((state) => state.stream);
 	const	user = useSelector((state) => state.user);
