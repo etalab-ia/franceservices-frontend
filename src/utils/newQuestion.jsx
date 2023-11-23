@@ -17,6 +17,5 @@ export function setNewQuestion(dispatch, newQuestion, agentResponse, isChat) {
     dispatch({ type: 'RESET_STREAM_HISTORY' });
 	dispatch({ type: 'RESET_USER_CHOICES' });
 	dispatch({ type: 'RESET_RESSOURCE'});
-	console.log('new question')
 	dispatch({ type: 'SET_MESSAGES', nextMessage: { text: newQuestion, sender: 'user' } });
 }

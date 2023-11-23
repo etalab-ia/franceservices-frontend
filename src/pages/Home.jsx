@@ -12,10 +12,10 @@ export function Home() {
 				<GlobalTitle>{toolsTitle}</GlobalTitle>
 				<HomeTiles tiles={toolsTiles}/>
 			</GlobalDiv>
-			<GlobalDiv>
+			{/* <GlobalDiv>
 				<GlobalTitle>{ressourcesTitle}</GlobalTitle>
 				<HomeTiles tiles={ressourcesTiles}/>
-			</GlobalDiv>
+			</GlobalDiv> */}
 		</GlobalRowContainer>
 	);
 }
