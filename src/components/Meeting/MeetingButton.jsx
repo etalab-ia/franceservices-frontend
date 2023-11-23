@@ -1,14 +1,16 @@
 import Button from "@codegouvfr/react-dsfr/Button";
 import { meetingGenerationPage } from "../../constants/meeting";
 import { useDispatch, useSelector } from "react-redux";
-import { setNewQuestion } from "../../utils/newQuestion";
+import { usePost } from "../../utils/hooks";
 
 export function MeetingButton({ isDisable, currQuestion, setGenerate }) {
 	const	dispatch = useDispatch();
-	const	stream = useSelector((state) => state.stream);
+    const   auth = useSelector((state) => state.auth);
+    const   user = useSelector((state) => state.user);
 
     const	handleClick = () => {
-        setNewQuestion(dispatch, currQuestion, stream.historyStream, false);
+        dispatch({ type: 'SET_USER_TEXT', nextUserText: currQuestion, nextIsChat: false });
+        usePost(auth, user.question, dispatch);
         setGenerate(true);
     }
 

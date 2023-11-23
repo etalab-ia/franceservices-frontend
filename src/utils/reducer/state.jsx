@@ -4,7 +4,7 @@ export const	initialQuestion = {
 	model_name: "albert-light",
 	mode: 'rag',
 	query: '',
-	limit: 9,
+	limit: 7,
 	user_text: '',
 	context: '',
 	institution: '',
