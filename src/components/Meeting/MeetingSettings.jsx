@@ -4,9 +4,7 @@ import { useState } from "react";
 import { MeetingInformations } from "./MeetingInformations";
 import { MeetingButton } from "./MeetingButton";
 
-export function	MeetingSettings({ setGenerate }) {
-	const	[currQuestion, setCurrQuestion] = useState('');
-
+export function	MeetingSettings({ setGenerate, currQuestion, setCurrQuestion }) {
 	return <GlobalRowContainer>
 		<GlobalDiv>
 			<MeetingInformations

@@ -2,6 +2,8 @@ import { initialStream } from "./state"
 
 export const	streamReducer = (state = initialStream, action) => {
 	switch (action.type) {
+		case 'SET_INITIAL_STREAM': 
+			return initialStream;
 		case 'GET_AGENT_STREAM':
 			return {
 				...state,
