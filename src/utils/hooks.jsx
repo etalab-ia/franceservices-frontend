@@ -1,4 +1,4 @@
-import { apiUrl, stopGenerationUrl } from "../constants/api";
+import { apiUrl } from "../constants/api";
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import { setHeaders, setUserQuestion } from "./setData";
 
@@ -15,7 +15,7 @@ export const	useFetch = async(url, method, props) => {
 			body: data === undefined ? {} : data
 		})
 		
-		if (response.status !== 200 || url === stopGenerationUrl || url.includes("start"))
+		if (response.status !== 200 || url.includes("start"))
 			return response;			
 		else
 		{

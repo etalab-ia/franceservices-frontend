@@ -13,7 +13,7 @@ export function MeetingStream() {
 	const	stream = useSelector((state) => state.stream);
 
 	return <>
-		<h3 className="text-2xl font-bold fr-pt-3w fr-pb-3w">Résultat</h3>
+		<h3 className="text-2xl font-bold">Résultat</h3>
 		{stream.isStreaming ?
 			<Stream response={stream.response}/>
 			:
