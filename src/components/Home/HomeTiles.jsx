@@ -7,7 +7,7 @@ export const    TileContainer = ({ children }) => {
 }
 
 export const    HomeTiles = ({ tiles }) => {
-	return <div className="fr-grid-row">
+	return <div className="fr-grid-row fr-mb-3w">
 		{tiles.map((tile, key) => {
 			return <TileContainer key={key}>
 				<Tile

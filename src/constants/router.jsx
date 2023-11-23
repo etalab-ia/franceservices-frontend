@@ -13,38 +13,45 @@ export function navFunc() {
 			"isActive": currentPath === "/home",
 		},
 		{
-			text: 'Mes outils',
-			"isActive": currentPath === "/chat" || currentPath === "/meeting",
-			menuLinks: [
-				{
-					"text": "Préparer un rendez-vous",
-					"linkProps": {
-						"to": "/meeting"
-					},
-					"isActive": currentPath === "/meeting",
-				},
-				{
-					"text": "Poser une question",
-					"linkProps": {
-						"to": "/chat"
-					},
-					"isActive": currentPath === "/chat",
-				},
-			]
+			"text": "Préparer un rendez-vous",
+			"linkProps": {
+				"to": "/meeting"
+			},
+			"isActive": currentPath === "/meeting",
 		},
-		{
-			text: 'Mes ressources',
-			"isActive": currentPath === "/history",
-			menuLinks: [
-				{
-					"text": "Historique",
-					"linkProps": {
-						"to": "/history"
-					},
-					"isActive": currentPath === "/history",
-				},
-			]
-		},
+		// {
+		// 	text: 'Mes outils',
+		// 	"isActive": currentPath === "/chat" || currentPath === "/meeting",
+		// 	menuLinks: [
+		// 		{
+		// 			"text": "Préparer un rendez-vous",
+		// 			"linkProps": {
+		// 				"to": "/meeting"
+		// 			},
+		// 			"isActive": currentPath === "/meeting",
+		// 		},
+		// 		{
+		// 			"text": "Poser une question",
+		// 			"linkProps": {
+		// 				"to": "/chat"
+		// 			},
+		// 			"isActive": currentPath === "/chat",
+		// 		},
+		// 	]
+		// },
+		// {
+		// 	text: 'Mes ressources',
+		// 	"isActive": currentPath === "/history",
+		// 	menuLinks: [
+		// 		{
+		// 			"text": "Historique",
+		// 			"linkProps": {
+		// 				"to": "/history"
+		// 			},
+		// 			"isActive": currentPath === "/history",
+		// 		},
+		// 	]
+		// },
 	]
 	return navDefs;
 }
