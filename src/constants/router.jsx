@@ -13,32 +13,25 @@ export function navFunc() {
 			"isActive": currentPath === "/home",
 		},
 		{
-			"text": "Préparer un rendez-vous",
-			"linkProps": {
-				"to": "/meeting"
-			},
-			"isActive": currentPath === "/meeting",
+			text: 'Mes outils',
+			"isActive": currentPath === "/chat" || currentPath === "/meeting",
+			menuLinks: [
+				{
+					"text": "Préparer un rendez-vous",
+					"linkProps": {
+						"to": "/meeting"
+					},
+					"isActive": currentPath === "/meeting",
+				},
+				{
+					"text": "Poser une question",
+					"linkProps": {
+						"to": "/chat"
+					},
+					"isActive": currentPath === "/chat",
+				},
+			]
 		},
-		// {
-		// 	text: 'Mes outils',
-		// 	"isActive": currentPath === "/chat" || currentPath === "/meeting",
-		// 	menuLinks: [
-		// 		{
-		// 			"text": "Préparer un rendez-vous",
-		// 			"linkProps": {
-		// 				"to": "/meeting"
-		// 			},
-		// 			"isActive": currentPath === "/meeting",
-		// 		},
-		// 		{
-		// 			"text": "Poser une question",
-		// 			"linkProps": {
-		// 				"to": "/chat"
-		// 			},
-		// 			"isActive": currentPath === "/chat",
-		// 		},
-		// 	]
-		// },
 		// {
 		// 	text: 'Mes ressources',
 		// 	"isActive": currentPath === "/history",

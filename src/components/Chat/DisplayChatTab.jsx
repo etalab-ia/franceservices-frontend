@@ -29,7 +29,7 @@ export function DisplayChatTab() {
 		<div className='row-message'>
 			<div className='my-10 w-3/5 mx-14'>
 				<Display messages={user.messages} archive={NOT_SET}/>
-				<DefaultQuestions />
+				{/* <DefaultQuestions /> */}
 				<UserMessage />
 			</div>
 			<DisplaySheets />
