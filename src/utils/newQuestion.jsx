@@ -11,8 +11,8 @@ export function postNewQuestion(dispatch, auth, question, isNewQuestion) {
 	isNewQuestion !== 0 && dispatch({ type: 'RESET_QUESTION_FIELDS' });
 }
 
-export function setNewQuestion(dispatch, newQuestion, agentResponse) {
-    dispatch({ type: 'SET_USER_TEXT', nextUserText: newQuestion });
+export function setNewQuestion(dispatch, newQuestion, agentResponse, isChat) {
+    dispatch({ type: 'SET_USER_TEXT', nextUserText: newQuestion, nextIsChat: isChat });
 	agentResponse.length && dispatch({ type: 'SET_MESSAGES', nextMessage: { text: agentResponse, sender: 'agent' } });
     dispatch({ type: 'RESET_STREAM_HISTORY' });
 	dispatch({ type: 'RESET_USER_CHOICES' });

@@ -5,27 +5,61 @@ export function navFunc() {
 	const	location = useLocation();
 	const	currentPath = location.pathname;
 	
-	const navDefs = [
-		{
-			"text": "Poser une question",
+	const navDefs = [{
+			"text": "Accueil",
 			"linkProps": {
-				"to": "/chat"
+				"to": "/home"
 			},
-			"isActive": currentPath === "/chat",
+			"isActive": currentPath === "/home",
+		},
+		{
+			"text": "Préparer un rendez-vous",
+			"linkProps": {
+				"to": "/meeting"
+			},
+			"isActive": currentPath === "/meeting",
 		},
 		// {
-		// 	"text": "Historique",
-		// 	"linkProps": {
-		// 		"to": "/history"
-		// 	},
+		// 	text: 'Mes outils',
+		// 	"isActive": currentPath === "/chat" || currentPath === "/meeting",
+		// 	menuLinks: [
+		// 		{
+		// 			"text": "Préparer un rendez-vous",
+		// 			"linkProps": {
+		// 				"to": "/meeting"
+		// 			},
+		// 			"isActive": currentPath === "/meeting",
+		// 		},
+		// 		{
+		// 			"text": "Poser une question",
+		// 			"linkProps": {
+		// 				"to": "/chat"
+		// 			},
+		// 			"isActive": currentPath === "/chat",
+		// 		},
+		// 	]
+		// },
+		// {
+		// 	text: 'Mes ressources',
 		// 	"isActive": currentPath === "/history",
+		// 	menuLinks: [
+		// 		{
+		// 			"text": "Historique",
+		// 			"linkProps": {
+		// 				"to": "/history"
+		// 			},
+		// 			"isActive": currentPath === "/history",
+		// 		},
+		// 	]
 		// },
 	]
 	return navDefs;
 }
 
 const routeDefs = {
-	"home": defineRoute("/chat"),
+	"home": defineRoute("/home"),
+	"meeting": defineRoute("/meeting"),
+	"chat": defineRoute("/chat"),
 	"editor": defineRoute("/history"),
 };
 

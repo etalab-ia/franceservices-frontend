@@ -1,4 +1,3 @@
-import Input from "@codegouvfr/react-dsfr/Input";
 import { ButtonsGroup } from "@codegouvfr/react-dsfr/ButtonsGroup";
 import { initButtonsLogin } from "../constants/connexion";
 import { loginFields } from "../constants/inputFields";
@@ -10,6 +9,8 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { usernameOrPasswordError } from "../constants/errorMessages";
 import { setUserInfos } from "../utils/manageConnexion";
+import { LoginContainer } from "../components/Auth/LoginContainer";
+import { LoginFields } from "../components/Auth/LoginFields";
 
 export function	Login() {
 	const	auth = useSelector((state) => state.auth);
@@ -80,20 +81,16 @@ export function	Login() {
 	};
 
 	return (
-		<div className="login-container">
-			{loginFields.map((field, key) => {
-				return <Input className="basic-width"
-					label={field.label}
-					iconId={field.iconId}
-					key={key}
-					hintText={field.hintText}
-					nativeInputProps={{...field.nativeInputProps, onChange: handleChange}}
-				/>
-			})}
+		<LoginContainer>
+			<LoginFields
+				fields={loginFields}
+				handleChange={handleChange}
+			/>
 			{auth.authFailed && <AuthFailed>{usernameOrPasswordError}</AuthFailed>}
-			<ButtonsGroup className="basic-width"
+			<ButtonsGroup
+				className="basic-width"
 				buttons={initButtonsLogin(handleClick, isDisable)}
 			/>
-		</div>
+		</LoginContainer>
 	)
 }

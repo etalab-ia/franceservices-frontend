@@ -1,3 +1,7 @@
+import meeting from "../../dist/dsfr/artwork/pictograms/buildings/city-hall.svg"
+import question from "../../dist/dsfr/artwork/pictograms/leisure/community.svg"
+import history from "../../dist/dsfr/artwork/pictograms/document/document.svg"
+
 export const signupFields = [
 	{
 		label: "Nom d'utilisateur",
@@ -45,4 +49,31 @@ export const loginFields = [
 			type: "password",
 		}
 	}
+]
+
+export const	toolsTiles = [
+	{
+		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
+		desc: "Accéder",
+		linkProps: { to: "/meeting" },
+		imageUrl: meeting,
+		title: "Préparer un rendez-vous",
+	},
+	// {
+	// 	className: "fr-tile fr-tile--no-icon fr-enlarge-link",
+	// 	desc: "Accéder",
+	// 	linkProps: { to: "/chat" },
+	// 	imageUrl: question,
+	// 	title: "Poser une question",
+	// }
+]
+
+export const	ressourcesTiles = [
+	{
+		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
+		desc: "Accéder",
+		linkProps: { to: '/history' },
+		imageUrl: history,
+		title: "Historique",
+	},
 ]
