@@ -25,7 +25,7 @@
     "@react-spring/web": "^9.7.3",
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.5.0",
-    "caniuse-lite": "^1.0.30001561",
+    "caniuse-lite": "^1.0.30001564",
     "dayjs": "^1.11.9",
     "event-source-polyfill": "^1.0.31",
     "js-cookie": "^3.0.5",
