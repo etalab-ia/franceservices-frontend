@@ -17,6 +17,7 @@ export function DisplayChatTab() {
 
 	useEffect(() => {
 		dispatch({ type: 'SET_INITIAL_STREAM' });
+		dispatch({ type: 'SET_INITIAL_USER' });
 		dispatch({ type: 'SET_USER_MODEL_NAME_CHOICE', nextModelName: 'albert-light', nextMode: 'rag', nextLimit: 9 });
 		!user.messages.length && dispatch({ type: 'SET_MESSAGES', nextMessage: { text: initialChatbotMessage, sender: 'agent' } });
 		checkConnexion(auth, dispatch);
