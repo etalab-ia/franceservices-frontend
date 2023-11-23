@@ -3,7 +3,7 @@ import { TagSheets } from './TagSheets';
 import arrowRight from "../../../icons/sheets/arrowRight.svg";
 import { getSheetId } from '../../utils/setData';
 import { OpenUrlInNewTab } from '../../utils/manageEffects';
-import { sheetsImgDescription } from '../../constants/sheets';
+import { accordionLabel, sheetsImgDescription } from '../../constants/sheets';
 
 export function	DisplaySheets() {
 	const	sheets = useSelector((state) => state.user.sheets);
@@ -11,7 +11,8 @@ export function	DisplaySheets() {
 	return (
 		<>
 			{sheets.length ?
-				<div className='w-[700px] pr-6 pt-7 max-h-[610px] overflow-y-auto overflow-x-hidden'>
+				<div className='mt-5 w-[700px] pr-6 pt-2 max-h-[610px] overflow-y-auto overflow-x-hidden'>
+						<p>{accordionLabel}</p>
 						{sheets.map((sheet, index) => {
 							return <div className="sheets-container" key={index}>
 								<TagSheets sheet={sheet} sheetId={getSheetId(sheet.url)}/>

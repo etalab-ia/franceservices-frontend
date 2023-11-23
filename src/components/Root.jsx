@@ -23,8 +23,8 @@ export const Root = () => {
 
 	return <div className="h-screen" id="screen">
 		<Header className="header-container" id="header"
-			brandTop={<>DINUM / Etalab{' '}<Badge as="span" noIcon severity="success">Beta</Badge></>}
-			serviceTitle="ALBERT"
+			brandTop="DINUM / Etalab"
+			serviceTitle={<>ALBERT{' '}<Badge as="span" noIcon severity="success">Beta</Badge></>}
 			serviceTagline="Le module d'Intelligence Artificielle orienté usager"
 			homeLinkProps={{ "to": "/login" }}
 			navigation={auth.isLogin && navigationData}

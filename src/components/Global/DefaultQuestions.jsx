@@ -10,7 +10,7 @@ export const    DefaultQuestions = () => {
         dispatch({ type: 'SET_USER_TEXT', nextUserText: question });
         dispatch({ type: 'SET_MESSAGES', nextMessage: { text: question, sender: 'user' } });
     }
-
+    
     return (
         <>
         {!stream.isStreaming ? 
