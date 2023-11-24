@@ -5,7 +5,7 @@ import { DisplayMessageTab } from "../Chat/DisplayMessageTab";
 import { StreamingMessage } from "../Chat/StreamingMessage";
 
 const Stream = ({ response }) => {
-	return <div className="streaming">
+	return <div className="streaming fr-mb-4w">
 		{response.map((item, index) => (
 			<span key={index}>{item}</span>
 		))}

@@ -492,10 +492,6 @@ video {
 
 /* GLOBAL */
 
-.basic-width {
-  width: 500px;
-}
-
 .row-message {
   display: flex;
   flex-direction: row;
@@ -539,8 +535,6 @@ video {
   margin: 0.25rem;
   border-radius: 90px;
 }
-
-/* AUTH */
 
 /* GLOBAL CHAT */
 
@@ -586,7 +580,6 @@ video {
   padding: 1rem;
   border-radius: 30px;
   margin-top: 0px;
-  margin-bottom: 2rem;
   text-align: justify;
   max-width: 648px;
 }
@@ -666,6 +659,7 @@ video {
 .chat {
   display: flex;
   flex-direction: column;
+  padding-right: 56px;
   white-space: pre-wrap;
   text-align: justify;
   overflow-y: auto;
@@ -673,7 +667,6 @@ video {
 }
 
 .agent-chat {
-  margin-bottom: 2rem;
   text-align: justify;
   --tw-bg-opacity: 1;
   background-color: rgb(245 245 254 / var(--tw-bg-opacity));
@@ -690,7 +683,6 @@ video {
 }
 
 .streaming {
-  margin-bottom: 2rem;
   text-align: justify;
   --tw-bg-opacity: 1;
   background-color: rgb(245 245 254 / var(--tw-bg-opacity));

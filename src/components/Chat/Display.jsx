@@ -3,7 +3,7 @@ import { DisplayArrayMessages } from "./DisplayArrayMessages";
 import { DisplaySingleMessage } from "./DisplaySingleMessage";
 import { ChatFollowUp } from "./ChatFollowUp";
 import { NOT_SET } from '../../constants/status';
-import { GlobalChatContainer } from './ChatContainer';
+import { GlobalChatContainer } from './GlobalChatContainer';
 
 export function Display({ messages, archive }) {
 	const	stream = useSelector((state) => state.stream);
