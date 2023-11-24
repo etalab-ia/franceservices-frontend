@@ -5,7 +5,9 @@ export function DisplayArchiveHead() {
     return <thead>
 		<tr>
 			{archiveTabsTitle.map((title, index) => {
-				return <th key={index} className="archive-tabs-title">{title.name}</th>
+				return <th key={index}>
+					{title.name}
+				</th>
 			})}
 		</tr>
 	</thead>

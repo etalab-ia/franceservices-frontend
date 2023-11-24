@@ -1,4 +1,4 @@
-const	apiBase = "https://albert.etalab.gouv.fr/albert/api/v2";
+const	apiBase = "https://albert.etalab.gouv.fr/api/v2";
 
 export const	apiUrl = apiBase + "/stream"
 export const    indexesUrl = apiBase + "/indexes";
