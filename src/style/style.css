@@ -427,7 +427,7 @@
 
 	.archive-tabs {
 		@apply table-fixed;
-		@apply w-[1000px];
+		/* @apply w-[1000px]; */
 		@apply border-collapse;
 	}
 	

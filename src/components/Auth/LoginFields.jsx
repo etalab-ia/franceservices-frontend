@@ -2,8 +2,8 @@ import Input from "@codegouvfr/react-dsfr/Input";
 import { PasswordInput } from "@codegouvfr/react-dsfr/blocks/PasswordInput";
 
 export const    LoginFields = ({ fields, handleChange }) => {
-    return <>
-        {fields.map((field, key) => {
+	return <>
+		{fields.map((field, key) => {
 			return field.nativeInputProps.type !== 'password' ?
 			<Input
 				label={field.label}
@@ -19,5 +19,5 @@ export const    LoginFields = ({ fields, handleChange }) => {
 				nativeInputProps={{...field.nativeInputProps, onChange: handleChange}}
 			/>
 		})}
-    </>
+	</>
 }
