@@ -108,15 +108,7 @@
 		@apply border-[#3A3A3A];
 	}
 
-	.chat-margin {
-		@apply mb-8;
-	}
-
 	/* GLOBAL */
-
-	.basic-width {
-		@apply w-[500px];
-	}
 
 	.header-container {
 		@apply sticky;
@@ -128,7 +120,6 @@
 		@apply flex;
 		@apply w-screen;
 		@apply flex-row;
-		/* @apply bg-red-200; */
 	}
 
 	.row-message {
@@ -225,29 +216,6 @@
 		@apply rounded-[90px];
 	}
 
-	/* AUTH */
-
-	.login-container {
-		@apply flex;
-		@apply flex-col;
-		@apply items-center;
-		@apply justify-center;
-		@apply m-10;
-	}
-
-	.login-failed {
-		@apply basic-width;
-		@apply mt-0;
-		@apply mb-4;
-	}
-
-	.login-infos {
-		@apply basic-width;
-		@apply flex;
-		@apply text-[#0063CB];
-		@apply mb-4;
-	}
-
 	/* GLOBAL CHAT */
 
 	.chat-container {
@@ -301,7 +269,6 @@
 		@apply p-4;
 		@apply rounded-[30px];
 		@apply mt-0;
-		@apply chat-margin;
 		@apply text-justify;
 		@apply max-w-[648px];
 	}
@@ -366,6 +333,7 @@
 	.chat {
 		@apply flex;
 		@apply flex-col;
+		@apply pr-[56px];
 		@apply whitespace-pre-wrap;
 		@apply text-justify;
 		@apply overflow-y-auto;
@@ -373,7 +341,6 @@
 	}
 	
 	.agent-chat {
-		@apply chat-margin;
 		@apply text-justify;
 		@apply bg-light-purple;
 		@apply rounded-[30px];
@@ -389,7 +356,6 @@
 	}
 
 	.streaming {
-		@apply chat-margin;
 		@apply text-justify;
 		@apply bg-light-purple;
 		@apply rounded-[30px];
