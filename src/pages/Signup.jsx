@@ -66,7 +66,7 @@ export function Signup() {
 				handleChange={handleChange}
 			/>
 			{auth.authFailed && <AuthFailed>{errorMesage}</AuthFailed>}
-			<ButtonsGroup className="basic-width"
+			<ButtonsGroup
 				buttons={initButtonsSignup(handleValidatePassword, handleClick, 'Créer un compte')}
 			/>
 		</LoginContainer>

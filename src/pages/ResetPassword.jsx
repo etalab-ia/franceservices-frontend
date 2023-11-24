@@ -35,14 +35,13 @@ export function ResetPassword() {
 	return (
 		<LoginContainer>
 			<Input
-				className="basic-width"
 				hintText="Email"
 				nativeInputProps={{
 					placeholder: "camille@mail.com",
 					onChange: handleChange,
 				}}
 			/>
-			<ButtonsGroup className="basic-width"
+			<ButtonsGroup
 				buttons={initButtonsReset(isDisable, handleClick)}
 			/>
 		</LoginContainer>

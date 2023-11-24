@@ -1,6 +1,5 @@
 import { ButtonsGroup } from "@codegouvfr/react-dsfr/ButtonsGroup";
 import { initButtonsLogin } from "../constants/connexion";
-import { loginFields } from "../constants/inputFields";
 import { useEffect, useState } from "react";
 import { signinUrl } from "../constants/api";
 import { useFetch } from "../utils/hooks";
@@ -9,8 +8,9 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { usernameOrPasswordError } from "../constants/errorMessages";
 import { setUserInfos } from "../utils/manageConnexion";
-import { LoginContainer } from "../components/Auth/LoginContainer";
 import { LoginFields } from "../components/Auth/LoginFields";
+import { loginFields } from "../constants/inputFields";
+import { LoginContainer } from "../components/Auth/LoginContainer";
 
 export function	Login() {
 	const	auth = useSelector((state) => state.auth);
@@ -51,33 +51,24 @@ export function	Login() {
 	}
 
 	const handleClick = async () => {
-		const data = {
+		const	data = {
 		  username: auth.username,
 		  email: auth.email,
 		  password: password
 		};
 		
 		dispatch({ type: 'RESET_AUTH_FAILED' });
-	  
-		try 
-		{
-			const	res = await useFetch(signinUrl, 'POST', {
-				data: JSON.stringify(data),
-				headers: { 'Content-Type': 'application/json' }
-			});
+	
+		const	res = await useFetch(signinUrl, 'POST', {
+			data: JSON.stringify(data),
+			headers: { 'Content-Type': 'application/json' }
+		});
 
-			if (res.status && res.status !== 200)
-				return dispatch({ type: 'AUTH_FAILED' });
+		if ((res.status && res.status !== 200) || !res.token)
+			return dispatch({ type: 'AUTH_FAILED' });
 
-			dispatch({ type: 'LOGIN', nextUserToken: res.token });
-			setUserInfos(res.token, dispatch);
-		} 
-		catch(error)
-		{
-			console.error('An error occurred: ', error);
-
-			return error;
-		}
+		dispatch({ type: 'LOGIN', nextUserToken: res.token });
+		setUserInfos(res.token, dispatch);
 	};
 
 	return (
@@ -88,7 +79,6 @@ export function	Login() {
 			/>
 			{auth.authFailed && <AuthFailed>{usernameOrPasswordError}</AuthFailed>}
 			<ButtonsGroup
-				className="basic-width"
 				buttons={initButtonsLogin(handleClick, isDisable)}
 			/>
 		</LoginContainer>

@@ -58,7 +58,6 @@ export function NewPassword() {
 			/>
 			{auth.authFailed && <AuthFailed>{changePasswordFailed}</AuthFailed>}
 			<ButtonsGroup 
-				className="basic-width"
 				buttons={initButtonsSignup(handleValidatePassword, handleClick, 'Changer de mot de passe')}
 			/>
 		</LoginContainer>
