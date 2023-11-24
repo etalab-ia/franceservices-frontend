@@ -1,3 +1,15 @@
+import { GlobalDiv } from "../Global/GlobalDiv"
+import { GlobalRowContainer } from "../Global/GlobalRowContainer"
+import { HalfScreenWidth } from "../Global/HalfScreenWidth"
+
 export const    LoginContainer = ({ children }) => {
-    return <div className="login-container">{children}</div>
+    return <GlobalRowContainer>
+        <GlobalDiv>
+            <GlobalRowContainer>
+                <HalfScreenWidth>
+                    {children}
+                </HalfScreenWidth>
+            </GlobalRowContainer>
+        </GlobalDiv>
+    </GlobalRowContainer>
 }

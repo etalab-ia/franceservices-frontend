@@ -12,11 +12,11 @@ export default ({ mode }) => {
     build: {
       outDir: 'dist',
       cssCodeSplit: false,
-      assetsInclude: ["dsfr/**"],
+      assetsInclude: ["artwork/**"],
     },
     resolve: {
       alias: {
-        '@dsfr': path.resolve(__dirname, './dsfr'),
+        '@artwork': path.resolve(__dirname, './artwork'),
       },
     },
     server: {
