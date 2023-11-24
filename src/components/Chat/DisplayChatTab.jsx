@@ -23,7 +23,9 @@ export function DisplayChatTab() {
 		checkConnexion(auth, dispatch);
 	}, []);
 
-	useEffect(() => { scrollToBottom(); }, [user, feedback, stream, dispatch]);
+	useEffect(() => {
+		scrollToBottom();
+	}, [user, feedback, stream, dispatch]);
 
 	return (
 		<div className='row-message'>
@@ -32,7 +34,7 @@ export function DisplayChatTab() {
 				{/* <DefaultQuestions /> */}
 				<UserMessage />
 			</div>
-			<DisplaySheets />
+			<DisplaySheets currQuestion={user.question.query}/>
 		</div>
 	);
 }

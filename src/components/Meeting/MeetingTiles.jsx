@@ -3,45 +3,23 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useFetch } from "../../utils/hooks";
 import { indexesUrl } from "../../constants/api";
-import { setHeaders, setSheetsData } from "../../utils/setData";
-
-const setTilesFromSheets = (sheets, setTiles) => {
-	sheets.map((sheet) => {
-		const	url = sheet.url;
-		const	parsedUrl = new URL(url);
-		let		domain = parsedUrl.hostname;
-
-		domain = domain.replace(/^www\./, '');
-		domain = domain.replace(/^entreprendre\./, '');
-
-		const newTile = {
-			linkProps: { to: sheet.url },
-			title: 
-			<>
-				<p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">
-					{sheet.surtitre}</p><p>{sheet.title}
-				</p>
-			</>,
-			desc: domain
-		};
-		setTiles(prevTiles => [...prevTiles, newTile]);
-	});
-};
+import { getSheetsData, setHeaders, setSheetsData } from "../../utils/setData";
+import { setTilesFromSheets } from "../../utils/setData";
 
 export const    MeetingTiles = ({ currQuestion }) => {
 	const   [tiles, setTiles] = useState([]);
 	const	[sheets, setSheets] = useState([]);
 	const	userToken = useSelector((state) => state.auth.userToken);
+	const	user = useSelector((state) => state.user);
+	const	archive = useSelector((state) => state.archive);
 
-	const getSheetsData = async () => {
-		const sheetsResp = await useFetch(indexesUrl, 'POST', {
-			data: setSheetsData(currQuestion),
-			headers: setHeaders(userToken, false),
-		});
-		setSheets(sheetsResp);
-	};
+	useEffect(() => {
+		setTiles([]);
+		if (currQuestion.length === 0)
+			return ;
+		getSheetsData(setSheets, currQuestion, userToken);
+	}, [user.question.query]);
 
-	useEffect(() => { getSheetsData(); }, []);
 	useEffect(() => { setTilesFromSheets(sheets, setTiles); }, [sheets]);
 
 	return <>
