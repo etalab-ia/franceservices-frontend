@@ -366,14 +366,10 @@
 	.chat {
 		@apply flex;
 		@apply flex-col;
-		/* @apply pt-8; */
-		/* @apply w-[1000px]; */
-		@apply pr-[56px];
 		@apply whitespace-pre-wrap;
 		@apply text-justify;
 		@apply overflow-y-auto;
 		@apply overflow-x-hidden;
-		@apply h-[550px];
 	}
 	
 	.agent-chat {
