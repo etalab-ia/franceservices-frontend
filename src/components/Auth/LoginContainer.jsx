@@ -3,9 +3,9 @@ import { GlobalRowContainer } from "../Global/GlobalRowContainer"
 import { HalfScreenWidth } from "../Global/HalfScreenWidth"
 
 export const    LoginContainer = ({ children }) => {
-    return <GlobalRowContainer>
+    return <GlobalRowContainer extraClass='fr-grid-row--center'>
         <GlobalDiv>
-            <GlobalRowContainer>
+            <GlobalRowContainer extraClass='fr-grid-row--center'>
                 <HalfScreenWidth>
                     {children}
                 </HalfScreenWidth>

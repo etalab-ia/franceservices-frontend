@@ -6,11 +6,11 @@ import { StreamingMessage } from "../Chat/StreamingMessage";
 import { GlobalColContainer } from "../Global/GlobalColContainer";
 
 const Stream = ({ response }) => {
-	return <div className="streaming fr-mb-4w">
+	return <p className="streaming fr-mb-4w fr-p-3v fr-ml-3v">
 		{response.map((item, index) => (
 			<span key={index}>{item}</span>
 		))}
-	</div>
+	</p>
 }
 
 export function DisplayStream({ stream, tabs, archive }) {

@@ -3,7 +3,7 @@ import { GlobalDiv } from '../components/Global/GlobalDiv';
 import { GlobalRowContainer } from '../components/Global/GlobalRowContainer';
 
 export function Chatbot() {
-	return (<GlobalRowContainer>
+	return (<GlobalRowContainer extraClass='fr-grid-row--center'>
 		<GlobalDiv>
 			<DisplayChatTab />
 		</GlobalDiv>

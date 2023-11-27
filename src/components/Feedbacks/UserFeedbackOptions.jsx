@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { ButtonsOptions } from "./ButtonsOptions";
 import { ConfirmationButton } from "./ConfirmationButton";
 import { InputOption } from "./InputOption";
+import { GlobalColContainer } from "../Global/GlobalColContainer";
 
 export function	UserFeedbackOptions({ activeTab, isFirst }) {
 	const	[reasons, setReasons] = useState([]);
@@ -31,7 +32,7 @@ export function	UserFeedbackOptions({ activeTab, isFirst }) {
 	});
 
 	return (
-		<div className="col-message">
+		<GlobalColContainer>
 			<ButtonsOptions
 				isFirst={isFirst}
 				buttonsType={buttonsType}
@@ -51,6 +52,6 @@ export function	UserFeedbackOptions({ activeTab, isFirst }) {
 				feedback={feedback}
 				dispatch={dispatch}
 			/>
-		</div>
+		</GlobalColContainer>
 	);
 }

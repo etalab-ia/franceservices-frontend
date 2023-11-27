@@ -1,5 +1,5 @@
-export const    GlobalRowContainer = ({ children }) => {
-	return <div className="fr-grid-row fr-grid-row-gutters fr-grid-row--center">
+export const    GlobalRowContainer = ({ children, extraClass }) => {
+	return <div className={`fr-grid-row fr-grid-row-gutters ${extraClass}`}>
 		{children}
 	</div>
 }

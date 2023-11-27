@@ -7,7 +7,7 @@ import { MeetingSeparator } from "./MeetingSeparator";
 import { MeetingResponse } from "./MeetingResponse";
 
 export function MeetingPage({ currQuestion }) {
-	return <GlobalRowContainer>
+	return <GlobalRowContainer extraClass='fr-grid-row--center'>
 		<GlobalDiv>
 			<GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
 			<div className="fr-pb-3w"><GlobalParagraph>{currQuestion}</GlobalParagraph></div>

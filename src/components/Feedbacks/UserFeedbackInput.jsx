@@ -1,6 +1,6 @@
 import { askingQualityPrecisions, primaryButtons, secondaryButtons } from "../../constants/feedback";
 import { UserFeedbackOptions } from "./UserFeedbackOptions";
-import { UserFeedbackThanks } from "./UserFeedbackThanks";
+// import { UserFeedbackThanks } from "./UserFeedbackThanks";
 import { UserFeedbackResume } from "./UserFeedbackResume";
 import { useSelector } from "react-redux";
 
@@ -18,7 +18,7 @@ export function	UserFeedbackInput({ activeTab, isFirst, isArchive }) {
 				:
 				<div>
 					<UserFeedbackResume />
-					<UserFeedbackThanks />
+					{/* <UserFeedbackThanks /> */}
 				</div>
 			}	
 		</>

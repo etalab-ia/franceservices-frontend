@@ -24,7 +24,7 @@ export function DisplayArchiveTabs() {
 
 
 	return (
-		<GlobalRowContainer>
+		<GlobalRowContainer extraClass='fr-grid-row--center'>
 			{tabs.archiveTab === NOT_SET ?
 				<GlobalDiv>
 					<table className="w-full">

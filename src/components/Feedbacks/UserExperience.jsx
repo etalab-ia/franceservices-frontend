@@ -2,13 +2,13 @@ import { Avatar } from "../Chat/Avatar";
 import { Feedback } from "./Feedback";
 import { askingQuality, redoAskingQuality } from "../../constants/feedback";
 import { useSelector } from 'react-redux';
+import { GlobalColContainer } from "../Global/GlobalColContainer";
+import { GlobalRowContainer } from "../Global/GlobalRowContainer";
 
 const	AskingResponseQuality = ({ tabsLen }) => {
 	return (
-		<div className='streaming my-2 mb-4'>
-			<div className="">
-				{tabsLen > 1 ? redoAskingQuality : askingQuality}
-			</div>
+		<div className='streaming fr-mb-2w fr-p-3v fr-ml-3v'>
+			<div>{tabsLen > 1 ? redoAskingQuality : askingQuality}</div>
 		</div>
 	);
 }
@@ -18,14 +18,21 @@ export function UserExperience({ isArchive }) {
 	const	tabsLen = stream.historyStream.length;
 
 	return (
-		<div className="col-message">
-			{/* {stream.activeTab === tabsLen && <div>
-				<div className="row-message ml-[56px]">
-					<Avatar user='agent' />
-					<AskingResponseQuality tabsLen={tabsLen} />
-				</div>
-				<Feedback isFirst={tabsLen === 1} isArchive={isArchive}/>
-			</div>} */}
-		</div>
+		<>
+			{stream.activeTab === tabsLen && <div>
+				<GlobalRowContainer>
+					<Avatar
+						user='agent'
+					/>
+					<AskingResponseQuality
+						tabsLen={tabsLen}
+					/>
+				</GlobalRowContainer>
+				<Feedback
+					isFirst={tabsLen === 1}
+					isArchive={isArchive}
+				/>
+			</div>}
+		</>
 	);
 }

@@ -581,7 +581,7 @@ video {
 }
 
 .user-feedback-container {
-  margin-left: 128px;
+  /* @apply ml-[128px]; */
   display: flex;
   flex-direction: column;
   padding-bottom: 1rem;
@@ -624,24 +624,6 @@ video {
   border-color: rgb(221 221 221 / var(--tw-border-opacity));
 }
 
-.user-feedback-resume {
-  display: flex;
-  flex-direction: row;
-  margin-right: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  justify-content: center;
-  align-content: center;
-  border-radius: 90px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(229 229 229 / var(--tw-bg-opacity));
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  max-height: 40px;
-}
-
 /* AGENT */
 
 .chat {
@@ -669,10 +651,8 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(245 245 254 / var(--tw-bg-opacity));
   border-radius: 30px;
-  margin-top: 0px;
-  margin-left: auto;
-  padding: 1rem;
-  margin-left: 1rem;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .streaming-tabs {
@@ -689,12 +669,6 @@ video {
   flex-direction: row;
   margin-left: 1rem;
   margin-top: 0.25rem;
-}
-
-.redo-question {
-  display: flex;
-  align-items: center;
-  margin-left: 1rem;
 }
 
 /* ARCHIVE PAGE */
@@ -879,11 +853,6 @@ video {
   margin-bottom: 2.5rem;
 }
 
-.my-2 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -912,24 +881,8 @@ video {
   margin-right: 0.75rem;
 }
 
-.mr-4 {
-  margin-right: 1rem;
-}
-
-.mt-2 {
-  margin-top: 0.5rem;
-}
-
 .mt-4 {
   margin-top: 1rem;
-}
-
-.ml-0 {
-  margin-left: 0px;
-}
-
-.mr-auto {
-  margin-right: auto;
 }
 
 .flex {
@@ -985,10 +938,6 @@ video {
   width: 100vw;
 }
 
-.w-\[200px\] {
-  width: 200px;
-}
-
 .flex-grow {
   flex-grow: 1;
 }
@@ -1036,19 +985,9 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-red-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 202 202 / var(--tw-bg-opacity));
-}
-
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-green-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(187 247 208 / var(--tw-bg-opacity));
 }
 
 .px-6 {

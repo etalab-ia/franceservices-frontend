@@ -5,6 +5,7 @@ import { Avatar } from "./Avatar";
 import { NOT_SET } from "../../constants/status";
 import { NotifyArchiving } from "../Archive/NotifyArchiving";
 import { useDispatch, useSelector } from "react-redux";
+import { GlobalRowContainer } from "../Global/GlobalRowContainer";
 
 export function NewQuestion() {
 	const	user = useSelector((state) => state.user);
@@ -17,13 +18,20 @@ export function NewQuestion() {
 	}, [user.choices.newQuestion]);
 
 	return (
-		<div className="col-message">
-			<div className="row-message ">
-				<Avatar user='agent' />
-				<p className="redo-question streaming mb-4">{redoUserQuestion}</p>
-			</div>
-			<BotQuestion id='newQuestion' choice={user.choices.newQuestion}/>
+		<>
+			<GlobalRowContainer>
+				<Avatar
+					user='agent'
+				/>
+				<p className="streaming fr-mb-2w fr-p-3v fr-ml-3v">
+					{redoUserQuestion}
+				</p>
+			</GlobalRowContainer>
+			<BotQuestion
+				id='newQuestion'
+				choice={user.choices.newQuestion}
+			/>
 			{user.choices.newQuestion !== NOT_SET && <NotifyArchiving />}
-		</div>
+		</>
 	);
 }
