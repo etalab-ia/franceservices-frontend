@@ -1,7 +1,7 @@
 import { Avatar } from "../Chat/Avatar";
 import { BotQuestion } from "./BotQuestion";
 
-export function	QuestionnaireBot({ id, question, type, choice }) {
+export function	QuestionnaireBot({ id, question, choice }) {
 
     return (
 		<div className="col-message">

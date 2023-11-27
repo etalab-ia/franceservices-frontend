@@ -12,7 +12,7 @@ async function		handleRedo(state, dispatch) {
 	const	archiveIndex = archive.length - 1;
 	let		newLimit = archive[archiveIndex].question.limit;
 	let		newText = archive[archiveIndex].agentResponse;
-	let		newMode = 'simple';
+	let		newMode = feedback.reasons.length ? 'simple' : 'rag';
 	
 	if (feedback.reasons.includes('Trop long'))
 	{
@@ -46,12 +46,12 @@ async function		handleRedo(state, dispatch) {
 }
 
 function			handleCopy(stream) {
-	const	joinedRes = stream.response.join('')
+	const	joinedRes = stream.historyStream[stream.historyStream.length - 1];
 
 	return navigator.clipboard.writeText(joinedRes);
 }
 
-export	function	userChatToolsFunc(state, dispatch, type) {
+export	function	userChatToolsFunc(state, dispatch) {
 
 	const	userChatToolsProps = [
 		{
@@ -69,16 +69,8 @@ export	function	userChatToolsFunc(state, dispatch, type) {
 			onClick: () => handleCopy(state.stream),
 		},
 	]
-	const typeToButtonsMap = {
-		default: [0, 1, 2, 3],
-		quality: [1],
-		sheets: [2],
-	};
 
-	const	visibleButtonIndices = typeToButtonsMap[type] || typeToButtonsMap.default;
-	const	visibleButtonsProps = userChatToolsProps.filter((button, index) => visibleButtonIndices.includes(index));
-
-	return visibleButtonsProps;
+	return userChatToolsProps;
 }
 
 export const	redoUserQuestion = `Voulez-vous poser une nouvelle question ?`;

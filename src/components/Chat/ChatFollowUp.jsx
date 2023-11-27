@@ -1,11 +1,11 @@
-import { Avatar } from "./Avatar";
-import { UserChatTools } from "../User/UserChatTools";
 import { UserExperience } from "../Feedbacks/UserExperience";
 import { NOT_SET } from "../../constants/status";
 import { DisplayStream } from "../Stream/DisplayStream";
 import { NewQuestion } from "./NewQuestion";
 import { useSelector } from "react-redux";
 import { GlobalRowContainer } from "../Global/GlobalRowContainer";
+import { GlobalColContainer } from "../Global/GlobalColContainer";
+import { AvatarToolsContainer } from "./AvatarToolsContainer";
 
 export function ChatFollowUp({ stream, tabs, archive }) {
 	const	user = useSelector((state) => state.user);
@@ -19,11 +19,16 @@ export function ChatFollowUp({ stream, tabs, archive }) {
 			{conditionDiv && (
 				<div>
 					<GlobalRowContainer extraClass='fr-grid-row--center'>
-						<UserChatTools type='sheets' isArchive={archive}/>
-						<Avatar user="agent" />
-						<DisplayStream stream={stream} tabs={tabs} archive={archive}/>
+						<AvatarToolsContainer archive={archive}/>
+						<DisplayStream
+							stream={stream}
+							tabs={tabs}
+							archive={archive}
+						/>
 					</GlobalRowContainer>
-					{userExperienceCondition && <UserExperience isArchive={archive !== NOT_SET}/>}
+					{userExperienceCondition && <UserExperience
+						isArchive={archive !== NOT_SET}
+					/>}
 					{/* {newQuestionCondition && <NewQuestion />} */}
 				</div>
 			)}
