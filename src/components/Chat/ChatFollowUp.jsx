@@ -5,6 +5,7 @@ import { NOT_SET } from "../../constants/status";
 import { DisplayStream } from "../Stream/DisplayStream";
 import { NewQuestion } from "./NewQuestion";
 import { useSelector } from "react-redux";
+import { GlobalRowContainer } from "../Global/GlobalRowContainer";
 
 export function ChatFollowUp({ stream, tabs, archive }) {
 	const	user = useSelector((state) => state.user);
@@ -17,11 +18,11 @@ export function ChatFollowUp({ stream, tabs, archive }) {
 		<>
 			{conditionDiv && (
 				<div>
-					<div className="streaming-container">
+					<GlobalRowContainer>
 						<UserChatTools type='sheets' isArchive={archive}/>
 						<Avatar user="agent" />
 						<DisplayStream stream={stream} tabs={tabs} archive={archive}/>
-					</div>
+					</GlobalRowContainer>
 					{userExperienceCondition && <UserExperience isArchive={archive !== NOT_SET}/>}
 					{/* {newQuestionCondition && <NewQuestion />} */}
 				</div>

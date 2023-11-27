@@ -38,17 +38,13 @@ export function UserMessage() {
 
 	return (
 		<div className="flex justify-center">
-			{/* {user.inputVisibility === 'hidden' ? */}
-				{/* <></>
-				: */}
-				<SearchBar
-					label="Poser votre question"
-					className='w-5/6'
-					onButtonClick={handleClick}
-					onChange={handleChange}
-					renderInput={handleRenderInput}
-				/>
-			{/* } */}
+			<SearchBar
+				label="Poser votre question"
+				className='w-5/6'
+				onButtonClick={handleClick}
+				onChange={handleChange}
+				renderInput={handleRenderInput}
+			/>
 		</div>
 	);
 }

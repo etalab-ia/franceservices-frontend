@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { StreamingMessage } from "./StreamingMessage";
 import { DisplayMessageTab } from "./DisplayMessageTab";
+import { GlobalRowContainer } from "../Global/GlobalRowContainer";
 
 export function DisplayArrayMessages({ messages, isArchive }) {
 	const	tabsLen = messages.length;
@@ -15,18 +16,16 @@ export function DisplayArrayMessages({ messages, isArchive }) {
 	useEffect(() => { dispatch({ type: 'SWITCH_TAB', nextTab: activeTab }) }, []);
 
 	return (
-		<div className="streaming-container">
+		<GlobalRowContainer>
 			<UserChatTools type='sheets' isArchive={isArchive}/>
 			<Avatar user="agent" />
-			<div className=" ">
-				<StreamingMessage>{messages[activeTab - 1]}</StreamingMessage>
-				<DisplayMessageTab
-					isDisplayable={conditionTab}
-					tabsLen={tabsLen}
-					activeTab={activeTab}
-					setActiveTab={setActiveTab}
-				/>
-			</div>
-		</div>
+			<StreamingMessage>{messages[activeTab - 1]}</StreamingMessage>
+			<DisplayMessageTab
+				isDisplayable={conditionTab}
+				tabsLen={tabsLen}
+				activeTab={activeTab}
+				setActiveTab={setActiveTab}
+			/>
+		</GlobalRowContainer>
 	);
 }

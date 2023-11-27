@@ -140,9 +140,6 @@
 	.avatar {
 		@apply bg-light-purple;
 		@apply rounded-[90px];
-		@apply w-[56px];
-		@apply h-[56px];
-		@apply flex;
 		@apply justify-center;
 		@apply items-center;
 		@apply text-center;
@@ -270,14 +267,12 @@
 		@apply rounded-[30px];
 		@apply mt-0;
 		@apply text-justify;
-		@apply max-w-[648px];
 	}
 
 	.user-feedback-container {
 		@apply ml-[128px];
 		@apply flex;
 		@apply flex-col;
-		@apply max-w-[648px];
 		@apply pb-4;
 	}
 
@@ -321,13 +316,6 @@
 		@apply max-h-[40px];
 	}
 
-	.user-chat-tools-container {
-		@apply h-[56px];
-		@apply flex;
-		@apply items-center;
-		/* @apply ml-[54px]; */
-	}
-
 	/* AGENT */
 
 	.chat {
@@ -347,12 +335,6 @@
 		@apply mt-0;
 		@apply ml-auto;
 		@apply p-4;
-		@apply max-w-[648px];
-	}
-
-	.streaming-container {
-		@apply flex;
-		@apply flex-row;
 	}
 
 	.streaming {
@@ -362,7 +344,6 @@
 		@apply mt-0;
 		@apply ml-auto;
 		@apply p-4;
-		@apply max-w-[648px];
 		@apply ml-4;
 	}
 
