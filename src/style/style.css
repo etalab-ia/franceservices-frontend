@@ -253,12 +253,6 @@
 		@apply my-[7px];
 	}
 
-	.user-question {
-		@apply flex;
-		/* @apply bottom-0; */
-		@apply w-[750px];
-	}
-
 	.user-chat {
 		@apply bg-light-purple;
 		@apply flex;
@@ -270,7 +264,6 @@
 	}
 
 	.user-feedback-container {
-		/* @apply ml-[128px]; */
 		@apply flex;
 		@apply flex-col;
 		@apply pb-4;
