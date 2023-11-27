@@ -1,25 +1,28 @@
 import { useDispatch, useSelector } from "react-redux";
-import { defaultQuestions } from "../../constants/chatbotProps"
+import { defaultButtonChoice, defaultQuestions } from "../../constants/chatbotProps"
+import { setNewQuestion } from "../../utils/newQuestion";
+import { DefaultQuestionsContainer } from "./DefaultQuestionsContainer";
 
 export const    DefaultQuestions = () => {
-    const   dispatch = useDispatch();
-    const   stream = useSelector((state) => state.stream);
+	const   dispatch = useDispatch();
+	const   stream = useSelector((state) => state.stream);
 
-    const   handleClick = (question) => {
-        stream.historyStream[0] && dispatch({ type: 'SET_MESSAGES', nextMessage: { text: stream.historyStream[0], sender: 'agent' } });
-        dispatch({ type: 'SET_USER_TEXT', nextUserText: question });
-        dispatch({ type: 'SET_MESSAGES', nextMessage: { text: question, sender: 'user' } });
-    }
-    
-    return (
-        <>
-        {!stream.isStreaming ? 
-        <div className="mb-4 flex justify-center">
-            {defaultQuestions.map((question, index) => {
-                return <button key={index} onClick={() => handleClick(question)} className="user-feedback-buttons max-h-fit text-sm">{question}</button>
-            })}
-        </div>
-            : <></>
-        }</>
-    )
+	const   handleClick = (question) => {
+		setNewQuestion(dispatch, question, stream.historyStream, true);
+	}
+	
+	return (
+		<DefaultQuestionsContainer>
+			{defaultQuestions.map((question, index) => {
+				return <button
+					key={index}
+					role={defaultButtonChoice(question)}
+					onClick={() => handleClick(question)}
+					className="user-feedback-buttons max-h-fit fr-text--xs"
+				>
+					{question}
+				</button>
+			})}
+		</DefaultQuestionsContainer>
+	)
 }

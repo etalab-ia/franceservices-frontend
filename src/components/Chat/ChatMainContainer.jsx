@@ -6,7 +6,9 @@ import { useEffect } from 'react';
 import { scrollToBottom } from '../../utils/manageEffects';
 import { initialChatbotMessage } from '../../constants/chatbotProps';
 import { checkConnexion } from '../../utils/localStorage';
-import { GlobalColContainer } from '../Global/GlobalColContainer';
+import { DefaultQuestions } from '../Global/DefaultQuestions';
+import { ChatOverflowManagementContainer } from './ChatOverflowManagementContainer';
+import { ChatHeightContainer } from './ChatHeightContainer';
 
 export function ChatMainContainer() {
 	const	auth = useSelector((state) => state.auth);
@@ -25,18 +27,15 @@ export function ChatMainContainer() {
 	useEffect(() => { scrollToBottom(); }, [user, feedback, stream, dispatch]);
 
 	return (
-		
-        <GlobalColContainer>
-			<div className='h-full flex flex-col'>
-				<div className="flex flex-grow ">
-					<Display
-						messages={user.messages}
-						archive={NOT_SET}
-					/>
-				</div>
-				{/* <DefaultQuestions /> */}
-				<UserMessage />
-			</div>
-		</GlobalColContainer>
+		<ChatHeightContainer>
+			<ChatOverflowManagementContainer>
+				<Display
+					messages={user.messages}
+					archive={NOT_SET}
+				/>
+			</ChatOverflowManagementContainer>
+			<DefaultQuestions />
+			<UserMessage />
+		</ChatHeightContainer>
 	);
 }

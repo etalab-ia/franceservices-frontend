@@ -3,6 +3,7 @@ import { NOT_SET } from "../../constants/status";
 import { useDispatch, useSelector } from 'react-redux';
 import { DisplayMessageTab } from "../Chat/DisplayMessageTab";
 import { StreamingMessage } from "../Chat/StreamingMessage";
+import { GlobalColContainer } from "../Global/GlobalColContainer";
 
 const Stream = ({ response }) => {
 	return <div className="streaming fr-mb-4w">
@@ -30,7 +31,7 @@ export function DisplayStream({ stream, tabs, archive }) {
 	useEffect(() => { dispatch({ type: 'SWITCH_TAB', nextTab: activeTab }) }, []);
 
 	return (
-		<div className="">
+		<GlobalColContainer>
 			{conditionStream ?
 				archive === NOT_SET ?
 					<Stream response={stream.response}/>
@@ -48,6 +49,6 @@ export function DisplayStream({ stream, tabs, archive }) {
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
 			/>
-		</div>
+		</GlobalColContainer>
 	);
 }

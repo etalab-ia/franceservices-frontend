@@ -87,13 +87,13 @@ export const	notifyArchiving = (title) => (
 	<>Cette conversation a été archivée <img src={archive} alt="Logo associé à l'archivage"/> comme {title}</>
 );
 
+export const	defaultButtonChoice = (choice) => `Bouton de sélection de la question par défaut ${choice}`;
+
+export const	defaultQuestions = ["Comment obtenir une carte famille nombreuse ?", "Quels sont les critères à remplir pour obtenir l'AAH ?"];
 export const	robotAvatarDescription = `Avatar du robot.`;
 export const	userAvatarDescription = `Avatar de l'utilisateur / utilisatrice.`;
 export const	previousImgDescription = `Bouton d'accès au message précédent généré par le robot.`;
 export const	nextImgDescription = `Bouton d'accès au message suivant généré par le robot.`;
+export const	initialChatbotMessage = [`Bonjour, je suis Albert, l'outil d’intelligence artificielle interministériel prêt à répondre à vos questions administratives. Quelle est votre question aujourd'hui ?
 
-// TODO: improve bot messages
-export const	initialEditorMessage = `Bonjour, je suis Albert, un outil d’intelligence artificielle dont le but est de vous aider à répondre à des avis SP+. Merci de renseigner l'avis auquel répondre :`;
-export const	initialChatbotMessage = `Bonjour, je suis Albert, l'outil d’intelligence artificielle interministériel prêt à répondre à vos questions administratives. Quelle est votre question aujourd'hui ?
-
-Notez que je suis toujours en plein développement, et ne demande qu'à m'améliorer !`;
+Notez que je suis toujours en plein développement, et ne demande qu'à m'améliorer !`];

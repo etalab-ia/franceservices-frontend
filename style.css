@@ -511,9 +511,6 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(245 245 254 / var(--tw-bg-opacity));
   border-radius: 90px;
-  width: 56px;
-  height: 56px;
-  display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -581,14 +578,12 @@ video {
   border-radius: 30px;
   margin-top: 0px;
   text-align: justify;
-  max-width: 648px;
 }
 
 .user-feedback-container {
   margin-left: 128px;
   display: flex;
   flex-direction: column;
-  max-width: 648px;
   padding-bottom: 1rem;
 }
 
@@ -647,13 +642,6 @@ video {
   max-height: 40px;
 }
 
-.user-chat-tools-container {
-  height: 56px;
-  display: flex;
-  align-items: center;
-  /* @apply ml-[54px]; */
-}
-
 /* AGENT */
 
 .chat {
@@ -674,12 +662,6 @@ video {
   margin-top: 0px;
   margin-left: auto;
   padding: 1rem;
-  max-width: 648px;
-}
-
-.streaming-container {
-  display: flex;
-  flex-direction: row;
 }
 
 .streaming {
@@ -690,7 +672,6 @@ video {
   margin-top: 0px;
   margin-left: auto;
   padding: 1rem;
-  max-width: 648px;
   margin-left: 1rem;
 }
 
@@ -943,6 +924,14 @@ video {
   margin-top: 1rem;
 }
 
+.ml-0 {
+  margin-left: 0px;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
 .flex {
   display: flex;
 }
@@ -955,10 +944,6 @@ video {
   display: none;
 }
 
-.h-full {
-  height: 100%;
-}
-
 .h-screen {
   height: 100vh;
 }
@@ -966,6 +951,10 @@ video {
 .max-h-fit {
   max-height: -moz-fit-content;
   max-height: fit-content;
+}
+
+.max-h-screen {
+  max-height: 100vh;
 }
 
 .w-1\/2 {
@@ -994,6 +983,10 @@ video {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-\[200px\] {
+  width: 200px;
 }
 
 .flex-grow {
@@ -1026,6 +1019,14 @@ video {
   border-style: solid;
 }
 
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
 .border {
   border-width: 1px;
 }
@@ -1035,9 +1036,19 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-red-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 202 202 / var(--tw-bg-opacity));
+}
+
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-green-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(187 247 208 / var(--tw-bg-opacity));
 }
 
 .px-6 {
@@ -1066,11 +1077,6 @@ video {
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
-}
-
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
 }
 
 .text-xl {
