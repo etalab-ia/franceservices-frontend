@@ -270,7 +270,7 @@
 	}
 
 	.user-feedback-container {
-		@apply ml-[128px];
+		/* @apply ml-[128px]; */
 		@apply flex;
 		@apply flex-col;
 		@apply pb-4;
@@ -302,20 +302,6 @@
 		@apply border-[#DDD];
 	}
 
-	.user-feedback-resume {
-		@apply flex;
-		@apply flex-row;
-		@apply mr-4;
-		@apply py-2;
-		@apply px-4;
-		@apply justify-center;
-		@apply content-center;
-		@apply rounded-[90px];
-		@apply bg-[#E5E5E5];
-		@apply my-2;
-		@apply max-h-[40px];
-	}
-
 	/* AGENT */
 
 	.chat {
@@ -341,10 +327,7 @@
 		@apply text-justify;
 		@apply bg-light-purple;
 		@apply rounded-[30px];
-		@apply mt-0;
-		@apply ml-auto;
-		@apply p-4;
-		@apply ml-4;
+		@apply w-fit;
 	}
 
 	.streaming-tabs {
@@ -360,17 +343,10 @@
 		@apply mt-1;
 	}
 
-	.redo-question {
-		@apply flex;
-		@apply items-center;
-		@apply ml-4;
-	}
-
 	/* ARCHIVE PAGE */
 
 	.archive-tabs {
 		@apply table-fixed;
-		/* @apply w-[1000px]; */
 		@apply border-collapse;
 	}
 	

@@ -16,7 +16,7 @@ export function DisplayArrayMessages({ messages, isArchive }) {
 	useEffect(() => { dispatch({ type: 'SWITCH_TAB', nextTab: activeTab }) }, []);
 
 	return (
-		<GlobalRowContainer>
+		<GlobalRowContainer extraClass='fr-grid-row--center'>
 			<UserChatTools type='sheets' isArchive={isArchive}/>
 			<Avatar user="agent" />
 			<StreamingMessage>{messages[activeTab - 1]}</StreamingMessage>

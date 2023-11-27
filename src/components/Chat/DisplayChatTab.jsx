@@ -4,7 +4,7 @@ import { ChatAdditionalContainer } from './ChatAdditionalContainer';
 
 export function DisplayChatTab() {
 	return (
-		<GlobalRowContainer>
+		<GlobalRowContainer extraClass='fr-grid-row--center'>
 			<ChatMainContainer />
 			<ChatAdditionalContainer />
 		</GlobalRowContainer>

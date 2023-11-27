@@ -7,7 +7,7 @@ import { GlobalTitle } from "../components/Global/GlobalTitle";
 
 export function Home() {
 	return (
-		<GlobalRowContainer>
+		<GlobalRowContainer extraClass='fr-grid-row--center'>
 			<GlobalDiv>
 				<GlobalTitle>{toolsTitle}</GlobalTitle>
 				<HomeTiles tiles={toolsTiles}/>

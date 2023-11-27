@@ -18,7 +18,7 @@ export function ChatFollowUp({ stream, tabs, archive }) {
 		<>
 			{conditionDiv && (
 				<div>
-					<GlobalRowContainer>
+					<GlobalRowContainer extraClass='fr-grid-row--center'>
 						<UserChatTools type='sheets' isArchive={archive}/>
 						<Avatar user="agent" />
 						<DisplayStream stream={stream} tabs={tabs} archive={archive}/>

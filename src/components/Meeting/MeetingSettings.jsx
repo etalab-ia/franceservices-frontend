@@ -5,7 +5,7 @@ import { MeetingInformations } from "./MeetingInformations";
 import { MeetingButton } from "./MeetingButton";
 
 export function	MeetingSettings({ setGenerate, currQuestion, setCurrQuestion }) {
-	return <GlobalRowContainer>
+	return <GlobalRowContainer extraClass='fr-grid-row--center'>
 		<GlobalDiv>
 			<MeetingInformations
 				setCurrQuestion={setCurrQuestion}

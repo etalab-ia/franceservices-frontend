@@ -7,7 +7,7 @@ import { GlobalTitle } from "../Global/GlobalTitle";
 export function MeetingInformations({ setCurrQuestion }) {
 	return <>
 		<GlobalTitle>{meetingTitle}</GlobalTitle>
-		<GlobalRowContainer>
+		<GlobalRowContainer extraClass='fr-grid-row--center'>
 			<MeetingMainInformations setCurrQuestion={setCurrQuestion}/>
 			<MeetingAdditionalInformations />
 		</GlobalRowContainer>
