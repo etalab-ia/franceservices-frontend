@@ -19,7 +19,6 @@ export function MeetingButton({ isDisable, currQuestion, setGenerate, context })
     useEffect(() => { dispatch({ type: 'RESET_QUESTION_FIELDS' }) }, []);
 
     useEffect(() => {
-        console.log('context: ', context)
         if (!user.question.user_text.length)
             return ;
         usePost(auth, user.question, dispatch);
