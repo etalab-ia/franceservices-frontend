@@ -9,12 +9,12 @@ export const		chatbotProps = {
 }
 
 async function		handleRedo(state, dispatch) {
-	const	{ archive, feedback, auth } = state;
+	const	{ archive, feedback, auth, user } = state;
 	const	archiveIndex = archive.length - 1;
 	let		newLimit = archive[archiveIndex].question.limit;
 	let		newText = archive[archiveIndex].agentResponse;
 	let		newMode = feedback.reasons.length ? 'simple' : 'rag';
-	
+
 	if (feedback.reasons.includes('Trop long'))
 	{
 		newText = 'Résume ce texte : ' + newText;
@@ -32,7 +32,7 @@ async function		handleRedo(state, dispatch) {
 			newText = archive[archiveIndex].question.query;
 	}
 	else
-		newText = archive[archiveIndex].question.query;
+		newText = user.originQuestion;
 	// else if (feedback.reasons.includes('Les éléments sont faux'))
 	// {
 	// 		TODO: ask user to underline errors ?
