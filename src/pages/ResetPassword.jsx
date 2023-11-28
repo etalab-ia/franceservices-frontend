@@ -24,7 +24,7 @@ export function ResetPassword() {
 		const res = await useFetch(resetPasswordMailUrl, 'POST', {
 			data: JSON.stringify({ email: auth.email }), 
 			headers: { 'Content-Type': 'application/json' }
-		});
+		}, dispatch);
 
 		if (res.status && res.status !== 200)
 			return dispatch({ type: 'AUTH_FAILED' });

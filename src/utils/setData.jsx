@@ -46,7 +46,7 @@ export const	getSheets = async(question, auth, dispatch) => {
 	const   sheetsResp = await useFetch(indexesUrl, 'POST', {
 		data: setSheetsData(question.user_text),
 		headers: setHeaders(auth.userToken, false)
-	});
+	}, dispatch);
 
 	dispatch({ type: 'SET_SHEETS', nextSheets: sheetsResp });
 }
@@ -81,10 +81,10 @@ export const setTilesFromSheets = (sheets, setTiles) => {
 	});
 }
 
-export const getSheetsData = async (setSheets, currQuestion, userToken) => {
+export const getSheetsData = async (setSheets, currQuestion, userToken, dispatch) => {
 	const sheetsResp = await useFetch(indexesUrl, 'POST', {
 		data: setSheetsData(currQuestion),
 		headers: setHeaders(userToken, false),
-	});
+	}, dispatch);
 	setSheets(sheetsResp);
 }

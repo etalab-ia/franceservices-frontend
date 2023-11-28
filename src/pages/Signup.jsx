@@ -45,7 +45,7 @@ export function Signup() {
 		const	res = await useFetch(userUrl, 'POST', {
 			data: JSON.stringify(data),
 			headers: { 'Content-Type': 'application/json' }
-		});
+		}, dispatch);
 		
 		if (res.status && res.status !== 200) {
 			const jsonData = await res.json();

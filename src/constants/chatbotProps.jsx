@@ -1,6 +1,7 @@
 import redo from "../../icons/usertools/redo.svg"
 import copy from "../../icons/usertools/copy.svg"
 import archive from "../../icons/archives/archive.svg";
+import { usePost } from "../utils/hooks";
 
 export const		chatbotProps = {
 	mainTitle: "Chatbot administratif",
@@ -8,7 +9,7 @@ export const		chatbotProps = {
 }
 
 async function		handleRedo(state, dispatch) {
-	const	{ archive, feedback } = state;
+	const	{ archive, feedback, auth } = state;
 	const	archiveIndex = archive.length - 1;
 	let		newLimit = archive[archiveIndex].question.limit;
 	let		newText = archive[archiveIndex].agentResponse;
@@ -37,8 +38,21 @@ async function		handleRedo(state, dispatch) {
 	// 		TODO: ask user to underline errors ?
 	// }
 
-	dispatch({ type: 'SET_USER_MODEL_NAME_CHOICE', nextModelName: 'albert-light', nextMode: newMode, nextLimit: newLimit });
-	dispatch({ type: 'SET_USER_TEXT', nextUserText: newText, nextIsChat: true });
+	const question = {
+		model_name: 'albert-light',
+		mode: newMode,
+		query: newText,
+		limit: newLimit,
+		user_text: newText,
+		context: '',
+		institution: '',
+		links: '',
+		temperature: 20,
+	}
+
+	// dispatch({ type: 'SET_USER_MODEL_NAME_CHOICE', nextModelName: 'albert-light', nextMode: newMode, nextLimit: newLimit });
+	usePost(auth, question, dispatch);
+	// dispatch({ type: 'SET_USER_TEXT', nextUserText: newText, nextIsChat: true });
 	dispatch({ type: 'SET_ARCHIVE_LIMIT', nextLimit: newLimit });
 	dispatch({ type: 'RESET_FEEDBACK' });
 

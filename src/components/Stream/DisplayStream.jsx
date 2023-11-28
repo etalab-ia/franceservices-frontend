@@ -48,6 +48,7 @@ export function DisplayStream({ stream, tabs, archive }) {
 				tabsLen={tabsLen}
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
+				extraClass='fr-ml-2w'
 			/>
 		</GlobalColContainer>
 	);

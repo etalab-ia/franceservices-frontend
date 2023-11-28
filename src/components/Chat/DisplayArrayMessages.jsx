@@ -16,14 +16,17 @@ export function DisplayArrayMessages({ messages, isArchive }) {
 	useEffect(() => { dispatch({ type: 'SWITCH_TAB', nextTab: activeTab }) }, []);
 
 	return (
-		<GlobalRowContainer extraClass='fr-grid-row--center'>
-			<Avatar user="agent" />
-			<StreamingMessage>{messages[activeTab - 1]}</StreamingMessage>
+		<GlobalRowContainer>
+			<GlobalRowContainer extraClass='fr-grid-row--center'>
+				<Avatar user="agent" />
+				<StreamingMessage>{messages[activeTab - 1]}</StreamingMessage>
+			</GlobalRowContainer>
 			<DisplayMessageTab
 				isDisplayable={conditionTab}
 				tabsLen={tabsLen}
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
+				extraClass='fr-ml-10w'
 			/>
 		</GlobalRowContainer>
 	);

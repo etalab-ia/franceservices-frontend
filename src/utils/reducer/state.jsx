@@ -9,7 +9,7 @@ export const	initialQuestion = {
 	context: '',
 	institution: '',
 	links: '',
-	temperature: 10,
+	temperature: 20,
 }
 
 export const	initialUserChoices = {
