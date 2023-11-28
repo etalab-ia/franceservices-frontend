@@ -22,7 +22,7 @@ export function UserChatTools({ isArchive }) {
 	return (
 		<div className="flex items-center fr-mt-2w">
 			<GlobalColContainer>
-				{userChatToolsFunc({ stream, archive, feedback, auth }, dispatch).map((tool, index) => (
+				{userChatToolsFunc({ stream, archive, feedback, auth, user }, dispatch).map((tool, index) => (
 					<button 
 						disabled={tool.name === 'redo' && (stream.isStoppable || isArchive !== NOT_SET)}
 						key={index} className={index === isSelected ? "fr-m-1v opacity-0" : "fr-m-1v opacity-[1]"}

@@ -23,6 +23,7 @@ export const	userReducer = (state = { question: initialQuestion, choices: initia
 		case 'SET_USER_TEXT':
 			return {
 				...state,
+				originQuestion: action.nextUserText,
 				question: {
 					...state.question,
 					user_text: action.nextUserText,
