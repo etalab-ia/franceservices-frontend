@@ -3,10 +3,10 @@ import { GlobalSubtitle } from "../Global/GlobalSubtitle";
 import { meetingInformations } from "../../constants/meeting";
 import { MeetingAdditionalInput } from "./MeetingAdditionalInput";
 
-export function MeetingAdditionalInformations() {
+export function MeetingAdditionalInformations({ setContext }) {
 
 	return <GlobalColContainer>
 		<GlobalSubtitle>{meetingInformations}</GlobalSubtitle>
-		<MeetingAdditionalInput />
+		<MeetingAdditionalInput setContext={setContext}/>
 	</GlobalColContainer>
 }

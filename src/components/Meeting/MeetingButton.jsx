@@ -3,19 +3,23 @@ import { meetingGenerationPage } from "../../constants/meeting";
 import { useDispatch, useSelector } from "react-redux";
 import { usePost } from "../../utils/hooks";
 import { useEffect } from "react";
+import { setQuestionWithContext } from "../../utils/setData";
 
-export function MeetingButton({ isDisable, currQuestion, setGenerate }) {
+export function MeetingButton({ isDisable, currQuestion, setGenerate, context }) {
 	const	dispatch = useDispatch();
     const   auth = useSelector((state) => state.auth);
     const   user = useSelector((state) => state.user);
 
     const	handleClick = () => {
-        dispatch({ type: 'SET_USER_TEXT', nextUserText: currQuestion, nextIsChat: false });
+        const   questionWithContext = setQuestionWithContext(currQuestion, context);
+
+        dispatch({ type: 'SET_USER_TEXT', nextUserText: questionWithContext, nextIsChat: false });
     }
 
     useEffect(() => { dispatch({ type: 'RESET_QUESTION_FIELDS' }) }, []);
 
     useEffect(() => {
+        console.log('context: ', context)
         if (!user.question.user_text.length)
             return ;
         usePost(auth, user.question, dispatch);

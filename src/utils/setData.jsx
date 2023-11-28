@@ -17,6 +17,14 @@ export const	setUserQuestion = (question) => {
 	return data;
 }
 
+export const	setQuestionWithContext = (question, context) => {
+	const	administrations = context.administrations.length ? "Les administrations concernées par cette question sont : " + context.administrations.map(adminstration => adminstration) : "";
+	const	themes = context.themes.length ? "La question porte sur les thèmes suivants : " + context.themes.map(theme => theme) : "";
+	const	questionWithContext = question + "\n" + administrations + "\n" + themes;
+
+	return questionWithContext;
+}
+
 export const	setSheetsData = (user_text) => {
 	const data = JSON.stringify({
 		name: 'sheets',
