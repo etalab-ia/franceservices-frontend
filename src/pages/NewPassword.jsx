@@ -41,7 +41,7 @@ export function NewPassword() {
 		const	res = await useFetch(resetPasswordUrl, 'POST', {
 			data: JSON.stringify(data),
 			headers: { 'Content-Type': 'application/json' }
-		});
+		}, dispatch);
 
 		if (res.status && res.status !== 200)
 			return dispatch({ type: 'AUTH_FAILED' });

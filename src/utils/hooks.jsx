@@ -2,7 +2,7 @@ import { apiUrl } from "../constants/api";
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import { setHeaders, setUserQuestion } from "./setData";
 
-export const	useFetch = async(url, method, props) => {
+export const	useFetch = async(url, method, props, dispatch) => {
 	const		{ data, headers } = props;
 	const		credentials = 'include';
 
@@ -15,8 +15,10 @@ export const	useFetch = async(url, method, props) => {
 			body: data === undefined ? {} : data
 		})
 		
-		if (response.status !== 200 || url.includes("start"))
-			return response;			
+		if (response.status === 401)
+			return dispatch({ type: 'LOGOUT'});
+		else if (url.includes("start"))
+			return response;	
 		else
 		{
 			const jsonData = await response.json();
@@ -82,7 +84,7 @@ export const	useStream = async(auth, dispatch, id) => {
 export async function	usePost(auth, question, dispatch) {
 	const	headers = setHeaders(auth.userToken, false);
 	const	data = setUserQuestion(question);
-	const	res = await useFetch(apiUrl, 'POST', {data: JSON.stringify(data), headers});
+	const	res = await useFetch(apiUrl, 'POST', {data: JSON.stringify(data), headers}, dispatch);
 	
 	await useStream(auth, dispatch, res.id);
 }

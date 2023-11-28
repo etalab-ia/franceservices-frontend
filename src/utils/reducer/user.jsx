@@ -59,11 +59,30 @@ export const	userReducer = (state = { question: initialQuestion, choices: initia
 					[action.nextKey]: action.nextValue,
 				}
 			}
-		case 'SET_MESSAGES': 
-			return {
-				...state,
-				messages: [...state.messages, action.nextMessage]
-			}
+			case 'SET_MESSAGES':
+				if (state.messages.length > 0) 
+				{
+					const	lastMessage = state.messages[state.messages.length - 1];
+			
+					if (lastMessage.sender === action.nextMessage.sender) {
+						const	updatedMessages = state.messages.slice(0, -1);
+						const	updatedLastMessage = {
+							...lastMessage,
+							text: [...lastMessage.text, action.nextMessage.text],
+						};
+						updatedMessages.push(updatedLastMessage);
+			
+						return {
+							...state,
+							messages: updatedMessages,
+						};
+					}
+				}
+				return {
+					...state,
+					messages: [...state.messages, action.nextMessage],
+				};
+			
 	  	default: { return state };
 	}
 }

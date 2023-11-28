@@ -62,7 +62,7 @@ export function	Login() {
 		const	res = await useFetch(signinUrl, 'POST', {
 			data: JSON.stringify(data),
 			headers: { 'Content-Type': 'application/json' }
-		});
+		}, dispatch);
 
 		if ((res.status && res.status !== 200) || !res.token)
 			return dispatch({ type: 'AUTH_FAILED' });

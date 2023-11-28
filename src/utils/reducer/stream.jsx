@@ -15,7 +15,7 @@ export const	streamReducer = (state = initialStream, action) => {
 
 			return {
 				...state,
-				historyStream: [joinedRes],
+				historyStream: [...state.historyStream, joinedRes],
 				isStoppable: false,
 				isStreaming: false,
 				response: [],
@@ -30,6 +30,12 @@ export const	streamReducer = (state = initialStream, action) => {
 			return {
 				...state,
 				response: [],
+			}
+		case 'SET_STREAM_HISTORY':
+			return {
+				...state,
+				historyStream: [...state.historyStream, action.nextStream],
+				activeTab: 1,
 			}
 		case 'RESET_STREAM_HISTORY':
 			return {
