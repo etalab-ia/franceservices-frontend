@@ -32,7 +32,10 @@ async function		handleRedo(state, dispatch) {
 			newText = archive[archiveIndex].question.query;
 	}
 	else
+	{
 		newText = user.originQuestion;
+		newMode = 'rag';
+	}
 	// else if (feedback.reasons.includes('Les éléments sont faux'))
 	// {
 	// 		TODO: ask user to underline errors ?
