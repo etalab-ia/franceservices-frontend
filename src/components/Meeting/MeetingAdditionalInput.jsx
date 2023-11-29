@@ -3,11 +3,14 @@ import { inputFields } from "../../constants/meetingInputFields";
 import { MeetingTags } from "./MeetingTags";
 import { MeetingInput } from "./MeetingInput";
 
-export function MeetingAdditionalInput({ setContext }) {
+export function MeetingAdditionalInput({ context, setContext }) {
 	const	[themes, setThemes] = useState([]);
 	const	[administrations, setAdministrations] = useState([]);
 
-	useEffect(() => { setContext({ themes: themes, administrations: administrations }) }, [themes, administrations]);
+	useEffect(() => {
+		setThemes(context.themes);
+		setAdministrations(context.administrations);
+	}, [context]);
 
 	return <div className="fr-mt-2w">
 		{inputFields.map((field, index) => {
@@ -15,8 +18,14 @@ export function MeetingAdditionalInput({ setContext }) {
 			const	setTags = field.name === "themes" ? setThemes : setAdministrations;
 
 			return <div className="fr-mb-3w" key={index}>
-				<MeetingInput field={field}/>
-				<MeetingTags tags={tags} setTags={setTags} field={field}/>
+				<MeetingInput
+					field={field}
+				/>
+				<MeetingTags
+					tags={tags}
+					setTags={setTags}
+					field={field}
+				/>
 			</div>
 		})}
 	</div>

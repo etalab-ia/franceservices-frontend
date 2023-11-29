@@ -33,5 +33,6 @@ export const	initialStream = {
 	historyStream: [],
 	isStoppable: true,
 	isStreaming: false,
-	activeTab: 1
+	activeTab: 1,
+	id: NOT_SET,
 }

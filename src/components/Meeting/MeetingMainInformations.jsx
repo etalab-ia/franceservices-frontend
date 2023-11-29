@@ -4,8 +4,9 @@ import { GlobalColContainer } from "../Global/GlobalColContainer";
 import { GlobalParagraph } from "../Global/GlobalParagraph";
 import { GlobalSubtitle } from "../Global/GlobalSubtitle";
 import { handleTextareaResize } from "../../utils/manageEffects";
+import { MeetingPromptAdvice } from "./MeetingPromptAdvice";
 
-export function	MeetingMainInformations({ setCurrQuestion }) {
+export function	MeetingMainInformations({ currQuestion, setCurrQuestion }) {
 	
 	const	handleChange = (e) => {
 		e.preventDefault();
@@ -15,7 +16,7 @@ export function	MeetingMainInformations({ setCurrQuestion }) {
 
     return <GlobalColContainer>
 		<GlobalSubtitle>{meetingSubtitle}</GlobalSubtitle>
-		<GlobalParagraph>{meetingParagraph}</GlobalParagraph>
+		<MeetingPromptAdvice/>
 		<Input
 			id="text-area"
 			textArea
@@ -23,6 +24,7 @@ export function	MeetingMainInformations({ setCurrQuestion }) {
 			nativeTextAreaProps={{
 				onChange: handleChange,
 				onInputCapture: handleTextareaResize,
+				value: currQuestion,
 				style: { minHeight: 300 }
 			}}
 		/>
