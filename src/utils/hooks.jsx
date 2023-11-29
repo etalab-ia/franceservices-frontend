@@ -67,7 +67,7 @@ function	handleStreamError(e, stream_chat) {
 }
 
 export const	useStream = async(auth, dispatch, id) => {
-	const   stream_chat = new EventSourcePolyfill( `${apiUrl}/${id}/start`, {
+	const   stream_chat = new EventSourcePolyfill(`${apiUrl}/${id}/start`, {
 		headers: setHeaders(auth.userToken, true),
 		withCredentials: true,
 	});
@@ -86,5 +86,6 @@ export async function	usePost(auth, question, dispatch) {
 	const	data = setUserQuestion(question);
 	const	res = await useFetch(apiUrl, 'POST', {data: JSON.stringify(data), headers}, dispatch);
 	
+	dispatch({ type: 'SET_STREAM_ID', nextStreamId: res.id });
 	await useStream(auth, dispatch, res.id);
 }

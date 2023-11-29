@@ -7,6 +7,10 @@ export function	Meeting() {
 	const	[generate, setGenerate] = useState(false);
 	const	[currQuestion, setCurrQuestion] = useState('');
 	const	dispatch = useDispatch();
+	const	[context, setContext] = useState({
+		administrations: [],
+		themes: [],
+	});
 	
 	useEffect(() => { dispatch({ type: 'SET_INITIAL_STREAM' }) }, []);
 	
@@ -16,10 +20,13 @@ export function	Meeting() {
 				setGenerate={setGenerate}
 				currQuestion={currQuestion}
 				setCurrQuestion={setCurrQuestion}
+				context={context}
+				setContext={setContext}
 			/>
 			:
 			<MeetingPage
 				currQuestion={currQuestion}
+				setGenerate={setGenerate}
 			/>
 		}
 	</>

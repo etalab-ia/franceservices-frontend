@@ -1,6 +1,4 @@
-import { NOT_SET } from "../constants/status";
 import { usePost } from "./hooks";
-import { getSheets } from "./setData";
 
 export function postNewQuestion(dispatch, auth, question, isNewQuestion) {
     dispatch({ type: 'SET_INPUT_VISIBILITY', nextVisibility: 'hidden' });

@@ -4,12 +4,19 @@ import { MeetingAdditionalInformations } from "./MeetingAdditionalInformation";
 import { MeetingMainInformations } from "./MeetingMainInformations";
 import { GlobalTitle } from "../Global/GlobalTitle";
 
-export function MeetingInformations({ setCurrQuestion, setContext }) {
+export function MeetingInformations({ currQuestion, setCurrQuestion, context, setContext }) {
 	return <>
 		<GlobalTitle>{meetingTitle}</GlobalTitle>
 		<GlobalRowContainer extraClass='fr-grid-row--center'>
-			<MeetingMainInformations setCurrQuestion={setCurrQuestion}/>
-			<MeetingAdditionalInformations setContext={setContext}/>
+			<MeetingMainInformations
+				currQuestion={currQuestion}
+				setCurrQuestion={setCurrQuestion}
+			/>
+			<MeetingAdditionalInformations
+				context={context}
+				setCurrQuestion={setCurrQuestion}
+				setContext={setContext}
+			/>
 		</GlobalRowContainer>
 	</>
 }

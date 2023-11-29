@@ -2,11 +2,19 @@ import { GlobalColContainer } from "../Global/GlobalColContainer";
 import { GlobalSubtitle } from "../Global/GlobalSubtitle";
 import { meetingInformations } from "../../constants/meeting";
 import { MeetingAdditionalInput } from "./MeetingAdditionalInput";
+import { MeetingDefaultQuestions } from "./MeetingDefaultQuestions";
 
-export function MeetingAdditionalInformations({ setContext }) {
+export function MeetingAdditionalInformations({ setCurrQuestion, context, setContext }) {
 
 	return <GlobalColContainer>
 		<GlobalSubtitle>{meetingInformations}</GlobalSubtitle>
-		<MeetingAdditionalInput setContext={setContext}/>
+		<MeetingAdditionalInput
+			context={context}
+			setContext={setContext}
+		/>
+		<MeetingDefaultQuestions
+			setCurrQuestion={setCurrQuestion}
+			setContext={setContext}
+		/>
 	</GlobalColContainer>
 }
