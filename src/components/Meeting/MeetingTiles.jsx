@@ -11,7 +11,6 @@ export const    MeetingTiles = ({ currQuestion }) => {
 	const	[sheets, setSheets] = useState([]);
 	const	userToken = useSelector((state) => state.auth.userToken);
 	const	user = useSelector((state) => state.user);
-	const	archive = useSelector((state) => state.archive);
 	const	dispatch = useDispatch();
 
 	useEffect(() => {

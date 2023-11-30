@@ -10,6 +10,8 @@ export const	streamReducer = (state = initialStream, action) => {
 				id: action.nextStreamId,
 			};
 		case 'GET_AGENT_STREAM':
+			console.log('is streaming: ', state.isStreaming)
+
 			return {
 				...state,
 				isStreaming: true,
