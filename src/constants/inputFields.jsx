@@ -72,8 +72,49 @@ export const	ressourcesTiles = [
 	{
 		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
 		desc: "Accéder",
-		linkProps: { to: '/history' },
-		imageUrl: history,
-		title: "Historique",
+		linkProps: { to: 'https://aplus.beta.gouv.fr/' },
+		imageUrl: meeting,
+		title: <>
+			<p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">
+				Réseau
+			</p>
+			<p>Administration+</p>
+		</>,
+	},
+	{
+		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
+		desc: "Accéder",
+		linkProps: { to: 'https://osmose.numerique.gouv.fr/' },
+		imageUrl: meeting,
+		title: <>
+			<p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">
+				Réseau
+			</p>
+			<p>Osmose</p>
+		</>,
+	},
+	{
+		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
+		desc: "Accéder",
+		linkProps: { to: 'https://extranet.france-services.gouv.fr/' },
+		imageUrl: meeting,
+		title: <>
+			<p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">
+				Documentation
+			</p>
+			<p>Plateforme France Services</p>
+		</>,
+	},
+	{
+		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
+		desc: "Accéder",
+		linkProps: { to: 'https://www.service-public.fr/' },
+		imageUrl: meeting,
+		title: <>
+			<p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">
+				Documentation
+			</p>
+			<p>Service-Public.fr</p>
+		</>,
 	},
 ]

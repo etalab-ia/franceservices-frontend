@@ -1,13 +1,13 @@
 import { Tile } from "@codegouvfr/react-dsfr/Tile";
 
 export const    TileContainer = ({ children }) => {
-	return <div className="container fr-mr-3w" style={{ width: 300 }}>
+	return <div className="container fr-mr-2w" style={{ width: 300 }}>
 		{children}
 	</div>
 }
 
 export const    HomeTiles = ({ tiles }) => {
-	return <div className="fr-grid-row fr-mb-3w">
+	return <div className="fr-grid-row">
 		{tiles.map((tile, key) => {
 			return <TileContainer key={key}>
 				<Tile

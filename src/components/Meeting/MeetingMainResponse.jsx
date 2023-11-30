@@ -5,6 +5,6 @@ import { MeetingQR } from "./MeetingQR";
 export function MeetingMainResponse() {
 	return <GlobalColContainer>
 		<MeetingStream />
-		<MeetingQR />
+		{/* <MeetingQR /> */}
 	</GlobalColContainer>
 }
