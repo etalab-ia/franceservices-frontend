@@ -10,6 +10,13 @@ export function	quickAccessItemsFunc(state, dispatch) {
 			text: state.username
 		},
 		{
+		  iconId: 'fr-icon-mail-fill',
+		  linkProps: {
+			href: 'mailto:language_model@data.gouv.fr'
+		  },
+		  text: 'Contact'
+		},
+		{
 			iconId: 'fr-icon-logout-box-r-line',
 			linkProps: {
 				onClick: () => handleSignout(state, dispatch)

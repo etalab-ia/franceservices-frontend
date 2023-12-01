@@ -16,6 +16,7 @@ import { History } from "../pages/History";
 import { Home } from "../pages/Home";
 import { Footer } from "@codegouvfr/react-dsfr/Footer";
 import { Meeting } from "../pages/Meeting";
+import { Contact } from "../pages/Contact";
 
 export const Root = () => {
 	const	navigationData = navFunc();
@@ -39,7 +40,8 @@ export const Root = () => {
 			<Route path="/home" element={!auth.isLogin ? <Navigate to="/login" /> : <Home />}/>
 			<Route path="/" element={!auth.isLogin ? <Navigate to="/login" /> : <Navigate to="/chat" />}/>
 			<Route path="/chat" element={!auth.isLogin ? <Navigate to="/login" /> : <Chatbot />}/>
-			<Route path="/history" element={!auth.isLogin ? <Navigate to="/login" /> : <History />}/>
+			<Route path="/contact" element={!auth.isLogin ? <Navigate to="/login" /> : <Contact />}/>
+			{/* <Route path="/history" element={!auth.isLogin ? <Navigate to="/login" /> : <History />}/> */}
 			<Route path="/signup" element={<Signup />} />
 			<Route path="/reset-password" element={<ResetPassword />} />
 			<Route path="/new-password" element={<NewPassword />} />

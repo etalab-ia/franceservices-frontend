@@ -32,6 +32,13 @@ export function navFunc() {
 				},
 			]
 		},
+		{
+			"text": "Nous contacter",
+			"linkProps": {
+				"to": "/contact"
+			},
+			"isActive": currentPath === "/contact",
+		},
 		// {
 		// 	text: 'Mes ressources',
 		// 	"isActive": currentPath === "/history",
@@ -53,7 +60,8 @@ const routeDefs = {
 	"home": defineRoute("/home"),
 	"meeting": defineRoute("/meeting"),
 	"chat": defineRoute("/chat"),
-	"editor": defineRoute("/history"),
+	"contact": defineRoute("/contact"),
+	// "editor": defineRoute("/history"),
 };
 
 export const { RouteProvider, useRoute, routes } = createRouter(routeDefs);
