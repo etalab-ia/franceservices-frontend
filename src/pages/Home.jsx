@@ -13,8 +13,10 @@ export function Home() {
 				<HomeTiles tiles={toolsTiles}/>
 			</GlobalDiv>
 			<GlobalDiv>
-				<GlobalTitle>{ressourcesTitle}</GlobalTitle>
-				<HomeTiles tiles={ressourcesTiles}/>
+				<div className="fr-mb-12w">
+					<GlobalTitle>{ressourcesTitle}</GlobalTitle>
+					<HomeTiles tiles={ressourcesTiles}/>
+				</div>
 			</GlobalDiv>
 		</GlobalRowContainer>
 	);
