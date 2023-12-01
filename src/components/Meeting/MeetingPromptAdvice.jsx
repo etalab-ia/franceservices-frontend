@@ -1,18 +1,15 @@
-import Input from "@codegouvfr/react-dsfr/Input";
-import { meetingParagraph, meetingPromptExamples, meetingSubtitle } from "../../constants/meeting";
+import { meetingParagraph, meetingPromptExamples } from "../../constants/meeting";
 import { GlobalColContainer } from "../Global/GlobalColContainer";
 import { GlobalParagraph } from "../Global/GlobalParagraph";
-import { GlobalSubtitle } from "../Global/GlobalSubtitle";
-import { handleTextareaResize } from "../../utils/manageEffects";
 import { GlobalRowContainer } from "../Global/GlobalRowContainer";
 import { useState } from "react";
 
 export function	MeetingPromptAdvice({ }) {
-
 	const [expandedItems, setExpandedItems] = useState([]);
 
 	const handleToggle = (index) => {
-		const updatedExpandedItems = [...expandedItems];
+		const	updatedExpandedItems = [...expandedItems];
+		
 		updatedExpandedItems[index] = !updatedExpandedItems[index];
 		setExpandedItems(updatedExpandedItems);
 	};

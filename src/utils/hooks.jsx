@@ -1,6 +1,7 @@
 import { apiUrl } from "../constants/api";
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import { setHeaders, setUserQuestion } from "./setData";
+import { emitCloseStream, onCloseStream } from "./eventsEmitter";
 
 export const	useFetch = async(url, method, props, dispatch) => {
 	const		{ data, headers } = props;
@@ -79,6 +80,10 @@ export const	useStream = async(auth, dispatch, id) => {
 	stream_chat.onerror = function (e) {
 		handleStreamError(e, stream_chat);
 	}
+	onCloseStream(() => {
+		stream_chat.close();
+		dispatch({ type: 'SET_INITIAL_STREAM' });
+	});
 }
 
 export async function	usePost(auth, question, dispatch) {
@@ -86,6 +91,5 @@ export async function	usePost(auth, question, dispatch) {
 	const	data = setUserQuestion(question);
 	const	res = await useFetch(apiUrl, 'POST', {data: JSON.stringify(data), headers}, dispatch);
 	
-	dispatch({ type: 'SET_STREAM_ID', nextStreamId: res.id });
-	await useStream(auth, dispatch, res.id);
+	return await useStream(auth, dispatch, res.id);
 }

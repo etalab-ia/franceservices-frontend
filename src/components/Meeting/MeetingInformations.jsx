@@ -8,7 +8,7 @@ export function MeetingInformations({ currQuestion, setCurrQuestion, context, se
 	return <>
 		<GlobalTitle>{meetingTitle}</GlobalTitle>
 		<GlobalRowContainer extraClass='fr-grid-row--center'>
-			<MeetingMainInformations
+			<MeetingMain	Informations
 				currQuestion={currQuestion}
 				setCurrQuestion={setCurrQuestion}
 			/>

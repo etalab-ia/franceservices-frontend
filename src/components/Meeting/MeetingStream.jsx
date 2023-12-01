@@ -12,9 +12,6 @@ const Stream = ({ response }) => {
 
 export function MeetingStream() {
 	const	stream = useSelector((state) => state.stream);
-	const	dispatch = useDispatch();
-
-	useEffect(() => { }, [stream])
 
 	return <>
 		<h3 className="text-2xl font-bold fr-mt-1w">Résultat</h3>
