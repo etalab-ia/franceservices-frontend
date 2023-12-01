@@ -67,6 +67,8 @@ export const	getSheetId = (url) => {
 }
 
 export const setTilesFromSheets = (sheets, setTiles) => {
+	if (!sheets || !sheets.length)
+		return setTiles([]);
 	sheets.map((sheet) => {
 		const	url = sheet.url;
 		const	parsedUrl = new URL(url);

@@ -4,12 +4,12 @@ import { signupFields } from "../constants/inputFields";
 import { initButtonsSignup } from "../constants/connexion";
 import { useFetch } from "../utils/hooks";
 import { resetPasswordUrl } from "../constants/api";
-import { AuthFailed } from "../components/Auth/AuthFailed";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { changePasswordFailed } from "../constants/errorMessages";
 import { LoginContainer } from "../components/Auth/LoginContainer";
 import { LoginFields } from "../components/Auth/LoginFields";
+import { ButtonInformation } from "../components/Global/ButtonInformation";
 
 export function NewPassword() {
 	const	auth = useSelector((state) => state.auth);
@@ -56,7 +56,7 @@ export function NewPassword() {
 				fields={fields}
 				handleChange={handleChange}
 			/>
-			{auth.authFailed && <AuthFailed>{changePasswordFailed}</AuthFailed>}
+			{auth.authFailed && <ButtonInformation>{changePasswordFailed}</ButtonInformation>}
 			<ButtonsGroup 
 				buttons={initButtonsSignup(handleValidatePassword, handleClick, 'Changer de mot de passe')}
 			/>

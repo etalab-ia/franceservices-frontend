@@ -3,7 +3,6 @@ import { initButtonsLogin } from "../constants/connexion";
 import { useEffect, useState } from "react";
 import { signinUrl } from "../constants/api";
 import { useFetch } from "../utils/hooks";
-import { AuthFailed } from "../components/Auth/AuthFailed";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { usernameOrPasswordError } from "../constants/errorMessages";
@@ -11,6 +10,7 @@ import { setUserInfos } from "../utils/manageConnexion";
 import { LoginFields } from "../components/Auth/LoginFields";
 import { loginFields } from "../constants/inputFields";
 import { LoginContainer } from "../components/Auth/LoginContainer";
+import { ButtonInformation } from "../components/Global/ButtonInformation";
 
 export function	Login() {
 	const	auth = useSelector((state) => state.auth);
@@ -77,7 +77,7 @@ export function	Login() {
 				fields={loginFields}
 				handleChange={handleChange}
 			/>
-			{auth.authFailed && <AuthFailed>{usernameOrPasswordError}</AuthFailed>}
+			{auth.authFailed && <ButtonInformation>{usernameOrPasswordError}</ButtonInformation>}
 			<ButtonsGroup
 				buttons={initButtonsLogin(handleClick, isDisable)}
 			/>

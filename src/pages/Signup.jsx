@@ -4,12 +4,12 @@ import { signupFields } from "../constants/inputFields";
 import { initButtonsSignup } from "../constants/connexion";
 import { useFetch } from "../utils/hooks";
 import { userUrl } from "../constants/api";
-import { AuthFailed } from "../components/Auth/AuthFailed";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { invalidEmail, invalidPassword } from "../constants/errorMessages";
 import { LoginContainer } from "../components/Auth/LoginContainer";
 import { LoginFields } from "../components/Auth/LoginFields";
+import { ButtonInformation } from "../components/Global/ButtonInformation";
 
 export function Signup() {
 	const	auth = useSelector((state) => state.auth);
@@ -65,7 +65,7 @@ export function Signup() {
 				fields={signupFields}
 				handleChange={handleChange}
 			/>
-			{auth.authFailed && <AuthFailed>{errorMesage}</AuthFailed>}
+			{auth.authFailed && <ButtonInformation>{errorMesage}</ButtonInformation>}
 			<ButtonsGroup
 				buttons={initButtonsSignup(handleValidatePassword, handleClick, 'Créer un compte')}
 			/>
