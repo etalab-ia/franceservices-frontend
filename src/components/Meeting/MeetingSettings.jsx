@@ -1,6 +1,5 @@
 import { GlobalDiv } from "../Global/GlobalDiv";
 import { GlobalRowContainer } from "../Global/GlobalRowContainer";
-import { useEffect, useState } from "react";
 import { MeetingInformations } from "./MeetingInformations";
 import { MeetingButton } from "./MeetingButton";
 

@@ -9,7 +9,6 @@ export function MeetingButton({ isDisable, currQuestion, setGenerate, context })
 	const	dispatch = useDispatch();
     const   auth = useSelector((state) => state.auth);
     const   user = useSelector((state) => state.user);
-    const   stream = useSelector((state) => state.stream);
 
     const	handleClick = () => {
         const   questionWithContext = setQuestionWithContext(currQuestion, context);

@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { MeetingPage } from "../components/Meeting/MeetingPage";
 import { MeetingSettings } from "../components/Meeting/MeetingSettings";
 import { useEffect, useState } from "react";
+import { emitCloseStream } from "../utils/eventsEmitter";
 
 export function	Meeting() {
 	const	[generate, setGenerate] = useState(false);
@@ -13,6 +14,7 @@ export function	Meeting() {
 	});
 	
 	useEffect(() => { dispatch({ type: 'SET_INITIAL_STREAM' }) }, []);
+	useEffect(() => { !generate && emitCloseStream(false); }, [generate])
 	
 	return <>
 		{!generate ?

@@ -1,7 +1,6 @@
 import Input from "@codegouvfr/react-dsfr/Input";
 import { meetingParagraph, meetingSubtitle } from "../../constants/meeting";
 import { GlobalColContainer } from "../Global/GlobalColContainer";
-import { GlobalParagraph } from "../Global/GlobalParagraph";
 import { GlobalSubtitle } from "../Global/GlobalSubtitle";
 import { handleTextareaResize } from "../../utils/manageEffects";
 import { MeetingPromptAdvice } from "./MeetingPromptAdvice";

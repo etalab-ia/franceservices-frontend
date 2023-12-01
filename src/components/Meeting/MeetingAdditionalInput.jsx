@@ -3,7 +3,7 @@ import { inputFields } from "../../constants/meetingInputFields";
 import { MeetingTags } from "./MeetingTags";
 import { MeetingInput } from "./MeetingInput";
 
-export function MeetingAdditionalInput({ context, setContext }) {
+export function MeetingAdditionalInput({ context }) {
 	const	[themes, setThemes] = useState([]);
 	const	[administrations, setAdministrations] = useState([]);
 

@@ -5,12 +5,10 @@ import { MeetingAdditionalInput } from "./MeetingAdditionalInput";
 import { MeetingDefaultQuestions } from "./MeetingDefaultQuestions";
 
 export function MeetingAdditionalInformations({ setCurrQuestion, context, setContext }) {
-
 	return <GlobalColContainer>
 		<GlobalSubtitle>{meetingInformations}</GlobalSubtitle>
 		<MeetingAdditionalInput
 			context={context}
-			setContext={setContext}
 		/>
 		<MeetingDefaultQuestions
 			setCurrQuestion={setCurrQuestion}
