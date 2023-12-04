@@ -21,6 +21,7 @@ export function ChatMainContainer({ archive }) {
 		if (archive)
 			return ;
 		dispatch({ type: 'SET_INITIAL_STREAM' });
+		console.log('set initial user')
 		dispatch({ type: 'SET_INITIAL_USER' });
 		dispatch({ type: 'SET_MESSAGES', nextMessage: { text: initialChatbotMessage, sender: 'agent' } });
 		checkConnexion(auth, dispatch);

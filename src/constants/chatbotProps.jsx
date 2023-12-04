@@ -28,8 +28,15 @@ async function		handleRedo(state, dispatch) {
 		newMode = 'rag';
 		if (feedback.reasons.includes('Trop long'))
 			newText = 'Résume ce texte : ' + newText;
-		else
+		else if (archive[archiveIndex].question.query.length)
 			newText = archive[archiveIndex].question.query;
+		else
+			newText = user.originQuestion;
+		dispatch({ type: 'SET_ARCHIVE_QUESTION', nextQuestion: user.originQuestion });
+		console.log('new text: ', newText)
+		console.log(archive[archiveIndex].question.query)
+		console.log(archive)
+		console.log(user)
 	}
 	else
 	{
@@ -54,10 +61,14 @@ async function		handleRedo(state, dispatch) {
 	}
 
 	// dispatch({ type: 'SET_USER_MODEL_NAME_CHOICE', nextModelName: 'albert-light', nextMode: newMode, nextLimit: newLimit });
+	console.log('going to post')
 	usePost(auth, question, dispatch);
+	console.log('archive: ', archive)
 	// dispatch({ type: 'SET_USER_TEXT', nextUserText: newText, nextIsChat: true });
 	dispatch({ type: 'SET_ARCHIVE_LIMIT', nextLimit: newLimit });
 	dispatch({ type: 'RESET_FEEDBACK' });
+
+	console.log('after: ', archive)
 
 	return dispatch({ type: 'REDO_AGENT_STREAM' });
 }

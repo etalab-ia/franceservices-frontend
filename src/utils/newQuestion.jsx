@@ -2,10 +2,10 @@ import { usePost } from "./hooks";
 import { getSheets } from "./setData";
 
 export function postNewQuestion(dispatch, auth, question, isNewQuestion) {
-    dispatch({ type: 'SET_INPUT_VISIBILITY', nextVisibility: 'hidden' });
 	usePost(auth, question, dispatch);
 	dispatch({ type: 'RESET_FEEDBACK'});
 	getSheets(question, auth, dispatch);
+	console.log('ici: ', isNewQuestion, ' ', question)
 	isNewQuestion !== 0 && dispatch({ type: 'SET_ARCHIVE_QUESTION', nextQuestion: question });
 	isNewQuestion !== 0 && dispatch({ type: 'RESET_QUESTION_FIELDS' });
 }
