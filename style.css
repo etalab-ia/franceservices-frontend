@@ -647,11 +647,8 @@ video {
 
 .streaming {
   text-align: justify;
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 245 254 / var(--tw-bg-opacity));
-  border-radius: 30px;
-  width: -moz-fit-content;
-  width: fit-content;
+  /* @apply bg-light-purple; */
+  border-radius: 10px;
 }
 
 .streaming-tabs {
@@ -679,19 +676,6 @@ video {
   --tw-border-opacity: 1;
   border-color: rgb(221 221 221 / var(--tw-border-opacity));
   text-align: left;
-}
-
-.archive-tags {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  width: -moz-fit-content;
-  width: fit-content;
-  justify-content: center;
-  align-content: center;
-  border-radius: 90px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(229 229 229 / var(--tw-bg-opacity));
-  margin: 0.5rem;
 }
 
 .archive-notification-text {
@@ -842,22 +826,8 @@ video {
   visibility: visible;
 }
 
-.mx-14 {
-  margin-left: 3.5rem;
-  margin-right: 3.5rem;
-}
-
-.my-10 {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
-}
-
 .mb-4 {
   margin-bottom: 1rem;
-}
-
-.ml-14 {
-  margin-left: 3.5rem;
 }
 
 .ml-2 {
@@ -915,10 +885,6 @@ video {
 
 .w-3\/4 {
   width: 75%;
-}
-
-.w-3\/5 {
-  width: 60%;
 }
 
 .w-5\/6 {
@@ -1001,16 +967,6 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-red-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 202 202 / var(--tw-bg-opacity));
-}
-
-.px-6 {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
 }
 
 .py-4 {

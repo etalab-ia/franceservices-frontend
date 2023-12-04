@@ -1,7 +1,7 @@
 import { apiUrl } from "../constants/api";
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import { setHeaders, setUserQuestion } from "./setData";
-import { emitCloseStream, onCloseStream } from "./eventsEmitter";
+import { onCloseStream } from "./eventsEmitter";
 
 export const	useFetch = async(url, method, props, dispatch) => {
 	const		{ data, headers } = props;
@@ -89,7 +89,7 @@ export const	useStream = async(auth, dispatch, id) => {
 export async function	usePost(auth, question, dispatch) {
 	const	headers = setHeaders(auth.userToken, false);
 	const	data = setUserQuestion(question);
-	const	res = await useFetch(apiUrl, 'POST', {data: JSON.stringify(data), headers}, dispatch);
+	const	res = await useFetch(apiUrl, 'POST', { data: JSON.stringify(data), headers }, dispatch);
 	
 	return await useStream(auth, dispatch, res.id);
 }

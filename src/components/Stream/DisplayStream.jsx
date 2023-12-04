@@ -15,6 +15,7 @@ const Stream = ({ response }) => {
 
 export function DisplayStream({ stream, tabs, archive }) {
 	const	tabsLen = stream.historyStream.length;
+	const	user = useSelector((state) => state.user);
 	const	[currLen, setCurrLen] = useState(tabsLen);
 	const	[activeTab, setActiveTab] = useState(tabsLen + 1);
 	const	conditionTab = !stream.isStreaming && stream.historyStream.length > 1;
@@ -24,7 +25,9 @@ export function DisplayStream({ stream, tabs, archive }) {
 	useEffect(() => {
 		if (tabsLen != currLen) {
 			setCurrLen(tabsLen);
-			dispatch({ type: 'SET_ARCHIVE_MESSAGES', nextAgentResponse: stream.historyStream });
+			// TODO: question is removed when redo response generation, check why
+			// seems to come from usePost
+			dispatch({ type: 'SET_ARCHIVE_MESSAGES', nextAgentResponse: stream.historyStream, nextQuestion: user.question });
 		}
 		setActiveTab(tabsLen);
 	}, [tabsLen])

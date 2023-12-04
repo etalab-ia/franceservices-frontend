@@ -24,7 +24,7 @@ export function UserChatTools({ isArchive }) {
 			<GlobalColContainer>
 				{userChatToolsFunc({ stream, archive, feedback, auth, user }, dispatch).map((tool, index) => (
 					<button 
-						disabled={tool.name === 'redo' && (stream.isStoppable || isArchive !== NOT_SET)}
+						disabled={tool.name === 'redo' && (stream.isStreaming || isArchive)}
 						key={index} className={index === isSelected ? "fr-m-1v opacity-0" : "fr-m-1v opacity-[1]"}
 						onClick={() => { 
 							handleClick(index); 

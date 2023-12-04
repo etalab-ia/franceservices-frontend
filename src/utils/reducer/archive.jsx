@@ -17,6 +17,7 @@ export const	archiveReducer = (state = [], action) => {
 					source: source,
 					agentResponse: action.nextAgentResponse,
 					sheets: action.nextSheets,
+					type: action.nextType
 			 	},
 			];
 		}
@@ -25,7 +26,8 @@ export const	archiveReducer = (state = [], action) => {
 		
 			return [
 				...state.slice(0, lastIndex),
-				{ ...state[lastIndex],
+				{
+					...state[lastIndex],
 					question: action.nextQuestion
 				},
 		  ];
@@ -55,6 +57,7 @@ export const	archiveReducer = (state = [], action) => {
 				{
 					...state[lastIndex],
 					agentResponse: action.nextAgentResponse,
+					question: action.nextQuestion,
 				}
 			]
 		}

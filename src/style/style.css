@@ -318,9 +318,8 @@
 
 	.streaming {
 		@apply text-justify;
-		@apply bg-light-purple;
-		@apply rounded-[30px];
-		@apply w-fit;
+		/* @apply bg-light-purple; */
+		@apply rounded-[10px];
 	}
 
 	.streaming-tabs {
