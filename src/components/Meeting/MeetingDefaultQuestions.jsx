@@ -1,6 +1,7 @@
 import { defaultButtonChoice } from "../../constants/chatbotProps";
-import { defaultInputFields } from "../../constants/meeting";
+import { defaultInputFields, meetingDefaultQuestionsIntroduction } from "../../constants/meeting";
 import { GlobalRowContainer } from "../Global/GlobalRowContainer";
+import { Button } from "@codegouvfr/react-dsfr/Button";
 
 export function MeetingDefaultQuestions({ setCurrQuestion, setContext }) {
     
@@ -9,16 +10,18 @@ export function MeetingDefaultQuestions({ setCurrQuestion, setContext }) {
         setContext({ themes: field.themes, administrations: field.administrations });
     }
 
-	return <GlobalRowContainer>
+	return <GlobalRowContainer extraClass="bg-[#F5F5FE] fr-p-2w">
+		{meetingDefaultQuestionsIntroduction}
         {defaultInputFields.map((field, index) => {
-			return <button
+			return <Button
 				key={index}
+				priority="secondary"
 				role={defaultButtonChoice(field.title)}
 				onClick={() => handleClick(field)}
-				className="user-feedback-buttons max-h-fit fr-text--xs"
+				className="w-full fr-my-3v justify-center"
 			>
 				{field.title}
-			</button>
+			</Button>
 		})}
 	</GlobalRowContainer>
 }
