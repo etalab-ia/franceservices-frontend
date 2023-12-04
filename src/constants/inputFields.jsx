@@ -68,6 +68,20 @@ export const	toolsTiles = [
 		linkProps: { to: "/chat" },
 		imageUrl: question,
 		title: "Poser une question",
+	},
+	// {
+	// 	className: "fr-tile fr-tile--no-icon fr-enlarge-link",
+	// 	desc: "Accéder",
+	// 	linkProps: { to: "/chat" },
+	// 	imageUrl: question,
+	// 	title: "Consulter mes fiches démarches",
+	// },
+	{
+		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
+		desc: "Accéder",
+		linkProps: { to: "/history" },
+		imageUrl: question,
+		title: "Consulter mes questions-réponses",
 	}
 ]
 

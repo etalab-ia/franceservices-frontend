@@ -7,11 +7,11 @@ import { useSelector } from "react-redux";
 export function Ressources({ archive }) {
 	const	user = useSelector((state) => state.user);
 	const	ressources = useSelector((state) => state.ressources);
-	const	choice = archive === NOT_SET ? NOT_SET : archive.choices.ressources;
+	const	choice = archive ? NOT_SET : archive.choices.ressources;
 
 	return (
 		<div>
-			{ressources.isConfirmed != NOT_SET && archive === NOT_SET ?
+			{ressources.isConfirmed != NOT_SET && archive ?
 				<></>
 				:
 				<div className="col-message">

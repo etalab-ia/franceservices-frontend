@@ -90,7 +90,7 @@ export	function	userChatToolsFunc(state, dispatch) {
 	return userChatToolsProps;
 }
 
-export const	redoUserQuestion = `Voulez-vous poser une nouvelle question ?`;
+export const	redoUserQuestion = `Voulez-vous archiver cette conversation ?`;
 
 export const	notifyArchiving = (title) => (
 	<>Cette conversation a été archivée <img src={archive} alt="Logo associé à l'archivage"/> comme {title}</>

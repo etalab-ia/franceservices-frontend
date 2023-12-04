@@ -3,12 +3,10 @@ import { DisplayArchiveHead } from "./DisplayArchiveHead";
 import { NOT_SET } from "../../constants/status";
 import { useSelector, useDispatch } from "react-redux";
 import { Print } from "../Print/Print";
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { checkConnexion } from "../../utils/localStorage";
 import { GlobalRowContainer } from "../Global/GlobalRowContainer";
 import { GlobalDiv } from "../Global/GlobalDiv";
-import { Table } from "@codegouvfr/react-dsfr/Table";
-import { archiveTabsTitle } from "../../utils/manageTabs";
 
 export function DisplayArchiveTabs() {
 	const	archive = useSelector((state) => state.archive);

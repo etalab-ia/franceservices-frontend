@@ -13,7 +13,7 @@ export function	DisplayRessources({ archive }) {
 			<div>
 				<p>{askingDocumentationChoice}</p>
 				<RessourceOptions archive={archive}/>
-				{archive === NOT_SET && <ConfirmationButton setIsConfirmed={setIsConfirmed}/>}
+				{archive && <ConfirmationButton setIsConfirmed={setIsConfirmed}/>}
 			</div>
 		}
 		</>
