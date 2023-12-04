@@ -9,6 +9,7 @@ export const    setArchive = (dispatch, stream, newQuestion, choices, sheets) =>
 		nextTags: selected,
 		nextAgentResponse: stream.historyStream,
 		nextChoices: choices,
+		nextSheets: sheets,
 	});
 	dispatch({ type: 'SET_USER_CHOICES', nextKey: 'oldQuestion', nextValue: newQuestion });
 }

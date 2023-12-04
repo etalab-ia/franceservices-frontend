@@ -18,7 +18,7 @@ export function	RessourceOptions({ archive }) {
 	return (
 		<div className="wrap-message">
 			{ressourceButtons.map((button, index) => {
-				const	isSelected = (archive === NOT_SET && ressource === button || ressource === button.name);
+				const	isSelected = (archive && ressource === button || ressource === button.name);
 				const	classNames = isSelected ? "bg-purple" : "bg-white";
 
 				return <div key={index}>

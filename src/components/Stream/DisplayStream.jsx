@@ -33,12 +33,12 @@ export function DisplayStream({ stream, tabs, archive }) {
 	return (
 		<GlobalColContainer>
 			{conditionStream ?
-				archive === NOT_SET ?
+				!archive ?
 					<Stream response={stream.response}/>
 					:
-					<Stream response={archive.agentResponse[0]}/>
+					<Stream response={archive.agentResponse}/>
 				:
-				archive === NOT_SET ?
+				!archive ?
 					<StreamingMessage>{stream.historyStream[activeTab - 1]}</StreamingMessage>
 					:
 					<StreamingMessage>{archive.agentResponse[activeTab - 1]}</StreamingMessage>

@@ -1,12 +1,10 @@
 import { Tile } from "@codegouvfr/react-dsfr/Tile";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useFetch } from "../../utils/hooks";
-import { indexesUrl } from "../../constants/api";
 import { getSheetsData, setHeaders, setSheetsData } from "../../utils/setData";
 import { setTilesFromSheets } from "../../utils/setData";
 
-export const    MeetingTiles = ({ currQuestion }) => {
+export const    MeetingTiles = ({ currQuestion, archiveSheets }) => {
 	const   [tiles, setTiles] = useState([]);
 	const	[sheets, setSheets] = useState([]);
 	const	userToken = useSelector((state) => state.auth.userToken);
@@ -15,9 +13,10 @@ export const    MeetingTiles = ({ currQuestion }) => {
 
 	useEffect(() => {
 		setTiles([]);
-		if (currQuestion.length === 0)
+		if ((!currQuestion || currQuestion.length === 0) && !archiveSheets)
 			return ;
-		getSheetsData(setSheets, currQuestion, userToken, dispatch);
+		!archiveSheets && getSheetsData(setSheets, currQuestion, userToken, dispatch);
+		archiveSheets && setSheets(archiveSheets);
 	}, [user.question.query]);
 
 	useEffect(() => { setTilesFromSheets(sheets, setTiles); }, [sheets]);

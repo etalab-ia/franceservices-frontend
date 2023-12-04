@@ -16,6 +16,7 @@ export const	archiveReducer = (state = [], action) => {
 					tags:action.nextTags,
 					source: source,
 					agentResponse: action.nextAgentResponse,
+					sheets: action.nextSheets,
 			 	},
 			];
 		}

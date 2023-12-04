@@ -3,15 +3,21 @@ import { DisplaySheets } from '../Sheets/DisplaySheets';
 import { GlobalColContainer } from '../Global/GlobalColContainer';
 import { OneThirdScreenWidth } from '../Global/OneThirdScreenWidth';
 
-export function ChatAdditionalContainer() {
+export function ChatAdditionalContainer({ archive }) {
 	const	user = useSelector((state) => state.user);
 
 	return (
 		<OneThirdScreenWidth>
 			<GlobalColContainer>
-				<DisplaySheets
-					currQuestion={user.question.query}
-				/>
+				{archive ? 
+					<DisplaySheets
+						archiveSheets={archive.sheets}
+					/>
+					:
+					<DisplaySheets
+						currQuestion={user.question.query}
+					/>
+				}
 			</GlobalColContainer>
 		</OneThirdScreenWidth>
 	);

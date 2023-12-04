@@ -344,14 +344,14 @@
 	}
 	
 	.archive-tabs-title {
-		@apply border-b-2 border-[#3A3A3A] p-4 text-left;
+		@apply border-b-2 border-[#3A3A3A] text-left;
 	}
 
 	.archive-body {
 		@apply p-4;
 		@apply w-auto;
 		@apply text-left;
-		@apply border-b-[1px] border-[#DDD] p-4 text-left;
+		@apply border-b-[1px] border-[#DDD] text-left;
 	}
 
 	.archive-tags {

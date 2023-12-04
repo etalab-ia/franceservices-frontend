@@ -30,6 +30,20 @@ export function navFunc() {
 					},
 					"isActive": currentPath === "/chat",
 				},
+				// {
+				// 	"text": "Consulter mes fiches démarches",
+				// 	"linkProps": {
+				// 		"to": "/chat"
+				// 	},
+				// 	"isActive": currentPath === "/chat",
+				// },
+				{
+					"text": "Consulter mes questions-réponses",
+					"linkProps": {
+						"to": "/history"
+					},
+					"isActive": currentPath === "/history",
+				},
 			]
 		},
 		{
@@ -39,19 +53,6 @@ export function navFunc() {
 			},
 			"isActive": currentPath === "/contact",
 		},
-		// {
-		// 	text: 'Mes ressources',
-		// 	"isActive": currentPath === "/history",
-		// 	menuLinks: [
-		// 		{
-		// 			"text": "Historique",
-		// 			"linkProps": {
-		// 				"to": "/history"
-		// 			},
-		// 			"isActive": currentPath === "/history",
-		// 		},
-		// 	]
-		// },
 	]
 	return navDefs;
 }
@@ -61,7 +62,7 @@ const routeDefs = {
 	"meeting": defineRoute("/meeting"),
 	"chat": defineRoute("/chat"),
 	"contact": defineRoute("/contact"),
-	// "editor": defineRoute("/history"),
+	"editor": defineRoute("/history"),
 };
 
 export const { RouteProvider, useRoute, routes } = createRouter(routeDefs);

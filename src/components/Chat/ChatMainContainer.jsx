@@ -10,7 +10,7 @@ import { DefaultQuestions } from '../Global/DefaultQuestions';
 import { ChatOverflowManagementContainer } from './ChatOverflowManagementContainer';
 import { ChatHeightContainer } from './ChatHeightContainer';
 
-export function ChatMainContainer() {
+export function ChatMainContainer({ archive }) {
 	const	auth = useSelector((state) => state.auth);
 	const	user = useSelector((state) => state.user);
 	const	feedback = useSelector((state) => state.feedback);
@@ -18,6 +18,8 @@ export function ChatMainContainer() {
 	const   dispatch = useDispatch();
 
 	useEffect(() => {
+		if (archive)
+			return ;
 		dispatch({ type: 'SET_INITIAL_STREAM' });
 		dispatch({ type: 'SET_INITIAL_USER' });
 		dispatch({ type: 'SET_MESSAGES', nextMessage: { text: initialChatbotMessage, sender: 'agent' } });
@@ -29,13 +31,20 @@ export function ChatMainContainer() {
 	return (
 		<ChatHeightContainer>
 			<ChatOverflowManagementContainer>
-				<Display
-					messages={user.messages}
-					archive={NOT_SET}
-				/>
+				{archive ?
+					<Display
+						messages={[{text: archive.question.query, sender: 'user'}, {text: archive.agentResponse, sender: 'agent'}]}
+						archive={true}
+					/>
+					:
+					<Display
+						messages={user.messages}
+						archive={false}
+					/>
+				}
 			</ChatOverflowManagementContainer>
-			<DefaultQuestions />
-			<UserMessage />
+			{!archive && <DefaultQuestions />}
+			{!archive && <UserMessage />}
 		</ChatHeightContainer>
 	);
 }
