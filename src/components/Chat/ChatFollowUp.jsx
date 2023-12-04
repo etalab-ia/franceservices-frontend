@@ -7,28 +7,24 @@ import { GlobalRowContainer } from "../Global/GlobalRowContainer";
 import { GlobalColContainer } from "../Global/GlobalColContainer";
 import { AvatarToolsContainer } from "./AvatarToolsContainer";
 
-export function ChatFollowUp({ stream, tabs, archive }) {
+export function ChatFollowUp({ stream, tabs }) {
 	const	user = useSelector((state) => state.user);
 	const	feedback = useSelector((state) => state.feedback);
-	const	conditionDiv = ((stream.response.length !== 0 || stream.historyStream.length !== 0) && tabs.activeTab === 0) || archive != NOT_SET;
-	const	userExperienceCondition = !stream.isStreaming && archive;
-	const	newQuestionCondition = !stream.isStreaming && user.choices.feedback !== NOT_SET && feedback.isConfirmed && archive;
+	const	conditionDiv = ((stream.response.length !== 0 || stream.historyStream.length !== 0) && tabs.activeTab === 0);
+	const	newQuestionCondition = !stream.isStreaming && user.choices.feedback !== NOT_SET && feedback.isConfirmed;
 
 	return (
 		<>
 			{conditionDiv && (
 				<div>
 					<GlobalRowContainer extraClass='fr-grid-row--center'>
-						<AvatarToolsContainer archive={archive}/>
+						<AvatarToolsContainer/>
 						<DisplayStream
 							stream={stream}
 							tabs={tabs}
-							// archive={archive}
 						/>
 					</GlobalRowContainer>
-					{userExperienceCondition && <UserExperience
-						isArchive={archive !== NOT_SET}
-					/>}
+					{!stream.isStreaming && <UserExperience/>}
 					{newQuestionCondition && <NewQuestion />}
 				</div>
 			)}

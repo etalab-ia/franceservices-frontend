@@ -13,7 +13,7 @@ export const PrintTools = React.forwardRef(({ messages }, ref) => {
         <div className="flex w-screen">
             <Button
                 iconId="fr-icon-arrow-left-s-line-double"
-                className="fr-my-4w fr-ml-6w fr-mx-1w"
+                className="fr-mt-4w fr-ml-6w fr-mx-1w"
                 onClick={handleClick}
                 priority="tertiary"
             />
@@ -23,7 +23,7 @@ export const PrintTools = React.forwardRef(({ messages }, ref) => {
                 trigger={() => (
                     <Button
                         iconId="fr-icon-printer-line"
-                        className="fr-my-4w"
+                        className="fr-mt-4w"
                         priority="tertiary"
                     />
                 )}
