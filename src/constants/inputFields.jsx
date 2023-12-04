@@ -1,6 +1,9 @@
-import meeting from "@artwork/pictograms/buildings/city-hall.svg"
-import question from "@artwork/pictograms/leisure/community.svg"
-import history from "@artwork/pictograms/document/document.svg"
+import meeting from "/dsfr/artwork/pictograms/albert/meeting.png"
+import question from "/dsfr/artwork/pictograms/albert/question.png"
+import aplus from "/dsfr/artwork/pictograms/logo/LogoA+.png"
+import franceservices from "/dsfr/artwork/pictograms/logo/LogoFranceServices.png"
+import osmose from "/dsfr/artwork/pictograms/logo/LogoOsmose.png"
+import servicepublic from "/dsfr/artwork/pictograms/logo/LogoServicePublicMinimised.png"
 
 export const signupFields = [
 	{
@@ -73,7 +76,7 @@ export const	ressourcesTiles = [
 		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
 		desc: "Accéder",
 		linkProps: { to: 'https://aplus.beta.gouv.fr/' },
-		imageUrl: meeting,
+		imageUrl: aplus,
 		title: <>
 			<p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">
 				Réseau
@@ -85,7 +88,7 @@ export const	ressourcesTiles = [
 		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
 		desc: "Accéder",
 		linkProps: { to: 'https://osmose.numerique.gouv.fr/' },
-		imageUrl: meeting,
+		imageUrl: osmose,
 		title: <>
 			<p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">
 				Réseau
@@ -97,7 +100,7 @@ export const	ressourcesTiles = [
 		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
 		desc: "Accéder",
 		linkProps: { to: 'https://extranet.france-services.gouv.fr/' },
-		imageUrl: meeting,
+		imageUrl: franceservices,
 		title: <>
 			<p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">
 				Documentation
@@ -109,7 +112,7 @@ export const	ressourcesTiles = [
 		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
 		desc: "Accéder",
 		linkProps: { to: 'https://www.service-public.fr/' },
-		imageUrl: meeting,
+		imageUrl: servicepublic,
 		title: <>
 			<p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">
 				Documentation
