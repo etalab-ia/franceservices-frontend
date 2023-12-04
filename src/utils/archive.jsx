@@ -1,7 +1,7 @@
 export const    setArchive = (dispatch, stream, newQuestion, choices, sheets) => {
 	const	themesArrays = sheets.map((sheet) => sheet.theme.split(', '));
-	const	uniqueThemesSet = new Set(themesArrays.flat());
-	const	selected = Array.from(uniqueThemesSet);
+	const	uniqueThemesSet = Array.from(new Set(themesArrays.flat()));
+	const	selected = uniqueThemesSet.filter((theme) => theme !== "");
 
 	dispatch({ 
 		type: 'SET_ARCHIVE',

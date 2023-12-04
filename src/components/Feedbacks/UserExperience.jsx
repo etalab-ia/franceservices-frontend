@@ -13,7 +13,7 @@ const	AskingResponseQuality = ({ tabsLen }) => {
 	);
 }
 
-export function UserExperience({ isArchive }) {
+export function UserExperience() {
 	const	stream = useSelector((state) => state.stream);
 	const	tabsLen = stream.historyStream.length;
 
@@ -30,7 +30,6 @@ export function UserExperience({ isArchive }) {
 				</GlobalRowContainer>
 				<Feedback
 					isFirst={tabsLen === 1}
-					isArchive={isArchive}
 				/>
 			</div>}
 		</>
