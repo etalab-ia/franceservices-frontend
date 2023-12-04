@@ -87,15 +87,23 @@ export const	meetingQR = [
 	},
 ]
 
+export const	meetingDefaultQuestionsIntroduction = <GlobalRowContainer>
+	<h6 className="text-xl font-bold text-[##3A3A3A]">Tester Albert</h6>
+	<p className="text-[##3A3A3A] fr-mt-3v fr-mb-1v">
+		Ceci est votre première utilisation d’Albert et vous souhaitez comprendre simplement son fonctionnement ? 
+		Nous vous avons préparé deux scénarios de tests pour cela. Il suffit de cliquer sur l’une des options ci-dessous.
+	</p>
+</GlobalRowContainer>
+
 export const	defaultInputFields = [
 	{
-		title: "Saisie RSA par la CAF",
+		title: "Comprendre une saisie RSA par la CAF",
 		question: "Une usagère ne comprend par le montant d’allocations sociales qu’elle touche ce mois-ci. En effet, le montant a été divisé par deux par rapport aux mois précédents et elle n’a plus que 150€. Elle cherche à comprendre pourquoi le montant a ainsi diminué.\n\nAprès avoir consulté le compte CAF de l’usagère avec son accord, il semble que la CAF opère une retenue sur le montant du RSA allouée à l’usagère suite à une déclaration erronée par le passé.\n\nLa CAF peut-elle faire une saisie sur le RSA et sous quelles conditions ? Comment débloquer la situation ?",
 		themes: ["Allocation sociale", "RSA"],
 		administrations: ["CAF"]
 	}, 
 	{
-		title: "Renouvellement Carte de Mobilité Inclusion sans compte en ligne",
+		title: "Renouveler une carte de mobilité inclusion sans compte en ligne",
 		question: "L’usager a perdu sa Carte de Mobilité Inclusion (CMI) stationnement. Il aimerait en refaire une.\n\nLa démarche se fait en ligne sur https://www.carte-mobilite-inclusion.fr.\n\nL’usager n'a jamais eu de compte sur le site et ne peut donc pas s'y connecter ou récupérer des informations.\n\nComment renouveler une CMI suite à une perte sans compte sur le site carte-mobilite-inclusion.fr ?",
 		themes: ["Handicap", "Santé", "Allocation"],
 		administrations: ["MDPH"]
