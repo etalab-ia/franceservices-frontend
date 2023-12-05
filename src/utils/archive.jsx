@@ -1,5 +1,5 @@
-export const    setArchive = (dispatch, stream, newQuestion, choices, sheets) => {
-	const	themesArrays = sheets.map((sheet) => sheet.theme.split(', '));
+export const    setArchive = (dispatch, stream, user) => {
+	const	themesArrays = user.sheets.map((sheet) => sheet.theme.split(', '));
 	const	uniqueThemesSet = Array.from(new Set(themesArrays.flat()));
 	const	selected = uniqueThemesSet.filter((theme) => theme !== "");
 
@@ -7,10 +7,15 @@ export const    setArchive = (dispatch, stream, newQuestion, choices, sheets) =>
 		type: 'SET_ARCHIVE',
 		nextDate: new Date().toLocaleDateString('fr'), 
 		nextTags: selected,
-		nextAgentResponse: stream.historyStream,
-		nextChoices: choices,
-		nextSheets: sheets,
+		nextSheets: user.sheets,
+		nextMessages: [{ text: user.originQuestion, sender: 'user' }, { text: stream.historyStream, sender: 'agent' }],
 		nextType: 'qr'
 	});
-	dispatch({ type: 'SET_USER_CHOICES', nextKey: 'oldQuestion', nextValue: newQuestion });
+
+	// TODO: improve isNewQuestion
+	dispatch({
+		type: 'SET_USER_CHOICES',
+		nextKey: 'oldQuestion',
+		nextValue: user.choices.newQuestion
+	});
 }
