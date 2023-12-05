@@ -318,7 +318,6 @@
 
 	.streaming {
 		@apply text-justify;
-		/* @apply bg-light-purple; */
 		@apply rounded-[10px];
 	}
 
@@ -347,8 +346,6 @@
 	}
 
 	.archive-body {
-		@apply p-4;
-		@apply w-auto;
 		@apply text-left;
 		@apply border-b-[1px] border-[#DDD] text-left;
 	}
@@ -374,6 +371,5 @@
 		@apply justify-center;
 		@apply text-center;
 		@apply text-[#929292];
-		@apply mb-4;
 	}
 }
