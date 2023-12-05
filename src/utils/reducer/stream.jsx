@@ -2,6 +2,8 @@ import { initialStream } from "./state"
 
 export const	streamReducer = (state = initialStream, action) => {
 	switch (action.type) {
+		case 'SET_INITIAL_CHAT':
+			return initialStream;
 		case 'SET_INITIAL_STREAM':
 			return initialStream;
 		case 'GET_AGENT_STREAM':
@@ -16,15 +18,8 @@ export const	streamReducer = (state = initialStream, action) => {
 			return {
 				...state,
 				historyStream: [...state.historyStream, joinedRes],
-				isStoppable: false,
 				isStreaming: false,
 				response: [],
-			}
-		case 'REDO_AGENT_STREAM':
-			return {
-				...state,
-				response: [],
-				isStoppable: true
 			}
 		case 'RESET_AGENT_STREAM':
 			return {

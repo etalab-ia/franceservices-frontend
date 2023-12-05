@@ -1,24 +1,18 @@
+import { initialChatbotMessage } from "../../constants/chatbotProps"
 import { initialQuestion, initialUserChoices } from "./state"
 
-export const	userReducer = (state = { question: initialQuestion, choices: initialUserChoices, sheets: [], messages: [], isChat: false }, action) => {
+export const	userReducer = (state = { question: initialQuestion, choices: initialUserChoices, messages: [] }, action) => {
 	switch (action.type) {
-		case 'SET_INITIAL_USER': 
+		case 'SET_INITIAL_CHAT': 
 			return {
 				question: initialQuestion,
 				choices: initialUserChoices,
-				sheets: [],
-				messages: [],
-				isChat: false,
+				messages: [{ text: initialChatbotMessage, sender: 'agent' }],
 			}
-		case 'SET_USER_MODEL_NAME_CHOICE':
+		case 'SET_SHEETS':
 			return {
 				...state,
-				question: {
-					...state.question,
-					model_name: action.nextModelName,
-					limit: action.nextLimit,
-					mode: action.nextMode,
-				}
+				sheets: action.nextSheets,
 			}
 		case 'SET_USER_TEXT':
 			return {
@@ -29,17 +23,6 @@ export const	userReducer = (state = { question: initialQuestion, choices: initia
 					user_text: action.nextUserText,
 					query: action.nextUserText
 				},
-				isChat: action.nextIsChat,
-			}
-		case 'SET_SHEETS':
-			return {
-				...state,
-				sheets: action.nextSheets,
-			}
-		case 'SET_INPUT_VISIBILITY':
-			return {
-				...state,
-				inputVisibility: action.nextVisibility,
 			}
 		case 'RESET_QUESTION_FIELDS':
 			return {
@@ -50,7 +33,6 @@ export const	userReducer = (state = { question: initialQuestion, choices: initia
 			return {
 				...state,
 				choices: initialUserChoices,
-				sheets: [],
 			}
 		case 'SET_USER_CHOICES':
 			return {

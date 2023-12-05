@@ -13,11 +13,8 @@ export const	initialQuestion = {
 }
 
 export const	initialUserChoices = {
-	ressources: NOT_SET,
-	sheets: NOT_SET,
 	feedback: NOT_SET,
 	newQuestion: NOT_SET,
-	oldQuestion: NOT_SET,
 }
 
 export const	initialAuth = {
@@ -31,8 +28,6 @@ export const	initialAuth = {
 export const	initialStream = {
 	response: [],
 	historyStream: [],
-	isStoppable: true,
 	isStreaming: false,
 	activeTab: 1,
-	id: NOT_SET,
 }
