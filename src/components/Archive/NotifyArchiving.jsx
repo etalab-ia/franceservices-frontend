@@ -6,23 +6,18 @@ import { setArchive } from "../../utils/archive";
 import { archiveNotificationRole } from "../../constants/archive";
 
 export function NotifyArchiving() {
-	const   archive = useSelector((state) => state.archive);
 	const   user = useSelector((state) => state.user);
 	const   stream = useSelector((state) => state.stream);
 	const	title = user.messages[user.messages.length - 1].text.length > 40 ? user.messages[user.messages.length - 1].text.slice(0, 40) + '...' : user.messages[user.messages.length - 1].text;
 	const	dispatch = useDispatch();
 
 	useEffect(() => {
-		if (user.choices.oldQuestion === user.choices.newQuestion)
-			return ;
-
-		setArchive(dispatch, stream, user.choices.newQuestion, user.choices, user.sheets);	
+		setArchive(dispatch, stream, user);	
 	}, [user.choices.newQuestion])
 
 	return (
 		<div role={archiveNotificationRole}>
-			<div className="archive-notification-text">{notifyArchiving(`« ${title} »`)}</div>
-			{/* <div className="archive-separation"></div> */}
+			<div className="archive-notification-text fr-mb-2w">{notifyArchiving(`« ${title} »`)}</div>
 		</div>
 	);
 }

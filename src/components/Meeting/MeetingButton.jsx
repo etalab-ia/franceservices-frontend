@@ -13,7 +13,7 @@ export function MeetingButton({ isDisable, currQuestion, setGenerate, context })
     const	handleClick = () => {
         const   questionWithContext = setQuestionWithContext(currQuestion, context);
 
-        dispatch({ type: 'SET_USER_TEXT', nextUserText: questionWithContext, nextIsChat: false });
+        dispatch({ type: 'SET_USER_TEXT', nextUserText: questionWithContext });
     }
 
     useEffect(() => { dispatch({ type: 'RESET_QUESTION_FIELDS' }) }, []);

@@ -13,7 +13,7 @@ const Stream = ({ response }) => {
 	</p>
 }
 
-export function DisplayStream({ stream, tabs, archive }) {
+export function	DisplayStream({ stream, tabs }) {
 	const	tabsLen = stream.historyStream.length;
 	const	user = useSelector((state) => state.user);
 	const	[currLen, setCurrLen] = useState(tabsLen);
@@ -23,28 +23,21 @@ export function DisplayStream({ stream, tabs, archive }) {
 	const	dispatch = useDispatch();
 
 	useEffect(() => {
-		if (tabsLen != currLen) {
+		if (tabsLen != currLen)
 			setCurrLen(tabsLen);
-			// TODO: question is removed when redo response generation, check why
-			// seems to come from usePost
-			dispatch({ type: 'SET_ARCHIVE_MESSAGES', nextAgentResponse: stream.historyStream, nextQuestion: user.question });
-		}
 		setActiveTab(tabsLen);
-	}, [tabsLen])
-	useEffect(() => { dispatch({ type: 'SWITCH_TAB', nextTab: activeTab }) }, []);
+	}, [tabsLen]);
+
+	useEffect(() => {
+		dispatch({ type: 'SWITCH_TAB', nextTab: activeTab })
+	}, []);
 
 	return (
 		<GlobalColContainer>
 			{conditionStream ?
-				!archive ?
-					<Stream response={stream.response}/>
-					:
-					<Stream response={archive.agentResponse}/>
+				<Stream response={stream.response}/>
 				:
-				!archive ?
-					<StreamingMessage>{stream.historyStream[activeTab - 1]}</StreamingMessage>
-					:
-					<StreamingMessage>{archive.agentResponse[activeTab - 1]}</StreamingMessage>
+				<StreamingMessage>{stream.historyStream[activeTab - 1]}</StreamingMessage>
 			}
 			<DisplayMessageTab
 				isDisplayable={conditionTab}

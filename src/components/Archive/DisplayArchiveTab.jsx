@@ -10,8 +10,12 @@ import { GlobalDiv } from "../Global/GlobalDiv";
 export function DisplayArchiveTabs({ type }) {
 	const	archive = useSelector((state) => state.archive);
 	const	tabs = useSelector((state) => state.tabs);
-	const	selectedMessages = tabs.archiveTab !== NOT_SET ? [{ text: archive[tabs.archiveTab].question.query, sender: 'user'}] : [];
+	const	selectedMessages = archive && archive.length && tabs.archiveTab !== NOT_SET ? archive[tabs.archiveTab] : [];
 	const   ref = useRef();
+
+	// TODO: 
+	// type === 'qr' -> chat page
+	// type === 'meeting' -> meeting page
 
 	return (
 		<GlobalRowContainer extraClass='fr-grid-row--center'>

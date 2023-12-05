@@ -4,9 +4,9 @@ import { DisplayStream } from "../Stream/DisplayStream";
 import { NewQuestion } from "./NewQuestion";
 import { useSelector } from "react-redux";
 import { GlobalRowContainer } from "../Global/GlobalRowContainer";
-import { GlobalColContainer } from "../Global/GlobalColContainer";
 import { AvatarToolsContainer } from "./AvatarToolsContainer";
 
+// TODO: improve
 export function ChatFollowUp({ stream, tabs }) {
 	const	user = useSelector((state) => state.user);
 	const	feedback = useSelector((state) => state.feedback);

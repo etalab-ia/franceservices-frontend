@@ -1,4 +1,4 @@
-import { archiveTabsTitle } from "../../utils/manageTabs";
+import { archiveTabsTitle } from "../../constants/tabs"
 
 export function DisplayArchiveHead() {
 	

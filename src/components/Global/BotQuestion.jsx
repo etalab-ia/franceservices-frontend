@@ -2,7 +2,6 @@ import { NOT_SET } from "../../constants/status";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from 'react';
 import { botQuestionRole } from "../../constants/global";
-import { GlobalColContainer } from "./GlobalColContainer";
 import { GlobalRowContainer } from "./GlobalRowContainer";
 
 export function	BotQuestion({ id, choice }) {
@@ -21,7 +20,6 @@ export function	BotQuestion({ id, choice }) {
 		{
 			setButtonChoice(index);
 			dispatch({ type: 'SET_USER_CHOICES', nextKey: id, nextValue: index });
-			index === 1 && dispatch({ type: 'CONFIRM_RESSOURCE' });
 		}
 	}
 

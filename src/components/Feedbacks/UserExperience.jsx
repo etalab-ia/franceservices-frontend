@@ -2,12 +2,11 @@ import { Avatar } from "../Chat/Avatar";
 import { Feedback } from "./Feedback";
 import { askingQuality, redoAskingQuality } from "../../constants/feedback";
 import { useSelector } from 'react-redux';
-import { GlobalColContainer } from "../Global/GlobalColContainer";
 import { GlobalRowContainer } from "../Global/GlobalRowContainer";
 
 const	AskingResponseQuality = ({ tabsLen }) => {
 	return (
-		<div className='streaming fr-mb-2w fr-p-3v fr-ml-3v'>
+		<div className='streaming fr-p-3v fr-ml-3v'>
 			<div>{tabsLen > 1 ? redoAskingQuality : askingQuality}</div>
 		</div>
 	);

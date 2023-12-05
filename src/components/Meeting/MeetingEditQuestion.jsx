@@ -1,11 +1,8 @@
-import { useDispatch } from "react-redux";
 import { GlobalRowContainer } from "../Global/GlobalRowContainer";
 
 export function MeetingEditQuestion({ setGenerate }) {
-	const	dispatch = useDispatch();
 
 	const   handleClick = async() => {
-		dispatch({ type: 'SET_INITIAL_STREAM'});
 		setGenerate(false);
 	}
 
