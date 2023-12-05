@@ -12,6 +12,7 @@ import { loginFields } from "../constants/inputFields";
 import { LoginContainer } from "../components/Auth/LoginContainer";
 import { ButtonInformation } from "../components/Global/ButtonInformation";
 
+// TODO: clean page
 export function	Login() {
 	const	auth = useSelector((state) => state.auth);
 	const	dispatch = useDispatch();
