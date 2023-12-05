@@ -7,7 +7,6 @@ import { postNewQuestion, setNewQuestion } from "../../utils/newQuestion";
 
 export function UserMessage() {
 	const	auth = useSelector((state) => state.auth);
-	const	ressources = useSelector((state) => state.ressources);
 	const	stream = useSelector((state) => state.stream);
 	const	user = useSelector((state) => state.user);
 	const	dispatch = useDispatch();
@@ -24,10 +23,10 @@ export function UserMessage() {
 	}
 
 	useEffect(() => {
-		if (!user.question.query.length || !user.isChat)
+		if (!user.question.query.length)
 			return ;
 		postNewQuestion(dispatch, auth, user.question, user.choices.newQuestion);
-	}, [user.question, ressources.isConfirmed]);
+	}, [user.question]);
 
 	const	handleRenderInput = (params) => {
 		const	newParams = { maxLength: 800 };

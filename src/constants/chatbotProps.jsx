@@ -2,6 +2,8 @@ import redo from "../../icons/usertools/redo.svg"
 import copy from "../../icons/usertools/copy.svg"
 import archive from "../../icons/archives/archive.svg";
 import { usePost } from "../utils/hooks";
+import { setQuestionFromRegeneration } from "../utils/setData";
+import { NOT_SET } from "./status";
 
 export const		chatbotProps = {
 	mainTitle: "Chatbot administratif",
@@ -9,68 +11,35 @@ export const		chatbotProps = {
 }
 
 async function		handleRedo(state, dispatch) {
-	const	{ archive, feedback, auth, user } = state;
+	const	{ archive, feedback, auth, user, stream } = state;
 	const	archiveIndex = archive.length - 1;
-	let		newLimit = archive[archiveIndex].question.limit;
-	let		newText = archive[archiveIndex].agentResponse;
+	let		newLimit = user.choices.newQuestion !== NOT_SET ? archive[archiveIndex].limit : user.question.limit;
+	let		newText = user.choices.newQuestion !== NOT_SET ? archive[archiveIndex].agentResponse : stream.historyStream[stream.historyStream.length - 1];
 	let		newMode = feedback.reasons.length ? 'simple' : 'rag';
 
 	if (feedback.reasons.includes('Trop long'))
 	{
 		newText = 'Résume ce texte : ' + newText;
-		newLimit = 5;
+		newLimit -= 2;
 	}
 	else if (feedback.reasons.includes('Incohérent'))
-		newText = 'Reformule ce texte : ' + newText;
+		newText = 'Reforume ce texte : ' + newText;
 	else if (feedback.reasons.includes('Manque de sources'))
 	{
 		newLimit += 2;
 		newMode = 'rag';
-		if (feedback.reasons.includes('Trop long'))
-			newText = 'Résume ce texte : ' + newText;
-		else if (archive[archiveIndex].question.query.length)
-			newText = archive[archiveIndex].question.query;
-		else
-			newText = user.originQuestion;
-		dispatch({ type: 'SET_ARCHIVE_QUESTION', nextQuestion: user.originQuestion });
-		console.log('new text: ', newText)
-		console.log(archive[archiveIndex].question.query)
-		console.log(archive)
-		console.log(user)
+		user.choices.newQuestion !== NOT_SET ? newText = archive[archiveIndex].messages[0].text : newText;
 	}
 	else
-	{
-		newText = user.originQuestion;
 		newMode = 'rag';
-	}
-	// else if (feedback.reasons.includes('Les éléments sont faux'))
-	// {
-	// 		TODO: ask user to underline errors ?
-	// }
+	
+	const	question = setQuestionFromRegeneration(newMode, newText, newLimit);
 
-	const question = {
-		model_name: 'albert-light',
-		mode: newMode,
-		query: newText,
-		limit: newLimit,
-		user_text: newText,
-		context: '',
-		institution: '',
-		links: '',
-		temperature: 20,
-	}
-
-	// dispatch({ type: 'SET_USER_MODEL_NAME_CHOICE', nextModelName: 'albert-light', nextMode: newMode, nextLimit: newLimit });
-	console.log('going to post')
 	usePost(auth, question, dispatch);
-	console.log('archive: ', archive)
-	// dispatch({ type: 'SET_USER_TEXT', nextUserText: newText, nextIsChat: true });
 	dispatch({ type: 'SET_ARCHIVE_LIMIT', nextLimit: newLimit });
 	dispatch({ type: 'RESET_FEEDBACK' });
 
-	console.log('after: ', archive)
-
-	return dispatch({ type: 'REDO_AGENT_STREAM' });
+	return dispatch({ type: 'RESET_AGENT_STREAM' });
 }
 
 function			handleCopy(stream) {
@@ -101,7 +70,7 @@ export	function	userChatToolsFunc(state, dispatch) {
 	return userChatToolsProps;
 }
 
-export const	redoUserQuestion = `Voulez-vous archiver cette conversation ?`;
+export const	redoUserQuestion = <p className="streaming fr-p-3v fr-ml-3v">Voulez-vous archiver cette conversation ?</p>;
 
 export const	notifyArchiving = (title) => (
 	<>Cette conversation a été archivée <img src={archive} alt="Logo associé à l'archivage"/> comme {title}</>

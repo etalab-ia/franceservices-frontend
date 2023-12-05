@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import { DisplayArrayMessages } from "./DisplayArrayMessages";
 import { DisplaySingleMessage } from "./DisplaySingleMessage";
 import { ChatFollowUp } from "./ChatFollowUp";
-import { NOT_SET } from '../../constants/status';
 import { GlobalChatContainer } from './GlobalChatContainer';
 
 export function Display({ messages, archive }) {
@@ -16,7 +15,6 @@ export function Display({ messages, archive }) {
 					<DisplayArrayMessages
 						key={index}
 						messages={message.text}
-						isArchive={archive !== NOT_SET}
 					/>
 					:
 					<DisplaySingleMessage
@@ -25,7 +23,10 @@ export function Display({ messages, archive }) {
 						text={message.text}
 					/>
 			})}
-			{!archive && <ChatFollowUp stream={stream} tabs={tabs} archive={archive}/>}
+			{!archive && <ChatFollowUp
+				stream={stream}
+				tabs={tabs}
+			/>}
 		</GlobalChatContainer>
 	);
 }

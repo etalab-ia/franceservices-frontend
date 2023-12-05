@@ -1,10 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { NOT_SET } from '../../constants/status';
 import { Display } from './Display';
 import { UserMessage } from '../User/UserMessage';
 import { useEffect } from 'react';
 import { scrollToBottom } from '../../utils/manageEffects';
-import { initialChatbotMessage } from '../../constants/chatbotProps';
 import { checkConnexion } from '../../utils/localStorage';
 import { DefaultQuestions } from '../Global/DefaultQuestions';
 import { ChatOverflowManagementContainer } from './ChatOverflowManagementContainer';
@@ -18,23 +16,20 @@ export function ChatMainContainer({ archive }) {
 	const   dispatch = useDispatch();
 
 	useEffect(() => {
-		if (archive)
-			return ;
-		dispatch({ type: 'SET_INITIAL_STREAM' });
-		console.log('set initial user')
-		dispatch({ type: 'SET_INITIAL_USER' });
-		dispatch({ type: 'SET_MESSAGES', nextMessage: { text: initialChatbotMessage, sender: 'agent' } });
+		!archive && dispatch({ type: 'SET_INITIAL_CHAT' });
 		checkConnexion(auth, dispatch);
 	}, []);
 
-	useEffect(() => { scrollToBottom(); }, [user, feedback, stream, dispatch]);
+	useEffect(() => {
+		scrollToBottom();
+	}, [user, feedback, stream, dispatch]);
 
 	return (
 		<ChatHeightContainer>
 			<ChatOverflowManagementContainer>
 				{archive ?
 					<Display
-						messages={[{text: archive.question.query, sender: 'user'}, {text: archive.agentResponse, sender: 'agent'}]}
+						messages={archive.messages}
 						archive={true}
 					/>
 					:

@@ -17,17 +17,16 @@ export  function DisplayArchiveBody() {
 
 	return <tbody>
 		{archive.map((item, index) => {
-			console.log(archive)
 			const	classNames = index === selected ? 'bg-light-purple' : 'bg-white';
-			const	title = item.question.query.length > 50 ? item.question.query.slice(0, 50) + '...' : item.question.query;
-			console.log(item)
-			return item.tags && <tr role={archiveTabRole} key={index} onClick={() => handleClick(index)} className={classNames}>
-				<td role={archiveTitleRole} className="archive-body fr-p-2w">{title}</td>
-				<td role={archiveTagsRole} className="archive-body tags-font-size wrap-message fr-p-2w">{item.tags && item.tags.map((theme, index) => {
+			const	title = item.messages[0].text > 50 ? item.messages[0].text.slice(0, 50) + '...' : item.messages[0].text;
+
+			return <tr role={archiveTabRole} key={index} onClick={() => handleClick(index)} className={classNames}>
+				<td role={archiveTitleRole} className="archive-body fr-p-4w">{title}</td>
+				<td role={archiveTagsRole} className="archive-body tags-font-size wrap-message fr-p-4w">{item.tags && item.tags.map((theme, index) => {
 					return <Tag key={index} className="fr-m-1w">{theme} </Tag>
 				})}</td>
-				<td role={archiveDateRole} className="archive-body fr-p-2w">{item.date}</td>
-				<td role={archiveSourceRole} className="archive-body fr-p-2w">{item.source}</td>
+				<td role={archiveDateRole} className="archive-body fr-p-4w">{item.date}</td>
+				<td role={archiveSourceRole} className="archive-body fr-p-4w">{item.source}</td>
 			</tr>
 		})}
 	</tbody>
