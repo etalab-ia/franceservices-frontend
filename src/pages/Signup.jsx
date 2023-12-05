@@ -11,6 +11,7 @@ import { LoginContainer } from "../components/Auth/LoginContainer";
 import { LoginFields } from "../components/Auth/LoginFields";
 import { ButtonInformation } from "../components/Global/ButtonInformation";
 
+// TODO: clean page
 export function Signup() {
 	const	auth = useSelector((state) => state.auth);
 	const	dispatch = useDispatch();
@@ -70,5 +71,5 @@ export function Signup() {
 				buttons={initButtonsSignup(handleValidatePassword, handleClick, 'Créer un compte')}
 			/>
 		</LoginContainer>
-	)
+	);
 }

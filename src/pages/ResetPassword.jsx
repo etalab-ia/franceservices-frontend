@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { LoginContainer } from "../components/Auth/LoginContainer";
 
+// TODO: clean page
 export function ResetPassword() {
 	const	auth = useSelector((state) => state.auth);
 	const	dispatch = useDispatch();
@@ -45,5 +46,5 @@ export function ResetPassword() {
 				buttons={initButtonsReset(isDisable, handleClick)}
 			/>
 		</LoginContainer>
-	)
+	);
 }
