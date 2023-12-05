@@ -1,6 +1,23 @@
 import { indexesUrl } from "../constants/api";
 import { useFetch } from "./hooks";
 
+export const	setHeaders = (token, isEventSource) => {
+	const	headers = isEventSource ? {
+		'Authorization': `Bearer ${token}`
+	}
+	:
+	{
+		'Content-Type': 'application/json',
+		'Authorization': `Bearer ${token}`
+	};
+
+	return headers;
+}
+
+/***************************
+		USER QUESTION
+ **************************/
+
 export const	setUserQuestion = (question) => {
 	const	data = {
 		institution: question.institution,
@@ -17,6 +34,22 @@ export const	setUserQuestion = (question) => {
 	return data;
 }
 
+export const	setQuestionFromRegeneration = (mode, text, limit) => {
+	const	data = {
+		model_name: 'albert-light',
+		mode: mode,
+		query: text,
+		limit: limit,
+		user_text: text,
+		context: '',
+		institution: '',
+		links: '',
+		temperature: 20,
+	};
+
+	return data;
+}
+
 export const	setQuestionWithContext = (question, context) => {
 	const	administrations = context.administrations.length ? "Les administrations concernées par cette question sont : " + context.administrations.map(adminstration => adminstration) : "";
 	const	themes = context.themes.length ? "La question porte sur les thèmes suivants : " + context.themes.map(theme => theme) : "";
@@ -25,7 +58,11 @@ export const	setQuestionWithContext = (question, context) => {
 	return questionWithContext;
 }
 
-export const	setSheetsData = (user_text) => {
+/***************************
+		SP SHEETS
+ **************************/
+
+const			setSheetsBody = (user_text) => {
 	const data = JSON.stringify({
 		name: 'sheets',
 		query: user_text,
@@ -37,38 +74,30 @@ export const	setSheetsData = (user_text) => {
 	return data;
 }
 
-export const	setHeaders = (token, isEventSource) => {
-	const	headers = isEventSource ? {
-		'Authorization': `Bearer ${token}`
-	}
-	:
-	{
-		'Content-Type': 'application/json',
-		'Authorization': `Bearer ${token}`
-	};
-
-	return headers;
-}
-
-export const	getSheets = async(question, auth, dispatch) => {
-	const   sheetsResp = await useFetch(indexesUrl, 'POST', {
-		data: setSheetsData(question.user_text),
-		headers: setHeaders(auth.userToken, false)
+const			getSheetsData = async (setSheets, currQuestion, userToken, dispatch) => {
+	const	sheetsResp = await useFetch(indexesUrl, 'POST', {
+		data: setSheetsBody(currQuestion),
+		headers: setHeaders(userToken, false),
 	}, dispatch);
-
-	dispatch({ type: 'SET_SHEETS', nextSheets: sheetsResp });
+	
+	setSheets(sheetsResp);
+	dispatch({ type: 'SET_SHEETS', nextSheets: sheetsResp});
 }
 
-export const	getSheetId = (url) => {
-	const	splitUrl = url.split("vosdroits/");
-	const	sheetId = splitUrl[1];
+export const	setSheetsData = (currQuestion, archiveSheets, setTiles, setSheets, userToken, dispatch) => {
+	setTiles([]);
 
-	return sheetId;
+	if ((!currQuestion || currQuestion.length === 0) && !archiveSheets)
+		return ;
+
+	!archiveSheets && getSheetsData(setSheets, currQuestion, userToken, dispatch);
+	archiveSheets && setSheets(archiveSheets);
 }
 
-export const setTilesFromSheets = (sheets, setTiles) => {
+export const	setTilesFromSheets = (sheets, setTiles) => {
 	if (!sheets || !sheets.length)
 		return setTiles([]);
+	
 	sheets.map((sheet) => {
 		const	url = sheet.url;
 		const	parsedUrl = new URL(url);
@@ -91,10 +120,9 @@ export const setTilesFromSheets = (sheets, setTiles) => {
 	});
 }
 
-export const getSheetsData = async (setSheets, currQuestion, userToken, dispatch) => {
-	const sheetsResp = await useFetch(indexesUrl, 'POST', {
-		data: setSheetsData(currQuestion),
-		headers: setHeaders(userToken, false),
-	}, dispatch);
-	setSheets(sheetsResp);
-}
+// export const	getSheetId = (url) => {
+// 	const	splitUrl = url.split("vosdroits/");
+// 	const	sheetId = splitUrl[1];
+
+// 	return sheetId;
+// }
