@@ -1,6 +1,16 @@
 import { indexesUrl } from "../constants/api";
 import { useFetch } from "./hooks";
 
+export const	setContactData = (subject, text, institution) => {
+	const	data = {
+		subject: subject,
+		text: text,
+		institution: institution
+	};
+
+	return JSON.stringify(data);
+}
+
 export const	setUserQuestion = (question) => {
 	const	data = {
 		institution: question.institution,
