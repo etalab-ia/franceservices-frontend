@@ -11,6 +11,7 @@ export function ContactForm() {
 	const	[isCompleted, setIsCompleted] = useState(false);
 
 	const	handleChange = (e) => {
+		console.log(e.target.name)
 		if (e.target.name === "title")
 			setTitle(e.target.value);
 		else if (e.target.name === "administration")
@@ -24,13 +25,20 @@ export function ContactForm() {
 	useEffect(() => {
 		if (title.length && administration.length && message.length && name.length)
 			setIsCompleted(true);
+		console.log('name: ', name)
 	}, [title, administration, message, name]);
 
 	return (
 		<div className='fr-mx-10w'>
 			<UserInformation handleChange={handleChange}/>
 			<UserMessage handleChange={handleChange}/>
-			<ContactButton isDisable={!isCompleted}/>
+			<ContactButton
+				isDisable={!isCompleted}
+				administration={administration}
+				title={title}
+				message={message}
+				name={name}
+			/>
 		</div>
 	)
 }
