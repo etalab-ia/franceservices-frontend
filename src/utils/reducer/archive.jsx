@@ -3,6 +3,7 @@ export const	archiveReducer = (state = [], action) => {
 		case 'SET_ARCHIVE': {
 			const	lastIndex = state.length ? state.length - 1 : state.length;
 	  
+			console.log('set archive: ', state)
 			return [
 			  	...state,
 			  	{
@@ -19,6 +20,8 @@ export const	archiveReducer = (state = [], action) => {
 		}
 		case 'SET_ARCHIVE_LIMIT': {
 			const	lastIndex = state.length ? state.length - 1 : state.length;
+
+			console.log('set archive limit: ', state)
 
 			return [
 				...state.slice(0, lastIndex),

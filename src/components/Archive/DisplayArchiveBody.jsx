@@ -17,6 +17,9 @@ export  function DisplayArchiveBody() {
 
 	return <tbody>
 		{archive.map((item, index) => {
+			console.log('archive: ', archive)
+			if (!item.messages)
+				return ;
 			const	classNames = index === selected ? 'bg-light-purple' : 'bg-white';
 			const	title = item.messages[0].text > 50 ? item.messages[0].text.slice(0, 50) + '...' : item.messages[0].text;
 

@@ -16,6 +16,7 @@ export function ChatMainContainer({ archive }) {
 	const   dispatch = useDispatch();
 
 	useEffect(() => {
+		console.log('set initial chat, archive is: ', archive);
 		!archive && dispatch({ type: 'SET_INITIAL_CHAT' });
 		checkConnexion(auth, dispatch);
 	}, []);

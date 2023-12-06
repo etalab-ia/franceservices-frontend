@@ -15,6 +15,7 @@ export const	initialQuestion = {
 export const	initialUserChoices = {
 	feedback: NOT_SET,
 	newQuestion: NOT_SET,
+	oldQuestion: NOT_SET,
 }
 
 export const	initialAuth = {

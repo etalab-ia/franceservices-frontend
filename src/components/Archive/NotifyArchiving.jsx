@@ -12,6 +12,8 @@ export function NotifyArchiving() {
 	const	dispatch = useDispatch();
 
 	useEffect(() => {
+		console.log('user: ', user.choices);
+		// console.log('stream: ', stream);
 		setArchive(dispatch, stream, user);	
 	}, [user.choices.newQuestion])
 
