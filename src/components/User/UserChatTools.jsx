@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { userChatToolsFunc } from "../../constants/chatbotProps";
+import { userChatToolsFunc } from "../../utils/chat";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { NOT_SET } from "../../constants/status";
 import { GlobalColContainer } from "../Global/GlobalColContainer";
 
 export function UserChatTools({ isArchive }) {

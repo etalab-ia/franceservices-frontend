@@ -3,8 +3,6 @@ import { useEffect } from "react";
 import previous from "../../../icons/usertools/previous.svg";
 import next from "../../../icons/usertools/next.svg";
 import { nextImgDescription, previousImgDescription } from "../../constants/chatbotProps";
-import { GlobalRowContainer } from "../Global/GlobalRowContainer";
-import { GlobalColContainer } from "../Global/GlobalColContainer";
 
 export function DisplayMessageTab({ isDisplayable, tabsLen, activeTab, setActiveTab, extraClass }) {
 	const	dispatch = useDispatch();

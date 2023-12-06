@@ -1,5 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
-import { defaultQuestions } from "../../constants/chatbotProps"
+import { useSelector } from "react-redux";
 import { GlobalRowContainer } from "./GlobalRowContainer";
 export const    DefaultQuestionsContainer = ({ children }) => {
 	const   stream = useSelector((state) => state.stream);

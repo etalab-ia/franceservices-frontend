@@ -21,6 +21,11 @@ export const	streamReducer = (state = initialStream, action) => {
 				isStreaming: false,
 				response: [],
 			}
+		case "SET_ARCHIVE_LIMIT":
+			return {
+				...state,
+				response: [],
+			}
 		case 'RESET_AGENT_STREAM':
 			return {
 				...state,

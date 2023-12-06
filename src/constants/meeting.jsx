@@ -81,10 +81,6 @@ export const	meetingQR = [
 		title: "Une troisième question",
 		desc: "Une description de la question"
 	},
-	{
-		title: "Une quatrième question",
-		desc: "Une description de la question"
-	},
 ]
 
 export const	meetingDefaultQuestionsIntroduction = <GlobalRowContainer>

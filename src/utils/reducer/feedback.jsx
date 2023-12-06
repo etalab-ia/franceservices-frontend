@@ -14,6 +14,11 @@ export const	feedbackReducer = (state = { reasons: [], isConfirmed: false }, act
 				...state,
 				isConfirmed: true,
 			}
+		case "SET_ARCHIVE_LIMIT":
+			return {
+				reasons: [],
+				isConfirmed: false,
+			};
 		case "RESET_FEEDBACK":
 			return {
 				reasons: [],
