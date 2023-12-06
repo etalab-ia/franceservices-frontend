@@ -30,7 +30,13 @@ export function ContactForm() {
 		<div className='fr-mx-10w'>
 			<UserInformation handleChange={handleChange}/>
 			<UserMessage handleChange={handleChange}/>
-			<ContactButton isDisable={!isCompleted}/>
+			<ContactButton
+				isDisable={!isCompleted}
+				administration={administration}
+				title={title}
+				message={message}
+				name={name}
+			/>
 		</div>
 	)
 }
