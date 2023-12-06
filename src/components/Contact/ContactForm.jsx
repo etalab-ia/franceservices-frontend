@@ -11,7 +11,6 @@ export function ContactForm() {
 	const	[isCompleted, setIsCompleted] = useState(false);
 
 	const	handleChange = (e) => {
-		console.log(e.target.name)
 		if (e.target.name === "title")
 			setTitle(e.target.value);
 		else if (e.target.name === "administration")
@@ -25,7 +24,6 @@ export function ContactForm() {
 	useEffect(() => {
 		if (title.length && administration.length && message.length && name.length)
 			setIsCompleted(true);
-		console.log('name: ', name)
 	}, [title, administration, message, name]);
 
 	return (
