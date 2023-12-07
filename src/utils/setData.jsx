@@ -38,7 +38,8 @@ export const	setUserQuestion = (question) => {
 		temperature: question.temperature,
 		model_name: question.model_name,
 		limit: question.limit,
-		mode: question.mode
+		mode: question.mode,
+		source: ["service-public"]
 	};
 
 	return data;
