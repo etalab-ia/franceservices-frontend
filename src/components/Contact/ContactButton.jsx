@@ -17,7 +17,7 @@ export function ContactButton({ isDisable, administration, message, name, title 
 			setUserInfos(auth.userToken, dispatch);
 		
 		await useFetch(contactUrl, 'POST', {
-			data: setContactData(title + ' from: ' + name + ' | ' + auth.email, message, administration), 
+			data: setContactData(title + ' from: ' + name, message, administration), 
 			headers: setHeaders(auth.userToken, false)
 		}, dispatch);
 
