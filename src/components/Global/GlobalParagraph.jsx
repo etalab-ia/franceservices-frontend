@@ -1,5 +1,5 @@
 export const    GlobalParagraph = ({ children }) => {
-    return <div>
+    return <div className="text-justify">
        {children}
     </div>
 }

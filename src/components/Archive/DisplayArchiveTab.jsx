@@ -13,24 +13,20 @@ export function DisplayArchiveTabs({ type }) {
 	const	selectedMessages = archive && archive.length && tabs.archiveTab !== NOT_SET ? archive[tabs.archiveTab] : [];
 	const   ref = useRef();
 
-	// TODO: 
-	// type === 'qr' -> chat page
-	// type === 'meeting' -> meeting page
-
 	return (
 		<GlobalRowContainer extraClass='fr-grid-row--center'>
 			{tabs.archiveTab === NOT_SET ?
 				<GlobalDiv>
 					<table className="w-full">
-						<DisplayArchiveHead />
-						<DisplayArchiveBody />
+						<DisplayArchiveHead type={type}/>
+						<DisplayArchiveBody type={type}/>
 					</table>
 				</GlobalDiv>
 				:
 				<Print
 					ref={ref}
-					messages={selectedMessages}
 					archive={archive[tabs.archiveTab]}
+					type={type}
 				/>
 			}
 		</GlobalRowContainer>

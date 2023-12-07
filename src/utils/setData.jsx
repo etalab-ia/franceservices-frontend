@@ -39,7 +39,6 @@ export const	setUserQuestion = (question) => {
 		model_name: question.model_name,
 		limit: question.limit,
 		mode: question.mode,
-		source: ["service-public"]
 	};
 
 	return data;
