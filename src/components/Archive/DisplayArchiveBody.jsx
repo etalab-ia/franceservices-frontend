@@ -4,7 +4,7 @@ import { NOT_SET } from "../../constants/status";
 import { archiveDateRole, archiveSourceRole, archiveTabRole, archiveTagsRole, archiveTitleRole } from "../../constants/archive";
 import { Tag } from "@codegouvfr/react-dsfr/Tag";
 
-export  function DisplayArchiveBody() {
+export  function DisplayArchiveBody({ type }) {
 	const	archive = useSelector((state) => state.archive);
 	const	[selected, setSelected] = useState(NOT_SET);
 	const	dispatch = useDispatch();
@@ -17,11 +17,12 @@ export  function DisplayArchiveBody() {
 
 	return <tbody>
 		{archive.map((item, index) => {
-			console.log('archive: ', archive)
-			if (!item.messages)
+			// TODO: fix first archive message
+			if (!item.messages || item.type !== type)
 				return ;
+			
 			const	classNames = index === selected ? 'bg-light-purple' : 'bg-white';
-			const	title = item.messages[0].text > 50 ? item.messages[0].text.slice(0, 50) + '...' : item.messages[0].text;
+			const	title = item.messages[0].text.length > 80 ? item.messages[0].text.slice(0, 80) + '...' : item.messages[0].text;
 
 			return <tr role={archiveTabRole} key={index} onClick={() => handleClick(index)} className={classNames}>
 				<td role={archiveTitleRole} className="archive-body fr-p-4w">{title}</td>

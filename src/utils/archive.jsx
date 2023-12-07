@@ -1,20 +1,19 @@
-export const    setArchive = (dispatch, stream, user) => {
-	const	themesArrays = user.sheets.map((sheet) => sheet.theme.split(', '));
+export const    setArchive = (dispatch, stream, user, type) => {
+	const	themesArrays = user.sheets.map((sheet) => sheet.theme && sheet.theme.split(', '));
 	const	uniqueThemesSet = Array.from(new Set(themesArrays.flat()));
-	const	selected = uniqueThemesSet.filter((theme) => theme !== "");
+	const	selected = uniqueThemesSet.filter((theme) => theme !== "" && theme !== undefined);
 
-	if (user.choices.oldQuestion === user.choices.newQuestion)
-		console.log('ici');
+	if (user.choices.oldQuestion === user.choices.newQuestion && type === 'qr')
+		return ;
+	
 	dispatch({ 
 		type: 'SET_ARCHIVE',
 		nextDate: new Date().toLocaleDateString('fr'), 
 		nextTags: selected,
 		nextSheets: user.sheets,
 		nextMessages: [{ text: user.originQuestion, sender: 'user' }, { text: stream.historyStream, sender: 'agent' }],
-		nextType: 'qr'
+		nextType: type
 	});
-
-	console.log('set archive done, old/new question: ', user.choices)
 
 	// TODO: improve isNewQuestion
 	dispatch({

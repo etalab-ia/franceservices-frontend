@@ -6,13 +6,14 @@ import { GlobalParagraph } from "../Global/GlobalParagraph";
 import { MeetingResponse } from "./MeetingResponse";
 import { MeetingEditQuestion } from "./MeetingEditQuestion";
 
-export function MeetingPage({ currQuestion, setGenerate }) {
+export function MeetingPage({ currQuestion, setGenerate, archive }) {
 	return <GlobalRowContainer extraClass='fr-grid-row--center'>
 		<GlobalDiv>
 			<GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
 			<GlobalParagraph>{currQuestion}</GlobalParagraph>
-			<MeetingEditQuestion setGenerate={setGenerate}/>
-			<MeetingResponse currQuestion={currQuestion}/>
+			{!archive && <MeetingEditQuestion setGenerate={setGenerate}/>}
+			{archive && <div className="fr-pt-2w"></div>}
+			<MeetingResponse currQuestion={currQuestion} archive={archive}/>
 		</GlobalDiv>
 	</GlobalRowContainer>
 }
