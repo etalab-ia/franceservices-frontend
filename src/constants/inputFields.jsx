@@ -1,9 +1,9 @@
-import meeting from "/dsfr/artwork/pictograms/albert/meeting.png"
-import question from "/dsfr/artwork/pictograms/albert/question.png"
-import aplus from "/dsfr/artwork/pictograms/logo/LogoA+.png"
-import franceservices from "/dsfr/artwork/pictograms/logo/LogoFranceServices.png"
-import osmose from "/dsfr/artwork/pictograms/logo/LogoOsmose.png"
-import servicepublic from "/dsfr/artwork/pictograms/logo/LogoServicePublicMinimised.png"
+import meeting from "@artwork/pictograms/albert/meeting.png"
+import question from "@artwork/pictograms/albert/question.png"
+import aplus from "@artwork/pictograms/logo/LogoA+.png"
+import franceservices from "@artwork/pictograms/logo/LogoFranceServices.png"
+import osmose from "@artwork/pictograms/logo/LogoOsmose.png"
+import servicepublic from "@artwork/pictograms/logo/LogoServicePublicMinimised.png"
 
 export const signupFields = [
 	{
