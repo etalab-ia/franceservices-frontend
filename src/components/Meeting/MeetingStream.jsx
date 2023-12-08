@@ -3,24 +3,30 @@ import { GlobalParagraph } from "../Global/GlobalParagraph";
 import { GlobalStream } from "../Global/GlobalStream";
 import { useEffect } from "react";
 import { setArchive } from "../../utils/archive";
+import { resultMeetingTitle } from "../../constants/meeting";
 
-export function MeetingStream() {
+export function MeetingStream({ archive }) {
 	const	stream = useSelector((state) => state.stream);
 	const	user = useSelector((state) => state.user);
+	const	agentResponse = archive ? archive.messages[1].text[0] : stream.historyStream[0]; 
 	const	dispatch = useDispatch();
 
 	useEffect(() => {
 		// TODO: set archive with "administrations concernées" & "thèmes associés"
-		if (!stream.isStreaming && stream.historyStream[0])
+		if (!stream.isStreaming && stream.historyStream[0] && !archive)
 			setArchive(dispatch, stream, user, 'meetings');
 	}, [stream.isStreaming])
 
 	return <>
-		<h3 className="text-2xl font-bold fr-mt-2w">Résultat</h3>
+		{resultMeetingTitle}
 		{stream.isStreaming ?
-			<GlobalStream response={stream.response}/>
+			<GlobalStream
+				response={stream.response}
+			/>
 			:
-			<GlobalParagraph>{stream.historyStream[0]}</GlobalParagraph>
+			<GlobalParagraph>
+				{agentResponse}
+			</GlobalParagraph>
 		}
 	</>
 }

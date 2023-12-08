@@ -4,8 +4,10 @@ import React from 'react';
 import { useDispatch } from "react-redux";
 
 export const PrintTools = React.forwardRef(({ messages }, ref) => {
-    const dispatch = useDispatch();
-    const handleClick = () => {
+    const   dispatch = useDispatch();
+
+    const   handleClick = () => {
+        console.log('print tools')
         dispatch({ type: 'RESET_ARCHIVE_TAB' });
     }
 

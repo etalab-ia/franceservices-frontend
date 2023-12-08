@@ -8,11 +8,13 @@ export const	tabsReducer = (state = { activeTab: 0, archiveTab: NOT_SET }, actio
 				activeTab: action.nextActiveTab,
 			}
 		case 'SET_ARCHIVE_TAB':
+			console.log('set case')
 			return {
 				...state,
 				archiveTab: action.nextArchiveTab,
 			}
 		case 'RESET_ARCHIVE_TAB':
+			console.log('reset case')
 			return {
 				...state,
 				archiveTab: NOT_SET,

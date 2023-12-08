@@ -11,9 +11,17 @@ export function MeetingPage({ currQuestion, setGenerate, archive }) {
 		<GlobalDiv>
 			<GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
 			<GlobalParagraph>{currQuestion}</GlobalParagraph>
-			{!archive && <MeetingEditQuestion setGenerate={setGenerate}/>}
-			{archive && <div className="fr-pt-2w"></div>}
-			<MeetingResponse currQuestion={currQuestion} archive={archive}/>
+			{!archive ? 
+				<MeetingEditQuestion
+					setGenerate={setGenerate}
+				/>
+				:
+				<div className="fr-pt-2w"></div>
+			}
+			<MeetingResponse
+				currQuestion={currQuestion}
+				archive={archive}
+			/>
 		</GlobalDiv>
 	</GlobalRowContainer>
 }

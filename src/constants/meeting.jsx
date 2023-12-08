@@ -68,21 +68,6 @@ export const    meetingContacts = [
 	}
 ]
 
-export const	meetingQR = [
-	{
-		title: "Une première question",
-		desc: "Une description de la question"
-	},
-	{
-		title: "Une deuxième question",
-		desc: "Une description de la question"
-	},
-	{
-		title: "Une troisième question",
-		desc: "Une description de la question"
-	},
-]
-
 export const	meetingDefaultQuestionsIntroduction = <GlobalRowContainer>
 	<h6 className="text-xl font-bold text-[##3A3A3A]">Tester Albert</h6>
 	<p className="text-[##3A3A3A] fr-mt-3v fr-mb-1v">
@@ -105,3 +90,6 @@ export const	defaultInputFields = [
 		administrations: ["MDPH"]
 	},
 ];
+
+export const	resultMeetingTitle = <h3 className="text-2xl font-bold fr-mt-2w">Résultat</h3>;
+export const	meetingQRTitle = <h3 className="text-2xl font-bold fr-pt-3w fr-pb-3w">Questions fréquentes</h3>;
