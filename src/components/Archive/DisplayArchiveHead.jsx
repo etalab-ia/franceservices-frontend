@@ -1,7 +1,6 @@
 import { archiveTabsTitle } from "../../constants/tabs"
 
 export function DisplayArchiveHead() {
-	
     return <thead>
 		<tr>
 			{archiveTabsTitle.map((title, index) => {

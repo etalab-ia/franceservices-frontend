@@ -17,6 +17,7 @@ export  function DisplayArchiveBody({ type }) {
 
 	return <tbody>
 		{archive.map((item, index) => {
+			console.log(item)
 			// TODO: fix first archive message
 			if (!item.messages || item.type !== type)
 				return ;

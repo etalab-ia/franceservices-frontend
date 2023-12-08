@@ -1,7 +1,7 @@
 import { initialChatbotMessage } from "../../constants/chatbotProps"
 import { initialQuestion, initialUserChoices } from "./state"
 
-export const	userReducer = (state = { question: initialQuestion, choices: initialUserChoices, messages: [] }, action) => {
+export const	userReducer = (state = { question: initialQuestion, choices: initialUserChoices, messages: [], sheets: [] }, action) => {
 	switch (action.type) {
 		case 'SET_INITIAL_CHAT': 
 			return {

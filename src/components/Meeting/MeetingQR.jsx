@@ -1,17 +1,41 @@
 import { Card } from "@codegouvfr/react-dsfr/Card";
-import { meetingQR } from "../../constants/meeting";
+import { Tag } from "@codegouvfr/react-dsfr/Tag";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { spSheetsUrl } from "../../constants/sheets";
+import { meetingQRTitle } from "../../constants/meeting";
 
-export function MeetingQR() {
+export function MeetingQR({ archive }) {
+	const	sheets = archive ? archive.sheets : useSelector((state) => state.user.sheets);
+	const	[relatedQuestions, setRelatedQuestions] = useState([]);
+
+	useEffect(() => {
+		if (!sheets)
+			return ;
+
+		let	updatedQuestions = [];
+		setRelatedQuestions([]);
+
+		sheets.forEach((sheet) => {
+			sheet.related_questions && sheet.related_questions.forEach((qr) => {
+				// Navigate to new url if !qr.sid ?
+				updatedQuestions = [...updatedQuestions, {title: qr.question, url: qr.sid ? spSheetsUrl + qr.sid : '', id: qr.sid}];
+			});
+		});
+		setRelatedQuestions(updatedQuestions);
+	}, [sheets]);
+	
+	
 	return <>
-			<h3 className="text-2xl font-bold fr-pt-3w fr-pb-3w">Questions fréquentes</h3>
-			{meetingQR.map((question, index) => {
+			{meetingQRTitle}
+			{relatedQuestions.map((question, index) => {
 				return <div className="fr-mb-3v" key={index}>
 					<Card
 						background
 						border
-						desc={question.desc}
+						end={<Tag>{question.id}</Tag>}
 						enlargeLink
-						linkProps={{ href: '#' }}
+						linkProps={{ href: question.url }}
 						size="small"
 						title={question.title}
 						titleAs="h6"

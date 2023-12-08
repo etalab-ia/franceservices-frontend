@@ -29,6 +29,7 @@ export function	Meeting() {
 				<MeetingPage
 					currQuestion={currQuestion}
 					setGenerate={setGenerate}
+					archive={false}
 				/>
 			}
 		</>
