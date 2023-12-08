@@ -72,7 +72,7 @@ export const	toolsTiles = [
 	{
 		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
 		desc: "Accéder",
-		linkProps: { to: "/chat" },
+		linkProps: { to: "/meetings-history" },
 		imageUrl: question,
 		title: "Consulter mes fiches démarches",
 	},
