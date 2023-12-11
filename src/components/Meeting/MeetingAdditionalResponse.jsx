@@ -1,8 +1,5 @@
-import { GlobalColContainer } from "../Global/GlobalColContainer";
 import { OneThirdScreenWidth } from "../Global/OneThirdScreenWidth";
 import { DisplaySheets } from "../Sheets/DisplaySheets";
-import { MeetingContacts } from "./MeetingContacts";
-import { MeetingTiles } from "./MeetingTiles";
 
 export function MeetingAdditionalResponse({ currQuestion, archive }) {
 	return <OneThirdScreenWidth>
