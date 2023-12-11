@@ -19,6 +19,7 @@ export function MeetingQR({ archive }) {
 		sheets.forEach((sheet) => {
 			sheet.related_questions && sheet.related_questions.forEach((qr) => {
 				// Navigate to new url if !qr.sid ?
+				// audience will be add: /particuliers/ or /associations/
 				updatedQuestions = [...updatedQuestions, {title: qr.question, url: qr.sid ? spSheetsUrl + qr.sid : '', id: qr.sid}];
 			});
 		});
@@ -27,7 +28,7 @@ export function MeetingQR({ archive }) {
 	
 	
 	return <>
-			{meetingQRTitle}
+			{relatedQuestions.length !== 0 && meetingQRTitle}
 			{relatedQuestions.map((question, index) => {
 				return <div className="fr-mb-3v" key={index}>
 					<Card

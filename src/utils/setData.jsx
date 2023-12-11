@@ -121,7 +121,10 @@ export const	setTilesFromSheets = (sheets, setTiles) => {
 			title: 
 			<>
 				<p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">
-					{sheet.surtitre}</p><p>{sheet.title}
+					{sheet.surtitre}
+				</p>
+				<p>
+					{sheet.title}
 				</p>
 			</>,
 			desc: domain
