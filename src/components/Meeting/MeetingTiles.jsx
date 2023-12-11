@@ -49,7 +49,7 @@ export const    MeetingTiles = ({ currQuestion, archiveSheets }) => {
 	}
 
 	const	handleRemoveSheet = () => {
-		setRemovedSheets(selectedSheets);
+		setRemovedSheets(removedSheets.concat(selectedSheets));
 		setSelectedSheets([]);
 		setIsModifiable(false);
 	}
@@ -58,7 +58,7 @@ export const    MeetingTiles = ({ currQuestion, archiveSheets }) => {
 		{numberOfSelectedSheets(selectedSheets.length)}
 		<GlobalRowContainer>
 			{selectedSheets.length !== 0 && <ModifyButton handleClick={handleRemoveSheet} text="Supprimer"/>}
-			{tiles.length !== 0 && <ModifyButton handleClick={handleClick} text="Modifier"/>}
+			{tiles.length !== 0 && removedSheets.length !== 3 && <ModifyButton handleClick={handleClick} text="Modifier"/>}
 		</GlobalRowContainer>
 		{tiles.map((tile, key) => {
 			return <div key={key}>
@@ -71,7 +71,7 @@ export const    MeetingTiles = ({ currQuestion, archiveSheets }) => {
 						title={tile.title}
 					/>
 					{isModifiable && <Checkbox
-						className="items-start justify-items-end"
+						className="items-start justify-items-end fr-pl-2w"
 						options={[
 							{
 								nativeInputProps: {
@@ -81,7 +81,6 @@ export const    MeetingTiles = ({ currQuestion, archiveSheets }) => {
 								}
 							},
 						]}
-						style={{ marginLeft: 'auto', marginRight: 0 }}
 						small
 					/>}
 				</div>}
