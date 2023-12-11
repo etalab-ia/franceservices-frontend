@@ -1,4 +1,4 @@
-import { GlobalRowContainer } from "../Global/GlobalRowContainer";
+import { ModifyButton } from "../Global/ModifyButton";
 
 export function MeetingEditQuestion({ setGenerate }) {
 
@@ -6,12 +6,5 @@ export function MeetingEditQuestion({ setGenerate }) {
 		setGenerate(false);
 	}
 
-	return <GlobalRowContainer>
-		<p
-			className="fr-pt-1w fr-text--xs underline cursor-pointer"
-			onClick={handleClick}
-		>
-			Modifier
-		</p>
-	</GlobalRowContainer>
+	return <ModifyButton handleClick={handleClick} text="Modifier"/>
 }
