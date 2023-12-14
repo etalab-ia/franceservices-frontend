@@ -133,6 +133,8 @@ export const	setTilesFromSheets = (sheets, setTiles) => {
 	});
 }
 
+// TODO: add if a tag w/ sheets id is needed in cards
+
 // export const	getSheetId = (url) => {
 // 	const	splitUrl = url.split("vosdroits/");
 // 	const	sheetId = splitUrl[1];

@@ -28,6 +28,21 @@ export const	archiveReducer = (state = [], action) => {
 				},
 		  ];
 		}
+		case 'REMOVE_SHEETS': {
+			if (!state.length)
+				return state;
+
+			const	lastIndex = state.length - 1;
+			const	nextSheets = state[lastIndex].sheets.filter((sheet, index) => !action.indexToRemove.includes(index));
+
+			return [
+				...state.slice(0, lastIndex),
+				{
+					...state[lastIndex],
+					sheets: nextSheets,
+				},
+		  ];
+		}
 	  	default: { return state };
 	}
 }
