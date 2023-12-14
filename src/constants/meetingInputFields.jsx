@@ -5,7 +5,7 @@ export const	inputFields = [
         className: "fr-mr-1w"
     },
     {
-        label: "Administrations concernées",
+        label: "Opérateurs concernés",
         name: "administrations",
         className: "fr-mr-1w"
     },

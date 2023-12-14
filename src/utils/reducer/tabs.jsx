@@ -11,6 +11,7 @@ export const	tabsReducer = (state = { activeTab: 0, archiveTab: NOT_SET }, actio
 			return {
 				...state,
 				archiveTab: action.nextArchiveTab,
+				type: action.nextType,
 			}
 		case 'RESET_ARCHIVE_TAB':
 			return {

@@ -33,24 +33,14 @@ export function navFunc() {
 					isActive: currentPath === "/chat",
 				},
 				{
-					text: "Consulter mes fiches démarches",
+					text: "Consulter mon historique",
 					linkProps: {
-						to: "/meetings-history",
+						to: "/history",
 						onClick: () => {
 							dispatch({ type: 'RESET_ARCHIVE_TAB' });
 						}
 					},
-					isActive: currentPath === "/meetings-history",
-				},
-				{
-					text: "Consulter mes questions-réponses",
-					linkProps: {
-						to: "/qr-history",
-						onClick: () => {
-							dispatch({ type: 'RESET_ARCHIVE_TAB' });
-						}
-					},
-					isActive: currentPath === "/qr-history",
+					isActive: currentPath === "/history",
 				},
 			]
 		},
@@ -70,8 +60,7 @@ const routeDefs = {
 	"meeting": defineRoute("/meeting"),
 	"chat": defineRoute("/chat"),
 	"contact": defineRoute("/contact"),
-	"qr-history": defineRoute("/qr-history"),
-	"meetings-history": defineRoute("/meetings-history"),
+	"history": defineRoute("/history"),
 };
 
 export const { RouteProvider, useRoute, routes } = createRouter(routeDefs);

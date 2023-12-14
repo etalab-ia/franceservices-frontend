@@ -33,6 +33,7 @@ export const    SheetsTilesContainer = ({ currQuestion, archiveSheets, userToken
 
 	useEffect(() => {
 		setSelectedSheets([]);
+		dispatch({ type: 'REMOVE_SHEETS', indexToRemove: removedSheets});
 	}, [removedSheets]);
 
 	return <>

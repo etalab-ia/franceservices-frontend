@@ -72,17 +72,10 @@ export const	toolsTiles = [
 	{
 		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
 		desc: "Accéder",
-		linkProps: { to: "/meetings-history" },
+		linkProps: { to: "/history" },
 		imageUrl: question,
-		title: "Consulter mes fiches démarches",
+		title: "Consulter mon historique",
 	},
-	{
-		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
-		desc: "Accéder",
-		linkProps: { to: "/qr-history" },
-		imageUrl: question,
-		title: "Consulter mes questions-réponses",
-	}
 ]
 
 export const	ressourcesTiles = [

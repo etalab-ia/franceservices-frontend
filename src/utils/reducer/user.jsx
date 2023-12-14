@@ -14,6 +14,16 @@ export const	userReducer = (state = { question: initialQuestion, choices: initia
 				...state,
 				sheets: action.nextSheets,
 			}
+		case 'REMOVE_SHEETS':
+			if (!state.sheets)
+				return state;
+			
+			const	nextSheets = state.sheets.filter((sheet, index) => !action.indexToRemove.includes(index));
+
+			return {
+				...state,
+				sheets: nextSheets,
+			}
 		case 'SET_USER_TEXT':
 			return {
 				...state,
