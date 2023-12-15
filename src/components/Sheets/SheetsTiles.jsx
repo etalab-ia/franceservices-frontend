@@ -1,6 +1,7 @@
 import { Tile } from "@codegouvfr/react-dsfr/Tile";
 
-export const    SheetsTiles = ({ tiles, isModifiable, removedSheets, setRemovedSheets }) => {
+export const    SheetsTiles = ({ tiles, isModifiable, removedSheets, setRemovedSheets, type }) => {
+	const	text = type === 'main' ? "X Supprimer" : "+ Ajouter";
 
 	const	handleClick = (key) => {
 		setRemovedSheets([...removedSheets, key]);
@@ -23,7 +24,7 @@ export const    SheetsTiles = ({ tiles, isModifiable, removedSheets, setRemovedS
 						className="fr-pl-2w font-bold fr-text--xs cursor-pointer"
 						onClick={() => handleClick(key)}
 					>
-						X Supprimer
+						{text}
 				  	</div>
 				)}
 			  </div>
