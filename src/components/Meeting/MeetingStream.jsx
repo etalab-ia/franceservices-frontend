@@ -4,6 +4,7 @@ import { GlobalStream } from "../Global/GlobalStream";
 import { useEffect } from "react";
 import { setArchive } from "../../utils/archive";
 import { resultMeetingTitle } from "../../constants/meeting";
+import { GlobalSecondaryTitle } from "../Global/GlobalSecondaryTitle";
 
 export function MeetingStream({ archive }) {
 	const	stream = useSelector((state) => state.stream);
@@ -18,7 +19,7 @@ export function MeetingStream({ archive }) {
 	}, [stream.isStreaming])
 
 	return <>
-		{resultMeetingTitle}
+		<GlobalSecondaryTitle extraClass='fr-mb-2w'>{resultMeetingTitle}</GlobalSecondaryTitle>
 		{stream.isStreaming ?
 			<GlobalStream
 				response={stream.response}

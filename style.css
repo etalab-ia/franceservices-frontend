@@ -445,11 +445,6 @@ video {
 
 /* Light purple */
 
-.bg-light-purple {
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 245 254 / var(--tw-bg-opacity));
-}
-
 /* Normal purple */
 
 .bg-purple {
@@ -491,10 +486,6 @@ video {
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-.tags-font-size {
-  font-size: 11px;
 }
 
 /* CHATBOT PAGE */
@@ -631,20 +622,6 @@ video {
 }
 
 /* ARCHIVE PAGE */
-
-.archive-tabs-title {
-  border-bottom-width: 2px;
-  --tw-border-opacity: 1;
-  border-color: rgb(58 58 58 / var(--tw-border-opacity));
-  text-align: left;
-}
-
-.archive-body {
-  border-bottom-width: 1px;
-  --tw-border-opacity: 1;
-  border-color: rgb(221 221 221 / var(--tw-border-opacity));
-  text-align: left;
-}
 
 .archive-notification-text {
   margin-left: 56px;
@@ -809,10 +786,6 @@ video {
   display: flex;
 }
 
-.table {
-  display: table;
-}
-
 .h-screen {
   height: 100vh;
 }
@@ -881,6 +854,10 @@ video {
 
 .items-center {
   align-items: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .justify-center {

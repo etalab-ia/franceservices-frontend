@@ -2,8 +2,8 @@ import { Card } from "@codegouvfr/react-dsfr/Card";
 import { Tag } from "@codegouvfr/react-dsfr/Tag";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { spSheetsUrl } from "../../constants/sheets";
 import { meetingQRTitle } from "../../constants/meeting";
+import { GlobalSecondaryTitle } from "../Global/GlobalSecondaryTitle";
 
 export function MeetingQR({ archive }) {
 	const	sheets = archive ? archive.sheets : useSelector((state) => state.user.sheets);
@@ -18,9 +18,12 @@ export function MeetingQR({ archive }) {
 
 		sheets.forEach((sheet) => {
 			sheet.related_questions && sheet.related_questions.forEach((qr) => {
-				// Navigate to new url if !qr.sid ?
-				// audience will be add: /particuliers/ or /associations/
-				updatedQuestions = [...updatedQuestions, {title: qr.question, url: qr.sid ? spSheetsUrl + qr.sid : '', id: qr.sid}];
+				const	object = updatedQuestions.some(obj => {
+					return obj.sid === qr.sid;
+				});
+
+				if (!object)
+					updatedQuestions = [...updatedQuestions, { question: qr.question, sid: qr.sid, url: qr.url }];
 			});
 		});
 		setRelatedQuestions(updatedQuestions);
@@ -28,17 +31,17 @@ export function MeetingQR({ archive }) {
 	
 	
 	return <>
-			{relatedQuestions.length !== 0 && meetingQRTitle}
-			{relatedQuestions.map((question, index) => {
+			{relatedQuestions.length !== 0 && <GlobalSecondaryTitle extraClass='fr-pt-3w fr-pb-3w'>{meetingQRTitle}</GlobalSecondaryTitle> }
+			{relatedQuestions.map((rq, index) => {
 				return <div className="fr-mb-3v" key={index}>
 					<Card
 						background
 						border
-						end={<Tag>{question.id}</Tag>}
+						end={<Tag>{rq.sid}</Tag>}
 						enlargeLink
-						linkProps={{ href: question.url }}
+						linkProps={{ href: rq.url }}
 						size="small"
-						title={question.title}
+						title={rq.question}
 						titleAs="h6"
 					/>
 				</div>

@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSheetsData } from "../../utils/setData";
 import { setTilesFromSheets } from "../../utils/setData";
-import { SheetsAdditionalButtons } from "./SheetsAdditionalButtons";
 import { SheetsTiles } from "./SheetsTiles";
 
-export const    SheetsTilesContainer = ({ currQuestion, archiveSheets, userToken }) => {
+export const    SheetsTilesContainer = ({ currQuestion, archiveSheets, isModifiable, setIsModifiable, removedSheets, setRemovedSheets, selectedSheets, setSelectedSheets }) => {
+	const	userToken = useSelector((state) => state.auth.userToken);
 	const   [tiles, setTiles] = useState([]);
 	const	[sheets, setSheets] = useState([]);
-	const	[isModifiable, setIsModifiable] = useState(false);
-	const	[selectedSheets, setSelectedSheets] = useState([]);
-	const	[removedSheets, setRemovedSheets] = useState([]);
 	const	dispatch = useDispatch();
 
 	useEffect(() => {
@@ -36,20 +33,12 @@ export const    SheetsTilesContainer = ({ currQuestion, archiveSheets, userToken
 		dispatch({ type: 'REMOVE_SHEETS', indexToRemove: removedSheets});
 	}, [removedSheets]);
 
-	return <>
-		<SheetsAdditionalButtons
-			isModifiable={isModifiable}
-			setIsModifiable={setIsModifiable}
-			removedSheets={removedSheets}
-			setRemovedSheets={setRemovedSheets}
-			selectedSheets={selectedSheets}
-		/>
+	return (
 		<SheetsTiles
 			tiles={tiles}
 			isModifiable={isModifiable}
-			selectedSheets={selectedSheets}
-			setSelectedSheets={setSelectedSheets}
 			removedSheets={removedSheets}
+			setRemovedSheets={setRemovedSheets}
 		/>
-	</>
+	);
 }
