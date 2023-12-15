@@ -6,5 +6,5 @@ export function MeetingEditQuestion({ setGenerate }) {
 		setGenerate(false);
 	}
 
-	return <ModifyButton handleClick={handleClick} text="Modifier"/>
+	return <ModifyButton handleClick={handleClick} text="Modifier" extraClass="underline"/>
 }

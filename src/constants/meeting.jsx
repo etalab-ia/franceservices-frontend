@@ -91,5 +91,5 @@ export const	defaultInputFields = [
 	},
 ];
 
-export const	resultMeetingTitle = <h3 className="text-2xl font-bold fr-mt-2w">Résultat</h3>;
-export const	meetingQRTitle = <h3 className="text-2xl font-bold fr-pt-3w fr-pb-3w">Questions fréquentes</h3>;
+export const	resultMeetingTitle = `Résultat`;
+export const	meetingQRTitle = `Questions fréquentes`;
