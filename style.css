@@ -766,6 +766,10 @@ video {
   }
 }
 
+.m-0 {
+  margin: 0px;
+}
+
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -848,10 +852,6 @@ video {
   flex-direction: column;
 }
 
-.items-start {
-  align-items: flex-start;
-}
-
 .items-center {
   align-items: center;
 }
@@ -862,10 +862,6 @@ video {
 
 .justify-center {
   justify-content: center;
-}
-
-.justify-items-end {
-  justify-items: end;
 }
 
 .divide-y > :not([hidden]) ~ :not([hidden]) {
@@ -905,6 +901,10 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.p-0 {
+  padding: 0px;
+}
+
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -935,6 +935,11 @@ video {
 
 .font-bold {
   font-weight: 700;
+}
+
+.text-\[\#000091\] {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 145 / var(--tw-text-opacity));
 }
 
 .text-\[\#929292\] {

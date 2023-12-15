@@ -76,7 +76,7 @@ const			setSheetsBody = (user_text) => {
 	const data = JSON.stringify({
 		name: 'sheets',
 		query: user_text,
-		limit: 3,
+		limit: 10,
 		similarity: "e5",
 		institution: ''
 	});
@@ -84,24 +84,24 @@ const			setSheetsBody = (user_text) => {
 	return data;
 }
 
-const			getSheetsData = async (setSheets, currQuestion, userToken, dispatch) => {
+const			getSheetsData = async (currQuestion, userToken, dispatch, setSheets, setAdditionalSheets) => {
 	const	sheetsResp = await useFetch(indexesUrl, 'POST', {
 		data: setSheetsBody(currQuestion),
 		headers: setHeaders(userToken, false),
 	}, dispatch);
 	
-	setSheets(sheetsResp);
 	dispatch({ type: 'SET_SHEETS', nextSheets: sheetsResp});
+	setSheets(sheetsResp.slice(0, 3));
+	setAdditionalSheets(sheetsResp.slice(3));
 }
 
-export const	setSheetsData = (currQuestion, archiveSheets, setTiles, setSheets, userToken, dispatch) => {
+export const	setSheetsData = (currQuestion, setTiles, userToken, dispatch, setSheets, setAdditionalSheets) => {
 	setTiles([]);
 
-	if ((!currQuestion || currQuestion.length === 0) && !archiveSheets)
+	if (!currQuestion || currQuestion.length === 0)
 		return ;
 
-	!archiveSheets && getSheetsData(setSheets, currQuestion, userToken, dispatch);
-	archiveSheets && setSheets(archiveSheets);
+	getSheetsData(currQuestion, userToken, dispatch, setSheets, setAdditionalSheets);
 }
 
 export const	setTilesFromSheets = (sheets, setTiles) => {

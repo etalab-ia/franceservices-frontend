@@ -1,7 +1,7 @@
 import { initialChatbotMessage } from "../../constants/chatbotProps"
 import { initialQuestion, initialUserChoices } from "./state"
 
-export const	userReducer = (state = { question: initialQuestion, choices: initialUserChoices, messages: [], sheets: [] }, action) => {
+export const	userReducer = (state = { question: initialQuestion, choices: initialUserChoices, messages: [], sheets: [], additionalSheets: [] }, action) => {
 	switch (action.type) {
 		case 'SET_INITIAL_CHAT': 
 			return {
@@ -10,19 +10,23 @@ export const	userReducer = (state = { question: initialQuestion, choices: initia
 				messages: [{ text: initialChatbotMessage, sender: 'agent' }],
 			}
 		case 'SET_SHEETS':
+			console.log('set sheet')
 			return {
 				...state,
-				sheets: action.nextSheets,
+				sheets: action.nextSheets.slice(0, 3),
+				additionalSheets: action.nextSheets.slice(3),
 			}
 		case 'REMOVE_SHEETS':
 			if (!state.sheets)
 				return state;
 			
 			const	nextSheets = state.sheets.filter((sheet, index) => !action.indexToRemove.includes(index));
+			const	nextAdditionalSheets = state.sheets.filter((sheet, index) => action.indexToRemove.includes(index));
 
 			return {
 				...state,
 				sheets: nextSheets,
+				additionalSheets: [...state.additionalSheets, nextAdditionalSheets],
 			}
 		case 'SET_USER_TEXT':
 			return {
