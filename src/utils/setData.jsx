@@ -84,29 +84,31 @@ const			setSheetsBody = (user_text) => {
 	return data;
 }
 
-const			getSheetsData = async (currQuestion, userToken, dispatch, setSheets, setAdditionalSheets) => {
+const			getSheetsData = async (currQuestion, userToken, dispatch) => {
 	const	sheetsResp = await useFetch(indexesUrl, 'POST', {
 		data: setSheetsBody(currQuestion),
 		headers: setHeaders(userToken, false),
 	}, dispatch);
 	
 	dispatch({ type: 'SET_SHEETS', nextSheets: sheetsResp});
-	setSheets(sheetsResp.slice(0, 3));
-	setAdditionalSheets(sheetsResp.slice(3));
+	// setSheets(sheetsResp.slice(0, 3));
+	// setAdditionalSheets(sheetsResp.slice(3, 10));
 }
 
-export const	setSheetsData = (currQuestion, setTiles, userToken, dispatch, setSheets, setAdditionalSheets) => {
+export const	setSheetsData = (currQuestion, setTiles, userToken, dispatch) => {
 	setTiles([]);
 
 	if (!currQuestion || currQuestion.length === 0)
 		return ;
 
-	getSheetsData(currQuestion, userToken, dispatch, setSheets, setAdditionalSheets);
+	getSheetsData(currQuestion, userToken, dispatch);
 }
 
 export const	setTilesFromSheets = (sheets, setTiles) => {
 	if (!sheets || !sheets.length)
 		return setTiles([]);
+
+	setTiles([]);
 	
 	sheets.map((sheet) => {
 		const	url = sheet.url;

@@ -28,7 +28,8 @@ export const Root = () => {
 	return <div className="h-screen" id="screen">
 		<Header
 			brandTop="DINUM / Etalab"
-			serviceTitle={<>ALBERT France services{' '}<Badge as="span" noIcon severity="success">Beta</Badge></>}
+			serviceTitle={<>ALBERT France services{' '}</>}
+			// serviceTitle={<>ALBERT France services{' '}<Badge as="span" noIcon severity="success">Beta</Badge></>}
 			serviceTagline="Aide à l’accompagnement des usagers France services"
 			homeLinkProps={{ "to": "/login" }}
 			navigation={auth.isLogin && navigationData}
