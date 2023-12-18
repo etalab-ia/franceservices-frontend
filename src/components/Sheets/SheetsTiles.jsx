@@ -1,10 +1,8 @@
 import { Tile } from "@codegouvfr/react-dsfr/Tile";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 export const    SheetsTiles = ({ tiles, isModifiable, type }) => {
 	const	text = type === 'main' ? "X Supprimer" : "+ Ajouter";
-	const	user = useSelector((state) => state.user);
 	const	dispatch = useDispatch();
 
 	const	handleClick = (key) => {
