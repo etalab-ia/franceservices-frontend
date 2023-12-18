@@ -766,10 +766,6 @@ video {
   }
 }
 
-.m-0 {
-  margin: 0px;
-}
-
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -899,10 +895,6 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.p-0 {
-  padding: 0px;
 }
 
 .py-4 {

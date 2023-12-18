@@ -7,12 +7,15 @@ export const    setArchive = (dispatch, stream, user, type) => {
 
 	if (user.choices.oldQuestion === user.choices.newQuestion && type === 'qr')
 		return ;
+
+	console.log('sheets here: ', user)
 	
 	dispatch({ 
 		type: 'SET_ARCHIVE',
 		nextDate: new Date().toLocaleDateString('fr'), 
 		nextTags: selected,
 		nextSheets: user.sheets,
+		nextAdditionalSheets: user.additionalSheets,
 		nextMessages: [{ text: user.originQuestion, sender: 'user' }, { text: stream.historyStream, sender: 'agent' }],
 		nextType: type
 	});

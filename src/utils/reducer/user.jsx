@@ -10,24 +10,37 @@ export const	userReducer = (state = { question: initialQuestion, choices: initia
 				messages: [{ text: initialChatbotMessage, sender: 'agent' }],
 			}
 		case 'SET_SHEETS':
-			console.log('set sheet')
 			return {
 				...state,
 				sheets: action.nextSheets.slice(0, 3),
-				additionalSheets: action.nextSheets.slice(3),
+				additionalSheets: action.nextSheets.slice(3, 10),
 			}
-		case 'REMOVE_SHEETS':
+		case 'REMOVE_SHEETS': {
 			if (!state.sheets)
 				return state;
-			
-			const	nextSheets = state.sheets.filter((sheet, index) => !action.indexToRemove.includes(index));
-			const	nextAdditionalSheets = state.sheets.filter((sheet, index) => action.indexToRemove.includes(index));
 
+			const	nextSheets = state.sheets.filter((sheet, index) => action.indexToRemove !== index);
+			const	nextAdditionalSheets = state.sheets.filter((sheet, index) => action.indexToRemove === index);
+			
 			return {
 				...state,
 				sheets: nextSheets,
-				additionalSheets: [...state.additionalSheets, nextAdditionalSheets],
+				additionalSheets: [...state.additionalSheets, ...nextAdditionalSheets],
 			}
+		}
+		case 'ADD_SHEETS': {
+			if (!state.sheets)
+				return state;
+
+			const	nextSheets = state.additionalSheets.filter((sheet, index) => action.indexToAdd === index);
+			const	nextAdditionalSheets = state.additionalSheets.filter((sheet, index) => action.indexToAdd !== index);
+			
+			return {
+				...state,
+				sheets: [...state.sheets, ...nextSheets],
+				additionalSheets: nextAdditionalSheets,
+			}
+		}
 		case 'SET_USER_TEXT':
 			return {
 				...state,

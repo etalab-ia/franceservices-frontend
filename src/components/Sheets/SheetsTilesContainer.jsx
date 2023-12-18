@@ -9,10 +9,8 @@ export const    SheetsTilesContainer = ({ currQuestion, archiveSheets, isModifia
 	const	userToken = useSelector((state) => state.auth.userToken);
 	const   [tiles, setTiles] = useState([]);
 	const   [additionalTiles, setAdditionalTiles] = useState([]);
-	const	[sheets, setSheets] = useState([]);
-	const   [additionalSheets, setAdditionalSheets] = useState([]);
-	const	[removedSheets, setRemovedSheets] = useState([]);
 	const	dispatch = useDispatch();
+	const	user = useSelector((state => state.user));
 
 	useEffect(() => {
 		!archiveSheets && setSheetsData(
@@ -20,38 +18,27 @@ export const    SheetsTilesContainer = ({ currQuestion, archiveSheets, isModifia
 			setTiles,
 			userToken,
 			dispatch,
-			setSheets,
-			setAdditionalSheets
 		);
-		archiveSheets && setSheets(archiveSheets);
+		archiveSheets && dispatch({ type: 'SET_SHEETS', nextSheets: archiveSheets});
 	}, [currQuestion]);
 
 	useEffect(() => {
-		setRemovedSheets([]);
-		setIsModifiable(false);
-		setTilesFromSheets(sheets, setTiles);
-		setTilesFromSheets(additionalSheets, setAdditionalTiles);
-	}, [sheets]);
+		setTilesFromSheets(user.sheets, setTiles);
+		setTilesFromSheets(user.additionalSheets, setAdditionalTiles);
 
-	useEffect(() => {
-		dispatch({ type: 'REMOVE_SHEETS', indexToRemove: removedSheets});
-	}, [removedSheets]);
+	}, [user.additionalSheets]);
 
 	return (
 		<>
 			<SheetsTiles
 				tiles={tiles}
 				isModifiable={isModifiable}
-				removedSheets={removedSheets}
-				setRemovedSheets={setRemovedSheets}
 				type='main'
 			/>
 			<SheetsAdditionalTilesTitle/>
 			<SheetsTiles
 				tiles={additionalTiles}
 				isModifiable={isModifiable}
-				removedSheets={removedSheets}
-				setRemovedSheets={setRemovedSheets}
 				type='additional'
 			/>
 		</>
