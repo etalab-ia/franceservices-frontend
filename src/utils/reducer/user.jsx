@@ -15,6 +15,12 @@ export const	userReducer = (state = { question: initialQuestion, choices: initia
 				sheets: action.nextSheets.slice(0, 3),
 				additionalSheets: action.nextSheets.slice(3, 10),
 			}
+		case 'SET_SHEETS_FROM_ARCHIVE':
+			return {
+				...state,
+				sheets: action.nextSheets,
+				additionalSheets: action.nextAdditionalSheets,
+			}
 		case 'REMOVE_SHEETS': {
 			if (!state.sheets)
 				return state;

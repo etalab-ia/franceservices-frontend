@@ -12,6 +12,7 @@ export function ChatAdditionalContainer({ archive }) {
 				{archive ? 
 					<DisplaySheets
 						archiveSheets={archive.sheets}
+						archiveAdditionalSheets={archive.additionalSheets}
 					/>
 					:
 					<DisplaySheets
