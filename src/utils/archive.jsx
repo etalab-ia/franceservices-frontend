@@ -14,6 +14,7 @@ export const    setArchive = (dispatch, stream, user, type) => {
 		nextTags: selected,
 		nextSheets: user.sheets,
 		nextAdditionalSheets: user.additionalSheets,
+		nextWebservices: user.webservices,
 		nextMessages: [{ text: user.originQuestion, sender: 'user' }, { text: stream.historyStream, sender: 'agent' }],
 		nextType: type
 	});

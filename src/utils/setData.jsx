@@ -90,7 +90,7 @@ const			getSheetsData = async (currQuestion, userToken, dispatch) => {
 		headers: setHeaders(userToken, false),
 	}, dispatch);
 	
-	dispatch({ type: 'SET_SHEETS', nextSheets: sheetsResp});
+	dispatch({ type: 'SET_SHEETS', nextSheets: sheetsResp });
 	// setSheets(sheetsResp.slice(0, 3));
 	// setAdditionalSheets(sheetsResp.slice(3, 10));
 }

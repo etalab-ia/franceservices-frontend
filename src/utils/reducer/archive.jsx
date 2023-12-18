@@ -13,6 +13,7 @@ export const	archiveReducer = (state = [], action) => {
 					type: action.nextType,
 					sheets: action.nextSheets,
 					additionalSheets: action.nextAdditionalSheets,
+					webservices: action.nextWebservices,
 					limit: 7,
 					source: 'service-public.fr'
 			 	},
