@@ -5,7 +5,7 @@ import { setTilesFromSheets } from "../../utils/setData";
 import { SheetsTiles } from "./SheetsTiles";
 import { SheetsAdditionalTilesTitle } from "./SheetsAdditionalTilesTitle";
 
-export const    SheetsTilesContainer = ({ currQuestion, archiveSheets, archiveAdditionalSheets, isModifiable }) => {
+export const    SheetsTilesContainer = ({ currQuestion, archiveSheets, archiveAdditionalSheets, archiveWebservices, isModifiable }) => {
 	const	userToken = useSelector((state) => state.auth.userToken);
 	const   [tiles, setTiles] = useState([]);
 	const   [additionalTiles, setAdditionalTiles] = useState([]);
@@ -22,7 +22,8 @@ export const    SheetsTilesContainer = ({ currQuestion, archiveSheets, archiveAd
 		archiveSheets && dispatch({
 			type: 'SET_SHEETS_FROM_ARCHIVE',
 			nextSheets: archiveSheets,
-			nextAdditionalSheets: archiveAdditionalSheets
+			nextAdditionalSheets: archiveAdditionalSheets,
+			nextWebservices: archiveWebservices
 		});
 	}, [currQuestion]);
 
