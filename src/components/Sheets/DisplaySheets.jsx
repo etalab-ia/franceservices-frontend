@@ -3,7 +3,7 @@ import { SheetsTilesContainer } from './SheetsTilesContainer';
 import { useState } from 'react';
 import { SheetsAdditionalButtons } from './SheetsAdditionalButtons';
 
-export function	DisplaySheets({ currQuestion, archiveSheets }) {
+export function	DisplaySheets({ currQuestion, archiveSheets, archiveAdditionalSheets }) {
 	const	[isModifiable, setIsModifiable] = useState(false);
 	
 	return (
@@ -15,8 +15,8 @@ export function	DisplaySheets({ currQuestion, archiveSheets }) {
 			<SheetsTilesContainer
 				currQuestion={currQuestion}
 				archiveSheets={archiveSheets}
+				archiveAdditionalSheets={archiveAdditionalSheets}
 				isModifiable={isModifiable}
-				setIsModifiable={setIsModifiable}
 			/>
 		</GlobalColContainer>		
 	);

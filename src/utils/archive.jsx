@@ -7,8 +7,6 @@ export const    setArchive = (dispatch, stream, user, type) => {
 
 	if (user.choices.oldQuestion === user.choices.newQuestion && type === 'qr')
 		return ;
-
-	console.log('sheets here: ', user)
 	
 	dispatch({ 
 		type: 'SET_ARCHIVE',

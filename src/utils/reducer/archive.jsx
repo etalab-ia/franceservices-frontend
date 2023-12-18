@@ -3,7 +3,6 @@ export const	archiveReducer = (state = [], action) => {
 		case 'SET_ARCHIVE': {
 			const	lastIndex = state.length ? state.length - 1 : state.length;
 	  
-			console.log(action.nextAdditionalSheets)
 			return [
 			  	...state,
 			  	{
@@ -51,9 +50,7 @@ export const	archiveReducer = (state = [], action) => {
 			if (!state.length)
 				return state;
 
-
 			const	lastIndex = state.length ? state.length - 1 : state.length;
-			console.log('state: ', state[lastIndex])
 			const	nextSheets = state[lastIndex].additionalSheets.filter((sheet, index) => action.indexToAdd === index);
 			const	nextAdditionalSheets = state[lastIndex].additionalSheets.filter((sheet, index) => action.indexToAdd !== index);
 
