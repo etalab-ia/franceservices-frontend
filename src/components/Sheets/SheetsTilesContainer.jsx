@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSheetsData } from "../../utils/setData";
+import { setIndexesData } from "../../utils/setData";
 import { setTilesFromSheets } from "../../utils/setData";
 import { SheetsTiles } from "./SheetsTiles";
 import { SheetsAdditionalTilesTitle } from "./SheetsAdditionalTilesTitle";
@@ -13,7 +13,7 @@ export const    SheetsTilesContainer = ({ currQuestion, archiveSheets, archiveAd
 	const	user = useSelector((state => state.user));
 
 	useEffect(() => {
-		!archiveSheets && setSheetsData(
+		!archiveSheets && setIndexesData(
 			currQuestion,
 			setTiles,
 			userToken,
