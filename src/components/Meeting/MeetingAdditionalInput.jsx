@@ -17,7 +17,7 @@ export function MeetingAdditionalInput({ context }) {
 			const	tags = field.name === "themes" ? themes : administrations;
 			const	setTags = field.name === "themes" ? setThemes : setAdministrations;
 
-			return <div className="fr-mb-3w" key={index}>
+			return <div className="fr-mb-4w" key={index}>
 				<MeetingInput
 					field={field}
 				/>
