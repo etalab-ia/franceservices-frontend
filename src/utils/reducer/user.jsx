@@ -1,35 +1,63 @@
+import { initialChatbotMessage } from "../../constants/chatbotProps"
 import { initialQuestion, initialUserChoices } from "./state"
 
-export const	userReducer = (state = { question: initialQuestion, choices: initialUserChoices, sheets: [], messages: [] }, action) => {
+export const	userReducer = (state = { question: initialQuestion, choices: initialUserChoices, messages: [], sheets: [], additionalSheets: [] }, action) => {
 	switch (action.type) {
-		case 'SET_USER_MODEL_NAME_CHOICE':
+		case 'SET_INITIAL_CHAT': 
 			return {
-				...state,
-				question: {
-					...state.question,
-					model_name: action.nextModelName,
-					limit: action.nextLimit,
-					mode: action.nextMode,
-				}
-			}
-		case 'SET_USER_TEXT':
-			return {
-				...state,
-				question: {
-					...state.question,
-					user_text: action.nextUserText,
-					query: action.nextUserText
-				}
+				question: initialQuestion,
+				choices: initialUserChoices,
+				messages: [{ text: initialChatbotMessage, sender: 'agent' }],
 			}
 		case 'SET_SHEETS':
 			return {
 				...state,
-				sheets: action.nextSheets,
+				sheets: action.nextSheets.slice(0, 3),
+				additionalSheets: action.nextSheets.slice(3, 10),
+				webservices: action.nextSheets[0].web_services.slice(0, 3),
 			}
-		case 'SET_INPUT_VISIBILITY':
+		case 'SET_SHEETS_FROM_ARCHIVE':
 			return {
 				...state,
-				inputVisibility: action.nextVisibility,
+				sheets: action.nextSheets,
+				additionalSheets: action.nextAdditionalSheets,
+				webservices: action.nextWebservices,
+			}
+		case 'REMOVE_SHEETS': {
+			if (!state.sheets)
+				return state;
+
+			const	nextSheets = state.sheets.filter((sheet, index) => action.indexToRemove !== index);
+			const	nextAdditionalSheets = state.sheets.filter((sheet, index) => action.indexToRemove === index);
+			
+			return {
+				...state,
+				sheets: nextSheets,
+				additionalSheets: [...state.additionalSheets, ...nextAdditionalSheets],
+			}
+		}
+		case 'ADD_SHEETS': {
+			if (!state.sheets)
+				return state;
+
+			const	nextSheets = state.additionalSheets.filter((sheet, index) => action.indexToAdd === index);
+			const	nextAdditionalSheets = state.additionalSheets.filter((sheet, index) => action.indexToAdd !== index);
+			
+			return {
+				...state,
+				sheets: [...state.sheets, ...nextSheets],
+				additionalSheets: nextAdditionalSheets,
+			}
+		}
+		case 'SET_USER_TEXT':
+			return {
+				...state,
+				originQuestion: action.nextUserText,
+				question: {
+					...state.question,
+					user_text: action.nextUserText,
+					query: action.nextUserText
+				},
 			}
 		case 'RESET_QUESTION_FIELDS':
 			return {
@@ -40,7 +68,6 @@ export const	userReducer = (state = { question: initialQuestion, choices: initia
 			return {
 				...state,
 				choices: initialUserChoices,
-				sheets: [],
 			}
 		case 'SET_USER_CHOICES':
 			return {
@@ -50,11 +77,30 @@ export const	userReducer = (state = { question: initialQuestion, choices: initia
 					[action.nextKey]: action.nextValue,
 				}
 			}
-		case 'SET_MESSAGES': 
-			return {
-				...state,
-				messages: [...state.messages, action.nextMessage]
-			}
+			case 'SET_MESSAGES':
+				if (state.messages.length > 0) 
+				{
+					const	lastMessage = state.messages[state.messages.length - 1];
+			
+					if (lastMessage.sender === action.nextMessage.sender) {
+						const	updatedMessages = state.messages.slice(0, -1);
+						const	updatedLastMessage = {
+							...lastMessage,
+							text: [...lastMessage.text, action.nextMessage.text],
+						};
+						updatedMessages.push(updatedLastMessage);
+			
+						return {
+							...state,
+							messages: updatedMessages,
+						};
+					}
+				}
+				return {
+					...state,
+					messages: [...state.messages, action.nextMessage],
+				};
+			
 	  	default: { return state };
 	}
 }

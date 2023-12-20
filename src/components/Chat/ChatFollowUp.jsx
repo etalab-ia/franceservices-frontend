@@ -1,30 +1,30 @@
-import { Avatar } from "./Avatar";
-import { UserChatTools } from "../User/UserChatTools";
 import { UserExperience } from "../Feedbacks/UserExperience";
 import { NOT_SET } from "../../constants/status";
 import { DisplayStream } from "../Stream/DisplayStream";
 import { NewQuestion } from "./NewQuestion";
 import { useSelector } from "react-redux";
-import { DisplaySheets } from "../Sheets/DisplaySheets";
+import { GlobalRowContainer } from "../Global/GlobalRowContainer";
+import { AvatarToolsContainer } from "./AvatarToolsContainer";
 
-export function ChatFollowUp({ stream, tabs, archive }) {
+// TODO: improve
+export function ChatFollowUp({ stream, tabs }) {
 	const	user = useSelector((state) => state.user);
-	const	conditionDiv = ((stream.response.length !== 0 || stream.historyStream.length !== 0) && tabs.activeTab === 0) || archive != NOT_SET;
-	const	sheetsCondition = ((!stream.isStreaming && user.choices.ressources !== NOT_SET) || archive !== NOT_SET);
-	const	userExperienceCondition = !stream.isStreaming && user.choices.ressources !== NOT_SET;
-	const	newQuestionCondition = !stream.isStreaming && user.choices.feedback !== NOT_SET;
+	const	feedback = useSelector((state) => state.feedback);
+	const	conditionDiv = ((stream.response.length !== 0 || stream.historyStream.length !== 0) && tabs.activeTab === 0);
+	const	newQuestionCondition = !stream.isStreaming && user.choices.feedback !== NOT_SET && feedback.isConfirmed;
 
 	return (
 		<>
 			{conditionDiv && (
 				<div>
-					<div className="streaming-container">
-						<UserChatTools isArchive={archive}/>
-						<Avatar user="agent" />
-						<DisplayStream stream={stream} tabs={tabs} archive={archive}/>
-					</div>
-					{sheetsCondition && <DisplaySheets />}
-					{userExperienceCondition && <UserExperience isArchive={archive !== NOT_SET}/>}
+					<GlobalRowContainer extraClass='fr-grid-row--center'>
+						<AvatarToolsContainer/>
+						<DisplayStream
+							stream={stream}
+							tabs={tabs}
+						/>
+					</GlobalRowContainer>
+					{!stream.isStreaming && <UserExperience/>}
 					{newQuestionCondition && <NewQuestion />}
 				</div>
 			)}

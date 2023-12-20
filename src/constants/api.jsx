@@ -1,18 +1,13 @@
-// POST USER QUESTION / GET AGENT RESPONSE
-export const	apiUrl = "http://***REMOVED***/api/v2/stream"
+const	apiBase = "https://albert.etalab.gouv.fr/api/v2";
+// const   apiBase = "http://127.0.0.1:8090";
 
-// GET INSTITUTIONS
-export  const	institutionsUrl = "http://***REMOVED***/api/v2/institutions"
-
-// GET INDEXES
-export const    indexesUrl = "http://***REMOVED***/api/v2/indexes";
-
-// STOP GENERATION
-export const	stopGenerationUrl = "http://***REMOVED***/api/api/fabrique_stop"
-
-// SIGNIN
-export const	signinUrl = "http://***REMOVED***/api/v2/sign_in"
-export const	signoutUrl = "http://***REMOVED***/api/v2/sign_out"
-export const	resetPasswordMailUrl = "http://***REMOVED***/api/v2/send_reset_password_email"
-export const	resetPasswordUrl = "http://***REMOVED***/api/v2/reset_password"
-export const    userUrl = "http://***REMOVED***/api/v2/user/me"
+export const	apiUrl = apiBase + "/stream";
+export const    indexesUrl = apiBase + "/indexes";
+export  const	institutionsUrl = apiBase + "/institutions";
+export const	signinUrl = apiBase + "/sign_in";
+export const	signoutUrl = apiBase + "/sign_out";
+export const	resetPasswordMailUrl = apiBase + "/send_reset_password_email";
+export const	resetPasswordUrl = apiBase + "/reset_password"
+export const    userUrl = apiBase + "/user/me";
+export const    contactUrl = apiBase + "/user/contact";
+export const    importUrl = "https://opendata.plus.transformation.gouv.fr/api/explore/v2.1/catalog/datasets/export-expa-c-riences/records?limit=5";

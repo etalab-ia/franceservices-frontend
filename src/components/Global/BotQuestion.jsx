@@ -2,6 +2,7 @@ import { NOT_SET } from "../../constants/status";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from 'react';
 import { botQuestionRole } from "../../constants/global";
+import { GlobalRowContainer } from "./GlobalRowContainer";
 
 export function	BotQuestion({ id, choice }) {
 	const	user = useSelector((state) => state.user);
@@ -19,13 +20,12 @@ export function	BotQuestion({ id, choice }) {
 		{
 			setButtonChoice(index);
 			dispatch({ type: 'SET_USER_CHOICES', nextKey: id, nextValue: index });
-			index === 1 && dispatch({ type: 'CONFIRM_RESSOURCE' });
 		}
 	}
 
 	return (
-		<div className="user-feedback-container">
-			<div className="row-message">
+		<div className="fr-ml-10w">
+			<GlobalRowContainer>
 				{buttons.map((button, index) => {
 					const	classNames = index === buttonChoice ? `bg-purple` : `bg-[white]`;
 					const	cursor = buttonChoice !== NOT_SET ? 'cursor-not-allowed' : 'cursor-pointer';
@@ -34,7 +34,7 @@ export function	BotQuestion({ id, choice }) {
 							<p className={index === buttonChoice ? `text-white text-center` : `text-purple text-center`}>{button}</p>
 						</button>
 				})}
-			</div>
+			</GlobalRowContainer>
 		</div>
 	);
 }

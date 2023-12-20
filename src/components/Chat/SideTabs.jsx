@@ -1,8 +1,8 @@
 import { sideButtonsProps } from '../../constants/sideButtons';
 
 export function SideTabs({ state, dispatch }) {
+
 	const	handleClick = (index) => {
-		dispatch({ type: 'RESET_ARCHIVE_TAB', nextActiveTab: index});
 		dispatch({ type: 'SET_ACTIVE_TAB', nextActiveTab: index});
 	};
 

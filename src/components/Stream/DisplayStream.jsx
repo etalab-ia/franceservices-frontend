@@ -1,18 +1,11 @@
 import { useEffect, useState } from "react";
-import { NOT_SET } from "../../constants/status";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { DisplayMessageTab } from "../Chat/DisplayMessageTab";
 import { StreamingMessage } from "../Chat/StreamingMessage";
+import { GlobalColContainer } from "../Global/GlobalColContainer";
+import { GlobalStream } from "../Global/GlobalStream";
 
-const Stream = ({ response }) => {
-	return <div className="streaming">
-		{response.map((item, index) => (
-			<span key={index}>{item}</span>
-		))}
-	</div>
-}
-
-export function DisplayStream({ stream, tabs, archive }) {
+export function	DisplayStream({ stream, tabs }) {
 	const	tabsLen = stream.historyStream.length;
 	const	[currLen, setCurrLen] = useState(tabsLen);
 	const	[activeTab, setActiveTab] = useState(tabsLen + 1);
@@ -21,33 +14,29 @@ export function DisplayStream({ stream, tabs, archive }) {
 	const	dispatch = useDispatch();
 
 	useEffect(() => {
-		if (tabsLen != currLen) {
-			dispatch({ type: 'SET_ARCHIVE_MESSAGES', nextAgentResponse: stream.historyStream });
+		if (tabsLen != currLen)
 			setCurrLen(tabsLen);
-		}
 		setActiveTab(tabsLen);
-	}, [tabsLen])
-	useEffect(() => { dispatch({ type: 'SWITCH_TAB', nextTab: activeTab }) }, []);
+	}, [tabsLen]);
+
+	useEffect(() => {
+		dispatch({ type: 'SWITCH_TAB', nextTab: activeTab })
+	}, []);
 
 	return (
-		<div>
+		<GlobalColContainer>
 			{conditionStream ?
-				archive === NOT_SET ?
-					<Stream response={stream.response}/>
-					:
-					<Stream response={archive.agentResponse[0]}/>
+				<GlobalStream response={stream.response} extraClass="streaming fr-mb-4w fr-p-3v fr-ml-3v"/>
 				:
-				archive === NOT_SET ?
-					<StreamingMessage>{stream.historyStream[activeTab - 1]}</StreamingMessage>
-					:
-					<StreamingMessage>{archive.agentResponse[activeTab - 1]}</StreamingMessage>
+				<StreamingMessage>{stream.historyStream[activeTab - 1]}</StreamingMessage>
 			}
 			<DisplayMessageTab
 				isDisplayable={conditionTab}
 				tabsLen={tabsLen}
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
+				extraClass='fr-ml-2w'
 			/>
-		</div>
+		</GlobalColContainer>
 	);
 }

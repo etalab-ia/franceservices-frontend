@@ -1,15 +1,17 @@
-import Input from "@codegouvfr/react-dsfr/Input";
 import { ButtonsGroup } from "@codegouvfr/react-dsfr/ButtonsGroup";
 import { useState } from "react";
 import { signupFields } from "../constants/inputFields";
 import { initButtonsSignup } from "../constants/connexion";
 import { useFetch } from "../utils/hooks";
 import { resetPasswordUrl } from "../constants/api";
-import { AuthFailed } from "../components/Auth/AuthFailed";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { changePasswordFailed } from "../constants/errorMessages";
+import { LoginContainer } from "../components/Auth/LoginContainer";
+import { LoginFields } from "../components/Auth/LoginFields";
+import { ButtonInformation } from "../components/Global/ButtonInformation";
 
+// TODO: clean page
 export function NewPassword() {
 	const	auth = useSelector((state) => state.auth);
 	const	dispatch = useDispatch();
@@ -40,29 +42,25 @@ export function NewPassword() {
 		const	res = await useFetch(resetPasswordUrl, 'POST', {
 			data: JSON.stringify(data),
 			headers: { 'Content-Type': 'application/json' }
-		});
+		}, dispatch);
 
 		if (res.status && res.status !== 200)
 			return dispatch({ type: 'AUTH_FAILED' });
 
 		return window.location.href = '/albert/login';
 	}
+	const	fields = signupFields.slice(2, signupFields.length);
 	
 	return (
-		<div className="login-container">
-			{signupFields.map((input, key) => {
-				if (key < 2)
-					return null;
-				return <Input className="basic-width"
-					key={key}
-					hintText={input.hintText}
-					nativeInputProps={{...input.nativeInputProps, onChange: handleChange}}
-				/>
-			})}
-			{auth.authFailed && <AuthFailed>{changePasswordFailed}</AuthFailed>}
-			<ButtonsGroup className="basic-width"
+		<LoginContainer>
+			<LoginFields
+				fields={fields}
+				handleChange={handleChange}
+			/>
+			{auth.authFailed && <ButtonInformation>{changePasswordFailed}</ButtonInformation>}
+			<ButtonsGroup 
 				buttons={initButtonsSignup(handleValidatePassword, handleClick, 'Changer de mot de passe')}
 			/>
-		</div>
+		</LoginContainer>
 	)
 }

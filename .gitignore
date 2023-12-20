@@ -1,5 +1,5 @@
 .env
-style.css
+.env.development
 
 # Logs
 logs

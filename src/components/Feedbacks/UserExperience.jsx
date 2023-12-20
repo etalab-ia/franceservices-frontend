@@ -2,30 +2,35 @@ import { Avatar } from "../Chat/Avatar";
 import { Feedback } from "./Feedback";
 import { askingQuality, redoAskingQuality } from "../../constants/feedback";
 import { useSelector } from 'react-redux';
+import { GlobalRowContainer } from "../Global/GlobalRowContainer";
 
 const	AskingResponseQuality = ({ tabsLen }) => {
 	return (
-		<div className='ml-4'>
-			<div className="py-4">
-				{tabsLen > 1 ? redoAskingQuality : askingQuality}
-			</div>
+		<div className='streaming fr-p-3v fr-ml-3v'>
+			<div>{tabsLen > 1 ? redoAskingQuality : askingQuality}</div>
 		</div>
 	);
 }
 
-export function UserExperience({ isArchive }) {
+export function UserExperience() {
 	const	stream = useSelector((state) => state.stream);
 	const	tabsLen = stream.historyStream.length;
 
 	return (
-		<div className="col-message mt-8">
+		<>
 			{stream.activeTab === tabsLen && <div>
-				<div className="row-message ml-[110px]">
-					<Avatar user='agent' />
-					<AskingResponseQuality tabsLen={tabsLen} />
-				</div>
-				<Feedback isFirst={tabsLen === 1} isArchive={isArchive}/>
+				<GlobalRowContainer>
+					<Avatar
+						user='agent'
+					/>
+					<AskingResponseQuality
+						tabsLen={tabsLen}
+					/>
+				</GlobalRowContainer>
+				<Feedback
+					isFirst={tabsLen === 1}
+				/>
 			</div>}
-		</div>
+		</>
 	);
 }

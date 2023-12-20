@@ -4,7 +4,7 @@ import previous from "../../../icons/usertools/previous.svg";
 import next from "../../../icons/usertools/next.svg";
 import { nextImgDescription, previousImgDescription } from "../../constants/chatbotProps";
 
-export function DisplayMessageTab({ isDisplayable, tabsLen, activeTab, setActiveTab }) {
+export function DisplayMessageTab({ isDisplayable, tabsLen, activeTab, setActiveTab, extraClass }) {
 	const	dispatch = useDispatch();
 
 	useEffect(() => setActiveTab(tabsLen), [tabsLen])
@@ -14,7 +14,8 @@ export function DisplayMessageTab({ isDisplayable, tabsLen, activeTab, setActive
 
 	return (
         <>
-		    {isDisplayable && <div className="messages-tabs">
+		    {isDisplayable &&<div className={`${extraClass} flex flex-row fr-mb-4w`}> 
+				
 				{activeTab > 1 && <button className="mr-2" onClick={() => handleClick(activeTab, setActiveTab, -1)}>
 					<img src={previous} alt={previousImgDescription}/>
 				</button>}

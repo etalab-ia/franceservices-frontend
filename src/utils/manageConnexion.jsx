@@ -14,7 +14,7 @@ export const	setUserInfos = async(token, dispatch) => {
 			'Authorization': `Bearer ${token}`
 		},
 		data: null,
-	});
+	}, dispatch);
 
 	storeAuth(token, userInfos.username);
 	dispatch({ type: 'SET_USER', nextEmail: userInfos.email, nextUsername: userInfos.username });

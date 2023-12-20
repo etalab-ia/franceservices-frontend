@@ -9,7 +9,7 @@ export const	InputOption = ({ reasons, setOtherReason, isFirst }) => {
         <>
 		    {(reasons.includes('Autre raison') || !isFirst) &&
 				<Input
-					className="basic-width"
+					// className="basic-width"
 					onChange={handleNewReason}
 					iconId="fr-icon-arrow-right-line"
 					nativeInputProps={{
