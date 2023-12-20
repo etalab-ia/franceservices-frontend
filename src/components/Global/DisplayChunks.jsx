@@ -19,7 +19,7 @@ export const    DisplayChunks = ({ chunks }) => {
 				<HalfScreenWidth key={index}>
 			  		<GlobalColContainer extraClass='border grey-950 fr-p-3w'>
 						<GlobalParagraph extraClass='fr-text--lg'>{chunk.title}</GlobalParagraph>	
-						<GlobalParagraph>{chunk.introduction}</GlobalParagraph>
+						<GlobalParagraph>{chunk.text}</GlobalParagraph>
 						<GlobalParagraph extraClass='font-bold'>{chunk.url}</GlobalParagraph>
 					</GlobalColContainer>
 				</HalfScreenWidth>
