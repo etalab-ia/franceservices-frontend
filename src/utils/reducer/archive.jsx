@@ -12,6 +12,7 @@ export const	archiveReducer = (state = [], action) => {
 					messages: action.nextMessages,
 					type: action.nextType,
 					sheets: action.nextSheets,
+					chunks: action.nextChunks,
 					additionalSheets: action.nextAdditionalSheets,
 					webservices: action.nextWebservices,
 					limit: 7,
