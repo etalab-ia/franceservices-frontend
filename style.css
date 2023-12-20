@@ -766,10 +766,6 @@ video {
   }
 }
 
-.mb-0 {
-  margin-bottom: 0px;
-}
-
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -884,6 +880,11 @@ video {
 
 .border {
   border-width: 1px;
+}
+
+.border-\[\#DDD\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(221 221 221 / var(--tw-border-opacity));
 }
 
 .bg-\[\#F5F5FE\] {
