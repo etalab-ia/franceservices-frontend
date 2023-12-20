@@ -4,10 +4,8 @@ import { GlobalRowContainer } from "../components/Global/GlobalRowContainer";
 
 export const	meetingTitle = `Préparer un rendez-vous`;
 export const	meetingSubtitle = `Description de la situation de l’usager`;
-export const	meetingParagraph = (<p className="fr-mt-1w fr-mb-1w text-justify">
-		Précisez la situation de l'usager <strong>en ne précisant aucune donnée à caractère personnelle</strong> (nom, prénom de l'usager, numéro de sécurité sociale, identifiants de compte...).<br className="fr-mb-1w"/>
-		Veillez à terminer votre description par une <strong>question</strong>.
-	</p>);
+export const	meetingParagraph = <>Précisez la situation de l'usager <strong>en ne précisant aucune donnée à caractère personnelle</strong> (nom, prénom de l'usager, numéro de sécurité sociale, identifiants de compte...).<br className="fr-mb-1w"/>
+		Veillez à terminer votre description par une <strong>question</strong></>;
 
 export const	meetingPromptExamples = [
 	{
