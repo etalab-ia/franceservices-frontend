@@ -91,8 +91,6 @@ const			getSheetsData = async (currQuestion, userToken, dispatch) => {
 	}, dispatch);
 	
 	dispatch({ type: 'SET_SHEETS', nextSheets: sheetsResp });
-	// setSheets(sheetsResp.slice(0, 3));
-	// setAdditionalSheets(sheetsResp.slice(3, 10));
 }
 
 export const	setSheetsData = (currQuestion, setTiles, userToken, dispatch) => {

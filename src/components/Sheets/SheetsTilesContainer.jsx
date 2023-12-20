@@ -40,7 +40,7 @@ export const    SheetsTilesContainer = ({ currQuestion, archiveSheets, archiveAd
 				isModifiable={isModifiable}
 				type='main'
 			/>
-			<SheetsAdditionalTilesTitle/>
+			{additionalTiles.length !== 0 && <SheetsAdditionalTilesTitle/>}
 			<SheetsTiles
 				tiles={additionalTiles}
 				isModifiable={isModifiable}

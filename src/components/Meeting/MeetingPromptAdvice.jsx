@@ -14,9 +14,9 @@ export function	MeetingPromptAdvice({ }) {
 		setExpandedItems(updatedExpandedItems);
 	};
 
-	return <GlobalParagraph>
+	return <>
 		<GlobalColContainer>
-			{meetingParagraph}
+			<GlobalParagraph>{meetingParagraph}</GlobalParagraph>
 			{meetingPromptExamples.map((ex, index) => (
 				<div key={index}>
 					<GlobalRowContainer>
@@ -30,5 +30,5 @@ export function	MeetingPromptAdvice({ }) {
 				</div>
 			))}
 		</GlobalColContainer>
-	</GlobalParagraph>
+	</>
 }
