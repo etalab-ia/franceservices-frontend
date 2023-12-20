@@ -1,7 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { primaryButtons, satisfactionButton, secondaryButtons } from "../../constants/feedback";
+import { GlobalRowContainer } from "../Global/GlobalRowContainer";
 
-export function UserFeedbackSatisfaction({ isFirst, isConfirmed, isArchive }) {
+export function UserFeedbackSatisfaction({ isFirst, isConfirmed }) {
 	const	user = useSelector((state) => state.user);
 	const	buttons = isFirst ? primaryButtons : secondaryButtons;
 	const	dispatch = useDispatch();
@@ -11,16 +12,16 @@ export function UserFeedbackSatisfaction({ isFirst, isConfirmed, isArchive }) {
 	}
 
 	return (
-		<div className="row-message">
+		<GlobalRowContainer>
 			{buttons.map((button, index) => {
 				return <button title={button.type} onClick={() => handleClick(index)} key={index} 
 							className={`user-feedback-buttons ${index === user.choices.feedback ? 'bg-purple' : 'bg-white'}`}
-							disabled={isConfirmed || isArchive}
+							disabled={isConfirmed}
 					>
 						<img alt={satisfactionButton(button.type)} className={index === user.choices.feedback ? "mr-2 brightness-0 invert-[1]" : "mr-2"} src={button.img}/>
 						<p className={`${index === user.choices.feedback ? 'text-white' : 'text-purple'}`}>{button.name}</p>
 					</button>
 			})}
-		</div>
+		</GlobalRowContainer>
 	);
 }

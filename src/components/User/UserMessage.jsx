@@ -3,12 +3,10 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { NOT_SET } from "../../constants/status";
 import { postNewQuestion, setNewQuestion } from "../../utils/newQuestion";
 
 export function UserMessage() {
 	const	auth = useSelector((state) => state.auth);
-	const	ressources = useSelector((state) => state.ressources);
 	const	stream = useSelector((state) => state.stream);
 	const	user = useSelector((state) => state.user);
 	const	dispatch = useDispatch();
@@ -21,14 +19,14 @@ export function UserMessage() {
 	}
 
 	const	handleClick = () => {
-		setNewQuestion(dispatch, currQuestion, stream.historyStream);
+		setNewQuestion(dispatch, currQuestion, stream.historyStream, true);
 	}
 
 	useEffect(() => {
-		if (!user.question.query.length || ressources.isConfirmed === NOT_SET)
+		if (!user.question.query.length)
 			return ;
 		postNewQuestion(dispatch, auth, user.question, user.choices.newQuestion);
-	}, [user.question, ressources.isConfirmed]);
+	}, [user.question]);
 
 	const	handleRenderInput = (params) => {
 		const	newParams = { maxLength: 800 };
@@ -38,18 +36,14 @@ export function UserMessage() {
 	};
 
 	return (
-		<>
-			{user.inputVisibility === 'hidden' ?
-				<></>
-				:
-				<SearchBar
-					label="Poser votre question"
-					className='user-question'
-					onButtonClick={handleClick}
-					onChange={handleChange}
-					renderInput={handleRenderInput}
-				/>
-			}
-		</>
+		<div className="flex justify-center">
+			<SearchBar
+				label="Poser votre question"
+				className='w-5/6'
+				onButtonClick={handleClick}
+				onChange={handleChange}
+				renderInput={handleRenderInput}
+			/>
+		</div>
 	);
 }

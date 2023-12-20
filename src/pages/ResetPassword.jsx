@@ -6,7 +6,9 @@ import { resetPasswordMailUrl } from "../constants/api";
 import { useFetch } from "../utils/hooks";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { LoginContainer } from "../components/Auth/LoginContainer";
 
+// TODO: clean page
 export function ResetPassword() {
 	const	auth = useSelector((state) => state.auth);
 	const	dispatch = useDispatch();
@@ -23,7 +25,7 @@ export function ResetPassword() {
 		const res = await useFetch(resetPasswordMailUrl, 'POST', {
 			data: JSON.stringify({ email: auth.email }), 
 			headers: { 'Content-Type': 'application/json' }
-		});
+		}, dispatch);
 
 		if (res.status && res.status !== 200)
 			return dispatch({ type: 'AUTH_FAILED' });
@@ -32,18 +34,17 @@ export function ResetPassword() {
 	}
 
 	return (
-		<div className="login-container">
+		<LoginContainer>
 			<Input
-				className="basic-width"
 				hintText="Email"
 				nativeInputProps={{
 					placeholder: "camille@mail.com",
 					onChange: handleChange,
 				}}
 			/>
-			<ButtonsGroup className="basic-width"
+			<ButtonsGroup
 				buttons={initButtonsReset(isDisable, handleClick)}
 			/>
-		</div>
-	)
+		</LoginContainer>
+	);
 }

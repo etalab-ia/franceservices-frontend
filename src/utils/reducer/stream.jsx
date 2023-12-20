@@ -2,6 +2,10 @@ import { initialStream } from "./state"
 
 export const	streamReducer = (state = initialStream, action) => {
 	switch (action.type) {
+		case 'SET_INITIAL_CHAT':
+			return initialStream;
+		case 'SET_INITIAL_STREAM':
+			return initialStream;
 		case 'GET_AGENT_STREAM':
 			return {
 				...state,
@@ -14,20 +18,24 @@ export const	streamReducer = (state = initialStream, action) => {
 			return {
 				...state,
 				historyStream: [...state.historyStream, joinedRes],
-				isStoppable: false,
 				isStreaming: false,
 				response: [],
 			}
-		case 'REDO_AGENT_STREAM':
+		case "SET_ARCHIVE_LIMIT":
 			return {
 				...state,
 				response: [],
-				isStoppable: true
 			}
 		case 'RESET_AGENT_STREAM':
 			return {
 				...state,
 				response: [],
+			}
+		case 'SET_STREAM_HISTORY':
+			return {
+				...state,
+				historyStream: [...state.historyStream, action.nextStream],
+				activeTab: 1,
 			}
 		case 'RESET_STREAM_HISTORY':
 			return {

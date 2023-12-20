@@ -3,8 +3,8 @@ import { thankFeedback, thankFeedbackRole } from "../../constants/feedback";
 export function	UserFeedbackThanks() {
 
 	return (
-		<div role={thankFeedbackRole} className="row-message">
-			<div className="pt-6">{thankFeedback}</div>
+		<div role={thankFeedbackRole} className="fr-mb-2w flex justify-center">
+			<div className="py-4">{thankFeedback}</div>
 		</div>
 	);
 }

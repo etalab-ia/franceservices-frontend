@@ -1,35 +1,24 @@
-import { useSelector } from 'react-redux';
-import { TagSheets } from './TagSheets';
-import arrowRight from "../../../icons/sheets/arrowRight.svg";
-import { getSheetId } from '../../utils/setData';
-import { OpenUrlInNewTab } from '../../utils/manageEffects';
-import { Accordion } from "@codegouvfr/react-dsfr/Accordion";
-import { accordionDescription, accordionLabel, sheetsImgDescription } from '../../constants/sheets';
+import { GlobalColContainer } from '../Global/GlobalColContainer';
+import { SheetsTilesContainer } from './SheetsTilesContainer';
+import { useState } from 'react';
+import { SheetsAdditionalButtons } from './SheetsAdditionalButtons';
 
-export function	DisplaySheets() {
-	const	sheets = useSelector((state) => state.user.sheets);
-	const	el = document.getElementsByClassName("fr-accordion__btn");
-
+export function	DisplaySheets({ currQuestion, archiveSheets, archiveAdditionalSheets, archiveWebservices }) {
+	const	[isModifiable, setIsModifiable] = useState(false);
+	
 	return (
-		<div className='sheets-accordion'>
-			<Accordion
-				title={accordionDescription}
-				label={accordionLabel}
-				className='w-[756px]'
-			>
-				{sheets.map((sheet, index) => {
-					return <div className="sheets-container" key={index}>
-						<TagSheets sheetId={getSheetId(sheet.url)}/>
-						<h1 className="sheet-title">{sheet.title}</h1>
-						<p className='py-3'>{sheet.introduction}</p>
-						<div className='sheet-url'>
-							<a onClick={() => OpenUrlInNewTab(sheet.url)}>
-								<img className='hover:cursor-pointer' src={arrowRight} alt={sheetsImgDescription}/>
-							</a>
-						</div>
-					</div>
-				})}
-		</Accordion>
-	  </div>
+		<GlobalColContainer>
+			<SheetsAdditionalButtons
+				isModifiable={isModifiable}
+				setIsModifiable={setIsModifiable}
+			/>
+			<SheetsTilesContainer
+				currQuestion={currQuestion}
+				archiveSheets={archiveSheets}
+				archiveAdditionalSheets={archiveAdditionalSheets}
+				archiveWebservices={archiveWebservices}
+				isModifiable={isModifiable}
+			/>
+		</GlobalColContainer>		
 	);
 }

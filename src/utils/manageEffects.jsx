@@ -1,10 +1,20 @@
 import { useEffect } from "react";
 
 export const	scrollToBottom = () => {
-	window.scrollTo(0, document.body.scrollHeight);
+	const	chatDiv = document.getElementById("chat");
+
+	if (!chatDiv)
+		return ;
+
+	chatDiv.scrollTop = chatDiv.scrollHeight;
 }
 
-export const useKeyPress = (callback) => {
+export const	handleTextareaResize = (e) => {
+	e.target.style.height = 'auto';
+	e.target.style.height = e.target.scrollHeight + 'px';
+};
+
+export const	useKeyPress = (callback) => {
 	useEffect(() => {
 	  	const handleKeyPress = (e) => {
 			if (e) {
@@ -17,10 +27,4 @@ export const useKeyPress = (callback) => {
 			document.removeEventListener('keypress', handleKeyPress);
 	  	};
 	}, [callback]);
-}
-
-export const	OpenUrlInNewTab = (url) => {
-	const	wdw = window.open(url, '_blank');
-
-	wdw.focus();
 }

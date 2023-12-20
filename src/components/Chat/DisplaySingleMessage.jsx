@@ -2,12 +2,12 @@ import { Avatar } from "./Avatar";
 
 export const	DisplaySingleMessage = ({ sender, text }) => {
 	const	isUser = sender === "user";
-	const	classNames = isUser ? "user-message" : "row-message";
+	const	classNames = isUser ? "user-message" : "";
 
 	return (
 		<div className={classNames}>
-			<div className={`w-[648px] ${isUser ? "mr-4" : "ml-4"}`}>
-				<div className={isUser ? "user-chat" : "agent-chat"}>{text}</div>
+			<div className={`${isUser ? "fr-mr-2w" : "fr-ml-2w"}`}>
+				<p className={isUser ? "user-chat fr-mb-4w" : "agent-chat fr-mb-4w"}>{text}</p>
 			</div>
 			{isUser && <Avatar user={sender} />}
 		</div>

@@ -5,16 +5,19 @@
 @layer base {
 	/* BORDERS */
 	.border {
-		@apply border-2;
+		@apply border-4;
 		@apply border-solid;
 	}
 
 	.archive-separation {
-		@apply ml-[114px];
-		@apply mt-[36px];
+		@apply ml-[56px];
+		@apply my-[36px];
 		@apply border-t-4;
 		@apply border-[#000091];
-		@apply w-[1000px];
+		@apply w-[750px];
+		@apply flex;
+		@apply items-center;
+		@apply justify-center;
 	}
 
 	/* COLORS */
@@ -105,15 +108,7 @@
 		@apply border-[#3A3A3A];
 	}
 
-	.chat-margin {
-		@apply mb-8;
-	}
-
 	/* GLOBAL */
-
-	.basic-width {
-		@apply w-[500px];
-	}
 
 	.header-container {
 		@apply sticky;
@@ -145,9 +140,6 @@
 	.avatar {
 		@apply bg-light-purple;
 		@apply rounded-[90px];
-		@apply w-[56px];
-		@apply h-[56px];
-		@apply flex;
 		@apply justify-center;
 		@apply items-center;
 		@apply text-center;
@@ -194,21 +186,8 @@
 
 	/* SHEETS */
 
-	.sheets-accordion {
-		@apply flex;
-		@apply ml-[114px];
-		@apply justify-center;
-		@apply pt-6;
-	}
-
-	.fr-accordion__btn {
-		@apply text-[#929292];
-		@apply text-sm;
-		@apply bg-white;
-	}
-
 	.sheets-container {
-		@apply my-4;
+		@apply my-2;
 		@apply p-6;
 		@apply border;
 		@apply border-light-grey;
@@ -232,29 +211,6 @@
 		@apply px-2;
 		@apply m-1;
 		@apply rounded-[90px];
-	}
-
-	/* AUTH */
-
-	.login-container {
-		@apply flex;
-		@apply flex-col;
-		@apply items-center;
-		@apply justify-center;
-		@apply m-10;
-	}
-
-	.login-failed {
-		@apply basic-width;
-		@apply mt-0;
-		@apply mb-4;
-	}
-
-	.login-infos {
-		@apply basic-width;
-		@apply flex;
-		@apply text-[#0063CB];
-		@apply mb-4;
 	}
 
 	/* GLOBAL CHAT */
@@ -297,14 +253,6 @@
 		@apply my-[7px];
 	}
 
-	.user-question {
-		@apply flex;
-		@apply bottom-0;
-		@apply mb-6;
-		@apply mt-8;
-		@apply w-[900px];
-	}
-
 	.user-chat {
 		@apply bg-light-purple;
 		@apply flex;
@@ -312,16 +260,12 @@
 		@apply p-4;
 		@apply rounded-[30px];
 		@apply mt-0;
-		@apply ml-auto;
-		@apply chat-margin;
 		@apply text-justify;
 	}
 
 	.user-feedback-container {
-		@apply ml-[182px];
 		@apply flex;
 		@apply flex-col;
-		@apply w-[648px];
 		@apply pb-4;
 	}
 
@@ -351,58 +295,30 @@
 		@apply border-[#DDD];
 	}
 
-	.user-feedback-resume {
-		@apply flex;
-		@apply flex-row;
-		@apply mr-4;
-		@apply py-2;
-		@apply px-4;
-		@apply justify-center;
-		@apply content-center;
-		@apply rounded-[90px];
-		@apply bg-[#E5E5E5];
-		@apply my-2;
-		@apply max-h-[40px];
-	}
-
-	.user-chat-tools-container {
-		@apply h-[56px];
-		@apply flex;
-		@apply items-center;
-		@apply ml-[54px];
-	}
-
 	/* AGENT */
 
 	.chat {
 		@apply flex;
 		@apply flex-col;
-		@apply pt-8;
-		@apply w-[1000px];
-		@apply mr-[112px];
+		@apply pr-[56px];
 		@apply whitespace-pre-wrap;
 		@apply text-justify;
 		@apply overflow-y-auto;
 		@apply overflow-x-hidden;
-		@apply min-h-[410px];
 	}
 	
 	.agent-chat {
-		@apply chat-margin;
-		@apply py-4;
 		@apply text-justify;
-	}
-
-	.streaming-container {
-		@apply flex;
-		@apply flex-row;
+		@apply bg-light-purple;
+		@apply rounded-[30px];
+		@apply mt-0;
+		@apply ml-auto;
+		@apply p-4;
 	}
 
 	.streaming {
-		@apply w-[648px];
-		@apply ml-4;
-		@apply py-4;
 		@apply text-justify;
+		@apply rounded-[10px];
 	}
 
 	.streaming-tabs {
@@ -418,29 +334,20 @@
 		@apply mt-1;
 	}
 
-	.redo-question {
-		@apply flex;
-		@apply items-center;
-		@apply ml-4;
-	}
-
 	/* ARCHIVE PAGE */
 
 	.archive-tabs {
 		@apply table-fixed;
-		@apply w-[1000px];
 		@apply border-collapse;
 	}
 	
 	.archive-tabs-title {
-		@apply border-b-2 border-[#3A3A3A] p-4 text-left;
+		@apply border-b-2 border-[#3A3A3A] text-left;
 	}
 
 	.archive-body {
-		@apply p-4;
-		@apply w-auto;
 		@apply text-left;
-		@apply border-b-[1px] border-[#DDD] p-4 text-left;
+		@apply border-b-[1px] border-[#DDD] text-left;
 	}
 
 	.archive-tags {
@@ -454,12 +361,12 @@
 	}
 
 	.archive-summary-button {
-		@apply ml-[170px];
-		@apply my-6;
+		/* @apply ml-14; */
+		@apply mt-4;
 	}
 
 	.archive-notification-text {
-		@apply ml-[114px];
+		@apply ml-[56px];
 		@apply flex;
 		@apply justify-center;
 		@apply text-center;

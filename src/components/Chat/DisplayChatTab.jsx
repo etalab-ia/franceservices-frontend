@@ -1,23 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { NOT_SET } from '../../constants/status';
-import { Display } from './Display';
-import { UserMessage } from '../User/UserMessage';
-import { useEffect } from 'react';
-import { scrollToBottom } from '../../utils/manageEffects';
+import { GlobalRowContainer } from '../Global/GlobalRowContainer';
+import { ChatMainContainer } from './ChatMainContainer';
+import { ChatAdditionalContainer } from './ChatAdditionalContainer';
 
-export function DisplayChatTab() {
-	const	user = useSelector((state) => state.user);
-	const	feedback = useSelector((state) => state.feedback);
-	const	ressources = useSelector((state) => state.ressources);
-	const	stream = useSelector((state) => state.stream);
-	const   dispatch = useDispatch();
-
-	useEffect(() => {scrollToBottom();}, [user, feedback, ressources, stream, dispatch]);
-
+export function DisplayChatTab({ archive }) {
 	return (
-		<>
-			<Display messages={user.messages} archive={NOT_SET}/>
-			<UserMessage />
-		</>
+		<GlobalRowContainer extraClass='fr-grid-row--center'>
+			<ChatMainContainer archive={archive}/>
+			<ChatAdditionalContainer archive={archive}/>
+		</GlobalRowContainer>
 	);
 }

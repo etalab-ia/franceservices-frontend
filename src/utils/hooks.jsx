@@ -1,8 +1,9 @@
-import { apiUrl, stopGenerationUrl } from "../constants/api";
+import { apiUrl } from "../constants/api";
 import { EventSourcePolyfill } from 'event-source-polyfill';
 import { setHeaders, setUserQuestion } from "./setData";
+import { onCloseStream } from "./eventsEmitter";
 
-export const	useFetch = async(url, method, props) => {
+export const	useFetch = async(url, method, props, dispatch) => {
 	const		{ data, headers } = props;
 	const		credentials = 'include';
 
@@ -15,8 +16,10 @@ export const	useFetch = async(url, method, props) => {
 			body: data === undefined ? {} : data
 		})
 		
-		if (response.status !== 200 || url === stopGenerationUrl || url.includes("start"))
-			return response;			
+		if (response.status === 401)
+			return dispatch({ type: 'LOGOUT'});
+		else if (url.includes("start"))
+			return response;	
 		else
 		{
 			const jsonData = await response.json();
@@ -65,7 +68,7 @@ function	handleStreamError(e, stream_chat) {
 }
 
 export const	useStream = async(auth, dispatch, id) => {
-	const   stream_chat = new EventSourcePolyfill( `${apiUrl}/${id}/start`, {
+	const   stream_chat = new EventSourcePolyfill(`${apiUrl}/${id}/start`, {
 		headers: setHeaders(auth.userToken, true),
 		withCredentials: true,
 	});
@@ -77,12 +80,16 @@ export const	useStream = async(auth, dispatch, id) => {
 	stream_chat.onerror = function (e) {
 		handleStreamError(e, stream_chat);
 	}
+	onCloseStream(() => {
+		stream_chat.close();
+		dispatch({ type: 'SET_INITIAL_STREAM' });
+	});
 }
 
 export async function	usePost(auth, question, dispatch) {
 	const	headers = setHeaders(auth.userToken, false);
 	const	data = setUserQuestion(question);
-	const	res = await useFetch(apiUrl, 'POST', {data: JSON.stringify(data), headers});
+	const	res = await useFetch(apiUrl, 'POST', { data: JSON.stringify(data), headers }, dispatch);
 	
-	await useStream(auth, dispatch, res.id);
+	return await useStream(auth, dispatch, res.id);
 }

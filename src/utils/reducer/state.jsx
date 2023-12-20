@@ -2,9 +2,9 @@ import { NOT_SET } from "../../constants/status"
 
 export const	initialQuestion = {
 	model_name: "albert-light",
-	mode: 'simple',
+	mode: 'rag',
 	query: '',
-	limit: 0,
+	limit: 7,
 	user_text: '',
 	context: '',
 	institution: '',
@@ -13,8 +13,6 @@ export const	initialQuestion = {
 }
 
 export const	initialUserChoices = {
-	ressources: NOT_SET,
-	sheets: NOT_SET,
 	feedback: NOT_SET,
 	newQuestion: NOT_SET,
 	oldQuestion: NOT_SET,
@@ -31,7 +29,6 @@ export const	initialAuth = {
 export const	initialStream = {
 	response: [],
 	historyStream: [],
-	isStoppable: true,
 	isStreaming: false,
-	activeTab: 1
+	activeTab: 1,
 }
