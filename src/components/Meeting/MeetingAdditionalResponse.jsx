@@ -12,7 +12,7 @@ export function MeetingAdditionalResponse({ currQuestion, archive }) {
 			archiveWebservices={archive.webservices}
 		/>
 		<GlobalColContainer>
-			<h3 className="text-2xl font-bold fr-pt-3w fr-pb-3w">Organismes et contacts</h3>
+			<h3 className="text-2xl font-bold fr-pt-3w fr-pb-3w">Liens pratiques</h3>
 			<MeetingContacts />
 		</GlobalColContainer>
 	</OneThirdScreenWidth>
