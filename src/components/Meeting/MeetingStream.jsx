@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { setArchive } from "../../utils/archive";
 import { resultMeetingTitle } from "../../constants/meeting";
 import { GlobalSecondaryTitle } from "../Global/GlobalSecondaryTitle";
+import { MeetingFeedback } from "./MeetingFeedback";
 
 export function MeetingStream({ archive }) {
 	const	stream = useSelector((state) => state.stream);
@@ -13,7 +14,7 @@ export function MeetingStream({ archive }) {
 	const	dispatch = useDispatch();
 
 	useEffect(() => {
-		// TODO: set archive with "administrations concernées" & "thèmes associés"
+		// TODO: WHEN BACK IS READY: set archive with "opérateurs concernés" & "thèmes associés"
 		if (!stream.isStreaming && stream.historyStream[0] && !archive)
 			setArchive(dispatch, stream, user, 'meetings');
 	}, [stream.isStreaming])
@@ -29,5 +30,6 @@ export function MeetingStream({ archive }) {
 				{agentResponse}
 			</GlobalParagraph>
 		}
+		{/* <MeetingFeedback/> */}
 	</>
 }
