@@ -34,8 +34,7 @@ export function MeetingStream({ archive }) {
 				{agentResponse}
 			</GlobalParagraph>
 		}
-		{/* TODO: WHEN BACK IS READY: uncomment and complete component */}
-		{/* <MeetingFeedback/> */}
+		{!stream.isStreaming && stream.historyStream.length !== 0 && <MeetingFeedback/>}
 		<ResponseExplanation
 			chunks={chunks}
 		/>
