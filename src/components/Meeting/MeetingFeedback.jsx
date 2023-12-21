@@ -10,8 +10,8 @@ import { thankFeedback } from "../../constants/feedback";
 
 export const    MeetingFeedback = () => {
 	const	userToken = useSelector((state) => state.auth.userToken);
-	const	dispatch = useDispatch();
 	const	[isClicked, setIsClicked] = useState(false);
+	const	dispatch = useDispatch();
 
 	const	handleClick = (isGood) => {
 		// TODO: WHEN BACK IS READY: sent boolean to /feedback endpoint
@@ -26,7 +26,7 @@ export const    MeetingFeedback = () => {
 		// 	data: data,
 		// 	headers: setHeaders(userToken, false)	
 		// }, dispatch);
-		
+
 		setIsClicked(true);
 
 		setTimeout(() => {
