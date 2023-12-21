@@ -4,34 +4,41 @@ import { DisplayChunks } from "./DisplayChunks";
 import { useState } from "react";
 
 export const ResponseExplanation = ({ chunks }) => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const	chunksPerPage = 2;
+  const	[currentPage, setCurrentPage] = useState(1);
 
-  const getPageLinkProps = (pageNumber) => {
-    const linkProps = {
-      href: `#page-${pageNumber}`,
-      title: `Page ${pageNumber}`,
-      onClick: () => setCurrentPage(pageNumber),
-    };
+	const	getPageLinkProps = (pageNumber) => {
+		const linkProps = {
+			href: `#page-${pageNumber}`,
+			title: `Page ${pageNumber}`,
+			onClick: () => {
+				setCurrentPage(pageNumber);
+			},
+		};
 
-    return linkProps;
-  };
+		return linkProps;
+	};
+
+  const	startIndex = (currentPage - 1) * chunksPerPage;
+  const	endIndex = startIndex + chunksPerPage;
 
   return (
     <div>
-      <Accordion
-        className="fr-mt-3v"
-        label="Quelles sont les sources utilisées pour générer cette réponse ?"
-        onExpandedChange={function noRefCheck(){}}
-      >
+		<Accordion
+			className="fr-mt-3v"
+			label="Quelles sont les sources utilisées pour générer cette réponse ?"
+			onExpandedChange={function noRefCheck() {}}
+		>
         <>
-          <DisplayChunks chunks={chunks} />
-          <Pagination
-            count={4}
-            defaultPage={currentPage}
-            getPageLinkProps={getPageLinkProps}
-          />
+        	<DisplayChunks chunks={chunks.slice(startIndex, endIndex)} />
+        	<Pagination
+				count={Math.ceil(chunks.length / chunksPerPage)}
+				defaultPage={currentPage}
+				getPageLinkProps={getPageLinkProps}
+				className='fr-mt-3v'
+        	/>
         </>
-      </Accordion>
+      	</Accordion>
     </div>
   );
 };
