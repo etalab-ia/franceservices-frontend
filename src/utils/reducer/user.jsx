@@ -1,7 +1,16 @@
 import { initialChatbotMessage } from "../../constants/chatbotProps"
 import { initialQuestion, initialUserChoices } from "./state"
 
-export const	userReducer = (state = { question: initialQuestion, choices: initialUserChoices, messages: [], sheets: [], additionalSheets: [] }, action) => {
+const	initialUser = {
+	question: initialQuestion,
+	choices: initialUserChoices,
+	messages: [],
+	sheets: [],
+	additionalSheets: [],
+	chunks: [],
+}
+
+export const	userReducer = (state = initialUser, action) => {
 	switch (action.type) {
 		case 'SET_INITIAL_CHAT': 
 			return {
@@ -15,6 +24,11 @@ export const	userReducer = (state = { question: initialQuestion, choices: initia
 				sheets: action.nextSheets.slice(0, 3),
 				additionalSheets: action.nextSheets.slice(3, 10),
 				webservices: action.nextSheets[0].web_services.slice(0, 3),
+			}
+		case 'SET_CHUNKS':
+			return {
+				...state,
+				chunks: action.nextChunks,
 			}
 		case 'SET_SHEETS_FROM_ARCHIVE':
 			return {

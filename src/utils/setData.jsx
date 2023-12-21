@@ -72,11 +72,11 @@ export const	setQuestionWithContext = (question, context) => {
 		SP SHEETS
  **************************/
 
-const			setSheetsBody = (user_text) => {
+const			setIndexesBody = (query, name, limit) => {
 	const data = JSON.stringify({
-		name: 'sheets',
-		query: user_text,
-		limit: 10,
+		name: name,
+		query: query,
+		limit: limit,
 		similarity: "e5",
 		institution: ''
 	});
@@ -84,22 +84,29 @@ const			setSheetsBody = (user_text) => {
 	return data;
 }
 
-const			getSheetsData = async (currQuestion, userToken, dispatch) => {
+const			getIndexesData = async (currQuestion, userToken, dispatch) => {
 	const	sheetsResp = await useFetch(indexesUrl, 'POST', {
-		data: setSheetsBody(currQuestion),
+		data: setIndexesBody(currQuestion, 'sheets', 10),
 		headers: setHeaders(userToken, false),
 	}, dispatch);
 	
 	dispatch({ type: 'SET_SHEETS', nextSheets: sheetsResp });
+
+	const	chunksResp = await useFetch(indexesUrl, 'POST', {
+		data: setIndexesBody(currQuestion, 'chunks', 7),
+		headers: setHeaders(userToken, false),
+	}, dispatch);
+	
+	dispatch({ type: 'SET_CHUNKS', nextChunks: chunksResp });
 }
 
-export const	setSheetsData = (currQuestion, setTiles, userToken, dispatch) => {
+export const	setIndexesData = (currQuestion, setTiles, userToken, dispatch) => {
 	setTiles([]);
 
 	if (!currQuestion || currQuestion.length === 0)
 		return ;
 
-	getSheetsData(currQuestion, userToken, dispatch);
+	getIndexesData(currQuestion, userToken, dispatch);
 }
 
 export const	setTilesFromSheets = (sheets, setTiles) => {
