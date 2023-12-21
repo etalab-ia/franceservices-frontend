@@ -24,21 +24,23 @@ export const ResponseExplanation = ({ chunks }) => {
 
   return (
     <div>
-		<Accordion
-			className="fr-mt-3v"
-			label="Quelles sont les sources utilisées pour générer cette réponse ?"
-			onExpandedChange={function noRefCheck() {}}
-		>
-        <>
-        	<DisplayChunks chunks={chunks.slice(startIndex, endIndex)} />
-        	<Pagination
-				count={Math.ceil(chunks.length / chunksPerPage)}
-				defaultPage={currentPage}
-				getPageLinkProps={getPageLinkProps}
-				className='fr-mt-3v'
-        	/>
-        </>
-      	</Accordion>
+		{chunks && <>
+			<Accordion
+				className="fr-mt-3v"
+				label="Quelles sont les sources utilisées pour générer cette réponse ?"
+				onExpandedChange={function noRefCheck() {}}
+			>
+			<>
+				<DisplayChunks chunks={chunks.slice(startIndex, endIndex)} />
+				<Pagination
+					count={Math.ceil(chunks.length / chunksPerPage)}
+					defaultPage={currentPage}
+					getPageLinkProps={getPageLinkProps}
+					className='fr-mt-3v'
+				/>
+			</>
+			</Accordion>
+		</>}
     </div>
   );
 };
