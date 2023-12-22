@@ -11,6 +11,7 @@ export function	DisplaySheets({ currQuestion, archiveSheets, archiveAdditionalSh
 			<SheetsAdditionalButtons
 				isModifiable={isModifiable}
 				setIsModifiable={setIsModifiable}
+				archive={archiveSheets}
 			/>
 			<SheetsTilesContainer
 				currQuestion={currQuestion}

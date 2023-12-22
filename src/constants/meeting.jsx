@@ -7,6 +7,7 @@ export const	meetingSubtitle = `Description de la situation de l’usager`;
 export const	meetingParagraph = <>Précisez la situation de l'usager <strong>en ne précisant aucune donnée à caractère personnelle</strong> (nom, prénom de l'usager, numéro de sécurité sociale, identifiants de compte...).<br className="fr-mb-1w"/>
 		Veillez à terminer votre description par une <strong>question</strong></>;
 
+export const	meetingExamplesTitle = `Voir des exemples`;
 export const	meetingPromptExamples = [
 	{
 		img: thumbsUp,

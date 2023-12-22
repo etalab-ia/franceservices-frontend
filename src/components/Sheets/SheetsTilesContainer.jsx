@@ -13,8 +13,14 @@ export const    SheetsTilesContainer = ({ currQuestion, archiveSheets, archiveAd
 	const	user = useSelector((state => state.user));
 
 	useEffect(() => {
+		const	data = {
+			question: currQuestion,
+			must_not_sids: user.question.must_not_sids,
+			should_sids: user.question.should_sids
+		};
+
 		!archiveSheets && setIndexesData(
-			currQuestion,
+			data,
 			setTiles,
 			userToken,
 			dispatch,
