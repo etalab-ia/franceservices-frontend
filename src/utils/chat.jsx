@@ -38,7 +38,7 @@ async function		handleRedo(state, dispatch) {
 	else
 		newMode = 'rag';
 	
-	const	question = setQuestionFromRegeneration(newMode, newText, newLimit, user.question.should_sids, user.question.must_not_sids);
+	const	question = setQuestionFromRegeneration(newMode, newText, newLimit, user.question.should_sids, user.question.musNotSids);
 
 	usePost(auth, question, dispatch);
 

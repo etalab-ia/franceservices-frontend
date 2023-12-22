@@ -2,16 +2,18 @@ import thumbsUp from "../../../icons/feedbacks/thumbsUp.svg";
 import thumbsDown from "../../../icons/feedbacks/thumbsDown.svg";
 import { useFetch } from "../../utils/hooks";
 import { feedbackUrl } from "../../constants/api";
-import { setHeaders } from "../../utils/setData";
-import { useDispatch, useSelector } from "react-redux";
+// import { setHeaders } from "../../utils/setData";
+// import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { ButtonInformation } from "../Global/ButtonInformation";
 import { thankFeedback } from "../../constants/feedback";
+import { NOT_SET } from "../../constants/status";
+import { GlobalParagraph } from "../Global/GlobalParagraph";
 
 export const    MeetingFeedback = () => {
-	const	userToken = useSelector((state) => state.auth.userToken);
-	const	[isClicked, setIsClicked] = useState(false);
-	const	dispatch = useDispatch();
+	// const	userToken = useSelector((state) => state.auth.userToken);
+	const	[isClicked, setIsClicked] = useState(NOT_SET);
+	// const	dispatch = useDispatch();
 
 	const	handleClick = (isGood) => {
 		// TODO: WHEN BACK IS READY: sent boolean to /feedback endpoint
@@ -27,20 +29,16 @@ export const    MeetingFeedback = () => {
 		// 	headers: setHeaders(userToken, false)
 		// }, dispatch);
 
-		setIsClicked(true);
-
-		setTimeout(() => {
-			setIsClicked(false);
-		}, 5000);
+		setIsClicked(isGood);
 	}
 
 	return <div className="fr-mt-2w">
-		<button onClick={() => handleClick(true)} className="fr-mr-1w border border-[#DDD]">
-			<img className="fr-m-1w" src={thumbsUp} alt="Feedback positif"/>
+		<button onClick={() => handleClick(true)} className={`fr-mr-1w border border-[#DDD] ${isClicked && isClicked !== NOT_SET ? 'bg-purple' : 'bg-white'}`}>
+			<img className={`fr-m-1w ${isClicked && isClicked !== NOT_SET ? "mr-2 brightness-0 invert-[1]" : "mr-2"}`} src={thumbsUp} alt="Feedback positif"/>
 		</button>
-		<button onClick={() => handleClick(false)} className="border border-[#DDD]">
-			<img className="fr-m-1w" src={thumbsDown} alt="Feedback négatif"/>
+		<button onClick={() => handleClick(false)} className={`fr-mr-1w border border-[#DDD] ${!isClicked ? 'bg-purple' : 'bg-white'}`}>
+			<img className={`fr-m-1w ${!isClicked ? "mr-2 brightness-0 invert-[1]" : "mr-2"}`} src={thumbsDown} alt="Feedback négatif"/>
 		</button>
-		{isClicked && <ButtonInformation>{thankFeedback}</ButtonInformation>}
+		{isClicked !== NOT_SET && <GlobalParagraph extraClass='fr-text--xs'>{thankFeedback}</GlobalParagraph>}
 	</div>
 }

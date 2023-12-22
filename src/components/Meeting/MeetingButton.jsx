@@ -13,13 +13,13 @@ export function MeetingButton({ isDisable, currQuestion, setGenerate, context })
     const	handleClick = () => {
         const   questionWithContext = setQuestionWithContext(currQuestion, context);
 
-        dispatch({ type: 'SET_USER_TEXT', nextUserText: questionWithContext });
+        dispatch({ type: 'SET_USER_QUERY', nextUserQuery: questionWithContext });
     }
 
     useEffect(() => { dispatch({ type: 'RESET_QUESTION_FIELDS' }) }, []);
 
     useEffect(() => {
-        if (!user.question.user_text.length)
+        if (!user.question.query.length)
             return ;
         usePost(auth, user.question, dispatch);
         setGenerate(true);

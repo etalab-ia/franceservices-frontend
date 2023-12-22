@@ -14,9 +14,9 @@ export const    DisplayChunks = ({ chunks }) => {
 					  	<a href={chunk.url} target="_blank" rel="noopener noreferrer">
 							<GlobalParagraph extraClass='fr-text--lg'>{chunk.title}</GlobalParagraph>	
 							<GlobalParagraph>{chunk.text}</GlobalParagraph>
-							<GlobalParagraph extraClass='font-bold'>
+							<p className='font-bold text-justify fr-my-1w'>
 								{chunk.url}
-							</GlobalParagraph>
+							</p>
 						</a>
 					</GlobalColContainer>
 				</HalfScreenWidth>
