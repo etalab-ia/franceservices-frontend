@@ -31,8 +31,8 @@ export const	setContactData = (subject, text, institution) => {
 export const	setUserQuestion = (question) => {
 	const	data = {
 		institution: question.institution,
-		user_text: question.user_text,
 		query: question.query,
+		user_text: '',
 		context: question.context,
 		links: question.links,
 		temperature: question.temperature,
@@ -53,7 +53,6 @@ export const	setQuestionFromRegeneration = (mode, text, limit, should_sids, must
 		mode: mode,
 		query: text,
 		limit: limit,
-		user_text: text,
 		context: '',
 		institution: '',
 		links: '',
@@ -71,6 +70,13 @@ export const	setQuestionWithContext = (question, context) => {
 	const	questionWithContext = question + "\n" + administrations + "\n" + themes;
 
 	return questionWithContext;
+}
+
+export const	setSidsSelection = (selectedSheets, deletedSheets, setSids) => {
+	setSids({
+		should: selectedSheets.map((sheet) => sheet.sid),
+		must_not: deletedSheets.map((sheet) => sheet.sid),
+	});
 }
 
 /***************************

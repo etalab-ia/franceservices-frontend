@@ -7,7 +7,7 @@ export function	postNewQuestion(dispatch, auth, question, isNewQuestion) {
 }
 
 export function setNewQuestion(dispatch, newQuestion, agentResponse) {
-    dispatch({ type: 'SET_USER_TEXT', nextUserText: newQuestion });
+    dispatch({ type: 'SET_USER_QUERY', nextUserQuery: newQuestion });
 	agentResponse.length && dispatch({ type: 'SET_MESSAGES', nextMessage: { text: agentResponse, sender: 'agent' } });
     dispatch({ type: 'RESET_STREAM_HISTORY' });
 	dispatch({ type: 'RESET_USER_CHOICES' });

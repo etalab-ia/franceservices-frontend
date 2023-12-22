@@ -35,7 +35,7 @@ export const	userReducer = (state = initialUser, action) => {
 			const	nextSheets = state.sheets.filter((sheet, index) => action.indexToRemove !== index);
 			const	nextAdditionalSheets = state.sheets.filter((sheet, index) => action.indexToRemove === index);
 			const	nextMustNotSids = [...state.question.must_not_sids, nextAdditionalSheets[0].sid];
-			const	nextShouldSids = state.question.should_sids.filter((sid) => !nextAdditionalSheets.includes(sid));
+			const	nextShouldSids = state.question.should_sids.length ? state.question.should_sids.filter((sid) => !nextAdditionalSheets.includes(sid)) : state.sheets.map((sheet) => sheet.sid);
 
 			return {
 				...state,
@@ -78,14 +78,13 @@ export const	userReducer = (state = initialUser, action) => {
 				}
 			}
 		}
-		case 'SET_USER_TEXT':
+		case 'SET_USER_QUERY':
 			return {
 				...state,
-				originQuestion: action.nextUserText,
+				originQuestion: action.nextUserQuery,
 				question: {
 					...state.question,
-					user_text: action.nextUserText,
-					query: action.nextUserText
+					query: action.nextUserQuery
 				},
 			}
 		case 'RESET_QUESTION_FIELDS':

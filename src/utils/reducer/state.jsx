@@ -5,7 +5,6 @@ export const	initialQuestion = {
 	mode: 'rag',
 	query: '',
 	limit: 7,
-	user_text: '',
 	context: '',
 	institution: '',
 	links: '',
