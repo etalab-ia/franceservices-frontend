@@ -24,7 +24,7 @@ export const    MeetingFeedback = () => {
 
 		// useFetch(`${feedbackUrl}/${chat_id}/${stream_id}`, 'POST', {
 		// 	data: data,
-		// 	headers: setHeaders(userToken, false)	
+		// 	headers: setHeaders(userToken, false)
 		// }, dispatch);
 
 		setIsClicked(true);

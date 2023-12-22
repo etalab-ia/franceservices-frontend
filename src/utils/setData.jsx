@@ -39,12 +39,15 @@ export const	setUserQuestion = (question) => {
 		model_name: question.model_name,
 		limit: question.limit,
 		mode: question.mode,
+		sources: question.sources,
+		should_sids: question.should_sids,
+		must_not_sids: question.must_not_sids,
 	};
 
 	return data;
 }
 
-export const	setQuestionFromRegeneration = (mode, text, limit) => {
+export const	setQuestionFromRegeneration = (mode, text, limit, should_sids, must_not_sids) => {
 	const	data = {
 		model_name: 'albert-light',
 		mode: mode,
@@ -55,6 +58,8 @@ export const	setQuestionFromRegeneration = (mode, text, limit) => {
 		institution: '',
 		links: '',
 		temperature: 20,
+		should_sids: should_sids,
+		must_not_sids: must_not_sids
 	};
 
 	return data;
@@ -72,41 +77,42 @@ export const	setQuestionWithContext = (question, context) => {
 		SP SHEETS
  **************************/
 
-const			setIndexesBody = (query, name, limit) => {
-	const data = JSON.stringify({
+const			setIndexesBody = (data, name, limit) => {
+	const body = JSON.stringify({
 		name: name,
-		query: query,
+		query: data.question,
 		limit: limit,
 		similarity: "e5",
-		institution: ''
+		institution: '',
+		should_sids: data.should_sids,
+		must_not_sids: data.must_not_sids,
 	});
 
-	return data;
+	return body;
 }
 
-const			getIndexesData = async (currQuestion, userToken, dispatch) => {
-	const	sheetsResp = await useFetch(indexesUrl, 'POST', {
-		data: setIndexesBody(currQuestion, 'sheets', 10),
+export const	getIndexes = async (data, userToken, dispatch, indexType, chunkSize) => {
+	const	actionType = indexType === 'sheets' ? 'SET_SHEETS' : 'SET_CHUNKS';
+	const	res = await useFetch(indexesUrl, 'POST', {
+		data: setIndexesBody(data, indexType, chunkSize),
 		headers: setHeaders(userToken, false),
 	}, dispatch);
-	
-	dispatch({ type: 'SET_SHEETS', nextSheets: sheetsResp });
-
-	const	chunksResp = await useFetch(indexesUrl, 'POST', {
-		data: setIndexesBody(currQuestion, 'chunks', 7),
-		headers: setHeaders(userToken, false),
-	}, dispatch);
-	
-	dispatch({ type: 'SET_CHUNKS', nextChunks: chunksResp });
+  
+	dispatch({ type: actionType, [indexType]: res });
 }
 
-export const	setIndexesData = (currQuestion, setTiles, userToken, dispatch) => {
+const		getIndexesData = async (data, userToken, dispatch) => {
+	getIndexes(data, userToken, dispatch, 'sheets', 10);
+	getIndexes(data, userToken, dispatch, 'chunks', 7);
+}
+
+export const	setIndexesData = (data, setTiles, userToken, dispatch) => {
 	setTiles([]);
 
-	if (!currQuestion || currQuestion.length === 0)
+	if (!data || !data.question || data.question.length === 0)
 		return ;
 
-	getIndexesData(currQuestion, userToken, dispatch);
+	getIndexesData(data, userToken, dispatch);
 }
 
 export const	setTilesFromSheets = (sheets, setTiles) => {
