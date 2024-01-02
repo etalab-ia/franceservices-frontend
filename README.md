@@ -24,7 +24,7 @@ Install dependencies:<br/><br/>
 ### Dev mode
 
 Create tailwind file:<br/><br/>
-`npx tailwind -i src/style/styles.css -o style.css`
+`npx tailwind -i src/style/style.css -o style.css`
 
 Launch dev mode:<br/><br/>
 `npm run dev`
