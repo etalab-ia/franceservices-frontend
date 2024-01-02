@@ -31,30 +31,34 @@ export const	setContactData = (subject, text, institution) => {
 export const	setUserQuestion = (question) => {
 	const	data = {
 		institution: question.institution,
-		user_text: question.user_text,
 		query: question.query,
+		user_text: '',
 		context: question.context,
 		links: question.links,
 		temperature: question.temperature,
 		model_name: question.model_name,
 		limit: question.limit,
 		mode: question.mode,
+		sources: question.sources,
+		should_sids: question.should_sids,
+		must_not_sids: question.must_not_sids,
 	};
 
 	return data;
 }
 
-export const	setQuestionFromRegeneration = (mode, text, limit) => {
+export const	setQuestionFromRegeneration = (mode, text, limit, should_sids, must_not_sids) => {
 	const	data = {
 		model_name: 'albert-light',
 		mode: mode,
 		query: text,
 		limit: limit,
-		user_text: text,
 		context: '',
 		institution: '',
 		links: '',
 		temperature: 20,
+		should_sids: should_sids,
+		must_not_sids: must_not_sids
 	};
 
 	return data;
@@ -68,38 +72,53 @@ export const	setQuestionWithContext = (question, context) => {
 	return questionWithContext;
 }
 
+export const	setSidsSelection = (selectedSheets, deletedSheets, setSids) => {
+	setSids({
+		should: selectedSheets.map((sheet) => sheet.sid),
+		must_not: deletedSheets.map((sheet) => sheet.sid),
+	});
+}
+
 /***************************
 		SP SHEETS
  **************************/
 
-const			setSheetsBody = (user_text) => {
-	const data = JSON.stringify({
-		name: 'sheets',
-		query: user_text,
-		limit: 10,
+const			setIndexesBody = (data, name, limit) => {
+	const body = JSON.stringify({
+		name: name,
+		query: data.question,
+		limit: limit,
 		similarity: "e5",
-		institution: ''
+		institution: '',
+		should_sids: data.should_sids,
+		must_not_sids: data.must_not_sids,
 	});
 
-	return data;
+	return body;
 }
 
-const			getSheetsData = async (currQuestion, userToken, dispatch) => {
-	const	sheetsResp = await useFetch(indexesUrl, 'POST', {
-		data: setSheetsBody(currQuestion),
+export const	getIndexes = async (data, userToken, dispatch, indexType, chunkSize) => {
+	const	actionType = indexType === 'sheets' ? 'SET_SHEETS' : 'SET_CHUNKS';
+	const	res = await useFetch(indexesUrl, 'POST', {
+		data: setIndexesBody(data, indexType, chunkSize),
 		headers: setHeaders(userToken, false),
 	}, dispatch);
-	
-	dispatch({ type: 'SET_SHEETS', nextSheets: sheetsResp });
+  
+	dispatch({ type: actionType, [indexType]: res });
 }
 
-export const	setSheetsData = (currQuestion, setTiles, userToken, dispatch) => {
+const		getIndexesData = async (data, userToken, dispatch) => {
+	getIndexes(data, userToken, dispatch, 'sheets', 10);
+	getIndexes(data, userToken, dispatch, 'chunks', 7);
+}
+
+export const	setIndexesData = (data, setTiles, userToken, dispatch) => {
 	setTiles([]);
 
-	if (!currQuestion || currQuestion.length === 0)
+	if (!data || !data.question || data.question.length === 0)
 		return ;
 
-	getSheetsData(currQuestion, userToken, dispatch);
+	getIndexesData(data, userToken, dispatch);
 }
 
 export const	setTilesFromSheets = (sheets, setTiles) => {

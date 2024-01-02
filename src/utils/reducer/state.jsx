@@ -5,17 +5,28 @@ export const	initialQuestion = {
 	mode: 'rag',
 	query: '',
 	limit: 7,
-	user_text: '',
 	context: '',
 	institution: '',
 	links: '',
 	temperature: 20,
+	sources: ["service-public"],
+	should_sids: [],
+	must_not_sids: [],
 }
 
 export const	initialUserChoices = {
 	feedback: NOT_SET,
 	newQuestion: NOT_SET,
 	oldQuestion: NOT_SET,
+}
+
+export const	initialUser = {
+	question: initialQuestion,
+	choices: initialUserChoices,
+	messages: [],
+	sheets: [],
+	additionalSheets: [],
+	chunks: [],
 }
 
 export const	initialAuth = {

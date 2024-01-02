@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSheetsData } from "../../utils/setData";
+import { setIndexesData } from "../../utils/setData";
 import { setTilesFromSheets } from "../../utils/setData";
 import { SheetsTiles } from "./SheetsTiles";
 import { SheetsAdditionalTilesTitle } from "./SheetsAdditionalTilesTitle";
@@ -13,8 +13,14 @@ export const    SheetsTilesContainer = ({ currQuestion, archiveSheets, archiveAd
 	const	user = useSelector((state => state.user));
 
 	useEffect(() => {
-		!archiveSheets && setSheetsData(
-			currQuestion,
+		const	data = {
+			question: currQuestion,
+			must_not_sids: user.question.must_not_sids,
+			should_sids: user.question.should_sids
+		};
+
+		!archiveSheets && setIndexesData(
+			data,
 			setTiles,
 			userToken,
 			dispatch,
@@ -40,12 +46,14 @@ export const    SheetsTilesContainer = ({ currQuestion, archiveSheets, archiveAd
 				isModifiable={isModifiable}
 				type='main'
 			/>
-			{additionalTiles.length !== 0 && <SheetsAdditionalTilesTitle/>}
-			<SheetsTiles
-				tiles={additionalTiles}
-				isModifiable={isModifiable}
-				type='additional'
-			/>
+			{isModifiable && additionalTiles.length !== 0 && <>
+				<SheetsAdditionalTilesTitle/>
+				<SheetsTiles
+					tiles={additionalTiles}
+					isModifiable={isModifiable}
+					type='additional'
+				/>
+			</>}
 		</>
 	);
 }
