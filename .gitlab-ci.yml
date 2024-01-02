@@ -4,7 +4,7 @@ stages:
 
 publish-front:
   rules:
-    - if: $CI_COMMIT_BRANCH == "qds_deploy_2"
+    - if: $CI_COMMIT_BRANCH == "main"
       when: manual
       allow_failure: true  # to avoid blocked state
   image: docker:latest
@@ -18,7 +18,7 @@ publish-front:
 
 deploy-front:
   rules:
-    - if: $CI_COMMIT_BRANCH == "qds_deploy_2"
+    - if: $CI_COMMIT_BRANCH == "main"
       when: manual
       allow_failure: true  # to avoid blocked state
   image: alpine:latest
