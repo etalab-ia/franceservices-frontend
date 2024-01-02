@@ -22,7 +22,7 @@ import { MeetingButton } from "./MeetingButton";
 
 	**	MeetingInformations: set current question & context (administrations / themes) from user input
 
-	**	MeetingInformations: set current question & context (administrations / themes) from user input
+	**	MeetingButton: setGenerate to true to switch to meeting stream page onClick
 			! Meeting generation button is disable when current question is empty
 
  *****************************************************************************************************/
