@@ -7,7 +7,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { feedbackReducer } from "./feedback";
 import { archiveReducer } from "./archive";
 
-const           reducer = combineReducers({
+const			reducer = combineReducers({
 	archive: archiveReducer,
 	auth: authReducer,
 	feedback: feedbackReducer,
