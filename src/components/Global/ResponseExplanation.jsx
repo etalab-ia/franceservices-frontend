@@ -1,5 +1,5 @@
 import { Accordion } from "@codegouvfr/react-dsfr/Accordion";
-import { Pagination } from "@codegouvfr/react-dsfr/Pagination";
+import  Pagination  from "@codegouvfr/react-dsfr/Pagination";
 import { DisplayChunks } from "./DisplayChunks";
 import { useState } from "react";
 
@@ -37,6 +37,7 @@ export const ResponseExplanation = ({ chunks }) => {
 					defaultPage={currentPage}
 					getPageLinkProps={getPageLinkProps}
 					className='fr-mt-3v'
+
 				/>
 			</>
 			</Accordion>
