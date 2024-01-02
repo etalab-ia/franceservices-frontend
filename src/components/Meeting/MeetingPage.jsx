@@ -6,6 +6,18 @@ import { GlobalParagraph } from "../Global/GlobalParagraph";
 import { MeetingResponse } from "./MeetingResponse";
 import { MeetingEditQuestion } from "./MeetingEditQuestion";
 
+/*****************************************************************************************************
+	
+	GENERAL: display:
+		- main informations: user prompt, stream response, response explanation / chunks
+		- additional informations: sheets, related questions, webservices
+
+	-----------------------------------------------------------------------------------------------
+
+	**	archive: meeting page is not editable when the user is on an archive
+
+ *****************************************************************************************************/
+
 export function MeetingPage({ currQuestion, setGenerate, archive }) {
 	return <GlobalRowContainer extraClass='fr-grid-row--center'>
 		<GlobalDiv>
