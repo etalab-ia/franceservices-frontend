@@ -8,12 +8,11 @@
     "build": "vite build && npx tailwindcss -i ./src/style/style.css -o ./dist/style.css --minify",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "postinstall": "copy-dsfr-to-public",
     "predev": "only-include-used-icons",
     "prebuild": "only-include-used-icons"
   },
   "dependencies": {
-    "@codegouvfr/react-dsfr": "^0.75.1",
+    "@codegouvfr/react-dsfr": "^1.0.4",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@gouvfr/dsfr": "^1.10.1",
@@ -33,6 +32,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.4",
+    "react-linkify": "^1.0.0-alpha",
     "react-redux": "^8.1.3",
     "react-router-dom": "^6.15.0",
     "react-to-print": "^2.14.15",
