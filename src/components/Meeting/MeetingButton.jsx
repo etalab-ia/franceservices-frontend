@@ -5,6 +5,17 @@ import { usePost } from "../../utils/hooks";
 import { useEffect } from "react";
 import { setQuestionWithContext } from "../../utils/setData";
 
+/*****************************************************************************************************
+	
+	FUNCTIONS:
+
+	**	setQuestionWithContext: improve user prompt with current question & context to send
+            more precised user_query to /stream endpoint.
+
+    **  handleClick: setGenerate to true to switch to meeting stream page
+
+ *****************************************************************************************************/
+
 export function MeetingButton({ isDisable, currQuestion, setGenerate, context }) {
 	const	dispatch = useDispatch();
     const   auth = useSelector((state) => state.auth);
@@ -15,8 +26,6 @@ export function MeetingButton({ isDisable, currQuestion, setGenerate, context })
 
         dispatch({ type: 'SET_USER_QUERY', nextUserQuery: questionWithContext });
     }
-
-    useEffect(() => { dispatch({ type: 'RESET_QUESTION_FIELDS' }) }, []);
 
     useEffect(() => {
         if (!user.question.query.length)
