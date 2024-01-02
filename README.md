@@ -14,6 +14,15 @@
 
 [Tailwind](https://tailwindcss.com/) 👉 efficient, fast | [Installation](https://tailwindcss.com/docs/installation)
 
+### DSFR
+
+DSFR is already installed, here are some useful resources:
+- [Basics](https://www.systeme-de-design.gouv.fr/): margins, font size, design, picto etc.
+- [Components](https://components.react-dsfr.codegouv.studio/)
+- [Accessibility](https://accessibilite.numerique.gouv.fr/): RGAA criterias
+
+Design models are created on Figma
+
 ## Launch project
 
 Scripts are available in `package.json`
@@ -55,8 +64,6 @@ States:
 - [x] ``archive``: store previous conversations
 - [x] ``auth``: user information & user token
 - [x] ``feedback``: information on the quality of the response submitted to the user and returned to the model in order to adapt response re-generation
-- [x] ``institutions``
-- [x] ``ressources``: user-selected additional links
 - [x] ``stream``: robot-generated stream management
 - [x] ``tabs``: side tab management (chatbot, history, saved)
 - [x] ``user``: information entered by the user: questions asked and choices made throughout the user journey
