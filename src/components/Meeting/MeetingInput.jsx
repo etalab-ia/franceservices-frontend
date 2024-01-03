@@ -1,101 +1,93 @@
-import Autocomplete from "@mui/material/Autocomplete";
-import Input from "@codegouvfr/react-dsfr/Input";
-import { cx } from "@codegouvfr/react-dsfr/tools/cx";
-import Fuse from "fuse.js";
-import { useState } from "react";
-        
-/* type MySearchInputProps = {
-    className?: string;
-    id: string;
-    placeholder: string;
-    type: "search;
+import { useState } from 'react';
+import Input from '@codegouvfr/react-dsfr/Input';
+import Fuse from 'fuse.js';
+
+const options = {
+    includeScore: true,
+    includeMatches: true,
+    threshold: 0.2,
+    keys: ['name'],
 };
-        
-function MySearchInput(props) {
 
-    const { className, id, placeholder, type } = props;
-        
-
-    return (
-        <Autocomplete 
-		options={institutions}
-            id={id}
-            renderInput={params => 
-                <div ref={params.InputProps.ref}>
-                    <input 
-                        {...params.inputProps} 
-                        className={cx(params.inputProps.className, className)}
-                        placeholder={placeholder}
-                        type={type}
-                    />
-                </div>
-            }
-        />
-    );
-        
-}
-     */   
-        const options = {
-        includeScore: true,
-        includeMatches: true,
-        threshold: 0.2,
-        keys: ["name"],
-    }
-export function MeetingInput({ field }) {
+export function MeetingInput({ field, onTagSelect, themes, administrations }) {
     const [searchResults, setSearchResults] = useState([]);
+    const [selectedValue, setSelectedValue] = useState('');
+    const [selectedIndex, setSelectedIndex] = useState(-1);
     const fuse = new Fuse(institutions, options);
+    
+    const handleSearch = (e) => {
+        const { value } = e.target;
+        setSelectedValue(value);
+        setSelectedIndex(-1);
+        if (value.length === 0) {
+            setSearchResults([]);
+            return;
+        }
+        const results = fuse.search(value);
+        setSearchResults(results.map((result) => result.item));
+    };
 
-    console.log(searchResults)
-      const handleSearch = (e) => {
-    const { value } = e.target;
-    // If the user searched for an empty string,
-    // display all data.
-    if (value.length === 0) {
-      setSearchResults([]);
-      return;
-    }
+    const handleKeyDown = (e) => {
+        let newIndex;
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            newIndex = e.key === 'ArrowDown' 
+                ? Math.min(selectedIndex + 1, searchResults.length - 1)
+                : Math.max(selectedIndex - 1, 0);
 
-    const results = fuse.search(value);
-    const items = results.map((result) => result.item);
-    setSearchResults(items);
-  };
-    if (field.name === "administrations") {
-        return (
-            <>
+            setSelectedIndex(newIndex);
+            setSelectedValue(searchResults[newIndex] || '');
+        } else if (e.key === 'Enter' && selectedIndex >= 0) {
+            e.preventDefault();
+            handleItemClick(searchResults[selectedIndex]);
+        }
+    };
+
+    const handleItemClick = (result) => {
+        setSelectedValue('');
+        setSearchResults([]);
+        onTagSelect(result, field.name);
+    };
+    const isTagSelected = (tag) => {
+        if (field.name === "themes") {
+            return themes.includes(tag);
+        } else if (field.name === "administrations") {
+            return administrations.includes(tag);
+        }
+        return false;
+    };
+    return (
+        <div>
             <Input
                 label={field.label}
                 style={{ marginBottom: 0 }}
                 className="fr-mb-1w"
                 onChange={handleSearch}
-                name={field.name}
+                onKeyDown={handleKeyDown}
+                nativeInputProps={{
+                    name: field.name,
+                    value: selectedValue,
+                    tabIndex: 0,
+                }}
             />
-            {searchResults.slice(0,5).map((result) => (
-                <div className="fr-mb-1w" key={result.id}>
-                        {result}
+            {field.name === 'administrations' &&
+                <div tabIndex={-1}>
+                    {searchResults.slice(0, 5).filter(result => !isTagSelected(result)).map((result, index) => (
+                        <div
+                            className={`fr-mb-1w cursor-pointer 0v ${selectedIndex === index ? 'bg-light-grey' : ''}`}
+                            key={result}
+                            onClick={() => handleItemClick(result)}
+                        >
+                            {result}
+                        </div>
+                    ))}
                 </div>
-            ))}
-            </>
-        );
-    }
-/* 		return (<SearchBar className="fr-mb-1w"
-    renderInput={({ className, id, placeholder, type }) => (
-        <MySearchInput
-            className={className}
-            id={id}
-            placeholder={placeholder}
-            type={type}
-        />
-    )}
-/>) */
-	return <Input
-		label={field.label}
-		style={{ marginBottom: 0}}
-		className="fr-mb-1w"
-		nativeInputProps={{
-			name: field.name
-		}}
-	/>
+            }
+        </div>
+    );
 }
+
+
 
 const institutions = [
     "115",
