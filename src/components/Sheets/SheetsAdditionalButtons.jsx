@@ -9,6 +9,17 @@ import { usePost } from "../../utils/hooks";
 import { emitCloseStream } from "../../utils/eventsEmitter";
 import { getIndexes, setQuestionFromRegeneration } from "../../utils/setData";
 
+/*****************************************************************************************
+	
+	USEEFFECT [isModifiable]: set deleted sheets:
+		- if a new deleted sheet has been added from initial main sheets
+		- no regeneration on archive view
+		- user was on edition mode and has saved his/her changes
+
+	USEEFFECT [deletedSheets]: regenerate stream
+
+ *****************************************************************************************/
+
 export const    SheetsAdditionalButtons = ({ isModifiable, setIsModifiable, archive }) => {
 	const	buttonTitle = isModifiable ? "Enregistrer" : "Modifier la section";
 	const	buttonIcon = isModifiable ? "fr-icon-save-3-fill fr-icon--sm flex justify-end items-center" : "fr-icon-settings-5-fill fr-icon--sm flex justify-end items-center";
