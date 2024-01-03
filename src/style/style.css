@@ -9,17 +9,6 @@
 		@apply border-solid;
 	}
 
-	.archive-separation {
-		@apply ml-[56px];
-		@apply my-[36px];
-		@apply border-t-4;
-		@apply border-[#000091];
-		@apply w-[750px];
-		@apply flex;
-		@apply items-center;
-		@apply justify-center;
-	}
-
 	/* COLORS */
 
 	/* Light purple */
@@ -115,22 +104,6 @@
 		@apply top-0;
 		@apply w-full;
 	}
-
-	.wrapper-container {
-		@apply flex;
-		@apply w-screen;
-		@apply flex-row;
-	}
-
-	.row-message {
-		@apply flex;
-		@apply flex-row;
-	}
-
-	.col-message {
-		@apply flex;
-		@apply flex-col;
-	}
 	
 	.wrap-message {
 		@apply flex;
@@ -139,87 +112,10 @@
 
 	.avatar {
 		@apply bg-light-purple;
-		@apply rounded-[90px];
+		@apply rounded-full;
 		@apply justify-center;
 		@apply items-center;
 		@apply text-center;
-	}
-
-	.tags-font-size {
-		@apply text-[11px];
-	}
-
-	/* CHATBOT PAGE */
-
-	.banner-bot {
-		@apply w-screen;
-		@apply h-[148px];
-		@apply bg-light-purple;
-		@apply flex;
-		@apply flex-row;
-		@apply items-center;
-		@apply justify-center;
-		@apply text-dark-grey;
-	}
-
-	.breadcrumb-container {
-		@apply p-0;
-		@apply m-0;
-		@apply pr-16;
-	}
-
-	.main-title {
-		@apply w-[384px];
-		@apply text-2xl;
-		@apply font-bold;
-		@apply m-0;
-		@apply leading-6;
-		@apply gap-1;
-	}
-
-	.subtitle {
-		@apply w-[384px];
-		@apply text-sm;
-		@apply text-justify;
-		@apply m-0;
-	}
-
-	/* SHEETS */
-
-	.sheets-container {
-		@apply my-2;
-		@apply p-6;
-		@apply border;
-		@apply border-light-grey;
-	}
-
-	.sheet-title {
-		@apply text-xl;
-		@apply font-bold;
-		@apply text-dark-purple;
-		@apply py-3;
-	}
-
-	.sheet-url {
-		@apply flex;
-		@apply justify-end;
-		@apply no-underline;
-	}
-
-	.sheets-tags {
-		@apply bg-light-grey;
-		@apply px-2;
-		@apply m-1;
-		@apply rounded-[90px];
-	}
-
-	/* GLOBAL CHAT */
-
-	.chat-container {
-		@apply flex;
-		@apply flex-col;
-		@apply w-screen;
-		@apply items-center;
 	}
 
 	/* USER */
@@ -231,44 +127,16 @@
 		@apply ml-auto;
 	}
 
-	.side-tools-container {
-		@apply flex;
-		@apply flex-col;
-		@apply items-center;
-		@apply w-[69px];
-		@apply ml-6;
-		@apply justify-center;
-		@apply bg-light-purple;
-		@apply rounded;
-		@apply mt-[134px];
-	}
-
-	.side-tools {
-		@apply w-[54px];
-		@apply h-[54px];
-		@apply flex;
-		@apply items-center;
-		@apply justify-center;
-		@apply rounded;
-		@apply my-[7px];
-	}
-
 	.user-chat {
 		@apply bg-light-purple;
 		@apply flex;
 		@apply w-fit;
-		@apply p-4;
 		@apply rounded-[30px];
 		@apply mt-0;
 		@apply text-justify;
 	}
 
-	.user-feedback-container {
-		@apply flex;
-		@apply flex-col;
-		@apply pb-4;
-	}
-
+	/* TODO: change margin/padding/colors/height to dsfr one */
 	.user-feedback-buttons {
 		@apply flex;
 		@apply flex-row;
@@ -284,6 +152,7 @@
 		@apply max-h-[40px];
 	}
 
+	/* TODO: change margin/padding/colors/height to dsfr one */
 	.user-feedback-confirmation-button {
 		@apply px-2;
 		@apply py-1;
@@ -300,7 +169,6 @@
 	.chat {
 		@apply flex;
 		@apply flex-col;
-		@apply pr-[56px];
 		@apply whitespace-pre-wrap;
 		@apply text-justify;
 		@apply overflow-y-auto;
@@ -313,7 +181,6 @@
 		@apply rounded-[30px];
 		@apply mt-0;
 		@apply ml-auto;
-		@apply p-4;
 	}
 
 	.streaming {
@@ -322,54 +189,18 @@
 	}
 
 	.streaming-tabs {
+		/* TODO: change for DSFR var() */
 		@apply text-grey;
 		@apply text-sm;
 		@apply font-medium;
 		@apply m-0;
 	}
 
-	.messages-tabs {
-		@apply row-message;
-		@apply ml-4;
-		@apply mt-1;
-	}
-
-	/* ARCHIVE PAGE */
-
-	.archive-tabs {
-		@apply table-fixed;
-		@apply border-collapse;
-	}
-	
-	.archive-tabs-title {
-		@apply border-b-2 border-[#3A3A3A] text-left;
-	}
-
-	.archive-body {
-		@apply text-left;
-		@apply border-b-[1px] border-[#DDD] text-left;
-	}
-
-	.archive-tags {
-		@apply px-2;
-		@apply w-fit;
-		@apply justify-center;
-		@apply content-center;
-		@apply rounded-[90px];
-		@apply bg-[#E5E5E5];
-		@apply m-2;
-	}
-
-	.archive-summary-button {
-		/* @apply ml-14; */
-		@apply mt-4;
-	}
-
 	.archive-notification-text {
-		@apply ml-[56px];
 		@apply flex;
 		@apply justify-center;
 		@apply text-center;
+		/* TODO: change for DSFR var() */
 		@apply text-[#929292];
 	}
 }
