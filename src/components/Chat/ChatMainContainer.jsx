@@ -8,7 +8,6 @@ import { ChatOverflowManagementContainer } from './ChatOverflowManagementContain
 import { ChatHeightContainer } from './ChatHeightContainer';
 
 export function ChatMainContainer({ archive }) {
-	const	auth = useSelector((state) => state.auth);
 	const	user = useSelector((state) => state.user);
 	const	feedback = useSelector((state) => state.feedback);
 	const	stream = useSelector((state) => state.stream);
