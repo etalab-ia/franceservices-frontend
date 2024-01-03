@@ -40,14 +40,13 @@ export const	setUserQuestion = (question) => {
 		limit: question.limit,
 		mode: question.mode,
 		sources: question.sources,
-		should_sids: question.should_sids,
 		must_not_sids: question.must_not_sids,
 	};
 
 	return data;
 }
 
-export const	setQuestionFromRegeneration = (mode, text, limit, should_sids, must_not_sids) => {
+export const	setQuestionFromRegeneration = (mode, text, limit, must_not_sids) => {
 	const	data = {
 		model_name: 'albert-light',
 		mode: mode,
@@ -57,7 +56,6 @@ export const	setQuestionFromRegeneration = (mode, text, limit, should_sids, must
 		institution: '',
 		links: '',
 		temperature: 20,
-		should_sids: should_sids,
 		must_not_sids: must_not_sids
 	};
 
@@ -72,13 +70,6 @@ export const	setQuestionWithContext = (question, context) => {
 	return questionWithContext;
 }
 
-export const	setSidsSelection = (selectedSheets, deletedSheets, setSids) => {
-	setSids({
-		should: selectedSheets.map((sheet) => sheet.sid),
-		must_not: deletedSheets.map((sheet) => sheet.sid),
-	});
-}
-
 /***************************
 		SP SHEETS
  **************************/
@@ -90,7 +81,6 @@ const			setIndexesBody = (data, name, limit) => {
 		limit: limit,
 		similarity: "e5",
 		institution: '',
-		should_sids: data.should_sids,
 		must_not_sids: data.must_not_sids,
 	});
 
@@ -151,12 +141,3 @@ export const	setTilesFromSheets = (sheets, setTiles) => {
 		setTiles(prevTiles => [...prevTiles, newTile]);
 	});
 }
-
-// TODO: add if a tag w/ sheets id is needed in cards
-
-// export const	getSheetId = (url) => {
-// 	const	splitUrl = url.split("vosdroits/");
-// 	const	sheetId = splitUrl[1];
-
-// 	return sheetId;
-// }
