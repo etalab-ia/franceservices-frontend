@@ -11,22 +11,32 @@ export function MeetingAdditionalInput({ context }) {
 		setThemes(context.themes);
 		setAdministrations(context.administrations);
 	}, [context]);
-
-	return <div className="fr-mt-2w">
-		{inputFields.map((field, index) => {
-			const	tags = field.name === "themes" ? themes : administrations;
-			const	setTags = field.name === "themes" ? setThemes : setAdministrations;
-
-			return <div className="fr-mb-4w" key={index}>
-				<MeetingInput
-					field={field}
-				/>
-				<MeetingTags
-					tags={tags}
-					setTags={setTags}
-					field={field}
-				/>
-			</div>
-		})}
-	</div>
+	    const handleSetTag = (tag, fieldName) => {
+        if (fieldName === "themes") {
+            setThemes([...themes, tag]);
+        } else if (fieldName === "administrations") {
+            setAdministrations([...administrations, tag]);
+        }
+    };
+    return (
+        <div className="fr-mt-2w">
+            {inputFields.map((field, index) => {
+                return (
+                    <div className="fr-mb-4w" key={index}>
+                        <MeetingInput
+                            field={field}
+                            onTagSelect={handleSetTag}
+                            themes={themes}
+                            administrations={administrations}
+                        />
+                        <MeetingTags
+                            tags={field.name === "themes" ? themes : administrations}
+                            setTags={field.name === "themes" ? setThemes : setAdministrations}
+                            field={field}
+                        />
+                    </div>
+                );
+            })}
+        </div>
+    );
 }
