@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.0 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -32,9 +32,11 @@
 4. Use the user's configured `sans` font-family by default.
 5. Use the user's configured `sans` font-feature-settings by default.
 6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
 */
 
-html {
+html,
+:host {
   line-height: 1.5;
   /* 1 */
   -webkit-text-size-adjust: 100%;
@@ -44,12 +46,14 @@ html {
   -o-tab-size: 4;
      tab-size: 4;
   /* 3 */
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   /* 4 */
   font-feature-settings: normal;
   /* 5 */
   font-variation-settings: normal;
   /* 6 */
+  -webkit-tap-highlight-color: transparent;
+  /* 7 */
 }
 
 /*
@@ -121,8 +125,10 @@ strong {
 }
 
 /*
-1. Use the user's configured `mono` font family by default.
-2. Correct the odd `em` font sizing in all browsers.
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
 */
 
 code,
@@ -131,8 +137,12 @@ samp,
 pre {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   /* 1 */
-  font-size: 1em;
+  font-feature-settings: normal;
   /* 2 */
+  font-variation-settings: normal;
+  /* 3 */
+  font-size: 1em;
+  /* 4 */
 }
 
 /*
@@ -482,26 +492,11 @@ video {
 .avatar {
   --tw-bg-opacity: 1;
   background-color: rgb(245 245 254 / var(--tw-bg-opacity));
-  border-radius: 90px;
+  border-radius: 9999px;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
-
-/* CHATBOT PAGE */
-
-/* SHEETS */
-
-.sheets-tags {
-  --tw-bg-opacity: 1;
-  background-color: rgb(238 238 238 / var(--tw-bg-opacity));
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  margin: 0.25rem;
-  border-radius: 90px;
-}
-
-/* GLOBAL CHAT */
 
 /* USER */
 
@@ -512,41 +507,18 @@ video {
   margin-left: auto;
 }
 
-.side-tools-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 69px;
-  margin-left: 1.5rem;
-  justify-content: center;
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 245 254 / var(--tw-bg-opacity));
-  border-radius: 0.25rem;
-  margin-top: 134px;
-}
-
-.side-tools {
-  width: 54px;
-  height: 54px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.25rem;
-  margin-top: 7px;
-  margin-bottom: 7px;
-}
-
 .user-chat {
   --tw-bg-opacity: 1;
   background-color: rgb(245 245 254 / var(--tw-bg-opacity));
   display: flex;
   width: -moz-fit-content;
   width: fit-content;
-  padding: 1rem;
   border-radius: 30px;
   margin-top: 0px;
   text-align: justify;
 }
+
+/* TODO: change margin/padding/colors/height to dsfr one */
 
 .user-feedback-buttons {
   display: flex;
@@ -570,6 +542,8 @@ video {
   max-height: 40px;
 }
 
+/* TODO: change margin/padding/colors/height to dsfr one */
+
 .user-feedback-confirmation-button {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -590,7 +564,6 @@ video {
 .chat {
   display: flex;
   flex-direction: column;
-  padding-right: 56px;
   white-space: pre-wrap;
   text-align: justify;
   overflow-y: auto;
@@ -604,7 +577,6 @@ video {
   border-radius: 30px;
   margin-top: 0px;
   margin-left: auto;
-  padding: 1rem;
 }
 
 .streaming {
@@ -613,6 +585,7 @@ video {
 }
 
 .streaming-tabs {
+  /* TODO: change for DSFR var() */
   --tw-text-opacity: 1;
   color: rgb(102 102 102 / var(--tw-text-opacity));
   font-size: 0.875rem;
@@ -621,13 +594,11 @@ video {
   margin: 0px;
 }
 
-/* ARCHIVE PAGE */
-
 .archive-notification-text {
-  margin-left: 56px;
   display: flex;
   justify-content: center;
   text-align: center;
+  /* TODO: change for DSFR var() */
   --tw-text-opacity: 1;
   color: rgb(146 146 146 / var(--tw-text-opacity));
 }
@@ -764,14 +735,6 @@ video {
   .container {
     max-width: 1536px;
   }
-}
-
-.mb-4 {
-  margin-bottom: 1rem;
-}
-
-.ml-2 {
-  margin-left: 0.5rem;
 }
 
 .mr-2 {
