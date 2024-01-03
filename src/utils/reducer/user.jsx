@@ -12,7 +12,9 @@ import { initialQuestion, initialUser, initialUserChoices } from "./state"
 	**	webservices: related to question. Choice of webservices could be improve, GET on /indexes sheets 
 			first index
 	**	chunks: chunks used to generate response, GET on /indexes chunks
-	**	should_sids: sheets id suggest to agent to generate response
+	**	should_sids: sheets id suggest to agent to generate response: 
+			! Temporary removed: should is treated as a must in backend
+
 	**	must_not_sids: sheets id forbidden to be used by agent to generate response
 
  *****************************************************************************************************/
@@ -95,15 +97,6 @@ export const	userReducer = (state = initialUser, action) => {
 				}
 			}
 		}
-		case 'RESET_SIDS_CHOICES': {
-			return {
-				...state,
-				question: {
-					...state.question,
-					must_not_sids: []
-				}
-			}
-		}
 		case 'SET_USER_QUERY':
 			return {
 				...state,
@@ -131,29 +124,29 @@ export const	userReducer = (state = initialUser, action) => {
 					[action.nextKey]: action.nextValue,
 				}
 			}
-			case 'SET_MESSAGES':
-				if (state.messages.length > 0) 
-				{
-					const	lastMessage = state.messages[state.messages.length - 1];
+		case 'SET_MESSAGES':
+			if (state.messages.length > 0) 
+			{
+				const	lastMessage = state.messages[state.messages.length - 1];
 			
-					if (lastMessage.sender === action.nextMessage.sender) {
-						const	updatedMessages = state.messages.slice(0, -1);
-						const	updatedLastMessage = {
-							...lastMessage,
-							text: [...lastMessage.text, action.nextMessage.text],
-						};
-						updatedMessages.push(updatedLastMessage);
+				if (lastMessage.sender === action.nextMessage.sender) {
+					const	updatedMessages = state.messages.slice(0, -1);
+					const	updatedLastMessage = {
+						...lastMessage,
+						text: [...lastMessage.text, action.nextMessage.text],
+					};
+					updatedMessages.push(updatedLastMessage);
 			
-						return {
-							...state,
-							messages: updatedMessages,
-						};
-					}
+					return {
+						...state,
+						messages: updatedMessages,
+					};
 				}
-				return {
-					...state,
-					messages: [...state.messages, action.nextMessage],
-				};
+			}
+			return {
+				...state,
+				messages: [...state.messages, action.nextMessage],
+			};
 			
 	  	default: { return state };
 	}
