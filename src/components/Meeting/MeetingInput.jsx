@@ -42,7 +42,7 @@ function MySearchInput(props) {
         keys: ["name"],
     }
 export function MeetingInput({ field }) {
-    const [searchResults, setSearchResults] = useState(institutions);
+    const [searchResults, setSearchResults] = useState([]);
     const fuse = new Fuse(institutions, options);
 
     console.log(searchResults)
@@ -51,7 +51,7 @@ export function MeetingInput({ field }) {
     // If the user searched for an empty string,
     // display all data.
     if (value.length === 0) {
-      setSearchResults(institutions);
+      setSearchResults([]);
       return;
     }
 
@@ -69,6 +69,11 @@ export function MeetingInput({ field }) {
                 onChange={handleSearch}
                 name={field.name}
             />
+            {searchResults.slice(0,5).map((result) => (
+                <div className="fr-mb-1w" key={result.id}>
+                        {result}
+                </div>
+            ))}
             </>
         );
     }
