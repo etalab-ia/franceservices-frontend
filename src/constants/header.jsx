@@ -1,5 +1,6 @@
 import { handleSignout } from "../utils/manageConnexion";
 
+
 export function	quickAccessItemsFunc(state, dispatch) {
 	const    quickAccessItemsProps = [
 		{
