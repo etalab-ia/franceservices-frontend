@@ -16,12 +16,12 @@ export function DisplayMessageTab({ isDisplayable, tabsLen, activeTab, setActive
         <>
 		    {isDisplayable &&<div className={`${extraClass} flex flex-row fr-mb-4w`}> 
 				
-				{activeTab > 1 && <button className="mr-2" onClick={() => handleClick(activeTab, setActiveTab, -1)}>
+				{activeTab > 1 && <button className="fr-mr-1w" onClick={() => handleClick(activeTab, setActiveTab, -1)}>
 					<img src={previous} alt={previousImgDescription}/>
 				</button>}
 				<p className="streaming-tabs">{activeTab} / {tabsLen}</p>
 				{activeTab < tabsLen && 
-				<button className="ml-2" onClick={() => handleClick(activeTab, setActiveTab, 1)}>
+				<button className="fr-ml-1w" onClick={() => handleClick(activeTab, setActiveTab, 1)}>
 					<img src={next} alt={nextImgDescription}/>
 				</button>}
 			</div>}

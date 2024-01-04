@@ -1,20 +1,47 @@
 import { Tag } from "@codegouvfr/react-dsfr/Tag";
 import { useKeyPress } from "../../utils/manageEffects";
+import { useEffect, useState } from "react";
 
-export function MeetingTags({ tags, setTags, field }) {
+export function	MeetingTags({setContext, context, field, tags }) {
+	const	[toAdd, setToAdd] = useState();
 
 	useKeyPress((e) => {
 		if (e.key === 'Enter' && e.target.name === field.name)
 		{
-			setTags([...tags, e.target.value]);
+			setToAdd(e.target.value);
 			e.target.value = '';
 		}
 	});
 
+	useEffect(() => {
+		if (!toAdd)
+			return ;
+
+		if (field.name === 'administrations')
+			setContext((prevContext) => ({
+				...prevContext,
+				administrations: [...context.administrations, toAdd]
+			}));
+			else if (field.name === 'themes')
+				setContext((prevContext) => ({
+					...prevContext,
+					themes: [...context.themes, toAdd]
+				}));
+	}, [toAdd])
+
 	const	handleClick = (e) => {
 		e.preventDefault();
 
-		e.target.name === field.name && setTags(tags.filter(tag => tag !== e.target.textContent));
+		if (e.target.name === field.name && field.name === 'administrations')
+			setContext((prevContext) => ({
+				...prevContext,
+				administrations: context.administrations.filter(tag => tag !== e.target.textContent)
+			}));
+		else if (e.target.name === field.name && field.name === 'themes')
+			setContext((prevContext) => ({
+				...prevContext,
+				themes: context.themes.filter(tag => tag !== e.target.textContent)
+			}));
 	}
 
 	return <>
