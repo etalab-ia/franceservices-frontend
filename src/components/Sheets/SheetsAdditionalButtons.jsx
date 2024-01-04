@@ -44,7 +44,7 @@ export const SheetsAdditionalButtons = ({ isModifiable, setIsModifiable, archive
 	}, [isModifiable])
 
 	useEffect(() => {
-		if (archive)
+		if (archive || (!user.originQuestion && !user.question.query))
 			return ;
 
 		const	question = setQuestionFromRegeneration(
