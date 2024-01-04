@@ -74,11 +74,13 @@ export function MeetingInput({ field, onTagSelect, themes, administrations }) {
                 <div tabIndex={-1}>
                     {searchResults.slice(0, 5).filter(result => !isTagSelected(result)).map((result, index) => (
                         <div
-                            className={`fr-mb-1w cursor-pointer 0v ${selectedIndex === index ? 'bg-light-grey' : ''}`}
+                            className={`fr-card  cursor-pointer p-0   ${selectedIndex === index ? 'bg-light-grey' : ''}`}
                             key={result}
                             onClick={() => handleItemClick(result)}
                         >
-                            {result}
+                            <p className='fr-ml-3w fr-mt-1w fr-mb-1w'>
+                                {result}
+                            </p>
                         </div>
                     ))}
                 </div>
