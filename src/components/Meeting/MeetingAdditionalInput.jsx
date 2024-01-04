@@ -1,21 +1,13 @@
 import { inputFields } from "../../constants/meetingInputFields";
 import { MeetingTags } from "./MeetingTags";
 import { MeetingInput } from "./MeetingInput";
-import { useEffect } from "react";
 
 export function MeetingAdditionalInput({ context, setContext }) {
     const handleSetTag = (tag, fieldName) => {
-        console.log("fieldname ", fieldName);
         if (fieldName === "administrations")
-        {
             setContext((prevContext) =>  ({...prevContext, administrations: [...prevContext.administrations, tag]}));
-            console.log("administration");
-        }    
 };
-useEffect(() => {
-    console.log(context);
-}
-, [context]);
+
 return <div className="fr-mt-2w">
 		{inputFields.map((field, index) => {
             
