@@ -77,7 +77,7 @@
                     }}
                 />
                 {field.name === 'administrations' && (
-                    <div tabIndex={-1}>
+                    <div tabIndex={-1} className='fr-mb-2v'>
                         {searchResults.slice(0, 5).filter(result => !isTagSelected(result)).map((result, index) => (
                             <div
                                 className={`fr-card cursor-pointer p-0 ${selectedIndex === index ? 'bg-light-grey' : ''}`}
