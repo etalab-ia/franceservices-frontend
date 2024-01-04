@@ -478,6 +478,11 @@ video {
 
 /* Light grey */
 
+.bg-light-grey {
+  --tw-bg-opacity: 1;
+  background-color: rgb(238 238 238 / var(--tw-bg-opacity));
+}
+
 /* Normal grey */
 
 /* Dark grey */

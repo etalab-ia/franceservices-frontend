@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux';
 import { History } from "../pages/History";
 import { Home } from "../pages/Home";
 import { Footer } from "@codegouvfr/react-dsfr/Footer";
+import { headerFooterDisplayItem } from "@codegouvfr/react-dsfr/Display";
 import { Meeting } from "../pages/Meeting";
 import { Contact } from "../pages/Contact";
 
@@ -50,6 +51,7 @@ export const Root = () => {
 			<Route path="*" element={<h1>404</h1>} />
 		</Routes>
 		<Footer
+			bottomItems={[headerFooterDisplayItem]}
 			accessibility="fully compliant"
 			termsLinkProps={{
 				href: '#'
