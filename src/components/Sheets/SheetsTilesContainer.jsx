@@ -5,18 +5,24 @@ import { setTilesFromSheets } from "../../utils/setData";
 import { SheetsTiles } from "./SheetsTiles";
 import { SheetsAdditionalTilesTitle } from "./SheetsAdditionalTilesTitle";
 
+/****************************************************************************************
+	
+	USEEFFECT [currQuestion]: set user.sheets & user.additionalSheets from GET /indexes 
+		sheets data OR from archive
+
+*****************************************************************************************/
+
 export const    SheetsTilesContainer = ({ currQuestion, archiveSheets, archiveAdditionalSheets, archiveWebservices, isModifiable }) => {
 	const	userToken = useSelector((state) => state.auth.userToken);
+	const	user = useSelector((state => state.user));
 	const   [tiles, setTiles] = useState([]);
 	const   [additionalTiles, setAdditionalTiles] = useState([]);
 	const	dispatch = useDispatch();
-	const	user = useSelector((state => state.user));
 
 	useEffect(() => {
 		const	data = {
 			question: currQuestion,
 			must_not_sids: user.question.must_not_sids,
-			should_sids: user.question.should_sids
 		};
 
 		!archiveSheets && setIndexesData(
@@ -36,7 +42,6 @@ export const    SheetsTilesContainer = ({ currQuestion, archiveSheets, archiveAd
 	useEffect(() => {
 		setTilesFromSheets(user.sheets, setTiles);
 		setTilesFromSheets(user.additionalSheets, setAdditionalTiles);
-
 	}, [user.additionalSheets]);
 
 	return (
