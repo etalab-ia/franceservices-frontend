@@ -11,10 +11,10 @@ export const archiveReducer = (state = [], action) => {
 					tags: action.nextTags,
 					messages: action.nextMessages,
 					type: action.nextType,
-					sheets: action.nextSheets,
+					sheets: action.sheets,
 					chunks: action.nextChunks,
-					additionalSheets: action.nextAdditionalSheets,
-					webservices: action.nextWebservices,
+					additionalSheets: action.additionalSheets,
+					webservices: action.webservices,
 					limit: 7,
 					source: "service-public.fr",
 				},
@@ -35,10 +35,10 @@ export const archiveReducer = (state = [], action) => {
 			if (!state.length) return state
 
 			const lastIndex = state.length ? state.length - 1 : state.length
-			const nextSheets = state[lastIndex].sheets.filter(
+			const sheets = state[lastIndex].sheets.filter(
 				(sheet, index) => action.indexToRemove !== index
 			)
-			const nextAdditionalSheets = state[lastIndex].sheets.filter(
+			const additionalSheets = state[lastIndex].sheets.filter(
 				(sheet, index) => action.indexToRemove === index
 			)
 
@@ -46,8 +46,8 @@ export const archiveReducer = (state = [], action) => {
 				...state.slice(0, lastIndex),
 				{
 					...state[lastIndex],
-					sheets: nextSheets,
-					additionalSheets: [...state[lastIndex].additionalSheets, ...nextAdditionalSheets],
+					sheets: sheets,
+					additionalSheets: [...state[lastIndex].additionalSheets, ...additionalSheets],
 				},
 			]
 		}
@@ -55,10 +55,10 @@ export const archiveReducer = (state = [], action) => {
 			if (!state.length) return state
 
 			const lastIndex = state.length ? state.length - 1 : state.length
-			const nextSheets = state[lastIndex].additionalSheets.filter(
+			const sheets = state[lastIndex].additionalSheets.filter(
 				(sheet, index) => action.indexToAdd === index
 			)
-			const nextAdditionalSheets = state[lastIndex].additionalSheets.filter(
+			const additionalSheets = state[lastIndex].additionalSheets.filter(
 				(sheet, index) => action.indexToAdd !== index
 			)
 
@@ -66,8 +66,8 @@ export const archiveReducer = (state = [], action) => {
 				...state.slice(0, lastIndex),
 				{
 					...state[lastIndex],
-					sheets: [...state[lastIndex].sheets, ...nextSheets],
-					additionalSheets: nextAdditionalSheets,
+					sheets: [...state[lastIndex].sheets, ...sheets],
+					additionalSheets: additionalSheets,
 				},
 			]
 		}

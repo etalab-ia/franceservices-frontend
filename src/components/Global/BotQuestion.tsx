@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
 import { botQuestionRole } from "../../constants/global"
 import { GlobalRowContainer } from "./GlobalRowContainer"
+import { RootState } from "../../../types"
 
 export function BotQuestion({ id, choice }) {
-	const user = useSelector((state) => state.user)
+	const user = useSelector((state: RootState) => state.user)
 	const buttons = ["Oui", "Non"]
 	const [buttonChoice, setButtonChoice] = choice === NOT_SET ? useState(NOT_SET) : useState(choice)
 	const dispatch = useDispatch()

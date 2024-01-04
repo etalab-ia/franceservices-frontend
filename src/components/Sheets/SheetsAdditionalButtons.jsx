@@ -44,13 +44,12 @@ export const SheetsAdditionalButtons = ({ isModifiable, setIsModifiable, archive
 	}, [isModifiable])
 
 	useEffect(() => {
-		if (archive || (!user.originQuestion && !user.question.query))
-			return ;
+		if (archive || (!user.originQuestion && !user.question.query)) return
 
-		const	question = setQuestionFromRegeneration(
-			'rag', 
-			user.originQuestion, 
-			7, 
+		const question = setQuestionFromRegeneration(
+			"rag",
+			user.originQuestion,
+			7,
 			user.question.must_not_sids
 		)
 

@@ -1,7 +1,7 @@
 import { indexesUrl } from "../constants/api"
 import { useFetch } from "./hooks"
 
-export const setHeaders = (token, isEventSource) => {
+export const setHeaders = (token : string, isEventSource : boolean) => {
 	const headers = isEventSource
 		? {
 				Authorization: `Bearer ${token}`,
@@ -18,7 +18,7 @@ export const setHeaders = (token, isEventSource) => {
 		USER QUESTION
  **************************/
 
-export const setContactData = (subject, text, institution) => {
+export const setContactData = (subject: string, text: string, institution: string) => {
 	const data = {
 		subject: subject,
 		text: text,
@@ -46,7 +46,7 @@ export const setUserQuestion = (question) => {
 	return data
 }
 
-export const setQuestionFromRegeneration = (mode, text, limit, must_not_sids) => {
+export const setQuestionFromRegeneration = (mode, text, limit, must_not_sids: string[]) => {
 	const data = {
 		model_name: "albert-light",
 		mode: mode,

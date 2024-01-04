@@ -6,10 +6,19 @@ import { useDispatch, useSelector } from "react-redux"
 import { setContactData, setHeaders } from "../../utils/setData"
 import { setUserInfos } from "../../utils/manageConnexion"
 import { useFetch } from "../../utils/hooks"
+import { RootState } from "../../../types"
 
-export function ContactButton({ isDisable, administration, message, name, title }) {
+interface ContactButtonProps {
+	isDisable: boolean
+	administration: string
+	message: string
+	name: string
+	title: string
+}
+
+export function ContactButton({ isDisable, administration, message, name, title } : ContactButtonProps) {
 	const [isSend, setIsSend] = useState(false)
-	const auth = useSelector((state) => state.auth)
+	const auth = useSelector((state: RootState) => state.auth)
 	const dispatch = useDispatch()
 
 	const handleClick = async () => {

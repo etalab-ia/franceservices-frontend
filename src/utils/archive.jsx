@@ -11,10 +11,10 @@ export const setArchive = (dispatch, stream, user, type) => {
 		type: "SET_ARCHIVE",
 		nextDate: new Date().toLocaleDateString("fr"),
 		nextTags: selected,
-		nextSheets: user.sheets,
+		sheets: user.sheets,
 		nextChunks: user.chunks,
-		nextAdditionalSheets: user.additionalSheets,
-		nextWebservices: user.webservices,
+		additionalSheets: user.additionalSheets,
+		webservices: user.webservices,
 		nextMessages: [
 			{ text: user.originQuestion, sender: "user" },
 			{ text: stream.historyStream, sender: "agent" },

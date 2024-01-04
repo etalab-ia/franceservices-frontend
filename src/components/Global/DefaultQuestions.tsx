@@ -2,10 +2,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { defaultButtonChoice, defaultQuestions } from "../../constants/chatbotProps"
 import { setNewQuestion } from "../../utils/newQuestion"
 import { DefaultQuestionsContainer } from "./DefaultQuestionsContainer"
+import { RootState } from "types"
 
 export const DefaultQuestions = () => {
 	const dispatch = useDispatch()
-	const stream = useSelector((state) => state.stream)
+	const stream = useSelector((state: RootState) => state.stream)
 
 	const handleClick = (question) => {
 		setNewQuestion(dispatch, question, stream.historyStream, true)
