@@ -2,8 +2,13 @@ import { apiUrl } from "../constants/api"
 import { EventSourcePolyfill } from "event-source-polyfill"
 import { setHeaders, setUserQuestion } from "./setData"
 import { onCloseStream } from "./eventsEmitter"
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
+import { AppDispatch, RootState } from "../../types"
 
-export const useFetch = async (url, method, props, dispatch) => {
+export const useAppDispatch: () => AppDispatch = useDispatch
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
+
+export const useFetch = async (url: string, method: string, props, dispatch: AppDispatch) => {
 	const { data, headers } = props
 	const credentials = "include"
 
@@ -12,7 +17,7 @@ export const useFetch = async (url, method, props, dispatch) => {
 			method: method,
 			credentials: credentials,
 			headers,
-			body: data === undefined ? {} : data,
+			body: data === undefined ? "" : data,
 		})
 
 		if (response.status === 401) return dispatch({ type: "LOGOUT" })

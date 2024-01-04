@@ -1,6 +1,10 @@
 import Input from "@codegouvfr/react-dsfr/Input"
 
-export function UserMessage({ handleChange }) {
+interface UserMessageProps {
+	handleChange: React.ChangeEventHandler<HTMLTextAreaElement>
+}
+
+export function UserMessage({ handleChange }: UserMessageProps) {
 	return (
 		<Input
 			label="Message"

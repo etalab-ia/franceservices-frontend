@@ -18,10 +18,11 @@ import { Footer } from "@codegouvfr/react-dsfr/Footer"
 import { headerFooterDisplayItem } from "@codegouvfr/react-dsfr/Display"
 import { Meeting } from "../pages/Meeting"
 import { Contact } from "../pages/Contact"
+import { RootState } from "../../types"
 
 export const Root = () => {
 	const navigationData = navFunc()
-	const auth = useSelector((state) => state.auth)
+	const auth = useSelector((state: RootState) => state.auth)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
@@ -41,7 +42,7 @@ export const Root = () => {
 					</>
 				}
 				serviceTagline="Aide à l’accompagnement des usagers France services"
-				homeLinkProps={{ to: "/login" }}
+				homeLinkProps={{ title: "Albert" }}
 				navigation={auth.isLogin && navigationData}
 				quickAccessItems={auth.isLogin ? quickAccessItemsFunc(auth, dispatch) : []}
 			/>

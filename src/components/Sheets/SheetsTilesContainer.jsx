@@ -35,9 +35,9 @@ export const SheetsTilesContainer = ({
 		archiveSheets &&
 			dispatch({
 				type: "SET_SHEETS_FROM_ARCHIVE",
-				nextSheets: archiveSheets,
-				nextAdditionalSheets: archiveAdditionalSheets,
-				nextWebservices: archiveWebservices,
+				sheets: archiveSheets,
+				additionalSheets: archiveAdditionalSheets,
+				webservices: archiveWebservices,
 			})
 	}, [currQuestion])
 

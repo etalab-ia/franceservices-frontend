@@ -2,7 +2,11 @@ import Input from "@codegouvfr/react-dsfr/Input"
 import { GlobalColContainer } from "../Global/GlobalColContainer"
 import { GlobalRowContainer } from "../Global/GlobalRowContainer"
 
-export function UserInformation({ handleChange }) {
+interface UserInformationsProps {
+	handleChange: React.ChangeEventHandler<HTMLInputElement>
+}
+
+export function UserInformation({ handleChange }: UserInformationsProps) {
 	return (
 		<>
 			<GlobalRowContainer extraClass="fr-mb-2w">

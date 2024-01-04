@@ -7,6 +7,7 @@ import { Root } from "./components/Root"
 import { Provider } from "react-redux"
 import { store } from "./utils/reducer/reducer"
 
+// @ts-expect-error
 startReactDsfr({ defaultColorScheme: "system", Link })
 
 ReactDOM.createRoot(document.getElementById("root")).render(
