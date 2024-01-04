@@ -5,7 +5,15 @@ import { MeetingInput } from "./MeetingInput";
 export function MeetingAdditionalInput({ context, setContext }) {
     const handleSetTag = (tag, fieldName) => {
         if (fieldName === "administrations")
-            setContext((prevContext) =>  ({...prevContext, administrations: [...prevContext.administrations, tag]}));
+            setContext((prevContext) =>  ({
+				...prevContext, 
+				administrations: [...prevContext.administrations, tag]
+			}));
+		else if (fieldName === "themes")
+			setContext((prevContext) =>  ({
+				...prevContext, 
+				themes: [...prevContext.themes, tag]
+			}));
 };
 
 return <div className="fr-mt-2w">
