@@ -1,5 +1,6 @@
 import meeting from "@artwork/pictograms/albert/meeting.png"
 import question from "@artwork/pictograms/albert/question.png"
+import history from "@artwork/pictograms/albert/history.svg"
 import aplus from "@artwork/pictograms/logo/LogoA+.png"
 import franceservices from "@artwork/pictograms/logo/LogoFranceServices.png"
 import osmose from "@artwork/pictograms/logo/LogoOsmose.png"

@@ -3,9 +3,8 @@ import { useFetch } from "./hooks";
 import { Navigate } from "react-router-dom";
 import { userUrl } from "../constants/api";
 
-export const	storeAuth = async(token, username) => {
+export const	storeAuth = async(token) => {
 	localStorage.setItem('authToken', token);
-	localStorage.setItem('username', username);
 }
 
 export const	setUserInfos = async(token, dispatch) => {
@@ -16,7 +15,7 @@ export const	setUserInfos = async(token, dispatch) => {
 		data: null,
 	}, dispatch);
 
-	storeAuth(token, userInfos.username);
+	storeAuth(token);
 	dispatch({ type: 'SET_USER', nextEmail: userInfos.email, nextUsername: userInfos.username });
 }
 
@@ -29,7 +28,6 @@ export const	checkId = (id, dispatch) => {
 
 const	rmAuth = () => {
 	localStorage.removeItem('authToken');
-	localStorage.removeItem('username');
 }
 
 export const    handleSignout = async(state, dispatch) => {

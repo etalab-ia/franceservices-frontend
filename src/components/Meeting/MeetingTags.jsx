@@ -1,20 +1,20 @@
 import { Tag } from "@codegouvfr/react-dsfr/Tag";
-import { useKeyPress } from "../../utils/manageEffects";
 
-export function MeetingTags({ tags, setTags, field }) {
-
-	useKeyPress((e) => {
-		if (e.key === 'Enter' && e.target.name === field.name)
-		{
-			setTags([...tags, e.target.value]);
-			e.target.value = '';
-		}
-	});
+export function	MeetingTags({setContext, context, field, tags }) {
 
 	const	handleClick = (e) => {
 		e.preventDefault();
 
-		e.target.name === field.name && setTags(tags.filter(tag => tag !== e.target.textContent));
+		if (e.target.name === field.name && field.name === 'administrations')
+			setContext((prevContext) => ({
+				...prevContext,
+				administrations: context.administrations.filter(tag => tag !== e.target.textContent)
+			}));
+		else if (e.target.name === field.name && field.name === 'themes')
+			setContext((prevContext) => ({
+				...prevContext,
+				themes: context.themes.filter(tag => tag !== e.target.textContent)
+			}));
 	}
 
 	return <>

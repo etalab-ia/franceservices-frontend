@@ -17,7 +17,7 @@ export function NotifyArchiving() {
 
 	return (
 		<div role={archiveNotificationRole}>
-			<div className="archive-notification-text fr-mb-2w">{notifyArchiving(`« ${title} »`)}</div>
+			<div className="archive-notification-text fr-ml-7w fr-mb-2w">{notifyArchiving(`« ${title} »`)}</div>
 		</div>
 	);
 }
