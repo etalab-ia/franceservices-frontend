@@ -4,10 +4,13 @@ import { MeetingInput } from "./MeetingInput";
 import { useEffect } from "react";
 
 export function MeetingAdditionalInput({ context, setContext }) {
-
     const handleSetTag = (tag, fieldName) => {
-        if (fieldName === "administration")
-        setContext((prevContext) =>  ({...prevContext, administrations: [...prevContext.administrations, tag]}));
+        console.log("fieldname ", fieldName);
+        if (fieldName === "administrations")
+        {
+            setContext((prevContext) =>  ({...prevContext, administrations: [...prevContext.administrations, tag]}));
+            console.log("administration");
+        }    
 };
 useEffect(() => {
     console.log(context);
