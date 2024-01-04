@@ -19,6 +19,7 @@ export function MeetingAdditionalInformations({ setCurrQuestion, context, setCon
 		<GlobalSubtitle>{meetingInformations}</GlobalSubtitle>
 		<MeetingAdditionalInput
 			context={context}
+			setContext={setContext}
 		/>
 		<MeetingDefaultQuestions
 			setCurrQuestion={setCurrQuestion}
