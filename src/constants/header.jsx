@@ -1,23 +1,22 @@
-import { handleSignout } from "../utils/manageConnexion";
+import { handleSignout } from "../utils/manageConnexion"
 
-
-export function	quickAccessItemsFunc(state, dispatch) {
-	const    quickAccessItemsProps = [
+export function quickAccessItemsFunc(state, dispatch) {
+	const quickAccessItemsProps = [
 		{
-			iconId: 'fr-icon-user-line',
+			iconId: "fr-icon-user-line",
 			linkProps: {
-				style: {pointerEvents: 'none'}
+				style: { pointerEvents: "none" },
 			},
-			text: state.username
+			text: state.username,
 		},
 		{
-			iconId: 'fr-icon-logout-box-r-line',
+			iconId: "fr-icon-logout-box-r-line",
 			linkProps: {
-				onClick: () => handleSignout(state, dispatch)
+				onClick: () => handleSignout(state, dispatch),
 			},
-			text: 'Se déconnecter'
+			text: "Se déconnecter",
 		},
 	]
 
-	return quickAccessItemsProps;
+	return quickAccessItemsProps
 }

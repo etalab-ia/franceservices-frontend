@@ -1,4 +1,4 @@
-import Input from '@codegouvfr/react-dsfr/Input';
+import Input from "@codegouvfr/react-dsfr/Input"
 
 export function UserMessage({ handleChange }) {
 	return (
@@ -8,7 +8,7 @@ export function UserMessage({ handleChange }) {
 			nativeTextAreaProps={{
 				name: "message",
 				onChange: handleChange,
-				style: { minHeight: 200 }
+				style: { minHeight: 200 },
 			}}
 		/>
 	)

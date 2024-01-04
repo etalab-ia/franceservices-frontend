@@ -1,13 +1,13 @@
-import { GlobalDiv } from '../components/Global/GlobalDiv';
-import { GlobalRowContainer } from '../components/Global/GlobalRowContainer';
-import { ContactForm } from '../components/Contact/ContactForm';
+import { GlobalDiv } from "../components/Global/GlobalDiv"
+import { GlobalRowContainer } from "../components/Global/GlobalRowContainer"
+import { ContactForm } from "../components/Contact/ContactForm"
 
 export function Contact() {
 	return (
-		<GlobalRowContainer extraClass='fr-grid-row--center'>
+		<GlobalRowContainer extraClass="fr-grid-row--center">
 			<GlobalDiv>
-				<ContactForm/>
+				<ContactForm />
 			</GlobalDiv>
 		</GlobalRowContainer>
-	);
+	)
 }

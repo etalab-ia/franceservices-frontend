@@ -1,30 +1,29 @@
-import { useEffect } from "react";
+import { useEffect } from "react"
 
-export const	scrollToBottom = () => {
-	const	chatDiv = document.getElementById("chat");
+export const scrollToBottom = () => {
+	const chatDiv = document.getElementById("chat")
 
-	if (!chatDiv)
-		return ;
+	if (!chatDiv) return
 
-	chatDiv.scrollTop = chatDiv.scrollHeight;
+	chatDiv.scrollTop = chatDiv.scrollHeight
 }
 
-export const	handleTextareaResize = (e) => {
-	e.target.style.height = 'auto';
-	e.target.style.height = e.target.scrollHeight + 'px';
-};
+export const handleTextareaResize = (e) => {
+	e.target.style.height = "auto"
+	e.target.style.height = e.target.scrollHeight + "px"
+}
 
-export const	useKeyPress = (callback) => {
+export const useKeyPress = (callback) => {
 	useEffect(() => {
-	  	const handleKeyPress = (e) => {
+		const handleKeyPress = (e) => {
 			if (e) {
-			  callback(e);
+				callback(e)
 			}
-	  	};
-	  	document.addEventListener('keypress', handleKeyPress);
-  
-	  	return () => {
-			document.removeEventListener('keypress', handleKeyPress);
-	  	};
-	}, [callback]);
+		}
+		document.addEventListener("keypress", handleKeyPress)
+
+		return () => {
+			document.removeEventListener("keypress", handleKeyPress)
+		}
+	}, [callback])
 }

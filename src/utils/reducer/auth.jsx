@@ -1,42 +1,44 @@
-import { initialAuth } from "./state";
+import { initialAuth } from "./state"
 
-export const	authReducer = (state = initialAuth, action) => {
+export const authReducer = (state = initialAuth, action) => {
 	switch (action.type) {
 		case "SET_EMAIL":
-	  		return {
+			return {
 				...state,
-				email: action.nextEmail
-			};
+				email: action.nextEmail,
+			}
 		case "SET_USERNAME":
 			return {
 				...state,
-				username: action.nextUsername
-			};
+				username: action.nextUsername,
+			}
 		case "SET_USER":
-	  		return {
+			return {
 				...state,
 				username: action.nextUsername,
-				email: action.nextEmail
-			};
+				email: action.nextEmail,
+			}
 		case "LOGIN":
-	  		return {
+			return {
 				...state,
 				isLogin: true,
-				userToken: action.nextUserToken
-			};
+				userToken: action.nextUserToken,
+			}
 		case "LOGOUT":
-	  		return initialAuth;
+			return initialAuth
 		case "AUTH_FAILED":
 			return {
 				...state,
 				isLogin: false,
-				authFailed: true
-			};
+				authFailed: true,
+			}
 		case "RESET_AUTH_FAILED":
 			return {
 				...state,
-				authFailed: false
-			};
-	  	default: { return state };
+				authFailed: false,
+			}
+		default: {
+			return state
+		}
 	}
 }
