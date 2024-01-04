@@ -30,8 +30,11 @@
                 const newIndex = e.key === 'ArrowDown' 
                     ? Math.min(selectedIndex + 1, searchResults.length - 1)
                     : Math.max(selectedIndex - 1, 0);
-                setSelectedIndex(newIndex);
-                setSelectedValue(searchResults[newIndex]?.name || '');
+                if (newIndex >= 0 && newIndex <= 4)
+                {
+                    setSelectedIndex(newIndex);
+                    setSelectedValue(searchResults[newIndex]?.name || '');
+                }
             } else if (e.key === 'Enter') {
                 e.preventDefault();
                 const selectedResult = searchResults[selectedIndex];
