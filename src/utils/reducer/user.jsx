@@ -1,6 +1,24 @@
 import { initialChatbotMessage } from "../../constants/chatbotProps"
 import { initialQuestion, initialUser, initialUserChoices } from "./state"
 
+/*****************************************************************************************************
+	
+	VARIABLES:
+
+	**	question: user params used to POST on /stream
+	**	messages: full conversation between user & agent with { sender: 'sender', text: 'message' }
+	**	sheets: main sheets related to user question and display, GET on /indexes sheets
+	**	additionalSheets: additional sheets display on Modify mode and suggest to user, GET on /indexes sheets
+	**	webservices: related to question. Choice of webservices could be improve, GET on /indexes sheets 
+			first index
+	**	chunks: chunks used to generate response, GET on /indexes chunks
+	**	should_sids: sheets id suggest to agent to generate response: 
+			! Temporary removed: should is treated as a must in backend
+
+	**	must_not_sids: sheets id forbidden to be used by agent to generate response
+
+ *****************************************************************************************************/
+
 export const	userReducer = (state = initialUser, action) => {
 	switch (action.type) {
 		case 'SET_INITIAL_CHAT': 
@@ -35,7 +53,13 @@ export const	userReducer = (state = initialUser, action) => {
 			const	nextSheets = state.sheets.filter((sheet, index) => action.indexToRemove !== index);
 			const	nextAdditionalSheets = state.sheets.filter((sheet, index) => action.indexToRemove === index);
 			const	nextMustNotSids = [...state.question.must_not_sids, nextAdditionalSheets[0].sid];
-			const	nextShouldSids = state.question.should_sids.length ? state.question.should_sids.filter((sid) => !nextAdditionalSheets.includes(sid)) : state.sheets.map((sheet) => sheet.sid);
+
+			if (JSON.stringify(nextMustNotSids) === JSON.stringify(state.question.must_not_sids))
+				return {
+					...state,
+					sheets: [...state.sheets, ...nextSheets],
+					additionalSheets: nextAdditionalSheets,
+				}
 
 			return {
 				...state,
@@ -43,7 +67,6 @@ export const	userReducer = (state = initialUser, action) => {
 				additionalSheets: [...state.additionalSheets, ...nextAdditionalSheets],
 				question: {
 					...state.question,
-					should_sids: nextShouldSids,
 					must_not_sids: nextMustNotSids,
 				}
 			}
@@ -54,27 +77,23 @@ export const	userReducer = (state = initialUser, action) => {
 
 			const	nextSheets = state.additionalSheets.filter((sheet, index) => action.indexToAdd === index);
 			const	nextAdditionalSheets = state.additionalSheets.filter((sheet, index) => action.indexToAdd !== index);
-			const	nextShouldSids = state.question.should_sids.length ? [...state.question.should_sids, nextSheets[0].sid] : [...state.sheets.map((sheet) => sheet.sid), nextSheets[0].sid];
+			const	nextShouldSids = [...state.sheets.map((sheet) => sheet.sid), nextSheets[0].sid];
 			const	nextMustNotSids = state.question.must_not_sids.filter((sid) => !nextShouldSids.includes(sid));
-			
+
+			if (JSON.stringify(nextMustNotSids) === JSON.stringify(state.question.must_not_sids))
+				return {
+					...state,
+					sheets: [...state.sheets, ...nextSheets],
+					additionalSheets: nextAdditionalSheets,
+				}
+
 			return {
 				...state,
 				sheets: [...state.sheets, ...nextSheets],
 				additionalSheets: nextAdditionalSheets,
 				question: {
 					...state.question,
-					should_sids: nextShouldSids,
 					must_not_sids: nextMustNotSids,
-				}
-			}
-		}
-		case 'RESET_SIDS_CHOICES': {
-			return {
-				...state,
-				question: {
-					...state.question,
-					should_sids: [],
-					must_not_sids: []
 				}
 			}
 		}
@@ -105,29 +124,29 @@ export const	userReducer = (state = initialUser, action) => {
 					[action.nextKey]: action.nextValue,
 				}
 			}
-			case 'SET_MESSAGES':
-				if (state.messages.length > 0) 
-				{
-					const	lastMessage = state.messages[state.messages.length - 1];
+		case 'SET_MESSAGES':
+			if (state.messages.length > 0) 
+			{
+				const	lastMessage = state.messages[state.messages.length - 1];
 			
-					if (lastMessage.sender === action.nextMessage.sender) {
-						const	updatedMessages = state.messages.slice(0, -1);
-						const	updatedLastMessage = {
-							...lastMessage,
-							text: [...lastMessage.text, action.nextMessage.text],
-						};
-						updatedMessages.push(updatedLastMessage);
+				if (lastMessage.sender === action.nextMessage.sender) {
+					const	updatedMessages = state.messages.slice(0, -1);
+					const	updatedLastMessage = {
+						...lastMessage,
+						text: [...lastMessage.text, action.nextMessage.text],
+					};
+					updatedMessages.push(updatedLastMessage);
 			
-						return {
-							...state,
-							messages: updatedMessages,
-						};
-					}
+					return {
+						...state,
+						messages: updatedMessages,
+					};
 				}
-				return {
-					...state,
-					messages: [...state.messages, action.nextMessage],
-				};
+			}
+			return {
+				...state,
+				messages: [...state.messages, action.nextMessage],
+			};
 			
 	  	default: { return state };
 	}

@@ -9,7 +9,7 @@ export const	initialQuestion = {
 	institution: '',
 	links: '',
 	temperature: 20,
-	sources: ["service-public"],
+	sources: ["service-public", "travail-emploi"],
 	should_sids: [],
 	must_not_sids: [],
 }
