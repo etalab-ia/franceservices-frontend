@@ -6,7 +6,8 @@
 			"node_modules",
 			".husky",
 			".vscode",
-			".github"
+			".github",
+			"./utility/icons/icons.json"
 		]
 	},
 	"formatter": {

@@ -9,7 +9,8 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predev": "only-include-used-icons",
-    "prebuild": "only-include-used-icons"
+    "prebuild": "only-include-used-icons",
+    "format" : "npx @biomejs/biome format . --write"
   },
   "dependencies": {
     "@codegouvfr/react-dsfr": "^1.0.4",
