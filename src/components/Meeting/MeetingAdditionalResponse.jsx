@@ -3,6 +3,16 @@ import { OneThirdScreenWidth } from "../Global/OneThirdScreenWidth";
 import { DisplaySheets } from "../Sheets/DisplaySheets";
 import { MeetingContacts } from "./MeetingContacts";
 
+/*****************************************************************************************
+	
+	COMPONENTS:
+
+		**	DisplaySheets: set & display sheets cards from GET /indexes sheets
+
+		**	MeetingContacts: set first webservices from GET /indexes sheets
+
+ *****************************************************************************************/
+
 export function MeetingAdditionalResponse({ currQuestion, archive }) {
 	return <OneThirdScreenWidth>
 		<DisplaySheets

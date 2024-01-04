@@ -3,13 +3,11 @@ import { Display } from './Display';
 import { UserMessage } from '../User/UserMessage';
 import { useEffect } from 'react';
 import { scrollToBottom } from '../../utils/manageEffects';
-import { checkConnexion } from '../../utils/localStorage';
 import { DefaultQuestions } from '../Global/DefaultQuestions';
 import { ChatOverflowManagementContainer } from './ChatOverflowManagementContainer';
 import { ChatHeightContainer } from './ChatHeightContainer';
 
 export function ChatMainContainer({ archive }) {
-	const	auth = useSelector((state) => state.auth);
 	const	user = useSelector((state) => state.user);
 	const	feedback = useSelector((state) => state.feedback);
 	const	stream = useSelector((state) => state.stream);
@@ -17,7 +15,6 @@ export function ChatMainContainer({ archive }) {
 
 	useEffect(() => {
 		!archive && dispatch({ type: 'SET_INITIAL_CHAT' });
-		checkConnexion(auth, dispatch);
 	}, []);
 
 	useEffect(() => {

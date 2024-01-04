@@ -4,6 +4,16 @@ import { MeetingAdditionalInformations } from "./MeetingAdditionalInformation";
 import { MeetingMainInformations } from "./MeetingMainInformations";
 import { GlobalTitle } from "../Global/GlobalTitle";
 
+/******************************************************************************
+	
+	COMPONENTS:
+	
+	**	MeetingMainInformations: set current question / user description
+
+	**	MeetingAdditionalInformations: set context / administrations & themes
+
+ ******************************************************************************/
+
 export function MeetingInformations({ currQuestion, setCurrQuestion, context, setContext }) {
 	return <>
 		<GlobalTitle>{meetingTitle}</GlobalTitle>

@@ -30,8 +30,11 @@
                 const newIndex = e.key === 'ArrowDown' 
                     ? Math.min(selectedIndex + 1, searchResults.length - 1)
                     : Math.max(selectedIndex - 1, 0);
-                setSelectedIndex(newIndex);
-                setSelectedValue(searchResults[newIndex]?.name || '');
+                if (newIndex >= 0 && newIndex <= 4)
+                {
+                    setSelectedIndex(newIndex);
+                    setSelectedValue(searchResults[newIndex]?.name || '');
+                }
             } else if (e.key === 'Enter') {
                 e.preventDefault();
                 const selectedResult = searchResults[selectedIndex];
@@ -74,7 +77,7 @@
                     }}
                 />
                 {field.name === 'administrations' && (
-                    <div tabIndex={-1}>
+                    <div tabIndex={-1} className='fr-mb-2v'>
                         {searchResults.slice(0, 5).filter(result => !isTagSelected(result)).map((result, index) => (
                             <div
                                 className={`fr-card cursor-pointer p-0 ${selectedIndex === index ? 'bg-light-grey' : ''}`}
