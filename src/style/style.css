@@ -48,11 +48,6 @@
 		@apply text-[#000091];
 	}
 
-	.border-dark-purple {
-		@apply border;
-		@apply border-[#000091];
-	}
-
 	/* Grey */
 
 	/* Light grey */
