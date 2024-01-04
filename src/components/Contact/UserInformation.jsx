@@ -1,6 +1,6 @@
-import Input from '@codegouvfr/react-dsfr/Input';
-import { GlobalColContainer } from '../Global/GlobalColContainer';
-import { GlobalRowContainer } from '../Global/GlobalRowContainer';
+import Input from "@codegouvfr/react-dsfr/Input"
+import { GlobalColContainer } from "../Global/GlobalColContainer"
+import { GlobalRowContainer } from "../Global/GlobalRowContainer"
 
 export function UserInformation({ handleChange }) {
 	return (
@@ -11,7 +11,7 @@ export function UserInformation({ handleChange }) {
 						label="Prénom / Nom"
 						nativeInputProps={{
 							name: "name",
-							onChange: handleChange
+							onChange: handleChange,
 						}}
 					/>
 				</GlobalColContainer>
@@ -20,7 +20,7 @@ export function UserInformation({ handleChange }) {
 						label="Votre administration"
 						nativeInputProps={{
 							name: "administration",
-							onChange: handleChange
+							onChange: handleChange,
 						}}
 					/>
 				</GlobalColContainer>
@@ -31,7 +31,7 @@ export function UserInformation({ handleChange }) {
 						label="Titre du message"
 						nativeInputProps={{
 							name: "title",
-							onChange: handleChange
+							onChange: handleChange,
 						}}
 					/>
 				</GlobalColContainer>

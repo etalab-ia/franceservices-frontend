@@ -1,7 +1,7 @@
-import { GlobalColContainer } from '../Global/GlobalColContainer';
-import { SheetsTilesContainer } from './SheetsTilesContainer';
-import { useState } from 'react';
-import { SheetsAdditionalButtons } from './SheetsAdditionalButtons';
+import { GlobalColContainer } from "../Global/GlobalColContainer"
+import { SheetsTilesContainer } from "./SheetsTilesContainer"
+import { useState } from "react"
+import { SheetsAdditionalButtons } from "./SheetsAdditionalButtons"
 
 /*****************************************************************************************
 	
@@ -24,9 +24,14 @@ import { SheetsAdditionalButtons } from './SheetsAdditionalButtons';
 
  *****************************************************************************************/
 
-export function	DisplaySheets({ currQuestion, archiveSheets, archiveAdditionalSheets, archiveWebservices }) {
-	const	[isModifiable, setIsModifiable] = useState(false);
-	
+export function DisplaySheets({
+	currQuestion,
+	archiveSheets,
+	archiveAdditionalSheets,
+	archiveWebservices,
+}) {
+	const [isModifiable, setIsModifiable] = useState(false)
+
 	return (
 		<GlobalColContainer>
 			<SheetsAdditionalButtons
@@ -41,6 +46,6 @@ export function	DisplaySheets({ currQuestion, archiveSheets, archiveAdditionalSh
 				archiveWebservices={archiveWebservices}
 				isModifiable={isModifiable}
 			/>
-		</GlobalColContainer>		
-	);
+		</GlobalColContainer>
+	)
 }

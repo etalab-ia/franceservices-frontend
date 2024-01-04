@@ -1,34 +1,35 @@
-import { createRouter, defineRoute } from "type-route";
-import { useLocation } from "react-router-dom";
-import { useDispatch  } from "react-redux";
+import { createRouter, defineRoute } from "type-route"
+import { useLocation } from "react-router-dom"
+import { useDispatch } from "react-redux"
 
 export function navFunc() {
-	const	dispatch = useDispatch();
-	const	location = useLocation();
-	const	currentPath = location.pathname;
+	const dispatch = useDispatch()
+	const location = useLocation()
+	const currentPath = location.pathname
 
-	const navDefs = [{
+	const navDefs = [
+		{
 			text: "Accueil",
 			linkProps: {
-				to: "/home"
+				to: "/home",
 			},
 			isActive: currentPath === "/home",
 		},
 		{
-			text: 'Mes outils',
+			text: "Mes outils",
 			isActive: currentPath === "/chat" || currentPath === "/meeting",
 			menuLinks: [
 				{
 					text: "Préparer un rendez-vous",
 					linkProps: {
-						to: "/meeting"
+						to: "/meeting",
 					},
 					isActive: currentPath === "/meeting",
 				},
 				{
 					text: "Poser une question",
 					linkProps: {
-						to: "/chat"
+						to: "/chat",
 					},
 					isActive: currentPath === "/chat",
 				},
@@ -37,30 +38,30 @@ export function navFunc() {
 					linkProps: {
 						to: "/history",
 						onClick: () => {
-							dispatch({ type: 'RESET_ARCHIVE_TAB' });
-						}
+							dispatch({ type: "RESET_ARCHIVE_TAB" })
+						},
 					},
 					isActive: currentPath === "/history",
 				},
-			]
+			],
 		},
 		{
 			text: "Nous contacter",
 			linkProps: {
-				to: "/contact"
+				to: "/contact",
 			},
 			isActive: currentPath === "/contact",
 		},
 	]
-	return navDefs;
+	return navDefs
 }
 
 const routeDefs = {
-	"home": defineRoute("/home"),
-	"meeting": defineRoute("/meeting"),
-	"chat": defineRoute("/chat"),
-	"contact": defineRoute("/contact"),
-	"history": defineRoute("/history"),
-};
+	home: defineRoute("/home"),
+	meeting: defineRoute("/meeting"),
+	chat: defineRoute("/chat"),
+	contact: defineRoute("/contact"),
+	history: defineRoute("/history"),
+}
 
-export const { RouteProvider, useRoute, routes } = createRouter(routeDefs);
+export const { RouteProvider, useRoute, routes } = createRouter(routeDefs)

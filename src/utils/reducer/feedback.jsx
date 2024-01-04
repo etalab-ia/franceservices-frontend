@@ -1,14 +1,14 @@
-export const	feedbackReducer = (state = { reasons: [], isConfirmed: false }, action) => {
+export const feedbackReducer = (state = { reasons: [], isConfirmed: false }, action) => {
 	switch (action.type) {
 		case "SET_NEW_FEEDBACK":
 			return {
-				...state, 
-				reasons: [...state.reasons, action.nextFeedback]
-			};
+				...state,
+				reasons: [...state.reasons, action.nextFeedback],
+			}
 		case "RM_FEEDBACK":
 			return {
-				reasons: state.reasons.filter(reason => reason !== action.rmFeedback)
-			};
+				reasons: state.reasons.filter((reason) => reason !== action.rmFeedback),
+			}
 		case "CONFIRM_FEEDBACKS":
 			return {
 				...state,
@@ -18,12 +18,14 @@ export const	feedbackReducer = (state = { reasons: [], isConfirmed: false }, act
 			return {
 				reasons: [],
 				isConfirmed: false,
-			};
+			}
 		case "RESET_FEEDBACK":
 			return {
 				reasons: [],
 				isConfirmed: false,
-			};
-		default: { return state };
+			}
+		default: {
+			return state
+		}
 	}
 }
