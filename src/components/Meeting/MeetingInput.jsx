@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Input from '@codegouvfr/react-dsfr/Input';
 import Fuse from 'fuse.js';
 
@@ -13,83 +13,81 @@ export function MeetingInput({ field, onTagSelect, themes, administrations }) {
     const [searchResults, setSearchResults] = useState([]);
     const [selectedValue, setSelectedValue] = useState('');
     const [selectedIndex, setSelectedIndex] = useState(-1);
-    const fuse = new Fuse(institutions, options);
-    
+
+    const fuse = useMemo(() => new Fuse(institutions, options), []);
+
     const handleSearch = (e) => {
-        const { value } = e.target;
+        const value = e.target.value;
         setSelectedValue(value);
         setSelectedIndex(-1);
-        if (value.length === 0) {
-            setSearchResults([]);
-            return;
-        }
-        const results = fuse.search(value);
-        setSearchResults(results.map((result) => result.item));
+        setSearchResults(value ? fuse.search(value).map(result => result.item) : []);
     };
 
     const handleKeyDown = (e) => {
-        let newIndex;
-        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
             e.preventDefault();
-            newIndex = e.key === 'ArrowDown' 
+            const newIndex = e.key === 'ArrowDown' 
                 ? Math.min(selectedIndex + 1, searchResults.length - 1)
                 : Math.max(selectedIndex - 1, 0);
-
             setSelectedIndex(newIndex);
-            setSelectedValue(searchResults[newIndex] || '');
-        } else if (e.key === 'Enter' && selectedIndex >= 0) {
+            setSelectedValue(searchResults[newIndex]?.name || '');
+        } else if (e.key === 'Enter') {
             e.preventDefault();
-            handleItemClick(searchResults[selectedIndex]);
+            const selectedResult = searchResults[selectedIndex];
+            if (selectedResult) {
+                handleSelect(selectedResult);
+            } else {
+                onTagSelect(selectedValue, field.name);
+                resetSelection();
+            }
         }
     };
 
-    const handleItemClick = (result) => {
+    const handleSelect = (result) => {
+        onTagSelect(result, field.name);
+        resetSelection();
+    };
+
+    const resetSelection = () => {
         setSelectedValue('');
         setSearchResults([]);
-        onTagSelect(result, field.name);
+        setSelectedIndex(-1);
     };
+
     const isTagSelected = (tag) => {
-        if (field.name === "themes") {
-            return themes.includes(tag);
-        } else if (field.name === "administrations") {
-            return administrations.includes(tag);
-        }
-        return false;
+        return (field.name === "themes" && themes.includes(tag)) ||
+               (field.name === "administrations" && administrations.includes(tag));
     };
+
     return (
         <div>
             <Input
                 label={field.label}
-                style={{ marginBottom: 0 }}
                 className="fr-mb-1w"
-                onChange={handleSearch}
                 onKeyDown={handleKeyDown}
                 nativeInputProps={{
-                    name: field.name,
+                    onChange: handleSearch,
                     value: selectedValue,
+                    name: field.name,
                     tabIndex: 0,
                 }}
             />
-            {field.name === 'administrations' &&
+            {field.name === 'administrations' && (
                 <div tabIndex={-1}>
                     {searchResults.slice(0, 5).filter(result => !isTagSelected(result)).map((result, index) => (
                         <div
-                            className={`fr-card  cursor-pointer p-0   ${selectedIndex === index ? 'bg-light-grey' : ''}`}
+                            className={`fr-card cursor-pointer p-0 ${selectedIndex === index ? 'bg-light-grey' : ''}`}
                             key={result}
-                            onClick={() => handleItemClick(result)}
+                            onClick={() => handleSelect(result)}
                         >
-                            <p className='fr-ml-3w fr-mt-1w fr-mb-1w'>
-                                {result}
-                            </p>
+                            <p className='fr-ml-3w fr-mt-1w fr-mb-1w'>{result}</p>
                         </div>
                     ))}
                 </div>
-            }
+            )}
         </div>
     );
 }
-
-
 
 const institutions = [
     "115",
