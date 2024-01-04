@@ -10,18 +10,20 @@ export function MeetingDefaultQuestions({ setCurrQuestion, setContext }) {
         setContext({ themes: field.themes, administrations: field.administrations });
     }
 
-	return <GlobalRowContainer extraClass="bg-[#F5F5FE] fr-p-2w">
-		{meetingDefaultQuestionsIntroduction}
-        {defaultInputFields.map((field, index) => {
-			return <Button
-				key={index}
-				priority="secondary"
-				role={defaultButtonChoice(field.title)}
-				onClick={() => handleClick(field)}
-				className="w-full fr-my-3v justify-center"
-			>
-				{field.title}
-			</Button>
-		})}
+	return <GlobalRowContainer>
+		<span className="fr-p-2w" style={{ background: 'var(--background-alt-blue-france)'}}>
+			{meetingDefaultQuestionsIntroduction}
+			{defaultInputFields.map((field, index) => {
+				return <Button
+					key={index}
+					priority="secondary"
+					role={defaultButtonChoice(field.title)}
+					onClick={() => handleClick(field)}
+					className="w-full fr-my-3v justify-center"
+				>
+					{field.title}
+				</Button>
+			})}
+		</span>
 	</GlobalRowContainer>
 }
