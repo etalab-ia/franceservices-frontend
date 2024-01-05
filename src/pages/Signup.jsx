@@ -4,14 +4,12 @@ import { signupFields } from "../constants/inputFields"
 import { initButtonsSignup } from "../constants/connexion"
 import { useFetch } from "../utils/hooks"
 import { userUrl } from "../constants/api"
-import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { invalidEmail, invalidPassword } from "../constants/errorMessages"
 import { LoginContainer } from "../components/Auth/LoginContainer"
 import { LoginFields } from "../components/Auth/LoginFields"
 import { ButtonInformation } from "../components/Global/ButtonInformation"
 
-// TODO: use setUserInfos
 export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
 	const dispatch = useDispatch()
 	const [password, setPassword] = useState("")
@@ -24,11 +22,11 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
 		if (e.target.name === "username")
 			setUserAuth({
 				...userAuth,
-				username: e.target.value
+				username: e.target.value,
 			})
 		else if (e.target.name === "password") setPassword(e.target.value)
 		else if (e.target.name === "confirmationPassword") setConfPassword(e.target.value)
-		else if (e.target.name === "email") 
+		else if (e.target.name === "email")
 			setUserAuth({
 				...userAuth,
 				email: e.target.value,
@@ -60,7 +58,6 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
 				data: JSON.stringify(data),
 				headers: { "Content-Type": "application/json" },
 			},
-			dispatch
 		)
 
 		if (res.status && res.status !== 200) {

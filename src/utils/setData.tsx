@@ -101,7 +101,6 @@ export const getIndexes = async (data, userToken, dispatch, indexType, chunkSize
 			data: setIndexesBody(data, indexType, chunkSize),
 			headers: setHeaders(userToken, false),
 		},
-		dispatch
 	)
 
 	dispatch({ type: actionType, [indexType]: res })

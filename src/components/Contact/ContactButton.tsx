@@ -2,7 +2,6 @@ import { useState, Dispatch, SetStateAction } from "react"
 import Button from "@codegouvfr/react-dsfr/Button"
 import { ButtonInformation } from "../Global/ButtonInformation"
 import { contactUrl } from "../../constants/api"
-import { useDispatch } from "react-redux"
 import { setContactData, setHeaders } from "../../utils/setData"
 import { setUserInfos } from "../../utils/manageConnexion"
 import { useFetch } from "../../utils/hooks"
@@ -26,12 +25,11 @@ export function ContactButton({
 	setUserAuth,
 }: ContactButtonProps) {
 	const [isSend, setIsSend] = useState(false)
-	const dispatch = useDispatch()
 
 	const handleClick = async () => {
 		const userToken = localStorage.getItem("authToken")
 
-		setUserInfos(userToken, dispatch, setUserAuth)
+		setUserInfos(userToken, setUserAuth)
 
 		await useFetch(
 			contactUrl,
@@ -40,7 +38,6 @@ export function ContactButton({
 				data: setContactData(title + " from: " + name, message, administration),
 				headers: setHeaders(userToken, false),
 			},
-			dispatch
 		)
 
 		setIsSend(true)

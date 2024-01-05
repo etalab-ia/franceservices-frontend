@@ -26,7 +26,7 @@ export const Root = () => {
 	const dispatch = useAppDispatch()
 
 	useEffect(() => {
-		checkConnexion(dispatch, setUserAuth)
+		checkConnexion(setUserAuth)
 	}, [dispatch])
 
 	return (
@@ -86,9 +86,19 @@ export const Root = () => {
 				/>
 				<Route
 					path="/signup"
-					element={<Signup authFailed={authFailed} setAuthFailed={setAuthFailed} userAuth={userAuth} setUserAuth={setUserAuth}/>}
+					element={
+						<Signup
+							authFailed={authFailed}
+							setAuthFailed={setAuthFailed}
+							userAuth={userAuth}
+							setUserAuth={setUserAuth}
+						/>
+					}
 				/>
-				<Route path="/reset-password" element={<ResetPassword setAuthFailed={setAuthFailed} />} />
+				<Route
+					path="/reset-password"
+					element={<ResetPassword setAuthFailed={setAuthFailed} userAuth={userAuth} setUserAuth={setUserAuth} />}
+				/>
 				<Route
 					path="/new-password"
 					element={<NewPassword authFailed={authFailed} setAuthFailed={setAuthFailed} />}

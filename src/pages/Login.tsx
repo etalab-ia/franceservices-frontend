@@ -3,7 +3,6 @@ import { initButtonsLogin } from "../constants/connexion"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { signinUrl } from "../constants/api"
 import { useFetch } from "../utils/hooks"
-import { useDispatch } from "react-redux"
 import { usernameOrPasswordError } from "../constants/errorMessages"
 import { setUserInfos } from "../utils/manageConnexion"
 import { LoginFields } from "../components/Auth/LoginFields"
@@ -19,7 +18,6 @@ interface LoginProps {
 }
 
 export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
-	const dispatch = useDispatch()
 	const [isDisable, setIsDisable] = useState(true)
 	const [password, setPassword] = useState("")
 	const [id, setId] = useState("")
@@ -63,12 +61,11 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
 				data: JSON.stringify(data),
 				headers: { "Content-Type": "application/json" },
 			},
-			dispatch
 		)
 
 		if ((res.status && res.status !== 200) || !res.token) return setAuthFailed(true)
 
-		return setUserInfos(res.token, dispatch, setUserAuth)
+		return setUserInfos(res.token, setUserAuth)
 	}
 
 	return (
