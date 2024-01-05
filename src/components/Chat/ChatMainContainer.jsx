@@ -9,8 +9,6 @@ import { ChatHeightContainer } from "./ChatHeightContainer"
 
 export function ChatMainContainer({ archive }) {
 	const user = useSelector((state) => state.user)
-	// TODO: change
-	const feedback = useSelector((state) => state.feedback)
 	const stream = useSelector((state) => state.stream)
 	const dispatch = useDispatch()
 
@@ -18,9 +16,10 @@ export function ChatMainContainer({ archive }) {
 		!archive && dispatch({ type: "SET_INITIAL_CHAT" })
 	}, [])
 
+	// TODO: add feedback to scroll down
 	useEffect(() => {
 		scrollToBottom()
-	}, [user, feedback, stream, dispatch])
+	}, [user, stream, dispatch])
 
 	return (
 		<ChatHeightContainer>
@@ -31,7 +30,7 @@ export function ChatMainContainer({ archive }) {
 					<Display messages={user.messages} archive={false} />
 				)}
 			</ChatOverflowManagementContainer>
-			{!archive && <DefaultQuestions />}
+			{/* {!archive && <DefaultQuestions />} */}
 			{!archive && <UserMessage />}
 		</ChatHeightContainer>
 	)
