@@ -99,15 +99,10 @@ const setIndexesBody = (data, name, limit) => {
 
 export const getIndexes = async (data, userToken, dispatch, indexType, chunkSize) => {
 	const actionType = indexType === "sheets" ? "SET_SHEETS" : "SET_CHUNKS"
-	const res = await useFetch(
-		indexesUrl,
-		"POST",
-		{
-			data: setIndexesBody(data, indexType, chunkSize),
-			headers: setHeaders(userToken, false),
-		},
-		dispatch
-	)
+	const res = await useFetch(indexesUrl, "POST", {
+		data: setIndexesBody(data, indexType, chunkSize),
+		headers: setHeaders(userToken, false),
+	})
 
 	dispatch({ type: actionType, [indexType]: res })
 }
