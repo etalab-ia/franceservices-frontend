@@ -1,14 +1,16 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { primaryButtons, satisfactionButton, secondaryButtons } from "../../constants/feedback"
 import { GlobalRowContainer } from "../Global/GlobalRowContainer"
 
-export function UserFeedbackSatisfaction({ isFirst, isConfirmed }) {
+export function UserFeedbackSatisfaction({ isFirst, feedback, setFeedback }) {
 	const user = useSelector((state) => state.user)
 	const buttons = isFirst ? primaryButtons : secondaryButtons
-	const dispatch = useDispatch()
 
 	const handleClick = (index) => {
-		dispatch({ type: "SET_USER_CHOICES", nextKey: "feedback", nextValue: index })
+		setFeedback({
+			...feedback,
+			isGood: index,
+		})
 	}
 
 	return (
@@ -22,7 +24,7 @@ export function UserFeedbackSatisfaction({ isFirst, isConfirmed }) {
 						className={`user-feedback-buttons ${
 							index === user.choices.feedback ? "bg-purple" : "bg-white"
 						}`}
-						disabled={isConfirmed}
+						disabled={feedback.isConfirmed}
 					>
 						<img
 							alt={satisfactionButton(button.type)}

@@ -30,7 +30,6 @@ export const feedbackReducer = (
         ...state,
         isConfirmed: true,
       };
-    case "SET_ARCHIVE_LIMIT":
     case "RESET_FEEDBACK":
       return {
         reasons: [],
