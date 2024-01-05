@@ -5,7 +5,6 @@ export const initialAuth = {
 	email: "",
 	userToken: "",
 	isLogin: false,
-	authFailed: false,
 }
 
 export const initialStream = {

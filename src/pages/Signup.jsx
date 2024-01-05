@@ -12,7 +12,7 @@ import { LoginFields } from "../components/Auth/LoginFields"
 import { ButtonInformation } from "../components/Global/ButtonInformation"
 
 // TODO: clean page
-export function Signup() {
+export function Signup({ authFailed, setAuthFailed }) {
 	const auth = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
 	const [password, setPassword] = useState("")
@@ -65,7 +65,7 @@ export function Signup() {
 					? setErrorMessage(invalidEmail)
 					: setErrorMessage(invalidPassword)
 			})
-			return dispatch({ type: "AUTH_FAILED" })
+			return setAuthFailed(true)
 		}
 
 		return (window.location.href = "/albert/login")
@@ -74,7 +74,7 @@ export function Signup() {
 	return (
 		<LoginContainer>
 			<LoginFields fields={signupFields} handleChange={handleChange} />
-			{auth.authFailed && <ButtonInformation>{errorMesage}</ButtonInformation>}
+			{authFailed && <ButtonInformation>{errorMesage}</ButtonInformation>}
 			<ButtonsGroup
 				buttons={initButtonsSignup(handleValidatePassword, handleClick, "Créer un compte")}
 			/>

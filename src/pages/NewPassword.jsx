@@ -12,7 +12,7 @@ import { LoginFields } from "../components/Auth/LoginFields"
 import { ButtonInformation } from "../components/Global/ButtonInformation"
 
 // TODO: clean page
-export function NewPassword() {
+export function NewPassword({ authFailed, setAuthFailed }) {
 	const auth = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
 	const [password, setPassword] = useState("")
@@ -47,7 +47,7 @@ export function NewPassword() {
 			dispatch
 		)
 
-		if (res.status && res.status !== 200) return dispatch({ type: "AUTH_FAILED" })
+		if (res.status && res.status !== 200) setAuthFailed(true)
 
 		return (window.location.href = "/albert/login")
 	}
@@ -56,7 +56,7 @@ export function NewPassword() {
 	return (
 		<LoginContainer>
 			<LoginFields fields={fields} handleChange={handleChange} />
-			{auth.authFailed && <ButtonInformation>{changePasswordFailed}</ButtonInformation>}
+			{authFailed && <ButtonInformation>{changePasswordFailed}</ButtonInformation>}
 			<ButtonsGroup
 				buttons={initButtonsSignup(handleValidatePassword, handleClick, "Changer de mot de passe")}
 			/>

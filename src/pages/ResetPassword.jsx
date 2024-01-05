@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux"
 import { LoginContainer } from "../components/Auth/LoginContainer"
 
 // TODO: clean page
-export function ResetPassword() {
+export function ResetPassword({ setAuthFailed }) {
 	const auth = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
 	const [isDisable, setIsDisable] = useState(true)
@@ -32,7 +32,7 @@ export function ResetPassword() {
 			dispatch
 		)
 
-		if (res.status && res.status !== 200) return dispatch({ type: "AUTH_FAILED" })
+		if (res.status && res.status !== 200) setAuthFailed(true)
 
 		return (window.location.href = "/albert/login")
 	}

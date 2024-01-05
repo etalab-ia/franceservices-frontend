@@ -13,7 +13,7 @@ import { LoginContainer } from "../components/Auth/LoginContainer"
 import { ButtonInformation } from "../components/Global/ButtonInformation"
 
 // TODO: clean page
-export function Login() {
+export function Login({ authFailed, setAuthFailed }) {
 	const auth = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
 	const [isDisable, setIsDisable] = useState(true)
@@ -56,7 +56,7 @@ export function Login() {
 			password: password,
 		}
 
-		dispatch({ type: "RESET_AUTH_FAILED" })
+		setAuthFailed(false)
 
 		const res = await useFetch(
 			signinUrl,
@@ -68,7 +68,7 @@ export function Login() {
 			dispatch
 		)
 
-		if ((res.status && res.status !== 200) || !res.token) return dispatch({ type: "AUTH_FAILED" })
+		if ((res.status && res.status !== 200) || !res.token) setAuthFailed(true)
 
 		dispatch({ type: "LOGIN", nextUserToken: res.token })
 		setUserInfos(res.token, dispatch)
@@ -77,7 +77,7 @@ export function Login() {
 	return (
 		<LoginContainer>
 			<LoginFields fields={loginFields} handleChange={handleChange} />
-			{auth.authFailed && <ButtonInformation>{usernameOrPasswordError}</ButtonInformation>}
+			{authFailed && <ButtonInformation>{usernameOrPasswordError}</ButtonInformation>}
 			<ButtonsGroup buttons={initButtonsLogin(handleClick, isDisable)} />
 		</LoginContainer>
 	)
