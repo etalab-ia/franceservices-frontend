@@ -20,8 +20,8 @@ export const useFetch = async (url: string, method: string, props, dispatch: App
 			body: data === undefined ? "" : data,
 		})
 
-		if (response.status === 401) return dispatch({ type: "LOGOUT" })
-		else if (url.includes("start")) return response
+		// if (response.status === 401) return dispatch({ type: "LOGOUT" })
+		if (url.includes("start")) return response
 		else {
 			const jsonData = await response.json()
 
@@ -60,9 +60,10 @@ function handleStreamError(e, stream_chat) {
 	}
 }
 
-export const useStream = async (auth, dispatch, id) => {
+export const useStream = async (dispatch, id) => {
+	const userToken = localStorage.getItem("authToken")
 	const stream_chat = new EventSourcePolyfill(`${apiUrl}/${id}/start`, {
-		headers: setHeaders(auth.userToken, true),
+		headers: setHeaders(userToken, true),
 		withCredentials: true,
 	})
 
@@ -79,10 +80,11 @@ export const useStream = async (auth, dispatch, id) => {
 	})
 }
 
-export async function usePost(auth, question, dispatch) {
-	const headers = setHeaders(auth.userToken, false)
+export async function usePost(question, dispatch) {
+	const userToken = localStorage.getItem("authToken")
+	const headers = setHeaders(userToken, false)
 	const data = setUserQuestion(question)
 	const res = await useFetch(apiUrl, "POST", { data: JSON.stringify(data), headers }, dispatch)
 
-	return await useStream(auth, dispatch, res.id)
+	return await useStream(dispatch, res.id)
 }

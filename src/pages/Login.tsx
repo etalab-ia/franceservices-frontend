@@ -1,9 +1,8 @@
 import { ButtonsGroup } from "@codegouvfr/react-dsfr/ButtonsGroup"
 import { initButtonsLogin } from "../constants/connexion"
-import { useEffect, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { signinUrl } from "../constants/api"
 import { useFetch } from "../utils/hooks"
-import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { usernameOrPasswordError } from "../constants/errorMessages"
 import { setUserInfos } from "../utils/manageConnexion"
@@ -11,31 +10,26 @@ import { LoginFields } from "../components/Auth/LoginFields"
 import { loginFields } from "../constants/inputFields"
 import { LoginContainer } from "../components/Auth/LoginContainer"
 import { ButtonInformation } from "../components/Global/ButtonInformation"
+import { UserAuth } from "src/utils/auth"
 
-// TODO: clean page
-export function Login({ authFailed, setAuthFailed }) {
-	const auth = useSelector((state) => state.auth)
+interface LoginProps {
+	authFailed: boolean
+	setAuthFailed: Dispatch<SetStateAction<boolean>>
+	setUserAuth: Dispatch<SetStateAction<UserAuth>>
+}
+
+export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
 	const dispatch = useDispatch()
 	const [isDisable, setIsDisable] = useState(true)
 	const [password, setPassword] = useState("")
 	const [id, setId] = useState("")
 
 	useEffect(() => {
-		checkId()
 		checkIfCompletedFields()
 	}, [password])
 
-	const checkId = () => {
-		if (id.includes("@")) dispatch({ type: "SET_USER", nextUsername: null, nextEmail: id })
-		else dispatch({ type: "SET_USER", nextUsername: id, nextEmail: null })
-	}
-
 	const checkIfCompletedFields = () => {
-		if (
-			password.length &&
-			((auth.username && auth.username.length) || (auth.email && auth.email.length))
-		)
-			setIsDisable(false)
+		if (password.length && ((id && id.length) || (password && password.length))) setIsDisable(false)
 		else setIsDisable(true)
 	}
 
@@ -45,16 +39,20 @@ export function Login({ authFailed, setAuthFailed }) {
 		if (e.target.name === "username") setId(e.target.value)
 		if (e.target.name === "password") setPassword(e.target.value)
 
-		checkId()
 		checkIfCompletedFields()
 	}
 
 	const handleClick = async () => {
-		const data = {
-			username: auth.username,
-			email: auth.email,
-			password: password,
-		}
+		// TODO: what if username contains @ ?
+		const data = id.includes("@")
+			? {
+					email: id,
+					password: password,
+			  }
+			: {
+					username: id,
+					password: password,
+			  }
 
 		setAuthFailed(false)
 
@@ -68,10 +66,9 @@ export function Login({ authFailed, setAuthFailed }) {
 			dispatch
 		)
 
-		if ((res.status && res.status !== 200) || !res.token) setAuthFailed(true)
+		if ((res.status && res.status !== 200) || !res.token) return setAuthFailed(true)
 
-		dispatch({ type: "LOGIN", nextUserToken: res.token })
-		setUserInfos(res.token, dispatch)
+		return setUserInfos(res.token, dispatch, setUserAuth)
 	}
 
 	return (

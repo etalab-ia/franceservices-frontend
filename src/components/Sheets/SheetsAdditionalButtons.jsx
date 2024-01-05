@@ -26,7 +26,7 @@ export const SheetsAdditionalButtons = ({ isModifiable, setIsModifiable, archive
 		? "fr-icon-save-3-fill fr-icon--sm flex justify-end items-center"
 		: "fr-icon-settings-5-fill fr-icon--sm flex justify-end items-center"
 	const user = useSelector((state) => state.user)
-	const auth = useSelector((state) => state.auth)
+	const userToken = localStorage.getItem("authToken")
 	const [deletedSheets, setDeletedSheets] = useState([])
 	const dispatch = useDispatch()
 
@@ -59,8 +59,8 @@ export const SheetsAdditionalButtons = ({ isModifiable, setIsModifiable, archive
 		}
 
 		emitCloseStream(false)
-		usePost(auth, question, dispatch)
-		getIndexes(body, auth.userToken, dispatch, "chunks", user.question.limit)
+		usePost(question, dispatch)
+		getIndexes(body, userToken, dispatch, "chunks", user.question.limit)
 	}, [deletedSheets])
 
 	return (

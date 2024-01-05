@@ -19,7 +19,6 @@ export const SheetsTilesContainer = ({
 	archiveWebservices,
 	isModifiable,
 }) => {
-	const userToken = useSelector((state) => state.auth.userToken)
 	const user = useSelector((state) => state.user)
 	const [tiles, setTiles] = useState([])
 	const [additionalTiles, setAdditionalTiles] = useState([])
@@ -31,7 +30,7 @@ export const SheetsTilesContainer = ({
 			must_not_sids: user.question.must_not_sids,
 		}
 
-		!archiveSheets && setIndexesData(data, setTiles, userToken, dispatch)
+		!archiveSheets && setIndexesData(data, setTiles, dispatch)
 		archiveSheets &&
 			dispatch({
 				type: "SET_SHEETS_FROM_ARCHIVE",

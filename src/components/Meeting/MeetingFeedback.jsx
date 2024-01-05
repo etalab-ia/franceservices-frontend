@@ -11,7 +11,7 @@ import { NOT_SET } from "../../constants/status"
 import { GlobalParagraph } from "../Global/GlobalParagraph"
 
 export const MeetingFeedback = () => {
-	// const	userToken = useSelector((state) => state.auth.userToken);
+	// const userToken = localStorage.getItem("authToken")
 	const [isClicked, setIsClicked] = useState(NOT_SET)
 	// const	dispatch = useDispatch();
 
