@@ -46,7 +46,12 @@ export const setUserQuestion = (question) => {
 	return data
 }
 
-export const setQuestionFromRegeneration = (mode: "string", text, limit: number, must_not_sids: string[]) => {
+export const setQuestionFromRegeneration = (
+	mode: "string",
+	text,
+	limit: number,
+	must_not_sids: string[]
+) => {
 	const data = {
 		model_name: "albert-light",
 		mode: mode,
@@ -62,7 +67,7 @@ export const setQuestionFromRegeneration = (mode: "string", text, limit: number,
 	return data
 }
 
-export const setQuestionWithContext = (question : string, context) => {
+export const setQuestionWithContext = (question: string, context) => {
 	const administrations = context.administrations.length
 		? "Les administrations concernées par cette question sont : " +
 		  context.administrations.map((adminstration) => adminstration)

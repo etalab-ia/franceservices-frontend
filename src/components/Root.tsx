@@ -48,7 +48,16 @@ export const Root = () => {
 				quickAccessItems={auth.isLogin ? quickAccessItemsFunc(auth, dispatch) : []}
 			/>
 			<Routes>
-				<Route path="/login" element={!auth.isLogin ? <Login authFailed={authFailed} setAuthFailed={setAuthFailed}/> : <Navigate to="/home" />} />
+				<Route
+					path="/login"
+					element={
+						!auth.isLogin ? (
+							<Login authFailed={authFailed} setAuthFailed={setAuthFailed} />
+						) : (
+							<Navigate to="/home" />
+						)
+					}
+				/>
 				<Route path="/meeting" element={!auth.isLogin ? <Navigate to="/login" /> : <Meeting />} />
 				<Route path="/home" element={!auth.isLogin ? <Navigate to="/login" /> : <Home />} />
 				<Route
@@ -61,9 +70,15 @@ export const Root = () => {
 				/>
 				<Route path="/contact" element={!auth.isLogin ? <Navigate to="/login" /> : <Contact />} />
 				<Route path="/history" element={!auth.isLogin ? <Navigate to="/login" /> : <History />} />
-				<Route path="/signup" element={<Signup authFailed={authFailed} setAuthFailed={setAuthFailed}/>} />
-				<Route path="/reset-password" element={<ResetPassword setAuthFailed={setAuthFailed}/>} />
-				<Route path="/new-password" element={<NewPassword authFailed={authFailed} setAuthFailed={setAuthFailed}/>} />
+				<Route
+					path="/signup"
+					element={<Signup authFailed={authFailed} setAuthFailed={setAuthFailed} />}
+				/>
+				<Route path="/reset-password" element={<ResetPassword setAuthFailed={setAuthFailed} />} />
+				<Route
+					path="/new-password"
+					element={<NewPassword authFailed={authFailed} setAuthFailed={setAuthFailed} />}
+				/>
 				<Route path="*" element={<h1>404</h1>} />
 			</Routes>
 			<Footer

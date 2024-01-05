@@ -13,13 +13,13 @@ interface ContactButtonProps {
 		title: string
 		administration: string
 		message: string
-		name: string,
+		name: string
 		isCompleted: boolean
 	}
 	setFormData: (data: any) => void
 }
 
-export function ContactButton({ formData, setFormData } : ContactButtonProps) {
+export function ContactButton({ formData, setFormData }: ContactButtonProps) {
 	const [isSend, setIsSend] = useState(false)
 	const auth = useSelector((state: RootState) => state.auth)
 	const dispatch = useDispatch()
