@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux"
 import { setContactData, setHeaders } from "../../utils/setData"
 import { setUserInfos } from "../../utils/manageConnexion"
 import { useFetch } from "../../utils/hooks"
-import { UserAuth } from "src/utils/reducer/auth"
+import { UserAuth } from "src/utils/auth"
 
 interface ContactButtonProps {
 	isDisable: boolean

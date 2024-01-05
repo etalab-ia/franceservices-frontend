@@ -16,7 +16,7 @@ import { Footer } from "@codegouvfr/react-dsfr/Footer"
 import { headerFooterDisplayItem } from "@codegouvfr/react-dsfr/Display"
 import { Meeting } from "../pages/Meeting"
 import { Contact } from "../pages/Contact"
-import { InitialUserAuth, UserAuth } from "../utils/reducer/auth"
+import { InitialUserAuth, UserAuth } from "../utils/auth"
 import { useAppDispatch } from "../utils/hooks"
 
 export const Root = () => {
@@ -51,13 +51,20 @@ export const Root = () => {
 					path="/login"
 					element={
 						!userAuth.isLogin ? (
-							<Login authFailed={authFailed} setAuthFailed={setAuthFailed} setUserAuth={setUserAuth} />
+							<Login
+								authFailed={authFailed}
+								setAuthFailed={setAuthFailed}
+								setUserAuth={setUserAuth}
+							/>
 						) : (
 							<Navigate to="/home" />
 						)
 					}
 				/>
-				<Route path="/meeting" element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />} />
+				<Route
+					path="/meeting"
+					element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
+				/>
 				<Route path="/home" element={!userAuth.isLogin ? <Navigate to="/login" /> : <Home />} />
 				<Route
 					path="/"
@@ -69,9 +76,14 @@ export const Root = () => {
 				/>
 				<Route
 					path="/contact"
-					element={!userAuth.isLogin ? <Navigate to="/login" /> : <Contact setUserAuth={setUserAuth} />}
+					element={
+						!userAuth.isLogin ? <Navigate to="/login" /> : <Contact setUserAuth={setUserAuth} />
+					}
 				/>
-				<Route path="/history" element={!userAuth.isLogin ? <Navigate to="/login" /> : <History />} />
+				<Route
+					path="/history"
+					element={!userAuth.isLogin ? <Navigate to="/login" /> : <History />}
+				/>
 				<Route
 					path="/signup"
 					element={<Signup authFailed={authFailed} setAuthFailed={setAuthFailed} />}
