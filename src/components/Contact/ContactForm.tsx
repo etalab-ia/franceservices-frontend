@@ -4,33 +4,26 @@ import { UserInformation } from "./UserInformation"
 import { UserMessage } from "./UserMessage"
 
 export function ContactForm() {
-	const [title, setTitle] = useState("")
-	const [administration, setAdministration] = useState("")
-	const [message, setMessage] = useState("")
-	const [name, setName] = useState("")
-	const [isCompleted, setIsCompleted] = useState(false)
-
-	const handleChange = (e) => {
-		if (e.target.name === "title") setTitle(e.target.value)
-		else if (e.target.name === "administration") setAdministration(e.target.value)
-		else if (e.target.name === "name") setName(e.target.value)
-		else setMessage(e.target.value)
-	}
+	const [formData, setFormData] = useState({
+		title: "",
+		administration: "",
+		message: "",
+		name: "",
+		isCompleted: false,
+	})
 
 	useEffect(() => {
-		if (title.length && administration.length && message.length && name.length) setIsCompleted(true)
-	}, [title, administration, message, name])
+		if (formData.title.length && formData.administration.length && formData.message.length && formData.name.length) setFormData((prevData) => ({ ...prevData, isCompleted: true }))
+		else setFormData((prevData) => ({ ...prevData, isCompleted: false }))
+	}, [formData.title, formData.administration, formData.message, formData.name])
 
 	return (
 		<div className="fr-mx-10w">
-			<UserInformation handleChange={handleChange} />
-			<UserMessage handleChange={handleChange} />
+			<UserInformation formData={formData} setFormData={setFormData} />
+			<UserMessage message={formData.message} setFormData={setFormData} />
 			<ContactButton
-				isDisable={!isCompleted}
-				administration={administration}
-				title={title}
-				message={message}
-				name={name}
+				formData={formData}
+				setFormData={setFormData}
 			/>
 		</div>
 	)

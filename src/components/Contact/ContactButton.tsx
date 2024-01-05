@@ -9,14 +9,17 @@ import { useFetch } from "../../utils/hooks"
 import { RootState } from "../../../types"
 
 interface ContactButtonProps {
-	isDisable: boolean
-	administration: string
-	message: string
-	name: string
-	title: string
+	formData: {
+		title: string
+		administration: string
+		message: string
+		name: string,
+		isCompleted: boolean
+	}
+	setFormData: (data: any) => void
 }
 
-export function ContactButton({ isDisable, administration, message, name, title } : ContactButtonProps) {
+export function ContactButton({ formData, setFormData } : ContactButtonProps) {
 	const [isSend, setIsSend] = useState(false)
 	const auth = useSelector((state: RootState) => state.auth)
 	const dispatch = useDispatch()
@@ -28,12 +31,17 @@ export function ContactButton({ isDisable, administration, message, name, title 
 			contactUrl,
 			"POST",
 			{
-				data: setContactData(title + " from: " + name, message, administration),
+				data: setContactData(
+					formData.title + " from: " + formData.name,
+					formData.message,
+					formData.administration
+				),
 				headers: setHeaders(auth.userToken, false),
 			},
 			dispatch
 		)
-
+		console.log("Message envoyé")
+		setFormData({ title: "", administration: "", message: "", name: "" })
 		setIsSend(true)
 	}
 
@@ -44,7 +52,7 @@ export function ContactButton({ isDisable, administration, message, name, title 
 					Votre message a bien été envoyé, merci pour votre retour !
 				</ButtonInformation>
 			)}
-			<Button onClick={handleClick} disabled={isDisable}>
+			<Button onClick={handleClick} disabled={!formData.isCompleted}>
 				Envoyer
 			</Button>
 		</>
