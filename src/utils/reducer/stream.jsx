@@ -1,4 +1,9 @@
-import { initialStream } from "./state"
+const initialStream = {
+	response: [],
+	historyStream: [],
+	isStreaming: false,
+	activeTab: 1,
+}
 
 export const streamReducer = (state = initialStream, action) => {
 	switch (action.type) {
