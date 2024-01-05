@@ -8,18 +8,18 @@ import { ButtonsOptions } from "./ButtonsOptions"
 import { ConfirmationButton } from "./ConfirmationButton"
 import { InputOption } from "./InputOption"
 import { GlobalColContainer } from "../Global/GlobalColContainer"
+import { InitialFeedback } from "../../utils/feedback"
 
-export function UserFeedbackOptions({ activeTab, isFirst }) {
+export function UserFeedbackOptions({ activeTab, isFirst, feedback, setFeedback }) {
 	const [reasons, setReasons] = useState([])
 	const [otherReason, setOtherReason] = useState("")
 	const [buttonsType, setButtonsType] = useState(
 		activeTab === 0 ? satisfiedButtons : unsatisfiedButtons
 	)
-	const feedback = useSelector((state) => state.feedback)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch({ type: "RESET_FEEDBACK" })
+		setFeedback(InitialFeedback)
 		setReasons([])
 		setButtonsType(activeTab === 0 ? satisfiedButtons : unsatisfiedButtons)
 	}, [activeTab])
@@ -28,12 +28,22 @@ export function UserFeedbackOptions({ activeTab, isFirst }) {
 		if (e.key === "Enter" && e.target.name === "otherReason" && otherReason) {
 			otherReason &&
 				!reasons.includes(otherReason) &&
-				dispatch({ type: "SET_NEW_FEEDBACK", nextFeedback: otherReason })
+				setFeedback({
+					...feedback,
+					reasons: [...feedback.reasons, otherReason]
+				})
 			e.target.value = ""
 			setOtherReason("")
 			setReasons(reasons.filter((reason) => reason !== "Autre raison"))
 		}
 	})
+
+	useEffect(() => {
+		setFeedback({
+			...feedback,
+			reasons: reasons,
+		})
+	}, [reasons])
 
 	return (
 		<GlobalColContainer>
@@ -42,15 +52,14 @@ export function UserFeedbackOptions({ activeTab, isFirst }) {
 				buttonsType={buttonsType}
 				reasons={reasons}
 				setReasons={setReasons}
-				dispatch={dispatch}
 			/>
 			<InputOption reasons={reasons} setOtherReason={setOtherReason} isFirst={isFirst} />
-			<UserFeedbackResume />
+			<UserFeedbackResume feedback={feedback}/>
 			<ConfirmationButton
 				reasons={reasons}
 				otherReason={otherReason}
 				feedback={feedback}
-				dispatch={dispatch}
+				setFeedback={setFeedback}
 			/>
 		</GlobalColContainer>
 	)

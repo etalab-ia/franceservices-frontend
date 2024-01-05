@@ -1,14 +1,12 @@
 import { feedbackButtonsChoice } from "../../constants/feedback"
 
-export const ButtonsOptions = ({ isFirst, buttonsType, reasons, setReasons, dispatch }) => {
+export const ButtonsOptions = ({ isFirst, buttonsType, reasons, setReasons }) => {
 	const handleClick = (index) => {
 		if (reasons.includes(buttonsType[index])) {
 			setReasons(reasons.filter((reason) => reason !== buttonsType[index]))
-			dispatch({ type: "RM_FEEDBACK", rmFeedback: buttonsType[index] })
 		} else {
 			setReasons([...reasons, buttonsType[index]])
 			if (buttonsType[index] === "Autre raison") return
-			dispatch({ type: "SET_NEW_FEEDBACK", nextFeedback: buttonsType[index] })
 		}
 	}
 
