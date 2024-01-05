@@ -14,13 +14,12 @@ interface ContactButtonProps {
 		administration: string
 		message: string
 		name: string
-		isCompleted: boolean
 	}
-	setFormData: (data: any) => void
+	clearForm: () => void
 	setUserAuth: Dispatch<SetStateAction<UserAuth>>
 }
 
-export function ContactButton({ formData, setFormData, setUserAuth }: ContactButtonProps) {
+export function ContactButton({ formData, clearForm, setUserAuth }: ContactButtonProps) {
 	const [isSend, setIsSend] = useState(false)
 	const dispatch = useDispatch()
 
@@ -43,10 +42,11 @@ export function ContactButton({ formData, setFormData, setUserAuth }: ContactBut
 			dispatch
 		)
 		console.log("Message envoyé")
-		setFormData({ title: "", administration: "", message: "", name: "" })
+		clearForm()
 		setIsSend(true)
 	}
 
+	const isCompleted = formData.title && formData.administration && formData.message && formData.name
 	return (
 		<>
 			{isSend && (
@@ -54,7 +54,7 @@ export function ContactButton({ formData, setFormData, setUserAuth }: ContactBut
 					Votre message a bien été envoyé, merci pour votre retour !
 				</ButtonInformation>
 			)}
-			<Button onClick={handleClick} disabled={!formData.isCompleted}>
+			<Button onClick={handleClick} disabled={!isCompleted}>
 				Envoyer
 			</Button>
 		</>

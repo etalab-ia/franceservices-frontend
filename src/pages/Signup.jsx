@@ -4,7 +4,6 @@ import { signupFields } from "../constants/inputFields"
 import { initButtonsSignup } from "../constants/connexion"
 import { useFetch } from "../utils/hooks"
 import { userUrl } from "../constants/api"
-import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { invalidEmail, invalidPassword } from "../constants/errorMessages"
 import { LoginContainer } from "../components/Auth/LoginContainer"
@@ -28,7 +27,7 @@ export function Signup({ authFailed, setAuthFailed }) {
 		else if (e.target.name === "email") dispatch({ type: "SET_EMAIL", nextEmail: e.target.value })
 	}
 
-	const handleValidatePassword = () => {
+	const handleValidatePassword = (auth) => {
 		return (
 			auth.username &&
 			auth.username.length &&

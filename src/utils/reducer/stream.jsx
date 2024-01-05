@@ -13,11 +13,9 @@ export const streamReducer = (state = initialStream, action) => {
 				response: [...state.response, action.nextResponse],
 			}
 		case "STOP_AGENT_STREAM":
-			const joinedRes = state.response.join("")
-
 			return {
 				...state,
-				historyStream: [...state.historyStream, joinedRes],
+				historyStream: [...state.historyStream, state.response.join("")],
 				isStreaming: false,
 				response: [],
 			}

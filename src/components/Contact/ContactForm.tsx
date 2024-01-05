@@ -8,7 +8,6 @@ export type formDataTypes = {
 	administration: string
 	message: string
 	name: string
-	isCompleted: boolean
 }
 import { UserAuth } from "src/utils/auth"
 
@@ -18,24 +17,15 @@ export function ContactForm({ setUserAuth }: { setUserAuth: Dispatch<SetStateAct
 		administration: "",
 		message: "",
 		name: "",
-		isCompleted: false,
 	})
-	useEffect(() => {
-		if (
-			formData.title.length &&
-			formData.administration.length &&
-			formData.message.length &&
-			formData.name.length
-		)
-			setFormData((prevData) => ({ ...prevData, isCompleted: true }))
-		else setFormData((prevData) => ({ ...prevData, isCompleted: false }))
-	}, [formData.title, formData.administration, formData.message, formData.name])
-
+	const clearForm = () => {
+		setFormData({ title: "", administration: "", message: "", name: "" })
+	}
 	return (
 		<div className="fr-mx-10w">
 			<UserInformation formData={formData} setFormData={setFormData} />
 			<UserMessage message={formData.message} setFormData={setFormData} />
-			<ContactButton setUserAuth={setUserAuth} formData={formData} setFormData={setFormData} />
+			<ContactButton setUserAuth={setUserAuth} formData={formData} clearForm={clearForm} />
 		</div>
 	)
 }
