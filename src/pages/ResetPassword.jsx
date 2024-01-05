@@ -8,9 +8,8 @@ import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { LoginContainer } from "../components/Auth/LoginContainer"
 
-// TODO: clean page
+// TODO: use setUserAuth
 export function ResetPassword({ setAuthFailed }) {
-	const auth = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
 	const [isDisable, setIsDisable] = useState(true)
 

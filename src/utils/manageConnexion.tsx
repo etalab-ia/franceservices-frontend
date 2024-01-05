@@ -3,12 +3,18 @@ import { useFetch } from "./hooks"
 import { Navigate } from "react-router-dom"
 import { userUrl } from "../constants/api"
 import { AppDispatch } from "../../types"
+import { InitialUserAuth, UserAuth } from "./auth"
+import { Dispatch, SetStateAction } from "react"
 
 export const storeAuth = async (token: string) => {
 	localStorage.setItem("authToken", token)
 }
 
-export const setUserInfos = async (token: string, dispatch: AppDispatch) => {
+export const setUserInfos = async (
+	token: string,
+	dispatch: AppDispatch,
+	setUserAuth: Dispatch<SetStateAction<UserAuth>>
+) => {
 	const userInfos = await useFetch(
 		userUrl,
 		"GET",
@@ -22,10 +28,20 @@ export const setUserInfos = async (token: string, dispatch: AppDispatch) => {
 	)
 
 	storeAuth(token)
-	dispatch({ type: "SET_USER", nextEmail: userInfos.email, nextUsername: userInfos.username })
+
+	// TODO: check why token is a string != just null
+	if (token !== "null")
+		return setUserAuth({
+			email: userInfos.email,
+			username: userInfos.username,
+			authToken: token,
+			isLogin: true,
+		})
+	return setUserAuth(InitialUserAuth)
 }
 
-export const checkId = (id: string, dispatch) => {
+export const checkId = (id: string, dispatch: AppDispatch) => {
+	console.log("check id with args")
 	if (id.includes("@")) dispatch({ type: "SET_USER", nextUsername: null, nextEmail: id })
 	else dispatch({ type: "SET_USER", nextUsername: id, nextEmail: null })
 }
@@ -34,15 +50,12 @@ const rmAuth = () => {
 	localStorage.removeItem("authToken")
 }
 
-export const handleSignout = async (state, dispatch) => {
-	await useFetch(
-		signoutUrl,
-		"POST",
-		{ headers: { Authorization: `Bearer ${state.userToken}` } },
-		null
-	)
+export const handleSignout = async (setUserAuth) => {
+	const userToken = localStorage.getItem("authToken")
+
+	await useFetch(signoutUrl, "POST", { headers: { Authorization: `Bearer ${userToken}` } }, null)
 		.then(() => rmAuth())
-		.then(() => dispatch({ type: "LOGOUT" }))
+		.then(() => setUserAuth(InitialUserAuth))
 
 	return <Navigate to="/" />
 }

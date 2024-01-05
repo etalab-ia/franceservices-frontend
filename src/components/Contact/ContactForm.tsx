@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, Dispatch, SetStateAction, ChangeEvent } from "react"
 import { ContactButton } from "./ContactButton"
 import { UserInformation } from "./UserInformation"
 import { UserMessage } from "./UserMessage"
@@ -10,8 +10,9 @@ export type formDataTypes = {
 	name: string
 	isCompleted: boolean
 }
+import { UserAuth } from "src/utils/auth"
 
-export function ContactForm() {
+export function ContactForm({ setUserAuth }: { setUserAuth: Dispatch<SetStateAction<UserAuth>> }) {
 	const [formData, setFormData] = useState<formDataTypes>({
 		title: "",
 		administration: "",
@@ -19,9 +20,8 @@ export function ContactForm() {
 		name: "",
 		isCompleted: false,
 	})
-
 	useEffect(() => {
-		if (
+	if (
 			formData.title.length &&
 			formData.administration.length &&
 			formData.message.length &&
@@ -35,7 +35,11 @@ export function ContactForm() {
 		<div className="fr-mx-10w">
 			<UserInformation formData={formData} setFormData={setFormData} />
 			<UserMessage message={formData.message} setFormData={setFormData} />
-			<ContactButton formData={formData} setFormData={setFormData} />
+			<ContactButton
+					setUserAuth={setUserAuth}
+					formData={formData}
+					setFormData={setFormData}
+			/>
 		</div>
 	)
 }
