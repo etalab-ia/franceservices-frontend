@@ -47,13 +47,11 @@ const InitialQuestion: Question = {
 }
 
 interface UserChoices {
-	feedback: number
 	newQuestion: number
 	oldQuestion: number
 }
 
-const InitialUserChoices: UserChoices = {
-	feedback: -1,
+const	InitialUserChoices: UserChoices = {
 	newQuestion: -1,
 	oldQuestion: -1,
 }
