@@ -11,9 +11,8 @@ import { LoginContainer } from "../components/Auth/LoginContainer"
 import { LoginFields } from "../components/Auth/LoginFields"
 import { ButtonInformation } from "../components/Global/ButtonInformation"
 
-// TODO: clean page
+// TODO: use setUserInfos
 export function Signup({ authFailed, setAuthFailed }) {
-	const auth = useSelector((state) => state.auth)
 	const dispatch = useDispatch()
 	const [password, setPassword] = useState("")
 	const [confPassword, setConfPassword] = useState("")

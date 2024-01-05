@@ -1,18 +1,18 @@
 import { handleSignout } from "../utils/manageConnexion"
 
-export function quickAccessItemsFunc(state, dispatch) {
+export function quickAccessItemsFunc(userAuth, setUserAuth) {
 	const quickAccessItemsProps = [
 		{
 			iconId: "fr-icon-user-line",
 			linkProps: {
 				style: { pointerEvents: "none" },
 			},
-			text: state.username,
+			text: userAuth.username,
 		},
 		{
 			iconId: "fr-icon-logout-box-r-line",
 			linkProps: {
-				onClick: () => handleSignout(state, dispatch),
+				onClick: () => handleSignout(setUserAuth),
 			},
 			text: "Se déconnecter",
 		},
