@@ -1,17 +1,20 @@
 import Input from "@codegouvfr/react-dsfr/Input"
 
-interface UserMessageProps {
-	handleChange: React.ChangeEventHandler<HTMLTextAreaElement>
-}
-
-export function UserMessage({ handleChange }: UserMessageProps) {
+export function UserMessage({ setFormData, message }) {
 	return (
 		<Input
+
 			label="Message"
 			textArea
 			nativeTextAreaProps={{
+				value: message,
 				name: "message",
-				onChange: handleChange,
+				onChange: (e) => {
+					setFormData((prevData) => ({
+						...prevData,
+						message: e.target.value,
+					}))
+				},
 				style: { minHeight: 200 },
 			}}
 		/>

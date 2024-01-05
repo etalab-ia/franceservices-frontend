@@ -2,11 +2,14 @@ import Input from "@codegouvfr/react-dsfr/Input"
 import { GlobalColContainer } from "../Global/GlobalColContainer"
 import { GlobalRowContainer } from "../Global/GlobalRowContainer"
 
-interface UserInformationsProps {
-	handleChange: React.ChangeEventHandler<HTMLInputElement>
-}
-
-export function UserInformation({ handleChange }: UserInformationsProps) {
+export function UserInformation({ setFormData, formData }) {
+	const handleChange = (e) => {
+		const { name, value } = e.target
+		setFormData((prevData) => ({
+			...prevData,
+			[name]: value,
+		}))
+	}
 	return (
 		<>
 			<GlobalRowContainer extraClass="fr-mb-2w">
@@ -16,6 +19,7 @@ export function UserInformation({ handleChange }: UserInformationsProps) {
 						nativeInputProps={{
 							name: "name",
 							onChange: handleChange,
+							value: formData.name,
 						}}
 					/>
 				</GlobalColContainer>
@@ -25,6 +29,7 @@ export function UserInformation({ handleChange }: UserInformationsProps) {
 						nativeInputProps={{
 							name: "administration",
 							onChange: handleChange,
+							value: formData.administration,
 						}}
 					/>
 				</GlobalColContainer>
@@ -36,6 +41,7 @@ export function UserInformation({ handleChange }: UserInformationsProps) {
 						nativeInputProps={{
 							name: "title",
 							onChange: handleChange,
+							value: formData.title,
 						}}
 					/>
 				</GlobalColContainer>
