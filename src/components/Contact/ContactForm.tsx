@@ -3,8 +3,16 @@ import { ContactButton } from "./ContactButton"
 import { UserInformation } from "./UserInformation"
 import { UserMessage } from "./UserMessage"
 
+export type formDataTypes = {
+	title: string,
+	administration: string,
+	message: string,
+	name: string,
+	isCompleted: boolean,
+}
+
 export function ContactForm() {
-	const [formData, setFormData] = useState({
+	const [formData, setFormData] = useState<formDataTypes>({
 		title: "",
 		administration: "",
 		message: "",

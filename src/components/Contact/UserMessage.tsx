@@ -1,6 +1,6 @@
 import Input from "@codegouvfr/react-dsfr/Input"
 
-export function UserMessage({ setFormData, message }) {
+export function UserMessage({ setFormData, message } : { setFormData: any, message: string }) {
 	return (
 		<Input
 
