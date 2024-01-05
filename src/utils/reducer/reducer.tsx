@@ -14,4 +14,4 @@ const reducer = combineReducers({
 	user: userReducer,
 })
 
-export const store = configureStore({ reducer: reducer });
+export const store = configureStore({ reducer: reducer })

@@ -6,7 +6,7 @@ import { emitCloseStream } from "../utils/eventsEmitter"
 import { useDispatch } from "react-redux"
 
 export function Chatbot({ archive }) {
-	const	dispatch = useDispatch();
+	const dispatch = useDispatch()
 
 	useEffect(() => {
 		emitCloseStream(false)

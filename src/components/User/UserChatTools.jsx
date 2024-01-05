@@ -21,21 +21,19 @@ export function UserChatTools({ isArchive }) {
 	return (
 		<div className="flex items-center fr-mt-2w">
 			<GlobalColContainer>
-				{userChatToolsFunc({ stream, archive, feedback, user }, dispatch).map(
-					(tool, index) => (
-						<button
-							disabled={tool.name === "redo" && (stream.isStreaming || isArchive)}
-							key={index}
-							className={index === isSelected ? "fr-m-1v opacity-0" : "fr-m-1v opacity-[1]"}
-							onClick={() => {
-								handleClick(index)
-								tool.onClick({ stream, user }, dispatch)
-							}}
-						>
-							<img src={tool.image} alt={tool.alt} title={tool.title} />
-						</button>
-					)
-				)}
+				{userChatToolsFunc({ stream, archive, feedback, user }, dispatch).map((tool, index) => (
+					<button
+						disabled={tool.name === "redo" && (stream.isStreaming || isArchive)}
+						key={index}
+						className={index === isSelected ? "fr-m-1v opacity-0" : "fr-m-1v opacity-[1]"}
+						onClick={() => {
+							handleClick(index)
+							tool.onClick({ stream, user }, dispatch)
+						}}
+					>
+						<img src={tool.image} alt={tool.alt} title={tool.title} />
+					</button>
+				))}
 			</GlobalColContainer>
 		</div>
 	)

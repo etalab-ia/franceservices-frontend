@@ -1,18 +1,18 @@
 interface FeedbackState {
-  reasons: string[];
-  isConfirmed: boolean;
+	reasons: string[]
+	isConfirmed: boolean
 }
 
 type FeedbackAction =
-  | { type: "SET_NEW_FEEDBACK"; nextFeedback: string }
-  | { type: "RM_FEEDBACK"; rmFeedback: string }
-  | { type: "CONFIRM_FEEDBACKS" }
-  | { type: "SET_ARCHIVE_LIMIT" }
-  | { type: "RESET_FEEDBACK" };
+	| { type: "SET_NEW_FEEDBACK"; nextFeedback: string }
+	| { type: "RM_FEEDBACK"; rmFeedback: string }
+	| { type: "CONFIRM_FEEDBACKS" }
+	| { type: "SET_ARCHIVE_LIMIT" }
+	| { type: "RESET_FEEDBACK" }
 
 export const feedbackReducer = (
-  state: FeedbackState = { reasons: [], isConfirmed: false },
-  action: FeedbackAction
+	state: FeedbackState = { reasons: [], isConfirmed: false },
+	action: FeedbackAction
 ): FeedbackState => {
   switch (action.type) {
     case "SET_NEW_FEEDBACK":
