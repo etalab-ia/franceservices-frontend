@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "predev": "only-include-used-icons",
     "prebuild": "only-include-used-icons",
-    "format": "npx @biomejs/biome format . --write"
+    "format": "npx @biomejs/biome format . --write",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@codegouvfr/react-dsfr": "^1.0.4",
@@ -61,6 +62,7 @@
     "postcss": "^8.4.29",
     "rollup-plugin-url": "^3.0.1",
     "tailwindcss": "^3.3.3",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "husky": "^8.0.0"
   }
 }
