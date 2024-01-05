@@ -2,7 +2,7 @@ import { useState, Dispatch, SetStateAction } from "react"
 import Button from "@codegouvfr/react-dsfr/Button"
 import { ButtonInformation } from "../Global/ButtonInformation"
 import { contactUrl } from "../../constants/api"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { setContactData, setHeaders } from "../../utils/setData"
 import { setUserInfos } from "../../utils/manageConnexion"
 import { useFetch } from "../../utils/hooks"
@@ -30,6 +30,7 @@ export function ContactButton({
 
 	const handleClick = async () => {
 		const userToken = localStorage.getItem("authToken")
+
 		setUserInfos(userToken, dispatch, setUserAuth)
 
 		await useFetch(
