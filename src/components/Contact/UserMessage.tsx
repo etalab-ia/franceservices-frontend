@@ -1,9 +1,8 @@
 import Input from "@codegouvfr/react-dsfr/Input"
 
-export function UserMessage({ setFormData, message } : { setFormData: any, message: string }) {
+export function UserMessage({ setFormData, message }: { setFormData: any; message: string }) {
 	return (
 		<Input
-
 			label="Message"
 			textArea
 			nativeTextAreaProps={{

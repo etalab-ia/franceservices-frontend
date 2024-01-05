@@ -16,10 +16,15 @@ import { RootState } from "types"
 
  *****************************************************************************************************/
 
-export function MeetingButton({ isDisable, currQuestion, setGenerate, context } : { isDisable: boolean, currQuestion: string, setGenerate: any, context: any }) {
+export function MeetingButton({
+	isDisable,
+	currQuestion,
+	setGenerate,
+	context,
+}: { isDisable: boolean; currQuestion: string; setGenerate: any; context: any }) {
 	const dispatch = useDispatch()
-	const auth = useSelector((state : RootState) => state.auth)
-	const user = useSelector((state : RootState) => state.user)
+	const auth = useSelector((state: RootState) => state.auth)
+	const user = useSelector((state: RootState) => state.user)
 
 	const handleClick = () => {
 		const questionWithContext = setQuestionWithContext(currQuestion, context)
