@@ -21,7 +21,7 @@ export function ContactForm({ setUserAuth }: { setUserAuth: Dispatch<SetStateAct
 		isCompleted: false,
 	})
 	useEffect(() => {
-	if (
+		if (
 			formData.title.length &&
 			formData.administration.length &&
 			formData.message.length &&
@@ -35,11 +35,7 @@ export function ContactForm({ setUserAuth }: { setUserAuth: Dispatch<SetStateAct
 		<div className="fr-mx-10w">
 			<UserInformation formData={formData} setFormData={setFormData} />
 			<UserMessage message={formData.message} setFormData={setFormData} />
-			<ContactButton
-					setUserAuth={setUserAuth}
-					formData={formData}
-					setFormData={setFormData}
-			/>
+			<ContactButton setUserAuth={setUserAuth} formData={formData} setFormData={setFormData} />
 		</div>
 	)
 }
