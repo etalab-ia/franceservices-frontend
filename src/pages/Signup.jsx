@@ -4,15 +4,13 @@ import { signupFields } from "../constants/inputFields"
 import { initButtonsSignup } from "../constants/connexion"
 import { useFetch } from "../utils/hooks"
 import { userUrl } from "../constants/api"
-import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { invalidEmail, invalidPassword } from "../constants/errorMessages"
 import { LoginContainer } from "../components/Auth/LoginContainer"
 import { LoginFields } from "../components/Auth/LoginFields"
 import { ButtonInformation } from "../components/Global/ButtonInformation"
 
-// TODO: use setUserInfos
-export function Signup({ authFailed, setAuthFailed }) {
+export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
 	const dispatch = useDispatch()
 	const [password, setPassword] = useState("")
 	const [confPassword, setConfPassword] = useState("")
@@ -22,18 +20,25 @@ export function Signup({ authFailed, setAuthFailed }) {
 		e.preventDefault()
 
 		if (e.target.name === "username")
-			dispatch({ type: "SET_USERNAME", nextUsername: e.target.value })
+			setUserAuth({
+				...userAuth,
+				username: e.target.value,
+			})
 		else if (e.target.name === "password") setPassword(e.target.value)
 		else if (e.target.name === "confirmationPassword") setConfPassword(e.target.value)
-		else if (e.target.name === "email") dispatch({ type: "SET_EMAIL", nextEmail: e.target.value })
+		else if (e.target.name === "email")
+			setUserAuth({
+				...userAuth,
+				email: e.target.value,
+			})
 	}
 
 	const handleValidatePassword = () => {
 		return (
-			auth.username &&
-			auth.username.length &&
-			auth.email.length &&
-			auth.email.includes("@") &&
+			userAuth.username &&
+			userAuth.username.length &&
+			userAuth.email.length &&
+			userAuth.email.includes("@") &&
 			password.length &&
 			confPassword === password
 		)
@@ -41,8 +46,8 @@ export function Signup({ authFailed, setAuthFailed }) {
 
 	const handleClick = async () => {
 		const data = {
-			username: auth.username,
-			email: auth.email,
+			username: userAuth.username,
+			email: userAuth.email,
 			password: password,
 		}
 
@@ -53,7 +58,6 @@ export function Signup({ authFailed, setAuthFailed }) {
 				data: JSON.stringify(data),
 				headers: { "Content-Type": "application/json" },
 			},
-			dispatch
 		)
 
 		if (res.status && res.status !== 200) {

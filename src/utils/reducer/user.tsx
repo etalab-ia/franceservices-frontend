@@ -43,7 +43,7 @@ const InitialQuestion: Question = {
 	temperature: 20,
 	sources: ["service-public", "travail-emploi"],
 	should_sids: [],
-	must_not_sids: []
+	must_not_sids: [],
 }
 
 interface UserChoices {
@@ -73,7 +73,7 @@ interface User {
 	webservices: any[]
 }
 
-const	InitialUser: User = {
+const InitialUser: User = {
 	originQuestion: undefined,
 	question: InitialQuestion,
 	choices: InitialUserChoices,
@@ -82,7 +82,6 @@ const	InitialUser: User = {
 	additionalSheets: [],
 	chunks: [],
 	webservices: [],
-
 }
 
 type UserAction =
@@ -92,11 +91,11 @@ type UserAction =
 	| { type: "SET_SHEETS_FROM_ARCHIVE"; sheets: any[]; additionalSheets: any[]; webservices: any[] }
 	| { type: "REMOVE_SHEETS"; indexToRemove: number }
 	| { type: "ADD_SHEETS"; indexToAdd: number }
-	| { type: "SET_USER_QUERY", nextUserQuery: string }
+	| { type: "SET_USER_QUERY"; nextUserQuery: string }
 	| { type: "RESET_QUESTION_FIELDS" }
 	| { type: "RESET_USER_CHOICES" }
-	| { type: "SET_USER_CHOICES", nextKey: string, nextValue: string }
-	| { type: "SET_MESSAGES", nextMessage: Messages }
+	| { type: "SET_USER_CHOICES"; nextKey: string; nextValue: string }
+	| { type: "SET_MESSAGES"; nextMessage: Messages }
 
 export const userReducer = (state: User = InitialUser, action: UserAction): User => {
 	switch (action.type) {
@@ -149,9 +148,7 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
 			if (!state.sheets) return state
 
 			const sheets = state.additionalSheets.filter((index) => action.indexToAdd === index)
-			const additionalSheets = state.additionalSheets.filter(
-				(index) => action.indexToAdd !== index
-			)
+			const additionalSheets = state.additionalSheets.filter((index) => action.indexToAdd !== index)
 			const nextShouldSids = [...state.sheets.map((sheet) => sheet.sid), sheets[0].sid]
 			const nextMustNotSids = state.question.must_not_sids.filter(
 				(sid) => !nextShouldSids.includes(sid)
@@ -212,7 +209,7 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
 						text: lastMessage.text.concat(action.nextMessage.text),
 					} // update last message
 					updatedMessages.push(updatedLastMessage)
-// action.nextMessage.text
+					// action.nextMessage.text
 					return {
 						...state,
 						messages: updatedMessages,

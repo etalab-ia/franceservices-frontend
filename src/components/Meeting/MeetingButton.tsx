@@ -4,21 +4,22 @@ import { useDispatch, useSelector } from "react-redux"
 import { usePost } from "../../utils/hooks"
 import { useEffect } from "react"
 import { setQuestionWithContext } from "../../utils/setData"
+import { RootState } from "types"
 
-/*****************************************************************************************************
-	
-	FUNCTIONS:
+/**
 
-	**	setQuestionWithContext: improve user prompt with current question & context to send
+    FUNCTIONS:
+
+        setQuestionWithContext: improve user prompt with current question & context to send
             more precised user_query to /stream endpoint.
 
-    **  handleClick: setGenerate to true to switch to meeting stream page
+      handleClick: setGenerate to true to switch to meeting stream page
 
- *****************************************************************************************************/
+ **/
 
 export function MeetingButton({ isDisable, currQuestion, setGenerate, context }) {
 	const dispatch = useDispatch()
-	const user = useSelector((state) => state.user)
+	const user = useSelector((state: RootState) => state.user)
 
 	const handleClick = () => {
 		const questionWithContext = setQuestionWithContext(currQuestion, context)
