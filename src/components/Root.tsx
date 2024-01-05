@@ -86,7 +86,7 @@ export const Root = () => {
 				/>
 				<Route
 					path="/signup"
-					element={<Signup authFailed={authFailed} setAuthFailed={setAuthFailed} />}
+					element={<Signup authFailed={authFailed} setAuthFailed={setAuthFailed} userAuth={userAuth} setUserAuth={setUserAuth}/>}
 				/>
 				<Route path="/reset-password" element={<ResetPassword setAuthFailed={setAuthFailed} />} />
 				<Route
