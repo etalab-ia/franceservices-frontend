@@ -107,17 +107,19 @@ export const getIndexes = async (data, userToken, dispatch, indexType, chunkSize
 	dispatch({ type: actionType, [indexType]: res })
 }
 
-const getIndexesData = async (data, userToken, dispatch) => {
+const getIndexesData = async (data, dispatch) => {
+	const userToken = localStorage.getItem("authToken")
+
 	getIndexes(data, userToken, dispatch, "sheets", 10)
 	getIndexes(data, userToken, dispatch, "chunks", 7)
 }
 
-export const setIndexesData = (data, setTiles, userToken, dispatch) => {
+export const setIndexesData = (data, setTiles, dispatch) => {
 	setTiles([])
 
 	if (!data || !data.question || data.question.length === 0) return
 
-	getIndexesData(data, userToken, dispatch)
+	getIndexesData(data, dispatch)
 }
 
 export const setTilesFromSheets = (sheets, setTiles) => {

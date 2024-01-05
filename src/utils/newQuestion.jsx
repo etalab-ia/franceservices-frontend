@@ -1,7 +1,7 @@
 import { usePost } from "./hooks"
 
-export function postNewQuestion(dispatch, auth, question, isNewQuestion) {
-	usePost(auth, question, dispatch)
+export function postNewQuestion(dispatch, question, isNewQuestion) {
+	usePost(question, dispatch)
 	dispatch({ type: "RESET_FEEDBACK" })
 	isNewQuestion !== 0 && dispatch({ type: "RESET_QUESTION_FIELDS" })
 }

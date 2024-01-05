@@ -15,7 +15,7 @@ const getLastMessage = (archive, stream, isArchive) => {
 }
 
 async function handleRedo(state, dispatch) {
-	const { archive, feedback, auth, user, stream } = state
+	const { archive, feedback, user, stream } = state
 	const archiveIndex = archive.length - 1
 	const isArchive = user.choices.newQuestion !== NOT_SET
 	let newLimit = isArchive ? archive[archiveIndex].limit : user.question.limit
@@ -36,7 +36,7 @@ async function handleRedo(state, dispatch) {
 
 	const question = setQuestionFromRegeneration(newMode, newText, newLimit, user.question.musNotSids)
 
-	usePost(auth, question, dispatch)
+	usePost(question, dispatch)
 	console.log("chat regeneration")
 
 	return dispatch({ type: "SET_ARCHIVE_LIMIT", nextLimit: newLimit })

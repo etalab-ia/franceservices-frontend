@@ -1,12 +1,12 @@
+import { useState, Dispatch, SetStateAction } from "react"
 import Button from "@codegouvfr/react-dsfr/Button"
-import { useState } from "react"
 import { ButtonInformation } from "../Global/ButtonInformation"
 import { contactUrl } from "../../constants/api"
 import { useDispatch, useSelector } from "react-redux"
 import { setContactData, setHeaders } from "../../utils/setData"
 import { setUserInfos } from "../../utils/manageConnexion"
 import { useFetch } from "../../utils/hooks"
-import { RootState } from "../../../types"
+import { UserAuth } from "src/utils/reducer/auth"
 
 interface ContactButtonProps {
 	isDisable: boolean
@@ -14,22 +14,30 @@ interface ContactButtonProps {
 	message: string
 	name: string
 	title: string
+	setUserAuth: Dispatch<SetStateAction<UserAuth>>
 }
 
-export function ContactButton({ isDisable, administration, message, name, title } : ContactButtonProps) {
+export function ContactButton({
+	isDisable,
+	administration,
+	message,
+	name,
+	title,
+	setUserAuth,
+}: ContactButtonProps) {
 	const [isSend, setIsSend] = useState(false)
-	const auth = useSelector((state: RootState) => state.auth)
 	const dispatch = useDispatch()
 
 	const handleClick = async () => {
-		if (!auth.email.length || !auth.username) setUserInfos(auth.userToken, dispatch)
+		const userToken = localStorage.getItem("authToken")
+		setUserInfos(userToken, dispatch, setUserAuth)
 
 		await useFetch(
 			contactUrl,
 			"POST",
 			{
 				data: setContactData(title + " from: " + name, message, administration),
-				headers: setHeaders(auth.userToken, false),
+				headers: setHeaders(userToken, false),
 			},
 			dispatch
 		)
