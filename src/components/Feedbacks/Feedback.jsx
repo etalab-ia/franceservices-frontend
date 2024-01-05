@@ -1,12 +1,15 @@
 import { UserFeedbackSatisfaction } from "./UserFeedbackSatisfaction"
 import { UserFeedbackInput } from "./UserFeedbackInput"
-import { NOT_SET } from "../../constants/status"
-import { useSelector } from "react-redux"
 import { GlobalColContainer } from "../Global/GlobalColContainer"
+import { useEffect } from "react"
+import { InitialFeedback } from "../../utils/feedback"
 
 export function Feedback({ isFirst, feedback, setFeedback }) {
-	const user = useSelector((state) => state.user)
 
+	useEffect(() => {
+		setFeedback(InitialFeedback)
+	}, [])
+	
 	return (
 		<GlobalColContainer>
 			<div className="fr-ml-10w">
