@@ -1,12 +1,11 @@
-import Input from "@codegouvfr/react-dsfr/Input"
 import ButtonsGroup from "@codegouvfr/react-dsfr/ButtonsGroup"
+import Input from "@codegouvfr/react-dsfr/Input"
 import { useState } from "react"
-import { initButtonsReset } from "../constants/connexion"
-import { resetPasswordMailUrl } from "../constants/api"
-import { useFetch } from "../utils/hooks"
-import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { LoginContainer } from "../components/Auth/LoginContainer"
+import { resetPasswordMailUrl } from "../constants/api"
+import { initButtonsReset } from "../constants/connexion"
+import { useFetch } from "../utils/hooks"
 
 // TODO: use setUserAuth
 export function ResetPassword({ setAuthFailed }) {

@@ -60,10 +60,20 @@ export const setArchiveBody = (item, index, userQuestion, dispatch) => {
 	}
 
 	return [
-		<div {...commonDivProps}>{title}</div>,
-		<div {...commonDivProps}>{tags}</div>,
-		<div {...commonDivProps}>{item.date}</div>,
-		<div {...commonDivProps}>{item.source}</div>,
-		<div {...commonDivProps}>{type}</div>,
+		<div key="title" {...commonDivProps}>
+			{title}
+		</div>,
+		<div key="tags" {...commonDivProps}>
+			{tags}
+		</div>,
+		<div key="date" {...commonDivProps}>
+			{item.date}
+		</div>,
+		<div key="source" {...commonDivProps}>
+			{item.source}
+		</div>,
+		<div key="type" {...commonDivProps}>
+			{type}
+		</div>,
 	]
 }
