@@ -4,15 +4,12 @@ import { signupFields } from "../constants/inputFields"
 import { initButtonsSignup } from "../constants/connexion"
 import { useFetch } from "../utils/hooks"
 import { resetPasswordUrl } from "../constants/api"
-import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux"
 import { changePasswordFailed } from "../constants/errorMessages"
 import { LoginContainer } from "../components/Auth/LoginContainer"
 import { LoginFields } from "../components/Auth/LoginFields"
 import { ButtonInformation } from "../components/Global/ButtonInformation"
 
 export function NewPassword({ authFailed, setAuthFailed }) {
-	const dispatch = useDispatch()
 	const [password, setPassword] = useState("")
 	const [confPassword, setConfPassword] = useState("")
 	const urlParams = new URL(window.location.href)
@@ -35,15 +32,10 @@ export function NewPassword({ authFailed, setAuthFailed }) {
 			password: password,
 		}
 
-		const res = await useFetch(
-			resetPasswordUrl,
-			"POST",
-			{
-				data: JSON.stringify(data),
-				headers: { "Content-Type": "application/json" },
-			},
-			dispatch
-		)
+		const res = await useFetch(resetPasswordUrl, "POST", {
+			data: JSON.stringify(data),
+			headers: { "Content-Type": "application/json" },
+		})
 
 		if (res.status && res.status !== 200) setAuthFailed(true)
 

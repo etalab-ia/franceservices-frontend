@@ -8,7 +8,7 @@ import { AppDispatch, RootState } from "../../types"
 export const useAppDispatch: () => AppDispatch = useDispatch
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
-export const useFetch = async (url: string, method: string, props, dispatch: AppDispatch) => {
+export const useFetch = async (url: string, method: string, props) => {
 	const { data, headers } = props
 	const credentials = "include"
 
@@ -20,7 +20,6 @@ export const useFetch = async (url: string, method: string, props, dispatch: App
 			body: data === undefined ? "" : data,
 		})
 
-		// if (response.status === 401) return dispatch({ type: "LOGOUT" })
 		if (url.includes("start")) return response
 		else {
 			const jsonData = await response.json()
@@ -84,7 +83,7 @@ export async function usePost(question, dispatch) {
 	const userToken = localStorage.getItem("authToken")
 	const headers = setHeaders(userToken, false)
 	const data = setUserQuestion(question)
-	const res = await useFetch(apiUrl, "POST", { data: JSON.stringify(data), headers }, dispatch)
+	const res = await useFetch(apiUrl, "POST", { data: JSON.stringify(data), headers })
 
 	return await useStream(dispatch, res.id)
 }
