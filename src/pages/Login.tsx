@@ -49,6 +49,7 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
 
 		const handleClick = async () => {
 			
+			// TODO: what if username contains @ ?
 			const data = id.includes('@') ? {
 				email: id,
 				password: password,
@@ -71,9 +72,9 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
 				dispatch
 			)
 
-			if ((res.status && res.status !== 200) || !res.token) setAuthFailed(true)
+			if ((res.status && res.status !== 200) || !res.token) return setAuthFailed(true)
 
-			setUserInfos(res.token, dispatch, setUserAuth)
+			return setUserInfos(res.token, dispatch, setUserAuth)
 		}
 
 		return (
