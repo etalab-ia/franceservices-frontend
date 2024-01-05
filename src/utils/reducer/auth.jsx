@@ -26,17 +26,6 @@ export const authReducer = (state = initialAuth, action) => {
 			}
 		case "LOGOUT":
 			return initialAuth
-		case "AUTH_FAILED":
-			return {
-				...state,
-				isLogin: false,
-				authFailed: true,
-			}
-		case "RESET_AUTH_FAILED":
-			return {
-				...state,
-				authFailed: false,
-			}
 		default: {
 			return state
 		}

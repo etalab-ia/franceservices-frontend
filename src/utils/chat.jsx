@@ -37,6 +37,7 @@ async function handleRedo(state, dispatch) {
 	const question = setQuestionFromRegeneration(newMode, newText, newLimit, user.question.musNotSids)
 
 	usePost(auth, question, dispatch)
+	console.log("chat regeneration")
 
 	return dispatch({ type: "SET_ARCHIVE_LIMIT", nextLimit: newLimit })
 }
