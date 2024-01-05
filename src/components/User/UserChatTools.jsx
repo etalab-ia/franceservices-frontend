@@ -8,6 +8,7 @@ export function UserChatTools({ isArchive }) {
 	const stream = useSelector((state) => state.stream)
 	const user = useSelector((state) => state.user)
 	const archive = useSelector((state) => state.archive)
+	// TODO: change
 	const feedback = useSelector((state) => state.feedback)
 	const dispatch = useDispatch()
 	const [isSelected, setIsSelected] = useState()

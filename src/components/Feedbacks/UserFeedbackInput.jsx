@@ -2,22 +2,21 @@ import { askingQualityPrecisions, primaryButtons, secondaryButtons } from "../..
 import { UserFeedbackOptions } from "./UserFeedbackOptions"
 // import { UserFeedbackThanks } from "./UserFeedbackThanks";
 import { UserFeedbackResume } from "./UserFeedbackResume"
-import { useSelector } from "react-redux"
 
-export function UserFeedbackInput({ activeTab, isFirst }) {
+export function UserFeedbackInput({ isFirst, feedback, setFeedback }) {
 	const buttons = isFirst ? primaryButtons : secondaryButtons
-	const feedback = useSelector((state) => state.feedback)
+	const activeTab = feedback.isGood
 
 	return (
 		<>
 			{!feedback.isConfirmed ? (
 				<div>
 					<p className="mt-4">{askingQualityPrecisions(buttons[activeTab].type)}</p>
-					<UserFeedbackOptions activeTab={activeTab} isFirst={isFirst} />
+					<UserFeedbackOptions activeTab={activeTab} isFirst={isFirst} feedback={feedback} setFeedback={setFeedback}/>
 				</div>
 			) : (
 				<div>
-					<UserFeedbackResume />
+					<UserFeedbackResume feedback={feedback}/>
 					{/* <UserFeedbackThanks /> */}
 				</div>
 			)}

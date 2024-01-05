@@ -12,7 +12,7 @@ const AskingResponseQuality = ({ tabsLen }) => {
 	)
 }
 
-export function UserExperience() {
+export function UserExperience({ feedback, setFeedback }) {
 	const stream = useSelector((state) => state.stream)
 	const tabsLen = stream.historyStream.length
 
@@ -24,7 +24,7 @@ export function UserExperience() {
 						<Avatar user="agent" />
 						<AskingResponseQuality tabsLen={tabsLen} />
 					</GlobalRowContainer>
-					<Feedback isFirst={tabsLen === 1} />
+					<Feedback isFirst={tabsLen === 1} feedback={feedback} setFeedback={setFeedback}/>
 				</div>
 			)}
 		</>
