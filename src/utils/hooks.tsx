@@ -91,6 +91,7 @@ export async function generateStream(question: Question, dispatch, chatId: numbe
 		data: JSON.stringify(stream_data),
 		headers,
 	})
+	dispatch({ type: "SET_STREAM_ID", nextStreamId: stream.id })
 
 	return await useStream(dispatch, stream.id)
 }
