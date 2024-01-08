@@ -20,19 +20,22 @@ export const setUserInfos = async (
 		data: null,
 	})
 
+	if (userInfos.detail === "Unauthorized") return rmAuth()
+
 	storeAuth(token)
 
 	if (token !== "null")
 		return setUserAuth({
 			email: userInfos.email,
 			username: userInfos.username,
+			// TODO: see if we cand delete userAuth.authToken
 			authToken: token,
 			isLogin: true,
 		})
 	return setUserAuth(InitialUserAuth)
 }
 
-const rmAuth = () => {
+export const rmAuth = () => {
 	localStorage.removeItem("authToken")
 }
 

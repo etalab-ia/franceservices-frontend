@@ -24,7 +24,7 @@ export const ResponseExplanation = ({ chunks }) => {
 
 	return (
 		<div>
-			{chunks && (
+			{chunks && chunks.length !== 0 && (
 				<>
 					<Accordion
 						className="fr-mt-3v"
