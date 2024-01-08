@@ -1,4 +1,3 @@
-import { AppDispatch } from "types"
 import { setUserInfos } from "./manageConnexion"
 import { UserAuth } from "./auth"
 import { Dispatch, SetStateAction } from "react"
