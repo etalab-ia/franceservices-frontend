@@ -61,6 +61,7 @@ interface User {
 	chunks: any[]
 	webservices: any[]
 	chatId: number
+	streamId: number
 }
 
 const InitialUser: User = {
@@ -73,6 +74,7 @@ const InitialUser: User = {
 	chunks: [],
 	webservices: [],
 	chatId: 0,
+	streamId: 0,
 }
 
 type UserAction =
@@ -82,11 +84,12 @@ type UserAction =
 	| { type: "SET_SHEETS_FROM_ARCHIVE"; sheets: any[]; additionalSheets: any[]; webservices: any[] }
 	| { type: "REMOVE_SHEETS"; indexToRemove: number }
 	| { type: "ADD_SHEETS"; indexToAdd: number }
-	| { type: "SET_USER_QUERY"; nextUserQuery: string, nextChatId: number }
+	| { type: "SET_USER_QUERY"; nextUserQuery: string; nextChatId: number }
 	| { type: "RESET_QUESTION_FIELDS" }
 	| { type: "RESET_USER_CHOICES" }
 	| { type: "SET_USER_CHOICES"; nextKey: string; nextValue: string }
 	| { type: "SET_MESSAGES"; nextMessage: Messages }
+	| { type: "SET_STREAM_ID"; nextStreamId: number }
 
 export const userReducer = (state: User = InitialUser, action: UserAction): User => {
 	switch (action.type) {
@@ -212,7 +215,11 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
 				...state,
 				messages: [...state.messages, action.nextMessage],
 			}
-
+		case "SET_STREAM_ID":
+			return {
+				...state,
+				streamId: action.nextStreamId
+			}
 		default: {
 			return state
 		}

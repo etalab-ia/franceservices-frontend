@@ -2,32 +2,29 @@ import thumbsUp from "../../../icons/feedbacks/thumbsUp.svg"
 import thumbsDown from "../../../icons/feedbacks/thumbsDown.svg"
 import { useFetch } from "../../utils/hooks"
 import { feedbackUrl } from "../../constants/api"
-// import { setHeaders } from "../../utils/setData";
-// import { useDispatch, useSelector } from "react-redux";
+import { setHeaders } from "../../utils/setData";
 import { useState } from "react"
 import { ButtonInformation } from "../Global/ButtonInformation"
 import { thankFeedback } from "../../constants/feedback"
-import { NOT_SET } from "../../constants/status"
 import { GlobalParagraph } from "../Global/GlobalParagraph"
+import { useSelector } from "react-redux"
+import { RootState } from "types";
 
 export const MeetingFeedback = () => {
-	// const userToken = localStorage.getItem("authToken")
-	const [isClicked, setIsClicked] = useState(NOT_SET)
-	// const	dispatch = useDispatch();
+	const streamId = useSelector((state: RootState) => state.user.streamId)
+	const [isClicked, setIsClicked] = useState<boolean | null>(null)
 
-	const handleClick = (isGood) => {
-		// TODO: WHEN BACK IS READY: sent boolean to /feedback endpoint
+	const handleClick = (isGood: boolean | null)  => {
 
-		// const	data = {
-		// 	isGood: isGood,
-		// 	message: '',
-		// 	reasons: ''
-		// }
+		const data = {
+			is_good: isGood,
+			message: "",
+		}
 
-		// useFetch(`${feedbackUrl}/${chat_id}/${stream_id}`, 'POST', {
-		// 	data: data,
-		// 	headers: setHeaders(userToken, false)
-		// });
+		useFetch(`${feedbackUrl}/${streamId}`, 'POST', {
+			data: JSON.stringify(data),
+			headers: setHeaders(false)
+		});
 
 		setIsClicked(isGood)
 	}
@@ -37,12 +34,12 @@ export const MeetingFeedback = () => {
 			<button
 				onClick={() => handleClick(true)}
 				className={`fr-mr-1w border border-[#DDD] ${
-					isClicked && isClicked !== NOT_SET ? "bg-purple" : "bg-white"
+					isClicked === true ? "bg-purple" : "bg-white"
 				}`}
 			>
 				<img
 					className={`fr-m-1w ${
-						isClicked && isClicked !== NOT_SET ? "mr-2 brightness-0 invert-[1]" : "mr-2"
+						isClicked && isClicked === true ? "mr-2 brightness-0 invert-[1]" : "mr-2"
 					}`}
 					src={thumbsUp}
 					alt="Feedback positif"
@@ -50,15 +47,15 @@ export const MeetingFeedback = () => {
 			</button>
 			<button
 				onClick={() => handleClick(false)}
-				className={`fr-mr-1w border border-[#DDD] ${!isClicked ? "bg-purple" : "bg-white"}`}
+				className={`fr-mr-1w border border-[#DDD] ${isClicked === false ? "bg-purple" : "bg-white"}`}
 			>
 				<img
-					className={`fr-m-1w ${!isClicked ? "mr-2 brightness-0 invert-[1]" : "mr-2"}`}
+					className={`fr-m-1w ${isClicked === false ? "mr-2 brightness-0 invert-[1]" : "mr-2"}`}
 					src={thumbsDown}
 					alt="Feedback négatif"
 				/>
 			</button>
-			{isClicked !== NOT_SET && (
+			{isClicked !== null && (
 				<GlobalParagraph extraClass="fr-text--xs">{thankFeedback}</GlobalParagraph>
 			)}
 		</div>
