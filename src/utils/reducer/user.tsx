@@ -102,6 +102,7 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
 		case "SET_INITIAL_CHAT":
 			return InitialUser
 		case "SET_SHEETS":
+			console.log('set sheets')
 			return {
 				...state,
 				sheets: action.sheets.slice(0, 3),
@@ -123,8 +124,8 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
 		case "REMOVE_SHEETS": {
 			if (!state.sheets) return state
 
-			const sheets = state.sheets.filter((index) => action.indexToRemove !== index)
-			const additionalSheets = state.sheets.filter((index) => action.indexToRemove === index)
+			const sheets = state.sheets.filter((_, index) => action.indexToRemove !== index)
+			const additionalSheets = state.sheets.filter((_, index) => action.indexToRemove === index)
 			const nextMustNotSids = [...state.question.must_not_sids, additionalSheets[0].sid]
 
 			if (JSON.stringify(nextMustNotSids) === JSON.stringify(state.question.must_not_sids))
@@ -147,8 +148,8 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
 		case "ADD_SHEETS": {
 			if (!state.sheets) return state
 
-			const sheets = state.additionalSheets.filter((index) => action.indexToAdd === index)
-			const additionalSheets = state.additionalSheets.filter((index) => action.indexToAdd !== index)
+			const sheets = state.additionalSheets.filter((_, index) => action.indexToAdd === index)
+			const additionalSheets = state.additionalSheets.filter((_, index) => action.indexToAdd !== index)
 			const nextShouldSids = [...state.sheets.map((sheet) => sheet.sid), sheets[0].sid]
 			const nextMustNotSids = state.question.must_not_sids.filter(
 				(sid) => !nextShouldSids.includes(sid)
