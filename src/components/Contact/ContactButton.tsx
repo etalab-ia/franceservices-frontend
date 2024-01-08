@@ -20,10 +20,9 @@ interface ContactButtonProps {
 
 export function ContactButton({ formData, clearForm, setUserAuth }: ContactButtonProps) {
 	const [isSend, setIsSend] = useState(false)
+	const userToken = localStorage.getItem("authToken")
 
 	const handleClick = async () => {
-		const userToken = localStorage.getItem("authToken")
-
 		setUserInfos(userToken, setUserAuth)
 
 		await useFetch(contactUrl, "POST", {
@@ -32,9 +31,8 @@ export function ContactButton({ formData, clearForm, setUserAuth }: ContactButto
 				formData.message,
 				formData.administration
 			),
-			headers: setHeaders(userToken, false),
+			headers: setHeaders(false),
 		})
-		console.log("Message envoyé")
 		clearForm()
 		setIsSend(true)
 	}

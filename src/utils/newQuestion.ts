@@ -1,7 +1,8 @@
-import { usePost } from "./hooks"
+import { generateStream } from "./hooks"
 
 export function postNewQuestion(dispatch, question, isNewQuestion) {
-	usePost(question, dispatch)
+	// TODO: fix chat page with new /chat architecture
+	generateStream(question, dispatch, 0)
 	dispatch({ type: "RESET_FEEDBACK" })
 	isNewQuestion !== 0 && dispatch({ type: "RESET_QUESTION_FIELDS" })
 }

@@ -5,7 +5,7 @@ import { GlobalSecondaryTitle } from "../Global/GlobalSecondaryTitle"
 import { GlobalColContainer } from "../Global/GlobalColContainer"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { usePost } from "../../utils/hooks"
+import { generateStream } from "../../utils/hooks"
 import { emitCloseStream } from "../../utils/eventsEmitter"
 import { getIndexes, setQuestionFromRegeneration } from "../../utils/setData"
 
@@ -26,7 +26,6 @@ export const SheetsAdditionalButtons = ({ isModifiable, setIsModifiable, archive
 		? "fr-icon-save-3-fill fr-icon--sm flex justify-end items-center"
 		: "fr-icon-settings-5-fill fr-icon--sm flex justify-end items-center"
 	const user = useSelector((state) => state.user)
-	const userToken = localStorage.getItem("authToken")
 	const [deletedSheets, setDeletedSheets] = useState([])
 	const dispatch = useDispatch()
 
@@ -59,8 +58,8 @@ export const SheetsAdditionalButtons = ({ isModifiable, setIsModifiable, archive
 		}
 
 		emitCloseStream(false)
-		usePost(question, dispatch)
-		getIndexes(body, userToken, dispatch, "chunks", user.question.limit)
+		generateStream(question, dispatch, user.chatId)
+		getIndexes(body, dispatch, "chunks", user.question.limit)
 	}, [deletedSheets])
 
 	return (

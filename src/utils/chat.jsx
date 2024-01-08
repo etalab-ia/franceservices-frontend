@@ -1,6 +1,6 @@
 import redo from "../../icons/usertools/redo.svg"
 import copy from "../../icons/usertools/copy.svg"
-import { usePost } from "./hooks"
+import { generateStream } from "./hooks"
 import { setQuestionFromRegeneration } from "./setData"
 import { NOT_SET } from "../constants/status"
 
@@ -14,6 +14,9 @@ const getLastMessage = (archive, stream, isArchive) => {
 	return base[base.length - 1]
 }
 
+/*
+** Regenerate answer
+*/
 async function handleRedo(state, dispatch) {
 	const { archive, feedback, user, stream } = state
 	const archiveIndex = archive.length - 1
@@ -25,7 +28,7 @@ async function handleRedo(state, dispatch) {
 	if (feedback.reasons.includes("Trop long")) {
 		newText = "Résume ce texte : " + newText
 		newLimit -= 2
-	} else if (feedback.reasons.includes("Incohérent")) newText = "Reforume ce texte : " + newText
+	} else if (feedback.reasons.includes("Incohérent")) newText = "Reformule ce texte : " + newText
 	else if (feedback.reasons.includes("Manque de sources")) {
 		newLimit += 2
 		newMode = "rag"
@@ -36,8 +39,7 @@ async function handleRedo(state, dispatch) {
 
 	const question = setQuestionFromRegeneration(newMode, newText, newLimit, user.question.musNotSids)
 
-	usePost(question, dispatch)
-	console.log("chat regeneration")
+	generateStream(question, dispatch, user.chatId)
 
 	return dispatch({ type: "SET_ARCHIVE_LIMIT", nextLimit: newLimit })
 }
