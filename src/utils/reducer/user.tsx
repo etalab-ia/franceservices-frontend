@@ -1,3 +1,4 @@
+import { type Question } from "types"
 import { initialChatbotMessage } from "../../constants/chatbotProps"
 
 /*****************************************************************************************************
@@ -18,19 +19,7 @@ import { initialChatbotMessage } from "../../constants/chatbotProps"
 
  *****************************************************************************************************/
 
-interface Question {
-	model_name: "albert-light"
-	mode: "rag"
-	query: string | undefined
-	limit: number
-	context: string | undefined
-	institution: string | undefined
-	links: string | undefined
-	temperature: number
-	sources: ["service-public", "travail-emploi"]
-	should_sids: string[]
-	must_not_sids: string[]
-}
+
 
 const InitialQuestion: Question = {
 	model_name: "albert-light",
@@ -71,6 +60,7 @@ interface User {
 	additionalSheets: any[]
 	chunks: any[]
 	webservices: any[]
+	chatId: number
 }
 
 const InitialUser: User = {
@@ -82,6 +72,7 @@ const InitialUser: User = {
 	additionalSheets: [],
 	chunks: [],
 	webservices: [],
+	chatId: 0,
 }
 
 type UserAction =
@@ -91,7 +82,7 @@ type UserAction =
 	| { type: "SET_SHEETS_FROM_ARCHIVE"; sheets: any[]; additionalSheets: any[]; webservices: any[] }
 	| { type: "REMOVE_SHEETS"; indexToRemove: number }
 	| { type: "ADD_SHEETS"; indexToAdd: number }
-	| { type: "SET_USER_QUERY"; nextUserQuery: string }
+	| { type: "SET_USER_QUERY"; nextUserQuery: string, nextChatId: number }
 	| { type: "RESET_QUESTION_FIELDS" }
 	| { type: "RESET_USER_CHOICES" }
 	| { type: "SET_USER_CHOICES"; nextKey: string; nextValue: string }
@@ -102,7 +93,6 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
 		case "SET_INITIAL_CHAT":
 			return InitialUser
 		case "SET_SHEETS":
-			console.log('set sheets')
 			return {
 				...state,
 				sheets: action.sheets.slice(0, 3),
@@ -180,6 +170,7 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
 					...state.question,
 					query: action.nextUserQuery,
 				},
+				chatId: action.nextChatId,
 			}
 		case "RESET_QUESTION_FIELDS":
 			return {

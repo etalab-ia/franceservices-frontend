@@ -1,9 +1,9 @@
-import { apiUrl } from "../constants/api"
+import { chatUrl, getChatsUrl, streamUrl } from "../constants/api"
 import { EventSourcePolyfill } from "event-source-polyfill"
 import { setHeaders, setUserQuestion } from "./setData"
 import { onCloseStream } from "./eventsEmitter"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
-import { AppDispatch, RootState } from "../../types"
+import { AppDispatch, Question, RootState } from "../../types"
 
 export const useAppDispatch: () => AppDispatch = useDispatch
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
@@ -59,10 +59,12 @@ function handleStreamError(e, stream_chat) {
 	}
 }
 
-export const useStream = async (dispatch, id) => {
-	const userToken = localStorage.getItem("authToken")
-	const stream_chat = new EventSourcePolyfill(`${apiUrl}/${id}/start`, {
-		headers: setHeaders(userToken, true),
+/*
+ **	Manage stream
+ */
+export const useStream = async (dispatch, id: number) => {
+	const stream_chat = new EventSourcePolyfill(`${streamUrl}/${id}/start`, {
+		headers: setHeaders(true),
 		withCredentials: true,
 	})
 
@@ -79,11 +81,16 @@ export const useStream = async (dispatch, id) => {
 	})
 }
 
-export async function usePost(question, dispatch) {
-	const userToken = localStorage.getItem("authToken")
-	const headers = setHeaders(userToken, false)
-	const data = setUserQuestion(question)
-	const res = await useFetch(apiUrl, "POST", { data: JSON.stringify(data), headers })
+/*
+ **  Generates new stream from a chatId
+ */
+export async function generateStream(question: Question, dispatch, chatId: number) {
+	const headers = setHeaders(false)
+	const stream_data = setUserQuestion(question)
+	const stream = await useFetch(streamUrl + `/chat/${chatId}`, "POST", {
+		data: JSON.stringify(stream_data),
+		headers,
+	})
 
-	return await useStream(dispatch, res.id)
+	return await useStream(dispatch, stream.id)
 }

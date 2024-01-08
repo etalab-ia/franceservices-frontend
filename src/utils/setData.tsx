@@ -1,7 +1,9 @@
 import { indexesUrl } from "../constants/api"
 import { useFetch } from "./hooks"
 
-export const setHeaders = (token: string, isEventSource: boolean) => {
+export const setHeaders = (isEventSource: boolean) => {
+	const token = localStorage.getItem("authToken")
+
 	const headers = isEventSource
 		? {
 				Authorization: `Bearer ${token}`,
@@ -84,7 +86,7 @@ export const setQuestionWithContext = (question: string, context) => {
 		SP SHEETS
  **************************/
 
-const setIndexesBody = (data, name, limit) => {
+const setIndexesBody = (data, name, limit: number) => {
 	const body = JSON.stringify({
 		name: name,
 		query: data.question,
@@ -97,21 +99,14 @@ const setIndexesBody = (data, name, limit) => {
 	return body
 }
 
-export const getIndexes = async (data, userToken, dispatch, indexType, chunkSize) => {
+export const getIndexes = async (data, dispatch, indexType: "sheets" | "chunks", chunkSize: number) => {
 	const actionType = indexType === "sheets" ? "SET_SHEETS" : "SET_CHUNKS"
 	const res = await useFetch(indexesUrl, "POST", {
 		data: setIndexesBody(data, indexType, chunkSize),
-		headers: setHeaders(userToken, false),
+		headers: setHeaders(false),
 	})
 
 	dispatch({ type: actionType, [indexType]: res })
-}
-
-const getIndexesData = async (data, dispatch) => {
-	const userToken = localStorage.getItem("authToken")
-
-	getIndexes(data, userToken, dispatch, "sheets", 10)
-	getIndexes(data, userToken, dispatch, "chunks", 7)
 }
 
 export const setIndexesData = (data, setTiles, dispatch) => {
@@ -119,7 +114,7 @@ export const setIndexesData = (data, setTiles, dispatch) => {
 
 	if (!data || !data.question || data.question.length === 0) return
 
-	getIndexesData(data, dispatch)
+	getIndexes(data, dispatch, "sheets", 10)
 }
 
 export const setTilesFromSheets = (sheets, setTiles) => {
