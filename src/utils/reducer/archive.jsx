@@ -1,3 +1,4 @@
+// TODO WHEN BACK IS READY: REMOVE ARCHIVE REDUCER
 export const archiveReducer = (state = [], action) => {
 	switch (action.type) {
 		case "SET_ARCHIVE": {

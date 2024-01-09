@@ -57,7 +57,7 @@ export const SheetsAdditionalButtons = ({ isModifiable, setIsModifiable, archive
 			must_not_sids: user.question.must_not_sids,
 		}
 
-		emitCloseStream(false)
+		emitCloseStream()
 		generateStream(question, dispatch, user.chatId)
 		getIndexes(body, dispatch, "chunks", user.question.limit)
 	}, [deletedSheets])

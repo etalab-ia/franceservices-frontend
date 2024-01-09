@@ -2,8 +2,8 @@ import EventEmitter from "events"
 
 const eventEmitter = new EventEmitter()
 
-export const emitCloseStream = (isStreaming) => {
-	eventEmitter.emit("closeStream", isStreaming)
+export const emitCloseStream = () => {
+	eventEmitter.emit("closeStream")
 }
 
 export const onCloseStream = (listener) => {

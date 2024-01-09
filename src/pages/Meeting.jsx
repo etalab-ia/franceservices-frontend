@@ -27,7 +27,7 @@ export function Meeting() {
 	})
 
 	useEffect(() => {
-		!generate && emitCloseStream(false)
+		!generate && emitCloseStream()
 	}, [generate])
 
 	return (

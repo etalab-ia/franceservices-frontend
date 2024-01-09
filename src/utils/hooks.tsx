@@ -76,8 +76,11 @@ export const useStream = async (dispatch, id: number) => {
 		handleStreamError(e, stream_chat)
 	}
 	onCloseStream(() => {
-		stream_chat.close()
+		if (stream_chat) {
+			stream_chat.close()
+		}
 		dispatch({ type: "SET_INITIAL_STREAM" })
+		dispatch({ type: "RESET_USER" })
 	})
 }
 
