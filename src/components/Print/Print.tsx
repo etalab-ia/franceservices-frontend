@@ -4,6 +4,12 @@ import ReactToPrint from "react-to-print"
 import { Chatbot } from "../../pages/Chatbot"
 import { MeetingPage } from "../Meeting/MeetingPage"
 
+/**********************************************************************************************
+		
+	**	Print selected archive thanks to ReactToPrint OR go back to Archive summary
+
+ **********************************************************************************************/
+
 // TODO: change archive type
 interface PrintProps {
 	archive: any
@@ -13,6 +19,7 @@ interface PrintProps {
 
 export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
 	({ archive, type, setArchiveTab }, ref) => {
+
 		const handleClick = () => {
 			setArchiveTab(null)
 		}
@@ -37,7 +44,6 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
 						content={() => (ref && "current" in ref ? ref.current : null)}
 					/>
 				</div>
-
 				<div ref={ref as React.RefObject<HTMLDivElement>}>
 					{type === "qr" && <Chatbot archive={archive} />}
 					{type === "meetings" && (

@@ -5,15 +5,14 @@ import { StreamingMessage } from "../Chat/StreamingMessage"
 import { GlobalColContainer } from "../Global/GlobalColContainer"
 import { GlobalStream } from "../Global/GlobalStream"
 
-export function DisplayStream({ stream, tabs }) {
+export function DisplayStream({ stream }) {
 	const tabsLen = stream.historyStream.length
 	const [currLen, setCurrLen] = useState(tabsLen)
 	const [activeTab, setActiveTab] = useState(tabsLen + 1)
 	const conditionTab = !stream.isStreaming && stream.historyStream.length > 1
 	const conditionStream =
 		(!stream.historyStream.length || stream.response.length) &&
-		stream.historyStream.length === activeTab &&
-		tabs.activeTab === 0
+		stream.historyStream.length === activeTab
 	const dispatch = useDispatch()
 
 	useEffect(() => {

@@ -6,10 +6,10 @@ import { AvatarToolsContainer } from "./AvatarToolsContainer"
 import { useEffect, useState } from "react"
 import { Feedback, InitialFeedback } from "../../utils/feedback";
 
-export function ChatFollowUp({ stream, tabs }) {
+export function ChatFollowUp({ stream }) {
 	const [feedback, setFeedback] = useState<Feedback>(InitialFeedback)
 	const conditionDiv =
-		(stream.response.length !== 0 || stream.historyStream.length !== 0) && tabs.activeTab === 0
+		(stream.response.length !== 0 || stream.historyStream.length !== 0)
 	const newQuestionCondition = !stream.isStreaming && feedback.isConfirmed
 
 	return (
@@ -18,7 +18,7 @@ export function ChatFollowUp({ stream, tabs }) {
 				<div>
 					<GlobalRowContainer extraClass="fr-grid-row--center">
 						<AvatarToolsContainer />
-						<DisplayStream stream={stream} tabs={tabs} />
+						<DisplayStream stream={stream} />
 					</GlobalRowContainer>
 					{!stream.isStreaming && <UserExperience feedback={feedback} setFeedback={setFeedback}/>}
 					{newQuestionCondition && <NewQuestion />}

@@ -6,7 +6,6 @@ import { GlobalChatContainer } from "./GlobalChatContainer"
 
 export function Display({ messages, archive }) {
 	const stream = useSelector((state) => state.stream)
-	const tabs = useSelector((state) => state.tabs)
 
 	return (
 		<GlobalChatContainer>
@@ -17,7 +16,7 @@ export function Display({ messages, archive }) {
 					<DisplaySingleMessage key={index} sender={message.sender} text={message.text} />
 				)
 			})}
-			{!archive && <ChatFollowUp stream={stream} tabs={tabs} />}
+			{!archive && <ChatFollowUp stream={stream} />}
 		</GlobalChatContainer>
 	)
 }
