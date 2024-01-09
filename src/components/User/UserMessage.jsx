@@ -23,7 +23,7 @@ export function UserMessage() {
 
 	useEffect(() => {
 		if (!user.question.query.length) return
-		postNewQuestion(dispatch, user.question, user.choices.newQuestion)
+		postNewQuestion(dispatch, user.question, user.choices.newQuestion, user.chatId)
 	}, [user.question])
 
 	const handleRenderInput = (params) => {
