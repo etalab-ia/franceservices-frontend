@@ -7,7 +7,7 @@ const initialStream = {
 
 export const streamReducer = (state = initialStream, action) => {
 	switch (action.type) {
-		case "SET_INITIAL_CHAT":
+		case "RESET_USER":
 			return initialStream
 		case "SET_INITIAL_STREAM":
 			return initialStream
