@@ -1,4 +1,4 @@
-const apiBase = "https://albert.etalab.gouv.fr/api/v2"
+const apiBase = "https://franceservices.etalab.gouv.fr/api/v2"
 
 export const streamUrl = apiBase + "/stream"
 export const chatUrl = apiBase + "/chat"
