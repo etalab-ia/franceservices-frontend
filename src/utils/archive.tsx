@@ -1,5 +1,6 @@
 import { Tag } from "@codegouvfr/react-dsfr/Tag"
 
+// TODO WHEN BACK IS READY: remove setArchive()
 export const setArchive = (dispatch, stream, user, type) => {
 	const themesArrays = user.sheets.map((sheet) => sheet.theme && sheet.theme.split(", "))
 	const uniqueThemesSet = Array.from(new Set(themesArrays.flat()))
@@ -32,7 +33,8 @@ export const setArchive = (dispatch, stream, user, type) => {
 
 export const archiveHeaders = ["Nom de la conversation", "Thèmes", "Date", "Source", "Type"]
 
-const setArchiveTags = (array) => {
+// Set archive tags from /indexes sheets surtitre etc
+const setArchiveTags = (array: string[]) => {
 	const tags = array.map((theme, index) => {
 		return (
 			<Tag key={index} className="fr-m-1w">
@@ -45,7 +47,14 @@ const setArchiveTags = (array) => {
 }
 
 // TODO: set types
-export const setArchiveBody = (item, index, userQuestion: string, setArchiveTab) => {
+interface ArchiveBodyProps {
+	item: any // archiveItem
+	index: number
+	userQuestion: string
+	setArchiveTab: React.Dispatch<React.SetStateAction<number | null>>
+}
+
+export const setArchiveBody = ({ item, index, userQuestion, setArchiveTab }: ArchiveBodyProps) => {
 	const title = userQuestion.length > 78 ? userQuestion.slice(0, 78) + "..." : userQuestion
 	const tags = setArchiveTags(item.tags)
 	const type = item.type === "qr" ? "Question" : "Rendez-vous"
