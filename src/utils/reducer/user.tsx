@@ -86,6 +86,7 @@ type UserAction =
 	| { type: "ADD_SHEETS"; indexToAdd: number }
 	| { type: "SET_USER_QUERY"; nextUserQuery: string; nextChatId: number }
 	| { type: "RESET_QUESTION_FIELDS" }
+	| { type: "RESET_USER" }
 	| { type: "RESET_USER_CHOICES" }
 	| { type: "SET_USER_CHOICES"; nextKey: string; nextValue: string }
 	| { type: "SET_MESSAGES"; nextMessage: Messages }
@@ -142,7 +143,9 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
 			if (!state.sheets) return state
 
 			const sheets = state.additionalSheets.filter((_, index) => action.indexToAdd === index)
-			const additionalSheets = state.additionalSheets.filter((_, index) => action.indexToAdd !== index)
+			const additionalSheets = state.additionalSheets.filter(
+				(_, index) => action.indexToAdd !== index
+			)
 			const nextShouldSids = [...state.sheets.map((sheet) => sheet.sid), sheets[0].sid]
 			const nextMustNotSids = state.question.must_not_sids.filter(
 				(sid) => !nextShouldSids.includes(sid)
@@ -180,6 +183,8 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
 				...state,
 				question: InitialQuestion,
 			}
+		case "RESET_USER":
+			return InitialUser
 		case "RESET_USER_CHOICES":
 			return {
 				...state,
@@ -218,7 +223,7 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
 		case "SET_STREAM_ID":
 			return {
 				...state,
-				streamId: action.nextStreamId
+				streamId: action.nextStreamId,
 			}
 		default: {
 			return state
