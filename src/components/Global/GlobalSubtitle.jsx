@@ -1,3 +1,3 @@
-export const    GlobalSubtitle = ({ children }) => {
-    return <h5 className="text-xl font-bold">{children}</h5>
+export const GlobalSubtitle = ({ children }) => {
+	return <h5 className="text-xl font-bold">{children}</h5>
 }

@@ -1,7 +1,7 @@
-import { MeetingPage } from "../components/Meeting/MeetingPage";
-import { MeetingSettings } from "../components/Meeting/MeetingSettings";
-import { useEffect, useState } from "react";
-import { emitCloseStream } from "../utils/eventsEmitter";
+import { MeetingPage } from "../components/Meeting/MeetingPage"
+import { MeetingSettings } from "../components/Meeting/MeetingSettings"
+import { useEffect, useState } from "react"
+import { emitCloseStream } from "../utils/eventsEmitter"
 
 /*****************************************************************************************************
 	
@@ -18,21 +18,21 @@ import { emitCloseStream } from "../utils/eventsEmitter";
 
  *****************************************************************************************************/
 
-export function	Meeting() {
-	const	[generate, setGenerate] = useState(false);
-	const	[currQuestion, setCurrQuestion] = useState('');
-	const	[context, setContext] = useState({
+export function Meeting() {
+	const [generate, setGenerate] = useState(false)
+	const [currQuestion, setCurrQuestion] = useState("")
+	const [context, setContext] = useState({
 		administrations: [],
 		themes: [],
-	});
-	
+	})
+
 	useEffect(() => {
-		!generate && emitCloseStream(false);
+		!generate && emitCloseStream()
 	}, [generate])
-	
+
 	return (
 		<>
-			{!generate ?
+			{!generate ? (
 				<MeetingSettings
 					setGenerate={setGenerate}
 					currQuestion={currQuestion}
@@ -40,13 +40,9 @@ export function	Meeting() {
 					context={context}
 					setContext={setContext}
 				/>
-				:
-				<MeetingPage
-					currQuestion={currQuestion}
-					setGenerate={setGenerate}
-					archive={false}
-				/>
-			}
+			) : (
+				<MeetingPage currQuestion={currQuestion} setGenerate={setGenerate} archive={false} />
+			)}
 		</>
-	);
+	)
 }

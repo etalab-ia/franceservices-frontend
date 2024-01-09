@@ -1,35 +1,49 @@
-import { useEffect, useState } from "react";
-import { satisfiedButtons, unsatisfiedButtons } from "../../constants/feedback";
-import { useDispatch } from 'react-redux';
-import { useKeyPress } from "../../utils/manageEffects";
-import { UserFeedbackResume } from "./UserFeedbackResume";
-import { useSelector } from 'react-redux';
-import { ButtonsOptions } from "./ButtonsOptions";
-import { ConfirmationButton } from "./ConfirmationButton";
-import { InputOption } from "./InputOption";
-import { GlobalColContainer } from "../Global/GlobalColContainer";
+import { useEffect, useState } from "react"
+import { satisfiedButtons, unsatisfiedButtons } from "../../constants/feedback"
+import { useDispatch } from "react-redux"
+import { useKeyPress } from "../../utils/manageEffects"
+import { UserFeedbackResume } from "./UserFeedbackResume"
+import { useSelector } from "react-redux"
+import { ButtonsOptions } from "./ButtonsOptions"
+import { ConfirmationButton } from "./ConfirmationButton"
+import { InputOption } from "./InputOption"
+import { GlobalColContainer } from "../Global/GlobalColContainer"
+import { InitialFeedback } from "../../utils/feedback"
 
-export function	UserFeedbackOptions({ activeTab, isFirst }) {
-	const	[reasons, setReasons] = useState([]);
-	const	[otherReason, setOtherReason] = useState('');
-	const	[buttonsType, setButtonsType] = useState(activeTab === 0 ? satisfiedButtons : unsatisfiedButtons);
-	const	feedback = useSelector((state) => state.feedback);
-	const	dispatch = useDispatch();
+export function UserFeedbackOptions({ activeTab, isFirst, feedback, setFeedback }) {
+	const [reasons, setReasons] = useState([])
+	const [otherReason, setOtherReason] = useState("")
+	const [buttonsType, setButtonsType] = useState(
+		activeTab === 0 ? satisfiedButtons : unsatisfiedButtons
+	)
+	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch({ type: 'RESET_FEEDBACK'});
-		setReasons([]);
-		setButtonsType(activeTab === 0 ? satisfiedButtons : unsatisfiedButtons);
-	}, [activeTab]);
+		setFeedback(InitialFeedback)
+		setReasons([])
+		setButtonsType(activeTab === 0 ? satisfiedButtons : unsatisfiedButtons)
+	}, [activeTab])
 
 	useKeyPress((e) => {
-		if (e.key === 'Enter' && e.target.name === 'otherReason' && otherReason) {
-			otherReason && !reasons.includes(otherReason) && dispatch({ type: 'SET_NEW_FEEDBACK', nextFeedback: otherReason });
-			e.target.value = '';
-			setOtherReason('');
-			setReasons(reasons.filter(reason => reason !== 'Autre raison'));
+		if (e.key === "Enter" && e.target.name === "otherReason" && otherReason) {
+			otherReason &&
+				!reasons.includes(otherReason) &&
+				setFeedback({
+					...feedback,
+					reasons: [...feedback.reasons, otherReason]
+				})
+			e.target.value = ""
+			setOtherReason("")
+			setReasons(reasons.filter((reason) => reason !== "Autre raison"))
 		}
-	});
+	})
+
+	useEffect(() => {
+		setFeedback({
+			...feedback,
+			reasons: reasons,
+		})
+	}, [reasons])
 
 	return (
 		<GlobalColContainer>
@@ -38,20 +52,15 @@ export function	UserFeedbackOptions({ activeTab, isFirst }) {
 				buttonsType={buttonsType}
 				reasons={reasons}
 				setReasons={setReasons}
-				dispatch={dispatch}
 			/>
-			<InputOption 
-				reasons={reasons} 
-				setOtherReason={setOtherReason} 
-				isFirst={isFirst}
-			/>
-			<UserFeedbackResume />
-			<ConfirmationButton 
+			<InputOption reasons={reasons} setOtherReason={setOtherReason} isFirst={isFirst} />
+			<UserFeedbackResume feedback={feedback}/>
+			<ConfirmationButton
 				reasons={reasons}
 				otherReason={otherReason}
 				feedback={feedback}
-				dispatch={dispatch}
+				setFeedback={setFeedback}
 			/>
 		</GlobalColContainer>
-	);
+	)
 }

@@ -1,23 +1,26 @@
-import { initialStream } from "./state"
+const initialStream = {
+	response: [],
+	historyStream: [],
+	isStreaming: false,
+	activeTab: 1,
+}
 
-export const	streamReducer = (state = initialStream, action) => {
+export const streamReducer = (state = initialStream, action) => {
 	switch (action.type) {
-		case 'SET_INITIAL_CHAT':
-			return initialStream;
-		case 'SET_INITIAL_STREAM':
-			return initialStream;
-		case 'GET_AGENT_STREAM':
+		case "RESET_USER":
+			return initialStream
+		case "SET_INITIAL_STREAM":
+			return initialStream
+		case "GET_AGENT_STREAM":
 			return {
 				...state,
 				isStreaming: true,
-				response: [...state.response, action.nextResponse]
+				response: [...state.response, action.nextResponse],
 			}
-		case 'STOP_AGENT_STREAM':
-			const joinedRes = state.response.join('');
-
+		case "STOP_AGENT_STREAM":
 			return {
 				...state,
-				historyStream: [...state.historyStream, joinedRes],
+				historyStream: [...state.historyStream, state.response.join("")],
 				isStreaming: false,
 				response: [],
 			}
@@ -26,28 +29,30 @@ export const	streamReducer = (state = initialStream, action) => {
 				...state,
 				response: [],
 			}
-		case 'RESET_AGENT_STREAM':
+		case "RESET_AGENT_STREAM":
 			return {
 				...state,
 				response: [],
 			}
-		case 'SET_STREAM_HISTORY':
+		case "SET_STREAM_HISTORY":
 			return {
 				...state,
 				historyStream: [...state.historyStream, action.nextStream],
 				activeTab: 1,
 			}
-		case 'RESET_STREAM_HISTORY':
+		case "RESET_STREAM_HISTORY":
 			return {
 				...state,
 				historyStream: [],
 				activeTab: 1,
 			}
-		case 'SWITCH_TAB':
+		case "SWITCH_TAB":
 			return {
 				...state,
-				activeTab: action.nextTab
+				activeTab: action.nextTab,
 			}
-	  	default: { return state };
+		default: {
+			return state
+		}
 	}
 }
