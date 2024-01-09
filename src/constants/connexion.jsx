@@ -1,24 +1,24 @@
 export const initButtonsLogin = (handleClick, isDisable) => {
 	const buttonsLogin = [
 		{
-			children: 'Connexion',
+			children: "Connexion",
 			onClick: handleClick,
 			disabled: isDisable,
-			priority: 'primary'
+			priority: "primary",
 		},
 		{
-			children: 'Créer un compte',
-			onClick: () => (window.location.href = '/albert/signup'),
-			priority: 'tertiary'
+			children: "Créer un compte",
+			onClick: () => (window.location.href = "/albert/signup"),
+			priority: "tertiary",
 		},
 		{
-			children: 'Mot de passe oublié',
-			onClick: () => (window.location.href = '/albert/reset-password'),
-			priority: 'tertiary'
-		}
+			children: "Mot de passe oublié",
+			onClick: () => (window.location.href = "/albert/reset-password"),
+			priority: "tertiary",
+		},
 	]
 
-	return buttonsLogin;
+	return buttonsLogin
 }
 
 export const initButtonsSignup = (handleValidatePassword, handleClick, children) => {
@@ -29,32 +29,30 @@ export const initButtonsSignup = (handleValidatePassword, handleClick, children)
 			onClick: handleClick,
 		},
 		{
-			children: 'Retour',
-			onClick: () => (window.location.href = '/albert/login'),
-			priority: 'tertiary'
-		}
-
+			children: "Retour",
+			onClick: () => (window.location.href = "/albert/login"),
+			priority: "tertiary",
+		},
 	]
 
-	return buttonsSignup;
+	return buttonsSignup
 }
 
 export const initButtonsReset = (isDisable, handleClick) => {
 	const buttonsReset = [
 		{
 			disabled: isDisable,
-			children: 'Soumettre',
-			onClick: handleClick
+			children: "Soumettre",
+			onClick: handleClick,
 		},
 		{
-			children: 'Retour',
-			onClick: () => (window.location.href = '/albert/login'),
-			priority: 'tertiary'
-		}
-
+			children: "Retour",
+			onClick: () => (window.location.href = "/albert/login"),
+			priority: "tertiary",
+		},
 	]
 
-	return buttonsReset;
+	return buttonsReset
 }
 
-export const	authFailedNotificationRole = `Notification d'échec d'authentification.`;
+export const authFailedNotificationRole = `Notification d'échec d'authentification.`

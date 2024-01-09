@@ -1,7 +1,5 @@
-import { DisplayArchiveTabs } from '../components/Archive/DisplayArchiveTab';
+import { DisplayArchiveTabs } from "../components/Archive/DisplayArchiveTab"
 
 export function History() {
-	return (
-		<DisplayArchiveTabs />
-	);
+	return <DisplayArchiveTabs />
 }

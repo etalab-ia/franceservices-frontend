@@ -1,12 +1,19 @@
-import { feedbackConfirmationButton } from "../../constants/feedback";
+import { feedbackConfirmationButton } from "../../constants/feedback"
 
-export const	ConfirmationButton = ({ reasons, otherReason, feedback, dispatch }) => {
-
-	const	handleConfirm = () => {
-		otherReason && !reasons.includes(otherReason) && dispatch({ type: 'SET_NEW_FEEDBACK', nextFeedback: otherReason });		
-		dispatch({ type: 'CONFIRM_FEEDBACKS' });
+export const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) => {
+	const handleConfirm = () => {
+		otherReason &&
+			!reasons.includes(otherReason) &&
+			setFeedback({
+				...feedback,
+				reasons: [...feedback.reasons, otherReason]
+			})
+		setFeedback({
+			...feedback,
+			isConfirmed: true,
+		})
 	}
-    const   classNames = feedback.reasons.length ? `text-dark-purple` : `text-[#929292]`;
+	const classNames = feedback.reasons.length ? `text-dark-purple` : `text-[#929292]`
 
 	return (
 		<button

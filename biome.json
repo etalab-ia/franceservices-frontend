@@ -1,0 +1,61 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
+	"files": {
+		"ignore": [
+			"package-lock.json",
+			"node_modules",
+			".husky",
+			".vscode",
+			".github",
+			"./utility/icons/icons.json",
+			"*.min.js"
+		]
+	},
+	"formatter": {
+		"formatWithErrors": true,
+		"indentStyle": "tab"
+	},
+	"javascript": {
+		"formatter": {
+			"trailingComma": "es5",
+			"jsxQuoteStyle": "double",
+			"arrowParentheses": "always",
+			"lineWidth": 100,
+			"semicolons": "asNeeded",
+			"quoteStyle": "double"
+		}
+	},
+
+	"organizeImports": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": false,
+		"rules": {
+			"recommended": true,
+			"style": {
+				"noParameterAssign": "warn",
+				"noUselessElse": "warn",
+				"noNonNullAssertion": "warn",
+				"noUnusedTemplateLiteral": "warn",
+				"useTemplate": "warn"
+			},
+			"suspicious": {
+				"noExplicitAny": "warn",
+				"noArrayIndexKey": "warn",
+				"noEmptyInterface": "warn",
+				"noGlobalIsNan": "warn"
+			},
+			"correctness": {
+				"useExhaustiveDependencies": "warn",
+				"noUnnecessaryContinue": "warn"
+			},
+			"security": {
+				"noDangerouslySetInnerHtml": "warn"
+			},
+			"complexity": {
+				"useLiteralKeys": "warn"
+			}
+		}
+	}
+}
