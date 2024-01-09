@@ -4,6 +4,7 @@ import { GlobalDiv } from "../components/Global/GlobalDiv"
 import { GlobalRowContainer } from "../components/Global/GlobalRowContainer"
 import { emitCloseStream } from "../utils/eventsEmitter"
 
+// TODO WHEN BACK IS READY: change archive type
 export function Chatbot({ archive }) {
 	
 	useEffect(() => {

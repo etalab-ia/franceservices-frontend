@@ -1,6 +1,5 @@
 const apiBase = "https://albert.etalab.gouv.fr/api/v2"
-// const   apiBase = "http://127.0.0.1:8090";
-// v3 à venir
+
 export const streamUrl = apiBase + "/stream"
 export const chatUrl = apiBase + "/chat"
 export const getChatsUrl = apiBase + "/chats"

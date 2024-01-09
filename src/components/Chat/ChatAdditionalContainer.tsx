@@ -2,9 +2,11 @@ import { useSelector } from "react-redux"
 import { DisplaySheets } from "../Sheets/DisplaySheets"
 import { GlobalColContainer } from "../Global/GlobalColContainer"
 import { OneThirdScreenWidth } from "../Global/OneThirdScreenWidth"
+import { RootState } from "types"
 
+// TODO WHEN BACK IS READY: change archive type
 export function ChatAdditionalContainer({ archive }) {
-	const user = useSelector((state) => state.user)
+	const user = useSelector((state: RootState) => state.user)
 
 	return (
 		<OneThirdScreenWidth>

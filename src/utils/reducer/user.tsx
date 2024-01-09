@@ -19,8 +19,6 @@ import { initialChatbotMessage } from "../../constants/chatbotProps"
 
  *****************************************************************************************************/
 
-
-
 const InitialQuestion: Question = {
 	model_name: "albert-light",
 	mode: "rag",
@@ -40,7 +38,7 @@ interface UserChoices {
 	oldQuestion: number
 }
 
-const	InitialUserChoices: UserChoices = {
+const InitialUserChoices: UserChoices = {
 	newQuestion: -1,
 	oldQuestion: -1,
 }
@@ -78,7 +76,6 @@ const InitialUser: User = {
 }
 
 type UserAction =
-	| { type: "SET_INITIAL_CHAT" }
 	| { type: "SET_SHEETS"; sheets: any[] }
 	| { type: "SET_CHUNKS"; chunks: any[] }
 	| { type: "SET_SHEETS_FROM_ARCHIVE"; sheets: any[]; additionalSheets: any[]; webservices: any[] }
@@ -94,8 +91,6 @@ type UserAction =
 
 export const userReducer = (state: User = InitialUser, action: UserAction): User => {
 	switch (action.type) {
-		case "SET_INITIAL_CHAT":
-			return InitialUser
 		case "SET_SHEETS":
 			return {
 				...state,

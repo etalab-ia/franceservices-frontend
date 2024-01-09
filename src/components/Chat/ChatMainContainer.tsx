@@ -3,17 +3,18 @@ import { Display } from "./Display"
 import { UserMessage } from "../User/UserMessage"
 import { useEffect } from "react"
 import { scrollToBottom } from "../../utils/manageEffects"
-import { DefaultQuestions } from "../Global/DefaultQuestions"
 import { ChatOverflowManagementContainer } from "./ChatOverflowManagementContainer"
 import { ChatHeightContainer } from "./ChatHeightContainer"
+import { RootState } from "types"
 
+// TODO WHEN BACK IS READY: change archive type
 export function ChatMainContainer({ archive }) {
-	const user = useSelector((state) => state.user)
-	const stream = useSelector((state) => state.stream)
+	const user = useSelector((state: RootState) => state.user)
+	const stream = useSelector((state: RootState) => state.stream)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		!archive && dispatch({ type: "SET_INITIAL_CHAT" })
+		!archive && dispatch({ type: "RESET_USER" })
 	}, [])
 
 	// TODO: add feedback to scroll down
@@ -30,7 +31,6 @@ export function ChatMainContainer({ archive }) {
 					<Display messages={user.messages} archive={false} />
 				)}
 			</ChatOverflowManagementContainer>
-			{/* {!archive && <DefaultQuestions />} */}
 			{!archive && <UserMessage />}
 		</ChatHeightContainer>
 	)
