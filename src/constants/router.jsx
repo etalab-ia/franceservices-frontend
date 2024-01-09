@@ -37,9 +37,6 @@ export function navFunc() {
 					text: "Consulter mon historique",
 					linkProps: {
 						to: "/history",
-						onClick: () => {
-							dispatch({ type: "RESET_ARCHIVE_TAB" })
-						},
 					},
 					isActive: currentPath === "/history",
 				},

@@ -27,7 +27,6 @@ export const Root = () => {
 	const dispatch = useAppDispatch()
 
 	useEffect(() => {
-		// rmAuth()
 		checkConnexion(setUserAuth)
 	}, [dispatch])
 

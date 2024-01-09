@@ -44,13 +44,14 @@ const setArchiveTags = (array) => {
 	return tags
 }
 
-export const setArchiveBody = (item, index, userQuestion, dispatch) => {
+// TODO: set types
+export const setArchiveBody = (item, index, userQuestion: string, setArchiveTab) => {
 	const title = userQuestion.length > 78 ? userQuestion.slice(0, 78) + "..." : userQuestion
 	const tags = setArchiveTags(item.tags)
 	const type = item.type === "qr" ? "Question" : "Rendez-vous"
 
 	const handleClick = () => {
-		dispatch({ type: "SET_ARCHIVE_TAB", nextArchiveTab: index, nextType: item.type })
+		setArchiveTab(index)
 	}
 
 	const commonDivProps = {
