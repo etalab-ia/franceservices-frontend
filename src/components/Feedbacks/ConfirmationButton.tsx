@@ -13,12 +13,13 @@ export const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback
 			!reasons.includes(otherReason) &&
 			setFeedback({
 				...feedback,
-				reasons: [...feedback.reasons, otherReason],
+				message: otherReason
 			})
 
 		const data = {
-			is_good: feedback.isGood,
-			message: "",
+			is_good: !feedback.isGood ? 1 : 0,
+			message: feedback.message,
+			reasons: feedback.reasons,
 		}
 
 		useFetch(`${feedbackUrl}/${streamId}`, "POST", {
