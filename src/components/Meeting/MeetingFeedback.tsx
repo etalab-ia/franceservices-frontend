@@ -10,6 +10,9 @@ import { GlobalParagraph } from "../Global/GlobalParagraph"
 import { useSelector } from "react-redux"
 import { RootState } from "types"
 
+/*
+ * User can select thumps up / down to give feedback
+ */
 export const MeetingFeedback = () => {
 	const streamId = useSelector((state: RootState) => state.user.streamId)
 	const [isClicked, setIsClicked] = useState<boolean | null>(null)
