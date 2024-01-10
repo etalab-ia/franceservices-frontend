@@ -29,9 +29,8 @@ export function Meeting() {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		if (!generate)
-		{
-			emitCloseStream() 
+		if (!generate) {
+			emitCloseStream()
 			dispatch({ type: "RESET_USER" })
 		}
 	}, [generate])

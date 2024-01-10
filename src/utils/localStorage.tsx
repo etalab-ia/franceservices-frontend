@@ -3,7 +3,14 @@ import { UserAuth } from "./auth"
 import { Dispatch, SetStateAction } from "react"
 
 export function checkConnexion(setUserAuth: Dispatch<SetStateAction<UserAuth>>) {
-	const authToken = localStorage.getItem("authToken")
-
-	setUserInfos(authToken, setUserAuth)
+	return new Promise<void>((resolve) => {
+		const authToken = localStorage.getItem("authToken")
+		if (authToken) {
+			setUserInfos(authToken, setUserAuth)
+				.then(resolve)
+				.catch(() => resolve())
+		} else {
+			resolve()
+		}
+	})
 }
