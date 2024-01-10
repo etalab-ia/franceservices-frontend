@@ -1,9 +1,7 @@
 import { createRouter, defineRoute } from "type-route"
 import { useLocation } from "react-router-dom"
-import { useDispatch } from "react-redux"
 
 export function navFunc() {
-	const dispatch = useDispatch()
 	const location = useLocation()
 	const currentPath = location.pathname
 
