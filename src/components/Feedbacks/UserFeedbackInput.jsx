@@ -12,11 +12,16 @@ export function UserFeedbackInput({ isFirst, feedback, setFeedback }) {
 			{!feedback.isConfirmed ? (
 				<div>
 					<p className="mt-4">{askingQualityPrecisions(buttons[activeTab].type)}</p>
-					<UserFeedbackOptions activeTab={activeTab} isFirst={isFirst} feedback={feedback} setFeedback={setFeedback}/>
+					<UserFeedbackOptions
+						activeTab={activeTab}
+						isFirst={isFirst}
+						feedback={feedback}
+						setFeedback={setFeedback}
+					/>
 				</div>
 			) : (
 				<div>
-					<UserFeedbackResume feedback={feedback}/>
+					<UserFeedbackResume feedback={feedback} />
 					{/* <UserFeedbackThanks /> */}
 				</div>
 			)}

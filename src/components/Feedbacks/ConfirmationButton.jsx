@@ -6,7 +6,7 @@ export const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback
 			!reasons.includes(otherReason) &&
 			setFeedback({
 				...feedback,
-				reasons: [...feedback.reasons, otherReason]
+				reasons: [...feedback.reasons, otherReason],
 			})
 		setFeedback({
 			...feedback,
