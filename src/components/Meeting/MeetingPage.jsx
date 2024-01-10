@@ -1,10 +1,11 @@
 import { GlobalRowContainer } from "../Global/GlobalRowContainer"
 import { GlobalDiv } from "../Global/GlobalDiv"
 import { GlobalSubtitle } from "../Global/GlobalSubtitle"
-import { meetingAppointmentInformations } from "../../constants/meeting"
+import { meetingAppointmentInformations, meetingAppointmentTitle } from "../../constants/meeting"
 import { GlobalParagraph } from "../Global/GlobalParagraph"
 import { MeetingResponse } from "./MeetingResponse"
 import { MeetingEditQuestion } from "./MeetingEditQuestion"
+import { GlobalTitle } from "../Global/GlobalTitle"
 
 /*****************************************************************************************************
 	
@@ -22,6 +23,7 @@ export function MeetingPage({ currQuestion, setGenerate, archive }) {
 	return (
 		<GlobalRowContainer extraClass="fr-grid-row--center">
 			<GlobalDiv>
+				<GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
 				<GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
 				<GlobalParagraph>{currQuestion}</GlobalParagraph>
 				{!archive ? (
