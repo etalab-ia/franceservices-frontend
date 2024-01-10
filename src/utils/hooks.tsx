@@ -80,7 +80,6 @@ export const useStream = async (dispatch, id: number) => {
 			stream_chat.close()
 		}
 		dispatch({ type: "SET_INITIAL_STREAM" })
-		dispatch({ type: "RESET_USER" })
 	})
 }
 

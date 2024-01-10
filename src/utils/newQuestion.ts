@@ -16,6 +16,6 @@ export async function setNewQuestion(dispatch, newQuestion, agentResponse) {
 	agentResponse.length &&
 		dispatch({ type: "SET_MESSAGES", nextMessage: { text: agentResponse, sender: "agent" } })
 	dispatch({ type: "RESET_STREAM_HISTORY" })
-	dispatch({ type: "RESET_USER_CHOICES" })
+	// dispatch({ type: "RESET_USER_CHOICES" })
 	dispatch({ type: "SET_MESSAGES", nextMessage: { text: newQuestion, sender: "user" } })
 }

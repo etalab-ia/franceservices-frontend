@@ -2,6 +2,7 @@ import { MeetingPage } from "../components/Meeting/MeetingPage"
 import { MeetingSettings } from "../components/Meeting/MeetingSettings"
 import { useEffect, useState } from "react"
 import { emitCloseStream } from "../utils/eventsEmitter"
+import { useDispatch } from "react-redux"
 
 /*****************************************************************************************************
 	
@@ -25,9 +26,14 @@ export function Meeting() {
 		administrations: [],
 		themes: [],
 	})
+	const dispatch = useDispatch()
 
 	useEffect(() => {
-		!generate && emitCloseStream()
+		if (!generate)
+		{
+			emitCloseStream() 
+			dispatch({ type: "RESET_USER" })
+		}
 	}, [generate])
 
 	return (
