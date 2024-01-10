@@ -16,10 +16,8 @@ export function UserFeedbackOptions({ activeTab, isFirst, feedback, setFeedback 
 	const [buttonsType, setButtonsType] = useState(
 		activeTab === 0 ? satisfiedButtons : unsatisfiedButtons
 	)
-	const dispatch = useDispatch()
 
 	useEffect(() => {
-		setFeedback(InitialFeedback)
 		setReasons([])
 		setButtonsType(activeTab === 0 ? satisfiedButtons : unsatisfiedButtons)
 	}, [activeTab])
@@ -30,10 +28,9 @@ export function UserFeedbackOptions({ activeTab, isFirst, feedback, setFeedback 
 				!reasons.includes(otherReason) &&
 				setFeedback({
 					...feedback,
-					reasons: [...feedback.reasons, otherReason],
+					message: otherReason,
 				})
 			e.target.value = ""
-			setOtherReason("")
 			setReasons(reasons.filter((reason) => reason !== "Autre raison"))
 		}
 	})
@@ -41,9 +38,9 @@ export function UserFeedbackOptions({ activeTab, isFirst, feedback, setFeedback 
 	useEffect(() => {
 		setFeedback({
 			...feedback,
-			reasons: reasons,
+			message: otherReason,
 		})
-	}, [reasons])
+	}, [otherReason])
 
 	return (
 		<GlobalColContainer>

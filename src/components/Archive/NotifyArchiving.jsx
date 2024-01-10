@@ -7,16 +7,16 @@ import { archiveNotificationRole } from "../../constants/archive"
 
 export function NotifyArchiving() {
 	const user = useSelector((state) => state.user)
-	const stream = useSelector((state) => state.stream)
+	// const stream = useSelector((state) => state.stream)
 	const title =
 		user.messages[user.messages.length - 1].text.length > 40
 			? user.messages[user.messages.length - 1].text.slice(0, 40) + "..."
 			: user.messages[user.messages.length - 1].text
-	const dispatch = useDispatch()
+	// const dispatch = useDispatch()
 
-	useEffect(() => {
-		setArchive(dispatch, stream, user, "qr")
-	}, [user.choices.newQuestion])
+	// useEffect(() => {
+	// 	setArchive(dispatch, stream, user, "qr")
+	// }, [user.choices.newQuestion])
 
 	return (
 		<div role={archiveNotificationRole}>
