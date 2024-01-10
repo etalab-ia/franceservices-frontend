@@ -6,7 +6,7 @@ export const setArchive = (dispatch, stream, user, type) => {
 	const uniqueThemesSet = Array.from(new Set(themesArrays.flat()))
 	const selected = uniqueThemesSet.filter((theme) => theme !== "" && theme !== undefined)
 
-	if (user.choices.oldQuestion === user.choices.newQuestion && type === "qr") return
+	// if (user.choices.oldQuestion === user.choices.newQuestion && type === "qr") return
 
 	dispatch({
 		type: "SET_ARCHIVE",
@@ -24,11 +24,11 @@ export const setArchive = (dispatch, stream, user, type) => {
 	})
 
 	// TODO: improve isNewQuestion
-	dispatch({
-		type: "SET_USER_CHOICES",
-		nextKey: "oldQuestion",
-		nextValue: user.choices.newQuestion,
-	})
+	// dispatch({
+	// 	type: "SET_USER_CHOICES",
+	// 	nextKey: "oldQuestion",
+	// 	nextValue: user.choices.newQuestion,
+	// })
 }
 
 export const archiveHeaders = ["Nom de la conversation", "Thèmes", "Date", "Source", "Type"]
