@@ -18,7 +18,6 @@ import { Meeting } from "../pages/Meeting"
 import { Contact } from "../pages/Contact"
 import { InitialUserAuth, UserAuth } from "../utils/auth"
 import { useAppDispatch } from "../utils/hooks"
-import { rmAuth } from "../utils/manageConnexion"
 
 export const Root = () => {
 	const navigationData = navFunc()
