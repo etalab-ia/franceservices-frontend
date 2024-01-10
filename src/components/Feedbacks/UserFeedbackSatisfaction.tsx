@@ -4,10 +4,11 @@ import { GlobalRowContainer } from "../Global/GlobalRowContainer"
 export function UserFeedbackSatisfaction({ isFirst, feedback, setFeedback }) {
 	const buttons = isFirst ? primaryButtons : secondaryButtons
 
-	const handleClick = (index) => {
+	const handleClick = (isGood: boolean | null) => {
+		if (isGood === feedback.isGood) return
 		setFeedback({
 			...feedback,
-			isGood: index,
+			isGood: isGood,
 		})
 	}
 
