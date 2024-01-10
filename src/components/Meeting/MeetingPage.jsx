@@ -6,6 +6,8 @@ import { GlobalParagraph } from "../Global/GlobalParagraph"
 import { MeetingResponse } from "./MeetingResponse"
 import { MeetingEditQuestion } from "./MeetingEditQuestion"
 import { GlobalTitle } from "../Global/GlobalTitle"
+import { CurrQuestionContext } from "../../utils/context/questionContext"
+import { useContext } from "react"
 
 /*****************************************************************************************************
 	
@@ -19,19 +21,21 @@ import { GlobalTitle } from "../Global/GlobalTitle"
 
  *****************************************************************************************************/
 
-export function MeetingPage({ currQuestion, setGenerate, archive }) {
+export function MeetingPage({ setGenerate, archive }) {
+	const { currQuestion } = useContext(CurrQuestionContext)
+
 	return (
 		<GlobalRowContainer extraClass="fr-grid-row--center">
 			<GlobalDiv>
 				<GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
 				<GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
-				<GlobalParagraph>{currQuestion}</GlobalParagraph>
+				<GlobalParagraph>{currQuestion.query}</GlobalParagraph>
 				{!archive ? (
 					<MeetingEditQuestion setGenerate={setGenerate} />
 				) : (
 					<div className="fr-pt-2w"></div>
 				)}
-				<MeetingResponse currQuestion={currQuestion} archive={archive} />
+				<MeetingResponse archive={archive} />
 			</GlobalDiv>
 		</GlobalRowContainer>
 	)

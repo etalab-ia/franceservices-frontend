@@ -16,3 +16,17 @@ export type Question = {
 	should_sids: string[]
 	must_not_sids: string[]
 }
+
+export const InitialQuestion: Question = {
+	model_name: "albert-light",
+	mode: "rag",
+	query: undefined,
+	limit: 7,
+	context: undefined,
+	institution: undefined,
+	links: undefined,
+	temperature: 20,
+	sources: ["service-public", "travail-emploi"],
+	should_sids: [],
+	must_not_sids: [],
+}

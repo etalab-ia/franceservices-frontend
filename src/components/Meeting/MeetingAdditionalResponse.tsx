@@ -13,11 +13,10 @@ import { MeetingContacts } from "./MeetingContacts"
 
  *****************************************************************************************/
 
-export function MeetingAdditionalResponse({ currQuestion, archive }) {
+export function MeetingAdditionalResponse({ archive }) {
 	return (
 		<OneThirdScreenWidth>
 			<DisplaySheets
-				currQuestion={currQuestion}
 				archiveSheets={archive.sheets}
 				archiveAdditionalSheets={archive.additionalSheets}
 				archiveWebservices={archive.webservices}

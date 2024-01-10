@@ -1,11 +1,18 @@
+import { useContext } from "react"
 import { defaultButtonChoice } from "../../constants/chatbotProps"
 import { defaultInputFields, meetingDefaultQuestionsIntroduction } from "../../constants/meeting"
+import { CurrQuestionContext } from "../../utils/context/questionContext"
 import { GlobalRowContainer } from "../Global/GlobalRowContainer"
 import { Button } from "@codegouvfr/react-dsfr/Button"
 
-export function MeetingDefaultQuestions({ setCurrQuestion, setContext }) {
+export function MeetingDefaultQuestions({ setContext }) {
+	const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
+
 	const handleClick = (field) => {
-		setCurrQuestion(field.question)
+		updateCurrQuestion({
+			...currQuestion,
+			query: field.question,
+		})
 		setContext({ themes: field.themes, administrations: field.administrations })
 	}
 
