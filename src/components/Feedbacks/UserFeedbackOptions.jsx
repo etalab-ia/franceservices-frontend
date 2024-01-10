@@ -30,7 +30,7 @@ export function UserFeedbackOptions({ activeTab, isFirst, feedback, setFeedback 
 				!reasons.includes(otherReason) &&
 				setFeedback({
 					...feedback,
-					reasons: [...feedback.reasons, otherReason]
+					reasons: [...feedback.reasons, otherReason],
 				})
 			e.target.value = ""
 			setOtherReason("")
@@ -54,7 +54,7 @@ export function UserFeedbackOptions({ activeTab, isFirst, feedback, setFeedback 
 				setReasons={setReasons}
 			/>
 			<InputOption reasons={reasons} setOtherReason={setOtherReason} isFirst={isFirst} />
-			<UserFeedbackResume feedback={feedback}/>
+			<UserFeedbackResume feedback={feedback} />
 			<ConfirmationButton
 				reasons={reasons}
 				otherReason={otherReason}

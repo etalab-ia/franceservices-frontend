@@ -99,14 +99,24 @@ const setIndexesBody = (data, name, limit: number) => {
 	return body
 }
 
-export const getIndexes = async (data, dispatch, indexType: "sheets" | "chunks", chunkSize: number) => {
+export const getIndexes = async (
+	data,
+	dispatch,
+	indexType: "sheets" | "chunks",
+	chunkSize: number
+) => {
 	const actionType = indexType === "sheets" ? "SET_SHEETS" : "SET_CHUNKS"
-	const res = await useFetch(indexesUrl, "POST", {
-		data: setIndexesBody(data, indexType, chunkSize),
-		headers: setHeaders(false),
-	})
 
-	dispatch({ type: actionType, [indexType]: res })
+	try {
+		const res = await useFetch(indexesUrl, "POST", {
+			data: setIndexesBody(data, indexType, chunkSize),
+			headers: setHeaders(false),
+		})
+
+		dispatch({ type: actionType, [indexType]: res })
+	} catch (error) {
+		console.error("An error occurred: ", error)
+	}
 }
 
 export const setIndexesData = (data, setTiles, dispatch) => {

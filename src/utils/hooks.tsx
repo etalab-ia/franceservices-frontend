@@ -8,28 +8,28 @@ import { AppDispatch, Question, RootState } from "../../types"
 export const useAppDispatch: () => AppDispatch = useDispatch
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
-export const useFetch = async (url: string, method: string, props) => {
+export const useFetch = async (url: string, method: string, props): Promise<any> => {
 	const { data, headers } = props
-	const credentials = "include"
-
 	try {
 		const response = await fetch(url, {
 			method: method,
-			credentials: credentials,
+			credentials: "include",
 			headers,
 			body: data === undefined ? "" : data,
 		})
 
+		if (!response.ok) {
+			throw new Error(`Fetch failed with status: ${response.status}`)
+		}
+
 		if (url.includes("start")) return response
 		else {
 			const jsonData = await response.json()
-
 			return jsonData
 		}
 	} catch (error) {
 		console.error("An error occurred: ", error)
-
-		return error
+		throw error
 	}
 }
 

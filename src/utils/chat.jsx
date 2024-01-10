@@ -15,8 +15,8 @@ const getLastMessage = (archive, stream, isArchive) => {
 }
 
 /*
-** Regenerate answer
-*/
+ ** Regenerate answer
+ */
 async function handleRedo(state, dispatch) {
 	const { archive, feedback, user, stream } = state
 	const archiveIndex = archive.length - 1

@@ -19,7 +19,6 @@ interface PrintProps {
 
 export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
 	({ archive, type, setArchiveTab }, ref) => {
-
 		const handleClick = () => {
 			setArchiveTab(null)
 		}
