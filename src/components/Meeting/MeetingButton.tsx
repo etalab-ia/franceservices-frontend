@@ -31,9 +31,8 @@ export function MeetingButton({ isDisable, currQuestion, setGenerate, context })
 	}
 
 	useEffect(() => {
-		if (!user.question.query.length) return
+		if (!user.question.query.length) return setGenerate(false)
 		setGenerate(true)
-		dispatch({ type: "RESET_QUESTION_FIELDS" })
 	}, [user.question])
 
 	return (
