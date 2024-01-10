@@ -14,17 +14,13 @@ import { GlobalTitle } from "../Global/GlobalTitle"
 
  ******************************************************************************/
 
-export function MeetingInformations({ currQuestion, setCurrQuestion, context, setContext }) {
+export function MeetingInformations({ context, setContext }) {
 	return (
 		<>
 			<GlobalTitle>{meetingTitle}</GlobalTitle>
 			<GlobalRowContainer extraClass="fr-grid-row--center">
-				<MeetingMainInformations currQuestion={currQuestion} setCurrQuestion={setCurrQuestion} />
-				<MeetingAdditionalInformations
-					context={context}
-					setCurrQuestion={setCurrQuestion}
-					setContext={setContext}
-				/>
+				<MeetingMainInformations />
+				<MeetingAdditionalInformations context={context} setContext={setContext} />
 			</GlobalRowContainer>
 		</>
 	)

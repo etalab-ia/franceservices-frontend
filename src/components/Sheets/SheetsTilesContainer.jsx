@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setIndexesData } from "../../utils/setData"
 import { setTilesFromSheets } from "../../utils/setData"
 import { SheetsTiles } from "./SheetsTiles"
 import { SheetsAdditionalTilesTitle } from "./SheetsAdditionalTilesTitle"
+import { CurrQuestionContext } from "../../utils/context/questionContext"
 
 /****************************************************************************************
 	
@@ -13,7 +14,6 @@ import { SheetsAdditionalTilesTitle } from "./SheetsAdditionalTilesTitle"
 *****************************************************************************************/
 
 export const SheetsTilesContainer = ({
-	currQuestion,
 	archiveSheets,
 	archiveAdditionalSheets,
 	archiveWebservices,
@@ -22,11 +22,12 @@ export const SheetsTilesContainer = ({
 	const user = useSelector((state) => state.user)
 	const [tiles, setTiles] = useState([])
 	const [additionalTiles, setAdditionalTiles] = useState([])
+	const { currQuestion } = useContext(CurrQuestionContext)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
 		const data = {
-			question: currQuestion,
+			question: currQuestion.query,
 			must_not_sids: user.question.must_not_sids,
 		}
 

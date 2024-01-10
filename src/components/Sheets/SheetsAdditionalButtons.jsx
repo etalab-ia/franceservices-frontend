@@ -3,11 +3,12 @@ import { GlobalRowContainer } from "../Global/GlobalRowContainer"
 import { sheetsTitle } from "../../constants/sheets"
 import { GlobalSecondaryTitle } from "../Global/GlobalSecondaryTitle"
 import { GlobalColContainer } from "../Global/GlobalColContainer"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { generateStream } from "../../utils/hooks"
 import { emitCloseStream } from "../../utils/eventsEmitter"
-import { getIndexes, setQuestionFromRegeneration } from "../../utils/setData"
+import { getIndexes } from "../../utils/setData"
+import { CurrQuestionContext } from "../../utils/context/questionContext"
 
 /*****************************************************************************************
 	
@@ -28,6 +29,7 @@ export const SheetsAdditionalButtons = ({ isModifiable, setIsModifiable, archive
 	const user = useSelector((state) => state.user)
 	const [deletedSheets, setDeletedSheets] = useState([])
 	const dispatch = useDispatch()
+	const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
 
 	const handleClick = () => {
 		setIsModifiable(!isModifiable)
@@ -43,24 +45,25 @@ export const SheetsAdditionalButtons = ({ isModifiable, setIsModifiable, archive
 	}, [isModifiable])
 
 	useEffect(() => {
-		if (archive || !user.question.query) return
+		if (archive) return
 
-		const question = setQuestionFromRegeneration(
-			"rag",
-			user.question.query,
-			7,
-			user.question.must_not_sids
-		)
+		updateCurrQuestion({
+			...currQuestion,
+			query: currQuestion.query,
+			must_not_sids: deletedSheets,
+		})
+	}, [deletedSheets])
 
-		const body = {
-			question: question.query,
+	useEffect(() => {
+		emitCloseStream()
+		const data = {
+			question: currQuestion.query,
 			must_not_sids: user.question.must_not_sids,
 		}
-
-		emitCloseStream()
-		generateStream(question, dispatch, user.chatId)
-		getIndexes(body, dispatch, "chunks", user.question.limit)
-	}, [deletedSheets])
+		console.log("curr q°: ", currQuestion)
+		generateStream(currQuestion, dispatch, user.chatId)
+		getIndexes(data, dispatch, "chunks", currQuestion.limit)
+	}, [currQuestion])
 
 	return (
 		<GlobalRowContainer>

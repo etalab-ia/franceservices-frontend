@@ -19,6 +19,10 @@ import { initialChatbotMessage } from "../../constants/chatbotProps"
 
  *****************************************************************************************************/
 
+// TODO:
+// - question: local state
+// - messages: check w/ backend /streams
+
 const InitialQuestion: Question = {
 	model_name: "albert-light",
 	mode: "rag",
@@ -39,14 +43,14 @@ interface Messages {
 }
 
 interface User {
-	question: Question
-	messages: Messages[]
-	sheets: any[]
-	additionalSheets: any[]
-	chunks: any[]
-	webservices: any[]
-	chatId: number
-	streamId: number
+	question: Question // Question asked by user
+	messages: Messages[] //
+	sheets: any[] // Sheets associated to the reponse from 0 to 2
+	additionalSheets: any[] // suggested sheets to from 3 to 9
+	chunks: any[] // Chunks associes a la reponse
+	webservices: any[] // Dans sheets webservices: liens utiles lies aux sheets
+	chatId: number // current chat id
+	streamId: number // current stream id
 }
 
 const InitialUser: User = {
@@ -71,6 +75,7 @@ type UserAction =
 	| { type: "RESET_USER" }
 	| { type: "SET_MESSAGES"; nextMessage: Messages }
 	| { type: "SET_STREAM_ID"; nextStreamId: number }
+	| { type: "SET_CHAT_ID"; nextChatId: number }
 
 export const userReducer = (state: User = InitialUser, action: UserAction): User => {
 	switch (action.type) {
@@ -146,6 +151,11 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
 				},
 			}
 		}
+		case "SET_CHAT_ID":
+			return {
+				...state,
+				chatId: action.nextChatId,
+			}
 		case "SET_USER_QUERY":
 			return {
 				...state,

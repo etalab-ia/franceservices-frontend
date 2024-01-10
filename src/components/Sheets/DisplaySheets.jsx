@@ -24,12 +24,7 @@ import { SheetsAdditionalButtons } from "./SheetsAdditionalButtons"
 
  *****************************************************************************************/
 
-export function DisplaySheets({
-	currQuestion,
-	archiveSheets,
-	archiveAdditionalSheets,
-	archiveWebservices,
-}) {
+export function DisplaySheets({ archiveSheets, archiveAdditionalSheets, archiveWebservices }) {
 	const [isModifiable, setIsModifiable] = useState(false)
 
 	return (
@@ -40,7 +35,6 @@ export function DisplaySheets({
 				archive={archiveSheets}
 			/>
 			<SheetsTilesContainer
-				currQuestion={currQuestion}
 				archiveSheets={archiveSheets}
 				archiveAdditionalSheets={archiveAdditionalSheets}
 				archiveWebservices={archiveWebservices}
