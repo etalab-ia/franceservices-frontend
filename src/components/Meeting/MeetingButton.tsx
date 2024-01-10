@@ -1,7 +1,7 @@
 import Button from "@codegouvfr/react-dsfr/Button"
 import { meetingGenerationPage } from "../../constants/meeting"
 import { useDispatch, useSelector } from "react-redux"
-import { useFetch, generateStream } from "../../utils/hooks"
+import { useFetch } from "../../utils/hooks"
 import { useEffect } from "react"
 import { setHeaders, setQuestionWithContext } from "../../utils/setData"
 import { RootState } from "types"
