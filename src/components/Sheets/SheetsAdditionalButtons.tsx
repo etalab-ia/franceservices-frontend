@@ -75,7 +75,7 @@ export const SheetsAdditionalButtons = ({
 
 		emitCloseStream()
 		generateStream(currQuestion, dispatch, user.chatId)
-		getIndexes(data, dispatch, "chunks", currQuestion.limit)
+		getIndexes(data, dispatch, "chunks", currQuestion.limit, user.streamId)
 	}, [currQuestion])
 
 	return (

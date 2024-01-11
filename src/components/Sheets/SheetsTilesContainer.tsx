@@ -34,17 +34,9 @@ export const SheetsTilesContainer = ({
 			question: currQuestion.query,
 			must_not_sids: user.question.must_not_sids,
 		}
+		const streamId = archive ? archive.id : user.streamId
 
-		!archive && setIndexesData(data, setTiles, dispatch)
-
-		// SET ARCHIVE SHEETS
-		// archiveSheets &&
-		// 	dispatch({
-		// 		type: "SET_SHEETS_FROM_ARCHIVE",
-		// 		sheets: archiveSheets,
-		// 		additionalSheets: archiveAdditionalSheets,
-		// 		webservices: archiveWebservices,
-		// 	})
+		setIndexesData(data, setTiles, dispatch, streamId)
 	}, [currQuestion])
 
 	const getSheets = async () => {
@@ -62,7 +54,6 @@ export const SheetsTilesContainer = ({
 		if (!archive || !archive.search_sids) return
 
 		getSheets()
-		// SET ARCHIVE SHEETS
 	}, [])
 
 	useEffect(() => {

@@ -86,7 +86,7 @@ export const setQuestionWithContext = (question: string, context) => {
 		SP SHEETS
  **************************/
 
-const setIndexesBody = (data, name, limit: number) => {
+const setIndexesBody = (data, name, limit: number, streamId: number) => {
 	const body = JSON.stringify({
 		name: name,
 		query: data.question,
@@ -94,6 +94,7 @@ const setIndexesBody = (data, name, limit: number) => {
 		similarity: "e5",
 		institution: "",
 		must_not_sids: data.must_not_sids,
+		stream_id: streamId,
 	})
 
 	return body
@@ -103,13 +104,14 @@ export const getIndexes = async (
 	data,
 	dispatch,
 	indexType: "sheets" | "chunks",
-	chunkSize: number
+	chunkSize: number,
+	streamId: number
 ) => {
 	const actionType = indexType === "sheets" ? "SET_SHEETS" : "SET_CHUNKS"
 
 	try {
 		const res = await useFetch(indexesUrl, "POST", {
-			data: setIndexesBody(data, indexType, chunkSize),
+			data: setIndexesBody(data, indexType, chunkSize, streamId),
 			headers: setHeaders(false),
 		})
 
@@ -119,12 +121,12 @@ export const getIndexes = async (
 	}
 }
 
-export const setIndexesData = (data, setTiles, dispatch) => {
+export const setIndexesData = (data, setTiles, dispatch, streamId) => {
 	setTiles([])
 
 	if (!data || !data.question || data.question.length === 0) return
 
-	getIndexes(data, dispatch, "sheets", 10)
+	getIndexes(data, dispatch, "sheets", 10, streamId)
 }
 
 export const setTilesFromSheets = (sheets, setTiles) => {
