@@ -1,16 +1,14 @@
-import { useSelector } from "react-redux"
 import { Print } from "../Print/Print"
 import { useEffect, useRef, useState } from "react"
 import { GlobalRowContainer } from "../Global/GlobalRowContainer"
 import { ArchiveContainer } from "./ArchiveContainer"
-import { Chat, InitialArchive, InitialChat } from "../../../types"
+import { Chat } from "../../../types"
 import { useFetch } from "../../utils/hooks"
 import { getChatsUrl } from "../../constants/api"
 
 export function DisplayArchiveTabs() {
 	const [chatsId, setChatsId] = useState<Chat[]>([]) // All previous user's chat
 	const [archiveTab, setArchiveTab] = useState<number | null>(null)
-	const [archive, setArchive] = useState(InitialArchive)
 	const ref = useRef<HTMLDivElement>(null)
 	const token = localStorage.getItem("authToken")
 
@@ -52,7 +50,7 @@ export function DisplayArchiveTabs() {
 
 	return (
 		<GlobalRowContainer extraClass="fr-grid-row--center items-center">
-			{!archiveTab ? (
+			{archiveTab === null ? (
 				<ArchiveContainer chatsId={chatsId} setArchiveTab={setArchiveTab} />
 			) : (
 				<Print ref={ref} selectedChat={chatsId[archiveTab]} setArchiveTab={setArchiveTab} />
