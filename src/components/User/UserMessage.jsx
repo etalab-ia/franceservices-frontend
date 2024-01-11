@@ -35,15 +35,11 @@ export function UserMessage() {
 	}
 
 	useEffect(() => {
-		console.log("use effect going to generate")
 		if (!user.question.query.length) return
+
 		generateStream(user.question, dispatch, user.chatId)
 		dispatch({ type: "RESET_FEEDBACK" })
 	}, [user.question])
-
-	useEffect(() => {
-		console.log("use effect suer message")
-	}, [])
 
 	const handleRenderInput = (params) => {
 		const newParams = { maxLength: 800 }
