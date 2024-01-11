@@ -47,20 +47,21 @@ export const SheetsAdditionalButtons = ({ isModifiable, setIsModifiable, archive
 	useEffect(() => {
 		if (archive) return
 
+		if (!deletedSheets.length && !currQuestion.must_not_sids.length) return
+
 		updateCurrQuestion({
 			...currQuestion,
-			query: currQuestion.query,
 			must_not_sids: deletedSheets,
 		})
 	}, [deletedSheets])
 
 	useEffect(() => {
-		emitCloseStream()
 		const data = {
 			question: currQuestion.query,
 			must_not_sids: user.question.must_not_sids,
 		}
-		console.log("curr q°: ", currQuestion)
+
+		emitCloseStream()
 		generateStream(currQuestion, dispatch, user.chatId)
 		getIndexes(data, dispatch, "chunks", currQuestion.limit)
 	}, [currQuestion])
