@@ -32,7 +32,7 @@ export function navFunc() {
 					isActive: currentPath === "/chat",
 				},
 				{
-					text: "Consulter mon historique",
+					text: "Mes fiches rendez-vous",
 					linkProps: {
 						to: "/history",
 					},
