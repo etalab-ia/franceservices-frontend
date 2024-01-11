@@ -75,7 +75,7 @@ export const toolsTiles = [
 		desc: "Accéder",
 		linkProps: { to: "/history" },
 		imageUrl: question,
-		title: "Consulter mon historique",
+		title: "Mes fiches rendez-vous",
 	},
 ]
 
