@@ -1,8 +1,11 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Button } from "@codegouvfr/react-dsfr/Button"
 import ReactToPrint from "react-to-print"
 import { Chatbot } from "../../pages/Chatbot"
 import { MeetingPage } from "../Meeting/MeetingPage"
+import { ArchiveType, Chat } from "../../../types"
+import { useFetch } from "../../utils/hooks"
+import { getStreamsUrl } from "../../constants/api"
 
 /**********************************************************************************************
 		
@@ -10,18 +13,40 @@ import { MeetingPage } from "../Meeting/MeetingPage"
 
  **********************************************************************************************/
 
-// TODO: change archive type
 interface PrintProps {
-	archive: any
-	type: string
+	selectedChat: Chat
 	setArchiveTab: React.Dispatch<React.SetStateAction<number | null>>
 }
 
 export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
-	({ archive, type, setArchiveTab }, ref) => {
+	({ selectedChat, setArchiveTab }, ref) => {
 		const handleClick = () => {
 			setArchiveTab(null)
 		}
+
+		const [archive, setArchive] = useState<ArchiveType>()
+		const token = localStorage.getItem("authToken")
+
+		const getStreamsFromChat = async () => {
+			const res = await useFetch(getStreamsUrl + `/${selectedChat.id}`, "GET", {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+				data: null,
+			})
+
+			console.log("res CELUI CI: ", res)
+
+			setArchive(res.streams[res.streams.length - 1])
+		}
+
+		useEffect(() => {
+			getStreamsFromChat()
+		}, [])
+
+		useEffect(() => {
+			console.log("stream: ", archive)
+		}, [archive])
 
 		return (
 			<>
@@ -44,10 +69,10 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
 					/>
 				</div>
 				<div ref={ref as React.RefObject<HTMLDivElement>}>
-					{type === "qr" && <Chatbot archive={archive} />}
-					{type === "meetings" && (
+					{/* {selectedChat.type === "qa" && <Chatbot archive={archive} />}
+					{selectedChat.type === "meeting" && (
 						<MeetingPage currQuestion={archive.messages[0].text} archive={archive} />
-					)}
+					)} */}
 				</div>
 			</>
 		)
