@@ -63,28 +63,28 @@ export const InitialArchive: Archive = {
 }
 
 export type ArchiveType = {
-	chat_type: "qa" | "meeting"
-	streams: [
-		{
-			model_name: string
-			mode: string
-			query: string | undefined
-			user_text: string
-			limit: number
-			context: undefined
-			institution: undefined
-			links: undefined
-			temperature: number
-			sources: string[]
-			should_sids: string[]
-			must_not_sids: string[]
-			response: string
-			rag_sources: string[]
-			id: number
-			is_streaming: boolean
-			user_id: number
-			chat_id: number
-			search_sids: string[] //
-		},
-	]
+	model_name: string
+	mode: string
+	query: string | undefined
+	user_text: string
+	limit: number
+	context: undefined
+	institution: undefined
+	links: undefined
+	temperature: number
+	sources: string[]
+	should_sids: string[]
+	must_not_sids: string[]
+	response: string
+	rag_sources: string[]
+	id: number
+	is_streaming: boolean
+	user_id: number
+	chat_id: number
+	search_sids: string[] //
+	// ICI
+	sheets: any[]
+	additionalSheets: any[]
+	webservices: []
+	chunks: any[]
 }

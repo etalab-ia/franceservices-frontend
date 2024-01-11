@@ -43,7 +43,7 @@ export function Meeting() {
 				{!generate ? (
 					<MeetingSettings setGenerate={setGenerate} context={context} setContext={setContext} />
 				) : (
-					<MeetingPage setGenerate={setGenerate} archive={false} />
+					<MeetingPage setGenerate={setGenerate} archive={undefined} />
 				)}
 			</>
 		</CurrQuestionContext.Provider>

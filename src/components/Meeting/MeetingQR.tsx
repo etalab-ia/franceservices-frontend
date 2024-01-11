@@ -4,13 +4,22 @@ import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import { meetingQRTitle } from "../../constants/meeting"
 import { GlobalSecondaryTitle } from "../Global/GlobalSecondaryTitle"
+import { ArchiveType, RootState } from "types"
 
-export function MeetingQR({ archive }) {
-	const sheets = archive ? archive.sheets : useSelector((state) => state.user.sheets)
+/*****************************************************************************************
+	
+	COMPONENTS:
+
+		Frequently asked question suggestions
+		For now we get the related questions from the sheets
+ *****************************************************************************************/
+export function MeetingQR({ archive }: { archive: ArchiveType | undefined }) {
+	const sheets = archive ? archive.sheets : useSelector((state: RootState) => state.user.sheets)
 	const [relatedQuestions, setRelatedQuestions] = useState([])
 
 	useEffect(() => {
-		if (!sheets) return
+		console.log("ARCHIVE QR ", archive)
+		if (!sheets || !sheets.length) return
 
 		let updatedQuestions = []
 		setRelatedQuestions([])

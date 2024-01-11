@@ -26,6 +26,7 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
 
 		const [archive, setArchive] = useState<ArchiveType>()
 		const token = localStorage.getItem("authToken")
+		const [isLoading, setIsLoading] = useState(true)
 
 		const getStreamsFromChat = async () => {
 			const res = await useFetch(getStreamsUrl + `/${selectedChat.id}`, "GET", {
@@ -38,6 +39,7 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
 			console.log("res CELUI CI: ", res)
 
 			setArchive(res.streams[res.streams.length - 1])
+			setIsLoading(false)
 		}
 
 		useEffect(() => {
@@ -45,8 +47,10 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
 		}, [])
 
 		useEffect(() => {
-			console.log("stream: ", archive)
+			console.log("ARCHIVE PRINT: ", archive)
 		}, [archive])
+
+		if (isLoading) return <div>loading...</div>
 
 		return (
 			<>
@@ -69,10 +73,10 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
 					/>
 				</div>
 				<div ref={ref as React.RefObject<HTMLDivElement>}>
-					{/* {selectedChat.type === "qa" && <Chatbot archive={archive} />}
+					{/* {selectedChat.type === "qa" && <Chatbot archive={archive} />}*/}
 					{selectedChat.type === "meeting" && (
-						<MeetingPage currQuestion={archive.messages[0].text} archive={archive} />
-					)} */}
+						<MeetingPage setGenerate={undefined} archive={archive} />
+					)}
 				</div>
 			</>
 		)

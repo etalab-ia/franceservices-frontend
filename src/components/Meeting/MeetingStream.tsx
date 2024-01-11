@@ -5,11 +5,21 @@ import { resultMeetingTitle } from "../../constants/meeting"
 import { GlobalSecondaryTitle } from "../Global/GlobalSecondaryTitle"
 import { MeetingFeedback } from "./MeetingFeedback"
 import { ResponseExplanation } from "../Global/ResponseExplanation"
+import { ArchiveType, RootState } from "types"
 
-export function MeetingStream({ archive }) {
-	const stream = useSelector((state) => state.stream)
-	const user = useSelector((state) => state.user)
-	const agentResponse = archive ? archive.messages[1].text[0] : stream.historyStream[0]
+/*****************************************************************************************
+
+		** MeetingStream 
+			Prints answer stream with GlobalStream
+			
+		** MeetingFeedback: set isGood & send feedback with thumbs icons
+		** ResponseExplanation: display chunks associated to response
+
+ *****************************************************************************************/
+export function MeetingStream({ archive }: { archive: ArchiveType | undefined }) {
+	const stream = useSelector((state: RootState) => state.stream)
+	const user = useSelector((state: RootState) => state.user)
+	const agentResponse = archive ? archive.response : stream.historyStream[0]
 	const chunks = archive ? archive.chunks : user.chunks
 
 	return (

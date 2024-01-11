@@ -3,12 +3,13 @@ import { GlobalRowContainer } from "../Global/GlobalRowContainer"
 import { sheetsTitle } from "../../constants/sheets"
 import { GlobalSecondaryTitle } from "../Global/GlobalSecondaryTitle"
 import { GlobalColContainer } from "../Global/GlobalColContainer"
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState, useContext, Dispatch } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { generateStream } from "../../utils/hooks"
 import { emitCloseStream } from "../../utils/eventsEmitter"
 import { getIndexes } from "../../utils/setData"
 import { CurrQuestionContext } from "../../utils/context/questionContext"
+import { ArchiveType, RootState } from "types"
 
 /*****************************************************************************************
 	
@@ -21,12 +22,20 @@ import { CurrQuestionContext } from "../../utils/context/questionContext"
 
  *****************************************************************************************/
 
-export const SheetsAdditionalButtons = ({ isModifiable, setIsModifiable, archive }) => {
+export const SheetsAdditionalButtons = ({
+	isModifiable,
+	setIsModifiable,
+	archive,
+}: {
+	isModifiable: boolean
+	setIsModifiable: React.Dispatch<React.SetStateAction<boolean>>
+	archive: ArchiveType | undefined
+}) => {
 	const buttonTitle = isModifiable ? "Enregistrer" : "Modifier la section"
 	const buttonIcon = isModifiable
 		? "fr-icon-save-3-fill fr-icon--sm flex justify-end items-center"
 		: "fr-icon-settings-5-fill fr-icon--sm flex justify-end items-center"
-	const user = useSelector((state) => state.user)
+	const user = useSelector((state: RootState) => state.user)
 	const [deletedSheets, setDeletedSheets] = useState([])
 	const dispatch = useDispatch()
 	const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
@@ -56,6 +65,9 @@ export const SheetsAdditionalButtons = ({ isModifiable, setIsModifiable, archive
 	}, [deletedSheets])
 
 	useEffect(() => {
+		if (archive) return
+
+		console.log("archive in useeffect: ", archive)
 		const data = {
 			question: currQuestion.query,
 			must_not_sids: user.question.must_not_sids,
@@ -70,7 +82,9 @@ export const SheetsAdditionalButtons = ({ isModifiable, setIsModifiable, archive
 		<GlobalRowContainer>
 			<GlobalSecondaryTitle>{sheetsTitle}</GlobalSecondaryTitle>
 			<GlobalColContainer>
-				<ModifyButton handleClick={handleClick} text={buttonTitle} extraClass={buttonIcon} />
+				{!archive && (
+					<ModifyButton handleClick={handleClick} text={buttonTitle} extraClass={buttonIcon} />
+				)}
 			</GlobalColContainer>
 		</GlobalRowContainer>
 	)
