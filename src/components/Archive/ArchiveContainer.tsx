@@ -1,23 +1,23 @@
 import { Table } from "@codegouvfr/react-dsfr/Table"
 import { archiveHeaders, setArchiveBody } from "../../utils/archive"
 import { GlobalRowContainer } from "../Global/GlobalRowContainer"
+import { Chat } from "../../../types"
 
-// TODO WHEN BACK IS READY: change archive type
 interface ArchiveContainerProps {
-	archive: any
+	chatsId: Chat[]
 	setArchiveTab: React.Dispatch<React.SetStateAction<number | null>>
 }
 
-export function ArchiveContainer({ archive, setArchiveTab }: ArchiveContainerProps) {
+export function ArchiveContainer({ chatsId, setArchiveTab }: ArchiveContainerProps) {
 	return (
 		<GlobalRowContainer extraClass="flex justify-center">
 			<Table
 				bordered
-				data={archive.map((item, index) =>
+				data={chatsId.map((chat, index) =>
 					setArchiveBody({
-						item: item,
+						item: chat,
 						index: index,
-						userQuestion: item.messages[0].text,
+						name: chat.name || `Chat ${index + 1}`,
 						setArchiveTab: setArchiveTab,
 					})
 				)}
