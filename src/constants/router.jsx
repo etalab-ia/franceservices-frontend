@@ -24,13 +24,13 @@ export function navFunc() {
 					},
 					isActive: currentPath === "/meeting",
 				},
-				{
-					text: "Poser une question",
-					linkProps: {
-						to: "/chat",
-					},
-					isActive: currentPath === "/chat",
-				},
+				// {
+				// 	text: "Poser une question",
+				// 	linkProps: {
+				// 		to: "/chat",
+				// 	},
+				// 	isActive: currentPath === "/chat",
+				// },
 				{
 					text: "Mes fiches rendez-vous",
 					linkProps: {

@@ -67,16 +67,20 @@ export const SheetsAdditionalButtons = ({
 	useEffect(() => {
 		if (archive) return
 
-		console.log("archive in useeffect: ", archive)
+		emitCloseStream()
+		generateStream(currQuestion, dispatch, user.chatId)
+	}, [currQuestion])
+
+	useEffect(() => {
+		if (!user.streamId || archive) return
+
 		const data = {
 			question: currQuestion.query,
 			must_not_sids: user.question.must_not_sids,
 		}
 
-		emitCloseStream()
-		generateStream(currQuestion, dispatch, user.chatId)
-		getIndexes(data, dispatch, "chunks", currQuestion.limit, user.streamId)
-	}, [currQuestion])
+		getIndexes(data, dispatch, "chunks", currQuestion.limit, JSON.stringify(user.streamId))
+	}, [user.streamId])
 
 	return (
 		<GlobalRowContainer>

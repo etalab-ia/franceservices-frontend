@@ -37,17 +37,6 @@ export function DisplayArchiveTabs() {
 		getChatsId()
 	}, [])
 
-	useEffect(() => {
-		console.log("id: ", chatsId)
-	}, [chatsId])
-
-	useEffect(() => {
-		console.log("archive tab: ", archiveTab)
-		// GET /chat/archive/${chat_id}
-		// res = GET /last stream
-		// setStream(res)
-	}, [archiveTab])
-
 	return (
 		<GlobalRowContainer extraClass="fr-grid-row--center items-center">
 			{archiveTab === null ? (
