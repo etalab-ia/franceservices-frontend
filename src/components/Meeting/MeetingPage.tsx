@@ -8,6 +8,7 @@ import { MeetingEditQuestion } from "./MeetingEditQuestion"
 import { GlobalTitle } from "../Global/GlobalTitle"
 import { CurrQuestionContext } from "../../utils/context/questionContext"
 import { useContext } from "react"
+import { ArchiveType } from "types"
 
 /*****************************************************************************************************
 	
@@ -21,15 +22,22 @@ import { useContext } from "react"
 
  *****************************************************************************************************/
 
-export function MeetingPage({ setGenerate, archive }) {
+export function MeetingPage({
+	setGenerate,
+	archive,
+}: {
+	setGenerate: React.Dispatch<React.SetStateAction<boolean>> | undefined
+	archive?: ArchiveType
+}) {
 	const { currQuestion } = useContext(CurrQuestionContext)
+	const query = archive ? archive.query : currQuestion.query
 
 	return (
 		<GlobalRowContainer extraClass="fr-grid-row--center">
 			<GlobalDiv>
 				<GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
 				<GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
-				<GlobalParagraph>{currQuestion.query}</GlobalParagraph>
+				<GlobalParagraph>{query}</GlobalParagraph>
 				{!archive ? (
 					<MeetingEditQuestion setGenerate={setGenerate} />
 				) : (

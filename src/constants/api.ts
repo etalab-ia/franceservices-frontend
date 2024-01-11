@@ -13,5 +13,6 @@ export const resetPasswordUrl = apiBase + "/reset_password"
 export const userUrl = apiBase + "/user/me"
 export const contactUrl = apiBase + "/user/contact"
 export const feedbackUrl = apiBase + "/feedback/add"
+export const getSheetsUrl = apiBase + "/get_sheets"
 export const importUrl =
 	"https://opendata.plus.transformation.gouv.fr/api/explore/v2.1/catalog/datasets/export-expa-c-riences/records?limit=5"

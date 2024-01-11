@@ -3,6 +3,14 @@ import Pagination from "@codegouvfr/react-dsfr/Pagination"
 import { DisplayChunks } from "./DisplayChunks"
 import { useState } from "react"
 
+/*****************************************************************************************************
+	
+	COMPONENTS:
+
+		**	
+
+ *****************************************************************************************************/
+
 export const ResponseExplanation = ({ chunks }) => {
 	const chunksPerPage = 2
 	const [currentPage, setCurrentPage] = useState(1)
