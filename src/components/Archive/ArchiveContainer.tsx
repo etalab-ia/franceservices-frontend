@@ -10,9 +10,10 @@ interface ArchiveContainerProps {
 
 export function ArchiveContainer({ chatsId, setArchiveTab }: ArchiveContainerProps) {
 	return (
-		<GlobalRowContainer extraClass="flex justify-center">
+		<GlobalRowContainer extraClass="flex justify-center flex-">
 			<Table
 				bordered
+				className="w-full"
 				data={chatsId.map((chat, index) =>
 					setArchiveBody({
 						item: chat,

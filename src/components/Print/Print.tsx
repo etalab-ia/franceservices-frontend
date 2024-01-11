@@ -36,8 +36,6 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
 				data: null,
 			})
 
-			console.log("res CELUI CI: ", res)
-
 			setArchive(res.streams[res.streams.length - 1])
 			setIsLoading(false)
 		}
@@ -45,10 +43,6 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
 		useEffect(() => {
 			getStreamsFromChat()
 		}, [])
-
-		useEffect(() => {
-			console.log("ARCHIVE PRINT: ", archive)
-		}, [archive])
 
 		if (isLoading) return <div>loading...</div>
 
