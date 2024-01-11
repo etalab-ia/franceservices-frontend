@@ -1,10 +1,14 @@
 import { GlobalRowContainer } from "../Global/GlobalRowContainer"
 import { GlobalDiv } from "../Global/GlobalDiv"
 import { GlobalSubtitle } from "../Global/GlobalSubtitle"
-import { meetingAppointmentInformations } from "../../constants/meeting"
+import { meetingAppointmentInformations, meetingAppointmentTitle } from "../../constants/meeting"
 import { GlobalParagraph } from "../Global/GlobalParagraph"
 import { MeetingResponse } from "./MeetingResponse"
 import { MeetingEditQuestion } from "./MeetingEditQuestion"
+import { GlobalTitle } from "../Global/GlobalTitle"
+import { CurrQuestionContext } from "../../utils/context/questionContext"
+import { useContext } from "react"
+import { ArchiveType } from "types"
 
 /*****************************************************************************************************
 	
@@ -18,18 +22,28 @@ import { MeetingEditQuestion } from "./MeetingEditQuestion"
 
  *****************************************************************************************************/
 
-export function MeetingPage({ currQuestion, setGenerate, archive }) {
+export function MeetingPage({
+	setGenerate,
+	archive,
+}: {
+	setGenerate: React.Dispatch<React.SetStateAction<boolean>> | undefined
+	archive?: ArchiveType
+}) {
+	const { currQuestion } = useContext(CurrQuestionContext)
+	const query = archive ? archive.query : currQuestion.query
+
 	return (
 		<GlobalRowContainer extraClass="fr-grid-row--center">
 			<GlobalDiv>
+				<GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
 				<GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
-				<GlobalParagraph>{currQuestion}</GlobalParagraph>
+				<GlobalParagraph>{query}</GlobalParagraph>
 				{!archive ? (
 					<MeetingEditQuestion setGenerate={setGenerate} />
 				) : (
 					<div className="fr-pt-2w"></div>
 				)}
-				<MeetingResponse currQuestion={currQuestion} archive={archive} />
+				<MeetingResponse archive={archive} />
 			</GlobalDiv>
 		</GlobalRowContainer>
 	)

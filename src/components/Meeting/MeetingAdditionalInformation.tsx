@@ -14,12 +14,12 @@ import { MeetingDefaultQuestions } from "./MeetingDefaultQuestions"
 
  **********************************************************************************************/
 
-export function MeetingAdditionalInformations({ setCurrQuestion, context, setContext }) {
+export function MeetingAdditionalInformations({ context, setContext }) {
 	return (
 		<GlobalColContainer>
 			<GlobalSubtitle>{meetingInformations}</GlobalSubtitle>
 			<MeetingAdditionalInput context={context} setContext={setContext} />
-			<MeetingDefaultQuestions setCurrQuestion={setCurrQuestion} setContext={setContext} />
+			<MeetingDefaultQuestions setContext={setContext} />
 		</GlobalColContainer>
 	)
 }

@@ -15,8 +15,10 @@ const getLastMessage = (archive, stream, isArchive) => {
 }
 
 /*
-** Regenerate answer
-*/
+ ** Regenerate answer
+ */
+// TODO: rm user.choices
+// TODO WHEN BACK IS READY: retrieve archive message
 async function handleRedo(state, dispatch) {
 	const { archive, feedback, user, stream } = state
 	const archiveIndex = archive.length - 1
@@ -52,20 +54,20 @@ function handleCopy(stream) {
 
 export function userChatToolsFunc(state, dispatch) {
 	const userChatToolsProps = [
-		{
-			name: "redo",
-			image: redo,
-			alt: "Re-générer la réponse",
-			title: "Re-générer la réponse",
-			onClick: () => handleRedo(state, dispatch),
-		},
-		{
-			name: "copy",
-			image: copy,
-			alt: "Copier la réponse",
-			title: "Copier la réponse",
-			onClick: () => handleCopy(state.stream),
-		},
+		// {
+		// 	name: "redo",
+		// 	image: redo,
+		// 	alt: "Re-générer la réponse",
+		// 	title: "Re-générer la réponse",
+		// 	onClick: () => handleRedo(state, dispatch),
+		// },
+		// {
+		// 	name: "copy",
+		// 	image: copy,
+		// 	alt: "Copier la réponse",
+		// 	title: "Copier la réponse",
+		// 	onClick: () => handleCopy(state.stream),
+		// },
 	]
 
 	return userChatToolsProps
