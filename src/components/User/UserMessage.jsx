@@ -3,7 +3,9 @@ import { useState } from "react"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
-import { postNewQuestion, setNewQuestion } from "../../utils/newQuestion"
+import { generateStream, useFetch } from "../../utils/hooks"
+import { setHeaders } from "../../utils/setData"
+import { chatUrl } from "../../constants/api"
 
 export function UserMessage() {
 	const stream = useSelector((state) => state.stream)
@@ -17,13 +19,26 @@ export function UserMessage() {
 		setCurrQuestion(e.target.value)
 	}
 
-	const handleClick = () => {
-		setNewQuestion(dispatch, currQuestion, stream.historyStream, true)
+	const handleClick = async () => {
+		const headers = setHeaders(false)
+		const chat_data = { chat_type: "meeting" }
+		const chat = await useFetch(chatUrl, "POST", { data: JSON.stringify(chat_data), headers })
+
+		dispatch({ type: "SET_USER_QUERY", nextUserQuery: currQuestion, nextChatId: chat.id })
+		stream.historyStream.length &&
+			dispatch({
+				type: "SET_MESSAGES",
+				nextMessage: { text: stream.historyStream, sender: "agent" },
+			})
+		dispatch({ type: "RESET_STREAM_HISTORY" })
+		dispatch({ type: "SET_MESSAGES", nextMessage: { text: currQuestion, sender: "user" } })
 	}
 
 	useEffect(() => {
 		if (!user.question.query.length) return
-		postNewQuestion(dispatch, user.question, user.choices.newQuestion, user.chatId)
+
+		generateStream(user.question, dispatch, user.chatId)
+		dispatch({ type: "RESET_FEEDBACK" })
 	}, [user.question])
 
 	const handleRenderInput = (params) => {

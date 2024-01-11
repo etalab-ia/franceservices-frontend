@@ -2,6 +2,8 @@ import { MeetingPage } from "../components/Meeting/MeetingPage"
 import { MeetingSettings } from "../components/Meeting/MeetingSettings"
 import { useEffect, useState } from "react"
 import { emitCloseStream } from "../utils/eventsEmitter"
+import { InitialQuestion } from "../../types"
+import { CurrQuestionContext } from "../utils/context/questionContext"
 
 /*****************************************************************************************************
 	
@@ -20,29 +22,30 @@ import { emitCloseStream } from "../utils/eventsEmitter"
 
 export function Meeting() {
 	const [generate, setGenerate] = useState(false)
-	const [currQuestion, setCurrQuestion] = useState("")
+	const [currQuestion, setCurrQuestion] = useState(InitialQuestion)
 	const [context, setContext] = useState({
 		administrations: [],
 		themes: [],
 	})
+	const updateCurrQuestion = (newQuestion) => {
+		setCurrQuestion(newQuestion)
+	}
 
 	useEffect(() => {
-		!generate && emitCloseStream()
+		if (!generate) {
+			emitCloseStream()
+		}
 	}, [generate])
 
 	return (
-		<>
-			{!generate ? (
-				<MeetingSettings
-					setGenerate={setGenerate}
-					currQuestion={currQuestion}
-					setCurrQuestion={setCurrQuestion}
-					context={context}
-					setContext={setContext}
-				/>
-			) : (
-				<MeetingPage currQuestion={currQuestion} setGenerate={setGenerate} archive={false} />
-			)}
-		</>
+		<CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>
+			<>
+				{!generate ? (
+					<MeetingSettings setGenerate={setGenerate} context={context} setContext={setContext} />
+				) : (
+					<MeetingPage setGenerate={setGenerate} archive={undefined} />
+				)}
+			</>
+		</CurrQuestionContext.Provider>
 	)
 }

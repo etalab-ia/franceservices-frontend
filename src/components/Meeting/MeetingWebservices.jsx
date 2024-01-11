@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { setTilesFromContacts } from "../../constants/meeting"
 
-export const MeetingContacts = () => {
+export const MeetingWebservices = () => {
 	const [tiles, setTiles] = useState([])
 	const user = useSelector((state) => state.user)
 

@@ -1,9 +1,7 @@
 import { createRouter, defineRoute } from "type-route"
 import { useLocation } from "react-router-dom"
-import { useDispatch } from "react-redux"
 
 export function navFunc() {
-	const dispatch = useDispatch()
 	const location = useLocation()
 	const currentPath = location.pathname
 
@@ -26,15 +24,15 @@ export function navFunc() {
 					},
 					isActive: currentPath === "/meeting",
 				},
+				// {
+				// 	text: "Poser une question",
+				// 	linkProps: {
+				// 		to: "/chat",
+				// 	},
+				// 	isActive: currentPath === "/chat",
+				// },
 				{
-					text: "Poser une question",
-					linkProps: {
-						to: "/chat",
-					},
-					isActive: currentPath === "/chat",
-				},
-				{
-					text: "Consulter mon historique",
+					text: "Mes fiches rendez-vous",
 					linkProps: {
 						to: "/history",
 					},

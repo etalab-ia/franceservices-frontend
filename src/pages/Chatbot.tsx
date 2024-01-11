@@ -6,7 +6,6 @@ import { emitCloseStream } from "../utils/eventsEmitter"
 
 // TODO WHEN BACK IS READY: change archive type
 export function Chatbot({ archive }) {
-	
 	useEffect(() => {
 		emitCloseStream()
 	}, [])
