@@ -1,11 +1,19 @@
 import { Tile } from "@codegouvfr/react-dsfr/Tile"
 import { useDispatch } from "react-redux"
 
-export const SheetsTiles = ({ tiles, isModifiable, type }) => {
+export const SheetsTiles = ({
+	tiles,
+	isModifiable,
+	type,
+}: {
+	tiles: any[]
+	isModifiable: boolean
+	type: string
+}) => {
 	const text = type === "main" ? "X Supprimer" : "+ Ajouter"
 	const dispatch = useDispatch()
 
-	const handleClick = (key) => {
+	const handleClick = (key: number) => {
 		if (type === "main") dispatch({ type: "REMOVE_SHEETS", indexToRemove: key })
 		else dispatch({ type: "ADD_SHEETS", indexToAdd: key })
 	}
