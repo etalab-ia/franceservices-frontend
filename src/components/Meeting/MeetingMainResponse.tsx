@@ -1,6 +1,7 @@
 import { GlobalColContainer } from "../Global/GlobalColContainer"
 import { MeetingStream } from "./MeetingStream"
 import { MeetingQR } from "./MeetingQR"
+import { ArchiveType } from "types"
 
 /*****************************************************************************************************
 	
@@ -12,7 +13,7 @@ import { MeetingQR } from "./MeetingQR"
 
  *****************************************************************************************************/
 
-export function MeetingMainResponse({ archive }) {
+export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefined }) {
 	return (
 		<GlobalColContainer>
 			<MeetingStream archive={archive} />

@@ -3,11 +3,13 @@ import { GlobalRowContainer } from "../Global/GlobalRowContainer"
 import { sheetsTitle } from "../../constants/sheets"
 import { GlobalSecondaryTitle } from "../Global/GlobalSecondaryTitle"
 import { GlobalColContainer } from "../Global/GlobalColContainer"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext, Dispatch } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { generateStream } from "../../utils/hooks"
 import { emitCloseStream } from "../../utils/eventsEmitter"
-import { getIndexes, setQuestionFromRegeneration } from "../../utils/setData"
+import { getIndexes } from "../../utils/setData"
+import { CurrQuestionContext } from "../../utils/context/questionContext"
+import { ArchiveType, RootState } from "types"
 
 /*****************************************************************************************
 	
@@ -20,14 +22,23 @@ import { getIndexes, setQuestionFromRegeneration } from "../../utils/setData"
 
  *****************************************************************************************/
 
-export const SheetsAdditionalButtons = ({ isModifiable, setIsModifiable, archive }) => {
+export const SheetsAdditionalButtons = ({
+	isModifiable,
+	setIsModifiable,
+	archive,
+}: {
+	isModifiable: boolean
+	setIsModifiable: React.Dispatch<React.SetStateAction<boolean>>
+	archive: ArchiveType | undefined
+}) => {
 	const buttonTitle = isModifiable ? "Enregistrer" : "Modifier la section"
 	const buttonIcon = isModifiable
 		? "fr-icon-save-3-fill fr-icon--sm flex justify-end items-center"
 		: "fr-icon-settings-5-fill fr-icon--sm flex justify-end items-center"
-	const user = useSelector((state) => state.user)
+	const user = useSelector((state: RootState) => state.user)
 	const [deletedSheets, setDeletedSheets] = useState([])
 	const dispatch = useDispatch()
+	const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
 
 	const handleClick = () => {
 		setIsModifiable(!isModifiable)
@@ -43,30 +54,41 @@ export const SheetsAdditionalButtons = ({ isModifiable, setIsModifiable, archive
 	}, [isModifiable])
 
 	useEffect(() => {
-		if (archive || (!user.originQuestion && !user.question.query)) return
+		if (archive) return
 
-		const question = setQuestionFromRegeneration(
-			"rag",
-			user.originQuestion,
-			7,
-			user.question.must_not_sids
-		)
+		if (!deletedSheets.length && !currQuestion.must_not_sids.length) return
 
-		const body = {
-			question: question.query,
+		updateCurrQuestion({
+			...currQuestion,
+			must_not_sids: deletedSheets,
+		})
+	}, [deletedSheets])
+
+	useEffect(() => {
+		if (archive) return
+
+		emitCloseStream()
+		generateStream(currQuestion, dispatch, user.chatId)
+	}, [currQuestion])
+
+	useEffect(() => {
+		if (!user.streamId || archive) return
+
+		const data = {
+			question: currQuestion.query,
 			must_not_sids: user.question.must_not_sids,
 		}
 
-		emitCloseStream()
-		generateStream(question, dispatch, user.chatId)
-		getIndexes(body, dispatch, "chunks", user.question.limit)
-	}, [deletedSheets])
+		getIndexes(data, dispatch, "chunks", currQuestion.limit, JSON.stringify(user.streamId))
+	}, [user.streamId])
 
 	return (
 		<GlobalRowContainer>
 			<GlobalSecondaryTitle>{sheetsTitle}</GlobalSecondaryTitle>
 			<GlobalColContainer>
-				<ModifyButton handleClick={handleClick} text={buttonTitle} extraClass={buttonIcon} />
+				{!archive && (
+					<ModifyButton handleClick={handleClick} text={buttonTitle} extraClass={buttonIcon} />
+				)}
 			</GlobalColContainer>
 		</GlobalRowContainer>
 	)

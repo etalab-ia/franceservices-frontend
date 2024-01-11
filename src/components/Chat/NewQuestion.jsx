@@ -14,8 +14,8 @@ export function NewQuestion() {
 				<Avatar user="agent" />
 				{redoUserQuestion}
 			</GlobalRowContainer>
-			<BotQuestion id="newQuestion" choice={user.choices.newQuestion} />
-			{!user.choices.newQuestion && <NotifyArchiving />}
+			{/* <BotQuestion id="newQuestion" choice={user.choices.newQuestion} /> */}
+			{/* {!user.choices.newQuestion && <NotifyArchiving />} */}
 		</>
 	)
 }

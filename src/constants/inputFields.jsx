@@ -63,19 +63,19 @@ export const toolsTiles = [
 		imageUrl: meeting,
 		title: "Préparer un rendez-vous",
 	},
-	{
-		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
-		desc: "Accéder",
-		linkProps: { to: "/chat" },
-		imageUrl: question,
-		title: "Poser une question",
-	},
+	// {
+	// 	className: "fr-tile fr-tile--no-icon fr-enlarge-link",
+	// 	desc: "Accéder",
+	// 	linkProps: { to: "/chat" },
+	// 	imageUrl: question,
+	// 	title: "Poser une question",
+	// },
 	{
 		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
 		desc: "Accéder",
 		linkProps: { to: "/history" },
 		imageUrl: question,
-		title: "Consulter mon historique",
+		title: "Mes fiches rendez-vous",
 	},
 ]
 

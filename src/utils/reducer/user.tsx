@@ -19,6 +19,10 @@ import { initialChatbotMessage } from "../../constants/chatbotProps"
 
  *****************************************************************************************************/
 
+// TODO:
+// - question: local state
+// - messages: check w/ backend /streams
+
 const InitialQuestion: Question = {
 	model_name: "albert-light",
 	mode: "rag",
@@ -33,39 +37,24 @@ const InitialQuestion: Question = {
 	must_not_sids: [],
 }
 
-interface UserChoices {
-	newQuestion: number
-	oldQuestion: number
-}
-
-const InitialUserChoices: UserChoices = {
-	newQuestion: -1,
-	oldQuestion: -1,
-}
-
 interface Messages {
 	text: string[]
 	sender: string
 }
 
 interface User {
-	originQuestion: string | undefined
-	question: Question
-	choices: UserChoices
-	messages: Messages[]
-	// TODO: check sheets/chunks structure
-	sheets: any[]
-	additionalSheets: any[]
-	chunks: any[]
-	webservices: any[]
-	chatId: number
-	streamId: number
+	question: Question // Question asked by user
+	messages: Messages[] //
+	sheets: any[] // Sheets associated to the reponse from 0 to 2
+	additionalSheets: any[] // suggested sheets to from 3 to 9
+	chunks: any[] // Chunks associes a la reponse
+	webservices: any[] // Dans sheets webservices: liens utiles lies aux sheets
+	chatId: number // current chat id
+	streamId: number // current stream id
 }
 
 const InitialUser: User = {
-	originQuestion: undefined,
 	question: InitialQuestion,
-	choices: InitialUserChoices,
 	messages: [{ text: initialChatbotMessage, sender: "agent" }],
 	sheets: [],
 	additionalSheets: [],
@@ -84,10 +73,9 @@ type UserAction =
 	| { type: "SET_USER_QUERY"; nextUserQuery: string; nextChatId: number }
 	| { type: "RESET_QUESTION_FIELDS" }
 	| { type: "RESET_USER" }
-	| { type: "RESET_USER_CHOICES" }
-	| { type: "SET_USER_CHOICES"; nextKey: string; nextValue: string }
 	| { type: "SET_MESSAGES"; nextMessage: Messages }
 	| { type: "SET_STREAM_ID"; nextStreamId: number }
+	| { type: "SET_CHAT_ID"; nextChatId: number }
 
 export const userReducer = (state: User = InitialUser, action: UserAction): User => {
 	switch (action.type) {
@@ -163,10 +151,14 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
 				},
 			}
 		}
+		case "SET_CHAT_ID":
+			return {
+				...state,
+				chatId: action.nextChatId,
+			}
 		case "SET_USER_QUERY":
 			return {
 				...state,
-				originQuestion: action.nextUserQuery,
 				question: {
 					...state.question,
 					query: action.nextUserQuery,
@@ -180,19 +172,6 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
 			}
 		case "RESET_USER":
 			return InitialUser
-		case "RESET_USER_CHOICES":
-			return {
-				...state,
-				choices: InitialUserChoices,
-			}
-		case "SET_USER_CHOICES":
-			return {
-				...state,
-				choices: {
-					...state.choices,
-					[action.nextKey]: action.nextValue,
-				},
-			}
 		case "SET_MESSAGES":
 			if (state.messages.length > 0) {
 				const lastMessage = state.messages[state.messages.length - 1]

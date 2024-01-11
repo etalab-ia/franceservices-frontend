@@ -4,12 +4,19 @@ import { GlobalColContainer } from "../Global/GlobalColContainer"
 import { GlobalSubtitle } from "../Global/GlobalSubtitle"
 import { handleTextareaResize } from "../../utils/manageEffects"
 import { MeetingPromptAdvice } from "./MeetingPromptAdvice"
+import { CurrQuestionContext } from "../../utils/context/questionContext"
+import { useContext } from "react"
 
-export function MeetingMainInformations({ currQuestion, setCurrQuestion }) {
+export function MeetingMainInformations() {
+	const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
+
 	const handleChange = (e) => {
 		e.preventDefault()
 
-		setCurrQuestion(e.target.value)
+		updateCurrQuestion({
+			...currQuestion,
+			query: e.target.value,
+		})
 	}
 
 	return (
@@ -23,7 +30,7 @@ export function MeetingMainInformations({ currQuestion, setCurrQuestion }) {
 				nativeTextAreaProps={{
 					onChange: handleChange,
 					onInputCapture: handleTextareaResize,
-					value: currQuestion,
+					value: currQuestion.query,
 					style: { minHeight: 300 },
 				}}
 			/>

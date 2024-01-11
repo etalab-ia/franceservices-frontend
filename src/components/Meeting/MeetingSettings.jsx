@@ -27,28 +27,12 @@ import { MeetingButton } from "./MeetingButton"
 
  *****************************************************************************************************/
 
-export function MeetingSettings({
-	setGenerate,
-	currQuestion,
-	setCurrQuestion,
-	context,
-	setContext,
-}) {
+export function MeetingSettings({ setGenerate, context, setContext }) {
 	return (
 		<GlobalRowContainer extraClass="fr-grid-row--center">
 			<GlobalDiv>
-				<MeetingInformations
-					currQuestion={currQuestion}
-					setCurrQuestion={setCurrQuestion}
-					context={context}
-					setContext={setContext}
-				/>
-				<MeetingButton
-					isDisable={currQuestion.length === 0}
-					currQuestion={currQuestion}
-					setGenerate={setGenerate}
-					context={context}
-				/>
+				<MeetingInformations context={context} setContext={setContext} />
+				<MeetingButton setGenerate={setGenerate} context={context} />
 			</GlobalDiv>
 		</GlobalRowContainer>
 	)

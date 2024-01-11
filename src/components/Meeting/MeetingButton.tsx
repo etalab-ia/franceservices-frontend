@@ -1,11 +1,11 @@
 import Button from "@codegouvfr/react-dsfr/Button"
 import { meetingGenerationPage } from "../../constants/meeting"
-import { useDispatch, useSelector } from "react-redux"
-import { useFetch, generateStream } from "../../utils/hooks"
-import { useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { useFetch } from "../../utils/hooks"
 import { setHeaders, setQuestionWithContext } from "../../utils/setData"
-import { RootState } from "types"
 import { chatUrl } from "../../constants/api"
+import { useContext } from "react"
+import { CurrQuestionContext } from "../../utils/context/questionContext"
 
 /**
 
@@ -18,23 +18,24 @@ import { chatUrl } from "../../constants/api"
 
  **/
 
-export function MeetingButton({ isDisable, currQuestion, setGenerate, context }) {
+export function MeetingButton({ setGenerate, context }) {
 	const dispatch = useDispatch()
-	const user = useSelector((state: RootState) => state.user)
+
+	const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
+	const isDisable = !currQuestion.query || (currQuestion.query && currQuestion.query.length === 0)
 
 	const handleClick = async () => {
-		const questionWithContext = setQuestionWithContext(currQuestion, context)
 		const headers = setHeaders(false)
 		const chat_data = { chat_type: "meeting" }
 		const chat = await useFetch(chatUrl, "POST", { data: JSON.stringify(chat_data), headers })
-		dispatch({ type: "SET_USER_QUERY", nextUserQuery: questionWithContext, nextChatId: chat.id })
-	}
 
-	useEffect(() => {
-		if (!user.question.query.length) return
+		updateCurrQuestion({
+			...currQuestion,
+			query: setQuestionWithContext(currQuestion.query, context),
+		})
+		dispatch({ type: "SET_CHAT_ID", nextChatId: chat.id })
 		setGenerate(true)
-		dispatch({ type: "RESET_QUESTION_FIELDS" })
-	}, [user.question])
+	}
 
 	return (
 		<Button
