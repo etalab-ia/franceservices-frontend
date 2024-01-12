@@ -31,10 +31,10 @@ export function MeetingPage({
 	archive?: ArchiveType
 }) {
 	const { currQuestion } = useContext(CurrQuestionContext)
-	const [query, setQuery] = archive ? useState(archive.query) : useState<string>()
+	const [query, setQuery] = archive ? useState(archive.query) : useState<string>(currQuestion.query)
 
 	useEffect(() => {
-		rmContextFromQuestion(currQuestion.query, setQuery)
+		rmContextFromQuestion(query, setQuery)
 	}, [])
 
 	return (
