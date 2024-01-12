@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { emitCloseStream } from "../utils/eventsEmitter"
 import { InitialQuestion } from "../../types"
 import { CurrQuestionContext } from "../utils/context/questionContext"
+import { rmContextFromQuestion } from "src/utils/setData"
 
 /*****************************************************************************************************
 	
