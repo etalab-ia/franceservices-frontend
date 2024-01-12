@@ -7,8 +7,9 @@ import { MeetingResponse } from "./MeetingResponse"
 import { MeetingEditQuestion } from "./MeetingEditQuestion"
 import { GlobalTitle } from "../Global/GlobalTitle"
 import { CurrQuestionContext } from "../../utils/context/questionContext"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { ArchiveType } from "types"
+import { rmContextFromQuestion } from "../../utils/setData"
 
 /*****************************************************************************************************
 	
@@ -30,7 +31,11 @@ export function MeetingPage({
 	archive?: ArchiveType
 }) {
 	const { currQuestion } = useContext(CurrQuestionContext)
-	const query = archive ? archive.query : currQuestion.query
+	const [query, setQuery] = archive ? useState(archive.query) : useState<string>(currQuestion.query)
+
+	useEffect(() => {
+		rmContextFromQuestion(query, setQuery)
+	}, [])
 
 	return (
 		<GlobalRowContainer extraClass="fr-grid-row--center">

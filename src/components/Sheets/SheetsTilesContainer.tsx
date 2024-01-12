@@ -35,7 +35,7 @@ export const SheetsTilesContainer = ({
 			must_not_sids: user.question.must_not_sids,
 		}
 		const streamId = archive ? archive.id : user.streamId
-		if (!streamId) return
+		if (!streamId || user.sheets.length) return
 
 		setIndexesData(data, setTiles, dispatch, JSON.stringify(streamId))
 	}, [user.streamId])

@@ -2,16 +2,41 @@ import { ButtonsGroup } from "@codegouvfr/react-dsfr/ButtonsGroup"
 import { useState } from "react"
 import { signupFields } from "../constants/inputFields"
 import { initButtonsSignup } from "../constants/connexion"
-import { useFetch } from "../utils/hooks"
 import { userUrl } from "../constants/api"
 import { useDispatch } from "react-redux"
 import { invalidEmail, invalidPassword } from "../constants/errorMessages"
 import { LoginContainer } from "../components/Auth/LoginContainer"
 import { LoginFields } from "../components/Auth/LoginFields"
 import { ButtonInformation } from "../components/Global/ButtonInformation"
+import * as v from "valibot"
 
+const passwordRegex = /^[A-Za-z\d$!%*+?&#_-]{8,20}$/
+
+const SignupSchema = v.object(
+	{
+		username: v.string("Le nom d'utilisateur est invalide.", [
+			v.custom(
+				(username) => !username.includes("@"),
+				"Le nom d'utilisateur ne doit pas contenir '@'."
+			),
+		]),
+		email: v.string("Adresse email valide", [v.email("Adresse email invalide.")]),
+		password: v.string("Le mot de passe est invalide.", [
+			v.regex(
+				passwordRegex,
+				"Le mot de passe doit contenir entre 8 et 20 caractères et peut inclure des lettres, des chiffres et des caractères spéciaux ($!%*+?&#_-)."
+			),
+		]),
+		confirmationPassword: v.string("La confirmation du mot de passe doit être une chaîne valide."),
+	},
+	[
+		v.custom(
+			(data) => data.password === data.confirmationPassword,
+			"Les deux mots de passe doivent etre identiques"
+		),
+	]
+)
 export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
-	const dispatch = useDispatch()
 	const [password, setPassword] = useState("")
 	const [confPassword, setConfPassword] = useState("")
 	const [errorMesage, setErrorMessage] = useState("")
@@ -51,23 +76,41 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
 			password: password,
 		}
 
-		const res = await useFetch(userUrl, "POST", {
-			data: JSON.stringify(data),
-			headers: { "Content-Type": "application/json" },
-		})
-
-		if (res.status && res.status !== 200) {
-			const jsonData = await res.json()
-
-			jsonData.detail.map((data) => {
-				data.type === "value_error"
-					? setErrorMessage(invalidEmail)
-					: setErrorMessage(invalidPassword)
-			})
-			return setAuthFailed(true)
+		try {
+			v.parse(SignupSchema, { ...data, confirmationPassword: confPassword })
+		} catch (error) {
+			console.error("Validation error:", error)
+			setErrorMessage(error.message)
+			setAuthFailed(true)
+			return
 		}
 
-		return (window.location.href = "/albert/login")
+		try {
+			const res = await useFetch(userUrl, "POST", {
+				data: JSON.stringify(data),
+				headers: { "Content-Type": "application/json" },
+			})
+
+			if (!res.success) {
+				switch (res.error.details.detail) {
+					case "Username already exists":
+						setErrorMessage("Nom d'utilisateur déjà utilisé")
+						break
+					case "Email already exists":
+						setErrorMessage("Email déjà utilisé")
+						break
+					default:
+						setErrorMessage("Une erreur est survenue")
+						break
+				}
+				setAuthFailed(true)
+			} else {
+				window.location.href = "/albert/login"
+			}
+		} catch (error) {
+			console.error("Fetch error:", error)
+			setAuthFailed(true)
+		}
 	}
 
 	return (
@@ -79,4 +122,41 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
 			/>
 		</LoginContainer>
 	)
+}
+
+export const useFetch = async (url, method, props) => {
+	const { data, headers } = props
+	try {
+		const response = await fetch(url, {
+			method: method,
+			credentials: "include",
+			headers,
+			body: data === undefined ? null : data,
+		})
+
+		if (!response.ok) {
+			// Parsing the response body to access detailed information
+			const errorDetails = await response.json()
+			return {
+				success: false,
+				error: {
+					status: response.status,
+					statusText: response.statusText,
+					details: errorDetails,
+				},
+			}
+		}
+
+		const responseData = url.includes("start") ? response : await response.json()
+		return {
+			success: true,
+			data: responseData,
+		}
+	} catch (error) {
+		console.error("An error occurred: ", error)
+		return {
+			success: false,
+			error: error.message || "Unknown error occurred",
+		}
+	}
 }

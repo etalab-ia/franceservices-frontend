@@ -1,5 +1,8 @@
+import { Dispatch, SetStateAction, useContext } from "react"
 import { indexesUrl } from "../constants/api"
 import { useFetch } from "./hooks"
+import { Question } from "types"
+import { CurrQuestionContext } from "./context/questionContext"
 
 export const setHeaders = (isEventSource: boolean) => {
 	const token = localStorage.getItem("authToken")
@@ -82,6 +85,50 @@ export const setQuestionWithContext = (question: string, context) => {
 	return questionWithContext
 }
 
+export const rmContextFromQuestion = (
+	str: string,
+	setQuery: React.Dispatch<React.SetStateAction<string>> | undefined
+) => {
+	const context = [
+		"Les administrations concernées par cette question sont : ",
+		"La question porte sur les thèmes suivants : ",
+	]
+
+	let newStr = str
+
+	context.forEach((c) => {
+		const start = newStr.indexOf(c)
+
+		if (start !== -1) {
+			newStr = newStr.substring(0, start).trim()
+		}
+	})
+
+	setQuery(newStr)
+}
+
+export const updateQuestion = (currQuestion: Question, updateCurrQuestion) => {
+	const context = [
+		"Les administrations concernées par cette question sont : ",
+		"La question porte sur les thèmes suivants : ",
+	]
+
+	let newStr = currQuestion.query
+
+	context.forEach((c) => {
+		const start = newStr.indexOf(c)
+
+		if (start !== -1) {
+			newStr = newStr.substring(0, start).trim()
+		}
+	})
+
+	updateCurrQuestion({
+		...currQuestion,
+		query: newStr,
+	})
+}
+
 /***************************
 		SP SHEETS
  **************************/
@@ -109,6 +156,7 @@ export const getIndexes = async (
 ) => {
 	const actionType = indexType === "sheets" ? "SET_SHEETS" : "SET_CHUNKS"
 
+	if (indexType === "sheets" && data.must_not_sids.length !== 0) return
 	try {
 		const res = await useFetch(indexesUrl, "POST", {
 			data: setIndexesBody(data, indexType, chunkSize, streamId),
