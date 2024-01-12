@@ -2,7 +2,6 @@ import { ButtonsGroup } from "@codegouvfr/react-dsfr/ButtonsGroup"
 import { initButtonsLogin } from "../constants/connexion"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { signinUrl } from "../constants/api"
-import { useFetch } from "../utils/hooks"
 import { usernameOrPasswordError } from "../constants/errorMessages"
 import { setUserInfos } from "../utils/manageConnexion"
 import { LoginFields } from "../components/Auth/LoginFields"
@@ -10,6 +9,7 @@ import { loginFields } from "../constants/inputFields"
 import { LoginContainer } from "../components/Auth/LoginContainer"
 import { ButtonInformation } from "../components/Global/ButtonInformation"
 import { UserAuth } from "src/utils/auth"
+import { useFetch } from "../utils/hooks"
 
 interface LoginProps {
 	authFailed: boolean
@@ -41,27 +41,31 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
 	}
 
 	const handleClick = async () => {
-		// TODO: what if username contains @ ?
 		const data = id.includes("@")
-			? {
-					email: id,
-					password: password,
-			  }
-			: {
-					username: id,
-					password: password,
-			  }
+			? { email: id, password: password }
+			: { username: id, password: password }
 
 		setAuthFailed(false)
 
-		const res = await useFetch(signinUrl, "POST", {
-			data: JSON.stringify(data),
-			headers: { "Content-Type": "application/json" },
-		})
+		try {
+			const res = await useFetch(signinUrl, "POST", {
+				data: JSON.stringify(data),
+				headers: { "Content-Type": "application/json" },
+			})
+			console.log("res", res)
+			if ((res.status && res.success !== true) || !res.token) {
+				// Set authFailed to true if the response status is not 200 or token is not received
 
-		if ((res.status && res.status !== 200) || !res.token) return setAuthFailed(true)
-
-		return setUserInfos(res.token, setUserAuth)
+				setAuthFailed(true)
+			} else {
+				// On successful authentication, set user info
+				setUserInfos(res.token, setUserAuth)
+			}
+			console.log(res)
+		} catch (error) {
+			console.error("An error occurred: ", error)
+			setAuthFailed(true)
+		}
 	}
 
 	return (
