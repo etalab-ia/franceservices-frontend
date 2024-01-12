@@ -18,7 +18,6 @@ export function MeetingQR({ archive }: { archive: ArchiveType | undefined }) {
 	const [relatedQuestions, setRelatedQuestions] = useState([])
 
 	useEffect(() => {
-		console.log("ARCHIVE QR ", archive)
 		if (!sheets || !sheets.length) return
 
 		let updatedQuestions = []

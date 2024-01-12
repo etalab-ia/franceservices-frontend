@@ -86,7 +86,7 @@ export const setQuestionWithContext = (question: string, context) => {
 		SP SHEETS
  **************************/
 
-const setIndexesBody = (data, name, limit: number, streamId: number) => {
+const setIndexesBody = (data, name, limit: number, streamId: string) => {
 	const body = JSON.stringify({
 		name: name,
 		query: data.question,
@@ -105,7 +105,7 @@ export const getIndexes = async (
 	dispatch,
 	indexType: "sheets" | "chunks",
 	chunkSize: number,
-	streamId: number
+	streamId: string
 ) => {
 	const actionType = indexType === "sheets" ? "SET_SHEETS" : "SET_CHUNKS"
 
