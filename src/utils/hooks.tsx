@@ -79,7 +79,9 @@ export const useStream = async (dispatch, id: number) => {
 		if (stream_chat) {
 			stream_chat.close()
 		}
+		console.log("emit stop stream")
 		dispatch({ type: "SET_INITIAL_STREAM" })
+		dispatch({ type: "SET_CHAT_ID", nextChatId: 0 })
 	})
 }
 

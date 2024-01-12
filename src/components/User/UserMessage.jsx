@@ -35,7 +35,7 @@ export function UserMessage() {
 	}
 
 	useEffect(() => {
-		if (!user.question.query.length) return
+		if (!user.question.query.length || !user.chatId) return
 
 		generateStream(user.question, dispatch, user.chatId)
 		dispatch({ type: "RESET_FEEDBACK" })
