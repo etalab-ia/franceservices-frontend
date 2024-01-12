@@ -65,7 +65,7 @@ export const SheetsAdditionalButtons = ({
 	}, [deletedSheets])
 
 	useEffect(() => {
-		if (archive) return
+		if (archive || !user.chatId) return
 
 		emitCloseStream()
 		generateStream(currQuestion, dispatch, user.chatId)

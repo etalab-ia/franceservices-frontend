@@ -52,7 +52,6 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
 				data: JSON.stringify(data),
 				headers: { "Content-Type": "application/json" },
 			})
-			console.log("res", res)
 			if ((res.status && res.success !== true) || !res.token) {
 				// Set authFailed to true if the response status is not 200 or token is not received
 
@@ -61,9 +60,7 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
 				// On successful authentication, set user info
 				setUserInfos(res.token, setUserAuth)
 			}
-			console.log(res)
 		} catch (error) {
-			console.error("An error occurred: ", error)
 			setAuthFailed(true)
 		}
 	}
