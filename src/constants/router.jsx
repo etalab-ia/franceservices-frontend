@@ -15,7 +15,7 @@ export function navFunc() {
 		},
 		{
 			text: "Mes outils",
-			isActive: currentPath === "/chat" || currentPath === "/meeting",
+			isActive: /* currentPath === "/chat"  || */ currentPath === "/meeting",
 			menuLinks: [
 				{
 					text: "Préparer un rendez-vous",
@@ -24,13 +24,13 @@ export function navFunc() {
 					},
 					isActive: currentPath === "/meeting",
 				},
-				// {
-				// 	text: "Poser une question",
-				// 	linkProps: {
-				// 		to: "/chat",
-				// 	},
-				// 	isActive: currentPath === "/chat",
-				// },
+				/* 				{
+					text: "Poser une question",
+					linkProps: {
+						to: "/chat",
+					},
+					isActive: currentPath === "/chat",
+				}, */
 				{
 					text: "Mes fiches rendez-vous",
 					linkProps: {
