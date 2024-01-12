@@ -74,10 +74,10 @@ export const Root = () => {
 					path="/"
 					element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/chat" />}
 				/>
-				<Route
+				{/* 				<Route
 					path="/chat"
 					element={!userAuth.isLogin ? <Navigate to="/login" /> : <Chatbot archive={false} />}
-				/>
+				/> */}
 				<Route
 					path="/contact"
 					element={
