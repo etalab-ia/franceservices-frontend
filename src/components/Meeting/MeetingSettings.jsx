@@ -2,6 +2,9 @@ import { GlobalDiv } from "../Global/GlobalDiv"
 import { GlobalRowContainer } from "../Global/GlobalRowContainer"
 import { MeetingInformations } from "./MeetingInformations"
 import { MeetingButton } from "./MeetingButton"
+import { useContext, useEffect } from "react"
+import { updateQuestion } from "../../utils/setData"
+import { CurrQuestionContext } from "../../utils/context/questionContext"
 
 /*****************************************************************************************************
 	
@@ -28,6 +31,12 @@ import { MeetingButton } from "./MeetingButton"
  *****************************************************************************************************/
 
 export function MeetingSettings({ setGenerate, context, setContext }) {
+	const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
+
+	useEffect(() => {
+		currQuestion.query && updateQuestion(currQuestion, updateCurrQuestion)
+	}, [])
+
 	return (
 		<GlobalRowContainer extraClass="fr-grid-row--center">
 			<GlobalDiv>
