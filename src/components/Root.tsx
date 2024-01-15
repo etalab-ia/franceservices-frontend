@@ -2,7 +2,7 @@ import { Badge } from "@codegouvfr/react-dsfr/Badge"
 import { headerFooterDisplayItem } from "@codegouvfr/react-dsfr/Display"
 import { Footer } from "@codegouvfr/react-dsfr/Footer"
 import { Header } from "@codegouvfr/react-dsfr/Header"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Navigate, Route, Routes } from "react-router-dom"
 import { quickAccessItemsFunc } from "../constants/header"
 import { navFunc } from "../constants/router"
@@ -18,6 +18,7 @@ import { Signup } from "../pages/Signup"
 import { InitialUserAuth, UserAuth } from "../utils/auth"
 import { useAppDispatch } from "../utils/hooks"
 import { checkConnexion } from "../utils/localStorage"
+import { isMFSContext } from "../utils/context/isMFSContext"
 
 export const Root = () => {
 	const navigationData = navFunc()
@@ -25,18 +26,8 @@ export const Root = () => {
 	const [authFailed, setAuthFailed] = useState(false)
 	const dispatch = useAppDispatch()
 	const [isLoading, setIsLoading] = useState(true)
-	const [isMFS, setIsMFS] = useState(false)
 
-	useEffect(() => {
-		const hostname = window.location.hostname
-		if (hostname === "albert.etalab.gouv.fr") {
-			setIsMFS(false)
-		} else if (hostname === "franceservices.etalab.gouv.fr") {
-			setIsMFS(true)
-		}
-
-		checkConnexion(setUserAuth).finally(() => setIsLoading(false))
-	}, [dispatch])
+	const isMFS = useContext(isMFSContext)
 
 	if (isLoading) {
 		return <div className="bg-red"></div>
@@ -83,10 +74,10 @@ export const Root = () => {
 					path="/"
 					element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/chat" />}
 				/>
-				{/* 				<Route
+				<Route
 					path="/chat"
 					element={!userAuth.isLogin ? <Navigate to="/login" /> : <Chatbot archive={false} />}
-				/> */}
+				/>
 				<Route
 					path="/contact"
 					element={
