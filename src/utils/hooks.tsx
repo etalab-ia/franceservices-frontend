@@ -1,4 +1,3 @@
-import { chatUrl, getChatsUrl, streamUrl } from "../constants/api"
 import { EventSourcePolyfill } from "event-source-polyfill"
 import { setHeaders, setUserQuestion } from "./setData"
 import { onCloseStream } from "./eventsEmitter"
@@ -10,6 +9,7 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 export const useFetch = async (url: string, method: string, props): Promise<any> => {
 	const { data, headers } = props
+	console.log("usefetch data", data)
 	try {
 		const response = await fetch(url, {
 			method: method,
@@ -62,7 +62,7 @@ function handleStreamError(e, stream_chat) {
 /*
  **	Manage stream
  */
-export const useStream = async (dispatch, id: number) => {
+export const useStream = async (dispatch, id: number, streamUrl: string) => {
 	const stream_chat = new EventSourcePolyfill(`${streamUrl}/${id}/start`, {
 		headers: setHeaders(true),
 		withCredentials: true,
@@ -86,7 +86,12 @@ export const useStream = async (dispatch, id: number) => {
 /*
  **  Generates new stream from a chatId
  */
-export async function generateStream(question: Question, dispatch, chatId: number) {
+export async function generateStream(
+	question: Question,
+	dispatch,
+	chatId: number,
+	streamUrl: string
+) {
 	const headers = setHeaders(false)
 	const stream_data = setUserQuestion(question)
 	const stream = await useFetch(streamUrl + `/chat/${chatId}`, "POST", {
@@ -95,5 +100,5 @@ export async function generateStream(question: Question, dispatch, chatId: numbe
 	})
 	dispatch({ type: "SET_STREAM_ID", nextStreamId: stream.id })
 
-	return await useStream(dispatch, stream.id)
+	return await useStream(dispatch, stream.id, streamUrl)
 }

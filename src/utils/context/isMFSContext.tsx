@@ -3,14 +3,16 @@
 
 import { createContext, useState, useEffect } from "react"
 
-export const isMFSContext = createContext(null)
+export const isMFSContext = createContext<boolean>(false)
 
 export const MFSProvider = ({ children }) => {
-	const [isMFS, setIsMFS] = useState(false)
+	const [isMFS, setIsMFS] = useState<boolean>(false)
 
 	useEffect(() => {
 		const hostname = window.location.hostname
 		setIsMFS(hostname === "franceservices.etalab.gouv.fr")
+		console.log("hostname", hostname)
+		//setIsMFS(hostname === "localhost")
 	}, [])
 
 	return <isMFSContext.Provider value={isMFS}>{children}</isMFSContext.Provider>

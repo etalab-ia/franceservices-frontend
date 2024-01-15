@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useContext } from "react"
-import { indexesUrl } from "../constants/api"
+import { useApiUrls } from "../constants/api"
 import { useFetch } from "./hooks"
 import { Question } from "types"
 import { CurrQuestionContext } from "./context/questionContext"
@@ -158,6 +158,7 @@ export const getIndexes = async (
 
 	if (indexType === "sheets" && data.must_not_sids.length !== 0) return
 	try {
+		const { indexesUrl } = useApiUrls()
 		const res = await useFetch(indexesUrl, "POST", {
 			data: setIndexesBody(data, indexType, chunkSize, streamId),
 			headers: setHeaders(false),

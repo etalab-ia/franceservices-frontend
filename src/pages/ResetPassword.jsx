@@ -1,7 +1,7 @@
 import ButtonsGroup from "@codegouvfr/react-dsfr/ButtonsGroup"
 import { initButtonsReset } from "../constants/connexion"
 import { LoginContainer } from "../components/Auth/LoginContainer"
-import { resetPasswordMailUrl } from "../constants/api"
+import { useApiUrls } from "../constants/api"
 import { useFetch } from "../utils/hooks"
 import Input from "@codegouvfr/react-dsfr/Input"
 
@@ -13,6 +13,7 @@ export function ResetPassword({ setAuthFailed, userAuth, setUserAuth }) {
 	}
 
 	const isValidEmail = userAuth.email.length && userAuth.email.includes("@")
+	const { resetPasswordMailUrl } = useApiUrls()
 	const handleClick = async () => {
 		const res = await useFetch(resetPasswordMailUrl, "POST", {
 			data: JSON.stringify({ email: userAuth.email }),

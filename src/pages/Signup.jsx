@@ -2,7 +2,7 @@ import { ButtonsGroup } from "@codegouvfr/react-dsfr/ButtonsGroup"
 import { useState } from "react"
 import { signupFields } from "../constants/inputFields"
 import { initButtonsSignup } from "../constants/connexion"
-import { userUrl } from "../constants/api"
+import { useApiUrls } from "../constants/api"
 import { useDispatch } from "react-redux"
 import { invalidEmail, invalidPassword } from "../constants/errorMessages"
 import { LoginContainer } from "../components/Auth/LoginContainer"
@@ -40,6 +40,7 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
 	const [password, setPassword] = useState("")
 	const [confPassword, setConfPassword] = useState("")
 	const [errorMesage, setErrorMessage] = useState("")
+	const { userUrl } = useApiUrls()
 
 	const handleChange = (e) => {
 		e.preventDefault()

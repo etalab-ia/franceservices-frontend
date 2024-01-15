@@ -5,13 +5,14 @@ import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { generateStream, useFetch } from "../../utils/hooks"
 import { setHeaders } from "../../utils/setData"
-import { chatUrl } from "../../constants/api"
+import { useApiUrls } from "../../constants/api"
 
 export function UserMessage() {
 	const stream = useSelector((state) => state.stream)
 	const user = useSelector((state) => state.user)
 	const dispatch = useDispatch()
 	const [currQuestion, setCurrQuestion] = useState("")
+	const { streamUrl, chatUrl } = useApiUrls()
 
 	const handleChange = (e) => {
 		e.preventDefault()
@@ -37,7 +38,7 @@ export function UserMessage() {
 	useEffect(() => {
 		if (!user.question.query.length) return
 
-		generateStream(user.question, dispatch, user.chatId)
+		generateStream(user.question, dispatch, user.chatId, streamUrl)
 		dispatch({ type: "RESET_FEEDBACK" })
 	}, [user.question])
 
