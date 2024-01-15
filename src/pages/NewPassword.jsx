@@ -3,7 +3,7 @@ import { useState } from "react"
 import { signupFields } from "../constants/inputFields"
 import { initButtonsSignup } from "../constants/connexion"
 import { useFetch } from "../utils/hooks"
-import { resetPasswordUrl } from "../constants/api"
+import { useApiUrls } from "../constants/api"
 import { changePasswordFailed } from "../constants/errorMessages"
 import { LoginContainer } from "../components/Auth/LoginContainer"
 import { LoginFields } from "../components/Auth/LoginFields"
@@ -14,6 +14,7 @@ export function NewPassword({ authFailed, setAuthFailed }) {
 	const [confPassword, setConfPassword] = useState("")
 	const urlParams = new URL(window.location.href)
 	const token = urlParams.searchParams.get("token")
+	const { resetPasswordUrl } = useApiUrls()
 
 	const handleChange = (e) => {
 		e.preventDefault()
@@ -31,7 +32,6 @@ export function NewPassword({ authFailed, setAuthFailed }) {
 			token: token,
 			password: password,
 		}
-
 		const res = await useFetch(resetPasswordUrl, "POST", {
 			data: JSON.stringify(data),
 			headers: { "Content-Type": "application/json" },

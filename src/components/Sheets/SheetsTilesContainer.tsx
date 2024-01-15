@@ -7,7 +7,7 @@ import { SheetsAdditionalTilesTitle } from "./SheetsAdditionalTilesTitle"
 import { CurrQuestionContext } from "../../utils/context/questionContext"
 import { ArchiveType, RootState } from "types"
 import { useFetch } from "../../utils/hooks"
-import { getSheetsUrl } from "../../constants/api"
+import { useApiUrls } from "../../constants/api"
 
 /****************************************************************************************
 	
@@ -28,6 +28,7 @@ export const SheetsTilesContainer = ({
 	const [additionalTiles, setAdditionalTiles] = useState([])
 	const { currQuestion } = useContext(CurrQuestionContext)
 	const dispatch = useDispatch()
+	const { getSheetsUrl } = useApiUrls()
 
 	useEffect(() => {
 		const data = {

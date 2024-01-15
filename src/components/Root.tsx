@@ -19,6 +19,8 @@ import { InitialUserAuth, UserAuth } from "../utils/auth"
 import { useAppDispatch } from "../utils/hooks"
 import { checkConnexion } from "../utils/localStorage"
 import { isMFSContext } from "../utils/context/isMFSContext"
+import Error404 from "../pages/404"
+import { useApiUrls } from "../constants/api"
 
 export const Root = () => {
 	const navigationData = navFunc()
@@ -27,10 +29,11 @@ export const Root = () => {
 	const dispatch = useAppDispatch()
 	const [isLoading, setIsLoading] = useState(true)
 	const isMFS = useContext(isMFSContext)
+	const { userUrl, signoutUrl } = useApiUrls()
 
 	console.log("isMFS", isMFS)
 	useEffect(() => {
-		checkConnexion(setUserAuth).finally(() => setIsLoading(false))
+		checkConnexion(setUserAuth, userUrl).finally(() => setIsLoading(false))
 	}, [dispatch])
 
 	if (isLoading) {
@@ -52,7 +55,9 @@ export const Root = () => {
 				serviceTagline="Aide à l’accompagnement des usagers France services"
 				homeLinkProps={{ title: "Albert" }}
 				navigation={userAuth.isLogin && navigationData}
-				quickAccessItems={userAuth.isLogin ? quickAccessItemsFunc(userAuth, setUserAuth) : []}
+				quickAccessItems={
+					userAuth.isLogin ? quickAccessItemsFunc(userAuth, setUserAuth, signoutUrl) : []
+				}
 			/>
 			<Routes>
 				<Route
@@ -69,19 +74,28 @@ export const Root = () => {
 						)
 					}
 				/>
-				<Route
-					path="/meeting"
-					element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
-				/>
+				{isMFS ? (
+					<Route
+						path="/meeting"
+						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
+					/>
+				) : (
+					<Route path={"/meeting"} element={<Navigate to="/404" />} />
+				)}
 				<Route path="/home" element={!userAuth.isLogin ? <Navigate to="/login" /> : <Home />} />
 				<Route
 					path="/"
-					element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/chat" />}
+					element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/home" />}
 				/>
-				{/* 		{	!isMFS ?	<Route
-					path="/chat"
-					element={!userAuth.isLogin ? <Navigate to="/login" /> : <Chatbot archive={false} />}
-				/> :  }*/}
+				<Route path="/404" element={<Error404 />} />
+				{!isMFS ? (
+					<Route
+						path="/chat"
+						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Chatbot archive={false} />}
+					/>
+				) : (
+					<Route path={"/chat"} element={<Navigate to="/404" />} />
+				)}
 				<Route
 					path="/contact"
 					element={
@@ -117,7 +131,7 @@ export const Root = () => {
 					path="/new-password"
 					element={<NewPassword authFailed={authFailed} setAuthFailed={setAuthFailed} />}
 				/>
-				<Route path="*" element={<h1>404</h1>} />
+				<Route path="*" element={<Error404 />} />
 			</Routes>
 			<Footer
 				bottomItems={[headerFooterDisplayItem]}

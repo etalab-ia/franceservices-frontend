@@ -1,0 +1,3229 @@
+{
+	"fileCounts": {},
+	"anys": [
+		{
+			"file": "custom.d.ts",
+			"line": 1,
+			"character": 7,
+			"text": "content",
+			"kind": 1
+		},
+		{
+			"file": "custom.d.ts",
+			"line": 2,
+			"character": 16,
+			"text": "content",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/reducer/user.tsx",
+			"line": 86,
+			"character": 34,
+			"text": "web_services",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/reducer/user.tsx",
+			"line": 86,
+			"character": 47,
+			"text": "slice",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/reducer/user.tsx",
+			"line": 103,
+			"character": 39,
+			"text": "_",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/reducer/user.tsx",
+			"line": 104,
+			"character": 49,
+			"text": "_",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/reducer/user.tsx",
+			"line": 105,
+			"character": 81,
+			"text": "sid",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/reducer/user.tsx",
+			"line": 127,
+			"character": 49,
+			"text": "_",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/reducer/user.tsx",
+			"line": 129,
+			"character": 5,
+			"text": "_",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/reducer/user.tsx",
+			"line": 131,
+			"character": 48,
+			"text": "sheet",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/reducer/user.tsx",
+			"line": 131,
+			"character": 58,
+			"text": "sheet",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/reducer/user.tsx",
+			"line": 131,
+			"character": 64,
+			"text": "sid",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/reducer/user.tsx",
+			"line": 131,
+			"character": 80,
+			"text": "sid",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/context/isMFSContext.tsx",
+			"line": 7,
+			"character": 30,
+			"text": "children",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatMainContainer.tsx",
+			"line": 10,
+			"character": 36,
+			"text": "archive",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatMainContainer.tsx",
+			"line": 16,
+			"character": 3,
+			"text": "archive",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatMainContainer.tsx",
+			"line": 27,
+			"character": 5,
+			"text": "archive",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatMainContainer.tsx",
+			"line": 28,
+			"character": 14,
+			"text": "messages",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatMainContainer.tsx",
+			"line": 28,
+			"character": 24,
+			"text": "archive",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatMainContainer.tsx",
+			"line": 28,
+			"character": 32,
+			"text": "messages",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatMainContainer.tsx",
+			"line": 33,
+			"character": 5,
+			"text": "archive",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/eventsEmitter.tsx",
+			"line": 8,
+			"character": 30,
+			"text": "listener",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 9,
+			"character": 60,
+			"text": "props",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 10,
+			"character": 9,
+			"text": "data",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 10,
+			"character": 15,
+			"text": "headers",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 17,
+			"character": 9,
+			"text": "data",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 26,
+			"character": 9,
+			"text": "jsonData",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 27,
+			"character": 10,
+			"text": "jsonData",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 30,
+			"character": 39,
+			"text": "error",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 31,
+			"character": 8,
+			"text": "error",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 29,
+			"character": 10,
+			"text": "error",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 35,
+			"character": 29,
+			"text": "e",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 35,
+			"character": 32,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 35,
+			"character": 42,
+			"text": "stream_chat",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 37,
+			"character": 8,
+			"text": "jsonData",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 37,
+			"character": 30,
+			"text": "e",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 37,
+			"character": 32,
+			"text": "data",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 39,
+			"character": 6,
+			"text": "jsonData",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 40,
+			"character": 3,
+			"text": "stream_chat",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 40,
+			"character": 15,
+			"text": "close",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 42,
+			"character": 10,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 44,
+			"character": 10,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 44,
+			"character": 47,
+			"text": "nextResponse",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 44,
+			"character": 61,
+			"text": "jsonData",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 47,
+			"character": 39,
+			"text": "error",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 49,
+			"character": 9,
+			"text": "error",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 46,
+			"character": 10,
+			"text": "error",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 53,
+			"character": 27,
+			"text": "e",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 53,
+			"character": 30,
+			"text": "stream_chat",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 54,
+			"character": 5,
+			"text": "stream_chat",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 55,
+			"character": 2,
+			"text": "stream_chat",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 55,
+			"character": 14,
+			"text": "close",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 57,
+			"character": 9,
+			"text": "stream_chat",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 64,
+			"character": 32,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 71,
+			"character": 1,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 73,
+			"character": 25,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 82,
+			"character": 2,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 89,
+			"character": 57,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 92,
+			"character": 8,
+			"text": "stream",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 96,
+			"character": 2,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 96,
+			"character": 36,
+			"text": "nextStreamId",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 96,
+			"character": 50,
+			"text": "stream",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 96,
+			"character": 57,
+			"text": "id",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 98,
+			"character": 25,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 98,
+			"character": 35,
+			"text": "stream",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 98,
+			"character": 42,
+			"text": "id",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 35,
+			"character": 32,
+			"text": "question",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 37,
+			"character": 2,
+			"text": "institution",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 37,
+			"character": 15,
+			"text": "question",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 37,
+			"character": 24,
+			"text": "institution",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 38,
+			"character": 2,
+			"text": "query",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 38,
+			"character": 9,
+			"text": "question",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 38,
+			"character": 18,
+			"text": "query",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 40,
+			"character": 2,
+			"text": "context",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 40,
+			"character": 11,
+			"text": "question",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 40,
+			"character": 20,
+			"text": "context",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 41,
+			"character": 2,
+			"text": "links",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 41,
+			"character": 9,
+			"text": "question",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 41,
+			"character": 18,
+			"text": "links",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 42,
+			"character": 2,
+			"text": "temperature",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 42,
+			"character": 15,
+			"text": "question",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 42,
+			"character": 24,
+			"text": "temperature",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 43,
+			"character": 2,
+			"text": "model_name",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 43,
+			"character": 14,
+			"text": "question",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 43,
+			"character": 23,
+			"text": "model_name",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 44,
+			"character": 2,
+			"text": "limit",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 44,
+			"character": 9,
+			"text": "question",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 44,
+			"character": 18,
+			"text": "limit",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 45,
+			"character": 2,
+			"text": "mode",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 45,
+			"character": 8,
+			"text": "question",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 45,
+			"character": 17,
+			"text": "mode",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 46,
+			"character": 2,
+			"text": "sources",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 46,
+			"character": 11,
+			"text": "question",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 46,
+			"character": 20,
+			"text": "sources",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 47,
+			"character": 2,
+			"text": "must_not_sids",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 47,
+			"character": 17,
+			"text": "question",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 47,
+			"character": 26,
+			"text": "must_not_sids",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 55,
+			"character": 1,
+			"text": "text",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 62,
+			"character": 2,
+			"text": "query",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 62,
+			"character": 9,
+			"text": "text",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 74,
+			"character": 57,
+			"text": "context",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 75,
+			"character": 25,
+			"text": "context",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 75,
+			"character": 33,
+			"text": "administrations",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 75,
+			"character": 49,
+			"text": "length",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 77,
+			"character": 4,
+			"text": "context",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 77,
+			"character": 12,
+			"text": "administrations",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 77,
+			"character": 28,
+			"text": "map",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 77,
+			"character": 33,
+			"text": "adminstration",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 77,
+			"character": 51,
+			"text": "adminstration",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 79,
+			"character": 16,
+			"text": "context",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 79,
+			"character": 24,
+			"text": "themes",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 79,
+			"character": 31,
+			"text": "length",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 80,
+			"character": 53,
+			"text": "context",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 80,
+			"character": 61,
+			"text": "themes",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 80,
+			"character": 68,
+			"text": "map",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 80,
+			"character": 73,
+			"text": "theme",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 80,
+			"character": 83,
+			"text": "theme",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 109,
+			"character": 55,
+			"text": "updateCurrQuestion",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 125,
+			"character": 1,
+			"text": "updateCurrQuestion",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 135,
+			"character": 24,
+			"text": "data",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 135,
+			"character": 30,
+			"text": "name",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 137,
+			"character": 2,
+			"text": "name",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 137,
+			"character": 8,
+			"text": "name",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 138,
+			"character": 2,
+			"text": "query",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 138,
+			"character": 9,
+			"text": "data",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 138,
+			"character": 14,
+			"text": "question",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 142,
+			"character": 2,
+			"text": "must_not_sids",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 142,
+			"character": 17,
+			"text": "data",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 142,
+			"character": 22,
+			"text": "must_not_sids",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 150,
+			"character": 1,
+			"text": "data",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 151,
+			"character": 1,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 158,
+			"character": 31,
+			"text": "data",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 158,
+			"character": 36,
+			"text": "must_not_sids",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 158,
+			"character": 50,
+			"text": "length",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 161,
+			"character": 8,
+			"text": "res",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 162,
+			"character": 24,
+			"text": "data",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 166,
+			"character": 2,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 166,
+			"character": 44,
+			"text": "res",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 168,
+			"character": 39,
+			"text": "error",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 167,
+			"character": 10,
+			"text": "error",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 172,
+			"character": 31,
+			"text": "data",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 172,
+			"character": 37,
+			"text": "setTiles",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 172,
+			"character": 47,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 172,
+			"character": 57,
+			"text": "streamId",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 173,
+			"character": 1,
+			"text": "setTiles",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 175,
+			"character": 6,
+			"text": "data",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 175,
+			"character": 15,
+			"text": "data",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 175,
+			"character": 20,
+			"text": "question",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 175,
+			"character": 32,
+			"text": "data",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 175,
+			"character": 37,
+			"text": "question",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 175,
+			"character": 46,
+			"text": "length",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 177,
+			"character": 12,
+			"text": "data",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 177,
+			"character": 18,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 180,
+			"character": 35,
+			"text": "sheets",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 180,
+			"character": 43,
+			"text": "setTiles",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 181,
+			"character": 6,
+			"text": "sheets",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 181,
+			"character": 17,
+			"text": "sheets",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 181,
+			"character": 24,
+			"text": "length",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 181,
+			"character": 39,
+			"text": "setTiles",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 183,
+			"character": 1,
+			"text": "setTiles",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 185,
+			"character": 1,
+			"text": "sheets",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 185,
+			"character": 8,
+			"text": "map",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 185,
+			"character": 13,
+			"text": "sheet",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 186,
+			"character": 8,
+			"text": "url",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 186,
+			"character": 14,
+			"text": "sheet",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 186,
+			"character": 20,
+			"text": "url",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 194,
+			"character": 16,
+			"text": "to",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 194,
+			"character": 20,
+			"text": "sheet",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 194,
+			"character": 26,
+			"text": "url",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 198,
+			"character": 7,
+			"text": "sheet",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 198,
+			"character": 13,
+			"text": "surtitre",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 200,
+			"character": 9,
+			"text": "sheet",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 200,
+			"character": 15,
+			"text": "title",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 205,
+			"character": 2,
+			"text": "setTiles",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 205,
+			"character": 12,
+			"text": "prevTiles",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/setData.tsx",
+			"line": 205,
+			"character": 30,
+			"text": "prevTiles",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Sheets/SheetsTiles.tsx",
+			"line": 22,
+			"character": 15,
+			"text": "tile",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Sheets/SheetsTiles.tsx",
+			"line": 27,
+			"character": 12,
+			"text": "tile",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Sheets/SheetsTiles.tsx",
+			"line": 27,
+			"character": 17,
+			"text": "desc",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Sheets/SheetsTiles.tsx",
+			"line": 28,
+			"character": 17,
+			"text": "tile",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Sheets/SheetsTiles.tsx",
+			"line": 28,
+			"character": 22,
+			"text": "linkProps",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Sheets/SheetsTiles.tsx",
+			"line": 29,
+			"character": 13,
+			"text": "tile",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Sheets/SheetsTiles.tsx",
+			"line": 29,
+			"character": 18,
+			"text": "title",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Sheets/SheetsTilesContainer.tsx",
+			"line": 47,
+			"character": 8,
+			"text": "sheets",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Sheets/SheetsTilesContainer.tsx",
+			"line": 51,
+			"character": 21,
+			"text": "sheets",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatAdditionalContainer.tsx",
+			"line": 5,
+			"character": 42,
+			"text": "archive",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/DisplayChatTab.tsx",
+			"line": 15,
+			"character": 33,
+			"text": "archive",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/DisplayChatTab.tsx",
+			"line": 18,
+			"character": 22,
+			"text": "archive",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/DisplayChatTab.tsx",
+			"line": 18,
+			"character": 31,
+			"text": "archive",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/DisplayChatTab.tsx",
+			"line": 19,
+			"character": 28,
+			"text": "archive",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/DisplayChatTab.tsx",
+			"line": 19,
+			"character": 37,
+			"text": "archive",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Chatbot.tsx",
+			"line": 7,
+			"character": 26,
+			"text": "archive",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Chatbot.tsx",
+			"line": 15,
+			"character": 20,
+			"text": "archive",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Chatbot.tsx",
+			"line": 15,
+			"character": 29,
+			"text": "archive",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/manageConnexion.ts",
+			"line": 14,
+			"character": 7,
+			"text": "userInfos",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/manageConnexion.ts",
+			"line": 21,
+			"character": 5,
+			"text": "userInfos",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/manageConnexion.ts",
+			"line": 21,
+			"character": 15,
+			"text": "detail",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/manageConnexion.ts",
+			"line": 27,
+			"character": 10,
+			"text": "userInfos",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/manageConnexion.ts",
+			"line": 27,
+			"character": 20,
+			"text": "email",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/manageConnexion.ts",
+			"line": 28,
+			"character": 13,
+			"text": "userInfos",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/manageConnexion.ts",
+			"line": 28,
+			"character": 23,
+			"text": "username",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/manageConnexion.ts",
+			"line": 40,
+			"character": 36,
+			"text": "setUserAuth",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/manageConnexion.ts",
+			"line": 44,
+			"character": 14,
+			"text": "setUserAuth",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Contact/UserInformation.tsx",
+			"line": 6,
+			"character": 1,
+			"text": "setFormData",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Contact/UserInformation.tsx",
+			"line": 8,
+			"character": 5,
+			"text": "setFormData",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Contact/UserInformation.tsx",
+			"line": 9,
+			"character": 23,
+			"text": "e",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Contact/UserInformation.tsx",
+			"line": 10,
+			"character": 10,
+			"text": "name",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Contact/UserInformation.tsx",
+			"line": 10,
+			"character": 16,
+			"text": "value",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Contact/UserInformation.tsx",
+			"line": 10,
+			"character": 26,
+			"text": "e",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Contact/UserInformation.tsx",
+			"line": 10,
+			"character": 28,
+			"text": "target",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Contact/UserInformation.tsx",
+			"line": 11,
+			"character": 2,
+			"text": "setFormData",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Contact/UserInformation.tsx",
+			"line": 13,
+			"character": 4,
+			"text": "name",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Contact/UserInformation.tsx",
+			"line": 13,
+			"character": 11,
+			"text": "value",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Contact/UserMessage.tsx",
+			"line": 2,
+			"character": 30,
+			"text": "setFormData",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Contact/UserMessage.tsx",
+			"line": 2,
+			"character": 56,
+			"text": "setFormData",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Contact/UserMessage.tsx",
+			"line": 11,
+			"character": 5,
+			"text": "setFormData",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Contact/UserMessage.tsx",
+			"line": 11,
+			"character": 18,
+			"text": "prevData",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Contact/UserMessage.tsx",
+			"line": 12,
+			"character": 9,
+			"text": "prevData",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Home.tsx",
+			"line": 15,
+			"character": 15,
+			"text": "tiles",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 34,
+			"character": 23,
+			"text": "e",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 35,
+			"character": 2,
+			"text": "e",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 35,
+			"character": 4,
+			"text": "preventDefault",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 37,
+			"character": 6,
+			"text": "e",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 37,
+			"character": 8,
+			"text": "target",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 37,
+			"character": 15,
+			"text": "name",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 37,
+			"character": 42,
+			"text": "e",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 37,
+			"character": 44,
+			"text": "target",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 37,
+			"character": 51,
+			"text": "value",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 38,
+			"character": 6,
+			"text": "e",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 38,
+			"character": 8,
+			"text": "target",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 38,
+			"character": 15,
+			"text": "name",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 38,
+			"character": 48,
+			"text": "e",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 38,
+			"character": 50,
+			"text": "target",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 38,
+			"character": 57,
+			"text": "value",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 51,
+			"character": 9,
+			"text": "res",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 55,
+			"character": 22,
+			"text": "res",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 56,
+			"character": 8,
+			"text": "res",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 56,
+			"character": 12,
+			"text": "status",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 56,
+			"character": 22,
+			"text": "res",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 56,
+			"character": 26,
+			"text": "success",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 56,
+			"character": 48,
+			"text": "res",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 56,
+			"character": 52,
+			"text": "token",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 62,
+			"character": 17,
+			"text": "res",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 62,
+			"character": 21,
+			"text": "token",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 64,
+			"character": 15,
+			"text": "res",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 66,
+			"character": 40,
+			"text": "error",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Login.tsx",
+			"line": 65,
+			"character": 11,
+			"text": "error",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingFeedback.tsx",
+			"line": 0,
+			"character": 7,
+			"text": "thumbsUp",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingFeedback.tsx",
+			"line": 1,
+			"character": 7,
+			"text": "thumbsDown",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingStream.tsx",
+			"line": 25,
+			"character": 7,
+			"text": "agentResponse",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingStream.tsx",
+			"line": 33,
+			"character": 8,
+			"text": "chunksRes",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingStream.tsx",
+			"line": 59,
+			"character": 22,
+			"text": "agentResponse",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 25,
+			"character": 18,
+			"text": "sheet",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 26,
+			"character": 3,
+			"text": "sheet",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 26,
+			"character": 9,
+			"text": "related_questions",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 27,
+			"character": 4,
+			"text": "sheet",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 27,
+			"character": 10,
+			"text": "related_questions",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 27,
+			"character": 28,
+			"text": "forEach",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 27,
+			"character": 37,
+			"text": "qr",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 28,
+			"character": 43,
+			"text": "obj",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 29,
+			"character": 13,
+			"text": "obj",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 29,
+			"character": 17,
+			"text": "sid",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 29,
+			"character": 25,
+			"text": "qr",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 29,
+			"character": 28,
+			"text": "sid",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 35,
+			"character": 9,
+			"text": "question",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 35,
+			"character": 19,
+			"text": "qr",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 35,
+			"character": 22,
+			"text": "question",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 35,
+			"character": 32,
+			"text": "sid",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 35,
+			"character": 37,
+			"text": "qr",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 35,
+			"character": 40,
+			"text": "sid",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 35,
+			"character": 45,
+			"text": "url",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 35,
+			"character": 50,
+			"text": "qr",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 35,
+			"character": 53,
+			"text": "url",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 47,
+			"character": 26,
+			"text": "rq",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 53,
+			"character": 18,
+			"text": "rq",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 53,
+			"character": 21,
+			"text": "sid",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 55,
+			"character": 26,
+			"text": "rq",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 55,
+			"character": 29,
+			"text": "url",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 57,
+			"character": 14,
+			"text": "rq",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingQR.tsx",
+			"line": 57,
+			"character": 17,
+			"text": "question",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Meeting.tsx",
+			"line": 30,
+			"character": 29,
+			"text": "newQuestion",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Print/Print.tsx",
+			"line": 31,
+			"character": 9,
+			"text": "res",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Print/Print.tsx",
+			"line": 38,
+			"character": 14,
+			"text": "res",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Print/Print.tsx",
+			"line": 38,
+			"character": 18,
+			"text": "streams",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Print/Print.tsx",
+			"line": 38,
+			"character": 26,
+			"text": "res",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Print/Print.tsx",
+			"line": 38,
+			"character": 30,
+			"text": "streams",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Print/Print.tsx",
+			"line": 38,
+			"character": 38,
+			"text": "length",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 16,
+			"character": 8,
+			"text": "res",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 23,
+			"character": 2,
+			"text": "res",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 23,
+			"character": 6,
+			"text": "map",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 23,
+			"character": 11,
+			"text": "item",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 25,
+			"character": 4,
+			"text": "name",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 25,
+			"character": 10,
+			"text": "item",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 25,
+			"character": 15,
+			"text": "chat_name",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 26,
+			"character": 4,
+			"text": "type",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 26,
+			"character": 10,
+			"text": "item",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 26,
+			"character": 15,
+			"text": "chat_type",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 27,
+			"character": 4,
+			"text": "creationDate",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 27,
+			"character": 18,
+			"text": "item",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 27,
+			"character": 23,
+			"text": "created_at",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 28,
+			"character": 4,
+			"text": "updatedDate",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 28,
+			"character": 17,
+			"text": "item",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 28,
+			"character": 22,
+			"text": "updated_at",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 29,
+			"character": 4,
+			"text": "id",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 29,
+			"character": 8,
+			"text": "item",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 29,
+			"character": 13,
+			"text": "id",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 30,
+			"character": 4,
+			"text": "userId",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 30,
+			"character": 12,
+			"text": "item",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Archive/DisplayArchiveTab.tsx",
+			"line": 30,
+			"character": 17,
+			"text": "user_id",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatFollowUp.tsx",
+			"line": 8,
+			"character": 31,
+			"text": "stream",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatFollowUp.tsx",
+			"line": 10,
+			"character": 22,
+			"text": "stream",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatFollowUp.tsx",
+			"line": 10,
+			"character": 29,
+			"text": "response",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatFollowUp.tsx",
+			"line": 10,
+			"character": 38,
+			"text": "length",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatFollowUp.tsx",
+			"line": 10,
+			"character": 54,
+			"text": "stream",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatFollowUp.tsx",
+			"line": 10,
+			"character": 61,
+			"text": "historyStream",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatFollowUp.tsx",
+			"line": 10,
+			"character": 75,
+			"text": "length",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatFollowUp.tsx",
+			"line": 19,
+			"character": 21,
+			"text": "stream",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatFollowUp.tsx",
+			"line": 19,
+			"character": 29,
+			"text": "stream",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatFollowUp.tsx",
+			"line": 21,
+			"character": 7,
+			"text": "stream",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatFollowUp.tsx",
+			"line": 21,
+			"character": 14,
+			"text": "isStreaming",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 7,
+			"character": 37,
+			"text": "reasons",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 7,
+			"character": 46,
+			"text": "otherReason",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 7,
+			"character": 59,
+			"text": "feedback",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 7,
+			"character": 69,
+			"text": "setFeedback",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 12,
+			"character": 2,
+			"text": "otherReason",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 13,
+			"character": 4,
+			"text": "reasons",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 13,
+			"character": 12,
+			"text": "includes",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 13,
+			"character": 21,
+			"text": "otherReason",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 14,
+			"character": 3,
+			"text": "setFeedback",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 15,
+			"character": 7,
+			"text": "feedback",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 16,
+			"character": 4,
+			"text": "message",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 16,
+			"character": 13,
+			"text": "otherReason",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 20,
+			"character": 13,
+			"text": "feedback",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 20,
+			"character": 22,
+			"text": "isGood",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 21,
+			"character": 3,
+			"text": "message",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 21,
+			"character": 12,
+			"text": "feedback",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 21,
+			"character": 21,
+			"text": "message",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 22,
+			"character": 3,
+			"text": "reasons",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 22,
+			"character": 12,
+			"text": "feedback",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 22,
+			"character": 21,
+			"text": "reasons",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 29,
+			"character": 2,
+			"text": "setFeedback",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 30,
+			"character": 6,
+			"text": "feedback",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 34,
+			"character": 20,
+			"text": "feedback",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 34,
+			"character": 29,
+			"text": "reasons",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/ConfirmationButton.tsx",
+			"line": 34,
+			"character": 37,
+			"text": "length",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 3,
+			"character": 43,
+			"text": "isFirst",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 3,
+			"character": 52,
+			"text": "feedback",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 3,
+			"character": 62,
+			"text": "setFeedback",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 4,
+			"character": 7,
+			"text": "buttons",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 4,
+			"character": 17,
+			"text": "isFirst",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 7,
+			"character": 17,
+			"text": "feedback",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 7,
+			"character": 26,
+			"text": "isGood",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 8,
+			"character": 2,
+			"text": "setFeedback",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 9,
+			"character": 6,
+			"text": "feedback",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 16,
+			"character": 4,
+			"text": "buttons",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 16,
+			"character": 12,
+			"text": "map",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 16,
+			"character": 17,
+			"text": "button",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 16,
+			"character": 25,
+			"text": "index",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 19,
+			"character": 13,
+			"text": "button",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 19,
+			"character": 20,
+			"text": "type",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 23,
+			"character": 7,
+			"text": "index",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 23,
+			"character": 17,
+			"text": "feedback",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 23,
+			"character": 26,
+			"text": "isGood",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 25,
+			"character": 16,
+			"text": "feedback",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 25,
+			"character": 25,
+			"text": "isConfirmed",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 35,
+			"character": 7,
+			"text": "button",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 28,
+			"character": 31,
+			"text": "button",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 28,
+			"character": 38,
+			"text": "type",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 29,
+			"character": 18,
+			"text": "index",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 29,
+			"character": 28,
+			"text": "feedback",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 29,
+			"character": 37,
+			"text": "isGood",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 30,
+			"character": 12,
+			"text": "button",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 30,
+			"character": 19,
+			"text": "img",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 32,
+			"character": 23,
+			"text": "index",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 32,
+			"character": 33,
+			"text": "feedback",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 32,
+			"character": 42,
+			"text": "isGood",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 33,
+			"character": 8,
+			"text": "button",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Feedbacks/UserFeedbackSatisfaction.tsx",
+			"line": 33,
+			"character": 15,
+			"text": "name",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Global/BotQuestion.tsx",
+			"line": 7,
+			"character": 30,
+			"text": "id",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Global/BotQuestion.tsx",
+			"line": 7,
+			"character": 34,
+			"text": "choice",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Global/BotQuestion.tsx",
+			"line": 10,
+			"character": 8,
+			"text": "buttonChoice",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Global/BotQuestion.tsx",
+			"line": 10,
+			"character": 41,
+			"text": "choice",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Global/BotQuestion.tsx",
+			"line": 10,
+			"character": 91,
+			"text": "choice",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Global/BotQuestion.tsx",
+			"line": 13,
+			"character": 28,
+			"text": "index",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Global/BotQuestion.tsx",
+			"line": 14,
+			"character": 19,
+			"text": "id",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Global/BotQuestion.tsx",
+			"line": 14,
+			"character": 27,
+			"text": "index",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Global/BotQuestion.tsx",
+			"line": 16,
+			"character": 40,
+			"text": "nextKey",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Global/BotQuestion.tsx",
+			"line": 16,
+			"character": 49,
+			"text": "id",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Global/BotQuestion.tsx",
+			"line": 18,
+			"character": 19,
+			"text": "index",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Global/BotQuestion.tsx",
+			"line": 19,
+			"character": 40,
+			"text": "nextKey",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Global/BotQuestion.tsx",
+			"line": 19,
+			"character": 49,
+			"text": "id",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Global/BotQuestion.tsx",
+			"line": 19,
+			"character": 53,
+			"text": "nextValue",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Global/BotQuestion.tsx",
+			"line": 19,
+			"character": 64,
+			"text": "index",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Global/BotQuestion.tsx",
+			"line": 27,
+			"character": 34,
+			"text": "buttonChoice",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Global/BotQuestion.tsx",
+			"line": 28,
+			"character": 20,
+			"text": "buttonChoice",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Global/BotQuestion.tsx",
+			"line": 33,
+			"character": 17,
+			"text": "buttonChoice",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Global/BotQuestion.tsx",
+			"line": 40,
+			"character": 19,
+			"text": "buttonChoice",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 4,
+			"character": 41,
+			"text": "context",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 4,
+			"character": 50,
+			"text": "setContext",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 5,
+			"character": 23,
+			"text": "tag",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 5,
+			"character": 28,
+			"text": "fieldName",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 6,
+			"character": 6,
+			"text": "fieldName",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 7,
+			"character": 3,
+			"text": "setContext",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 7,
+			"character": 15,
+			"text": "prevContext",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 8,
+			"character": 7,
+			"text": "prevContext",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 9,
+			"character": 25,
+			"text": "prevContext",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 9,
+			"character": 37,
+			"text": "administrations",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 9,
+			"character": 54,
+			"text": "tag",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 11,
+			"character": 11,
+			"text": "fieldName",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 12,
+			"character": 3,
+			"text": "setContext",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 12,
+			"character": 15,
+			"text": "prevContext",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 13,
+			"character": 7,
+			"text": "prevContext",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 14,
+			"character": 16,
+			"text": "prevContext",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 14,
+			"character": 28,
+			"text": "themes",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 14,
+			"character": 36,
+			"text": "tag",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 20,
+			"character": 21,
+			"text": "field",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 20,
+			"character": 28,
+			"text": "index",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 21,
+			"character": 10,
+			"text": "tags",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 21,
+			"character": 17,
+			"text": "field",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 21,
+			"character": 23,
+			"text": "name",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 21,
+			"character": 43,
+			"text": "context",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 21,
+			"character": 51,
+			"text": "themes",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 21,
+			"character": 60,
+			"text": "context",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 21,
+			"character": 68,
+			"text": "administrations",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 25,
+			"character": 7,
+			"text": "field",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 25,
+			"character": 14,
+			"text": "field",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 26,
+			"character": 21,
+			"text": "tag",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 26,
+			"character": 42,
+			"text": "tag",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 26,
+			"character": 47,
+			"text": "field",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 26,
+			"character": 53,
+			"text": "name",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 27,
+			"character": 7,
+			"text": "themes",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 27,
+			"character": 15,
+			"text": "context",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 27,
+			"character": 23,
+			"text": "themes",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 28,
+			"character": 7,
+			"text": "administrations",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 28,
+			"character": 24,
+			"text": "context",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 28,
+			"character": 32,
+			"text": "administrations",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 30,
+			"character": 19,
+			"text": "setContext",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 30,
+			"character": 31,
+			"text": "setContext",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 30,
+			"character": 43,
+			"text": "context",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 30,
+			"character": 52,
+			"text": "context",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 30,
+			"character": 61,
+			"text": "field",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 30,
+			"character": 68,
+			"text": "field",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 30,
+			"character": 75,
+			"text": "tags",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInput.tsx",
+			"line": 30,
+			"character": 81,
+			"text": "tags",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInformation.tsx",
+			"line": 16,
+			"character": 48,
+			"text": "context",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInformation.tsx",
+			"line": 16,
+			"character": 57,
+			"text": "setContext",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInformation.tsx",
+			"line": 20,
+			"character": 27,
+			"text": "context",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInformation.tsx",
+			"line": 20,
+			"character": 36,
+			"text": "context",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInformation.tsx",
+			"line": 20,
+			"character": 45,
+			"text": "setContext",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInformation.tsx",
+			"line": 20,
+			"character": 57,
+			"text": "setContext",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInformation.tsx",
+			"line": 21,
+			"character": 28,
+			"text": "setContext",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingAdditionalInformation.tsx",
+			"line": 21,
+			"character": 40,
+			"text": "setContext",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingButton.tsx",
+			"line": 20,
+			"character": 32,
+			"text": "setGenerate",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingButton.tsx",
+			"line": 20,
+			"character": 45,
+			"text": "context",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingButton.tsx",
+			"line": 30,
+			"character": 8,
+			"text": "chat",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingButton.tsx",
+			"line": 34,
+			"character": 53,
+			"text": "context",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingButton.tsx",
+			"line": 36,
+			"character": 34,
+			"text": "nextChatId",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingButton.tsx",
+			"line": 36,
+			"character": 46,
+			"text": "chat",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingButton.tsx",
+			"line": 36,
+			"character": 51,
+			"text": "id",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Meeting/MeetingButton.tsx",
+			"line": 37,
+			"character": 2,
+			"text": "setGenerate",
+			"kind": 1
+		}
+	],
+	"percentage": 86.48648648648648,
+	"total": 3404,
+	"covered": 2944,
+	"uncovered": 460
+}

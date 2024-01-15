@@ -10,6 +10,7 @@ import { emitCloseStream } from "../../utils/eventsEmitter"
 import { getIndexes } from "../../utils/setData"
 import { CurrQuestionContext } from "../../utils/context/questionContext"
 import { ArchiveType, RootState } from "types"
+import { useApiUrls } from "../../constants/api"
 
 /*****************************************************************************************
 	
@@ -39,6 +40,7 @@ export const SheetsAdditionalButtons = ({
 	const [deletedSheets, setDeletedSheets] = useState([])
 	const dispatch = useDispatch()
 	const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
+	const { streamUrl } = useApiUrls()
 
 	const handleClick = () => {
 		setIsModifiable(!isModifiable)
@@ -68,7 +70,7 @@ export const SheetsAdditionalButtons = ({
 		if (archive) return
 
 		emitCloseStream()
-		generateStream(currQuestion, dispatch, user.chatId)
+		generateStream(currQuestion, dispatch, user.chatId, streamUrl)
 	}, [currQuestion])
 
 	useEffect(() => {
