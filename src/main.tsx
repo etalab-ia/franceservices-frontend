@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 import { Root } from "./components/Root"
 import { Provider } from "react-redux"
 import { store } from "./utils/reducer/reducer"
+import { MFSProvider } from "./utils/context/isMFSContext"
 
 // @ts-expect-error
 startReactDsfr({ defaultColorScheme: "system", Link })
@@ -13,9 +14,12 @@ startReactDsfr({ defaultColorScheme: "system", Link })
 ReactDOM.createRoot(document.getElementById("root")).render(
 	// <React.StrictMode>
 	<BrowserRouter basename="/albert">
-		<Provider store={store}>
-			<Root />
-		</Provider>
+		<MFSProvider>
+			<Provider store={store}>
+				<Root />
+			</Provider>
+		</MFSProvider>
 	</BrowserRouter>
-	// </React.StrictMode>
+
+	//</React.StrictMode>
 )
