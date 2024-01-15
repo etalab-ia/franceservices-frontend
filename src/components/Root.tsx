@@ -25,7 +25,16 @@ export const Root = () => {
 	const [authFailed, setAuthFailed] = useState(false)
 	const dispatch = useAppDispatch()
 	const [isLoading, setIsLoading] = useState(true)
+	const [isMFS, setIsMFS] = useState(false)
+
 	useEffect(() => {
+		const hostname = window.location.hostname
+		if (hostname === "albert.etalab.gouv.fr") {
+			setIsMFS(false)
+		} else if (hostname === "franceservices.etalab.gouv.fr") {
+			setIsMFS(true)
+		}
+
 		checkConnexion(setUserAuth).finally(() => setIsLoading(false))
 	}, [dispatch])
 

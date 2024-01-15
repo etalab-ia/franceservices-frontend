@@ -1,0 +1,17 @@
+// This context keeps track of wether the user is browsing albert.etalab.gouv.fr or franceservices.etalab.gouv.fr
+// because the front doesn't display the same content depending on the domain name
+
+import { createContext, useState, useEffect } from "react"
+
+export const isMFSContext = createContext(null)
+
+export const MFSProvider = ({ children }) => {
+	const [isMFS, setIsMFS] = useState(false)
+
+	useEffect(() => {
+		const hostname = window.location.hostname
+		setIsMFS(hostname === "franceservices.etalab.gouv.fr")
+	}, [])
+
+	return <isMFSContext.Provider value={isMFS}>{children}</isMFSContext.Provider>
+}
