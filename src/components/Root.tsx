@@ -2,7 +2,7 @@ import { Badge } from "@codegouvfr/react-dsfr/Badge"
 import { headerFooterDisplayItem } from "@codegouvfr/react-dsfr/Display"
 import { Footer } from "@codegouvfr/react-dsfr/Footer"
 import { Header } from "@codegouvfr/react-dsfr/Header"
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { Navigate, Route, Routes } from "react-router-dom"
 import { quickAccessItemsFunc } from "../constants/header"
 import { navFunc } from "../constants/router"
@@ -26,9 +26,13 @@ export const Root = () => {
 	const [authFailed, setAuthFailed] = useState(false)
 	const dispatch = useAppDispatch()
 	const [isLoading, setIsLoading] = useState(true)
-
 	const isMFS = useContext(isMFSContext)
+
 	console.log("isMFS", isMFS)
+	useEffect(() => {
+		checkConnexion(setUserAuth).finally(() => setIsLoading(false))
+	}, [dispatch])
+
 	if (isLoading) {
 		return <div className="bg-red"></div>
 	}
@@ -74,10 +78,10 @@ export const Root = () => {
 					path="/"
 					element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/chat" />}
 				/>
-				<Route
+				{/* 		{	!isMFS ?	<Route
 					path="/chat"
 					element={!userAuth.isLogin ? <Navigate to="/login" /> : <Chatbot archive={false} />}
-				/>
+				/> :  }*/}
 				<Route
 					path="/contact"
 					element={
