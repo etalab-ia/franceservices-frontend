@@ -28,7 +28,7 @@ export const Root = () => {
 	const [isLoading, setIsLoading] = useState(true)
 
 	const isMFS = useContext(isMFSContext)
-
+	console.log("isMFS", isMFS)
 	if (isLoading) {
 		return <div className="bg-red"></div>
 	}
