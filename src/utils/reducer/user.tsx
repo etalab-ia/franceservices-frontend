@@ -44,7 +44,7 @@ interface Messages {
 
 interface User {
 	question: Question // Question asked by user
-	messages: Messages[] //
+	messages: Messages[] // Messages exchanged between user & agent
 	sheets: any[] // Sheets associated to the reponse from 0 to 2
 	additionalSheets: any[] // suggested sheets to from 3 to 9
 	chunks: any[] // Chunks associes a la reponse
