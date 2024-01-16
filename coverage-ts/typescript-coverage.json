@@ -100,370 +100,6 @@
 			"kind": 1
 		},
 		{
-			"file": "src/components/Chat/ChatMainContainer.tsx",
-			"line": 10,
-			"character": 36,
-			"text": "archive",
-			"kind": 1
-		},
-		{
-			"file": "src/components/Chat/ChatMainContainer.tsx",
-			"line": 16,
-			"character": 3,
-			"text": "archive",
-			"kind": 1
-		},
-		{
-			"file": "src/components/Chat/ChatMainContainer.tsx",
-			"line": 27,
-			"character": 5,
-			"text": "archive",
-			"kind": 1
-		},
-		{
-			"file": "src/components/Chat/ChatMainContainer.tsx",
-			"line": 28,
-			"character": 14,
-			"text": "messages",
-			"kind": 1
-		},
-		{
-			"file": "src/components/Chat/ChatMainContainer.tsx",
-			"line": 28,
-			"character": 24,
-			"text": "archive",
-			"kind": 1
-		},
-		{
-			"file": "src/components/Chat/ChatMainContainer.tsx",
-			"line": 28,
-			"character": 32,
-			"text": "messages",
-			"kind": 1
-		},
-		{
-			"file": "src/components/Chat/ChatMainContainer.tsx",
-			"line": 33,
-			"character": 5,
-			"text": "archive",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/eventsEmitter.tsx",
-			"line": 8,
-			"character": 30,
-			"text": "listener",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 9,
-			"character": 60,
-			"text": "props",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 10,
-			"character": 9,
-			"text": "data",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 10,
-			"character": 15,
-			"text": "headers",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 17,
-			"character": 9,
-			"text": "data",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 26,
-			"character": 9,
-			"text": "jsonData",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 27,
-			"character": 10,
-			"text": "jsonData",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 30,
-			"character": 39,
-			"text": "error",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 31,
-			"character": 8,
-			"text": "error",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 29,
-			"character": 10,
-			"text": "error",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 35,
-			"character": 29,
-			"text": "e",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 35,
-			"character": 32,
-			"text": "dispatch",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 35,
-			"character": 42,
-			"text": "stream_chat",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 37,
-			"character": 8,
-			"text": "jsonData",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 37,
-			"character": 30,
-			"text": "e",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 37,
-			"character": 32,
-			"text": "data",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 39,
-			"character": 6,
-			"text": "jsonData",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 40,
-			"character": 3,
-			"text": "stream_chat",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 40,
-			"character": 15,
-			"text": "close",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 42,
-			"character": 10,
-			"text": "dispatch",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 44,
-			"character": 10,
-			"text": "dispatch",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 44,
-			"character": 47,
-			"text": "nextResponse",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 44,
-			"character": 61,
-			"text": "jsonData",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 47,
-			"character": 39,
-			"text": "error",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 49,
-			"character": 9,
-			"text": "error",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 46,
-			"character": 10,
-			"text": "error",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 53,
-			"character": 27,
-			"text": "e",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 53,
-			"character": 30,
-			"text": "stream_chat",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 54,
-			"character": 5,
-			"text": "stream_chat",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 55,
-			"character": 2,
-			"text": "stream_chat",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 55,
-			"character": 14,
-			"text": "close",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 57,
-			"character": 9,
-			"text": "stream_chat",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 64,
-			"character": 32,
-			"text": "dispatch",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 71,
-			"character": 1,
-			"text": "dispatch",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 73,
-			"character": 25,
-			"text": "dispatch",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 82,
-			"character": 2,
-			"text": "dispatch",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 89,
-			"character": 57,
-			"text": "dispatch",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 92,
-			"character": 8,
-			"text": "stream",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 96,
-			"character": 2,
-			"text": "dispatch",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 96,
-			"character": 36,
-			"text": "nextStreamId",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 96,
-			"character": 50,
-			"text": "stream",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 96,
-			"character": 57,
-			"text": "id",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 98,
-			"character": 25,
-			"text": "dispatch",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 98,
-			"character": 35,
-			"text": "stream",
-			"kind": 1
-		},
-		{
-			"file": "src/utils/hooks.tsx",
-			"line": 98,
-			"character": 42,
-			"text": "id",
-			"kind": 1
-		},
-		{
 			"file": "src/utils/setData.tsx",
 			"line": 35,
 			"character": 32,
@@ -906,35 +542,35 @@
 		},
 		{
 			"file": "src/utils/setData.tsx",
-			"line": 150,
+			"line": 151,
 			"character": 1,
 			"text": "data",
 			"kind": 1
 		},
 		{
 			"file": "src/utils/setData.tsx",
-			"line": 151,
+			"line": 152,
 			"character": 1,
 			"text": "dispatch",
 			"kind": 1
 		},
 		{
 			"file": "src/utils/setData.tsx",
-			"line": 158,
+			"line": 159,
 			"character": 31,
 			"text": "data",
 			"kind": 1
 		},
 		{
 			"file": "src/utils/setData.tsx",
-			"line": 158,
+			"line": 159,
 			"character": 36,
 			"text": "must_not_sids",
 			"kind": 1
 		},
 		{
 			"file": "src/utils/setData.tsx",
-			"line": 158,
+			"line": 159,
 			"character": 50,
 			"text": "length",
 			"kind": 1
@@ -1234,6 +870,468 @@
 			"kind": 1
 		},
 		{
+			"file": "src/utils/eventsEmitter.tsx",
+			"line": 11,
+			"character": 30,
+			"text": "listener",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 9,
+			"character": 60,
+			"text": "props",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 10,
+			"character": 9,
+			"text": "data",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 10,
+			"character": 15,
+			"text": "headers",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 16,
+			"character": 9,
+			"text": "data",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 25,
+			"character": 9,
+			"text": "jsonData",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 26,
+			"character": 10,
+			"text": "jsonData",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 29,
+			"character": 39,
+			"text": "error",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 30,
+			"character": 8,
+			"text": "error",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 28,
+			"character": 10,
+			"text": "error",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 34,
+			"character": 29,
+			"text": "e",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 34,
+			"character": 32,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 34,
+			"character": 42,
+			"text": "stream_chat",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 36,
+			"character": 8,
+			"text": "jsonData",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 36,
+			"character": 30,
+			"text": "e",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 36,
+			"character": 32,
+			"text": "data",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 38,
+			"character": 6,
+			"text": "jsonData",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 39,
+			"character": 3,
+			"text": "stream_chat",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 39,
+			"character": 15,
+			"text": "close",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 41,
+			"character": 10,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 43,
+			"character": 10,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 43,
+			"character": 47,
+			"text": "nextResponse",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 43,
+			"character": 61,
+			"text": "jsonData",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 46,
+			"character": 39,
+			"text": "error",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 48,
+			"character": 9,
+			"text": "error",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 45,
+			"character": 10,
+			"text": "error",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 52,
+			"character": 27,
+			"text": "e",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 52,
+			"character": 30,
+			"text": "stream_chat",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 53,
+			"character": 5,
+			"text": "stream_chat",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 54,
+			"character": 2,
+			"text": "stream_chat",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 54,
+			"character": 14,
+			"text": "close",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 56,
+			"character": 9,
+			"text": "stream_chat",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 63,
+			"character": 32,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 69,
+			"character": 1,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 71,
+			"character": 25,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 80,
+			"character": 2,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 81,
+			"character": 2,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 90,
+			"character": 1,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 96,
+			"character": 7,
+			"text": "stream",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 100,
+			"character": 1,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 100,
+			"character": 35,
+			"text": "nextStreamId",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 100,
+			"character": 49,
+			"text": "stream",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 100,
+			"character": 56,
+			"text": "id",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 102,
+			"character": 24,
+			"text": "dispatch",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 102,
+			"character": 34,
+			"text": "stream",
+			"kind": 1
+		},
+		{
+			"file": "src/utils/hooks.tsx",
+			"line": 102,
+			"character": 41,
+			"text": "id",
+			"kind": 1
+		},
+		{
+			"file": "src/components/User/UserMessage.tsx",
+			"line": 24,
+			"character": 23,
+			"text": "e",
+			"kind": 1
+		},
+		{
+			"file": "src/components/User/UserMessage.tsx",
+			"line": 25,
+			"character": 2,
+			"text": "e",
+			"kind": 1
+		},
+		{
+			"file": "src/components/User/UserMessage.tsx",
+			"line": 25,
+			"character": 4,
+			"text": "preventDefault",
+			"kind": 1
+		},
+		{
+			"file": "src/components/User/UserMessage.tsx",
+			"line": 27,
+			"character": 19,
+			"text": "e",
+			"kind": 1
+		},
+		{
+			"file": "src/components/User/UserMessage.tsx",
+			"line": 27,
+			"character": 21,
+			"text": "target",
+			"kind": 1
+		},
+		{
+			"file": "src/components/User/UserMessage.tsx",
+			"line": 27,
+			"character": 28,
+			"text": "value",
+			"kind": 1
+		},
+		{
+			"file": "src/components/User/UserMessage.tsx",
+			"line": 34,
+			"character": 8,
+			"text": "chat",
+			"kind": 1
+		},
+		{
+			"file": "src/components/User/UserMessage.tsx",
+			"line": 35,
+			"character": 67,
+			"text": "nextChatId",
+			"kind": 1
+		},
+		{
+			"file": "src/components/User/UserMessage.tsx",
+			"line": 35,
+			"character": 79,
+			"text": "chat",
+			"kind": 1
+		},
+		{
+			"file": "src/components/User/UserMessage.tsx",
+			"line": 35,
+			"character": 84,
+			"text": "id",
+			"kind": 1
+		},
+		{
+			"file": "src/components/User/UserMessage.tsx",
+			"line": 57,
+			"character": 28,
+			"text": "params",
+			"kind": 1
+		},
+		{
+			"file": "src/components/User/UserMessage.tsx",
+			"line": 59,
+			"character": 8,
+			"text": "updatedParams",
+			"kind": 1
+		},
+		{
+			"file": "src/components/User/UserMessage.tsx",
+			"line": 59,
+			"character": 29,
+			"text": "params",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatMainContainer.tsx",
+			"line": 18,
+			"character": 36,
+			"text": "archive",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatMainContainer.tsx",
+			"line": 24,
+			"character": 3,
+			"text": "archive",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatMainContainer.tsx",
+			"line": 35,
+			"character": 5,
+			"text": "archive",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatMainContainer.tsx",
+			"line": 36,
+			"character": 14,
+			"text": "messages",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatMainContainer.tsx",
+			"line": 36,
+			"character": 24,
+			"text": "archive",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatMainContainer.tsx",
+			"line": 36,
+			"character": 32,
+			"text": "messages",
+			"kind": 1
+		},
+		{
+			"file": "src/components/Chat/ChatMainContainer.tsx",
+			"line": 41,
+			"character": 5,
+			"text": "archive",
+			"kind": 1
+		},
+		{
 			"file": "src/components/Sheets/SheetsTiles.tsx",
 			"line": 22,
 			"character": 15,
@@ -1298,7 +1396,7 @@
 		},
 		{
 			"file": "src/components/Chat/ChatAdditionalContainer.tsx",
-			"line": 5,
+			"line": 8,
 			"character": 42,
 			"text": "archive",
 			"kind": 1
@@ -1340,83 +1438,90 @@
 		},
 		{
 			"file": "src/pages/Chatbot.tsx",
-			"line": 7,
+			"line": 10,
 			"character": 26,
 			"text": "archive",
 			"kind": 1
 		},
 		{
 			"file": "src/pages/Chatbot.tsx",
-			"line": 15,
-			"character": 20,
+			"line": 14,
+			"character": 29,
+			"text": "newQuestion",
+			"kind": 1
+		},
+		{
+			"file": "src/pages/Chatbot.tsx",
+			"line": 31,
+			"character": 21,
 			"text": "archive",
 			"kind": 1
 		},
 		{
 			"file": "src/pages/Chatbot.tsx",
-			"line": 15,
-			"character": 29,
+			"line": 31,
+			"character": 30,
 			"text": "archive",
 			"kind": 1
 		},
 		{
-			"file": "src/utils/manageConnexion.ts",
+			"file": "src/utils/manageConnexion.tsx",
 			"line": 14,
 			"character": 7,
 			"text": "userInfos",
 			"kind": 1
 		},
 		{
-			"file": "src/utils/manageConnexion.ts",
+			"file": "src/utils/manageConnexion.tsx",
 			"line": 21,
 			"character": 5,
 			"text": "userInfos",
 			"kind": 1
 		},
 		{
-			"file": "src/utils/manageConnexion.ts",
+			"file": "src/utils/manageConnexion.tsx",
 			"line": 21,
 			"character": 15,
 			"text": "detail",
 			"kind": 1
 		},
 		{
-			"file": "src/utils/manageConnexion.ts",
+			"file": "src/utils/manageConnexion.tsx",
 			"line": 27,
 			"character": 10,
 			"text": "userInfos",
 			"kind": 1
 		},
 		{
-			"file": "src/utils/manageConnexion.ts",
+			"file": "src/utils/manageConnexion.tsx",
 			"line": 27,
 			"character": 20,
 			"text": "email",
 			"kind": 1
 		},
 		{
-			"file": "src/utils/manageConnexion.ts",
+			"file": "src/utils/manageConnexion.tsx",
 			"line": 28,
 			"character": 13,
 			"text": "userInfos",
 			"kind": 1
 		},
 		{
-			"file": "src/utils/manageConnexion.ts",
+			"file": "src/utils/manageConnexion.tsx",
 			"line": 28,
 			"character": 23,
 			"text": "username",
 			"kind": 1
 		},
 		{
-			"file": "src/utils/manageConnexion.ts",
+			"file": "src/utils/manageConnexion.tsx",
 			"line": 40,
 			"character": 36,
 			"text": "setUserAuth",
 			"kind": 1
 		},
 		{
-			"file": "src/utils/manageConnexion.ts",
+			"file": "src/utils/manageConnexion.tsx",
 			"line": 44,
 			"character": 14,
 			"text": "setUserAuth",
@@ -1648,13 +1753,6 @@
 		},
 		{
 			"file": "src/pages/Login.tsx",
-			"line": 55,
-			"character": 22,
-			"text": "res",
-			"kind": 1
-		},
-		{
-			"file": "src/pages/Login.tsx",
 			"line": 56,
 			"character": 8,
 			"text": "res",
@@ -1712,20 +1810,6 @@
 		{
 			"file": "src/pages/Login.tsx",
 			"line": 64,
-			"character": 15,
-			"text": "res",
-			"kind": 1
-		},
-		{
-			"file": "src/pages/Login.tsx",
-			"line": 66,
-			"character": 40,
-			"text": "error",
-			"kind": 1
-		},
-		{
-			"file": "src/pages/Login.tsx",
-			"line": 65,
 			"character": 11,
 			"text": "error",
 			"kind": 1
@@ -3222,8 +3306,8 @@
 			"kind": 1
 		}
 	],
-	"percentage": 86.48648648648648,
-	"total": 3404,
-	"covered": 2944,
-	"uncovered": 460
+	"percentage": 86.7154517309316,
+	"total": 3553,
+	"covered": 3081,
+	"uncovered": 472
 }

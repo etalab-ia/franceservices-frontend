@@ -24,7 +24,6 @@ export function ContactButton({ formData, clearForm, setUserAuth }: ContactButto
 	const { userUrl, contactUrl } = useApiUrls()
 	const handleClick = async () => {
 		//setUserInfos(userToken, setUserAuth, userUrl)
-		console.log("formData", formData)
 		await useFetch(contactUrl, "POST", {
 			data: setContactData(
 				formData.title + " from: " + formData.name,
