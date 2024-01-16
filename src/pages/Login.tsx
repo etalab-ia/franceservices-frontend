@@ -1,7 +1,7 @@
 import { ButtonsGroup } from "@codegouvfr/react-dsfr/ButtonsGroup"
 import { initButtonsLogin } from "../constants/connexion"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
-import { signinUrl } from "../constants/api"
+import { useApiUrls } from "../constants/api"
 import { usernameOrPasswordError } from "../constants/errorMessages"
 import { setUserInfos } from "../utils/manageConnexion"
 import { LoginFields } from "../components/Auth/LoginFields"
@@ -21,6 +21,7 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
 	const [isDisable, setIsDisable] = useState(true)
 	const [password, setPassword] = useState("")
 	const [id, setId] = useState("")
+	const { signinUrl, userUrl } = useApiUrls()
 
 	useEffect(() => {
 		checkIfCompletedFields()
@@ -52,13 +53,14 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
 				data: JSON.stringify(data),
 				headers: { "Content-Type": "application/json" },
 			})
+
 			if ((res.status && res.success !== true) || !res.token) {
 				// Set authFailed to true if the response status is not 200 or token is not received
 
 				setAuthFailed(true)
 			} else {
 				// On successful authentication, set user info
-				setUserInfos(res.token, setUserAuth)
+				setUserInfos(res.token, setUserAuth, userUrl)
 			}
 		} catch (error) {
 			setAuthFailed(true)

@@ -3,6 +3,7 @@ import copy from "../../icons/usertools/copy.svg"
 import { generateStream } from "./hooks"
 import { setQuestionFromRegeneration } from "./setData"
 import { NOT_SET } from "../constants/status"
+import { useApiUrls } from "../constants/api"
 
 const getLastArchiveMessage = (archive) => {
 	return archive.messages[archive.messages.length - 1].text
@@ -26,6 +27,7 @@ async function handleRedo(state, dispatch) {
 	let newLimit = isArchive ? archive[archiveIndex].limit : user.question.limit
 	let newText = getLastMessage(archive[archiveIndex], stream, isArchive)
 	let newMode = feedback.reasons.length ? "simple" : "rag"
+	const { streamUrl } = useApiUrls()
 
 	if (feedback.reasons.includes("Trop long")) {
 		newText = "Résume ce texte : " + newText
@@ -41,7 +43,7 @@ async function handleRedo(state, dispatch) {
 
 	const question = setQuestionFromRegeneration(newMode, newText, newLimit, user.question.musNotSids)
 
-	generateStream(question, dispatch, user.chatId)
+	generateStream(question, dispatch, user.chatId, streamUrl)
 
 	return dispatch({ type: "SET_ARCHIVE_LIMIT", nextLimit: newLimit })
 }

@@ -59,16 +59,19 @@ export const toolsTiles = [
 	{
 		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
 		desc: "Accéder",
-		linkProps: { to: "/meeting" },
-		imageUrl: meeting,
-		title: "Préparer un rendez-vous",
-	},
-	{
-		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
-		desc: "Accéder",
 		linkProps: { to: "/chat" },
 		imageUrl: question,
 		title: "Poser une question",
+	},
+]
+
+export const MFStoolsTiles = [
+	{
+		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
+		desc: "Accéder",
+		linkProps: { to: "/meeting" },
+		imageUrl: meeting,
+		title: "Préparer un rendez-vous",
 	},
 	{
 		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
