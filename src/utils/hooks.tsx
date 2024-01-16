@@ -9,7 +9,6 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 export const useFetch = async (url: string, method: string, props): Promise<any> => {
 	const { data, headers } = props
-	console.log("usefetch data", data)
 	try {
 		const response = await fetch(url, {
 			method: method,
@@ -79,7 +78,6 @@ export const useStream = async (dispatch, id: number, streamUrl: string) => {
 		if (stream_chat) {
 			stream_chat.close()
 		}
-		console.log("emit stop stream")
 		dispatch({ type: "SET_INITIAL_STREAM" })
 		dispatch({ type: "SET_CHAT_ID", nextChatId: 0 })
 	})

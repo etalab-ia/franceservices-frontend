@@ -74,8 +74,6 @@ export const SheetsAdditionalButtons = ({
 	}, [currQuestion])
 
 	useEffect(() => {
-		console.log("generate stream ", currQuestion, " ", user.chatId, " streamUrl ", streamUrl)
-
 		if (!user.streamId || archive || !currQuestion.query) return
 
 		const data = {
