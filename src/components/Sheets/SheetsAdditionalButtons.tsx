@@ -80,7 +80,7 @@ export const SheetsAdditionalButtons = ({
 			question: currQuestion.query,
 			must_not_sids: user.question.must_not_sids,
 		}
-		//console.log("generate stream ", currQuestion, " ", user.chatId, " streamUrl ", streamUrl)
+		console.log("generate stream ", currQuestion, " ", user.chatId, " streamUrl ", streamUrl)
 		getIndexes(
 			data,
 			dispatch,
