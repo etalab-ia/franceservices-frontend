@@ -1,0 +1,84 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>MeetingQR.tsx</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="../../../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../../../assets/source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="negative"><td class="">src/components/Meeting/MeetingQR.tsx</td><td class="">71.13%</td><td class="">80%</td><td class="">97</td><td class="">69</td><td class="">28</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { Card } from &quot;@codegouvfr/react-dsfr/Card&quot;
+import { Tag } from &quot;@codegouvfr/react-dsfr/Tag&quot;
+import { useSelector } from &quot;react-redux&quot;
+import { useEffect, useState } from &quot;react&quot;
+import { meetingQRTitle } from &quot;../../constants/meeting&quot;
+import { GlobalSecondaryTitle } from &quot;../Global/GlobalSecondaryTitle&quot;
+import { ArchiveType, RootState } from &quot;types&quot;
+
+/*****************************************************************************************
+	
+	COMPONENTS:
+
+		Frequently asked question suggestions
+		For now we get the related questions from the sheets
+ *****************************************************************************************/
+export function MeetingQR({ archive }: { archive: ArchiveType | undefined }) {
+	const sheets = archive ? archive.sheets : useSelector((state: RootState) =&gt; state.user.sheets)
+	const [relatedQuestions, setRelatedQuestions] = useState([])
+
+	useEffect(() =&gt; {
+		if (!sheets || !sheets.length) return
+
+		let updatedQuestions = []
+		setRelatedQuestions([])
+
+		sheets.forEach((sheet) =&gt; {
+			sheet.related_questions &amp;&amp;
+				sheet.related_questions.forEach((qr) =&gt; {
+					const object = updatedQuestions.some((obj) =&gt; {
+						return obj.sid === qr.sid
+					})
+
+					if (!object)
+						updatedQuestions = [
+							...updatedQuestions,
+							{ question: qr.question, sid: qr.sid, url: qr.url },
+						]
+				})
+		})
+		setRelatedQuestions(updatedQuestions)
+	}, [sheets])
+
+	return (
+		&lt;&gt;
+			{relatedQuestions.length !== 0 &amp;&amp; (
+				&lt;GlobalSecondaryTitle extraClass=&quot;fr-pt-3w fr-pb-3w&quot;&gt;{meetingQRTitle}&lt;/GlobalSecondaryTitle&gt;
+			)}
+			{relatedQuestions.map((rq, index) =&gt; {
+				return (
+					&lt;div className=&quot;fr-mb-3v&quot; key={index}&gt;
+						&lt;Card
+							background
+							border
+							end={&lt;Tag&gt;{rq.sid}&lt;/Tag&gt;}
+							enlargeLink
+							linkProps={{ href: rq.url }}
+							size=&quot;small&quot;
+							title={rq.question}
+							titleAs=&quot;h6&quot;
+						/&gt;
+					&lt;/div&gt;
+				)
+			})}
+		&lt;/&gt;
+	)
+}
+</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:25,&quot;character&quot;:18,&quot;text&quot;:&quot;sheet&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:26,&quot;character&quot;:3,&quot;text&quot;:&quot;sheet&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:26,&quot;character&quot;:9,&quot;text&quot;:&quot;related_questions&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:27,&quot;character&quot;:4,&quot;text&quot;:&quot;sheet&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:27,&quot;character&quot;:10,&quot;text&quot;:&quot;related_questions&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:27,&quot;character&quot;:28,&quot;text&quot;:&quot;forEach&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:27,&quot;character&quot;:37,&quot;text&quot;:&quot;qr&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:28,&quot;character&quot;:43,&quot;text&quot;:&quot;obj&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:29,&quot;character&quot;:13,&quot;text&quot;:&quot;obj&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:29,&quot;character&quot;:17,&quot;text&quot;:&quot;sid&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:29,&quot;character&quot;:25,&quot;text&quot;:&quot;qr&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:29,&quot;character&quot;:28,&quot;text&quot;:&quot;sid&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:35,&quot;character&quot;:9,&quot;text&quot;:&quot;question&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:35,&quot;character&quot;:19,&quot;text&quot;:&quot;qr&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:35,&quot;character&quot;:22,&quot;text&quot;:&quot;question&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:35,&quot;character&quot;:32,&quot;text&quot;:&quot;sid&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:35,&quot;character&quot;:37,&quot;text&quot;:&quot;qr&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:35,&quot;character&quot;:40,&quot;text&quot;:&quot;sid&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:35,&quot;character&quot;:45,&quot;text&quot;:&quot;url&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:35,&quot;character&quot;:50,&quot;text&quot;:&quot;qr&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:35,&quot;character&quot;:53,&quot;text&quot;:&quot;url&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:47,&quot;character&quot;:26,&quot;text&quot;:&quot;rq&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:53,&quot;character&quot;:18,&quot;text&quot;:&quot;rq&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:53,&quot;character&quot;:21,&quot;text&quot;:&quot;sid&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:55,&quot;character&quot;:26,&quot;text&quot;:&quot;rq&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:55,&quot;character&quot;:29,&quot;text&quot;:&quot;url&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:57,&quot;character&quot;:14,&quot;text&quot;:&quot;rq&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingQR.tsx&quot;,&quot;line&quot;:57,&quot;character&quot;:17,&quot;text&quot;:&quot;question&quot;,&quot;kind&quot;:1}]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Mon, 15 Jan 2024 20:27:43 GMT</p>
+    </body>
+  </html>
+  

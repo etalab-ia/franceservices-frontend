@@ -24,7 +24,7 @@ import { rmContextFromQuestion } from "src/utils/setData"
 export function Meeting() {
 	const [generate, setGenerate] = useState(false)
 	const [currQuestion, setCurrQuestion] = useState(InitialQuestion)
-	const [context, setContext] = useState({
+	const [context, setContext] = useState<{ administrations: string[]; themes: string[] }>({
 		administrations: [],
 		themes: [],
 	})
