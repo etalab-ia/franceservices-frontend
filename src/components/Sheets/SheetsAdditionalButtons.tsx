@@ -74,13 +74,14 @@ export const SheetsAdditionalButtons = ({
 	}, [currQuestion])
 
 	useEffect(() => {
-		if (!user.streamId || archive) return
+		console.log("generate stream ", currQuestion, " ", user.chatId, " streamUrl ", streamUrl)
+
+		if (!user.streamId || archive || !currQuestion.query) return
 
 		const data = {
 			question: currQuestion.query,
 			must_not_sids: user.question.must_not_sids,
 		}
-		console.log("generate stream ", currQuestion, " ", user.chatId, " streamUrl ", streamUrl)
 		getIndexes(
 			data,
 			dispatch,
@@ -89,7 +90,7 @@ export const SheetsAdditionalButtons = ({
 			JSON.stringify(user.streamId),
 			indexesUrl
 		)
-	}, [user.streamId])
+	}, [user.streamId, currQuestion])
 
 	return (
 		<GlobalRowContainer>
