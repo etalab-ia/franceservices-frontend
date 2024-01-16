@@ -1,7 +1,7 @@
 import { useState, Dispatch, SetStateAction } from "react"
 import Button from "@codegouvfr/react-dsfr/Button"
 import { ButtonInformation } from "../Global/ButtonInformation"
-import { contactUrl } from "../../constants/api"
+import { useApiUrls } from "../../constants/api"
 import { setContactData, setHeaders } from "../../utils/setData"
 import { setUserInfos } from "../../utils/manageConnexion"
 import { useFetch } from "../../utils/hooks"
@@ -21,10 +21,10 @@ interface ContactButtonProps {
 export function ContactButton({ formData, clearForm, setUserAuth }: ContactButtonProps) {
 	const [isSend, setIsSend] = useState(false)
 	const userToken = localStorage.getItem("authToken")
-
+	const { userUrl, contactUrl } = useApiUrls()
 	const handleClick = async () => {
-		setUserInfos(userToken, setUserAuth)
-
+		//setUserInfos(userToken, setUserAuth, userUrl)
+		console.log("formData", formData)
 		await useFetch(contactUrl, "POST", {
 			data: setContactData(
 				formData.title + " from: " + formData.name,

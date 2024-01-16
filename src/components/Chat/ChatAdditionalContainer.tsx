@@ -3,6 +3,9 @@ import { DisplaySheets } from "../Sheets/DisplaySheets"
 import { GlobalColContainer } from "../Global/GlobalColContainer"
 import { OneThirdScreenWidth } from "../Global/OneThirdScreenWidth"
 
+/*
+ * Wrapper around sheets
+ */
 export function ChatAdditionalContainer({ archive }) {
 	return (
 		<OneThirdScreenWidth>

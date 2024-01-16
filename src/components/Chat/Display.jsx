@@ -4,6 +4,9 @@ import { DisplaySingleMessage } from "./DisplaySingleMessage"
 import { ChatFollowUp } from "./ChatFollowUp"
 import { GlobalChatContainer } from "./GlobalChatContainer"
 
+/*
+ *
+ */
 export function Display({ messages, archive }) {
 	const stream = useSelector((state) => state.stream)
 

@@ -10,6 +10,7 @@ import { emitCloseStream } from "../../utils/eventsEmitter"
 import { getIndexes } from "../../utils/setData"
 import { CurrQuestionContext } from "../../utils/context/questionContext"
 import { ArchiveType, RootState } from "types"
+import { useApiUrls } from "../../constants/api"
 
 /*****************************************************************************************
 	
@@ -39,6 +40,7 @@ export const SheetsAdditionalButtons = ({
 	const [deletedSheets, setDeletedSheets] = useState([])
 	const dispatch = useDispatch()
 	const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
+	const { streamUrl, indexesUrl } = useApiUrls()
 
 	const handleClick = () => {
 		setIsModifiable(!isModifiable)
@@ -65,22 +67,30 @@ export const SheetsAdditionalButtons = ({
 	}, [deletedSheets])
 
 	useEffect(() => {
-		if (archive) return
+		if (archive || !user.chatId) return
 
 		emitCloseStream()
-		generateStream(currQuestion, dispatch, user.chatId)
+		generateStream(currQuestion, dispatch, user.chatId, streamUrl)
 	}, [currQuestion])
 
 	useEffect(() => {
-		if (!user.streamId || archive) return
+		console.log("generate stream ", currQuestion, " ", user.chatId, " streamUrl ", streamUrl)
+
+		if (!user.streamId || archive || !currQuestion.query) return
 
 		const data = {
 			question: currQuestion.query,
 			must_not_sids: user.question.must_not_sids,
 		}
-
-		getIndexes(data, dispatch, "chunks", currQuestion.limit, JSON.stringify(user.streamId))
-	}, [user.streamId])
+		getIndexes(
+			data,
+			dispatch,
+			"chunks",
+			currQuestion.limit,
+			JSON.stringify(user.streamId),
+			indexesUrl
+		)
+	}, [user.streamId, currQuestion])
 
 	return (
 		<GlobalRowContainer>

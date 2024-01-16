@@ -3,7 +3,7 @@ import { meetingGenerationPage } from "../../constants/meeting"
 import { useDispatch } from "react-redux"
 import { useFetch } from "../../utils/hooks"
 import { setHeaders, setQuestionWithContext } from "../../utils/setData"
-import { chatUrl } from "../../constants/api"
+import { useApiUrls } from "../../constants/api"
 import { useContext } from "react"
 import { CurrQuestionContext } from "../../utils/context/questionContext"
 
@@ -23,6 +23,7 @@ export function MeetingButton({ setGenerate, context }) {
 
 	const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
 	const isDisable = !currQuestion.query || (currQuestion.query && currQuestion.query.length === 0)
+	const { chatUrl } = useApiUrls()
 
 	const handleClick = async () => {
 		const headers = setHeaders(false)
