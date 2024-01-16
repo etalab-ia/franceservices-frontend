@@ -134,7 +134,6 @@ export const updateQuestion = (currQuestion: Question, updateCurrQuestion) => {
  **************************/
 
 const setIndexesBody = (data, name, limit: number, streamId: string) => {
-	console.log("set indexes body: ", data)
 	const body = JSON.stringify({
 		name: name,
 		query: data.question,
@@ -158,7 +157,6 @@ export const getIndexes = async (
 	indexesUrl: string
 ) => {
 	const actionType = indexType === "sheets" ? "SET_SHEETS" : "SET_CHUNKS"
-	console.log("get indexes: ", data)
 	if (indexType === "sheets" && data.must_not_sids.length !== 0) return
 	try {
 		const res = await useFetch(indexesUrl, "POST", {

@@ -17,7 +17,6 @@ export function Chatbot({ archive }) {
 	}
 
 	const handleMount = async () => {
-		console.log("Chatbot mounted")
 		emitCloseStream()
 		dispatch({ type: "SET_CHAT_ID", nextChatId: 0 })
 		dispatch({ type: "SET_STREAM_ID", nextChatId: 0 })

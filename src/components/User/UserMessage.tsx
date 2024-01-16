@@ -33,8 +33,6 @@ export function UserMessage() {
 		const headers = setHeaders(false)
 		const chat_data = { chat_type: "meeting" }
 		const chat = await useFetch(chatUrl, "POST", { data: JSON.stringify(chat_data), headers })
-		console.log("button curr q: ", currQuestion, " question input: ", questionInput)
-		console.log("update button curr q: ", currQuestion)
 		dispatch({ type: "SET_USER_QUERY", nextUserQuery: questionInput, nextChatId: chat.id })
 		stream.historyStream.length &&
 			dispatch({
