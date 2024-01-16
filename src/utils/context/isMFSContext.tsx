@@ -11,7 +11,6 @@ export const MFSProvider = ({ children }) => {
 	useEffect(() => {
 		const hostname = window.location.hostname
 		setIsMFS(hostname === "franceservices.etalab.gouv.fr")
-		console.log("hostname", hostname)
 		//setIsMFS(hostname === "localhost")
 	}, [])
 
