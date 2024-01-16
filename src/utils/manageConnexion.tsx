@@ -1,7 +1,5 @@
-import { signoutUrl } from "../constants/api"
 import { useFetch } from "./hooks"
 import { Navigate } from "react-router-dom"
-import { userUrl } from "../constants/api"
 import { InitialUserAuth, UserAuth } from "./auth"
 import { Dispatch, SetStateAction } from "react"
 
@@ -11,7 +9,8 @@ export const storeAuth = async (token: string) => {
 
 export const setUserInfos = async (
 	token: string,
-	setUserAuth: Dispatch<SetStateAction<UserAuth>>
+	setUserAuth: Dispatch<SetStateAction<UserAuth>>,
+	userUrl: string
 ) => {
 	const userInfos = await useFetch(userUrl, "GET", {
 		headers: {
@@ -39,9 +38,8 @@ export const rmAuth = () => {
 	localStorage.removeItem("authToken")
 }
 
-export const handleSignout = async (setUserAuth) => {
+export const handleSignout = async (setUserAuth, signoutUrl: string) => {
 	const userToken = localStorage.getItem("authToken")
-
 	await useFetch(signoutUrl, "POST", { headers: { Authorization: `Bearer ${userToken}` } })
 		.then(() => rmAuth())
 		.then(() => setUserAuth(InitialUserAuth))

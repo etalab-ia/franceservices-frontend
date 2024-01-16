@@ -4,13 +4,14 @@ import { GlobalRowContainer } from "../Global/GlobalRowContainer"
 import { ArchiveContainer } from "./ArchiveContainer"
 import { Chat } from "../../../types"
 import { useFetch } from "../../utils/hooks"
-import { getChatsUrl } from "../../constants/api"
+import { useApiUrls } from "../../constants/api"
 
 export function DisplayArchiveTabs() {
 	const [chatsId, setChatsId] = useState<Chat[]>([]) // All previous user's chat
 	const [archiveTab, setArchiveTab] = useState<number | null>(null)
 	const ref = useRef<HTMLDivElement>(null)
 	const token = localStorage.getItem("authToken")
+	const { getChatsUrl } = useApiUrls()
 
 	const getChatsId = async () => {
 		const res = await useFetch(getChatsUrl, "GET", {
