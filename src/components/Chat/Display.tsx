@@ -3,12 +3,13 @@ import { DisplayArrayMessages } from "./DisplayArrayMessages"
 import { DisplaySingleMessage } from "./DisplaySingleMessage"
 import { ChatFollowUp } from "./ChatFollowUp"
 import { GlobalChatContainer } from "./GlobalChatContainer"
+import { type RootState, type Message } from "types"
 
 /*
  *
  */
-export function Display({ messages, archive }) {
-	const stream = useSelector((state) => state.stream)
+export function Display({ messages, archive }: { messages: Message[]; archive: boolean }) {
+	const stream = useSelector((state: RootState) => state.stream)
 
 	return (
 		<GlobalChatContainer>

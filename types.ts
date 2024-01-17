@@ -95,3 +95,8 @@ export type StreamState = {
 	isStreaming: boolean
 	activeTab: number
 }
+
+export type Message = {
+	text: string[]
+	sender: string
+}
