@@ -40,21 +40,24 @@ export const setArchiveBody = ({ item, index, name, setArchiveTab }: ArchiveBody
 	}
 
 	return [
-		<div key="title" {...commonDivProps}>
+		<td key="title" style={cellStyle} {...commonDivProps}>
 			{title}
-		</div>,
-		// <div key="tags" {...commonDivProps}>
-		// 	{tags}
-		// </div>,
-		<div key="date" {...commonDivProps}>
+		</td>,
+		// <td key="tags" >{tags}</td>,
+		<td key="date" style={cellStyle} {...commonDivProps}>
 			{date}
-		</div>,
-		// TODO: change bc sources === sp + travail emploi
-		<div key="source" {...commonDivProps}>
+		</td>,
+		<td key="source" style={cellStyle} {...commonDivProps}>
 			Service Public
-		</div>,
-		<div key="type" {...commonDivProps}>
+		</td>,
+		<td key="type" style={cellStyle} {...commonDivProps}>
 			{type}
-		</div>,
+		</td>,
 	]
+}
+
+const cellStyle = {
+	textAlign: "left" as const,
+	padding: "10px",
+	cursor: "pointer",
 }
