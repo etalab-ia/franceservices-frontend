@@ -1,3 +1,5 @@
+import { StreamState } from "../../../types"
+
 const initialStream = {
 	response: [],
 	historyStream: [],
@@ -5,7 +7,7 @@ const initialStream = {
 	activeTab: 1,
 }
 
-export const streamReducer = (state = initialStream, action) => {
+export const streamReducer = (state: StreamState = initialStream, action: StreamAction) => {
 	switch (action.type) {
 		case "RESET_USER":
 			return initialStream
@@ -56,3 +58,14 @@ export const streamReducer = (state = initialStream, action) => {
 		}
 	}
 }
+
+type StreamAction =
+	| { type: "RESET_USER" }
+	| { type: "SET_INITIAL_STREAM" }
+	| { type: "GET_AGENT_STREAM"; nextResponse: string }
+	| { type: "STOP_AGENT_STREAM" }
+	| { type: "SET_ARCHIVE_LIMIT" }
+	| { type: "RESET_AGENT_STREAM" }
+	| { type: "SET_STREAM_HISTORY"; nextStream: string }
+	| { type: "RESET_STREAM_HISTORY" }
+	| { type: "SWITCH_TAB"; nextTab: number }
