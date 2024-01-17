@@ -101,10 +101,14 @@ export const Root = () => {
 						!userAuth.isLogin ? <Navigate to="/login" /> : <Contact setUserAuth={setUserAuth} />
 					}
 				/>
-				<Route
-					path="/history"
-					element={!userAuth.isLogin ? <Navigate to="/login" /> : <History />}
-				/>
+				{isMFS ? (
+					<Route
+						path="/history"
+						element={!userAuth.isLogin ? <Navigate to="/login" /> : <History />}
+					/>
+				) : (
+					<Route path={"/history"} element={<Navigate to="/404" />} />
+				)}
 				<Route
 					path="/signup"
 					element={
