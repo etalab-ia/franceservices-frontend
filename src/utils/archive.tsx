@@ -34,7 +34,7 @@ export const setArchiveBody = ({ item, index, name, setArchiveTab }: ArchiveBody
 	}
 
 	const commonDivProps = {
-		key: index,
+		//key: index,
 		onClick: handleClick,
 		className: "cursor-pointer",
 	}

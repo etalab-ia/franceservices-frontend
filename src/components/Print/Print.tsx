@@ -6,6 +6,7 @@ import { MeetingPage } from "../Meeting/MeetingPage"
 import { ArchiveType, Chat } from "../../../types"
 import { useFetch } from "../../utils/hooks"
 import { useApiUrls } from "../../constants/api"
+import { preventDefaultLinkClickBehavior } from "type-route"
 
 /**********************************************************************************************
 		
@@ -23,7 +24,7 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
 		const handleClick = () => {
 			setArchiveTab(null)
 		}
-
+		window.addEventListener("popstate", () => {})
 		const { getStreamsUrl } = useApiUrls()
 		const [archive, setArchive] = useState<ArchiveType>()
 		const token = localStorage.getItem("authToken")
