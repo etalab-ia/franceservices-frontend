@@ -79,7 +79,10 @@ export const Root = () => {
 						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
 					/>
 				) : (
-					<Route path={"/meeting"} element={<Navigate to="/404" />} />
+					<Route
+						path={"/meeting"}
+						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />}
+					/>
 				)}
 				<Route path="/home" element={!userAuth.isLogin ? <Navigate to="/login" /> : <Home />} />
 				<Route
@@ -93,7 +96,10 @@ export const Root = () => {
 						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Chatbot archive={false} />}
 					/>
 				) : (
-					<Route path={"/chat"} element={<Navigate to="/404" />} />
+					<Route
+						path={"/chat"}
+						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />}
+					/>
 				)}
 				<Route
 					path="/contact"
@@ -107,7 +113,10 @@ export const Root = () => {
 						element={!userAuth.isLogin ? <Navigate to="/login" /> : <History />}
 					/>
 				) : (
-					<Route path={"/history"} element={<Navigate to="/404" />} />
+					<Route
+						path={"/history"}
+						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />}
+					/>
 				)}
 				<Route
 					path="/signup"
