@@ -1,5 +1,6 @@
 stages:
   - publish
+  - publish-fs
   - deploy
   - deploy-fs
 
@@ -16,6 +17,21 @@ publish-front:
     - cd . && docker build -t $CI_REGISTRY_IMAGE/front_albert:latest .
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker push $CI_REGISTRY_IMAGE/front_albert:latest
+
+
+publish-front-fs:
+  rules:
+    - if: $CI_COMMIT_BRANCH == "deployMFS" # to be changed, this should be managed in env variable
+      when: manual
+      allow_failure: true  # to avoid blocked state
+  image: docker:latest
+  stage: publish
+  services:
+    - docker:dind
+  script:
+    - cd . && docker build -t $CI_REGISTRY_IMAGE/front_albert_fs:latest .
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker push $CI_REGISTRY_IMAGE/front_albert_fs:latest
 
 deploy-front:
   rules:
@@ -43,11 +59,12 @@ deploy-front-fs:
   image: alpine:latest
   stage: deploy-fs
   environment:
-    name: production
+    name: fs
   script:
     - chmod og= $ID_RSA
     - apk update && apk add openssh-client
     - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER_RECETTE@$SERVER_IP_RECETTE "docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY"
-    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER_RECETTE@$SERVER_IP_RECETTE "docker pull $CI_REGISTRY_IMAGE/front_albert:latest"
+    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER_RECETTE@$SERVER_IP_RECETTE "docker pull $CI_REGISTRY_IMAGE/front_albert_fs:latest"
     - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER_RECETTE@$SERVER_IP_RECETTE "docker container rm -f miaou-front-albert || true"
-    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER_RECETTE@$SERVER_IP_RECETTE "docker run -d -p 4174:4173 --name miaou-front-albert $CI_REGISTRY_IMAGE/front_albert:latest"
+    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER_RECETTE@$SERVER_IP_RECETTE "docker container rm -f miaou-front-albert_fs || true"
+    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER_RECETTE@$SERVER_IP_RECETTE "docker run -d -p 4174:4173 --name miaou-front-albert_fs $CI_REGISTRY_IMAGE/front_albert_fs:latest"
