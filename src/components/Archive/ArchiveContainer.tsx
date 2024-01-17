@@ -14,7 +14,7 @@ export function ArchiveContainer({ chatsId, setArchiveTab }: ArchiveContainerPro
 		<div className="fr-container fr-pt-5w">
 			<GlobalTitle>Consulter mes fiches rendez-vous</GlobalTitle>
 			<table className="w-full">
-				<thead>
+				<thead style={{ borderBottom: "2px solid #000" }}>
 					<tr>
 						{archiveHeaders.map((header, index) => (
 							<th key={index} style={{ textAlign: "left", padding: "10px" }}>
@@ -25,7 +25,7 @@ export function ArchiveContainer({ chatsId, setArchiveTab }: ArchiveContainerPro
 				</thead>
 				<tbody>
 					{chatsId.map((chat, index) => (
-						<tr key={index}>
+						<tr key={chat.id}>
 							{setArchiveBody({
 								item: chat,
 								index: index,
