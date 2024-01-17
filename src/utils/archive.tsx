@@ -25,10 +25,11 @@ interface ArchiveBodyProps {
 }
 
 export const setArchiveBody = ({ item, index, name, setArchiveTab }: ArchiveBodyProps) => {
-	const title = name.length > 78 ? name.slice(0, 78) + "..." : name
+	//const title = name.length > 78 ? name.slice(0, 78) + "..." : name
 	const tags = [] // setArchiveTags(item.tags)
 	const type = item.type === "qr" ? "Question" : "Rendez-vous"
 	const date = new Date(item.creationDate).toLocaleDateString("fr-FR")
+	const title = item.name ? item.name : `Chat ${item.id}`
 	const handleClick = () => {
 		setArchiveTab(index)
 	}
@@ -59,5 +60,8 @@ export const setArchiveBody = ({ item, index, name, setArchiveTab }: ArchiveBody
 const cellStyle = {
 	textAlign: "left" as const,
 	padding: "10px",
+	paddingTop: "20px",
+	paddingBottom: "20px",
 	cursor: "pointer",
+	borderBottom: "1px solid #DDDD",
 }
