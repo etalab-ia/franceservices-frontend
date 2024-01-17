@@ -1,7 +1,7 @@
 import { Tag } from "@codegouvfr/react-dsfr/Tag"
 import { Chat } from "../../types"
 
-export const archiveHeaders = ["Nom de la conversation", "Date", "Source", "Type"]
+export const archiveHeaders = ["Nom de la conversation", "Date de création", "Source", "Type"]
 
 // Set archive tags from /indexes sheets surtitre etc
 const setArchiveTags = (array: string[]) => {
