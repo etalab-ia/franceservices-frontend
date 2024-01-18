@@ -41,7 +41,7 @@ export const Root = () => {
 	}
 
 	return (
-		<div className="h-screen w-screen" id="screen">
+		<div className="h-screen w-screen flex-col justify-between" id="screen">
 			<Header
 				brandTop="DINUM / Etalab"
 				serviceTitle={
@@ -148,7 +148,7 @@ export const Root = () => {
 				<Route path="*" element={<Error404 />} />
 			</Routes>
 			<Footer
-				style={{ marginBottom: 0 }}
+				style={{ marginTop: "auto" }}
 				bottomItems={[headerFooterDisplayItem]}
 				accessibility="fully compliant"
 				termsLinkProps={{
