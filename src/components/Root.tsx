@@ -11,6 +11,7 @@ import { Contact } from "../pages/Contact"
 import { History } from "../pages/History"
 import { Home } from "../pages/Home"
 import { Login } from "../pages/Login"
+import { FAQ } from "../pages/FAQ"
 import { Meeting } from "../pages/Meeting"
 import { NewPassword } from "../pages/NewPassword"
 import { ResetPassword } from "../pages/ResetPassword"
@@ -40,7 +41,7 @@ export const Root = () => {
 	}
 
 	return (
-		<div className="h-screen" id="screen">
+		<div className="h-screen w-screen" id="screen">
 			<Header
 				brandTop="DINUM / Etalab"
 				serviceTitle={
@@ -73,6 +74,7 @@ export const Root = () => {
 						)
 					}
 				/>
+				<Route path="/FAQ" element={<FAQ />} />
 				{isMFS ? (
 					<Route
 						path="/meeting"
@@ -146,6 +148,7 @@ export const Root = () => {
 				<Route path="*" element={<Error404 />} />
 			</Routes>
 			<Footer
+				style={{ marginBottom: 0 }}
 				bottomItems={[headerFooterDisplayItem]}
 				accessibility="fully compliant"
 				termsLinkProps={{
