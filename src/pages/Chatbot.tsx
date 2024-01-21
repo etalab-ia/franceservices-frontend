@@ -11,6 +11,11 @@ import { InitialQuestion } from "../../types"
 export function Chatbot({ archive }) {
 	const dispatch = useDispatch()
 	const [currQuestion, setCurrQuestion] = useState(InitialQuestion)
+	const [generate, setGenerate] = useState(false)
+
+	if (!generate) {
+		emitCloseStream()
+	}
 
 	const updateCurrQuestion = (newQuestion) => {
 		setCurrQuestion(newQuestion)
@@ -29,7 +34,7 @@ export function Chatbot({ archive }) {
 		<CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>
 			<GlobalRowContainer extraClass="fr-grid-row--center">
 				<GlobalDiv>
-					<DisplayChatTab archive={archive} />
+					<DisplayChatTab archive={archive} setGenerate={setGenerate} />
 				</GlobalDiv>
 			</GlobalRowContainer>
 		</CurrQuestionContext.Provider>

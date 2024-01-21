@@ -46,7 +46,7 @@ export const Root = () => {
 				brandTop="DINUM / Etalab"
 				serviceTitle={
 					<>
-						ALBERT France services{" "}
+						ALBERT {isMFS ? "France services" : "Chat"}{" "}
 						<Badge as="span" noIcon severity="success">
 							Beta
 						</Badge>

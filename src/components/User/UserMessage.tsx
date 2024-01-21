@@ -12,7 +12,7 @@ import { CurrQuestionContext } from "../../utils/context/questionContext"
 /*
  **
  */
-export function UserMessage() {
+export function UserMessage({ setGenerate }) {
 	const stream = useSelector((state: RootState) => state.stream)
 	const user = useSelector((state: RootState) => state.user)
 	const dispatch = useDispatch()
@@ -33,6 +33,12 @@ export function UserMessage() {
 		const headers = setHeaders(false)
 		const chat_data = { chat_type: "meeting" }
 		const chat = await useFetch(chatUrl, "POST", { data: JSON.stringify(chat_data), headers })
+		dispatch({ type: "SET_CHAT_ID", nextChatId: chat.id })
+		console.log("user: ", user)
+		console.log("stream: ", stream)
+		console.log("chat: ", chat)
+		console.log("questionInput: ", questionInput)
+		console.log("currQuestion: ", currQuestion)
 		dispatch({ type: "SET_USER_QUERY", nextUserQuery: questionInput, nextChatId: chat.id })
 		stream.historyStream.length &&
 			dispatch({
@@ -41,6 +47,9 @@ export function UserMessage() {
 			})
 		dispatch({ type: "RESET_STREAM_HISTORY" })
 		dispatch({ type: "SET_MESSAGES", nextMessage: { text: questionInput, sender: "user" } })
+		console.log("user2: ", user)
+		console.log("stream2: ", stream)
+		setGenerate(true)
 	}
 
 	/*
