@@ -66,7 +66,7 @@ const faq = {
 		],
 	},
 	albertUsage: {
-		categoryName: "Utilisation d’Albert France services",
+		categoryName: "Informations concernant l'utilisation d’Albert France services",
 		questions: [
 			{
 				label: "Comment me créer un compte pour accéder à Albert ?",
