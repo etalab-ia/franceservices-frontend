@@ -10,8 +10,8 @@ export const MFSProvider = ({ children }) => {
 
 	useEffect(() => {
 		const hostname = window.location.hostname
-		//setIsMFS(hostname === "franceservices.etalab.gouv.fr")
-		setIsMFS(hostname === "localhost")
+		setIsMFS(hostname === "franceservices.etalab.gouv.fr")
+		//setIsMFS(hostname === "localhost")
 	}, [])
 
 	return <isMFSContext.Provider value={isMFS}>{children}</isMFSContext.Provider>
