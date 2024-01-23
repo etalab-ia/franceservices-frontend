@@ -8,68 +8,80 @@ export function navFunc() {
 	const location = useLocation()
 	const currentPath = location.pathname
 
-	const navDefs: any[] = [
-		{
-			text: "Accueil",
-			linkProps: {
-				to: "/home",
-			},
-			isActive: currentPath === "/home",
-		},
-	]
-	if (isMFS) {
-		navDefs.push({
-			text: "Mes outils",
-			isActive: currentPath === "/chat" || currentPath === "/meeting",
-			menuLinks: [
+	const navDefs: any[] = isMFS
+		? [
 				{
-					text: "Préparer un rendez-vous",
+					text: "Accueil",
 					linkProps: {
-						to: "/meeting",
+						to: "/home",
 					},
-					isActive: currentPath === "/meeting",
+					isActive: currentPath === "/home",
 				},
 				{
-					text: "Mes fiches rendez-vous",
-					linkProps: {
-						to: "/history",
-					},
-					isActive: currentPath === "/history",
+					text: "Mes outils",
+					isActive: currentPath === "/chat" || currentPath === "/meeting",
+					menuLinks: [
+						{
+							text: "Préparer un rendez-vous",
+							linkProps: {
+								to: "/meeting",
+							},
+							isActive: currentPath === "/meeting",
+						},
+						{
+							text: "Mes fiches rendez-vous",
+							linkProps: {
+								to: "/history",
+							},
+							isActive: currentPath === "/history",
+						},
+					],
 				},
-			],
-		})
-	}
-	if (!isMFS) {
-		navDefs.push({
-			text: "Mes outils",
-			isActive: currentPath === "/chat",
-			menuLinks: [
 				{
-					text: "Poser une question",
+					text: "Aide",
 					linkProps: {
-						to: "/chat",
+						to: "/FAQ",
 					},
+					isActive: currentPath === "/FAQ",
+				},
+				{
+					text: "Contact",
+					linkProps: {
+						to: "/contact",
+					},
+					isActive: currentPath === "/contact",
+				},
+		  ]
+		: [
+				{
+					text: "Accueil",
+					linkProps: {
+						to: "/home",
+					},
+					isActive: currentPath === "/home",
+				},
+				{
+					text: "Mes outils",
 					isActive: currentPath === "/chat",
+					menuLinks: [
+						{
+							text: "Poser une question",
+							linkProps: {
+								to: "/chat",
+							},
+							isActive: currentPath === "/chat",
+						},
+					],
 				},
-			],
-		})
-	}
-	navDefs.push({
-		text: "Contact",
-		linkProps: {
-			to: "/contact",
-		},
-		isActive: currentPath === "/contact",
-	})
-	if (isMFS) {
-		navDefs.push({
-			text: "Aide",
-			linkProps: {
-				to: "/FAQ",
-			},
-			isActive: currentPath === "/FAQ",
-		})
-	}
+				{
+					text: "Contact",
+					linkProps: {
+						to: "/contact",
+					},
+					isActive: currentPath === "/contact",
+				},
+		  ]
+
 	return navDefs
 }
 

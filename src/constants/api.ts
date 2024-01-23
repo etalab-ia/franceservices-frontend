@@ -4,7 +4,7 @@ import { isMFSContext } from "../utils/context/isMFSContext"
 const apiUrl = `${import.meta.env.VITE_API_URL}/api/v2`
 // We need a hook to dynamically set apiBase based on if user is on MFS or not
 export const useApiUrls = () => {
-	console.log("apiUrl", apiUrl)
+	//console.log("apiUrl", apiUrl)
 	const isMFS = useContext(isMFSContext)
 
 	// Set apiBase based on isMFS

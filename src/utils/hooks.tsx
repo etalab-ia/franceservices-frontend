@@ -35,7 +35,7 @@ export const useFetch = async (url: string, method: string, props): Promise<any>
 function handleStreamMessage(e, dispatch, stream_chat) {
 	try {
 		const jsonData = JSON.parse(e.data)
-		console.log("json: ", jsonData)
+		//		console.log("json: ", jsonData)
 		if (jsonData == "[DONE]") {
 			stream_chat.close()
 

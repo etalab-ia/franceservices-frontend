@@ -56,7 +56,7 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
 						onClick={handleClick}
 						priority="tertiary"
 					>
-						{" "}
+						{""}
 					</Button>
 					<ReactToPrint
 						trigger={() => (
