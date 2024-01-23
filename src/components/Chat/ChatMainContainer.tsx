@@ -16,7 +16,7 @@ import { RootState } from "types"
  * UserMessage: input for user
  * Display: display messages
  */
-export function ChatMainContainer({ archive }) {
+export function ChatMainContainer({ archive, setGenerate }) {
 	const user = useSelector((state: RootState) => state.user)
 	const stream = useSelector((state: RootState) => state.stream)
 	const dispatch = useDispatch()
@@ -39,7 +39,8 @@ export function ChatMainContainer({ archive }) {
 					<Display messages={user.messages} archive={false} />
 				)}
 			</ChatOverflowManagementContainer>
-			{!archive && <UserMessage />} {/* Display input if not in archive */}
+			{!archive && <UserMessage setGenerate={setGenerate} />}{" "}
+			{/* Display input if not in archive */}
 		</ChatHeightContainer>
 	)
 }

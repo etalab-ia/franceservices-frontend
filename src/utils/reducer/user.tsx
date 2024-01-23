@@ -1,4 +1,4 @@
-import { type Question } from "types"
+import { type Question, type Message } from "types"
 import { initialChatbotMessage } from "../../constants/chatbotProps"
 
 /*****************************************************************************************************
@@ -37,14 +37,9 @@ const InitialQuestion: Question = {
 	must_not_sids: [],
 }
 
-interface Messages {
-	text: string[]
-	sender: string
-}
-
 interface User {
 	question: Question // Question asked by user
-	messages: Messages[] // Messages exchanged between user & agent
+	messages: Message[] // Message exchanged between user & agent
 	sheets: any[] // Sheets associated to the reponse from 0 to 2
 	additionalSheets: any[] // suggested sheets to from 3 to 9
 	chunks: any[] // Chunks associes a la reponse
@@ -73,7 +68,7 @@ type UserAction =
 	| { type: "SET_USER_QUERY"; nextUserQuery: string; nextChatId: number }
 	| { type: "RESET_QUESTION_FIELDS" }
 	| { type: "RESET_USER" }
-	| { type: "SET_MESSAGES"; nextMessage: Messages }
+	| { type: "SET_MESSAGES"; nextMessage: Message }
 	| { type: "SET_STREAM_ID"; nextStreamId: number }
 	| { type: "SET_CHAT_ID"; nextChatId: number }
 

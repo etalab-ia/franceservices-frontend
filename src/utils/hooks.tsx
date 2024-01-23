@@ -35,10 +35,12 @@ export const useFetch = async (url: string, method: string, props): Promise<any>
 function handleStreamMessage(e, dispatch, stream_chat) {
 	try {
 		const jsonData = JSON.parse(e.data)
-
+		//		console.log("json: ", jsonData)
 		if (jsonData == "[DONE]") {
 			stream_chat.close()
 
+			dispatch({ type: "SET_STREAM_ID", nextStreamId: 0 })
+			dispatch({ type: "SET_CHAT_ID", nextChatId: 0 })
 			return dispatch({ type: "STOP_AGENT_STREAM" })
 		} else {
 			return dispatch({ type: "GET_AGENT_STREAM", nextResponse: jsonData })
@@ -100,5 +102,5 @@ export async function generateStream(
 	})
 	dispatch({ type: "SET_STREAM_ID", nextStreamId: stream.id })
 
-	return await useStream(dispatch, stream.id, streamUrl)
+	await useStream(dispatch, stream.id, streamUrl)
 }
