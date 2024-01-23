@@ -4,12 +4,12 @@
 import { createContext, useState } from "react"
 
 export const isMFSContext = createContext<boolean>(
-	import.meta.env.VITE_API_URL === "https://franceservices.etalab.gouv.fr/api/v2"
+	import.meta.env.VITE_API_URL === "https://franceservices.etalab.gouv.fr"
 )
 
 export const MFSProvider = ({ children }) => {
 	const [isMFS, setIsMFS] = useState<boolean>(
-		import.meta.env.VITE_API_URL === "https://franceservices.etalab.gouv.fr/api/v2"
+		import.meta.env.VITE_API_URL === "https://franceservices.etalab.gouv.fr"
 	)
 	return <isMFSContext.Provider value={isMFS}>{children}</isMFSContext.Provider>
 }
