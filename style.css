@@ -958,12 +958,45 @@ video {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
-@media (max-width: 1186px) {
+.accordion-container {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+}
+
+.accordion-container > .flex {
+    /* full width for smaller screens */
+    width: 100%;
+    /* Optional: add other styles like padding or margin as needed */
+}
+
+.accordion {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* This aligns all children (including h6 and accordions) to the start */
+}
+
+.h6-container {
+    width: 100%; /* Ensures h6 takes full width of its parent */
+    /* Optional: Add margin or padding as needed */
+}
+
+/* Adjust the size of h6 to ensure they take the same space if needed */
+.h6-container h6 {
+    min-height: Xpx; /* Replace X with a fixed height that fits the largest h6 */
+    /* Optional: Add other styling as needed */
+}
+
+/* Styles for larger screens */
+@media (min-width: 1186px) {
     .accordion-container {
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-evenly;
     }
-     .accordion {
-        padding-left: 0;
-        padding-top: 2vh;
+
+    .accordion-container > .flex {
+        flex-grow: 1;
+        flex-basis: 0;
+        /* Adjust the width as necessary and add margin/padding for spacing */
     }
 }

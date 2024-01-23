@@ -31,13 +31,13 @@ export const Root = () => {
 	const [isLoading, setIsLoading] = useState(true)
 	const isMFS = useContext(isMFSContext)
 	const { userUrl, signoutUrl } = useApiUrls()
-
+	console.log("isMFS", isMFS)
 	useEffect(() => {
 		checkConnexion(setUserAuth, userUrl).finally(() => setIsLoading(false))
 	}, [dispatch])
 
 	if (isLoading) {
-		return <div className="bg-red"></div>
+		return <div></div>
 	}
 
 	return (
@@ -74,7 +74,14 @@ export const Root = () => {
 						)
 					}
 				/>
-				<Route path="/FAQ" element={<FAQ />} />
+				{isMFS ? (
+					<Route path="/FAQ" element={!userAuth.isLogin ? <Navigate to="/login" /> : <FAQ />} />
+				) : (
+					<Route
+						path={"/FAQ"}
+						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />}
+					/>
+				)}{" "}
 				{isMFS ? (
 					<Route
 						path="/meeting"

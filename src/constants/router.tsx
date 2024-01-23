@@ -54,22 +54,22 @@ export function navFunc() {
 			],
 		})
 	}
-	navDefs.push(
-		{
-			text: "Contact",
-			linkProps: {
-				to: "/contact",
-			},
-			isActive: currentPath === "/contact",
+	navDefs.push({
+		text: "Contact",
+		linkProps: {
+			to: "/contact",
 		},
-		{
+		isActive: currentPath === "/contact",
+	})
+	if (isMFS) {
+		navDefs.push({
 			text: "Aide",
 			linkProps: {
 				to: "/FAQ",
 			},
 			isActive: currentPath === "/FAQ",
-		}
-	)
+		})
+	}
 	return navDefs
 }
 
