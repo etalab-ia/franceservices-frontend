@@ -11,6 +11,7 @@ import { Contact } from "../pages/Contact"
 import { History } from "../pages/History"
 import { Home } from "../pages/Home"
 import { Login } from "../pages/Login"
+import { FAQ } from "../pages/FAQ"
 import { Meeting } from "../pages/Meeting"
 import { NewPassword } from "../pages/NewPassword"
 import { ResetPassword } from "../pages/ResetPassword"
@@ -30,22 +31,21 @@ export const Root = () => {
 	const [isLoading, setIsLoading] = useState(true)
 	const isMFS = useContext(isMFSContext)
 	const { userUrl, signoutUrl } = useApiUrls()
-
 	useEffect(() => {
 		checkConnexion(setUserAuth, userUrl).finally(() => setIsLoading(false))
 	}, [dispatch])
 
 	if (isLoading) {
-		return <div className="bg-red"></div>
+		return <div></div>
 	}
 
 	return (
-		<div className="h-screen" id="screen">
+		<div className="h-screen w-screen flex-col justify-between" id="screen">
 			<Header
 				brandTop="DINUM / Etalab"
 				serviceTitle={
 					<>
-						ALBERT France services{" "}
+						ALBERT {isMFS ? "France services" : "Chat"}{" "}
 						<Badge as="span" noIcon severity="success">
 							Beta
 						</Badge>
@@ -74,12 +74,23 @@ export const Root = () => {
 					}
 				/>
 				{isMFS ? (
+					<Route path="/FAQ" element={!userAuth.isLogin ? <Navigate to="/login" /> : <FAQ />} />
+				) : (
+					<Route
+						path={"/FAQ"}
+						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />}
+					/>
+				)}{" "}
+				{isMFS ? (
 					<Route
 						path="/meeting"
 						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
 					/>
 				) : (
-					<Route path={"/meeting"} element={<Navigate to="/404" />} />
+					<Route
+						path={"/meeting"}
+						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />}
+					/>
 				)}
 				<Route path="/home" element={!userAuth.isLogin ? <Navigate to="/login" /> : <Home />} />
 				<Route
@@ -93,7 +104,10 @@ export const Root = () => {
 						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Chatbot archive={false} />}
 					/>
 				) : (
-					<Route path={"/chat"} element={<Navigate to="/404" />} />
+					<Route
+						path={"/chat"}
+						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />}
+					/>
 				)}
 				<Route
 					path="/contact"
@@ -101,10 +115,17 @@ export const Root = () => {
 						!userAuth.isLogin ? <Navigate to="/login" /> : <Contact setUserAuth={setUserAuth} />
 					}
 				/>
-				<Route
-					path="/history"
-					element={!userAuth.isLogin ? <Navigate to="/login" /> : <History />}
-				/>
+				{isMFS ? (
+					<Route
+						path="/history"
+						element={!userAuth.isLogin ? <Navigate to="/login" /> : <History />}
+					/>
+				) : (
+					<Route
+						path={"/history"}
+						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />}
+					/>
+				)}
 				<Route
 					path="/signup"
 					element={
@@ -133,6 +154,7 @@ export const Root = () => {
 				<Route path="*" element={<Error404 />} />
 			</Routes>
 			<Footer
+				style={{ marginTop: "auto" }}
 				bottomItems={[headerFooterDisplayItem]}
 				accessibility="fully compliant"
 				termsLinkProps={{
