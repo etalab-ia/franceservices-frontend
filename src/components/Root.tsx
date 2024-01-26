@@ -52,7 +52,7 @@ export const Root = () => {
 					</>
 				}
 				serviceTagline="Aide à l’accompagnement des usagers France services"
-				homeLinkProps={{ title: "Albert" }}
+				homeLinkProps={{ title: "Albert", href: "/" }}
 				navigation={userAuth.isLogin && navigationData}
 				quickAccessItems={
 					userAuth.isLogin ? quickAccessItemsFunc(userAuth, setUserAuth, signoutUrl) : []
