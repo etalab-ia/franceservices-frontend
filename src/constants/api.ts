@@ -9,6 +9,7 @@ export const useApiUrls = () => {
 
 	// Set apiBase based on isMFS
 	//const apiBase = "https://albert.etalab.gouv.fr/api/v2"
+	console.log("apiUrl: ", apiUrl)
 	const apiBase = apiUrl
 	const streamUrl = apiBase + "/stream"
 	const chatUrl = apiBase + "/chat"
