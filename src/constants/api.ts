@@ -1,9 +1,11 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import { isMFSContext } from "../utils/context/isMFSContext"
 
 const apiUrl = `${import.meta.env.VITE_API_URL}/api/v2`
 // We need a hook to dynamically set apiBase based on if user is on MFS or not
-console.log("apiUrl: ", apiUrl)
+useEffect(() => {
+	console.log("apiUrl: ", apiUrl)
+}, [apiUrl])
 export const useApiUrls = () => {
 	//console.log("apiUrl", apiUrl)
 	const isMFS = useContext(isMFSContext)
