@@ -30,7 +30,8 @@ export const Root = () => {
 	const dispatch = useAppDispatch()
 	const [isLoading, setIsLoading] = useState(true)
 	const isMFS = useContext(isMFSContext)
-	const { userUrl, signoutUrl } = useApiUrls()
+	const { userUrl, signoutUrl, apiBase } = useApiUrls()
+	console.log("apibase root: ", apiBase)
 	useEffect(() => {
 		checkConnexion(setUserAuth, userUrl).finally(() => setIsLoading(false))
 	}, [dispatch])
