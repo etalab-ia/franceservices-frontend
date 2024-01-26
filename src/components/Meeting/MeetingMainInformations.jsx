@@ -22,7 +22,6 @@ export function MeetingMainInformations() {
 	return (
 		<GlobalColContainer>
 			<GlobalSubtitle>{meetingSubtitle}</GlobalSubtitle>
-			<MeetingPromptAdvice />
 			<Input
 				id="text-area"
 				textArea
@@ -34,6 +33,7 @@ export function MeetingMainInformations() {
 					style: { minHeight: 300 },
 				}}
 			/>
+			<MeetingPromptAdvice />
 		</GlobalColContainer>
 	)
 }

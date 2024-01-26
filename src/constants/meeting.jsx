@@ -6,11 +6,41 @@ export const meetingTitle = `Préparer un rendez-vous`
 export const meetingSubtitle = `Description de la situation de l’usager`
 export const meetingParagraph = (
 	<>
-		Précisez la situation de l'usager{" "}
-		<strong>en ne précisant aucune donnée à caractère personnelle</strong> (nom, prénom de l'usager,
-		numéro de sécurité sociale, identifiants de compte...).
-		<br className="fr-mb-1w" />
-		Veillez à terminer votre description par une <strong>question</strong>.
+		<p className="fr-text-mention--grey fr-mb-2w">
+			Quelques bonnes pratiques pour décrire la situation d’un usager
+		</p>
+		<div className=" fr-mb-1w flex">
+			<span
+				className="fr-icon-success-fill fr-text-default--info fr-mr-2v"
+				aria-hidden="true"
+			></span>
+			<p className="fr-text-default--info ">
+				Utiliser des termes précis (eg. parler de « formulaire cerfa » au lieu de « demande papier
+				»)
+			</p>
+		</div>
+		<div className=" fr-mb-1w flex">
+			<span
+				className="fr-icon-success-fill fr-text-default--info fr-mr-2v"
+				aria-hidden="true"
+			></span>
+			<p className="fr-text-default--info ">
+				Formuler une question à la fin de la description pour orienter la recherche d’Albert.
+			</p>
+		</div>
+		<div className=" fr-mb-1w flex">
+			<span className="fr-icon-error-fill fr-text-default--info fr-mr-2v" aria-hidden="true"></span>
+			<p className="fr-text-default--info ">
+				Éviter d’indiquer des informations personnelles, notamment celles trouvées sur un compte
+				administratif de l’usager.
+			</p>
+		</div>
+		<div className=" fr-mb-1w flex">
+			<span className="fr-icon-error-fill fr-text-default--info fr-mr-2v" aria-hidden="true"></span>
+			<p className="fr-text-default--info ">
+				Éviter d’utiliser seulement des mots clés pour décrire la situation de l’usager.
+			</p>
+		</div>
 	</>
 )
 
