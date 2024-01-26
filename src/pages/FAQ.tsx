@@ -16,7 +16,7 @@ export function FAQ() {
 					{faq.albertInfo.questions.map((question) => (
 						<Accordion label={question.label}>{question.content}</Accordion>
 					))}
-					<CallOut>
+					<CallOut className="fr-mt-3w">
 						<>
 							Pour plus d’informations, des supports de formation sont disponibles sur le{" "}
 							<a href="https://osmose.numerique.gouv.fr">groupe Osmose</a> dédié à
