@@ -71,12 +71,6 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
 		<LoginContainer>
 			<LoginFields fields={loginFields} handleChange={handleChange} />
 			{authFailed && <ButtonInformation>{usernameOrPasswordError}</ButtonInformation>}
-// @ts-expect-error TS(2304) FIXME: Cannot find name 'children'.
-// @ts-expect-error TS(2304): Cannot find name 'children'.
-// @ts-expect-error TS(2322): Type '({ children: string; onClick: any; disabled:... Remove this comment to see the full error message
-// @ts-expect-error TS(2304): Cannot find name 'children'.
-// @ts-expect-error TS(2322) FIXME: Type '({ children: string; onClick: any; disabled:... Remove this comment to see the full error message
-// @ts-expect-error TS(2322): Type '({ children: string; onClick: any; disabled:... Remove this comment to see the full error message
 			<ButtonsGroup buttons={initButtonsLogin(handleClick, isDisable)} />
 		</LoginContainer>
 	)

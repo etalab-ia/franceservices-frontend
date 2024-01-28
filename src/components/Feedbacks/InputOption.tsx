@@ -10,13 +10,13 @@ export const InputOption = ({ reasons, setOtherReason, isFirst }) => {
 		<>
 			{(reasons.includes("Autre raison") || !isFirst) && (
 				<Input
-					// @ts-expect-error TS(2322): Type '{ onChange: (e: any) => void; iconId: "fr-ic... Remove this comment to see the full error message
-					onChange={handleNewReason}
 					iconId="fr-icon-arrow-right-line"
+					label="Autre raison"
 					nativeInputProps={{
 						role: feedbackAdditionalInput,
 						name: "otherReason",
 						placeholder: askingReasons,
+						onChange: handleNewReason,
 					}}
 				/>
 			)}

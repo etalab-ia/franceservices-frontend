@@ -69,10 +69,9 @@ export function MeetingInput({ field, onTagSelect, themes, administrations }) {
 			<Input
 				label={field.label}
 				className="fr-mb-1w"
-				// @ts-expect-error TS(2322): Type '{ label: any; className: string; onKeyDown: ... Remove this comment to see the full error message
-				onKeyDown={handleKeyDown}
 				nativeInputProps={{
 					onChange: handleSearch,
+					onKeyDown: handleKeyDown,
 					value: selectedValue,
 					name: field.name,
 					tabIndex: 0,

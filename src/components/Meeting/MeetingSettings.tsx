@@ -39,8 +39,6 @@ export function MeetingSettings({ setGenerate, context, setContext }) {
 
 	return (
 		<GlobalRowContainer extraClass="fr-grid-row--center">
-			// @ts-expect-error TS(2304) FIXME: Cannot find name 'children'. // @ts-expect-error TS(2304):
-			Cannot find name 'children'.
 			<GlobalDiv>
 				<MeetingInformations context={context} setContext={setContext} />
 				<MeetingButton setGenerate={setGenerate} context={context} />

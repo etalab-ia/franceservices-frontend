@@ -119,7 +119,6 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
 			<LoginFields fields={signupFields} handleChange={handleChange} />
 			{authFailed && <ButtonInformation>{errorMesage}</ButtonInformation>}
 			<ButtonsGroup
-				// @ts-expect-error TS(2322): Type '({ disabled: boolean; children: any; onClick... Remove this comment to see the full error message
 				buttons={initButtonsSignup(handleValidatePassword, handleClick, "Créer un compte")}
 			/>
 		</LoginContainer>

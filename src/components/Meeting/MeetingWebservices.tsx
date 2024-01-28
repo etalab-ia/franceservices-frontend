@@ -2,11 +2,11 @@ import { Tile } from "@codegouvfr/react-dsfr/Tile"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { setTilesFromContacts } from "../../constants/meeting"
+import { RootState } from "types"
 
 export const MeetingWebservices = () => {
 	const [tiles, setTiles] = useState([])
-	// @ts-expect-error TS(2339): Property 'user' does not exist on type 'unknown'.
-	const user = useSelector((state) => state.user)
+	const user = useSelector((state: RootState) => state.user)
 
 	useEffect(() => {
 		setTilesFromContacts(user.webservices, setTiles)

@@ -52,7 +52,7 @@ export const setUserQuestion = (question) => {
 }
 
 export const setQuestionFromRegeneration = (
-	mode: "string",
+	mode: string,
 	text,
 	limit: number,
 	must_not_sids: string[]

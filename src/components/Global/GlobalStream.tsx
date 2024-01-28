@@ -1,4 +1,7 @@
-export const GlobalStream = ({ response, extraClass }) => {
+export const GlobalStream = ({
+	response,
+	extraClass,
+}: { response: any[]; extraClass?: string }) => {
 	return (
 		<div className={`text-justify ${extraClass}`}>
 			{response.map((item, index) => (
