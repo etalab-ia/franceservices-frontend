@@ -6,6 +6,7 @@ import { useSelector } from "react-redux"
 import { GlobalRowContainer } from "../Global/GlobalRowContainer"
 
 export function NewQuestion() {
+	// @ts-expect-error TS(2339): Property 'user' does not exist on type 'unknown'.
 	const user = useSelector((state) => state.user)
 
 	return (

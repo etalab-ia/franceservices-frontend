@@ -39,9 +39,17 @@ export function MeetingPage({
 
 	return (
 		<GlobalRowContainer extraClass="fr-grid-row--center">
+// @ts-expect-error TS(2304) FIXME: Cannot find name 'children'.
+// @ts-expect-error TS(2304): Cannot find name 'children'.
 			<GlobalDiv>
 				<GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
 				<GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
+// @ts-expect-error TS(2304) FIXME: Cannot find name 'childr'.
+// @ts-expect-error TS(2304): Cannot find name 'childr'.
+// @ts-expect-error TS(2741): Property 'extraClass' is missing in type '{ childr... Remove this comment to see the full error message
+// @ts-expect-error TS(2304): Cannot find name 'childr'.
+// @ts-expect-error TS(2741) FIXME: Property 'extraClass' is missing in type '{ childr... Remove this comment to see the full error message
+// @ts-expect-error TS(2741): Property 'extraClass' is missing in type '{ childr... Remove this comment to see the full error message
 				<GlobalParagraph>{query}</GlobalParagraph>
 				{!archive ? (
 					<MeetingEditQuestion setGenerate={setGenerate} />

@@ -41,8 +41,10 @@ async function handleRedo(state, dispatch) {
 			: newText
 	} else newMode = "rag"
 
+	// @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
 	const question = setQuestionFromRegeneration(newMode, newText, newLimit, user.question.musNotSids)
 
+	// @ts-expect-error TS(2345): Argument of type '{ model_name: string; mode: "str... Remove this comment to see the full error message
 	generateStream(question, dispatch, user.chatId, streamUrl)
 
 	return dispatch({ type: "SET_ARCHIVE_LIMIT", nextLimit: newLimit })

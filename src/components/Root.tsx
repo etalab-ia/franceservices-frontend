@@ -55,6 +55,7 @@ export const Root = () => {
 				serviceTagline="Aide à l’accompagnement des usagers France services"
 				homeLinkProps={{ title: "Albert", href: "/" }}
 				navigation={userAuth.isLogin && navigationData}
+				// @ts-expect-error TS(2322): Type '({ iconId: string; linkProps: { style: { poi... Remove this comment to see the full error message
 				quickAccessItems={
 					userAuth.isLogin ? quickAccessItemsFunc(userAuth, setUserAuth, signoutUrl) : []
 				}

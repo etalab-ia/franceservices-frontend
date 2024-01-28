@@ -19,7 +19,7 @@ export function FAQ() {
 					<CallOut className="fr-mt-3w">
 						<>
 							Pour plus d’informations, des supports de formation sont disponibles sur le{" "}
-							<a href="https://osmose.numerique.gouv.fr" target="_blank">
+							<a href="https://osmose.numerique.gouv.fr" target="_blank" rel="noreferrer">
 								groupe Osmose
 							</a>{" "}
 							dédié à l’expérimentation.

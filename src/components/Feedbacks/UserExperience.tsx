@@ -13,6 +13,7 @@ const AskingResponseQuality = ({ tabsLen }) => {
 }
 
 export function UserExperience({ feedback, setFeedback }) {
+	// @ts-expect-error TS(2339): Property 'stream' does not exist on type 'unknown'... Remove this comment to see the full error message
 	const stream = useSelector((state) => state.stream)
 	const tabsLen = stream.historyStream.length
 

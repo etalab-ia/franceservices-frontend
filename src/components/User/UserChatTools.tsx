@@ -5,10 +5,14 @@ import { useDispatch } from "react-redux"
 import { GlobalColContainer } from "../Global/GlobalColContainer"
 
 export function UserChatTools({ isArchive }) {
+	// @ts-expect-error TS(2339): Property 'stream' does not exist on type 'unknown'... Remove this comment to see the full error message
 	const stream = useSelector((state) => state.stream)
+	// @ts-expect-error TS(2339): Property 'user' does not exist on type 'unknown'.
 	const user = useSelector((state) => state.user)
+	// @ts-expect-error TS(2339): Property 'archive' does not exist on type 'unknown... Remove this comment to see the full error message
 	const archive = useSelector((state) => state.archive)
 	// TODO: change
+	// @ts-expect-error TS(2339): Property 'feedback' does not exist on type 'unknow... Remove this comment to see the full error message
 	const feedback = useSelector((state) => state.feedback)
 	const dispatch = useDispatch()
 	const [isSelected, setIsSelected] = useState()

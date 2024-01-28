@@ -1,6 +1,6 @@
 import Linkify from "react-linkify"
 
-export const GlobalParagraph = ({ children, extraClass }) => {
+export const GlobalParagraph = ({ children, extraClass } : ) => {
 	return (
 		<p className={`text-justify fr-my-1w ${extraClass}`}>
 			{typeof children !== "string"

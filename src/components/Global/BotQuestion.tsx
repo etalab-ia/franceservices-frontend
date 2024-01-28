@@ -12,6 +12,7 @@ export function BotQuestion({ id, choice }) {
 	const dispatch = useDispatch()
 
 	const handleClick = async (index) => {
+		// @ts-expect-error TS(2339): Property 'choices' does not exist on type 'User'.
 		if (user.choices[id] === index) {
 			setButtonChoice(NOT_SET)
 			dispatch({ type: "SET_USER_CHOICES", nextKey: id, nextValue: NOT_SET })

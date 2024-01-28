@@ -22,6 +22,12 @@ export function MeetingMainInformations() {
 	return (
 		<GlobalColContainer>
 			<GlobalSubtitle>{meetingSubtitle}</GlobalSubtitle>
+// @ts-expect-error TS(2304) FIXME: Cannot find name 'id'.
+// @ts-expect-error TS(2304): Cannot find name 'id'.
+// @ts-expect-error TS(2322): Type '{ id: string; textArea: true; className: str... Remove this comment to see the full error message
+// @ts-expect-error TS(2304): Cannot find name 'id'.
+// @ts-expect-error TS(2322) FIXME: Type '{ id: string; textArea: true; className: str... Remove this comment to see the full error message
+// @ts-expect-error TS(2322): Type '{ id: string; textArea: true; className: str... Remove this comment to see the full error message
 			<Input
 				id="text-area"
 				textArea

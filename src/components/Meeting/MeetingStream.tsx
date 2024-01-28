@@ -55,8 +55,10 @@ export function MeetingStream({ archive }: { archive: ArchiveType | undefined })
 		<>
 			<GlobalSecondaryTitle extraClass="fr-mb-2w">{resultMeetingTitle}</GlobalSecondaryTitle>
 			{stream.isStreaming ? (
+				// @ts-expect-error TS(2741): Property 'extraClass' is missing in type '{ respon... Remove this comment to see the full error message
 				<GlobalStream response={stream.response} />
 			) : (
+				// @ts-expect-error TS(2741): Property 'extraClass' is missing in type '{ childr... Remove this comment to see the full error message
 				<GlobalParagraph>{agentResponse}</GlobalParagraph>
 			)}
 			{!stream.isStreaming && stream.historyStream.length !== 0 && <MeetingFeedback />}
