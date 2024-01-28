@@ -1,28 +1,29 @@
-export const initButtonsLogin = (handleClick, isDisable) => {
-	const buttonsLogin = [
+import { ButtonProps } from "@codegouvfr/react-dsfr/Button"
+
+export const initButtonsLogin = (handleClick: any, isDisable: boolean) => {
+	const buttonsLogin: [ButtonProps, ...ButtonProps[]] = [
 		{
-			children: "Connexion",
+			children: "Button 1",
 			onClick: handleClick,
 			disabled: isDisable,
 			priority: "primary",
 		},
 		{
-			children: "Créer un compte",
-			onClick: () => (window.location.href = "/albert/signup"),
-			priority: "tertiary",
-		},
-		{
-			children: "Mot de passe oublié",
-			onClick: () => (window.location.href = "/albert/reset-password"),
-			priority: "tertiary",
+			children: "Button 2",
+			onClick: handleClick,
+			priority: "secondary",
 		},
 	]
 
 	return buttonsLogin
 }
 
-export const initButtonsSignup = (handleValidatePassword, handleClick, children) => {
-	const buttonsSignup = [
+export const initButtonsSignup = (
+	handleValidatePassword: (any?) => any,
+	handleClick: () => void,
+	children: React.ReactNode
+) => {
+	const buttonsSignup: [ButtonProps, ...ButtonProps[]] = [
 		{
 			disabled: !handleValidatePassword(),
 			children: children,
@@ -38,8 +39,8 @@ export const initButtonsSignup = (handleValidatePassword, handleClick, children)
 	return buttonsSignup
 }
 
-export const initButtonsReset = (isDisable, handleClick) => {
-	const buttonsReset = [
+export const initButtonsReset = (isDisable: boolean, handleClick: () => void) => {
+	const buttonsReset: [ButtonProps, ...ButtonProps[]] = [
 		{
 			disabled: isDisable,
 			children: "Soumettre",

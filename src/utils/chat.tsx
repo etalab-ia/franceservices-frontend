@@ -20,7 +20,7 @@ const getLastMessage = (archive, stream, isArchive) => {
  */
 // TODO: rm user.choices
 // TODO WHEN BACK IS READY: retrieve archive message
-async function handleRedo(state, dispatch) {
+/* async function handleRedo(state, dispatch) {
 	const { archive, feedback, user, stream } = state
 	const archiveIndex = archive.length - 1
 	const isArchive = user.choices.newQuestion !== NOT_SET
@@ -41,14 +41,12 @@ async function handleRedo(state, dispatch) {
 			: newText
 	} else newMode = "rag"
 
-	// @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
-	const question = setQuestionFromRegeneration(newMode, newText, newLimit, user.question.musNotSids)
+		const question = setQuestionFromRegeneration(newMode, newText, newLimit, user.question.musNotSids)
 
-	// @ts-expect-error TS(2345): Argument of type '{ model_name: string; mode: "str... Remove this comment to see the full error message
-	generateStream(question, dispatch, user.chatId, streamUrl)
+		generateStream(question, dispatch, user.chatId, streamUrl)
 
 	return dispatch({ type: "SET_ARCHIVE_LIMIT", nextLimit: newLimit })
-}
+} */
 
 function handleCopy(stream) {
 	const joinedRes = stream.historyStream[stream.historyStream.length - 1]

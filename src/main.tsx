@@ -8,7 +8,7 @@ import { Provider } from "react-redux"
 import { store } from "./utils/reducer/reducer"
 import { MFSProvider } from "./utils/context/isMFSContext"
 
-// @ts-expect-error TS(2322): Type 'ForwardRefExoticComponent<LinkProps & RefAtt... Remove this comment to see the full error message
+// @ts-expect-error TS(2322) FIXME: Type 'ForwardRefExoticComponent<LinkProps & RefAtt... Remove this comment to see the full error message
 startReactDsfr({ defaultColorScheme: "system", Link })
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -1,3 +1,4 @@
+import React, { useState } from "react"
 import { Table } from "@codegouvfr/react-dsfr/Table"
 import { archiveHeaders, setArchiveBody } from "../../utils/archive"
 import { GlobalRowContainer } from "../Global/GlobalRowContainer"
@@ -10,6 +11,17 @@ interface ArchiveContainerProps {
 }
 
 export function ArchiveContainer({ chatsId, setArchiveTab }: ArchiveContainerProps) {
+	const [isDateAscending, setDateAscending] = useState(true)
+
+	const sortChatsByDate = () => {
+		chatsId.sort((a, b) => {
+			const dateA = new Date(a.creationDate)
+			const dateB = new Date(b.creationDate)
+			return isDateAscending ? dateA - dateB : dateB - dateA
+		})
+		setDateAscending(!isDateAscending)
+	}
+
 	return (
 		<div className="fr-container fr-pt-5w">
 			<GlobalTitle>Consulter mes fiches rendez-vous</GlobalTitle>
@@ -17,8 +29,19 @@ export function ArchiveContainer({ chatsId, setArchiveTab }: ArchiveContainerPro
 				<thead style={{ borderBottom: "2px solid #000" }}>
 					<tr>
 						{archiveHeaders.map((header, index) => (
-							<th key={index} style={{ textAlign: "left", padding: "10px" }}>
+							<th
+								key={index}
+								style={{ textAlign: "left", padding: "10px" }}
+								onClick={header === "Date de création" ? sortChatsByDate : undefined}
+								{...(header === "Date de création" ? { className: "cursor-pointer" } : {})}
+							>
 								{header}
+								{header === "Date de création" && (
+									<span
+										className={`fr-icon-arrow-${isDateAscending ? "down" : "up"}-s-fill`}
+										aria-hidden="true"
+									></span>
+								)}
 							</th>
 						))}
 					</tr>

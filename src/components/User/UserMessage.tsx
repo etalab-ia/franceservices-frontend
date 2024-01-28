@@ -77,7 +77,7 @@ export function UserMessage({ setGenerate }) {
 				label="Poser votre question"
 				className="w-5/6"
 				onButtonClick={handleClick}
-				// @ts-expect-error TS(2322): Type '{ label: string; className: string; onButton... Remove this comment to see the full error message
+				//@ts-expect-error
 				onChange={handleChange}
 				renderInput={handleRenderInput}
 			/>

@@ -23,9 +23,8 @@ export function MeetingTags({ setContext, context, field, tags }) {
 					<Tag
 						className={field.className}
 						key={index}
-						// @ts-expect-error TS(2322): Type '{ children: any; className: any; key: any; n... Remove this comment to see the full error message
-						name={field.name}
-						dismissible
+						/* 						name={field.name}
+						 */ dismissible
 						nativeButtonProps={{
 							onClick: handleClick,
 						}}

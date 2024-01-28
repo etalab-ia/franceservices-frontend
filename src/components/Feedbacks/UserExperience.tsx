@@ -3,6 +3,7 @@ import { Feedback } from "./Feedback"
 import { askingQuality, redoAskingQuality } from "../../constants/feedback"
 import { useSelector } from "react-redux"
 import { GlobalRowContainer } from "../Global/GlobalRowContainer"
+import { RootState } from "types"
 
 const AskingResponseQuality = ({ tabsLen }) => {
 	return (
@@ -13,8 +14,7 @@ const AskingResponseQuality = ({ tabsLen }) => {
 }
 
 export function UserExperience({ feedback, setFeedback }) {
-	// @ts-expect-error TS(2339): Property 'stream' does not exist on type 'unknown'... Remove this comment to see the full error message
-	const stream = useSelector((state) => state.stream)
+	const stream = useSelector((state: RootState) => state.stream)
 	const tabsLen = stream.historyStream.length
 
 	return (

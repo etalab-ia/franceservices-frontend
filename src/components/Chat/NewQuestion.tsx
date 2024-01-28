@@ -4,10 +4,10 @@ import { Avatar } from "./Avatar"
 import { NotifyArchiving } from "../Archive/NotifyArchiving"
 import { useSelector } from "react-redux"
 import { GlobalRowContainer } from "../Global/GlobalRowContainer"
+import { RootState } from "types"
 
 export function NewQuestion() {
-	// @ts-expect-error TS(2339): Property 'user' does not exist on type 'unknown'.
-	const user = useSelector((state) => state.user)
+	const user = useSelector((state: RootState) => state.user)
 
 	return (
 		<>

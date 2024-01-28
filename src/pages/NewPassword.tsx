@@ -48,7 +48,6 @@ export function NewPassword({ authFailed, setAuthFailed }) {
 			<LoginFields fields={fields} handleChange={handleChange} />
 			{authFailed && <ButtonInformation>{changePasswordFailed}</ButtonInformation>}
 			<ButtonsGroup
-				// @ts-expect-error TS(2322): Type '({ disabled: boolean; children: any; onClick... Remove this comment to see the full error message
 				buttons={initButtonsSignup(handleValidatePassword, handleClick, "Changer de mot de passe")}
 			/>
 		</LoginContainer>
