@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-	content: ["./src/pages/**/*.{html,jsx}", "./src/components/**/*.{html,jsx}"],
+	content: ["./src/pages/**/*.{html,tsx}", "./src/components/**/*.{html,tsx}"],
 	plugins: [],
 }
