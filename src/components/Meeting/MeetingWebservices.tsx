@@ -5,6 +5,7 @@ import { setTilesFromContacts } from "../../constants/meeting"
 
 export const MeetingWebservices = () => {
 	const [tiles, setTiles] = useState([])
+	// @ts-expect-error TS(2339): Property 'user' does not exist on type 'unknown'.
 	const user = useSelector((state) => state.user)
 
 	useEffect(() => {

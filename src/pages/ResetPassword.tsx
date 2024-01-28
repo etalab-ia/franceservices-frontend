@@ -27,6 +27,12 @@ export function ResetPassword({ setAuthFailed, userAuth, setUserAuth }) {
 
 	return (
 		<LoginContainer>
+// @ts-expect-error TS(2304) FIXME: Cannot find name 'hintText'.
+// @ts-expect-error TS(2304): Cannot find name 'hintText'.
+// @ts-expect-error TS(2322): Type '{ hintText: string; nativeInputProps: { plac... Remove this comment to see the full error message
+// @ts-expect-error TS(2304): Cannot find name 'hintText'.
+// @ts-expect-error TS(2322) FIXME: Type '{ hintText: string; nativeInputProps: { plac... Remove this comment to see the full error message
+// @ts-expect-error TS(2322): Type '{ hintText: string; nativeInputProps: { plac... Remove this comment to see the full error message
 			<Input
 				hintText="Email"
 				nativeInputProps={{
@@ -34,6 +40,12 @@ export function ResetPassword({ setAuthFailed, userAuth, setUserAuth }) {
 					onChange: handleChange,
 				}}
 			/>
+// @ts-expect-error TS(2304) FIXME: Cannot find name 'disabled'.
+// @ts-expect-error TS(2304): Cannot find name 'disabled'.
+// @ts-expect-error TS(2322): Type '({ disabled: any; children: string; onClick:... Remove this comment to see the full error message
+// @ts-expect-error TS(2304): Cannot find name 'disabled'.
+// @ts-expect-error TS(2322) FIXME: Type '({ disabled: any; children: string; onClick:... Remove this comment to see the full error message
+// @ts-expect-error TS(2322): Type '({ disabled: any; children: string; onClick:... Remove this comment to see the full error message
 			<ButtonsGroup buttons={initButtonsReset(!isValidEmail, handleClick)} />
 		</LoginContainer>
 	)

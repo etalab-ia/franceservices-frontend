@@ -16,6 +16,11 @@ export function ChatFollowUp({ stream }) {
 			{conditionDiv && (
 				<div>
 					<GlobalRowContainer extraClass="fr-grid-row--center">
+						// @ts-expect-error TS(2741): Property 'archive' is missing in type '{}' but req...
+						Remove this comment to see the full error message // @ts-expect-error TS(2741) FIXME:
+						Property 'archive' is missing in type '{}' but req... Remove this comment to see the
+						full error message // @ts-expect-error TS(2741): Property 'archive' is missing in type '
+						{}' but req... Remove this comment to see the full error message
 						<AvatarToolsContainer />
 						<DisplayStream stream={stream} />
 					</GlobalRowContainer>

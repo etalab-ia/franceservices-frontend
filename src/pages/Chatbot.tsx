@@ -33,6 +33,8 @@ export function Chatbot({ archive }) {
 	return (
 		<CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>
 			<GlobalRowContainer extraClass="fr-grid-row--center">
+				// @ts-expect-error TS(2304) FIXME: Cannot find name 'children'. // @ts-expect-error
+				TS(2304): Cannot find name 'children'.
 				<GlobalDiv>
 					<DisplayChatTab archive={archive} setGenerate={setGenerate} />
 				</GlobalDiv>

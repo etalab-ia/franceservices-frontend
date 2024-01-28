@@ -25,6 +25,7 @@ export function MeetingDefaultQuestions({ setContext }) {
 						<Button
 							key={index}
 							priority="secondary"
+							// @ts-expect-error TS(2322): Type '{ children: string; key: number; priority: "... Remove this comment to see the full error message
 							role={defaultButtonChoice(field.title)}
 							onClick={() => handleClick(field)}
 							className="w-full fr-my-3v justify-center"
