@@ -1,10 +1,6 @@
 stages:
   - publish
-<<<<<<< HEAD
-  - publish-recette
-=======
   - publish-fs
->>>>>>> main
   - deploy
   - deploy-fs
 
