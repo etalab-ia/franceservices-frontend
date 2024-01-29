@@ -1,4 +1,4 @@
-import { feedbackUrl } from "../../constants/api"
+import { useApiUrls } from "../../constants/api"
 import { feedbackConfirmationButton } from "../../constants/feedback"
 import { useFetch } from "../../utils/hooks"
 import { setHeaders } from "../../utils/setData"
@@ -7,6 +7,7 @@ import { RootState } from "types"
 
 export const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) => {
 	const streamId = useSelector((state: RootState) => state.user.streamId)
+	const { feedbackUrl } = useApiUrls()
 
 	const handleConfirm = () => {
 		otherReason &&
@@ -21,7 +22,6 @@ export const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback
 			message: feedback.message,
 			reasons: feedback.reasons,
 		}
-
 		useFetch(`${feedbackUrl}/${streamId}`, "POST", {
 			data: JSON.stringify(data),
 			headers: setHeaders(false),

@@ -1,0 +1,226 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>setData.tsx</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="../../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../../assets/source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="negative"><td class="">src/utils/setData.tsx</td><td class="">61.40%</td><td class="">80%</td><td class="">285</td><td class="">175</td><td class="">110</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { Dispatch, SetStateAction, useContext } from &quot;react&quot;
+import { useApiUrls } from &quot;../constants/api&quot;
+import { useFetch } from &quot;./hooks&quot;
+import { Question } from &quot;types&quot;
+import { CurrQuestionContext } from &quot;./context/questionContext&quot;
+
+export const setHeaders = (isEventSource: boolean) =&gt; {
+	const token = localStorage.getItem(&quot;authToken&quot;)
+
+	const headers = isEventSource
+		? {
+				Authorization: `Bearer ${token}`,
+		  }
+		: {
+				&quot;Content-Type&quot;: &quot;application/json&quot;,
+				Authorization: `Bearer ${token}`,
+		  }
+
+	return headers
+}
+
+/***************************
+		USER QUESTION
+ **************************/
+
+export const setContactData = (subject: string, text: string, institution: string) =&gt; {
+	const data = {
+		subject: subject,
+		text: text,
+		institution: institution,
+	}
+
+	return JSON.stringify(data)
+}
+
+export const setUserQuestion = (question) =&gt; {
+	const data = {
+		institution: question.institution,
+		query: question.query,
+		user_text: &quot;&quot;,
+		context: question.context,
+		links: question.links,
+		temperature: question.temperature,
+		model_name: question.model_name,
+		limit: question.limit,
+		mode: question.mode,
+		sources: question.sources,
+		must_not_sids: question.must_not_sids,
+	}
+
+	return data
+}
+
+export const setQuestionFromRegeneration = (
+	mode: string,
+	text,
+	limit: number,
+	must_not_sids: string[]
+) =&gt; {
+	const data = {
+		model_name: &quot;albert-light&quot;,
+		mode: mode,
+		query: text,
+		limit: limit,
+		context: &quot;&quot;,
+		institution: &quot;&quot;,
+		links: &quot;&quot;,
+		temperature: 20,
+		must_not_sids: must_not_sids,
+	}
+
+	return data
+}
+
+export const setQuestionWithContext = (question: string, context) =&gt; {
+	const administrations = context.administrations.length
+		? &quot;Les administrations concernées par cette question sont : &quot; +
+		  context.administrations.map((adminstration) =&gt; adminstration)
+		: &quot;&quot;
+	const themes = context.themes.length
+		? &quot;La question porte sur les thèmes suivants : &quot; + context.themes.map((theme) =&gt; theme)
+		: &quot;&quot;
+	const questionWithContext = question + &quot;\n&quot; + administrations + &quot;\n&quot; + themes
+
+	return questionWithContext
+}
+
+export const rmContextFromQuestion = (
+	str: string,
+	setQuery: React.Dispatch&lt;React.SetStateAction&lt;string&gt;&gt; | undefined
+) =&gt; {
+	const context = [
+		&quot;Les administrations concernées par cette question sont : &quot;,
+		&quot;La question porte sur les thèmes suivants : &quot;,
+	]
+
+	let newStr = str
+
+	context.forEach((c) =&gt; {
+		const start = newStr.indexOf(c)
+
+		if (start !== -1) {
+			newStr = newStr.substring(0, start).trim()
+		}
+	})
+
+	setQuery(newStr)
+}
+
+export const updateQuestion = (currQuestion: Question, updateCurrQuestion) =&gt; {
+	const context = [
+		&quot;Les administrations concernées par cette question sont : &quot;,
+		&quot;La question porte sur les thèmes suivants : &quot;,
+	]
+
+	let newStr = currQuestion.query
+
+	context.forEach((c) =&gt; {
+		const start = newStr.indexOf(c)
+
+		if (start !== -1) {
+			newStr = newStr.substring(0, start).trim()
+		}
+	})
+
+	updateCurrQuestion({
+		...currQuestion,
+		query: newStr,
+	})
+}
+
+/***************************
+		SP SHEETS
+ **************************/
+
+const setIndexesBody = (data, name, limit: number, streamId: string) =&gt; {
+	const body = JSON.stringify({
+		name: name,
+		query: data.question,
+		limit: limit,
+		similarity: &quot;e5&quot;,
+		institution: &quot;&quot;,
+		must_not_sids: data.must_not_sids,
+		stream_id: streamId,
+	})
+
+	return body
+}
+
+/* retrieve chunks or sheets */
+export const getIndexes = async (
+	data,
+	dispatch,
+	indexType: &quot;sheets&quot; | &quot;chunks&quot;,
+	chunkSize: number,
+	streamId: string,
+	indexesUrl: string
+) =&gt; {
+	const actionType = indexType === &quot;sheets&quot; ? &quot;SET_SHEETS&quot; : &quot;SET_CHUNKS&quot;
+	if (indexType === &quot;sheets&quot; &amp;&amp; data.must_not_sids.length !== 0) return
+	try {
+		const res = await useFetch(indexesUrl, &quot;POST&quot;, {
+			data: setIndexesBody(data, indexType, chunkSize, streamId),
+			headers: setHeaders(false),
+		})
+
+		dispatch({ type: actionType, [indexType]: res })
+	} catch (error) {
+		console.error(&quot;An error occurred: &quot;, error)
+	}
+}
+
+export const setIndexesData = (data, setTiles, dispatch, streamId, indexesUrl: string) =&gt; {
+	setTiles([])
+
+	if (!data || !data.question || data.question.length === 0) return
+
+	getIndexes(data, dispatch, &quot;sheets&quot;, 10, streamId, indexesUrl)
+}
+
+export const setTilesFromSheets = (sheets, setTiles) =&gt; {
+	if (!sheets || !sheets.length) return setTiles([])
+
+	setTiles([])
+
+	sheets.map((sheet) =&gt; {
+		const url = sheet.url
+		const parsedUrl = new URL(url)
+		let domain = parsedUrl.hostname
+
+		domain = domain.replace(/^www\./, &quot;&quot;)
+		domain = domain.replace(/^entreprendre\./, &quot;&quot;)
+
+		const newTile = {
+			linkProps: { to: sheet.url },
+			title: (
+				&lt;&gt;
+					&lt;p className=&quot;fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v&quot;&gt;
+						{sheet.surtitre}
+					&lt;/p&gt;
+					&lt;p&gt;{sheet.title}&lt;/p&gt;
+				&lt;/&gt;
+			),
+			desc: domain,
+		}
+		setTiles((prevTiles) =&gt; [...prevTiles, newTile])
+	})
+}
+</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:35,&quot;character&quot;:32,&quot;text&quot;:&quot;question&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:37,&quot;character&quot;:2,&quot;text&quot;:&quot;institution&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:37,&quot;character&quot;:15,&quot;text&quot;:&quot;question&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:37,&quot;character&quot;:24,&quot;text&quot;:&quot;institution&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:38,&quot;character&quot;:2,&quot;text&quot;:&quot;query&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:38,&quot;character&quot;:9,&quot;text&quot;:&quot;question&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:38,&quot;character&quot;:18,&quot;text&quot;:&quot;query&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:40,&quot;character&quot;:2,&quot;text&quot;:&quot;context&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:40,&quot;character&quot;:11,&quot;text&quot;:&quot;question&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:40,&quot;character&quot;:20,&quot;text&quot;:&quot;context&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:41,&quot;character&quot;:2,&quot;text&quot;:&quot;links&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:41,&quot;character&quot;:9,&quot;text&quot;:&quot;question&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:41,&quot;character&quot;:18,&quot;text&quot;:&quot;links&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:42,&quot;character&quot;:2,&quot;text&quot;:&quot;temperature&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:42,&quot;character&quot;:15,&quot;text&quot;:&quot;question&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:42,&quot;character&quot;:24,&quot;text&quot;:&quot;temperature&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:43,&quot;character&quot;:2,&quot;text&quot;:&quot;model_name&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:43,&quot;character&quot;:14,&quot;text&quot;:&quot;question&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:43,&quot;character&quot;:23,&quot;text&quot;:&quot;model_name&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:44,&quot;character&quot;:2,&quot;text&quot;:&quot;limit&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:44,&quot;character&quot;:9,&quot;text&quot;:&quot;question&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:44,&quot;character&quot;:18,&quot;text&quot;:&quot;limit&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:45,&quot;character&quot;:2,&quot;text&quot;:&quot;mode&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:45,&quot;character&quot;:8,&quot;text&quot;:&quot;question&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:45,&quot;character&quot;:17,&quot;text&quot;:&quot;mode&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:46,&quot;character&quot;:2,&quot;text&quot;:&quot;sources&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:46,&quot;character&quot;:11,&quot;text&quot;:&quot;question&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:46,&quot;character&quot;:20,&quot;text&quot;:&quot;sources&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:47,&quot;character&quot;:2,&quot;text&quot;:&quot;must_not_sids&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:47,&quot;character&quot;:17,&quot;text&quot;:&quot;question&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:47,&quot;character&quot;:26,&quot;text&quot;:&quot;must_not_sids&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:55,&quot;character&quot;:1,&quot;text&quot;:&quot;text&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:62,&quot;character&quot;:2,&quot;text&quot;:&quot;query&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:62,&quot;character&quot;:9,&quot;text&quot;:&quot;text&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:74,&quot;character&quot;:57,&quot;text&quot;:&quot;context&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:75,&quot;character&quot;:25,&quot;text&quot;:&quot;context&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:75,&quot;character&quot;:33,&quot;text&quot;:&quot;administrations&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:75,&quot;character&quot;:49,&quot;text&quot;:&quot;length&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:77,&quot;character&quot;:4,&quot;text&quot;:&quot;context&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:77,&quot;character&quot;:12,&quot;text&quot;:&quot;administrations&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:77,&quot;character&quot;:28,&quot;text&quot;:&quot;map&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:77,&quot;character&quot;:33,&quot;text&quot;:&quot;adminstration&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:77,&quot;character&quot;:51,&quot;text&quot;:&quot;adminstration&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:79,&quot;character&quot;:16,&quot;text&quot;:&quot;context&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:79,&quot;character&quot;:24,&quot;text&quot;:&quot;themes&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:79,&quot;character&quot;:31,&quot;text&quot;:&quot;length&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:80,&quot;character&quot;:53,&quot;text&quot;:&quot;context&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:80,&quot;character&quot;:61,&quot;text&quot;:&quot;themes&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:80,&quot;character&quot;:68,&quot;text&quot;:&quot;map&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:80,&quot;character&quot;:73,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:80,&quot;character&quot;:83,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:109,&quot;character&quot;:55,&quot;text&quot;:&quot;updateCurrQuestion&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:125,&quot;character&quot;:1,&quot;text&quot;:&quot;updateCurrQuestion&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:135,&quot;character&quot;:24,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:135,&quot;character&quot;:30,&quot;text&quot;:&quot;name&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:137,&quot;character&quot;:2,&quot;text&quot;:&quot;name&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:137,&quot;character&quot;:8,&quot;text&quot;:&quot;name&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:138,&quot;character&quot;:2,&quot;text&quot;:&quot;query&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:138,&quot;character&quot;:9,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:138,&quot;character&quot;:14,&quot;text&quot;:&quot;question&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:142,&quot;character&quot;:2,&quot;text&quot;:&quot;must_not_sids&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:142,&quot;character&quot;:17,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:142,&quot;character&quot;:22,&quot;text&quot;:&quot;must_not_sids&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:151,&quot;character&quot;:1,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:152,&quot;character&quot;:1,&quot;text&quot;:&quot;dispatch&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:159,&quot;character&quot;:31,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:159,&quot;character&quot;:36,&quot;text&quot;:&quot;must_not_sids&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:159,&quot;character&quot;:50,&quot;text&quot;:&quot;length&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:161,&quot;character&quot;:8,&quot;text&quot;:&quot;res&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:162,&quot;character&quot;:24,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:166,&quot;character&quot;:2,&quot;text&quot;:&quot;dispatch&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:166,&quot;character&quot;:44,&quot;text&quot;:&quot;res&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:168,&quot;character&quot;:39,&quot;text&quot;:&quot;error&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:167,&quot;character&quot;:10,&quot;text&quot;:&quot;error&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:172,&quot;character&quot;:31,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:172,&quot;character&quot;:37,&quot;text&quot;:&quot;setTiles&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:172,&quot;character&quot;:47,&quot;text&quot;:&quot;dispatch&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:172,&quot;character&quot;:57,&quot;text&quot;:&quot;streamId&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:173,&quot;character&quot;:1,&quot;text&quot;:&quot;setTiles&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:175,&quot;character&quot;:6,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:175,&quot;character&quot;:15,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:175,&quot;character&quot;:20,&quot;text&quot;:&quot;question&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:175,&quot;character&quot;:32,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:175,&quot;character&quot;:37,&quot;text&quot;:&quot;question&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:175,&quot;character&quot;:46,&quot;text&quot;:&quot;length&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:177,&quot;character&quot;:12,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:177,&quot;character&quot;:18,&quot;text&quot;:&quot;dispatch&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:180,&quot;character&quot;:35,&quot;text&quot;:&quot;sheets&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:180,&quot;character&quot;:43,&quot;text&quot;:&quot;setTiles&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:181,&quot;character&quot;:6,&quot;text&quot;:&quot;sheets&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:181,&quot;character&quot;:17,&quot;text&quot;:&quot;sheets&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:181,&quot;character&quot;:24,&quot;text&quot;:&quot;length&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:181,&quot;character&quot;:39,&quot;text&quot;:&quot;setTiles&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:183,&quot;character&quot;:1,&quot;text&quot;:&quot;setTiles&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:185,&quot;character&quot;:1,&quot;text&quot;:&quot;sheets&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:185,&quot;character&quot;:8,&quot;text&quot;:&quot;map&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:185,&quot;character&quot;:13,&quot;text&quot;:&quot;sheet&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:186,&quot;character&quot;:8,&quot;text&quot;:&quot;url&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:186,&quot;character&quot;:14,&quot;text&quot;:&quot;sheet&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:186,&quot;character&quot;:20,&quot;text&quot;:&quot;url&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:194,&quot;character&quot;:16,&quot;text&quot;:&quot;to&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:194,&quot;character&quot;:20,&quot;text&quot;:&quot;sheet&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:194,&quot;character&quot;:26,&quot;text&quot;:&quot;url&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:198,&quot;character&quot;:7,&quot;text&quot;:&quot;sheet&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:198,&quot;character&quot;:13,&quot;text&quot;:&quot;surtitre&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:200,&quot;character&quot;:9,&quot;text&quot;:&quot;sheet&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:200,&quot;character&quot;:15,&quot;text&quot;:&quot;title&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:205,&quot;character&quot;:2,&quot;text&quot;:&quot;setTiles&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:205,&quot;character&quot;:12,&quot;text&quot;:&quot;prevTiles&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/setData.tsx&quot;,&quot;line&quot;:205,&quot;character&quot;:30,&quot;text&quot;:&quot;prevTiles&quot;,&quot;kind&quot;:1}]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Sun, 28 Jan 2024 15:29:25 GMT</p>
+    </body>
+  </html>
+  

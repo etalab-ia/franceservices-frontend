@@ -1,0 +1,64 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>ConfirmationButton.tsx</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="../../../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../../../assets/source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="negative"><td class="">src/components/Feedbacks/ConfirmationButton.tsx</td><td class="">60.32%</td><td class="">80%</td><td class="">63</td><td class="">38</td><td class="">25</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { useApiUrls } from &quot;../../constants/api&quot;
+import { feedbackConfirmationButton } from &quot;../../constants/feedback&quot;
+import { useFetch } from &quot;../../utils/hooks&quot;
+import { setHeaders } from &quot;../../utils/setData&quot;
+import { useSelector } from &quot;react-redux&quot;
+import { RootState } from &quot;types&quot;
+
+export const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) =&gt; {
+	const streamId = useSelector((state: RootState) =&gt; state.user.streamId)
+	const { feedbackUrl } = useApiUrls()
+
+	const handleConfirm = () =&gt; {
+		otherReason &amp;&amp;
+			!reasons.includes(otherReason) &amp;&amp;
+			setFeedback({
+				...feedback,
+				message: otherReason,
+			})
+
+		const data = {
+			is_good: !feedback.isGood ? 1 : 0,
+			message: feedback.message,
+			reasons: feedback.reasons,
+		}
+		useFetch(`${feedbackUrl}/${streamId}`, &quot;POST&quot;, {
+			data: JSON.stringify(data),
+			headers: setHeaders(false),
+		})
+
+		setFeedback({
+			...feedback,
+			isConfirmed: true,
+		})
+	}
+	const classNames = feedback.reasons.length ? `text-dark-purple` : `text-[#929292]`
+
+	return (
+		&lt;button
+			role={feedbackConfirmationButton}
+			onClick={handleConfirm}
+			className={`user-feedback-confirmation-button ${classNames}`}
+		&gt;
+			Confirmer
+		&lt;/button&gt;
+	)
+}
+</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:7,&quot;character&quot;:37,&quot;text&quot;:&quot;reasons&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:7,&quot;character&quot;:46,&quot;text&quot;:&quot;otherReason&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:7,&quot;character&quot;:59,&quot;text&quot;:&quot;feedback&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:7,&quot;character&quot;:69,&quot;text&quot;:&quot;setFeedback&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:12,&quot;character&quot;:2,&quot;text&quot;:&quot;otherReason&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:13,&quot;character&quot;:4,&quot;text&quot;:&quot;reasons&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:13,&quot;character&quot;:12,&quot;text&quot;:&quot;includes&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:13,&quot;character&quot;:21,&quot;text&quot;:&quot;otherReason&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:14,&quot;character&quot;:3,&quot;text&quot;:&quot;setFeedback&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:15,&quot;character&quot;:7,&quot;text&quot;:&quot;feedback&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:16,&quot;character&quot;:4,&quot;text&quot;:&quot;message&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:16,&quot;character&quot;:13,&quot;text&quot;:&quot;otherReason&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:20,&quot;character&quot;:13,&quot;text&quot;:&quot;feedback&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:20,&quot;character&quot;:22,&quot;text&quot;:&quot;isGood&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:21,&quot;character&quot;:3,&quot;text&quot;:&quot;message&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:21,&quot;character&quot;:12,&quot;text&quot;:&quot;feedback&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:21,&quot;character&quot;:21,&quot;text&quot;:&quot;message&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:22,&quot;character&quot;:3,&quot;text&quot;:&quot;reasons&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:22,&quot;character&quot;:12,&quot;text&quot;:&quot;feedback&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:22,&quot;character&quot;:21,&quot;text&quot;:&quot;reasons&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:29,&quot;character&quot;:2,&quot;text&quot;:&quot;setFeedback&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:30,&quot;character&quot;:6,&quot;text&quot;:&quot;feedback&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:34,&quot;character&quot;:20,&quot;text&quot;:&quot;feedback&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:34,&quot;character&quot;:29,&quot;text&quot;:&quot;reasons&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Feedbacks/ConfirmationButton.tsx&quot;,&quot;line&quot;:34,&quot;character&quot;:37,&quot;text&quot;:&quot;length&quot;,&quot;kind&quot;:1}]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Sun, 28 Jan 2024 15:29:25 GMT</p>
+    </body>
+  </html>
+  

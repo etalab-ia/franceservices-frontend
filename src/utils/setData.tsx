@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useContext } from "react"
-import { indexesUrl } from "../constants/api"
+import { useApiUrls } from "../constants/api"
 import { useFetch } from "./hooks"
 import { Question } from "types"
 import { CurrQuestionContext } from "./context/questionContext"
@@ -52,7 +52,7 @@ export const setUserQuestion = (question) => {
 }
 
 export const setQuestionFromRegeneration = (
-	mode: "string",
+	mode: string,
 	text,
 	limit: number,
 	must_not_sids: string[]
@@ -147,15 +147,16 @@ const setIndexesBody = (data, name, limit: number, streamId: string) => {
 	return body
 }
 
+/* retrieve chunks or sheets */
 export const getIndexes = async (
 	data,
 	dispatch,
 	indexType: "sheets" | "chunks",
 	chunkSize: number,
-	streamId: string
+	streamId: string,
+	indexesUrl: string
 ) => {
 	const actionType = indexType === "sheets" ? "SET_SHEETS" : "SET_CHUNKS"
-
 	if (indexType === "sheets" && data.must_not_sids.length !== 0) return
 	try {
 		const res = await useFetch(indexesUrl, "POST", {
@@ -169,12 +170,12 @@ export const getIndexes = async (
 	}
 }
 
-export const setIndexesData = (data, setTiles, dispatch, streamId) => {
+export const setIndexesData = (data, setTiles, dispatch, streamId, indexesUrl: string) => {
 	setTiles([])
 
 	if (!data || !data.question || data.question.length === 0) return
 
-	getIndexes(data, dispatch, "sheets", 10, streamId)
+	getIndexes(data, dispatch, "sheets", 10, streamId, indexesUrl)
 }
 
 export const setTilesFromSheets = (sheets, setTiles) => {

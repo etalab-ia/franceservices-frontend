@@ -88,3 +88,15 @@ export type ArchiveType = {
 	webservices: []
 	chunks: any[]
 }
+
+export type StreamState = {
+	response: string[]
+	historyStream: string[]
+	isStreaming: boolean
+	activeTab: number
+}
+
+export type Message = {
+	text: string[]
+	sender: string
+}

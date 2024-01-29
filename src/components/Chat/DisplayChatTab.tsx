@@ -13,10 +13,10 @@ import { ChatAdditionalContainer } from "./ChatAdditionalContainer"
  **********************************************************************************************/
 
 // TODO WHEN BACK IS READY: change archive type
-export function DisplayChatTab({ archive }) {
+export function DisplayChatTab({ archive, setGenerate }) {
 	return (
 		<GlobalRowContainer extraClass="fr-grid-row--center">
-			<ChatMainContainer archive={archive} />
+			<ChatMainContainer archive={archive} setGenerate={setGenerate} />
 			<ChatAdditionalContainer archive={archive} />
 		</GlobalRowContainer>
 	)

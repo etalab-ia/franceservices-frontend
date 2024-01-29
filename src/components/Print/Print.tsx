@@ -5,7 +5,8 @@ import { Chatbot } from "../../pages/Chatbot"
 import { MeetingPage } from "../Meeting/MeetingPage"
 import { ArchiveType, Chat } from "../../../types"
 import { useFetch } from "../../utils/hooks"
-import { getStreamsUrl } from "../../constants/api"
+import { useApiUrls } from "../../constants/api"
+import { preventDefaultLinkClickBehavior } from "type-route"
 
 /**********************************************************************************************
 		
@@ -23,11 +24,11 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
 		const handleClick = () => {
 			setArchiveTab(null)
 		}
-
+		window.addEventListener("popstate", () => {})
+		const { getStreamsUrl } = useApiUrls()
 		const [archive, setArchive] = useState<ArchiveType>()
 		const token = localStorage.getItem("authToken")
 		const [isLoading, setIsLoading] = useState(true)
-
 		const getStreamsFromChat = async () => {
 			const res = await useFetch(getStreamsUrl + `/${selectedChat.id}`, "GET", {
 				headers: {
@@ -55,7 +56,7 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
 						onClick={handleClick}
 						priority="tertiary"
 					>
-						{" "}
+						{""}
 					</Button>
 					<ReactToPrint
 						trigger={() => (

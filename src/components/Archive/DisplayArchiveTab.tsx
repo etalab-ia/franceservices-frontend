@@ -4,22 +4,31 @@ import { GlobalRowContainer } from "../Global/GlobalRowContainer"
 import { ArchiveContainer } from "./ArchiveContainer"
 import { Chat } from "../../../types"
 import { useFetch } from "../../utils/hooks"
-import { getChatsUrl } from "../../constants/api"
+import { useApiUrls } from "../../constants/api"
+
+type ChatInfos = {
+	chat_name: string
+	chat_type: string
+	created_at: string
+	id: number
+	updated_at: string
+	user_id: number
+}
 
 export function DisplayArchiveTabs() {
 	const [chatsId, setChatsId] = useState<Chat[]>([]) // All previous user's chat
 	const [archiveTab, setArchiveTab] = useState<number | null>(null)
 	const ref = useRef<HTMLDivElement>(null)
 	const token = localStorage.getItem("authToken")
+	const { getChatsUrl } = useApiUrls()
 
 	const getChatsId = async () => {
-		const res = await useFetch(getChatsUrl, "GET", {
+		const res: ChatInfos[] = await useFetch(getChatsUrl, "GET", {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
 			data: null,
 		})
-
 		res.map((item) => {
 			const newItem = {
 				name: item.chat_name,

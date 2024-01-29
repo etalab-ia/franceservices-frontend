@@ -1,7 +1,7 @@
 import thumbsUp from "../../../icons/feedbacks/thumbsUp.svg"
 import thumbsDown from "../../../icons/feedbacks/thumbsDown.svg"
 import { useFetch } from "../../utils/hooks"
-import { feedbackUrl } from "../../constants/api"
+import { useApiUrls } from "../../constants/api"
 import { setHeaders } from "../../utils/setData"
 import { useState } from "react"
 import { ButtonInformation } from "../Global/ButtonInformation"
@@ -16,13 +16,13 @@ import { RootState } from "types"
 export const MeetingFeedback = () => {
 	const streamId = useSelector((state: RootState) => state.user.streamId)
 	const [isClicked, setIsClicked] = useState<boolean | null>(null)
+	const { feedbackUrl } = useApiUrls()
 
 	const handleClick = (isGood: boolean | null) => {
 		const data = {
 			is_good: isGood,
 			message: "",
 		}
-
 		useFetch(`${feedbackUrl}/${streamId}`, "POST", {
 			data: JSON.stringify(data),
 			headers: setHeaders(false),
