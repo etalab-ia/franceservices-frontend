@@ -1,17 +1,22 @@
 import { ButtonProps } from "@codegouvfr/react-dsfr/Button"
 
-export const initButtonsLogin = (handleClick: any, isDisable: boolean) => {
-	const buttonsLogin: [ButtonProps, ...ButtonProps[]] = [
+export const initButtonsLogin = (handleClick, isDisable) => {
+	const buttonsLogin = [
 		{
-			children: "Button 1",
+			children: "Connexion",
 			onClick: handleClick,
 			disabled: isDisable,
 			priority: "primary",
 		},
 		{
-			children: "Button 2",
-			onClick: handleClick,
-			priority: "secondary",
+			children: "Créer un compte",
+			onClick: () => (window.location.href = "/albert/signup"),
+			priority: "tertiary",
+		},
+		{
+			children: "Mot de passe oublié",
+			onClick: () => (window.location.href = "/albert/reset-password"),
+			priority: "tertiary",
 		},
 	]
 

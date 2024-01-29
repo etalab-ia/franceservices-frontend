@@ -14,6 +14,7 @@ publish-front:
   services:
     - docker:dind
   script:
+    - touch .env && echo "VITE_API_URL=$SERVER_URL" >> .env
     - cd . && docker build -t $CI_REGISTRY_IMAGE/front_albert:latest .
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker push $CI_REGISTRY_IMAGE/front_albert:latest
@@ -29,6 +30,7 @@ publish-front-fs:
   services:
     - docker:dind
   script:
+    - touch .env && echo "VITE_API_URL=$SERVER_RECETTE_URL" >> .env
     - cd . && docker build -t $CI_REGISTRY_IMAGE/front_albert_fs:latest .
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker push $CI_REGISTRY_IMAGE/front_albert_fs:latest
