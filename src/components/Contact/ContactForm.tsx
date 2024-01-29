@@ -3,13 +3,13 @@ import { ContactButton } from "./ContactButton"
 import { UserInformation } from "./UserInformation"
 import { UserMessage } from "./UserMessage"
 
+import { UserAuth } from "src/utils/auth"
 export type formDataTypes = {
 	title: string
 	administration: string
 	message: string
 	name: string
 }
-import { UserAuth } from "src/utils/auth"
 
 export function ContactForm({ setUserAuth }: { setUserAuth: Dispatch<SetStateAction<UserAuth>> }) {
 	const [formData, setFormData] = useState<formDataTypes>({

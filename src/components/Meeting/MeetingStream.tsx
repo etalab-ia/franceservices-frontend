@@ -8,7 +8,7 @@ import { ResponseExplanation } from "../Global/ResponseExplanation"
 import { ArchiveType, RootState } from "types"
 import { useEffect, useState } from "react"
 import { useFetch } from "../../utils/hooks"
-import { getChunksUrl } from "../../constants/api"
+import { useApiUrls } from "../../constants/api"
 import { setHeaders } from "../../utils/setData"
 
 /*****************************************************************************************
@@ -25,6 +25,7 @@ export function MeetingStream({ archive }: { archive: ArchiveType | undefined })
 	const user = useSelector((state: RootState) => state.user)
 	const agentResponse = archive !== undefined ? archive.response : stream.historyStream[0]
 	const [chunks, setChunks] = useState([])
+	const { getChunksUrl } = useApiUrls()
 
 	const getChunks = async () => {
 		const data = {

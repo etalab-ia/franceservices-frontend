@@ -2,7 +2,7 @@ import { Badge } from "@codegouvfr/react-dsfr/Badge"
 import { headerFooterDisplayItem } from "@codegouvfr/react-dsfr/Display"
 import { Footer } from "@codegouvfr/react-dsfr/Footer"
 import { Header } from "@codegouvfr/react-dsfr/Header"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { Navigate, Route, Routes } from "react-router-dom"
 import { quickAccessItemsFunc } from "../constants/header"
 import { navFunc } from "../constants/router"
@@ -11,6 +11,7 @@ import { Contact } from "../pages/Contact"
 import { History } from "../pages/History"
 import { Home } from "../pages/Home"
 import { Login } from "../pages/Login"
+import { FAQ } from "../pages/FAQ"
 import { Meeting } from "../pages/Meeting"
 import { NewPassword } from "../pages/NewPassword"
 import { ResetPassword } from "../pages/ResetPassword"
@@ -18,6 +19,9 @@ import { Signup } from "../pages/Signup"
 import { InitialUserAuth, UserAuth } from "../utils/auth"
 import { useAppDispatch } from "../utils/hooks"
 import { checkConnexion } from "../utils/localStorage"
+import { isMFSContext } from "../utils/context/isMFSContext"
+import Error404 from "../pages/404"
+import { useApiUrls } from "../constants/api"
 
 export const Root = () => {
 	const navigationData = navFunc()
@@ -25,30 +29,36 @@ export const Root = () => {
 	const [authFailed, setAuthFailed] = useState(false)
 	const dispatch = useAppDispatch()
 	const [isLoading, setIsLoading] = useState(true)
+	const isMFS = useContext(isMFSContext)
+	const { userUrl, signoutUrl, apiBase } = useApiUrls()
+	console.log("apibase root: ", apiBase)
 	useEffect(() => {
-		checkConnexion(setUserAuth).finally(() => setIsLoading(false))
+		checkConnexion(setUserAuth, userUrl).finally(() => setIsLoading(false))
 	}, [dispatch])
 
 	if (isLoading) {
-		return <div className="bg-red"></div>
+		return <div></div>
 	}
 
 	return (
-		<div className="h-screen" id="screen">
+		<div className="h-screen w-screen flex-col justify-between  " id="screen">
 			<Header
 				brandTop="DINUM / Etalab"
 				serviceTitle={
 					<>
-						ALBERT France services{" "}
+						ALBERT {isMFS ? "France services" : "Chat"}{" "}
 						<Badge as="span" noIcon severity="success">
 							Beta
 						</Badge>
 					</>
 				}
 				serviceTagline="Aide à l’accompagnement des usagers France services"
-				homeLinkProps={{ title: "Albert" }}
+				homeLinkProps={{ title: "Albert", href: "/" }}
 				navigation={userAuth.isLogin && navigationData}
-				quickAccessItems={userAuth.isLogin ? quickAccessItemsFunc(userAuth, setUserAuth) : []}
+				// @ts-expect-error TS(2322) FIXME: Type '({ iconId: string; linkProps: { style: { poi... Remove this comment to see the full error message
+				quickAccessItems={
+					userAuth.isLogin ? quickAccessItemsFunc(userAuth, setUserAuth, signoutUrl) : []
+				}
 			/>
 			<Routes>
 				<Route
@@ -65,29 +75,59 @@ export const Root = () => {
 						)
 					}
 				/>
-				<Route
-					path="/meeting"
-					element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
-				/>
+				{isMFS ? (
+					<Route path="/FAQ" element={!userAuth.isLogin ? <Navigate to="/login" /> : <FAQ />} />
+				) : (
+					<Route
+						path={"/FAQ"}
+						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />}
+					/>
+				)}{" "}
+				{isMFS ? (
+					<Route
+						path="/meeting"
+						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
+					/>
+				) : (
+					<Route
+						path={"/meeting"}
+						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />}
+					/>
+				)}
 				<Route path="/home" element={!userAuth.isLogin ? <Navigate to="/login" /> : <Home />} />
 				<Route
 					path="/"
-					element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/chat" />}
+					element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/home" />}
 				/>
-				{/* 				<Route
-					path="/chat"
-					element={!userAuth.isLogin ? <Navigate to="/login" /> : <Chatbot archive={false} />}
-				/> */}
+				<Route path="/404" element={<Error404 />} />
+				{!isMFS ? (
+					<Route
+						path="/chat"
+						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Chatbot archive={false} />}
+					/>
+				) : (
+					<Route
+						path={"/chat"}
+						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />}
+					/>
+				)}
 				<Route
 					path="/contact"
 					element={
 						!userAuth.isLogin ? <Navigate to="/login" /> : <Contact setUserAuth={setUserAuth} />
 					}
 				/>
-				<Route
-					path="/history"
-					element={!userAuth.isLogin ? <Navigate to="/login" /> : <History />}
-				/>
+				{isMFS ? (
+					<Route
+						path="/history"
+						element={!userAuth.isLogin ? <Navigate to="/login" /> : <History />}
+					/>
+				) : (
+					<Route
+						path={"/history"}
+						element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />}
+					/>
+				)}
 				<Route
 					path="/signup"
 					element={
@@ -113,11 +153,12 @@ export const Root = () => {
 					path="/new-password"
 					element={<NewPassword authFailed={authFailed} setAuthFailed={setAuthFailed} />}
 				/>
-				<Route path="*" element={<h1>404</h1>} />
+				<Route path="*" element={<Error404 />} />
 			</Routes>
 			<Footer
+				style={{ marginTop: "auto" }}
 				bottomItems={[headerFooterDisplayItem]}
-				accessibility="fully compliant"
+				accessibility="partially compliant"
 				termsLinkProps={{
 					href: "#",
 				}}

@@ -6,16 +6,20 @@ import { Link } from "react-router-dom"
 import { Root } from "./components/Root"
 import { Provider } from "react-redux"
 import { store } from "./utils/reducer/reducer"
+import { MFSProvider } from "./utils/context/isMFSContext"
 
-// @ts-expect-error
+// @ts-expect-error TS(2322) FIXME: Type 'ForwardRefExoticComponent<LinkProps & RefAtt... Remove this comment to see the full error message
 startReactDsfr({ defaultColorScheme: "system", Link })
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	// <React.StrictMode>
 	<BrowserRouter basename="/albert">
-		<Provider store={store}>
-			<Root />
-		</Provider>
+		<MFSProvider>
+			<Provider store={store}>
+				<Root />
+			</Provider>
+		</MFSProvider>
 	</BrowserRouter>
-	// </React.StrictMode>
+
+	//</React.StrictMode>
 )

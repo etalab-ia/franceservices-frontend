@@ -1,0 +1,121 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>SheetsAdditionalButtons.tsx</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="../../../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../../../assets/source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src/components/Sheets/SheetsAdditionalButtons.tsx</td><td class="">100.00%</td><td class="">80%</td><td class="">137</td><td class="">137</td><td class="">0</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { ModifyButton } from &quot;../Global/ModifyButton&quot;
+import { GlobalRowContainer } from &quot;../Global/GlobalRowContainer&quot;
+import { sheetsTitle } from &quot;../../constants/sheets&quot;
+import { GlobalSecondaryTitle } from &quot;../Global/GlobalSecondaryTitle&quot;
+import { GlobalColContainer } from &quot;../Global/GlobalColContainer&quot;
+import { useEffect, useState, useContext, Dispatch } from &quot;react&quot;
+import { useDispatch, useSelector } from &quot;react-redux&quot;
+import { generateStream } from &quot;../../utils/hooks&quot;
+import { emitCloseStream } from &quot;../../utils/eventsEmitter&quot;
+import { getIndexes } from &quot;../../utils/setData&quot;
+import { CurrQuestionContext } from &quot;../../utils/context/questionContext&quot;
+import { ArchiveType, RootState } from &quot;types&quot;
+import { useApiUrls } from &quot;../../constants/api&quot;
+
+/*****************************************************************************************
+	
+	USEEFFECT [isModifiable]: set deleted sheets:
+		- if a new deleted sheet has been added from initial main sheets
+		- no regeneration on archive view
+		- user was on edition mode and has saved his/her changes
+
+	USEEFFECT [deletedSheets]: regenerate stream
+
+ *****************************************************************************************/
+
+export const SheetsAdditionalButtons = ({
+	isModifiable,
+	setIsModifiable,
+	archive,
+}: {
+	isModifiable: boolean
+	setIsModifiable: React.Dispatch&lt;React.SetStateAction&lt;boolean&gt;&gt;
+	archive: ArchiveType | undefined
+}) =&gt; {
+	const buttonTitle = isModifiable ? &quot;Enregistrer&quot; : &quot;Modifier la section&quot;
+	const buttonIcon = isModifiable
+		? &quot;fr-icon-save-3-fill fr-icon--sm flex justify-end items-center&quot;
+		: &quot;fr-icon-settings-5-fill fr-icon--sm flex justify-end items-center&quot;
+	const user = useSelector((state: RootState) =&gt; state.user)
+	const [deletedSheets, setDeletedSheets] = useState([])
+	const dispatch = useDispatch()
+	const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
+	const { streamUrl, indexesUrl } = useApiUrls()
+
+	const handleClick = () =&gt; {
+		setIsModifiable(!isModifiable)
+	}
+
+	useEffect(() =&gt; {
+		if (
+			!archive &amp;&amp;
+			!isModifiable &amp;&amp;
+			JSON.stringify(deletedSheets) !== JSON.stringify(user.question.must_not_sids)
+		)
+			setDeletedSheets(user.question.must_not_sids)
+	}, [isModifiable])
+
+	useEffect(() =&gt; {
+		if (archive) return
+
+		if (!deletedSheets.length &amp;&amp; !currQuestion.must_not_sids.length) return
+
+		updateCurrQuestion({
+			...currQuestion,
+			must_not_sids: deletedSheets,
+		})
+	}, [deletedSheets])
+
+	useEffect(() =&gt; {
+		if (archive || !user.chatId) return
+
+		emitCloseStream()
+		generateStream(currQuestion, dispatch, user.chatId, streamUrl)
+	}, [currQuestion])
+
+	useEffect(() =&gt; {
+		if (!user.streamId || archive || !currQuestion.query) return
+
+		const data = {
+			question: currQuestion.query,
+			must_not_sids: user.question.must_not_sids,
+		}
+		getIndexes(
+			data,
+			dispatch,
+			&quot;chunks&quot;,
+			currQuestion.limit,
+			JSON.stringify(user.streamId),
+			indexesUrl
+		)
+	}, [user.streamId, currQuestion])
+
+	return (
+		&lt;GlobalRowContainer&gt;
+			&lt;GlobalSecondaryTitle&gt;{sheetsTitle}&lt;/GlobalSecondaryTitle&gt;
+			&lt;GlobalColContainer&gt;
+				{!archive &amp;&amp; (
+					&lt;ModifyButton handleClick={handleClick} text={buttonTitle} extraClass={buttonIcon} /&gt;
+				)}
+			&lt;/GlobalColContainer&gt;
+		&lt;/GlobalRowContainer&gt;
+	)
+}
+</textarea><pre id="annotations" style="display:none">[]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Sun, 28 Jan 2024 15:29:25 GMT</p>
+    </body>
+  </html>
+  
