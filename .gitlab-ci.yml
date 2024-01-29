@@ -50,7 +50,7 @@ deploy-front:
     - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY"
     - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker pull $CI_REGISTRY_IMAGE/front_albert:latest"
     - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker container rm -f miaou-front-albert || true"
-    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker run  -d -p 4174:4173   --name miaou-front-albert $CI_REGISTRY_IMAGE/front_albert:latest"
+    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker run -e VITE_API_URL=$SERVER_URL  -d -p 4174:4173   --name miaou-front-albert $CI_REGISTRY_IMAGE/front_albert:latest"
 
 
 deploy-front-fs:
@@ -70,3 +70,4 @@ deploy-front-fs:
     - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_RECETTE_USER@$SERVER_RECETTE_IP "docker container rm -f miaou-front-albert || true"
     - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_RECETTE_USER@$SERVER_RECETTE_IP "docker container rm -f miaou-front-albert_fs || true"
     - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_RECETTE_USER@$SERVER_RECETTE_IP "docker run -e VITE_API_URL=$SERVER_RECETTE_URL -d -p 4174:4173  --name miaou-front-albert_fs  $CI_REGISTRY_IMAGE/front_albert_fs:latest "
+  
