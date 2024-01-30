@@ -32,11 +32,9 @@ export function Chatbot({ archive }) {
 
 	return (
 		<CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>
-			<GlobalRowContainer extraClass="fr-grid-row--center">
-				<GlobalDiv>
-					<DisplayChatTab archive={archive} setGenerate={setGenerate} />
-				</GlobalDiv>
-			</GlobalRowContainer>
+			<div className="ft-container">
+				<DisplayChatTab archive={archive} setGenerate={setGenerate} />
+			</div>
 		</CurrQuestionContext.Provider>
 	)
 }

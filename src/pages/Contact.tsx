@@ -6,10 +6,8 @@ import { UserAuth } from "src/utils/auth"
 
 export function Contact({ setUserAuth }: { setUserAuth: Dispatch<SetStateAction<UserAuth>> }) {
 	return (
-		<GlobalRowContainer extraClass="fr-grid-row--center">
-			<GlobalDiv>
-				<ContactForm setUserAuth={setUserAuth} />
-			</GlobalDiv>
-		</GlobalRowContainer>
+		<div className="ft-container">
+			<ContactForm setUserAuth={setUserAuth} />
+		</div>
 	)
 }

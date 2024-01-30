@@ -15,9 +15,11 @@ import { ChatAdditionalContainer } from "./ChatAdditionalContainer"
 // TODO WHEN BACK IS READY: change archive type
 export function DisplayChatTab({ archive, setGenerate }) {
 	return (
-		<GlobalRowContainer extraClass="fr-grid-row--center">
-			<ChatMainContainer archive={archive} setGenerate={setGenerate} />
-			<ChatAdditionalContainer archive={archive} />
-		</GlobalRowContainer>
+		<div className="fr-container fr-py-3w ">
+			<div className="fr-grid-row fr-grid-row--gutters">
+				<ChatMainContainer archive={archive} setGenerate={setGenerate} />
+				<ChatAdditionalContainer archive={archive} />
+			</div>
+		</div>
 	)
 }

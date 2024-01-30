@@ -70,4 +70,3 @@ deploy-front-fs:
     - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_RECETTE_USER@$SERVER_RECETTE_IP "docker container rm -f miaou-front-albert || true"
     - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_RECETTE_USER@$SERVER_RECETTE_IP "docker container rm -f miaou-front-albert_fs || true"
     - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_RECETTE_USER@$SERVER_RECETTE_IP "docker run -d -p 4174:4173  --name miaou-front-albert_fs  $CI_REGISTRY_IMAGE/front_albert_fs:latest "
-  

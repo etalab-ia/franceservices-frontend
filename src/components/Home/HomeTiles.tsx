@@ -2,7 +2,7 @@ import { Tile } from "@codegouvfr/react-dsfr/Tile"
 
 export const TileContainer = ({ children }) => {
 	return (
-		<div className="container fr-mr-2w" style={{ width: 300 }}>
+		<div className="container fr-mr-2w" style={{ width: 282 }}>
 			{children}
 		</div>
 	)

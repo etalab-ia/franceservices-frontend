@@ -1,4 +1,4 @@
-import { useEffect, useState, Dispatch, SetStateAction, ChangeEvent } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
 import { ContactButton } from "./ContactButton"
 import { UserInformation } from "./UserInformation"
 import { UserMessage } from "./UserMessage"
@@ -22,7 +22,7 @@ export function ContactForm({ setUserAuth }: { setUserAuth: Dispatch<SetStateAct
 		setFormData({ title: "", administration: "", message: "", name: "" })
 	}
 	return (
-		<div className="fr-mx-10w">
+		<div className=" fr-container fr-my-3w ">
 			<UserInformation formData={formData} setFormData={setFormData} />
 			<UserMessage message={formData.message} setFormData={setFormData} />
 			<ContactButton setUserAuth={setUserAuth} formData={formData} clearForm={clearForm} />
