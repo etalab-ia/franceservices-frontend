@@ -49,10 +49,10 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
 
 		return (
 			<>
-				<div className="flex w-screen">
+				<div className="fr-mb-4w">
 					<Button
 						iconId="fr-icon-arrow-left-s-line-double"
-						className="fr-mt-4w fr-ml-6w fr-mx-1w"
+						className="fr-mt-4w fr-mr-1w"
 						onClick={handleClick}
 						priority="tertiary"
 					>

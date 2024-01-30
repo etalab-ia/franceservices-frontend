@@ -29,7 +29,6 @@ export const SheetsTilesContainer = ({
 	const { currQuestion } = useContext(CurrQuestionContext)
 	const dispatch = useDispatch()
 	const { getSheetsUrl, indexesUrl } = useApiUrls()
-
 	useEffect(() => {
 		const data = {
 			question: currQuestion.query,
@@ -39,7 +38,7 @@ export const SheetsTilesContainer = ({
 		if (!streamId || user.sheets.length) return
 
 		setIndexesData(data, setTiles, dispatch, JSON.stringify(streamId), indexesUrl)
-	}, [user.streamId])
+	}, [user.streamId, currQuestion])
 
 	const getSheets = async () => {
 		const data = {

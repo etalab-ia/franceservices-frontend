@@ -47,12 +47,12 @@ export function DisplayArchiveTabs() {
 	}, [])
 
 	return (
-		<GlobalRowContainer extraClass="fr-grid-row--center items-center">
+		<div className="fr-container">
 			{archiveTab === null ? (
 				<ArchiveContainer chatsId={chatsId} setArchiveTab={setArchiveTab} />
 			) : (
 				<Print ref={ref} selectedChat={chatsId[archiveTab]} setArchiveTab={setArchiveTab} />
 			)}
-		</GlobalRowContainer>
+		</div>
 	)
 }
