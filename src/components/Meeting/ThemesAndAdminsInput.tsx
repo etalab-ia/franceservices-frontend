@@ -9,7 +9,10 @@ const options = {
 	keys: ["name"],
 }
 
-export function MeetingInput({ field, onTagSelect, themes, administrations }) {
+/*
+ * Additional inputs used to search for administrations or themes tags
+ */
+export function ThemesAndAdminsInput({ field, onTagSelect, themes, administrations }) {
 	const [searchResults, setSearchResults] = useState([])
 	const [selectedValue, setSelectedValue] = useState("")
 	const [selectedIndex, setSelectedIndex] = useState(-1)

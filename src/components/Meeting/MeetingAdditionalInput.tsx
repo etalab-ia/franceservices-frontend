@@ -1,6 +1,6 @@
 import { inputFields } from "../../constants/meetingInputFields"
 import { MeetingTags } from "./MeetingTags"
-import { MeetingInput } from "./MeetingInput"
+import { ThemesAndAdminsInput } from "./ThemesAndAdminsInput"
 
 export function MeetingAdditionalInput({ context, setContext }) {
 	const handleSetTag = (tag, fieldName) => {
@@ -22,7 +22,7 @@ export function MeetingAdditionalInput({ context, setContext }) {
 				const tags = field.name === "themes" ? context.themes : context.administrations
 				return (
 					<div className="fr-mb-4w" key={index}>
-						<MeetingInput
+						<ThemesAndAdminsInput
 							field={field}
 							onTagSelect={(tag) => handleSetTag(tag, field.name)}
 							themes={context.themes}

@@ -38,11 +38,9 @@ export function MeetingSettings({ setGenerate, context, setContext }) {
 	}, [])
 
 	return (
-		<GlobalRowContainer extraClass="fr-grid-row--center">
-			<GlobalDiv>
-				<MeetingInformations context={context} setContext={setContext} />
-				<MeetingButton setGenerate={setGenerate} context={context} />
-			</GlobalDiv>
-		</GlobalRowContainer>
+		<div style={{ width: "100%", flex: 1, flexGrow: 1 }}>
+			<MeetingInformations context={context} setContext={setContext} />
+			<MeetingButton setGenerate={setGenerate} context={context} />
+		</div>
 	)
 }

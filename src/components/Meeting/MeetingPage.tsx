@@ -38,18 +38,16 @@ export function MeetingPage({
 	}, [])
 
 	return (
-		<GlobalRowContainer extraClass="fr-grid-row--center">
-			<GlobalDiv>
-				<GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
-				<GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
-				<GlobalParagraph>{query}</GlobalParagraph>
-				{!archive ? (
-					<MeetingEditQuestion setGenerate={setGenerate} />
-				) : (
-					<div className="fr-pt-2w"></div>
-				)}
-				<MeetingResponse archive={archive} />
-			</GlobalDiv>
-		</GlobalRowContainer>
+		<div className="ft-container">
+			<GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
+			<GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
+			<GlobalParagraph>{query}</GlobalParagraph>
+			{!archive ? (
+				<MeetingEditQuestion setGenerate={setGenerate} />
+			) : (
+				<div className="fr-pt-2w"></div>
+			)}
+			<MeetingResponse archive={archive} />
+		</div>
 	)
 }

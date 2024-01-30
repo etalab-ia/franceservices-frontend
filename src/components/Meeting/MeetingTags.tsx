@@ -9,11 +9,13 @@ export function MeetingTags({ setContext, context, field, tags }) {
 				...prevContext,
 				administrations: context.administrations.filter((tag) => tag !== e.target.textContent),
 			}))
-		else if (e.target.name === field.name && field.name === "themes")
+		else if (e.target.name === field.name && field.name === "themes") {
+			console.log("here")
 			setContext((prevContext) => ({
 				...prevContext,
 				themes: context.themes.filter((tag) => tag !== e.target.textContent),
 			}))
+		}
 	}
 
 	return (
