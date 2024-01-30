@@ -82,7 +82,21 @@ export const MFStoolsTiles = [
 	},
 ]
 
-export const ressourcesTiles = [
+export const generalistRessourcesTiles = [
+	{
+		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
+		desc: "Accéder",
+		linkProps: { to: "https://www.service-public.fr/" },
+		imageUrl: servicepublic,
+		title: (
+			<>
+				<p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">Documentation</p>
+				<p>Service-Public.fr</p>
+			</>
+		),
+	},
+]
+export const MFSressourcesTiles = [
 	{
 		className: "fr-tile fr-tile--no-icon fr-enlarge-link",
 		desc: "Accéder",
