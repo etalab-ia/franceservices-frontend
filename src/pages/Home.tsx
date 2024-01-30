@@ -6,7 +6,6 @@ import {
 	generalistRessourcesTiles,
 	MFStoolsTiles,
 } from "../constants/inputFields"
-import { GlobalRowContainer } from "../components/Global/GlobalRowContainer"
 import { GlobalDiv } from "../components/Global/GlobalDiv"
 import { GlobalTitle } from "../components/Global/GlobalTitle"
 import { isMFSContext } from "../utils/context/isMFSContext"

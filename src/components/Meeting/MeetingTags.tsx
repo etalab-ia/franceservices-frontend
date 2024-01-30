@@ -4,16 +4,17 @@ export function MeetingTags({ setContext, context, field, tags }) {
 	const handleClick = (e) => {
 		e.preventDefault()
 
-		if (e.target.name === field.name && field.name === "administrations")
+		const tagName = e.currentTarget.textContent.trim()
+
+		if (e.currentTarget.name === "administrations") {
 			setContext((prevContext) => ({
 				...prevContext,
-				administrations: context.administrations.filter((tag) => tag !== e.target.textContent),
+				administrations: prevContext.administrations.filter((tag) => tag !== tagName),
 			}))
-		else if (e.target.name === field.name && field.name === "themes") {
-			console.log("here")
+		} else if (e.currentTarget.name === "themes") {
 			setContext((prevContext) => ({
 				...prevContext,
-				themes: context.themes.filter((tag) => tag !== e.target.textContent),
+				themes: prevContext.themes.filter((tag) => tag !== tagName),
 			}))
 		}
 	}
@@ -25,8 +26,9 @@ export function MeetingTags({ setContext, context, field, tags }) {
 					<Tag
 						className={field.className}
 						key={index}
-						/* 						name={field.name}
-						 */ dismissible
+						//@ts-expect-error for some reason name isn't recognized as a valid prop but is needed to delete tag
+						name={field.name}
+						dismissible
 						nativeButtonProps={{
 							onClick: handleClick,
 						}}
