@@ -38,7 +38,7 @@ export function MeetingSettings({ setGenerate, context, setContext }) {
 	}, [])
 
 	return (
-		<div style={{ width: "100%", flex: 1, flexGrow: 1 }}>
+		<div style={{ width: "100%", flex: 1, flexGrow: 1, backgroundColor: "" }}>
 			<MeetingInformations context={context} setContext={setContext} />
 			<MeetingButton setGenerate={setGenerate} context={context} />
 		</div>
