@@ -1,6 +1,11 @@
 import { toolsTitle, ressourcesTitle } from "../constants/home"
 import { HomeTiles } from "../components/Home/HomeTiles"
-import { toolsTiles, ressourcesTiles, MFStoolsTiles } from "../constants/inputFields"
+import {
+	toolsTiles,
+	MFSressourcesTiles,
+	generalistRessourcesTiles,
+	MFStoolsTiles,
+} from "../constants/inputFields"
 import { GlobalRowContainer } from "../components/Global/GlobalRowContainer"
 import { GlobalDiv } from "../components/Global/GlobalDiv"
 import { GlobalTitle } from "../components/Global/GlobalTitle"
@@ -9,6 +14,7 @@ import { useContext } from "react"
 
 export function Home() {
 	const isMFS = useContext(isMFSContext)
+	const tiles = isMFS ? MFSressourcesTiles : generalistRessourcesTiles
 	return (
 		<div className="fr-container">
 			<GlobalDiv>
@@ -17,7 +23,7 @@ export function Home() {
 			</GlobalDiv>
 			<div className="fr-mb-12w">
 				<GlobalTitle>{ressourcesTitle}</GlobalTitle>
-				<HomeTiles tiles={ressourcesTiles} />
+				<HomeTiles tiles={tiles} />
 			</div>
 		</div>
 	)
