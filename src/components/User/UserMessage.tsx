@@ -31,7 +31,7 @@ export function UserMessage({ setGenerate }) {
 	const handleClick = async () => {
 		updateCurrQuestion({ ...currQuestion, query: questionInput })
 		const headers = setHeaders(false)
-		const chat_data = { chat_type: "meeting" }
+		const chat_data = { chat_type: "qa" }
 		const chat = await useFetch(chatUrl, "POST", { data: JSON.stringify(chat_data), headers })
 		dispatch({ type: "SET_CHAT_ID", nextChatId: chat.id })
 		/* 		console.log("user: ", user)

@@ -170,11 +170,14 @@ export const getIndexes = async (
 	}
 }
 
+/*
+ * Get the sheets from the stream
+ */
 export const setIndexesData = (data, setTiles, dispatch, streamId, indexesUrl: string) => {
 	setTiles([])
 
 	if (!data || !data.question || data.question.length === 0) return
-
+	console.log("set indexes data", data)
 	getIndexes(data, dispatch, "sheets", 10, streamId, indexesUrl)
 }
 

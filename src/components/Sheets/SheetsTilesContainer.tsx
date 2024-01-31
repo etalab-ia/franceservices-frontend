@@ -35,7 +35,7 @@ export const SheetsTilesContainer = ({
 			must_not_sids: user.question.must_not_sids,
 		}
 		const streamId = archive ? archive.id : user.streamId
-		if (!streamId || user.sheets.length) return
+		if (!streamId) return
 
 		setIndexesData(data, setTiles, dispatch, JSON.stringify(streamId), indexesUrl)
 	}, [user.streamId, currQuestion])
@@ -59,6 +59,7 @@ export const SheetsTilesContainer = ({
 
 	useEffect(() => {
 		if (archive) return
+		console.log("set tiles fro sheets", user.sheets)
 		setTilesFromSheets(user.sheets, setTiles)
 		setTilesFromSheets(user.additionalSheets, setAdditionalTiles)
 	}, [user.additionalSheets])

@@ -1,6 +1,5 @@
 import { GlobalColContainer } from "../Global/GlobalColContainer"
 import { GlobalSubtitle } from "../Global/GlobalSubtitle"
-import { meetingInformations } from "../../constants/meeting"
 import { MeetingAdditionalInput } from "./MeetingAdditionalInput"
 import { MeetingDefaultQuestions } from "./MeetingDefaultQuestions"
 
@@ -17,7 +16,7 @@ import { MeetingDefaultQuestions } from "./MeetingDefaultQuestions"
 export function MeetingAdditionalInformations({ context, setContext }) {
 	return (
 		<GlobalColContainer>
-			<GlobalSubtitle>{meetingInformations}</GlobalSubtitle>
+			<GlobalSubtitle>Informations contextuelles</GlobalSubtitle>
 			<MeetingAdditionalInput context={context} setContext={setContext} />
 			<MeetingDefaultQuestions setContext={setContext} />
 		</GlobalColContainer>
