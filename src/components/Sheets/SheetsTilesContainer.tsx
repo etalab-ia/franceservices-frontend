@@ -59,7 +59,6 @@ export const SheetsTilesContainer = ({
 
 	useEffect(() => {
 		if (archive) return
-		console.log("set tiles fro sheets", user.sheets)
 		setTilesFromSheets(user.sheets, setTiles)
 		setTilesFromSheets(user.additionalSheets, setAdditionalTiles)
 	}, [user.additionalSheets])
