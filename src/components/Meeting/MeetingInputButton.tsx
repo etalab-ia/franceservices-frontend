@@ -7,7 +7,7 @@ import { useContext } from "react"
 import { CurrQuestionContext } from "../../utils/context/questionContext"
 
 /**
-
+	Button to send user query to /stream endpoint & switch to meeting stream page
     FUNCTIONS:
 
         setQuestionWithContext: improve user prompt with current question & context to send
@@ -17,7 +17,7 @@ import { CurrQuestionContext } from "../../utils/context/questionContext"
 
  **/
 
-export function MeetingButton({ setGenerate, context }) {
+export function MeetingInputButton({ setGenerate, context }) {
 	const dispatch = useDispatch()
 
 	const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)

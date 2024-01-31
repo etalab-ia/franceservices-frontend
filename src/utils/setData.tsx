@@ -177,7 +177,6 @@ export const setIndexesData = (data, setTiles, dispatch, streamId, indexesUrl: s
 	setTiles([])
 
 	if (!data || !data.question || data.question.length === 0) return
-	console.log("set indexes data", data)
 	getIndexes(data, dispatch, "sheets", 10, streamId, indexesUrl)
 }
 

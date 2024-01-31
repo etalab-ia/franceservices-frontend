@@ -1,7 +1,7 @@
 import { GlobalDiv } from "../Global/GlobalDiv"
 import { GlobalRowContainer } from "../Global/GlobalRowContainer"
 import { MeetingInformations } from "./MeetingInformations"
-import { MeetingButton } from "./MeetingButton"
+import { MeetingInputButton } from "./MeetingInputButton"
 import { useContext, useEffect } from "react"
 import { updateQuestion } from "../../utils/setData"
 import { CurrQuestionContext } from "../../utils/context/questionContext"
@@ -25,7 +25,7 @@ import { CurrQuestionContext } from "../../utils/context/questionContext"
 
 	**	MeetingInformations: set current question & context (administrations / themes) from user input
 
-	**	MeetingButton: setGenerate to true to switch to meeting stream page onClick
+	**	MeetingInputButton: setGenerate to true to switch to meeting stream page onClick
 			! Meeting generation button is disable when current question is empty
 
  *****************************************************************************************************/
@@ -40,7 +40,7 @@ export function MeetingSettings({ setGenerate, context, setContext }) {
 	return (
 		<div style={{ width: "100%", flex: 1, flexGrow: 1, backgroundColor: "" }}>
 			<MeetingInformations context={context} setContext={setContext} />
-			<MeetingButton setGenerate={setGenerate} context={context} />
+			<MeetingInputButton setGenerate={setGenerate} context={context} />
 		</div>
 	)
 }

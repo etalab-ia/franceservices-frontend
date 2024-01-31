@@ -50,10 +50,9 @@ export function MeetingStream({ archive }: { archive: ArchiveType | undefined })
 
 		setChunks(user.chunks)
 	}, [user.chunks])
-
 	return (
 		<>
-			<GlobalSecondaryTitle extraClass="fr-mb-2w">{resultMeetingTitle}</GlobalSecondaryTitle>
+			<GlobalSecondaryTitle extraClass="fr-mb-2w ">{resultMeetingTitle}</GlobalSecondaryTitle>
 			{stream.isStreaming ? (
 				<GlobalStream response={stream.response} />
 			) : (

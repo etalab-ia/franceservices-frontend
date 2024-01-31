@@ -8,6 +8,9 @@ import { GlobalParagraph } from "../Global/GlobalParagraph"
 import { GlobalRowContainer } from "../Global/GlobalRowContainer"
 import { useState } from "react"
 
+/*
+ * Advices and examples of good and bad prompts
+ */
 export function MeetingPromptAdvice({}) {
 	const [expandedItems, setExpandedItems] = useState([])
 	const [isAccordionOpen, setIsAccordionOpen] = useState(false)

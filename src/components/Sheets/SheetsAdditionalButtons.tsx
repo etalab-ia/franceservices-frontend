@@ -75,7 +75,6 @@ export const SheetsAdditionalButtons = ({
 	useEffect(() => {
 		if (!user.streamId || archive || !currQuestion.query) return
 
-		console.log("currQuestion", currQuestion)
 		const data = {
 			question: currQuestion.query,
 			must_not_sids: user.question.must_not_sids,

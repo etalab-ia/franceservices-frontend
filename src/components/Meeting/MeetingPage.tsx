@@ -42,7 +42,7 @@ export function MeetingPage({
 			{!archive ? (
 				<MeetingEditQuestion setGenerate={setGenerate} />
 			) : (
-				<div className="fr-container fr-pt-2w"></div>
+				<div className="fr-container fr-pt-2w "></div>
 			)}
 			<MeetingResponse archive={archive} />
 		</div>

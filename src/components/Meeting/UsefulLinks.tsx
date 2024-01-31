@@ -4,7 +4,10 @@ import { useSelector } from "react-redux"
 import { setTilesFromContacts } from "../../constants/meeting"
 import { RootState } from "types"
 
-export const MeetingWebservices = () => {
+/*
+ * Tiles containing useful links for the meeting's response
+ */
+export const UsefulLinks = () => {
 	const [tiles, setTiles] = useState([])
 	const user = useSelector((state: RootState) => state.user)
 
