@@ -1,5 +1,4 @@
 import Button from "@codegouvfr/react-dsfr/Button"
-import { meetingGenerationPage } from "../../constants/meeting"
 import { useDispatch } from "react-redux"
 import { useFetch } from "../../utils/hooks"
 import { setHeaders, setQuestionWithContext } from "../../utils/setData"
@@ -44,7 +43,7 @@ export function MeetingButton({ setGenerate, context }) {
 			onClick={handleClick}
 			disabled={isDisable}
 		>
-			{meetingGenerationPage}
+			Générer la fiche rendez-vous
 		</Button>
 	)
 }

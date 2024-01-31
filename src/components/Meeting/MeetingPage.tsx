@@ -1,7 +1,4 @@
-import { GlobalRowContainer } from "../Global/GlobalRowContainer"
-import { GlobalDiv } from "../Global/GlobalDiv"
 import { GlobalSubtitle } from "../Global/GlobalSubtitle"
-import { meetingAppointmentInformations, meetingAppointmentTitle } from "../../constants/meeting"
 import { GlobalParagraph } from "../Global/GlobalParagraph"
 import { MeetingResponse } from "./MeetingResponse"
 import { MeetingEditQuestion } from "./MeetingEditQuestion"
@@ -39,8 +36,8 @@ export function MeetingPage({
 
 	return (
 		<div className="ft-container">
-			<GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
-			<GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
+			<GlobalTitle>Fiche rendez-vous</GlobalTitle>
+			<GlobalSubtitle>Informations sur le rendez-vous</GlobalSubtitle>
 			<GlobalParagraph>{query}</GlobalParagraph>
 			{!archive ? (
 				<MeetingEditQuestion setGenerate={setGenerate} />

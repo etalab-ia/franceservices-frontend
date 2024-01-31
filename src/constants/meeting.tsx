@@ -77,11 +77,6 @@ export const meetingPromptExamples = [
 	},
 ]
 
-export const meetingInformations = `Informations contextuelles`
-export const meetingGenerationPage = `Générer la fiche rendez-vous`
-export const meetingAppointmentInformations = `Informations sur le rendez-vous`
-export const meetingAppointmentTitle = "Fiche rendez-vous"
-
 export const setTilesFromContacts = (webservices, setTiles) => {
 	setTiles([])
 
