@@ -2,9 +2,9 @@ import thumbsDown from '../../icons/feedbacks/thumbsDown.svg'
 import thumbsUp from '../../icons/feedbacks/thumbsUp.svg'
 import { GlobalRowContainer } from '../components/Global/GlobalRowContainer'
 
-export const meetingTitle = `Préparer un rendez-vous`
-export const meetingSubtitle = `Description de la situation de l’usager`
-export const meetingParagraph = (
+export const meetingTitle = 'Préparer un rendez-vous'
+export const meetingSubtitle = 'Description de la situation de l’usager'
+export const meetingInputGuidelines = (
   <>
     <p className="fr-text-mention--grey fr-mb-2w">
       Quelques bonnes pratiques pour décrire la situation d’un usager
