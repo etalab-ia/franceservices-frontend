@@ -1,5 +1,5 @@
-import { type Question, type Message } from "types"
-import { initialChatbotMessage } from "../../constants/chatbotProps"
+import { type Message, type Question } from 'types'
+import { initialChatbotMessage } from '../../constants/chatbotProps'
 
 /*****************************************************************************************************
 	
@@ -24,178 +24,191 @@ import { initialChatbotMessage } from "../../constants/chatbotProps"
 // - messages: check w/ backend /streams
 
 const InitialQuestion: Question = {
-	model_name: "albert-light",
-	mode: "rag",
-	query: "",
-	limit: 7,
-	context: undefined,
-	institution: undefined,
-	links: undefined,
-	temperature: 20,
-	sources: ["service-public", "travail-emploi"],
-	should_sids: [],
-	must_not_sids: [],
+  model_name: 'albert-light',
+  mode: 'rag',
+  query: '',
+  limit: 7,
+  context: undefined,
+  institution: undefined,
+  links: undefined,
+  temperature: 20,
+  sources: ['service-public', 'travail-emploi'],
+  should_sids: [],
+  must_not_sids: [],
 }
 
 interface User {
-	question: Question // Question asked by user
-	messages: Message[] // Message exchanged between user & agent
-	sheets: any[] // Sheets associated to the reponse from 0 to 2
-	additionalSheets: any[] // suggested sheets to from 3 to 9
-	chunks: any[] // Chunks associes a la reponse
-	webservices: any[] // Dans sheets webservices: liens utiles lies aux sheets
-	chatId: number // current chat id
-	streamId: number // current stream id
+  question: Question // Question asked by user
+  messages: Message[] // Message exchanged between user & agent
+  sheets: any[] // Sheets associated to the reponse from 0 to 2
+  additionalSheets: any[] // suggested sheets to from 3 to 9
+  chunks: any[] // Chunks associes a la reponse
+  webservices: any[] // Dans sheets webservices: liens utiles lies aux sheets
+  chatId: number // current chat id
+  streamId: number // current stream id
 }
 
 const InitialUser: User = {
-	question: InitialQuestion,
-	messages: [{ text: initialChatbotMessage, sender: "agent" }],
-	sheets: [],
-	additionalSheets: [],
-	chunks: [],
-	webservices: [],
-	chatId: 0,
-	streamId: 0,
+  question: InitialQuestion,
+  messages: [{ text: initialChatbotMessage, sender: 'agent' }],
+  sheets: [],
+  additionalSheets: [],
+  chunks: [],
+  webservices: [],
+  chatId: 0,
+  streamId: 0,
 }
 
 type UserAction =
-	| { type: "SET_SHEETS"; sheets: any[] }
-	| { type: "SET_CHUNKS"; chunks: any[] }
-	| { type: "SET_SHEETS_FROM_ARCHIVE"; sheets: any[]; additionalSheets: any[]; webservices: any[] }
-	| { type: "REMOVE_SHEETS"; indexToRemove: number }
-	| { type: "ADD_SHEETS"; indexToAdd: number }
-	| { type: "SET_USER_QUERY"; nextUserQuery: string; nextChatId: number }
-	| { type: "RESET_QUESTION_FIELDS" }
-	| { type: "RESET_USER" }
-	| { type: "SET_MESSAGES"; nextMessage: Message }
-	| { type: "SET_STREAM_ID"; nextStreamId: number }
-	| { type: "SET_CHAT_ID"; nextChatId: number }
+  | { type: 'SET_SHEETS'; sheets: any[] }
+  | { type: 'SET_CHUNKS'; chunks: any[] }
+  | {
+      type: 'SET_SHEETS_FROM_ARCHIVE'
+      sheets: any[]
+      additionalSheets: any[]
+      webservices: any[]
+    }
+  | { type: 'REMOVE_SHEETS'; indexToRemove: number }
+  | { type: 'ADD_SHEETS'; indexToAdd: number }
+  | { type: 'SET_USER_QUERY'; nextUserQuery: string; nextChatId: number }
+  | { type: 'RESET_QUESTION_FIELDS' }
+  | { type: 'RESET_USER' }
+  | { type: 'SET_MESSAGES'; nextMessage: Message }
+  | { type: 'SET_STREAM_ID'; nextStreamId: number }
+  | { type: 'SET_CHAT_ID'; nextChatId: number }
 
 export const userReducer = (state: User = InitialUser, action: UserAction): User => {
-	switch (action.type) {
-		case "SET_SHEETS":
-			return {
-				...state,
-				sheets: action.sheets.slice(0, 3),
-				additionalSheets: action.sheets.slice(3, 10),
-				webservices: action.sheets[0].web_services.slice(0, 3),
-			}
-		case "SET_CHUNKS":
-			return {
-				...state,
-				chunks: action.chunks,
-			}
-		case "SET_SHEETS_FROM_ARCHIVE":
-			return {
-				...state,
-				sheets: action.sheets,
-				additionalSheets: action.additionalSheets,
-				webservices: action.webservices,
-			}
-		case "REMOVE_SHEETS": {
-			if (!state.sheets) return state
+  switch (action.type) {
+    case 'SET_SHEETS':
+      return {
+        ...state,
+        sheets: action.sheets.slice(0, 3),
+        additionalSheets: action.sheets.slice(3, 10),
+        webservices: action.sheets[0].web_services.slice(0, 3),
+      }
+    case 'SET_CHUNKS':
+      return {
+        ...state,
+        chunks: action.chunks,
+      }
+    case 'SET_SHEETS_FROM_ARCHIVE':
+      return {
+        ...state,
+        sheets: action.sheets,
+        additionalSheets: action.additionalSheets,
+        webservices: action.webservices,
+      }
+    case 'REMOVE_SHEETS': {
+      if (!state.sheets) return state
 
-			const sheets = state.sheets.filter((_, index) => action.indexToRemove !== index)
-			const additionalSheets = state.sheets.filter((_, index) => action.indexToRemove === index)
-			const nextMustNotSids = [...state.question.must_not_sids, additionalSheets[0].sid]
+      const sheets = state.sheets.filter((_, index) => action.indexToRemove !== index)
+      const additionalSheets = state.sheets.filter(
+        (_, index) => action.indexToRemove === index
+      )
+      const nextMustNotSids = [...state.question.must_not_sids, additionalSheets[0].sid]
 
-			if (JSON.stringify(nextMustNotSids) === JSON.stringify(state.question.must_not_sids))
-				return {
-					...state,
-					sheets: [...state.sheets, ...sheets],
-					additionalSheets: additionalSheets,
-				}
+      if (
+        JSON.stringify(nextMustNotSids) === JSON.stringify(state.question.must_not_sids)
+      )
+        return {
+          ...state,
+          sheets: [...state.sheets, ...sheets],
+          additionalSheets: additionalSheets,
+        }
 
-			return {
-				...state,
-				sheets: sheets,
-				additionalSheets: [...state.additionalSheets, ...additionalSheets],
-				question: {
-					...state.question,
-					must_not_sids: nextMustNotSids,
-				},
-			}
-		}
-		case "ADD_SHEETS": {
-			if (!state.sheets) return state
+      return {
+        ...state,
+        sheets: sheets,
+        additionalSheets: [...state.additionalSheets, ...additionalSheets],
+        question: {
+          ...state.question,
+          must_not_sids: nextMustNotSids,
+        },
+      }
+    }
+    case 'ADD_SHEETS': {
+      if (!state.sheets) return state
 
-			const sheets = state.additionalSheets.filter((_, index) => action.indexToAdd === index)
-			const additionalSheets = state.additionalSheets.filter(
-				(_, index) => action.indexToAdd !== index
-			)
-			const nextShouldSids = [...state.sheets.map((sheet) => sheet.sid), sheets[0].sid]
-			const nextMustNotSids = state.question.must_not_sids.filter(
-				(sid) => !nextShouldSids.includes(sid)
-			)
+      const sheets = state.additionalSheets.filter(
+        (_, index) => action.indexToAdd === index
+      )
+      const additionalSheets = state.additionalSheets.filter(
+        (_, index) => action.indexToAdd !== index
+      )
+      const nextShouldSids = [...state.sheets.map((sheet) => sheet.sid), sheets[0].sid]
+      const nextMustNotSids = state.question.must_not_sids.filter(
+        (sid) => !nextShouldSids.includes(sid)
+      )
 
-			if (JSON.stringify(nextMustNotSids) === JSON.stringify(state.question.must_not_sids))
-				return {
-					...state,
-					sheets: [...state.sheets, ...sheets],
-					additionalSheets: additionalSheets,
-				}
+      if (
+        JSON.stringify(nextMustNotSids) === JSON.stringify(state.question.must_not_sids)
+      )
+        return {
+          ...state,
+          sheets: [...state.sheets, ...sheets],
+          additionalSheets: additionalSheets,
+        }
 
-			return {
-				...state,
-				sheets: [...state.sheets, ...sheets],
-				additionalSheets: additionalSheets,
-				question: {
-					...state.question,
-					must_not_sids: nextMustNotSids,
-				},
-			}
-		}
-		case "SET_CHAT_ID":
-			return {
-				...state,
-				chatId: action.nextChatId,
-			}
-		case "SET_USER_QUERY":
-			return {
-				...state,
-				question: {
-					...state.question,
-					query: action.nextUserQuery,
-				},
-				chatId: action.nextChatId,
-			}
-		case "RESET_QUESTION_FIELDS":
-			return {
-				...state,
-				question: InitialQuestion,
-			}
-		case "RESET_USER":
-			return InitialUser
-		case "SET_MESSAGES":
-			if (state.messages.length > 0) {
-				const lastMessage = state.messages[state.messages.length - 1]
+      return {
+        ...state,
+        sheets: [...state.sheets, ...sheets],
+        additionalSheets: additionalSheets,
+        question: {
+          ...state.question,
+          must_not_sids: nextMustNotSids,
+        },
+      }
+    }
+    case 'SET_CHAT_ID':
+      return {
+        ...state,
+        chatId: action.nextChatId,
+      }
+    case 'SET_USER_QUERY':
+      return {
+        ...state,
+        question: {
+          ...state.question,
+          query: action.nextUserQuery,
+        },
+        chatId: action.nextChatId,
+      }
+    case 'RESET_QUESTION_FIELDS':
+      return {
+        ...state,
+        question: InitialQuestion,
+      }
+    case 'RESET_USER':
+      return InitialUser
+    case 'SET_MESSAGES':
+      if (state.messages.length > 0) {
+        const lastMessage = state.messages[state.messages.length - 1]
 
-				if (lastMessage.sender === action.nextMessage.sender) {
-					const updatedMessages = state.messages.slice(0, -1) // remove last message
-					const updatedLastMessage = {
-						...lastMessage,
-						text: lastMessage.text.concat(action.nextMessage.text),
-					} // update last message
-					updatedMessages.push(updatedLastMessage)
-					// action.nextMessage.text
-					return {
-						...state,
-						messages: updatedMessages,
-					}
-				}
-			}
-			return {
-				...state,
-				messages: [...state.messages, action.nextMessage],
-			}
-		case "SET_STREAM_ID":
-			return {
-				...state,
-				streamId: action.nextStreamId,
-			}
-		default: {
-			return state
-		}
-	}
+        if (lastMessage.sender === action.nextMessage.sender) {
+          const updatedMessages = state.messages.slice(0, -1) // remove last message
+          const updatedLastMessage = {
+            ...lastMessage,
+            text: lastMessage.text.concat(action.nextMessage.text),
+          } // update last message
+          updatedMessages.push(updatedLastMessage)
+          // action.nextMessage.text
+          return {
+            ...state,
+            messages: updatedMessages,
+          }
+        }
+      }
+      return {
+        ...state,
+        messages: [...state.messages, action.nextMessage],
+      }
+    case 'SET_STREAM_ID':
+      return {
+        ...state,
+        streamId: action.nextStreamId,
+      }
+    default: {
+      return state
+    }
+  }
 }

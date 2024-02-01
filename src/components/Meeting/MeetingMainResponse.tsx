@@ -1,9 +1,10 @@
-import { GlobalColContainer } from "../Global/GlobalColContainer"
-import { MeetingStream } from "./MeetingStream"
-import { MeetingQR } from "./MeetingQR"
-import { ArchiveType } from "types"
+import { ArchiveType } from 'types'
+import { GlobalColContainer } from '../Global/GlobalColContainer'
+import { MeetingQR } from './MeetingQR'
+import { MeetingStream } from './MeetingStream'
 
 /*****************************************************************************************************
+	The 
 	
 	COMPONENTS:
 
@@ -14,10 +15,10 @@ import { ArchiveType } from "types"
  *****************************************************************************************************/
 
 export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefined }) {
-	return (
-		<GlobalColContainer>
-			<MeetingStream archive={archive} />
-			<MeetingQR archive={archive} />
-		</GlobalColContainer>
-	)
+  return (
+    <GlobalColContainer>
+      <MeetingStream archive={archive} />
+      <MeetingQR archive={archive} />
+    </GlobalColContainer>
+  )
 }
