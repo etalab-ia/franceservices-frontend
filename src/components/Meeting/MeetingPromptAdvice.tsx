@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {
   meetingExamplesTitle,
-  meetingParagraph,
+  meetingInputGuidelines,
   meetingPromptExamples,
 } from '../../constants/meeting'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
@@ -29,13 +29,13 @@ export function MeetingPromptAdvice({}) {
   return (
     <>
       <GlobalColContainer>
-        <GlobalParagraph>{meetingParagraph}</GlobalParagraph>
-        <p className={`fr-my-2w`} onClick={handleToggleAll}>
+        <GlobalParagraph>{meetingInputGuidelines}</GlobalParagraph>
+        <p className={'flex fr-my-2w'} onClick={handleToggleAll}>
           {meetingExamplesTitle}
           <span
             className={`fr-text-mention--grey fr-icon-arrow-${
               isAccordionOpen ? 'up' : 'down'
-            }-s-line fr-my-2w`}
+            }-s-line fr-my-1v`}
           ></span>
         </p>
         {meetingPromptExamples.map((ex, index) => (
