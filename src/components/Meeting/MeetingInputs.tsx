@@ -1,10 +1,10 @@
-import { GlobalDiv } from "../Global/GlobalDiv"
-import { GlobalRowContainer } from "../Global/GlobalRowContainer"
-import { MeetingInformations } from "./MeetingInformations"
-import { MeetingInputButton } from "./MeetingInputButton"
-import { useContext, useEffect } from "react"
-import { updateQuestion } from "../../utils/setData"
-import { CurrQuestionContext } from "../../utils/context/questionContext"
+import { useContext, useEffect } from 'react'
+import { CurrQuestionContext } from '../../utils/context/questionContext'
+import { updateQuestion } from '../../utils/setData'
+import { GlobalDiv } from '../Global/GlobalDiv'
+import { GlobalRowContainer } from '../Global/GlobalRowContainer'
+import { MeetingInformations } from './MeetingInformations'
+import { MeetingInputButton } from './MeetingInputButton'
 
 /*****************************************************************************************************
 	
@@ -30,17 +30,17 @@ import { CurrQuestionContext } from "../../utils/context/questionContext"
 
  *****************************************************************************************************/
 
-export function MeetingSettings({ setGenerate, context, setContext }) {
-	const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
+export function MeetingInputs({ setGenerate, context, setContext }) {
+  const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
 
-	useEffect(() => {
-		currQuestion.query && updateQuestion(currQuestion, updateCurrQuestion)
-	}, [])
+  useEffect(() => {
+    currQuestion.query && updateQuestion(currQuestion, updateCurrQuestion)
+  }, [])
 
-	return (
-		<div style={{ width: "100%", flex: 1, flexGrow: 1, backgroundColor: "" }}>
-			<MeetingInformations context={context} setContext={setContext} />
-			<MeetingInputButton setGenerate={setGenerate} context={context} />
-		</div>
-	)
+  return (
+    <div style={{ width: '100%', flex: 1, flexGrow: 1, backgroundColor: '' }}>
+      <MeetingInformations context={context} setContext={setContext} />
+      <MeetingInputButton setGenerate={setGenerate} context={context} />
+    </div>
+  )
 }

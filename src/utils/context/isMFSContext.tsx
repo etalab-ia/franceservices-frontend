@@ -1,15 +1,15 @@
 // This context keeps track of wether the user is browsing albert.etalab.gouv.fr or franceservices.etalab.gouv.fr
 // because the front doesn't display the same content depending on the domain name
 
-import { createContext, useState } from "react"
+import { createContext, useState } from 'react'
 
 export const isMFSContext = createContext<boolean>(
-	import.meta.env.VITE_API_URL === "https://franceservices.etalab.gouv.fr"
+  import.meta.env.VITE_API_URL === 'https://franceservices.etalab.gouv.fr'
 )
 
 export const MFSProvider = ({ children }) => {
-	const [isMFS, setIsMFS] = useState<boolean>(
-		import.meta.env.VITE_API_URL === "https://franceservices.etalab.gouv.fr"
-	)
-	return <isMFSContext.Provider value={isMFS}>{children}</isMFSContext.Provider>
+  const [isMFS, setIsMFS] = useState<boolean>(
+    import.meta.env.VITE_API_URL === 'https://franceservices.etalab.gouv.fr'
+  )
+  return <isMFSContext.Provider value={isMFS}>{children}</isMFSContext.Provider>
 }
