@@ -1,16 +1,16 @@
-import { ModifyButton } from "../Global/ModifyButton"
-import { GlobalRowContainer } from "../Global/GlobalRowContainer"
-import { sheetsTitle } from "../../constants/sheets"
-import { GlobalSecondaryTitle } from "../Global/GlobalSecondaryTitle"
-import { GlobalColContainer } from "../Global/GlobalColContainer"
-import { useEffect, useState, useContext, Dispatch } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { generateStream } from "../../utils/hooks"
-import { emitCloseStream } from "../../utils/eventsEmitter"
-import { getIndexes } from "../../utils/setData"
-import { CurrQuestionContext } from "../../utils/context/questionContext"
-import { ArchiveType, RootState } from "types"
-import { useApiUrls } from "../../constants/api"
+import { Dispatch, useContext, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { ArchiveType, RootState } from 'types'
+import { useApiUrls } from '../../constants/api'
+import { sheetsTitle } from '../../constants/sheets'
+import { CurrQuestionContext } from '../../utils/context/questionContext'
+import { emitCloseStream } from '../../utils/eventsEmitter'
+import { generateStream } from '../../utils/hooks'
+import { getIndexes } from '../../utils/setData'
+import { GlobalColContainer } from '../Global/GlobalColContainer'
+import { GlobalRowContainer } from '../Global/GlobalRowContainer'
+import { GlobalSecondaryTitle } from '../Global/GlobalSecondaryTitle'
+import { ModifyButton } from '../Global/ModifyButton'
 
 /*****************************************************************************************
 	
@@ -24,80 +24,83 @@ import { useApiUrls } from "../../constants/api"
  *****************************************************************************************/
 
 export const SheetsAdditionalButtons = ({
-	isModifiable,
-	setIsModifiable,
-	archive,
+  isModifiable,
+  setIsModifiable,
+  archive,
 }: {
-	isModifiable: boolean
-	setIsModifiable: React.Dispatch<React.SetStateAction<boolean>>
-	archive: ArchiveType | undefined
+  isModifiable: boolean
+  setIsModifiable: React.Dispatch<React.SetStateAction<boolean>>
+  archive: ArchiveType | undefined
 }) => {
-	const buttonTitle = isModifiable ? "Enregistrer" : "Modifier la section"
-	const buttonIcon = isModifiable
-		? "fr-icon-save-3-fill fr-icon--sm flex justify-end items-center"
-		: "fr-icon-settings-5-fill fr-icon--sm flex justify-end items-center"
-	const user = useSelector((state: RootState) => state.user)
-	const [deletedSheets, setDeletedSheets] = useState([])
-	const dispatch = useDispatch()
-	const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
-	const { streamUrl, indexesUrl } = useApiUrls()
+  const buttonTitle = isModifiable ? 'Enregistrer' : 'Modifier la section'
+  const buttonIcon = isModifiable
+    ? 'fr-icon-save-3-fill fr-icon--sm flex justify-end items-center'
+    : 'fr-icon-settings-5-fill fr-icon--sm flex justify-end items-center'
+  const user = useSelector((state: RootState) => state.user)
+  const [deletedSheets, setDeletedSheets] = useState([])
+  const dispatch = useDispatch()
+  const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
+  const { streamUrl, indexesUrl } = useApiUrls()
+  const handleClick = () => {
+    setIsModifiable(!isModifiable)
+  }
 
-	const handleClick = () => {
-		setIsModifiable(!isModifiable)
-	}
+  useEffect(() => {
+    if (
+      !archive &&
+      !isModifiable &&
+      JSON.stringify(deletedSheets) !== JSON.stringify(user.question.must_not_sids)
+    )
+      setDeletedSheets(user.question.must_not_sids)
+  }, [isModifiable])
 
-	useEffect(() => {
-		if (
-			!archive &&
-			!isModifiable &&
-			JSON.stringify(deletedSheets) !== JSON.stringify(user.question.must_not_sids)
-		)
-			setDeletedSheets(user.question.must_not_sids)
-	}, [isModifiable])
+  useEffect(() => {
+    if (archive) return
 
-	useEffect(() => {
-		if (archive) return
+    if (!deletedSheets.length && !currQuestion.must_not_sids.length) return
 
-		if (!deletedSheets.length && !currQuestion.must_not_sids.length) return
+    updateCurrQuestion({
+      ...currQuestion,
+      must_not_sids: deletedSheets,
+    })
+  }, [deletedSheets])
 
-		updateCurrQuestion({
-			...currQuestion,
-			must_not_sids: deletedSheets,
-		})
-	}, [deletedSheets])
+  useEffect(() => {
+    if (archive || !user.chatId) return
 
-	useEffect(() => {
-		if (archive || !user.chatId) return
+    emitCloseStream()
+    generateStream(currQuestion, dispatch, user.chatId, streamUrl)
+  }, [currQuestion])
 
-		emitCloseStream()
-		generateStream(currQuestion, dispatch, user.chatId, streamUrl)
-	}, [currQuestion])
+  useEffect(() => {
+    if (!user.streamId || archive || !currQuestion.query) return
 
-	useEffect(() => {
-		if (!user.streamId || archive || !currQuestion.query) return
+    const data = {
+      question: currQuestion.query,
+      must_not_sids: user.question.must_not_sids,
+    }
+    getIndexes(
+      data,
+      dispatch,
+      'chunks',
+      currQuestion.limit,
+      JSON.stringify(user.streamId),
+      indexesUrl
+    )
+  }, [user.streamId, currQuestion])
 
-		const data = {
-			question: currQuestion.query,
-			must_not_sids: user.question.must_not_sids,
-		}
-		getIndexes(
-			data,
-			dispatch,
-			"chunks",
-			currQuestion.limit,
-			JSON.stringify(user.streamId),
-			indexesUrl
-		)
-	}, [user.streamId, currQuestion])
-
-	return (
-		<GlobalRowContainer>
-			<GlobalSecondaryTitle>{sheetsTitle}</GlobalSecondaryTitle>
-			<GlobalColContainer>
-				{!archive && (
-					<ModifyButton handleClick={handleClick} text={buttonTitle} extraClass={buttonIcon} />
-				)}
-			</GlobalColContainer>
-		</GlobalRowContainer>
-	)
+  return (
+    <GlobalRowContainer>
+      <GlobalSecondaryTitle>{sheetsTitle}</GlobalSecondaryTitle>
+      <GlobalColContainer>
+        {!archive && (
+          <ModifyButton
+            handleClick={handleClick}
+            text={buttonTitle}
+            extraClass={buttonIcon}
+          />
+        )}
+      </GlobalColContainer>
+    </GlobalRowContainer>
+  )
 }
