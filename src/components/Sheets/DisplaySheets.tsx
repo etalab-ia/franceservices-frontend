@@ -1,8 +1,8 @@
-import { GlobalColContainer } from "../Global/GlobalColContainer"
-import { SheetsTilesContainer } from "./SheetsTilesContainer"
-import { useState } from "react"
-import { SheetsAdditionalButtons } from "./SheetsAdditionalButtons"
-import { ArchiveType } from "types"
+import { useState } from 'react'
+import { ArchiveType } from 'types'
+import { GlobalColContainer } from '../Global/GlobalColContainer'
+import { SheetsAdditionalButtons } from './SheetsAdditionalButtons'
+import { SheetsTilesContainer } from './SheetsTilesContainer'
 
 /*****************************************************************************************
 	
@@ -26,16 +26,16 @@ import { ArchiveType } from "types"
  *****************************************************************************************/
 
 export function DisplaySheets({ archive }: { archive: ArchiveType | undefined }) {
-	const [isModifiable, setIsModifiable] = useState(false)
+  const [isModifiable, setIsModifiable] = useState(false)
 
-	return (
-		<GlobalColContainer>
-			<SheetsAdditionalButtons
-				isModifiable={isModifiable}
-				setIsModifiable={setIsModifiable}
-				archive={archive}
-			/>
-			<SheetsTilesContainer archive={archive} isModifiable={isModifiable} />
-		</GlobalColContainer>
-	)
+  return (
+    <GlobalColContainer>
+      <SheetsAdditionalButtons
+        isModifiable={isModifiable}
+        setIsModifiable={setIsModifiable}
+        archive={archive}
+      />
+      <SheetsTilesContainer archive={archive} isModifiable={isModifiable} />
+    </GlobalColContainer>
+  )
 }

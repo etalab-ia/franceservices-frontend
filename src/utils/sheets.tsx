@@ -1,13 +1,13 @@
 export const handleRemoveSheet = (
-	removedSheets,
-	setRemovedSheets,
-	selectedSheets,
-	setSelectedSheets,
-	setIsModifiable
+  removedSheets,
+  setRemovedSheets,
+  selectedSheets,
+  setSelectedSheets,
+  setIsModifiable
 ) => {
-	setRemovedSheets(removedSheets.concat(selectedSheets))
-	setSelectedSheets([])
-	setIsModifiable(false)
+  setRemovedSheets(removedSheets.concat(selectedSheets))
+  setSelectedSheets([])
+  setIsModifiable(false)
 
-	// TODO: POST sheets to remove
+  // TODO: POST sheets to remove
 }

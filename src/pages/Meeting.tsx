@@ -1,10 +1,10 @@
-import { MeetingPage } from "../components/Meeting/MeetingPage"
-import { MeetingSettings } from "../components/Meeting/MeetingSettings"
-import { useEffect, useState } from "react"
-import { emitCloseStream } from "../utils/eventsEmitter"
-import { InitialQuestion } from "../../types"
-import { CurrQuestionContext } from "../utils/context/questionContext"
-import { rmContextFromQuestion } from "src/utils/setData"
+import { useEffect, useState } from 'react'
+import { rmContextFromQuestion } from 'src/utils/setData'
+import { InitialQuestion } from '../../types'
+import { MeetingInputs } from '../components/Meeting/MeetingInputs'
+import { MeetingOutputs } from '../components/Meeting/MeetingOutputs'
+import { CurrQuestionContext } from '../utils/context/questionContext'
+import { emitCloseStream } from '../utils/eventsEmitter'
 
 /*****************************************************************************************************
 	
@@ -22,31 +22,38 @@ import { rmContextFromQuestion } from "src/utils/setData"
  *****************************************************************************************************/
 
 export function Meeting() {
-	const [generate, setGenerate] = useState(false)
-	const [currQuestion, setCurrQuestion] = useState(InitialQuestion)
-	const [context, setContext] = useState<{ administrations: string[]; themes: string[] }>({
-		administrations: [],
-		themes: [],
-	})
-	const updateCurrQuestion = (newQuestion) => {
-		setCurrQuestion(newQuestion)
-	}
+  const [generate, setGenerate] = useState(false)
+  const [currQuestion, setCurrQuestion] = useState(InitialQuestion)
+  const [context, setContext] = useState<{
+    administrations: string[]
+    themes: string[]
+  }>({
+    administrations: [],
+    themes: [],
+  })
+  const updateCurrQuestion = (newQuestion) => {
+    setCurrQuestion(newQuestion)
+  }
 
-	useEffect(() => {
-		if (!generate) {
-			emitCloseStream()
-		}
-	}, [generate])
+  useEffect(() => {
+    if (!generate) {
+      emitCloseStream()
+    }
+  }, [generate])
 
-	return (
-		<CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>
-			<div className="fr-container fr-my-3w">
-				{generate ? (
-					<MeetingPage setGenerate={setGenerate} archive={undefined} />
-				) : (
-					<MeetingSettings setGenerate={setGenerate} context={context} setContext={setContext} />
-				)}
-			</div>
-		</CurrQuestionContext.Provider>
-	)
+  return (
+    <CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>
+      <div className="fr-container fr-my-3w">
+        {generate ? (
+          <MeetingOutputs setGenerate={setGenerate} archive={undefined} />
+        ) : (
+          <MeetingInputs
+            setGenerate={setGenerate}
+            context={context}
+            setContext={setContext}
+          />
+        )}
+      </div>
+    </CurrQuestionContext.Provider>
+  )
 }
