@@ -6,45 +6,45 @@ export const meetingTitle = 'Préparer un rendez-vous'
 export const meetingSubtitle = 'Description de la situation de l’usager'
 export const meetingInputGuidelines = (
   <>
-    <p className="fr-text-mention--grey fr-mb-2w">
+    <p className="fr-text-mention--grey fr-text--xs ">
       Quelques bonnes pratiques pour décrire la situation d’un usager
     </p>
-    <div className=" fr-mb-1w flex">
+    <div className="  flex">
       <span
-        className="fr-icon-info-fill fr-text-default--info fr-mr-2v"
+        className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
         aria-hidden="true"
       ></span>
-      <p className="fr-text-default--info ">
+      <p className="fr-text-default--info fr-text--xs">
         Utiliser des termes précis (eg. parler de « formulaire cerfa » au lieu de «
         demande papier »)
       </p>
     </div>
-    <div className=" fr-mb-1w flex">
+    <div className="  flex ">
       <span
-        className="fr-icon-info-fill fr-text-default--info fr-mr-2v"
+        className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
         aria-hidden="true"
       ></span>
-      <p className="fr-text-default--info ">
+      <p className="fr-text-default--info fr-text--xs">
         Formuler une question à la fin de la description pour orienter la recherche
         d’Albert.
       </p>
     </div>
-    <div className=" fr-mb-1w flex">
+    <div className="flex justify-center">
       <span
-        className="fr-icon-info-fill fr-text-default--info fr-mr-2v"
+        className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
         aria-hidden="true"
       ></span>
-      <p className="fr-text-default--info ">
+      <p className="fr-text-default--info fr-text--xs">
         Éviter d’indiquer des informations personnelles, notamment celles trouvées sur un
         compte administratif de l’usager.
       </p>
     </div>
-    <div className=" fr-mb-1w flex">
+    <div className="flex">
       <span
-        className="fr-icon-info-fill fr-text-default--info fr-mr-2v"
+        className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
         aria-hidden="true"
       ></span>
-      <p className="fr-text-default--info ">
+      <p className="fr-text-default--info fr-text--xs">
         Éviter d’utiliser seulement des mots clés pour décrire la situation de l’usager.
       </p>
     </div>
@@ -52,15 +52,19 @@ export const meetingInputGuidelines = (
 )
 
 export const meetingExamplesTitle = (
-  <p className="fr-text-mention--grey">Voir des exemples</p>
+  <p className="fr-text-mention--grey fr-text--xs">Voir des exemples</p>
 )
 export const meetingPromptExamples = [
   {
     img: thumbsUp,
     alt: "Pouce en l'air",
-    title: <p className="fr-text-default--info">Exemple de bonne description</p>,
+    title: (
+      <p className="fr-text-default--info fr-text--xs align-center">
+        Exemple de bonne description
+      </p>
+    ),
     description: (
-      <p className="fr-text-mention--grey">
+      <p className="fr-text-mention--grey fr-text--xs">
         L'usagère ne comprend pas son allocation RSA ait diminué.
         <br className="fr-my-1w" />
         Après étude de son compte, il semble que la CAF opère une retenue sur son
@@ -73,9 +77,11 @@ export const meetingPromptExamples = [
   {
     img: thumbsDown,
     alt: 'Pouce vers le bas',
-    title: <p className="fr-text-default--info">Exemple de mauvaise description</p>,
+    title: (
+      <p className="fr-text-default--info fr-text--xs">Exemple de mauvaise description</p>
+    ),
     description: (
-      <p className="fr-text-mention--grey">
+      <p className="fr-text-mention--grey fr-text--xs">
         [Monsieur Durant] ne comprend pas que son allocation RSA ait diminué.
         <br className="fr-my-1w" />
         Après avoir saisi ses [identifiants n°XXX mot de passe XXX], il semble que la CAF

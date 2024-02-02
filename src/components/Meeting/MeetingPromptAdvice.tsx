@@ -29,27 +29,27 @@ export function MeetingPromptAdvice({}) {
   return (
     <>
       <GlobalColContainer>
-        <GlobalParagraph>{meetingInputGuidelines}</GlobalParagraph>
-        <p className={'flex fr-my-2w'} onClick={handleToggleAll}>
+        <div>{meetingInputGuidelines}</div>
+        <div className={'flex '} onClick={handleToggleAll}>
           {meetingExamplesTitle}
           <span
-            className={`fr-text-mention--grey fr-icon-arrow-${
+            className={`fr-text-mention--grey fr-icon--sm fr-icon-arrow-${
               isAccordionOpen ? 'up' : 'down'
             }-s-line fr-my-1v`}
           ></span>
-        </p>
+        </div>
         {meetingPromptExamples.map((ex, index) => (
           <div
             className="fr-mt-1w"
             key={index}
             style={{ display: isAccordionOpen ? 'block' : 'none' }}
           >
-            <GlobalRowContainer>
-              <img className="fr-mr-1w" src={ex.img} alt={ex.alt} />
-              <p>{ex.title}</p>
-            </GlobalRowContainer>
+            <div className="flex content-center items-center justify-start">
+              <img className="w-6 h-6 mr-2" src={ex.img} alt={ex.alt} />
+              <p className="self-center">{ex.title}</p>
+            </div>
 
-            <p className="fr-mb-1w text-justify">{ex.description}</p>
+            <p className="mb-4 text-justify text-xs">{ex.description}</p>
           </div>
         ))}
       </GlobalColContainer>
