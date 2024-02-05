@@ -24,7 +24,7 @@ export const SheetsTiles = ({
         <div key={key} className="flex w-full fr-mb-3v">
           <Tile
             horizontal
-            className="w-full fr-pl-2w font-bold fr-text--xs cursor-pointer"
+            className="w-full fr-pl-2w font-bold cursor-pointer"
             desc={tile.desc}
             linkProps={tile.linkProps}
             title={tile.title}

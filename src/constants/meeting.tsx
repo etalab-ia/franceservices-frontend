@@ -14,7 +14,7 @@ export const meetingInputGuidelines = (
         className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
         aria-hidden="true"
       ></span>
-      <p className="fr-text-default--info fr-text--xs">
+      <p className="fr-text-default--info fr-text--xs" style={{ margin: 0 }}>
         Utiliser des termes précis (eg. parler de « formulaire cerfa » au lieu de «
         demande papier »)
       </p>
@@ -24,7 +24,7 @@ export const meetingInputGuidelines = (
         className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
         aria-hidden="true"
       ></span>
-      <p className="fr-text-default--info fr-text--xs">
+      <p className="fr-text-default--info fr-text--xs" style={{ margin: 0 }}>
         Formuler une question à la fin de la description pour orienter la recherche
         d’Albert.
       </p>
@@ -34,12 +34,12 @@ export const meetingInputGuidelines = (
         className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
         aria-hidden="true"
       ></span>
-      <p className="fr-text-default--info fr-text--xs">
+      <p className="fr-text-default--info fr-text--xs" style={{ margin: 0 }}>
         Éviter d’indiquer des informations personnelles, notamment celles trouvées sur un
         compte administratif de l’usager.
       </p>
     </div>
-    <div className="flex">
+    <div className="flex ">
       <span
         className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
         aria-hidden="true"
@@ -52,14 +52,19 @@ export const meetingInputGuidelines = (
 )
 
 export const meetingExamplesTitle = (
-  <p className="fr-text-mention--grey fr-text--xs">Voir des exemples</p>
+  <p className="fr-text-mention--grey fr-text--xs" style={{ margin: 0 }}>
+    Voir des exemples
+  </p>
 )
 export const meetingPromptExamples = [
   {
     img: thumbsUp,
     alt: "Pouce en l'air",
     title: (
-      <p className="fr-text-default--info fr-text--xs align-center">
+      <p
+        className=" fr-text-default--info fr-text-default--info fr-text--xs"
+        style={{ margin: '0' }}
+      >
         Exemple de bonne description
       </p>
     ),
@@ -78,7 +83,12 @@ export const meetingPromptExamples = [
     img: thumbsDown,
     alt: 'Pouce vers le bas',
     title: (
-      <p className="fr-text-default--info fr-text--xs">Exemple de mauvaise description</p>
+      <p
+        className=" fr-text-default--info fr-text-default--info fr-text--xs"
+        style={{ margin: '0' }}
+      >
+        Exemple de mauvaise description
+      </p>
     ),
     description: (
       <p className="fr-text-mention--grey fr-text--xs">

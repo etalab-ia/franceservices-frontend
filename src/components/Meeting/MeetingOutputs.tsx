@@ -51,6 +51,7 @@ export function MeetingOutputs({
       ) : (
         <div className="fr-container fr-pt-2w "></div>
       )}
+      <div className="fr-container w-full  border --border-default-grey  fr-mb-2w"></div>
       <MeetingResponse archive={archive} />
     </div>
   )

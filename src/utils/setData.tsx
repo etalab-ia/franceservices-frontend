@@ -202,6 +202,7 @@ export const setTilesFromSheets = (sheets, setTiles) => {
 
     const newTile = {
       linkProps: { to: sheet.url },
+      enlargeLink: false,
       title: (
         <>
           <p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">
