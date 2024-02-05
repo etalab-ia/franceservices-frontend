@@ -1,8 +1,9 @@
-import { ArchiveType } from 'types'
+import { ArchiveType, RootState } from 'types'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { MeetingQR } from './MeetingQR'
 import { MeetingStream } from './MeetingStream'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 /*****************************************************************************************************
 	The 
@@ -17,7 +18,8 @@ import { useState } from 'react'
 
 export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefined }) {
   const [question, setQuestion] = useState('')
-
+  const stream = useSelector((state: RootState) => state.stream)
+  console.log('stream', stream)
   return (
     <GlobalColContainer>
       <MeetingStream archive={archive} />
@@ -38,9 +40,8 @@ function MeetingAdditionnalQuestion({
       <label className="fr-label">Recherche</label>
       <input
         className="fr-input"
-        placeholder="Rechercher"
+        placeholder="Poser une nouvelle question"
         type="search"
-        id="search-784-input"
         name="search-784-input"
         onChange={(e) => setQuestion(e.target.value)}
         value={question}

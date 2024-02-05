@@ -986,7 +986,9 @@ video {
     min-height: Xpx; /* Replace X with a fixed height that fits the largest h6 */
     /* Optional: Add other styling as needed */
 }
-
+    .accordion-custom-button {
+      --text-spacing:0;--title-spacing:0;display:inline-flex;flex-direction:row;align-items:center;width:-moz-fit-content;width:fit-content;font-weight:500;font-size:1rem;line-height:1.5rem;min-height:3rem;padding:0.75rem 1rem;overflow:initial;max-width:100%;max-height:none;width:100%;text-align:left;margin:0;color:var(--text-disabled-grey);
+    }
 /* Styles for larger screens */
 @media (min-width: 1186px) {
     .accordion-container {
@@ -999,4 +1001,6 @@ video {
         flex-basis: 0;
         /* Adjust the width as necessary and add margin/padding for spacing */
     }
+
+
 }

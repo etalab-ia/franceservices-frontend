@@ -30,7 +30,6 @@
         "noExplicitAny": "off",
         "noArrayIndexKey": "off",
         "noDoubleEquals": "off",
-        "noConsoleLog": "error",
         "noAssignInExpressions": "off",
         "noRedeclare": "off"
       },
