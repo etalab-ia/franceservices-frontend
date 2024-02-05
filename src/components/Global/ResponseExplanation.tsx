@@ -34,21 +34,33 @@ export const ResponseExplanation = ({ chunks }) => {
     <div>
       {chunks && chunks.length !== 0 && (
         <>
-          <Accordion
-            className="fr-mt-3v"
-            label="Quelles sont les sources utilisées pour générer cette réponse ?"
-            onExpandedChange={function noRefCheck() {}}
-          >
-            <>
-              <DisplayChunks chunks={chunks.slice(startIndex, endIndex)} />
-              <Pagination
-                count={Math.ceil(chunks.length / chunksPerPage)}
-                defaultPage={currentPage}
-                getPageLinkProps={getPageLinkProps}
-                className="fr-mt-3v"
-              />
-            </>
-          </Accordion>
+          <section className="fr-accordion ">
+            <h3 className="--text-disabled-grey">
+              <button
+                className="accordion-custom-button flex"
+                aria-expanded="false"
+                aria-controls="accordion-106"
+              >
+                Quelles sont les sources utilisées pour générer cette réponse ?
+                <span
+                  className={`fr-icon-arrow-${true ? 'down' : 'up'}-s-line`}
+                  aria-hidden="true"
+                ></span>
+              </button>
+            </h3>{' '}
+            <div className="fr-collapse" id="accordion-106">
+              {' '}
+              <>
+                <DisplayChunks chunks={chunks.slice(startIndex, endIndex)} />
+                <Pagination
+                  count={Math.ceil(chunks.length / chunksPerPage)}
+                  defaultPage={currentPage}
+                  getPageLinkProps={getPageLinkProps}
+                  className="fr-mt-3v"
+                />
+              </>{' '}
+            </div>
+          </section>
         </>
       )}
     </div>
