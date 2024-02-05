@@ -13,7 +13,8 @@ import { MeetingEditQuestion } from './MeetingEditQuestion'
 import { MeetingResponse } from './MeetingResponse'
 
 /*****************************************************************************************************
-	Displays Albert's response and the modify button	
+	Displays Albert's response and the modify button
+  Archive is undefined when the user is not on an archive
 
 	GENERAL: display:
 		- main informations: user prompt, stream response, response explanation / chunks
@@ -46,11 +47,7 @@ export function MeetingOutputs({
       <GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
       <GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
       <GlobalParagraph>{query}</GlobalParagraph>
-      {!archive ? (
-        <MeetingEditQuestion setGenerate={setGenerate} />
-      ) : (
-        <div className="fr-container fr-pt-2w "></div>
-      )}
+      {!archive ? <MeetingEditQuestion setGenerate={setGenerate} /> : <div></div>}
       <div className="fr-container w-full  border --border-default-grey  fr-mb-2w"></div>
       <MeetingResponse archive={archive} />
     </div>
