@@ -1,5 +1,6 @@
 import { Tile } from '@codegouvfr/react-dsfr/Tile'
 import { useDispatch } from 'react-redux'
+import { Tile as TileType } from 'types'
 
 export const SheetsTiles = ({
   tiles,
@@ -12,7 +13,7 @@ export const SheetsTiles = ({
 }) => {
   const text = type === 'main' ? 'X Supprimer' : '+ Ajouter'
   const dispatch = useDispatch()
-
+  console.log('test sheets: ', tiles, ' type: ', type)
   const handleClick = (key: number) => {
     if (type === 'main') dispatch({ type: 'REMOVE_SHEETS', indexToRemove: key })
     else dispatch({ type: 'ADD_SHEETS', indexToAdd: key })
@@ -40,5 +41,39 @@ export const SheetsTiles = ({
         </div>
       ))}
     </>
+  )
+}
+
+function TileTest() {
+  return (
+    <div id="card-rejoindre-la-communaute" className="fr-card  fr-card--horizontal">
+      <div className="fr-card__body">
+        <div className="fr-card__content">
+          <h3 className="fr-card__title">
+            <a
+              href="/communaute/rejoindre-la-communaute"
+              className="fr-card__link"
+              id="card__link-rejoindre-la-communaute"
+            >
+              Rejoindre la communauté
+            </a>
+          </h3>
+          <p className="fr-card__desc">
+            Le Système de Design réunit 550 membres experts du numérique : designers,
+            développeurs, chefs de produit ou chefs de projet. Rejoignez-nous !
+          </p>
+        </div>
+      </div>{' '}
+      <div className="fr-card__header">
+        <div className="fr-card__img">
+          <img
+            src="/img/placeholder.16x9.png"
+            alt=""
+            className="fr-responsive-img"
+            data-fr-js-ratio="true"
+          />
+        </div>
+      </div>
+    </div>
   )
 }

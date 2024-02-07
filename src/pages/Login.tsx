@@ -42,7 +42,7 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
     checkIfCompletedFields()
   }
 
-  const handleClick = async () => {
+  const handleSubmit = async () => {
     const data = id.includes('@')
       ? { email: id, password: password }
       : { username: id, password: password }
@@ -72,7 +72,7 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
     <LoginContainer>
       <LoginFields fields={loginFields} handleChange={handleChange} />
       {authFailed && <ButtonInformation>{usernameOrPasswordError}</ButtonInformation>}
-      <ButtonsGroup buttons={initButtonsLogin(handleClick, isDisable)} />
+      <ButtonsGroup buttons={initButtonsLogin(handleSubmit, isDisable)} />
     </LoginContainer>
   )
 }

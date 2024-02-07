@@ -6,6 +6,7 @@ import { useFetch } from './hooks'
 
 const modelName: string = import.meta.env.VITE_MODEL_NAME as string
 
+import { Tile, Sheet } from 'types'
 export const setHeaders = (isEventSource: boolean) => {
   const token = localStorage.getItem('authToken')
 
@@ -177,10 +178,13 @@ export const getIndexes = async (
  * Get the sheets from the stream
  */
 export const setIndexesData = (
-  data,
-  setTiles,
+  data: {
+    question: string
+    must_not_sids: string[]
+  },
+  setTiles: React.Dispatch<React.SetStateAction<any[]>>,
   dispatch,
-  streamId,
+  streamId: string,
   indexesUrl: string
 ) => {
   setTiles([])
@@ -189,11 +193,10 @@ export const setIndexesData = (
   getIndexes(data, dispatch, 'sheets', 10, streamId, indexesUrl)
 }
 
-export const setTilesFromSheets = (sheets, setTiles) => {
+export const setTilesFromSheets = (sheets: Sheet[], setTiles: (any) => void) => {
   if (!sheets || !sheets.length) return setTiles([])
 
   setTiles([])
-
   sheets.map((sheet) => {
     const url = sheet.url
     const parsedUrl = new URL(url)
@@ -202,8 +205,8 @@ export const setTilesFromSheets = (sheets, setTiles) => {
     domain = domain.replace(/^www\./, '')
     domain = domain.replace(/^entreprendre\./, '')
 
-    const newTile = {
-      linkProps: { to: sheet.url },
+    const newTile: Tile = {
+      linkProps: { href: sheet.url },
       enlargeLink: false,
       title: (
         <>
@@ -213,8 +216,8 @@ export const setTilesFromSheets = (sheets, setTiles) => {
           <p>{sheet.title}</p>
         </>
       ),
-      desc: domain,
+      desc: <>{domain}</>,
     }
-    setTiles((prevTiles) => [...prevTiles, newTile])
+    setTiles((prevTiles: Tile[]) => [...prevTiles, newTile])
   })
 }

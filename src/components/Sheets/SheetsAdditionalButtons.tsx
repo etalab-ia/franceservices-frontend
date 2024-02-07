@@ -1,7 +1,7 @@
 import { Dispatch, useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ArchiveType, RootState } from 'types'
-import { useApiUrls } from '../../constants/api'
+import { useApiUrls, streamUrl } from '../../constants/api'
 import { sheetsTitle } from '../../constants/sheets'
 import { CurrQuestionContext } from '../../utils/context/questionContext'
 import { emitCloseStream } from '../../utils/eventsEmitter'
@@ -40,7 +40,7 @@ export const SheetsAdditionalButtons = ({
   const [deletedSheets, setDeletedSheets] = useState([])
   const dispatch = useDispatch()
   const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
-  const { streamUrl, indexesUrl } = useApiUrls()
+  const { indexesUrl } = useApiUrls()
   const handleClick = () => {
     setIsModifiable(!isModifiable)
   }
@@ -69,7 +69,7 @@ export const SheetsAdditionalButtons = ({
     if (archive || !user.chatId) return
 
     emitCloseStream()
-    generateStream(currQuestion, dispatch, user.chatId, streamUrl)
+    generateStream(currQuestion, dispatch, user.chatId, false)
   }, [currQuestion])
 
   useEffect(() => {

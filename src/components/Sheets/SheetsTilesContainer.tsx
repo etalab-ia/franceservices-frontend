@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ArchiveType, RootState } from 'types'
+import { ArchiveType, RootState, Sheet } from 'types'
 import { useApiUrls } from '../../constants/api'
 import { CurrQuestionContext } from '../../utils/context/questionContext'
 import { useFetch } from '../../utils/hooks'
@@ -44,7 +44,7 @@ export const SheetsTilesContainer = ({
     const data = {
       uids: archive.search_sids,
     }
-    const sheets = await useFetch(getSheetsUrl, 'POST', {
+    const sheets: Sheet[] = await useFetch(getSheetsUrl, 'POST', {
       headers: setHeaders(false),
       data: JSON.stringify(data),
     })
@@ -59,6 +59,7 @@ export const SheetsTilesContainer = ({
 
   useEffect(() => {
     if (archive) return
+    console.log(user.additionalSheets, 'user.additionalSheets.web')
     setTilesFromSheets(user.sheets, setTiles)
     setTilesFromSheets(user.additionalSheets, setAdditionalTiles)
   }, [user.additionalSheets])
