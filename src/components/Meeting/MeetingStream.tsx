@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { ArchiveType, RootState } from 'types'
+import { ArchiveType, RootState, Question } from 'types'
 import { useApiUrls } from '../../constants/api'
 import { resultMeetingTitle } from '../../constants/meeting'
 import { useFetch } from '../../utils/hooks'
@@ -52,7 +52,7 @@ export function MeetingStream({ archive }: { archive: ArchiveType | undefined })
   }, [user.chunks])
   return (
     <>
-      <GlobalSecondaryTitle extraClass="fr-mb-2w ">
+      <GlobalSecondaryTitle extraClass="fr-mb-2w">
         {resultMeetingTitle}
       </GlobalSecondaryTitle>
       {stream.isStreaming ? (

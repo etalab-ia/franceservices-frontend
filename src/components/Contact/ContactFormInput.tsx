@@ -1,6 +1,6 @@
 import Input from '@codegouvfr/react-dsfr/Input'
 
-export function UserMessage({
+export function ContactFormInput({
   setFormData,
   message,
 }: { setFormData: any; message: string }) {

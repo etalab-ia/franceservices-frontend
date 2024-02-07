@@ -2,4 +2,11 @@
 export default {
   content: ['./src/pages/**/*.{html,tsx}', './src/components/**/*.{html,tsx}'],
   plugins: [],
+  theme: {
+    screens: {
+      sm: '576px',
+      md: '960px',
+      lg: '1440px',
+    },
+  },
 }

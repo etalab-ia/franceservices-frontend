@@ -19,7 +19,6 @@ export type Question = {
   should_sids: string[]
   must_not_sids: string[]
 }
-
 export const InitialQuestion: Question = {
   model_name: modelName,
   mode: modelMode,
@@ -99,17 +98,64 @@ export type StreamState = {
   activeTab: number
 }
 
+export interface User {
+  question: Question // Question asked by user plus all the parameters required to generate a response
+  messages: Message[] // Message exchanged between user & agent
+  sheets: any[] // Sheets associated to the reponse from 0 to 2
+  additionalSheets: any[] // suggested sheets to from 3 to 9
+  chunks: any[] // Chunks associes a la reponse
+  webservices: any[] // Dans sheets webservices: liens utiles lies aux sheets
+  chatId: number // current chat id
+  streamId: number // current stream id
+}
+
 export type Message = {
   text: string[]
   sender: string
 }
 
 export type Tile = {
-  className: string
-  desc: string
-  imageUrl: string
+  id?: string
+  className?: string
+  title: JSX.Element
   linkProps: {
     href: string
+    target?: string
+    rel?: string
   }
-  title: string | JSX.Element
+  desc?: JSX.Element
+  imageUrl?: string
+  imageAlt?: string
+  imageWidth?: string | number
+  imageHeight?: string | number
+  grey?: boolean
+  enlargeLink?: boolean
+  classes?: Partial<
+    Record<'root' | 'title' | 'link' | 'body' | 'desc' | 'img' | 'imgTag', string>
+  >
+  horizontal?: boolean
+}
+
+export type Sheet = {
+  hash: string
+  sid: string
+  title: string
+  url: string
+  introduction: string
+  text: string
+  context: string
+  theme: string
+  surtitre: string
+  source: string
+  related_questions: {
+    question: string
+    sid: string
+    url: string
+  }[]
+  web_services?: {
+    title: string
+    institution: string
+    url: string
+    type: string
+  }[]
 }

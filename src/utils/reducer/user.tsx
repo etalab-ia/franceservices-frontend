@@ -1,4 +1,4 @@
-import { type Message, type Question } from 'types'
+import { type Message, type Question, type User } from 'types'
 import { initialChatbotMessage } from '../../constants/chatbotProps'
 
 /*****************************************************************************************************
@@ -40,17 +40,6 @@ const InitialQuestion: Question = {
   must_not_sids: [],
 }
 
-interface User {
-  question: Question // Question asked by user
-  messages: Message[] // Message exchanged between user & agent
-  sheets: any[] // Sheets associated to the reponse from 0 to 2
-  additionalSheets: any[] // suggested sheets to from 3 to 9
-  chunks: any[] // Chunks associes a la reponse
-  webservices: any[] // Dans sheets webservices: liens utiles lies aux sheets
-  chatId: number // current chat id
-  streamId: number // current stream id
-}
-
 const InitialUser: User = {
   question: InitialQuestion,
   messages: [{ text: initialChatbotMessage, sender: 'agent' }],
@@ -87,7 +76,7 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
         ...state,
         sheets: action.sheets.slice(0, 3),
         additionalSheets: action.sheets.slice(3, 10),
-        webservices: action.sheets[0].web_services.slice(0, 3),
+        webservices: action.sheets[0].web_services?.slice(0, 3),
       }
     case 'SET_CHUNKS':
       return {

@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 import { ContactButton } from './ContactButton'
 import { UserInformation } from './UserInformation'
-import { UserMessage } from './UserMessage'
+import { ContactFormInput } from './ContactFormInput'
 
 import { UserAuth } from 'src/utils/auth'
 export type formDataTypes = {
@@ -26,7 +26,7 @@ export function ContactForm({
   return (
     <div className=" fr-container fr-my-3w ">
       <UserInformation formData={formData} setFormData={setFormData} />
-      <UserMessage message={formData.message} setFormData={setFormData} />
+      <ContactFormInput message={formData.message} setFormData={setFormData} />
       <ContactButton
         setUserAuth={setUserAuth}
         formData={formData}
