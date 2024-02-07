@@ -14,6 +14,7 @@ import { DisplayChunks } from './DisplayChunks'
 export const ResponseExplanation = ({ chunks }) => {
   const chunksPerPage = 2
   const [currentPage, setCurrentPage] = useState(1)
+  const [open, setOpen] = useState(false)
 
   const getPageLinkProps = (pageNumber) => {
     const linkProps = {
@@ -37,13 +38,14 @@ export const ResponseExplanation = ({ chunks }) => {
           <section className="fr-accordion ">
             <h3 className="--text-disabled-grey">
               <button
+                onClick={() => setOpen(!open)}
                 className="accordion-custom-button flex"
                 aria-expanded="false"
                 aria-controls="accordion-106"
               >
                 Quelles sont les sources utilisées pour générer cette réponse ?
                 <span
-                  className={`fr-icon-arrow-${true ? 'down' : 'up'}-s-line`}
+                  className={`fr-icon-arrow-${open ? 'up' : 'down'}-s-line`}
                   aria-hidden="true"
                 ></span>
               </button>

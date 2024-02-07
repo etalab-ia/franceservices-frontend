@@ -2,10 +2,10 @@ import { ArchiveType, RootState, User } from 'types'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { MeetingQR } from './MeetingQR'
 import { MeetingStream } from './MeetingStream'
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { generateStream } from 'src/utils/hooks'
-import { UserMessage } from '../User/UserMessage'
+import { useContext, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { generateStream } from '../../utils/hooks'
+import { CurrQuestionContext } from '../../utils/context/questionContext'
 
 /*****************************************************************************************************
 	The 
@@ -22,15 +22,23 @@ export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefi
   const [question, setQuestion] = useState('')
   const stream = useSelector((state: RootState) => state.stream)
   const user = useSelector((state: RootState) => state.user)
+  const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
+
   const [generateStream, setGenerateStream] = useState(false)
   const [questionHistory, setQuestionHistory] = useState<QuestionHistory>([])
   console.log('stream: ', stream)
   console.log('user: ', user)
+  console.log('crreunt question', currQuestion)
   return (
     <GlobalColContainer>
       <MeetingStream archive={archive} />
       {!archive && (
-        /*   <MeetingAdditionnalQuestion question={question} setQuestion={setQuestion} /> */
+        /*        <MeetingAdditionnalQuestion
+          question={question}
+          setQuestion={setQuestion}
+          questionHistory={questionHistory}
+          setQuestionHistory={setQuestionHistory}
+        /> */
         <UserMessage setGenerate={setGenerateStream} chatType={'meeting'} />
       )}
       <MeetingQR archive={archive} setQuestion={setQuestion} />
@@ -41,9 +49,14 @@ export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefi
 function MeetingAdditionnalQuestion({
   question,
   setQuestion,
-}: { question: string; setQuestion: React.Dispatch<React.SetStateAction<string>> }) {
-  const user = useSelector((state: RootState) => state.user)
-
+  questionHistory,
+  setQuestionHistory,
+}: {
+  question: string
+  setQuestion: React.Dispatch<React.SetStateAction<string>>
+  questionHistory: QuestionHistory
+  setQuestionHistory: React.Dispatch<React.SetStateAction<QuestionHistory>>
+}) {
   return (
     <div className="fr-search-bar" id="header-search" role="search">
       <label className="fr-label">Recherche</label>
@@ -67,14 +80,102 @@ function MeetingAdditionnalQuestion({
   )
 }
 
+export function UserMessage({ setGenerate, chatType }) {
+  const stream = useSelector((state: RootState) => state.stream)
+  const user = useSelector((state: RootState) => state.user)
+  const dispatch = useDispatch()
+  const [questionInput, setQuestionInput] = useState('')
+  const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
+
+  const handleChange = (e) => {
+    e.preventDefault()
+
+    setQuestionInput(e.target.value)
+  }
+
+  const handleClick = async () => {
+    updateCurrQuestion({ ...currQuestion, query: questionInput })
+    dispatch({
+      type: 'SET_USER_QUERY',
+      nextUserQuery: questionInput,
+      nextChatId: user.chatId,
+    })
+    stream.historyStream.length &&
+      dispatch({
+        type: 'SET_MESSAGES',
+        nextMessage: { text: stream.historyStream, sender: 'agent' },
+      })
+    dispatch({ type: 'RESET_STREAM_HISTORY' })
+    dispatch({
+      type: 'SET_MESSAGES',
+      nextMessage: { text: questionInput, sender: 'user' },
+    })
+    setGenerate(true)
+  }
+
+  useEffect(() => {
+    if (!user.question.query.length || !user.chatId) return
+
+    generateStream(user.question, dispatch, user.chatId, true)
+    dispatch({ type: 'RESET_FEEDBACK' })
+  }, [user.question])
+
+  const handleRenderInput = (params) => {
+    const newParams = { maxLength: 800 }
+    const updatedParams = { ...params, ...newParams }
+
+    return <input {...updatedParams} />
+  }
+
+  return (
+    <div className="fr-search-bar" id="header-search" role="search">
+      <label className="fr-label">Recherche</label>
+      <input
+        className="fr-input"
+        placeholder="Poser une nouvelle question"
+        type="search"
+        name="search-784-input"
+        onChange={handleChange}
+        value={questionInput}
+      />
+      <button
+        onClick={handleClick}
+        disabled={questionInput === ''}
+        className="fr-btn"
+        title="Rechercher"
+        /*  onClick={() => {handleNewQuestion(question)}} */
+      >
+        Rechercher
+      </button>
+    </div>
+  )
+}
+
 function handleNewQuestion(
   question: string,
   questionHistory: QuestionHistory,
   setQuestionHistory: React.Dispatch<React.SetStateAction<QuestionHistory>>
 ) {
+  const user = useSelector((state: RootState) => state.user)
+  const dispatch = useDispatch()
+  const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
+
   //Add current data to histoy
-  setQuestionHistory([...questionHistory])
-  //generateStream()
+  setQuestionHistory([...questionHistory, { user: user, response: 'test' }])
+  questionHistory.map((p) => {
+    console.log('question: ', p)
+  })
+  /*  dispatch({
+    type: 'SET_USER_QUERY',
+    nextUserQuery: question,
+    nextChatId: user.chatId,
+  }) */
+  updateCurrQuestion({ ...currQuestion, query: question })
+  dispatch({
+    type: '',
+    nextMessage: { text: question, sender: 'user' },
+  })
+  generateStream(currQuestion, dispatch, user.chatId, false)
   return
 }
 

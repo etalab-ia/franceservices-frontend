@@ -40,7 +40,7 @@ export function MeetingStream({ archive }: { archive: ArchiveType | undefined })
   }
 
   useEffect(() => {
-    if (archive !== undefined) {
+    if (archive) {
       getChunks()
     }
   }, [])
