@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	/* BORDERS */
+	.border {
+		@apply border-4;
+		@apply border-solid;
+	}
+
+	/* COLORS */
+
+	/* Light purple */
+	.bg-light-purple {
+		@apply bg-[#F5F5FE];
+	}
+
+	.text-light-purple {
+		@apply text-[#F5F5FE];
+	}
+
+	.border-light-purple {
+		@apply border;
+		@apply border-[#F5F5FE];
+	}
+
+	/* Normal purple */
+	.bg-purple {
+		@apply bg-[#6A6AF4];
+	}
+
+	.text-purple {
+		@apply text-[#6A6AF4];
+	}
+
+	.border-purple {
+		@apply border;
+		@apply border-[#6A6AF4];
+	}
+
+	/* Dark purple */
+	.bg-dark-purple {
+		@apply bg-[#000091];
+	}
+
+	.text-dark-purple {
+		@apply text-[#000091];
+	}
+
+	/* Grey */
+
+	/* Light grey */
+	.bg-light-grey {
+		@apply bg-[#EEEEEE];
+	}
+
+	.text-light-grey {
+		@apply text-[#EEEEEE];
+	}
+
+	.border-light-grey {
+		@apply border;
+		@apply border-[#EEEEEE];
+	}
+
+	/* Normal grey */
+	.bg-grey {
+		@apply bg-[#666];
+	}
+
+	.text-grey {
+		@apply text-[#666];
+	}
+
+	.border-grey {
+		@apply border;
+		@apply border-[#666];
+	}
+
+	/* Dark grey */
+	.bg-dark-grey {
+		@apply bg-[#3A3A3A];
+	}
+
+	.text-dark-grey {
+		@apply text-[#3A3A3A];
+	}
+
+	.border-dark-grey {
+		@apply border;
+		@apply border-[#3A3A3A];
+	}
+
+	/* GLOBAL */
+
+	.header-container {
+		@apply sticky;
+		@apply top-0;
+		@apply w-full;
+	}
+	
+	.wrap-message {
+		@apply flex;
+		@apply flex-wrap;
+	}
+
+	.avatar {
+		@apply bg-light-purple;
+		@apply rounded-full;
+		@apply justify-center;
+		@apply items-center;
+		@apply text-center;
+	}
+
+	/* USER */
+
+	.user-message {
+		@apply flex;
+		@apply flex-row;
+		@apply mr-0;
+		@apply ml-auto;
+	}
+
+	.user-chat {
+		@apply bg-light-purple;
+		@apply flex;
+		@apply w-fit;
+		@apply rounded-[30px];
+		@apply mt-0;
+		@apply text-justify;
+	}
+
+	/* TODO: change margin/padding/colors/height to dsfr one */
+	.user-feedback-buttons {
+		@apply flex;
+		@apply flex-row;
+		@apply mr-4;
+		@apply py-2;
+		@apply px-4;
+		@apply justify-center;
+		@apply content-center;
+		@apply rounded-[90px];
+		@apply border-purple;
+		@apply text-purple;
+		@apply my-2;
+		@apply max-h-[40px];
+	}
+
+	/* TODO: change margin/padding/colors/height to dsfr one */
+	.user-feedback-confirmation-button {
+		@apply px-2;
+		@apply py-1;
+		@apply mt-2;
+		@apply font-bold;
+		@apply w-fit;
+		@apply border-solid;
+		@apply border-[1px];
+		@apply border-[#DDD];
+	}
+
+	/* AGENT */
+
+	.chat {
+		@apply flex;
+		@apply flex-col;
+		@apply whitespace-pre-wrap;
+		@apply text-justify;
+		@apply overflow-y-auto;
+		@apply overflow-x-hidden;
+	}
+	
+	.agent-chat {
+		@apply text-justify;
+		@apply bg-light-purple;
+		@apply rounded-[30px];
+		@apply mt-0;
+		@apply ml-auto;
+	}
+
+	.streaming {
+		@apply text-justify;
+		@apply rounded-[10px];
+	}
+
+	.streaming-tabs {
+		/* TODO: change for DSFR var() */
+		@apply text-grey;
+		@apply text-sm;
+		@apply font-medium;
+		@apply m-0;
+	}
+
+	.archive-notification-text {
+		@apply flex;
+		@apply justify-center;
+		@apply text-center;
+		/* TODO: change for DSFR var() */
+		@apply text-[#929292];
+	}
+}
