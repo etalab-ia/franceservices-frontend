@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { RootState } from 'types'
-import { useApiUrls, streamUrl } from '../../constants/api'
+import { chatUrl, streamUrl } from '../../constants/api'
 import { CurrQuestionContext } from '../../utils/context/questionContext'
 import { generateStream, useFetch } from '../../utils/hooks'
 import { setHeaders } from '../../utils/setData'
@@ -17,10 +17,7 @@ export function UserMessage({ setGenerate, chatType }) {
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
   const [questionInput, setQuestionInput] = useState('')
-
   const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
-
-  const { chatUrl } = useApiUrls()
 
   const handleChange = (e) => {
     e.preventDefault()

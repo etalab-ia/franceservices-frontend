@@ -3,7 +3,7 @@ import { CurrQuestionContext } from '../../utils/context/questionContext'
 import { updateQuestion } from '../../utils/setData'
 import { GlobalDiv } from '../Global/GlobalDiv'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
-import { MeetingInformations } from './MeetingInformations'
+import { MeetingInputFields } from './MeetingInputFields'
 import { MeetingInputButton } from './MeetingInputButton'
 
 /*****************************************************************************************************
@@ -23,7 +23,7 @@ import { MeetingInputButton } from './MeetingInputButton'
 
 	COMPONENTS:
 
-	**	MeetingInformations: set current question & context (administrations / themes) from user input
+	**	MeetingInputFields: set current question & context (administrations / themes) from user input
 
 	**	MeetingInputButton: setGenerate to true to switch to meeting stream page onClick
 			! Meeting generation button is disable when current question is empty
@@ -39,7 +39,7 @@ export function MeetingInputs({ setGenerate, context, setContext }) {
 
   return (
     <div style={{ width: '100%', flex: 1, flexGrow: 1, backgroundColor: '' }}>
-      <MeetingInformations context={context} setContext={setContext} />
+      <MeetingInputFields context={context} setContext={setContext} />
       <MeetingInputButton setGenerate={setGenerate} context={context} />
     </div>
   )

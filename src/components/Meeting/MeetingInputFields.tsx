@@ -14,7 +14,7 @@ import { MeetingMainInformations } from './MeetingMainInformations'
 
  ******************************************************************************/
 
-export function MeetingInformations({ context, setContext }) {
+export function MeetingInputFields({ context, setContext }) {
   return (
     <>
       <GlobalTitle>{meetingTitle}</GlobalTitle>
