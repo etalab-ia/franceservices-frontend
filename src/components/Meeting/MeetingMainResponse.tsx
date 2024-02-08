@@ -38,7 +38,11 @@ export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefi
           questionHistory={questionHistory}
           setQuestionHistory={setQuestionHistory}
         /> */
-        <UserMessage setGenerate={setGenerateStream} chatType={'meeting'} />
+        <UserMessage
+          setGenerate={setGenerateStream}
+          chatType={'meeting'}
+          question={question}
+        />
       )}
       <MeetingQR archive={archive} setQuestion={setQuestion} />
     </GlobalColContainer>
@@ -79,7 +83,7 @@ export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefi
   )
 }
  */
-export function UserMessage({ setGenerate, chatType }) {
+export function UserMessage({ setGenerate, chatType, question }) {
   const stream = useSelector((state: RootState) => state.stream)
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
