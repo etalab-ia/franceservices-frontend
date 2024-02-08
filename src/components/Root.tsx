@@ -177,7 +177,6 @@ export const Root = () => {
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer
-        style={{ marginTop: 'auto' }}
         bottomItems={[headerFooterDisplayItem]}
         accessibility="partially compliant"
         termsLinkProps={{

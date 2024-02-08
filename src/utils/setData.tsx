@@ -167,7 +167,7 @@ export const getIndexes = async (
       data: setIndexesBody(data, indexType, chunkSize, streamId),
       headers: setHeaders(false),
     })
-
+    console.log('idexes: ', res)
     dispatch({ type: actionType, [indexType]: res })
   } catch (error) {
     console.error('An error occurred: ', error)

@@ -49,6 +49,7 @@ const InitialUser: User = {
   webservices: [],
   chatId: 0,
   streamId: 0,
+  history: [],
 }
 
 type UserAction =
@@ -68,9 +69,15 @@ type UserAction =
   | { type: 'SET_MESSAGES'; nextMessage: Message }
   | { type: 'SET_STREAM_ID'; nextStreamId: number }
   | { type: 'SET_CHAT_ID'; nextChatId: number }
+  | { type: 'ADD_HISTORY'; newItem: any }
 
 export const userReducer = (state: User = InitialUser, action: UserAction): User => {
   switch (action.type) {
+    case 'ADD_HISTORY':
+      return {
+        ...state,
+        history: [...state.history, action.newItem],
+      }
     case 'SET_SHEETS':
       return {
         ...state,

@@ -2,10 +2,11 @@ import { ArchiveType, RootState, User } from 'types'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { MeetingQR } from './MeetingQR'
 import { MeetingStream } from './MeetingStream'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, KeyboardEvent, ChangeEventHandler } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { generateStream } from '../../utils/hooks'
 import { CurrQuestionContext } from '../../utils/context/questionContext'
+import { current } from '@reduxjs/toolkit'
 
 /*****************************************************************************************************
 	
@@ -25,9 +26,6 @@ export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefi
 
   const [generateStream, setGenerateStream] = useState(false)
   const [questionHistory, setQuestionHistory] = useState<QuestionHistory>([])
-  /*   console.log('stream: ', stream)
-  console.log('user: ', user)
-  console.log('crreunt question', currQuestion) */
   return (
     <GlobalColContainer>
       <MeetingStream archive={archive} />
@@ -41,7 +39,8 @@ export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefi
         <UserMessage
           setGenerate={setGenerateStream}
           chatType={'meeting'}
-          question={question}
+          questionInput={question}
+          setQuestionInput={setQuestion}
         />
       )}
       <MeetingQR archive={archive} setQuestion={setQuestion} />
@@ -83,11 +82,11 @@ export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefi
   )
 }
  */
-export function UserMessage({ setGenerate, chatType, question }) {
+export function UserMessage({ setGenerate, chatType, questionInput, setQuestionInput }) {
   const stream = useSelector((state: RootState) => state.stream)
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
-  const [questionInput, setQuestionInput] = useState('')
+  //const [questionInput, setQuestionInput] = useState('')
   const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
 
   const handleChange = (e) => {
@@ -96,8 +95,18 @@ export function UserMessage({ setGenerate, chatType, question }) {
     setQuestionInput(e.target.value)
   }
 
-  const handleClick = async () => {
+  const handleSubmit = async () => {
     updateCurrQuestion({ ...currQuestion, query: questionInput })
+    dispatch({
+      type: 'ADD_HISTORY',
+      newItem: {
+        query: currQuestion.query,
+        response: stream.historyStream[0],
+        sheets: user.sheets,
+        chunks: user.chunks,
+        usefulInfo: user.webservices,
+      },
+    })
     dispatch({
       type: 'SET_USER_QUERY',
       nextUserQuery: questionInput,
@@ -114,6 +123,7 @@ export function UserMessage({ setGenerate, chatType, question }) {
       nextMessage: { text: questionInput, sender: 'user' },
     })
     setGenerate(true)
+    setQuestionInput('')
   }
 
   useEffect(() => {
@@ -135,7 +145,11 @@ export function UserMessage({ setGenerate, chatType, question }) {
 
     return <input {...updatedParams} />
   }
-
+  function handleKeyDown(e: any) {
+    if (e.key === 'Enter' && questionInput !== '' && !stream.isStreaming) {
+      handleSubmit()
+    }
+  }
   return (
     <div className="fr-search-bar" id="header-search" role="search">
       <label className="fr-label">Recherche</label>
@@ -146,13 +160,13 @@ export function UserMessage({ setGenerate, chatType, question }) {
         name="search-784-input"
         onChange={handleChange}
         value={questionInput}
+        onKeyDown={handleKeyDown}
       />
       <button
-        onClick={handleClick}
-        disabled={questionInput === ''}
+        onClick={handleSubmit}
+        disabled={questionInput === '' || stream.isStreaming}
         className="fr-btn"
         title="Rechercher"
-        /*  onClick={() => {handleNewQuestion(question)}} */
       >
         Rechercher
       </button>
@@ -171,9 +185,7 @@ function handleNewQuestion(
 
   //Add current data to histoy
   setQuestionHistory([...questionHistory, { user: user, response: 'test' }])
-  questionHistory.map((p) => {
-    console.log('question: ', p)
-  })
+  questionHistory.map((p) => {})
   /*  dispatch({
     type: 'SET_USER_QUERY',
     nextUserQuery: question,

@@ -13,7 +13,6 @@ export const SheetsTiles = ({
 }) => {
   const text = type === 'main' ? 'X Supprimer' : '+ Ajouter'
   const dispatch = useDispatch()
-  console.log('test sheets: ', tiles, ' type: ', type)
   const handleClick = (key: number) => {
     if (type === 'main') dispatch({ type: 'REMOVE_SHEETS', indexToRemove: key })
     else dispatch({ type: 'ADD_SHEETS', indexToAdd: key })
