@@ -38,7 +38,10 @@ function handleStreamMessage(e, dispatch, stream_chat, isChat: boolean) {
       stream_chat.close()
 
       dispatch({ type: 'SET_STREAM_ID', nextStreamId: 0 })
-      if (isChat) dispatch({ type: 'SET_CHAT_ID', nextChatId: 0 })
+      if (isChat) {
+        console.log('CLOSING:')
+        dispatch({ type: 'SET_CHAT_ID', nextChatId: 0 })
+      }
       return dispatch({ type: 'STOP_AGENT_STREAM' })
     }
     return dispatch({ type: 'GET_AGENT_STREAM', nextResponse: jsonData })
@@ -78,7 +81,8 @@ export const useStream = async (dispatch, id: number, isChat: boolean) => {
       stream_chat.close()
     }
     dispatch({ type: 'SET_INITIAL_STREAM' })
-    dispatch({ type: 'SET_CHAT_ID', nextChatId: 0 })
+    console.log('onlosestream')
+    //dispatch({ type: 'SET_CHAT_ID', nextChatId: 0 })
   })
 }
 

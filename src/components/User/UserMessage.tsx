@@ -22,60 +22,38 @@ export function UserMessage({ setGenerate, chatType }) {
   const handleChange = (e) => {
     e.preventDefault()
 
-    setQuestionInput(e.target.value)
-  }
-
-  const handleClick = async () => {
-    updateCurrQuestion({ ...currQuestion, query: questionInput })
-    const headers = setHeaders(false)
-    const chat_data = { chat_type: chatType }
-    const chat = await useFetch(chatUrl, 'POST', {
-      data: JSON.stringify(chat_data),
-      headers,
-    })
-    dispatch({ type: 'SET_CHAT_ID', nextChatId: chat.id })
-    dispatch({
-      type: 'SET_USER_QUERY',
-      nextUserQuery: questionInput,
-      nextChatId: chat.id,
-    })
-    stream.historyStream.length &&
-      dispatch({
-        type: 'SET_MESSAGES',
-        nextMessage: { text: stream.historyStream, sender: 'agent' },
-      })
-    dispatch({ type: 'RESET_STREAM_HISTORY' })
-    dispatch({
-      type: 'SET_MESSAGES',
-      nextMessage: { text: questionInput, sender: 'user' },
-    })
-    setGenerate(true)
-  }
-
-  useEffect(() => {
+    /*   useEffect(() => {
     if (!user.question.query.length || !user.chatId) return
-
-    generateStream(user.question, dispatch, user.chatId, true)
+    console.log("JE SERS A QUOI ???!!!")
+   // generateStream(user.question, dispatch, user.chatId, true)
     dispatch({ type: 'RESET_FEEDBACK' })
-  }, [user.question])
+  }, [user.question]) */
 
-  const handleRenderInput = (params) => {
-    const newParams = { maxLength: 800 }
-    const updatedParams = { ...params, ...newParams }
+    useEffect(() => {
+      if (!user.question.query.length || !user.chatId) return
 
-    return <input {...updatedParams} />
+      generateStream(user.question, dispatch, user.chatId, true)
+      dispatch({ type: 'RESET_FEEDBACK' })
+    }, [user.question])
+
+    const handleRenderInput = (params) => {
+      const newParams = { maxLength: 800 }
+      const updatedParams = { ...params, ...newParams }
+
+      return <input {...updatedParams} />
+    }
+
+    return (
+      <div className="flex justify-center">
+        <SearchBar
+          label="Poser votre question"
+          className="w-5/6"
+          onButtonClick={handleClick}
+          //@ts-expect-error
+          onChange={handleChange}
+          renderInput={handleRenderInput}
+        />
+      </div>
+    )
   }
-
-  return (
-    <div className="flex justify-center">
-      <SearchBar
-        label="Poser votre question"
-        className="w-5/6"
-        onButtonClick={handleClick}
-        //@ts-expect-error
-        onChange={handleChange}
-        renderInput={handleRenderInput}
-      />
-    </div>
-  )
 }

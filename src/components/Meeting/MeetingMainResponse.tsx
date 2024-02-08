@@ -8,7 +8,6 @@ import { generateStream } from '../../utils/hooks'
 import { CurrQuestionContext } from '../../utils/context/questionContext'
 
 /*****************************************************************************************************
-	The 
 	
 	COMPONENTS:
 
@@ -26,9 +25,9 @@ export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefi
 
   const [generateStream, setGenerateStream] = useState(false)
   const [questionHistory, setQuestionHistory] = useState<QuestionHistory>([])
-  console.log('stream: ', stream)
+  /*   console.log('stream: ', stream)
   console.log('user: ', user)
-  console.log('crreunt question', currQuestion)
+  console.log('crreunt question', currQuestion) */
   return (
     <GlobalColContainer>
       <MeetingStream archive={archive} />
@@ -46,7 +45,7 @@ export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefi
   )
 }
 
-function MeetingAdditionnalQuestion({
+/* function MeetingAdditionnalQuestion({
   question,
   setQuestion,
   questionHistory,
@@ -72,14 +71,14 @@ function MeetingAdditionnalQuestion({
         disabled={question === ''}
         className="fr-btn"
         title="Rechercher"
-        /*  onClick={() => {handleNewQuestion(question)}} */
+        //  onClick={() => {handleNewQuestion(question)}} 
       >
         Rechercher
       </button>
     </div>
   )
 }
-
+ */
 export function UserMessage({ setGenerate, chatType }) {
   const stream = useSelector((state: RootState) => state.stream)
   const user = useSelector((state: RootState) => state.user)
@@ -114,12 +113,18 @@ export function UserMessage({ setGenerate, chatType }) {
   }
 
   useEffect(() => {
+    // console.log('user.question: generate', user.question, user.chatId)
     if (!user.question.query.length || !user.chatId) return
-
-    generateStream(user.question, dispatch, user.chatId, true)
+    //generateStream(user.question, dispatch, user.chatId, false)
     dispatch({ type: 'RESET_FEEDBACK' })
   }, [user.question])
 
+  /*   if (user.question.query.length && user.chatId)
+  {
+    generateStream(user.question, dispatch, user.chatId, false)
+    dispatch({ type: 'RESET_FEEDBACK' })
+
+  } */
   const handleRenderInput = (params) => {
     const newParams = { maxLength: 800 }
     const updatedParams = { ...params, ...newParams }
