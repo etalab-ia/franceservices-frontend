@@ -39,7 +39,6 @@ function handleStreamMessage(e, dispatch, stream_chat, isChat: boolean) {
 
       dispatch({ type: 'SET_STREAM_ID', nextStreamId: 0 })
       if (isChat) {
-        console.log('CLOSING:')
         dispatch({ type: 'SET_CHAT_ID', nextChatId: 0 })
       }
       return dispatch({ type: 'STOP_AGENT_STREAM' })
@@ -81,7 +80,6 @@ export const useStream = async (dispatch, id: number, isChat: boolean) => {
       stream_chat.close()
     }
     dispatch({ type: 'SET_INITIAL_STREAM' })
-    console.log('onlosestream')
     //dispatch({ type: 'SET_CHAT_ID', nextChatId: 0 })
   })
 }

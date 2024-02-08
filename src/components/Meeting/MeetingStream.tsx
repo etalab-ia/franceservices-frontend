@@ -35,7 +35,6 @@ export function MeetingStream({ archive }: { archive: ArchiveType | undefined })
       headers: setHeaders(false),
       data: JSON.stringify(data),
     })
-
     setChunks(chunksRes)
   }
 
@@ -61,7 +60,8 @@ export function MeetingStream({ archive }: { archive: ArchiveType | undefined })
         <GlobalParagraph>{agentResponse}</GlobalParagraph>
       )}
       {!stream.isStreaming && stream.historyStream.length !== 0 && <MeetingFeedback />}
-      <ResponseExplanation chunks={chunks} />
+      {/*       <ResponseExplanation chunks={chunks} />
+       */}{' '}
     </>
   )
 }

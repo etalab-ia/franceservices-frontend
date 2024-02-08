@@ -30,7 +30,7 @@ export const ResponseExplanation = ({ chunks }) => {
 
   const startIndex = (currentPage - 1) * chunksPerPage
   const endIndex = startIndex + chunksPerPage
-
+  console.log('chunks ', chunks)
   return (
     <div>
       {chunks && chunks.length !== 0 && (

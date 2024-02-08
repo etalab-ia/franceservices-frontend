@@ -31,7 +31,7 @@ export function UserMessage({ setGenerate, chatType }) {
 
     useEffect(() => {
       if (!user.question.query.length || !user.chatId) return
-
+      console.log('generate stream from usermessage')
       generateStream(user.question, dispatch, user.chatId, true)
       dispatch({ type: 'RESET_FEEDBACK' })
     }, [user.question])
