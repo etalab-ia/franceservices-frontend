@@ -32,7 +32,7 @@ import { MeetingInputButton } from './MeetingInputButton'
 
 export function MeetingInputs({ setGenerate, context, setContext }) {
   const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
-
+  //TODO: REMOVE USEEFFECT
   useEffect(() => {
     currQuestion.query && updateQuestion(currQuestion, updateCurrQuestion)
   }, [])
