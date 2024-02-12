@@ -91,7 +91,7 @@ function History() {
           </h3>
 
           <div className="fr-collapse" id={`history-${index}`}>
-            <div className="flex flex-col md:flex-rowp justify-between fr-mt-1w items-center">
+            <div className="flex flex-col md:flex-row justify-between fr-mt-1w items-center">
               <h6 className="text-xl font-bold">Sources de réponses</h6>
               <Pagination
                 count={Math.ceil(h.chunks.length / 3)}
@@ -130,7 +130,7 @@ function SourceTile({ title, text, url }: { title: string; text: string; url: st
         {text.slice(0, 95)}
         {text.length > 96 ? '...' : ''}
       </p>
-      <a style={{ backgroundImage: '' }} href={url}>
+      <a style={{ backgroundImage: 'none', textDecoration: 'none' }} href={url}>
         {url}
       </a>
     </div>
