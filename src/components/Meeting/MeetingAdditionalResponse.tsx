@@ -25,9 +25,7 @@ export function MeetingAdditionalResponse({
     <OneThirdScreenWidth>
       <DisplaySheets archive={archive ?? undefined} />
       <GlobalColContainer>
-        {!archive && (
-          <h3 className="text-2xl font-bold fr-pt-3w fr-pb-3w">Liens pratiques</h3>
-        )}
+        {!archive && <h3 className="text-2xl font-bold  fr-pb-3w">Liens pratiques</h3>}
         <UsefulLinks />
       </GlobalColContainer>
     </OneThirdScreenWidth>

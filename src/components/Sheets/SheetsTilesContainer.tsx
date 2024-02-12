@@ -66,7 +66,7 @@ export const SheetsTilesContainer = ({
 
   return (
     <>
-      <SheetsTiles tiles={tiles} isModifiable={isModifiable} type="main" />
+      {/*   <SheetsTiles tiles={tiles} isModifiable={isModifiable} type="main" />
       {isModifiable && additionalTiles.length !== 0 && (
         <>
           <SheetsAdditionalTilesTitle />
@@ -76,7 +76,7 @@ export const SheetsTilesContainer = ({
             type="additional"
           />
         </>
-      )}
+      )} */}
     </>
   )
 }

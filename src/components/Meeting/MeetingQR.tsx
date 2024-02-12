@@ -51,11 +51,9 @@ export function MeetingQR({
   return (
     <>
       {relatedQuestions.length !== 0 && (
-        <GlobalSecondaryTitle extraClass="fr-pt-3w fr-pb-3w">
-          {meetingQRTitle}
-        </GlobalSecondaryTitle>
+        <p className="fr-pt-4w fr-mb-2w">{meetingQRTitle}</p>
       )}
-      {relatedQuestions.map((rq, index) => {
+      {relatedQuestions.slice(0, 3).map((rq, index) => {
         return (
           <div className="fr-mb-3v" key={index} onClick={() => setQuestion(rq.question)}>
             <div

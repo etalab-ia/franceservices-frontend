@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { generateStream } from '../../utils/hooks'
 import { CurrQuestionContext } from '../../utils/context/questionContext'
 import { current } from '@reduxjs/toolkit'
+import { GlobalSecondaryTitle } from '../Global/GlobalSecondaryTitle'
 
 /*****************************************************************************************************
 	
@@ -20,24 +21,11 @@ import { current } from '@reduxjs/toolkit'
 
 export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefined }) {
   const [question, setQuestion] = useState('')
-  const stream = useSelector((state: RootState) => state.stream)
-  const user = useSelector((state: RootState) => state.user)
-  const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
-
-  const [generateStream, setGenerateStream] = useState(false)
-  const [questionHistory, setQuestionHistory] = useState<QuestionHistory>([])
   return (
     <GlobalColContainer>
       <MeetingStream archive={archive} />
       {!archive && (
-        /*        <MeetingAdditionnalQuestion
-          question={question}
-          setQuestion={setQuestion}
-          questionHistory={questionHistory}
-          setQuestionHistory={setQuestionHistory}
-        /> */
-        <UserMessage
-          setGenerate={setGenerateStream}
+        <NewQuestionInput
           chatType={'meeting'}
           questionInput={question}
           setQuestionInput={setQuestion}
@@ -48,45 +36,10 @@ export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefi
   )
 }
 
-/* function MeetingAdditionnalQuestion({
-  question,
-  setQuestion,
-  questionHistory,
-  setQuestionHistory,
-}: {
-  question: string
-  setQuestion: React.Dispatch<React.SetStateAction<string>>
-  questionHistory: QuestionHistory
-  setQuestionHistory: React.Dispatch<React.SetStateAction<QuestionHistory>>
-}) {
-  return (
-    <div className="fr-search-bar" id="header-search" role="search">
-      <label className="fr-label">Recherche</label>
-      <input
-        className="fr-input"
-        placeholder="Poser une nouvelle question"
-        type="search"
-        name="search-784-input"
-        onChange={(e) => setQuestion(e.target.value)}
-        value={question}
-      />
-      <button
-        disabled={question === ''}
-        className="fr-btn"
-        title="Rechercher"
-        //  onClick={() => {handleNewQuestion(question)}} 
-      >
-        Rechercher
-      </button>
-    </div>
-  )
-}
- */
-export function UserMessage({ setGenerate, chatType, questionInput, setQuestionInput }) {
+export function NewQuestionInput({ chatType, questionInput, setQuestionInput }) {
   const stream = useSelector((state: RootState) => state.stream)
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
-  //const [questionInput, setQuestionInput] = useState('')
   const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
 
   const handleChange = (e) => {
@@ -122,7 +75,6 @@ export function UserMessage({ setGenerate, chatType, questionInput, setQuestionI
       type: 'SET_MESSAGES',
       nextMessage: { text: questionInput, sender: 'user' },
     })
-    setGenerate(true)
     setQuestionInput('')
   }
 
@@ -151,56 +103,30 @@ export function UserMessage({ setGenerate, chatType, questionInput, setQuestionI
     }
   }
   return (
-    <div className="fr-search-bar" id="header-search" role="search">
-      <label className="fr-label">Recherche</label>
-      <input
-        className="fr-input"
-        placeholder="Poser une nouvelle question"
-        type="search"
-        name="search-784-input"
-        onChange={handleChange}
-        value={questionInput}
-        onKeyDown={handleKeyDown}
-      />
-      <button
-        onClick={handleSubmit}
-        disabled={questionInput === '' || stream.isStreaming}
-        className="fr-btn"
-        title="Rechercher"
-      >
-        Rechercher
-      </button>
+    <div>
+      <GlobalSecondaryTitle extraClass="fr-mt-4w">
+        Poser une question complémentaire
+      </GlobalSecondaryTitle>
+      <div className="fr-search-bar fr-mt-2w" id="header-search" role="search">
+        <label className="fr-label">Recherche</label>
+        <input
+          className="fr-input"
+          placeholder="Poser une nouvelle question"
+          type="search"
+          name="search-784-input"
+          onChange={handleChange}
+          value={questionInput}
+          onKeyDown={handleKeyDown}
+        />
+        <button
+          onClick={handleSubmit}
+          disabled={questionInput === '' || stream.isStreaming}
+          className="fr-btn"
+          title="Rechercher"
+        >
+          Rechercher
+        </button>
+      </div>
     </div>
   )
 }
-
-function handleNewQuestion(
-  question: string,
-  questionHistory: QuestionHistory,
-  setQuestionHistory: React.Dispatch<React.SetStateAction<QuestionHistory>>
-) {
-  const user = useSelector((state: RootState) => state.user)
-  const dispatch = useDispatch()
-  const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
-
-  //Add current data to histoy
-  setQuestionHistory([...questionHistory, { user: user, response: 'test' }])
-  questionHistory.map((p) => {})
-  /*  dispatch({
-    type: 'SET_USER_QUERY',
-    nextUserQuery: question,
-    nextChatId: user.chatId,
-  }) */
-  updateCurrQuestion({ ...currQuestion, query: question })
-  dispatch({
-    type: '',
-    nextMessage: { text: question, sender: 'user' },
-  })
-  generateStream(currQuestion, dispatch, user.chatId, false)
-  return
-}
-
-type QuestionHistory = {
-  user: User
-  response: string
-}[]
