@@ -165,5 +165,6 @@ export const defaultInputFields = [
   // },
 ]
 
-export const resultMeetingTitle = `Résultat`
-export const meetingQRTitle = `Questions fréquentes`
+export const resultMeetingTitle = 'Synthèse par Albert'
+export const meetingQRTitle =
+  'Des questions posées fréquemment pour des situations similaires :'

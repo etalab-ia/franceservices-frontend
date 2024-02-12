@@ -12,6 +12,7 @@ import { GlobalTitle } from '../Global/GlobalTitle'
 import { MeetingEditQuestion } from './MeetingEditQuestion'
 import { MeetingResponse } from './MeetingResponse'
 import { useSelector } from 'react-redux'
+import Pagination from '@codegouvfr/react-dsfr/Pagination'
 
 /*****************************************************************************************************
 	Displays Albert's response and the modify button
@@ -59,7 +60,22 @@ export function MeetingOutputs({
 
 function History() {
   const user = useSelector((state: RootState) => state.user)
+  const [currentPage, setCurrentPage] = useState(1)
 
+  const startIndex = (currentPage - 1) * 3
+  const endIndex = startIndex + 3
+
+  const getPageLinkProps = (pageNumber) => {
+    const linkProps = {
+      href: `#page-${pageNumber}`,
+      title: `Page ${pageNumber}`,
+      onClick: () => {
+        setCurrentPage(pageNumber)
+      },
+    }
+
+    return linkProps
+  }
   return (
     <div className="">
       {user.history.map((h, index) => (
@@ -75,8 +91,18 @@ function History() {
           </h3>
 
           <div className="fr-collapse" id={`history-${index}`}>
-            <div className="flex  overflow-auto max-w-full fr-mt-2v">
-              {h.chunks.map((c, index) => (
+            <div className="flex flex-col md:flex-rowp justify-between fr-mt-1w items-center">
+              <h6 className="text-xl font-bold">Sources de réponses</h6>
+              <Pagination
+                count={Math.ceil(h.chunks.length / 3)}
+                defaultPage={currentPage}
+                getPageLinkProps={getPageLinkProps}
+                className="fr-mt-3v"
+              />
+            </div>
+            <div className="flex flex-col md:flex-row gap-2 items-stretch  fr-mt-2v fr-mb-2w">
+              {' '}
+              {h.chunks.slice(startIndex, endIndex).map((c, index) => (
                 <SourceTile
                   key={`chunk-${index}`}
                   title={c.title}
@@ -94,15 +120,21 @@ function History() {
 }
 function SourceTile({ title, text, url }: { title: string; text: string; url: string }) {
   return (
-    <a href={url} target="_blank" rel="noreferrer">
-      <div className="--border-default-grey min-w-96">
-        <h4 className="fr-mb-2w min-h-18">{title}</h4>
-        <p>
-          {text.slice(0, 95)}
-          {text.length > 96 ? '...' : ''}
-        </p>
-        <a href={url}>{url}</a>
-      </div>
-    </a>
+    /*     <a href={url} target="_blank" rel="noreferrer" className='flex'>
+     */
+    <div className="flex flex-col fr-col-12 fr-col-sm-4 border border-cyan-400 max-w-[392px]  p-4 h-226 ">
+      {' '}
+      <h4 className="fr-mb-2w h-1/4">{title}</h4>
+      <p className="flex-grow h-2/4">
+        {' '}
+        {text.slice(0, 95)}
+        {text.length > 96 ? '...' : ''}
+      </p>
+      <a style={{ backgroundImage: '' }} href={url}>
+        {url}
+      </a>
+    </div>
+    /*     </a>
+     */
   )
 }

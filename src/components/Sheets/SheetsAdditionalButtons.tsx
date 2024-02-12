@@ -34,8 +34,8 @@ export const SheetsAdditionalButtons = ({
 }) => {
   const buttonTitle = isModifiable ? 'Enregistrer' : 'Modifier la section'
   const buttonIcon = isModifiable
-    ? 'fr-icon-save-3-fill fr-icon--sm flex justify-end items-center'
-    : 'fr-icon-settings-5-fill fr-icon--sm flex justify-end items-center'
+    ? 'fr-icon-save-3-fill fr-icon--sm flex  items-center'
+    : 'fr-icon-settings-5-fill fr-icon--sm flex  items-center'
   const user = useSelector((state: RootState) => state.user)
   const [deletedSheets, setDeletedSheets] = useState([])
   const dispatch = useDispatch()
@@ -90,9 +90,9 @@ export const SheetsAdditionalButtons = ({
   }, [user.streamId, currQuestion])
 
   return (
-    <GlobalRowContainer>
-      <GlobalSecondaryTitle>{sheetsTitle}</GlobalSecondaryTitle>
-      <GlobalColContainer>
+    <div className="fr-background-alt--blue-france">
+      {/*       <GlobalSecondaryTitle>{sheetsTitle}</GlobalSecondaryTitle>
+      <>
         {!archive && (
           <ModifyButton
             handleClick={handleClick}
@@ -100,7 +100,7 @@ export const SheetsAdditionalButtons = ({
             extraClass={buttonIcon}
           />
         )}
-      </GlobalColContainer>
-    </GlobalRowContainer>
+      </> */}
+    </div>
   )
 }

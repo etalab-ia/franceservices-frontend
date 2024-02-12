@@ -29,13 +29,13 @@ export function DisplaySheets({ archive }: { archive: ArchiveType | undefined })
   const [isModifiable, setIsModifiable] = useState(false)
 
   return (
-    <GlobalColContainer>
+    <>
       <SheetsAdditionalButtons
         isModifiable={isModifiable}
         setIsModifiable={setIsModifiable}
         archive={archive}
       />
       <SheetsTilesContainer archive={archive} isModifiable={isModifiable} />
-    </GlobalColContainer>
+    </>
   )
 }
