@@ -5,6 +5,13 @@ export type AppDispatch = typeof store.dispatch
 
 const modelName: string = import.meta.env.VITE_MODEL_NAME as string
 const modelMode: string = import.meta.env.VITE_MODEL_MODE as string
+/****************************************************************
+ *                             USER                             *
+ *            All the types used in the redux store             *
+ *                 to track the user's question                 *
+ *                    and the bot's response                    *
+ *                                                              *
+ ****************************************************************/
 export interface User {
   question: Question // Question asked by user plus all the parameters required to generate a response
   messages: Message[] // Message exchanged between user & agent
@@ -21,6 +28,13 @@ export interface User {
   }[]
 }
 
+export type Message = {
+  text: string[]
+  sender: 'user' | 'agent'
+}
+
+// Contains the user query,
+// as well as all the parameters required by the back-end to generate a response
 export type Question = {
   model_name: string
   mode: string
@@ -47,6 +61,49 @@ export const InitialQuestion: Question = {
   should_sids: [],
   must_not_sids: [],
 }
+
+/**
+ * A sheet is a source document used by the bot to generate a response
+ */
+export type Sheet = {
+  hash: string
+  sid: string
+  title: string
+  url: string
+  introduction: string
+  text: string
+  context: string
+  theme: string
+  surtitre: string
+  source: string
+  related_questions: {
+    question: string
+    sid: string
+    url: string
+  }[]
+  web_services?: {
+    title: string
+    institution: string
+    url: string
+    type: string
+  }[]
+}
+
+/**
+ * A chunk is a part of a sheet that has been used to generate the repsonse
+ */
+export type Chunk = {
+  hash: string
+  sid: string // The sheet id
+  title: string
+  url: string
+  introduction: string
+  text: string
+  context: string
+  surtitre: string
+  source: string
+}
+
 export type Chat = {
   name: string | undefined
   type: string | undefined
@@ -56,28 +113,14 @@ export type Chat = {
   userId: number | undefined
 }
 
-export const InitialChat: Chat = {
+/* export const InitialChat: Chat = {
   name: undefined,
   type: undefined,
   creationDate: undefined,
   updatedDate: undefined,
   id: undefined,
   userId: undefined,
-}
-
-export type Archive = {
-  question: Question
-  streamsId: number[]
-  type: string | undefined
-  date: string | undefined
-}
-
-export const InitialArchive: Archive = {
-  question: InitialQuestion,
-  streamsId: [],
-  type: undefined,
-  date: undefined,
-}
+} */
 
 export type ArchiveType = {
   model_name: string
@@ -105,6 +148,10 @@ export type ArchiveType = {
   chunks: any[]
 }
 
+/**
+ * This object contains the result sent by the bot
+ * it is used to track the state of the response
+ */
 export type StreamState = {
   response: string[]
   historyStream: string[]
@@ -112,47 +159,13 @@ export type StreamState = {
   activeTab: number
 }
 
-export type Message = {
-  text: string[]
-  sender: string
-}
+/****************************************************************
+ *                            OTHER                             *
+ ****************************************************************/
 
-export type Sheet = {
-  hash: string
-  sid: string
-  title: string
-  url: string
-  introduction: string
-  text: string
-  context: string
-  theme: string
-  surtitre: string
-  source: string
-  related_questions: {
-    question: string
-    sid: string
-    url: string
-  }[]
-  web_services?: {
-    title: string
-    institution: string
-    url: string
-    type: string
-  }[]
-}
-
-export type Chunk = {
-  hash: string
-  sid: string
-  title: string
-  url: string
-  introduction: string
-  text: string
-  context: string
-  surtitre: string
-  source: string
-}
-
+/**
+ * Used to type Tiles in DSFR
+ */
 export type Tile = {
   id?: string
   className?: string
@@ -173,4 +186,9 @@ export type Tile = {
     Record<'root' | 'title' | 'link' | 'body' | 'desc' | 'img' | 'imgTag', string>
   >
   horizontal?: boolean
+}
+
+export type MeetingInputContext = {
+  administrations: string[]
+  themes: string[]
 }

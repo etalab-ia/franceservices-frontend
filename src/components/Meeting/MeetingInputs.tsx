@@ -5,6 +5,7 @@ import { GlobalDiv } from '../Global/GlobalDiv'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { MeetingInputFields } from './MeetingInputFields'
 import { MeetingInputButton } from './MeetingInputButton'
+import { MeetingInputContext } from 'types'
 
 /*****************************************************************************************************
 	
@@ -30,7 +31,15 @@ import { MeetingInputButton } from './MeetingInputButton'
 
  *****************************************************************************************************/
 
-export function MeetingInputs({ setGenerate, context, setContext }) {
+export function MeetingInputs({
+  setGenerate,
+  context,
+  setContext,
+}: {
+  setGenerate: React.Dispatch<React.SetStateAction<boolean>>
+  context: MeetingInputContext
+  setContext: React.Dispatch<React.SetStateAction<MeetingInputContext>>
+}) {
   const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
   //TODO: REMOVE USEEFFECT
   useEffect(() => {

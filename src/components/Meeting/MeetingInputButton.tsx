@@ -6,6 +6,7 @@ import { meetingGenerateButton } from '../../constants/meeting'
 import { CurrQuestionContext } from '../../utils/context/questionContext'
 import { useFetch } from '../../utils/hooks'
 import { setHeaders, setQuestionWithContext } from '../../utils/setData'
+import { MeetingInputContext } from 'types'
 
 /**
 	Button to send user query to /stream endpoint & switch to meeting stream page
@@ -15,10 +16,17 @@ import { setHeaders, setQuestionWithContext } from '../../utils/setData'
             more precised user_query to /stream endpoint.
 
       handleClick: setGenerate to true to switch to meeting stream page + create new chat id for meeting
+      context: 
 
  **/
 
-export function MeetingInputButton({ setGenerate, context }) {
+export function MeetingInputButton({
+  setGenerate,
+  context,
+}: {
+  setGenerate: React.Dispatch<React.SetStateAction<boolean>>
+  context: MeetingInputContext
+}) {
   const dispatch = useDispatch()
 
   const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
@@ -28,12 +36,11 @@ export function MeetingInputButton({ setGenerate, context }) {
 
   const handleClick = async () => {
     const headers = setHeaders(false)
-    const chat_data = { chat_type: 'meeting' }
     const chat = await useFetch(chatUrl, 'POST', {
-      data: JSON.stringify(chat_data),
+      data: JSON.stringify({ chat_type: 'meeting' }),
       headers,
     })
-
+    dispatch({ type: 'SET_USER_QUERY', nextUserQuery: currQuestion.query })
     updateCurrQuestion({
       ...currQuestion,
       query: setQuestionWithContext(currQuestion.query, context),

@@ -1,10 +1,8 @@
 import { Button } from '@codegouvfr/react-dsfr/Button'
 import React, { useEffect, useState } from 'react'
 import ReactToPrint from 'react-to-print'
-import { preventDefaultLinkClickBehavior } from 'type-route'
 import { ArchiveType, Chat } from '../../../types'
 import { useApiUrls } from '../../constants/api'
-import { Chatbot } from '../../pages/Chatbot'
 import { useFetch } from '../../utils/hooks'
 import { MeetingOutputs } from '../Meeting/MeetingOutputs'
 

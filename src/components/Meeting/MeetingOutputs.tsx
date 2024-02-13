@@ -80,13 +80,15 @@ function History() {
     <div className="">
       {user.history.map((h, index) => (
         <div className="mb-5" key={index}>
-          <h3 className="fr-background-alt--blue-france">
+          <h3 className="fr-background-alt--blue-france text-ellipsis">
             <button
-              className="fr-accordion__btn text-black"
+              className="fr-accordion__btn text-black text-ellipsis"
               aria-expanded="false"
               aria-controls={`history-${index}`}
             >
-              {h.query}
+              <p className="text-ellipsis overflow-hidden whitespace-nowrap block">
+                {h.query}
+              </p>
             </button>
           </h3>
 
@@ -122,15 +124,14 @@ function SourceTile({ title, text, url }: { title: string; text: string; url: st
   return (
     /*     <a href={url} target="_blank" rel="noreferrer" className='flex'>
      */
-    <div className="flex flex-col fr-col-12 fr-col-sm-4 border border-cyan-400 max-w-[392px]  p-4 h-226 ">
-      {' '}
-      <h4 className="fr-mb-2w h-1/4">{title}</h4>
-      <p className="flex-grow h-2/4">
-        {' '}
-        {text.slice(0, 95)}
-        {text.length > 96 ? '...' : ''}
-      </p>
-      <a style={{ backgroundImage: 'none', textDecoration: 'none' }} href={url}>
+    <div className="flex flex-col fr-col-12 fr-col-sm-4 border border-[rgba(221, 221, 221, 1)] max-w-[392px]  fr-px-4w fr-py-2w h-226 ">
+      <h4 className="fr-mb-2w h-1/4 ">{title}</h4>
+      <p className="flex-grow h-2/4 line-clamp-3 fr-mb-2w ">{text}</p>
+      <a
+        className="line-clamp-1 font-bold"
+        style={{ backgroundImage: 'none', textDecoration: 'none' }}
+        href={url}
+      >
         {url}
       </a>
     </div>
