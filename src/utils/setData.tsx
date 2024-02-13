@@ -1,12 +1,8 @@
-import { Dispatch, SetStateAction, useContext } from 'react'
-import { Question } from 'types'
-import { useApiUrls } from '../constants/api'
-import { CurrQuestionContext } from './context/questionContext'
+import { Question, Sheet, Tile } from 'types'
 import { useFetch } from './hooks'
 
 const modelName: string = import.meta.env.VITE_MODEL_NAME as string
 
-import { Tile, Sheet } from 'types'
 export const setHeaders = (isEventSource: boolean) => {
   const token = localStorage.getItem('authToken')
 

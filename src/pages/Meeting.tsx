@@ -1,11 +1,10 @@
-import { useEffect, useReducer, useState } from 'react'
-import { rmContextFromQuestion } from 'src/utils/setData'
-import { InitialQuestion, RootState } from '../../types'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { InitialQuestion, RootState, MeetingInputContext } from '../../types'
 import { MeetingInputs } from '../components/Meeting/MeetingInputs'
 import { MeetingOutputs } from '../components/Meeting/MeetingOutputs'
 import { CurrQuestionContext } from '../utils/context/questionContext'
 import { emitCloseStream } from '../utils/eventsEmitter'
-import { useDispatch, useSelector } from 'react-redux'
 
 /*****************************************************************************************************
 	
@@ -24,15 +23,9 @@ import { useDispatch, useSelector } from 'react-redux'
 
 export function Meeting() {
   const dispatch = useDispatch()
-  const user = useSelector((state: RootState) => state.user)
-  const stream = useSelector((state: RootState) => state.stream)
-
   const [generate, setGenerate] = useState(false)
   const [currQuestion, setCurrQuestion] = useState(InitialQuestion)
-  const [context, setContext] = useState<{
-    administrations: string[]
-    themes: string[]
-  }>({
+  const [context, setContext] = useState<MeetingInputContext>({
     administrations: [],
     themes: [],
   })

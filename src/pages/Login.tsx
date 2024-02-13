@@ -70,7 +70,11 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
 
   return (
     <LoginContainer>
-      <LoginFields fields={loginFields} handleChange={handleChange} />
+      <LoginFields
+        fields={loginFields}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
       {authFailed && <ButtonInformation>{usernameOrPasswordError}</ButtonInformation>}
       <ButtonsGroup buttons={initButtonsLogin(handleSubmit, isDisable)} />
     </LoginContainer>
