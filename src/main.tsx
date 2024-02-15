@@ -13,7 +13,7 @@ startReactDsfr({ defaultColorScheme: 'system', Link })
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
-  <BrowserRouter basename="/albert">
+  <BrowserRouter basename="/">
     <MFSProvider>
       <Provider store={store}>
         <Root />

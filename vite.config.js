@@ -6,7 +6,6 @@ import { defineConfig } from 'vite'
 
 export default ({ mode }) => {
   const isProduction = mode === 'production'
-  const base = isProduction ? '' : '/albert'
 
   return defineConfig({
     plugins: [react(), tailwindcss(), url()],
@@ -28,6 +27,6 @@ export default ({ mode }) => {
       strictPort: true,
       port: 4173,
     },
-    base: base,
+    base: '',
   })
 }

@@ -5,7 +5,7 @@ import * as v from 'valibot'
 import { LoginContainer } from '../components/Auth/LoginContainer'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
-import { useApiUrls } from '../constants/api'
+import { userUrl } from '../constants/api'
 import { initButtonsSignup } from '../constants/connexion'
 import { invalidEmail, invalidPassword } from '../constants/errorMessages'
 import { signupFields } from '../constants/inputFields'
@@ -42,7 +42,6 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
   const [password, setPassword] = useState('')
   const [confPassword, setConfPassword] = useState('')
   const [errorMesage, setErrorMessage] = useState('')
-  const { userUrl } = useApiUrls()
 
   const handleChange = (e) => {
     e.preventDefault()
@@ -108,7 +107,7 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
         }
         setAuthFailed(true)
       } else {
-        window.location.href = '/albert/login'
+        window.location.href = '/login'
       }
     } catch (error) {
       console.error('Fetch error:', error)
