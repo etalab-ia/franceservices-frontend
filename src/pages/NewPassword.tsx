@@ -39,7 +39,7 @@ export function NewPassword({ authFailed, setAuthFailed }) {
 
     if (res.status && res.status !== 200) setAuthFailed(true)
 
-    return (window.location.href = '/albert/login')
+    return (window.location.href = '/login')
   }
   const fields = signupFields.slice(2, signupFields.length)
 

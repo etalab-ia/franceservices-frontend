@@ -190,9 +190,9 @@ export const setIndexesData = (
 }
 
 export const setTilesFromSheets = (sheets: Sheet[], setTiles: (any) => void) => {
-  if (!sheets || !sheets.length) return setTiles([])
-
   setTiles([])
+  if (!sheets || !sheets.length) return
+
   sheets.map((sheet) => {
     const url = sheet.url
     const parsedUrl = new URL(url)

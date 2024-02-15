@@ -49,7 +49,7 @@ export function Meeting() {
     <CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>
       <div className="fr-container fr-my-3w">
         {generate ? (
-          <MeetingOutputs setGenerate={setGenerate} archive={undefined} />
+          <MeetingOutputs archive={undefined} />
         ) : (
           <MeetingInputs
             setGenerate={setGenerate}

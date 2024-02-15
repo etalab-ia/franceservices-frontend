@@ -14,7 +14,7 @@ var isMFSContext_1 = require('./utils/context/isMFSContext')
 })
 client_1.default.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
-  <react_router_dom_1.BrowserRouter basename="/albert">
+  <react_router_dom_1.BrowserRouter basename="/">
     <isMFSContext_1.MFSProvider>
       <react_redux_1.Provider store={reducer_1.store}>
         <Root_1.Root />

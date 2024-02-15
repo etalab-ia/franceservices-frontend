@@ -1,4 +1,4 @@
-import { type Message, type Question, type User } from 'types'
+import { UserHistory, type Message, type Question, type User } from 'types'
 import { initialChatbotMessage } from '../../constants/chatbotProps'
 
 /*****************************************************************************************************
@@ -69,7 +69,7 @@ type UserAction =
   | { type: 'SET_MESSAGES'; nextMessage: Message }
   | { type: 'SET_STREAM_ID'; nextStreamId: number }
   | { type: 'SET_CHAT_ID'; nextChatId: number }
-  | { type: 'ADD_HISTORY'; newItem: any }
+  | { type: 'ADD_HISTORY'; newItem: UserHistory }
 
 export const userReducer = (state: User = InitialUser, action: UserAction): User => {
   switch (action.type) {

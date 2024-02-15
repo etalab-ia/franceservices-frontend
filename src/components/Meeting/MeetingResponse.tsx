@@ -12,10 +12,14 @@ export function MeetingResponse({ archive }: { archive: ArchiveType | undefined 
   console.log('user', user)
   return (
     <>
-      <h3 className="font-bold ">Votre question</h3>
-      <div className="min-h-12 fr-mb-2w fr-background-alt--blue-france flex items-center fr-px-2w">
-        <p>{user.question.query}</p>
-      </div>
+      {user.history.length !== 0 && (
+        <>
+          <h3 className="font-bold ">Votre question</h3>
+          <div className="min-h-12 fr-mb-2w fr-background-alt--blue-france flex items-center fr-p-2w ">
+            <p>{user.question.query}</p>
+          </div>
+        </>
+      )}
       <GlobalRowContainer extraClass="fr-grid-row--center">
         <MeetingMainResponse archive={archive} />
         <MeetingAdditionalResponse archive={archive} />

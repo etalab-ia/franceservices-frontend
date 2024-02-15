@@ -1,4 +1,3 @@
-import history from '@artwork/pictograms/albert/history.svg'
 import meeting from '@artwork/pictograms/albert/meeting.png'
 import question from '@artwork/pictograms/albert/question.png'
 import aplus from '@artwork/pictograms/logo/LogoA+.png'

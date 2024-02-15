@@ -108,35 +108,6 @@ export const meetingGenerateButton = `Générer la fiche rendez-vous`
 export const meetingAppointmentInformations = `Informations sur le rendez-vous`
 export const meetingAppointmentTitle = 'Fiche rendez-vous'
 
-export const setTilesFromContacts = (webservices, setTiles) => {
-  setTiles([])
-
-  if (!webservices || !webservices.length) return
-
-  webservices.map((webservice) => {
-    const url = webservice.url
-    const parsedUrl = new URL(url)
-    let domain = parsedUrl.hostname
-
-    domain = domain.replace(/^www\./, '')
-    domain = domain.replace(/^entreprendre\./, '')
-
-    const newTile = {
-      linkProps: { to: webservice.url },
-      title: (
-        <>
-          <p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">
-            {webservice.type}
-          </p>
-          <p>{webservice.institution}</p>
-        </>
-      ),
-      desc: domain,
-    }
-    setTiles((prevTiles) => [...prevTiles, newTile])
-  })
-}
-
 export const meetingDefaultQuestionsIntroduction = (
   <GlobalRowContainer>
     <h6 className="text-xl font-bold text-[##3A3A3A]">Tester Albert</h6>

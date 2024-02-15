@@ -10,12 +10,12 @@ export const initButtonsLogin = (onSubmit, isDisable) => {
     },
     {
       children: 'Créer un compte',
-      onClick: () => (window.location.href = '/albert/signup'),
+      onClick: () => (window.location.href = '/signup'),
       priority: 'tertiary',
     },
     {
       children: 'Mot de passe oublié',
-      onClick: () => (window.location.href = '/albert/reset-password'),
+      onClick: () => (window.location.href = '/reset-password'),
       priority: 'tertiary',
     },
   ]
@@ -36,7 +36,7 @@ export const initButtonsSignup = (
     },
     {
       children: 'Retour',
-      onClick: () => (window.location.href = '/albert/login'),
+      onClick: () => (window.location.href = '/login'),
       priority: 'tertiary',
     },
   ]
@@ -53,7 +53,7 @@ export const initButtonsReset = (isDisable: boolean, handleClick: () => void) =>
     },
     {
       children: 'Retour',
-      onClick: () => (window.location.href = '/albert/login'),
+      onClick: () => (window.location.href = '/login'),
       priority: 'tertiary',
     },
   ]

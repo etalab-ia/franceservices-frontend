@@ -1,5 +1,7 @@
-import { useContext, useEffect, useState } from 'react'
-import { ArchiveType, RootState } from 'types'
+import Pagination from '@codegouvfr/react-dsfr/Pagination'
+import { useContext, useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
+import type { ArchiveType, Chunk, RootState, WebService } from 'types'
 import {
   meetingAppointmentInformations,
   meetingAppointmentTitle,
@@ -9,10 +11,8 @@ import { rmContextFromQuestion } from '../../utils/setData'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { GlobalSubtitle } from '../Global/GlobalSubtitle'
 import { GlobalTitle } from '../Global/GlobalTitle'
-import { MeetingEditQuestion } from './MeetingEditQuestion'
 import { MeetingResponse } from './MeetingResponse'
-import { useSelector } from 'react-redux'
-import Pagination from '@codegouvfr/react-dsfr/Pagination'
+import { UsefulLinks } from './UsefulLinks'
 
 /*****************************************************************************************************
 	Displays Albert's response and the modify button
@@ -29,13 +29,13 @@ import Pagination from '@codegouvfr/react-dsfr/Pagination'
  *****************************************************************************************************/
 
 export function MeetingOutputs({
-  setGenerate,
   archive,
 }: {
-  setGenerate: React.Dispatch<React.SetStateAction<boolean>> | undefined
   archive?: ArchiveType
 }) {
   const { currQuestion } = useContext(CurrQuestionContext)
+  const user = useSelector((state: RootState) => state.user)
+
   const [query, setQuery] = archive
     ? useState(archive.query)
     : useState<string>(currQuestion.query)
@@ -49,17 +49,79 @@ export function MeetingOutputs({
       <GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
       <GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
       <GlobalParagraph>{query}</GlobalParagraph>
-
-      {/*  {!archive ? <MeetingEditQuestion setGenerate={setGenerate} /> : <div></div>} */}
+      {user.history.length > 0 && (
+        <DisplayResponse
+          chunks={user.history[0].chunks}
+          response={user.history[0].response}
+          webservices={user.history[0].webservices}
+        />
+      )}
       <History />
-      <div className="fr-container w-full  border --border-default-grey  fr-mb-2w"></div>
       <MeetingResponse archive={archive} />
     </div>
   )
 }
 
+/**
+ * Display a list of accordion, each one contains a user query and the bot's response with sources and useful links
+ */
 function History() {
   const user = useSelector((state: RootState) => state.user)
+
+  return (
+    <>
+      {user.history.map(
+        (h, index) =>
+          index !== 0 && (
+            <div className="mb-5" key={index}>
+              <h3 className="fr-background-alt--blue-france text-ellipsis">
+                <button
+                  className="fr-accordion__btn text-black text-ellipsis"
+                  aria-expanded="false"
+                  aria-controls={`history-${index}`}
+                >
+                  <p className="text-ellipsis overflow-hidden whitespace-nowrap block">
+                    {h.query}
+                  </p>
+                </button>
+              </h3>
+              <div className="fr-collapse" id={`history-${index}`}>
+                <DisplayResponse
+                  chunks={h.chunks}
+                  response={h.response}
+                  webservices={h.webservices}
+                />
+              </div>
+            </div>
+          )
+      )}
+    </>
+  )
+}
+
+function DisplayResponse({
+  chunks,
+  response,
+  webservices,
+}: { chunks: Chunk[]; response: string; webservices: WebService[] }) {
+  return (
+    <>
+      <DisplaySourceCards chunks={chunks} />
+      <div className="fr-grid-row">
+        <div className="flex flex-col fr-col-sm-8">
+          <div className="text-xl font-bold">Synthèse par Albert</div>
+          <GlobalParagraph>{response}</GlobalParagraph>
+        </div>
+        <UsefulLinks webservices={webservices} extraClass="fr-col-sm-4" />
+      </div>
+    </>
+  )
+}
+
+/**
+ * Display an array of chunks in cards with a pagination
+ */
+export function DisplaySourceCards({ chunks }: { chunks: Chunk[] }) {
   const [currentPage, setCurrentPage] = useState(1)
 
   const startIndex = (currentPage - 1) * 3
@@ -77,65 +139,40 @@ function History() {
     return linkProps
   }
   return (
-    <div className="">
-      {user.history.map((h, index) => (
-        <div className="mb-5" key={index}>
-          <h3 className="fr-background-alt--blue-france text-ellipsis">
-            <button
-              className="fr-accordion__btn text-black text-ellipsis"
-              aria-expanded="false"
-              aria-controls={`history-${index}`}
-            >
-              <p className="text-ellipsis overflow-hidden whitespace-nowrap block">
-                {h.query}
-              </p>
-            </button>
-          </h3>
-
-          <div className="fr-collapse" id={`history-${index}`}>
-            <div className="flex flex-col md:flex-row justify-between fr-mt-1w items-center">
-              <h6 className="text-xl font-bold">Sources de réponses</h6>
-              <Pagination
-                count={Math.ceil(h.chunks.length / 3)}
-                defaultPage={currentPage}
-                getPageLinkProps={getPageLinkProps}
-                className="fr-mt-3v"
-              />
-            </div>
-            <div className="flex flex-col md:flex-row gap-2 items-stretch  fr-mt-2v fr-mb-2w">
-              {' '}
-              {h.chunks.slice(startIndex, endIndex).map((c, index) => (
-                <SourceTile
-                  key={`chunk-${index}`}
-                  title={c.title}
-                  text={c.text}
-                  url={c.url}
-                />
-              ))}
-            </div>
-            {h.response}
-          </div>
-        </div>
-      ))}
-    </div>
+    <>
+      <div className="flex flex-col md:flex-row justify-between fr-mt-1w items-center w-full">
+        <h6 className="text-xl font-bold">Sources de réponses</h6>
+        <Pagination
+          count={Math.ceil(chunks.length / 3)}
+          defaultPage={currentPage}
+          getPageLinkProps={getPageLinkProps}
+          className="fr-mt-3v"
+        />
+      </div>
+      <div className="fr-grid-row fr-mt-2v fr-mb-2w gap-2">
+        {chunks.slice(startIndex, endIndex).map((c, index) => (
+          <SourceCard key={`chunk-${index}`} title={c.title} text={c.text} url={c.url} />
+        ))}
+      </div>
+    </>
   )
 }
-function SourceTile({ title, text, url }: { title: string; text: string; url: string }) {
+
+/**
+ * A card that display the source of a response, we get informations for this from the chunks
+ */
+function SourceCard({ title, text, url }: { title: string; text: string; url: string }) {
   return (
-    /*     <a href={url} target="_blank" rel="noreferrer" className='flex'>
-     */
-    <div className="flex flex-col fr-col-12 fr-col-sm-4 border border-[rgba(221, 221, 221, 1)] max-w-[392px]  fr-px-4w fr-py-2w h-226 ">
-      <h4 className="fr-mb-2w h-1/4 ">{title}</h4>
-      <p className="flex-grow h-2/4 line-clamp-3 fr-mb-2w ">{text}</p>
+    <div className=" fr-col-12 fr-col-sm-4 border border-[rgba(221, 221, 221, 1)] fr-px-4w fr-py-2w max-w-[392px]">
+      <h4 className=" ">{title}</h4>
+      <p className=" line-clamp-3">{text}</p>
       <a
-        className="line-clamp-1 font-bold"
+        className="line-clamp-1 font-bold mt-auto bottom"
         style={{ backgroundImage: 'none', textDecoration: 'none' }}
         href={url}
       >
         {url}
       </a>
     </div>
-    /*     </a>
-     */
   )
 }

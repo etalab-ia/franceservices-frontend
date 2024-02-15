@@ -90,7 +90,7 @@ export const SheetsAdditionalButtons = ({
   }, [user.streamId, currQuestion])
 
   return (
-    <div className="fr-background-alt--blue-france">
+    <div>
       {/*       <GlobalSecondaryTitle>{sheetsTitle}</GlobalSecondaryTitle>
       <>
         {!archive && (

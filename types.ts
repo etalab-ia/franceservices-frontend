@@ -1,6 +1,10 @@
 import { store } from './src/utils/reducer/reducer'
 
+/**
+ * The type of the Redux store
+ */
 export type RootState = ReturnType<typeof store.getState>
+
 export type AppDispatch = typeof store.dispatch
 
 const modelName: string = import.meta.env.VITE_MODEL_NAME as string
@@ -21,11 +25,14 @@ export interface User {
   webservices: any[] // Dans sheets webservices: liens utiles lies aux sheets
   chatId: number // current chat id
   streamId: number // current stream id
-  history: {
-    query: string
-    chunks: Chunk[]
-    response: string
-  }[]
+  history: UserHistory[]
+}
+
+export type UserHistory = {
+  query: string
+  chunks: Chunk[]
+  response: string
+  webservices: WebService[]
 }
 
 export type Message = {
@@ -128,9 +135,9 @@ export type ArchiveType = {
   query: string | undefined
   user_text: string
   limit: number
-  context: undefined
-  institution: undefined
-  links: undefined
+  context: any
+  institution: any
+  links: any
   temperature: number
   sources: string[]
   should_sids: string[]
@@ -142,10 +149,10 @@ export type ArchiveType = {
   user_id: number
   chat_id: number
   search_sids: string[]
-  sheets: any[]
-  additionalSheets: any[]
+  sheets: Sheet[]
+  additionalSheets: Sheet[]
   webservices: []
-  chunks: any[]
+  chunks: Chunk[]
 }
 
 /**
@@ -156,7 +163,7 @@ export type StreamState = {
   response: string[]
   historyStream: string[]
   isStreaming: boolean
-  activeTab: number
+  activeTab: number // deprecated
 }
 
 /****************************************************************
@@ -191,4 +198,11 @@ export type Tile = {
 export type MeetingInputContext = {
   administrations: string[]
   themes: string[]
+}
+
+export type WebService = {
+  title: string
+  institution: string
+  url: string
+  type: string
 }
