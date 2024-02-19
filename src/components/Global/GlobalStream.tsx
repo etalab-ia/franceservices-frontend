@@ -1,9 +1,15 @@
+import { useEffect, useRef } from 'react'
+
 export const GlobalStream = ({
   response,
   extraClass,
 }: { response: any[]; extraClass?: string }) => {
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    ref.current.scrollIntoView({ behavior: 'smooth' })
+  }, [response])
   return (
-    <div className={`text-justify ${extraClass}`}>
+    <div ref={ref} className={`text-justify ${extraClass}`}>
       {response.map((item, index) => (
         <span key={index}>
           {item.split('\n').map((line, lineIndex) => (
