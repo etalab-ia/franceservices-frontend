@@ -77,25 +77,6 @@ export function NewQuestionInput({ questionInput, setQuestionInput }) {
     setQuestionInput('')
   }
 
-  useEffect(() => {
-    // console.log('user.question: generate', user.question, user.chatId)
-    if (!user.question.query.length || !user.chatId) return
-    //generateStream(user.question, dispatch, user.chatId, false)
-    dispatch({ type: 'RESET_FEEDBACK' })
-  }, [user.question])
-
-  /*   if (user.question.query.length && user.chatId)
-  {
-    generateStream(user.question, dispatch, user.chatId, false)
-    dispatch({ type: 'RESET_FEEDBACK' })
-
-  } */
-  const handleRenderInput = (params) => {
-    const newParams = { maxLength: 800 }
-    const updatedParams = { ...params, ...newParams }
-
-    return <input {...updatedParams} />
-  }
   function handleKeyDown(e: any) {
     if (e.key === 'Enter' && questionInput !== '' && !stream.isStreaming) {
       handleSubmit()
@@ -103,18 +84,6 @@ export function NewQuestionInput({ questionInput, setQuestionInput }) {
   }
   return (
     <div>
-      {/*       <div className="fr-search-bar fr-mt-2w" id="header-search" role="search">
-       */}
-      {/*         <label className="fr-label">Recherche</label>
-       */} {/*         <input
-          className="fr-input"
-          placeholder="Poser une nouvelle question"
-          type="search"
-          name="search-784-input"
-          onChange={handleChange}
-          value={questionInput}
-          onKeyDown={handleKeyDown}
-        /> */}
       <div className=" w-full ">
         <GlobalSecondaryTitle extraClass="fr-mt-4w fr-mb-2w">
           Poser une question complémentaire
@@ -150,7 +119,5 @@ export function NewQuestionInput({ questionInput, setQuestionInput }) {
         </Button>
       </div>
     </div>
-    /*     </div>
-     */
   )
 }

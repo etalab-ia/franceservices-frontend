@@ -34,6 +34,7 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
         },
         data: null,
       })
+      console.log('archive', res)
 
       setArchive(res.streams[res.streams.length - 1])
       setIsLoading(false)
@@ -44,7 +45,6 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
     }, [])
 
     if (isLoading) return <div>loading...</div>
-
     return (
       <>
         <div className="fr-mb-4w">
@@ -71,9 +71,7 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
         </div>
         <div ref={ref as React.RefObject<HTMLDivElement>}>
           {/* {selectedChat.type === "qa" && <Chatbot archive={archive} />}*/}
-          {selectedChat.type === 'meeting' && (
-            <MeetingOutputs setGenerate={undefined} archive={archive} />
-          )}
+          {selectedChat.type === 'meeting' && <MeetingOutputs archive={archive} />}
         </div>
       </>
     )

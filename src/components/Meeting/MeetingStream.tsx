@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { ArchiveType, RootState, Question } from 'types'
+import { ArchiveType, RootState } from 'types'
 import { useApiUrls } from '../../constants/api'
 import { resultMeetingTitle } from '../../constants/meeting'
 import { useFetch } from '../../utils/hooks'
@@ -8,7 +8,6 @@ import { setHeaders } from '../../utils/setData'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { GlobalSecondaryTitle } from '../Global/GlobalSecondaryTitle'
 import { GlobalStream } from '../Global/GlobalStream'
-import { ResponseExplanation } from '../Global/ResponseExplanation'
 import { MeetingFeedback } from './MeetingFeedback'
 
 /*****************************************************************************************
@@ -60,8 +59,6 @@ export function MeetingStream({ archive }: { archive: ArchiveType | undefined })
         <GlobalParagraph>{agentResponse}</GlobalParagraph>
       )}
       {!stream.isStreaming && stream.historyStream.length !== 0 && <MeetingFeedback />}
-      {/*       <ResponseExplanation chunks={chunks} />
-       */}{' '}
     </>
   )
 }

@@ -1,7 +1,7 @@
 import Pagination from '@codegouvfr/react-dsfr/Pagination'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-import type { ArchiveType, Chunk, RootState, WebService } from 'types'
+import type { ArchiveType, Chunk, RootState, UserHistory, WebService } from 'types'
 import {
   meetingAppointmentInformations,
   meetingAppointmentTitle,
@@ -56,7 +56,7 @@ export function MeetingOutputs({
           webservices={user.history[0].webservices}
         />
       )}
-      <History />
+      <History history={user.history} />
       <MeetingResponse archive={archive} />
     </div>
   )
@@ -65,12 +65,10 @@ export function MeetingOutputs({
 /**
  * Display a list of accordion, each one contains a user query and the bot's response with sources and useful links
  */
-function History() {
-  const user = useSelector((state: RootState) => state.user)
-
+function History({ history }: { history: UserHistory[] }) {
   return (
     <>
-      {user.history.map(
+      {history.map(
         (h, index) =>
           index !== 0 && (
             <div className="mb-5" key={index}>
