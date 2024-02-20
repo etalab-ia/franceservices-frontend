@@ -66,7 +66,7 @@ deploy-front:
     - ssh -i $CI_DEPLOY_USER_SSH_PRIVATE_KEY -o StrictHostKeyChecking=no ${CI_DEPLOY_USER}@${CI_DEPLOY_HOST} "docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY"
     - ssh -i $CI_DEPLOY_USER_SSH_PRIVATE_KEY -o StrictHostKeyChecking=no ${CI_DEPLOY_USER}@${CI_DEPLOY_HOST} "docker pull $CI_REGISTRY_IMAGE/front_albert:latest"
     - ssh -i $CI_DEPLOY_USER_SSH_PRIVATE_KEY -o StrictHostKeyChecking=no ${CI_DEPLOY_USER}@${CI_DEPLOY_HOST} "docker container rm -f miaou-front-albert || true"
-    - ssh -i $CI_DEPLOY_USER_SSH_PRIVATE_KEY -o StrictHostKeyChecking=no ${CI_DEPLOY_USER}@${CI_DEPLOY_HOST} "docker run  -d -p 4174:4173   --name miaou-front-albert $CI_REGISTRY_IMAGE/front_albert:latest"
+    - ssh -i $CI_DEPLOY_USER_SSH_PRIVATE_KEY -o StrictHostKeyChecking=no ${CI_DEPLOY_USER}@${CI_DEPLOY_HOST} "docker run  -d -p 4174:4173 --name miaou-front-albert $CI_REGISTRY_IMAGE/front_albert:latest"
 
 
 ################## France Services ###################
@@ -104,4 +104,4 @@ deploy-front-fs:
     - ssh -i $CI_DEPLOY_USER_SSH_PRIVATE_KEY -o StrictHostKeyChecking=no ${CI_DEPLOY_USER}@${CI_DEPLOY_HOST} "docker pull $CI_REGISTRY_IMAGE/front_albert_fs:latest"
     - ssh -i $CI_DEPLOY_USER_SSH_PRIVATE_KEY -o StrictHostKeyChecking=no ${CI_DEPLOY_USER}@${CI_DEPLOY_HOST} "docker container rm -f miaou-front-albert || true"
     - ssh -i $CI_DEPLOY_USER_SSH_PRIVATE_KEY -o StrictHostKeyChecking=no ${CI_DEPLOY_USER}@${CI_DEPLOY_HOST} "docker container rm -f miaou-front-albert_fs || true"
-    - ssh -i $CI_DEPLOY_USER_SSH_PRIVATE_KEY -o StrictHostKeyChecking=no ${CI_DEPLOY_USER}@${CI_DEPLOY_HOST} "docker run -d -p 4174:4173  --name miaou-front-albert_fs  $CI_REGISTRY_IMAGE/front_albert_fs:latest "
+    - ssh -i $CI_DEPLOY_USER_SSH_PRIVATE_KEY -o StrictHostKeyChecking=no ${CI_DEPLOY_USER}@${CI_DEPLOY_HOST} "docker run -d -p 4174:4173  --name miaou-front-albert_fs $CI_REGISTRY_IMAGE/front_albert_fs:latest "
