@@ -1,72 +1,107 @@
 stages:
-  - publish
-  - publish-fs
+  - build
   - deploy
-  - deploy-fs
 
-publish-front:
+############################################
+################# CONFIG ###################
+############################################
+
+before_script:
+  - | # export env file and copy routing table to pyalbert config
+    if [[ -z $CI_ENVIRONMENT_NAME ]]; then
+      echo "info: CI_ENVIRONMENT_NAME is empty, skip the export"
+    else
+      if [[ $CI_COMMIT_BRANCH = "staging" ]]; then
+        echo "info: export staging env file of $CI_ENVIRONMENT_NAME environment"
+        export $(grep -v "^#" $STAGING__ENV_FILE | xargs)
+      elif [[ $CI_COMMIT_BRANCH = "main" ]]; then
+        echo "info: export production env file of $CI_ENVIRONMENT_NAME environment"
+        export $(grep -v "^#" $PROD__ENV_FILE | xargs)
+      fi
+    fi
+
+config:clean gitlab runner:
   rules:
-    - if: $CI_COMMIT_BRANCH == "main"
-      when: manual
+    - when: manual
       allow_failure: true  # to avoid blocked state
+  stage: .pre
   image: docker:latest
-  stage: publish
   services:
     - docker:dind
   script:
-    - touch .env && echo "VITE_API_URL=$SERVER_URL" > .env
+    - docker system prune -af --volumes
+
+
+################## DINUM ###################
+
+build:front:dinum:
+  environment:
+    name: dinum
+  rules:
+    - if: $CI_COMMIT_BRANCH == "staging" || $CI_COMMIT_BRANCH == "main"
+      when: manual
+      allow_failure: true  # to avoid blocked state
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - touch .env && echo "VITE_API_URL=$CI_DEPLOY_URL" > .env
     - cd . && docker build -t $CI_REGISTRY_IMAGE/front_albert:latest .
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker push $CI_REGISTRY_IMAGE/front_albert:latest
 
-
-publish-front-fs:
-  rules:
-    - if: $CI_COMMIT_BRANCH == "deployMFS" # to be changed, this should be managed in env variable
-      when: manual
-      allow_failure: true  # to avoid blocked state
-  image: docker:latest
-  stage: publish
-  services:
-    - docker:dind
-  script:
-    - touch .env && echo "VITE_API_URL=$SERVER_RECETTE_URL" > .env
-    - cd . && docker build -t $CI_REGISTRY_IMAGE/front_albert_fs:latest .
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker push $CI_REGISTRY_IMAGE/front_albert_fs:latest
-
 deploy-front:
+  environment:
+    name: dinum
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
       when: manual
       allow_failure: true  # to avoid blocked state
-  image: alpine:latest
   stage: deploy
-  environment:
-    name: production
+  image: alpine:latest
   script:
-    - chmod og= $ID_RSA
+    - chmod og= $CI_DEPLOY_USER_SSH_PRIVATE_KEY
     - apk update && apk add openssh-client
-    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY"
-    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker pull $CI_REGISTRY_IMAGE/front_albert:latest"
-    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker container rm -f miaou-front-albert || true"
-    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker run  -d -p 4174:4173   --name miaou-front-albert $CI_REGISTRY_IMAGE/front_albert:latest"
+    - ssh -i $CI_DEPLOY_USER_SSH_PRIVATE_KEY -o StrictHostKeyChecking=no ${CI_DEPLOY_USER}@${CI_DEPLOY_HOST} "docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY"
+    - ssh -i $CI_DEPLOY_USER_SSH_PRIVATE_KEY -o StrictHostKeyChecking=no ${CI_DEPLOY_USER}@${CI_DEPLOY_HOST} "docker pull $CI_REGISTRY_IMAGE/front_albert:latest"
+    - ssh -i $CI_DEPLOY_USER_SSH_PRIVATE_KEY -o StrictHostKeyChecking=no ${CI_DEPLOY_USER}@${CI_DEPLOY_HOST} "docker container rm -f miaou-front-albert || true"
+    - ssh -i $CI_DEPLOY_USER_SSH_PRIVATE_KEY -o StrictHostKeyChecking=no ${CI_DEPLOY_USER}@${CI_DEPLOY_HOST} "docker run  -d -p 4174:4173   --name miaou-front-albert $CI_REGISTRY_IMAGE/front_albert:latest"
 
 
-deploy-front-fs:
+################## France Services ###################
+
+build:front:fs:
+  environment:
+    name: franceservices
   rules:
-    - if: $CI_COMMIT_BRANCH == "deployMFS" # to be changed, this should be managed in env variable
+    - if: $CI_COMMIT_BRANCH == "staging" || $CI_COMMIT_BRANCH == "main"
       when: manual
       allow_failure: true  # to avoid blocked state
-  image: alpine:latest
-  stage: deploy-fs
-  environment:
-    name: fs
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
   script:
-    - chmod og= $ID_RSA
+    - touch .env && echo "VITE_API_URL=$CI_DEPLOY_URL" > .env
+    - cd . && docker build -t $CI_REGISTRY_IMAGE/front_albert:latest .
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker push $CI_REGISTRY_IMAGE/front_albert:latest
+
+deploy-front-fs:
+  environment:
+    name: franceservices
+  rules:
+    - if: $CI_COMMIT_BRANCH == "staging" || $CI_COMMIT_BRANCH == "main"
+      when: manual
+      allow_failure: true  # to avoid blocked state
+  stage: deploy
+  image: alpine:latest
+  script:
+    - chmod og= $CI_DEPLOY_USER_SSH_PRIVATE_KEY
     - apk update && apk add openssh-client
-    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_RECETTE_USER@$SERVER_RECETTE_IP "docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY"
-    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_RECETTE_USER@$SERVER_RECETTE_IP "docker pull $CI_REGISTRY_IMAGE/front_albert_fs:latest"
-    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_RECETTE_USER@$SERVER_RECETTE_IP "docker container rm -f miaou-front-albert || true"
-    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_RECETTE_USER@$SERVER_RECETTE_IP "docker container rm -f miaou-front-albert_fs || true"
-    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_RECETTE_USER@$SERVER_RECETTE_IP "docker run -d -p 4174:4173  --name miaou-front-albert_fs  $CI_REGISTRY_IMAGE/front_albert_fs:latest "
+    - ssh -i $CI_DEPLOY_USER_SSH_PRIVATE_KEY -o StrictHostKeyChecking=no ${CI_DEPLOY_USER}@${CI_DEPLOY_HOST} "docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY"
+    - ssh -i $CI_DEPLOY_USER_SSH_PRIVATE_KEY -o StrictHostKeyChecking=no ${CI_DEPLOY_USER}@${CI_DEPLOY_HOST} "docker pull $CI_REGISTRY_IMAGE/front_albert_fs:latest"
+    - ssh -i $CI_DEPLOY_USER_SSH_PRIVATE_KEY -o StrictHostKeyChecking=no ${CI_DEPLOY_USER}@${CI_DEPLOY_HOST} "docker container rm -f miaou-front-albert || true"
+    - ssh -i $CI_DEPLOY_USER_SSH_PRIVATE_KEY -o StrictHostKeyChecking=no ${CI_DEPLOY_USER}@${CI_DEPLOY_HOST} "docker container rm -f miaou-front-albert_fs || true"
+    - ssh -i $CI_DEPLOY_USER_SSH_PRIVATE_KEY -o StrictHostKeyChecking=no ${CI_DEPLOY_USER}@${CI_DEPLOY_HOST} "docker run -d -p 4174:4173  --name miaou-front-albert_fs  $CI_REGISTRY_IMAGE/front_albert_fs:latest "
