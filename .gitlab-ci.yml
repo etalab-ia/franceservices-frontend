@@ -55,7 +55,7 @@ deploy-front:
   environment:
     name: dinum
   rules:
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "staging" || $CI_COMMIT_BRANCH == "main"
       when: manual
       allow_failure: true  # to avoid blocked state
   stage: deploy
