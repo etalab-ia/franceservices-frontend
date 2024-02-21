@@ -3,18 +3,27 @@ import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { MeetingAdditionalResponse } from './MeetingAdditionalResponse'
 import { MeetingMainResponse } from './MeetingMainResponse'
 import { useSelector } from 'react-redux'
+import { useEffect, useRef } from 'react'
 
 /*
  *	Contains text response from the bot and additional informations like sheets and chunks, useful links
  */
-export function MeetingResponse({ archive }: { archive: ArchiveType | undefined }) {
+export function MeetingCurrentResponse({
+  archive,
+}: { archive: ArchiveType | undefined }) {
   const user = useSelector((state: RootState) => state.user)
-  console.log('user', user)
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (ref.current === null) return
+    ref.current.scrollIntoView({ behavior: 'smooth' })
+  }, [user.messages])
   return (
     <>
       {user.history.length !== 0 && (
         <>
-          <h3 className="font-bold ">Votre question</h3>
+          <h3 ref={ref} className="font-bold ">
+            Votre question
+          </h3>
           <div className="min-h-12 fr-mb-2w fr-background-alt--blue-france flex items-center fr-p-2w ">
             <p>{user.question.query}</p>
           </div>

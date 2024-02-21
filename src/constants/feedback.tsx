@@ -39,7 +39,7 @@ export const satisfiedButtons = [
   'Synthétique',
   'Sources fiables',
   'Autre raison',
-]
+] as const
 
 export const unsatisfiedButtons = [
   'Les éléments sont faux',
@@ -48,7 +48,7 @@ export const unsatisfiedButtons = [
   'Incohérent',
   'Fautes de grammaire',
   'Autre raison',
-]
+] as const
 
 export const askingQuality = `Quelle est la qualité de ce message ?`
 export const redoAskingQuality = `Cette réponse est-elle mieux ou moins bien ?`

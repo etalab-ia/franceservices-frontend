@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { ArchiveType, RootState } from 'types'
-import { useApiUrls } from '../../constants/api'
+import { ArchiveType, InitialFeedback, RootState } from '../../../types'
+import { getChunksUrl } from '../../constants/api'
 import { resultMeetingTitle } from '../../constants/meeting'
 import { useFetch } from '../../utils/hooks'
 import { setHeaders } from '../../utils/setData'
@@ -9,6 +9,7 @@ import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { GlobalSecondaryTitle } from '../Global/GlobalSecondaryTitle'
 import { GlobalStream } from '../Global/GlobalStream'
 import { MeetingFeedback } from './MeetingFeedback'
+import { Feedback } from '../Feedbacks/Feedback'
 
 /*****************************************************************************************
 
@@ -24,7 +25,7 @@ export function MeetingStream({ archive }: { archive: ArchiveType | undefined })
   const user = useSelector((state: RootState) => state.user)
   const agentResponse = archive !== undefined ? archive.response : stream.historyStream[0]
   const [chunks, setChunks] = useState([])
-  const { getChunksUrl } = useApiUrls()
+  const [feedback, setFeedback] = useState(InitialFeedback)
 
   const getChunks = async () => {
     const data = {
@@ -58,7 +59,11 @@ export function MeetingStream({ archive }: { archive: ArchiveType | undefined })
       ) : (
         <GlobalParagraph>{agentResponse}</GlobalParagraph>
       )}
-      {!stream.isStreaming && stream.historyStream.length !== 0 && <MeetingFeedback />}
+      {/* [      {!stream.isStreaming && stream.historyStream.length !== 0 && <MeetingFeedback />}
+] */}{' '}
+      {!stream.isStreaming && stream.historyStream.length !== 0 && (
+        <Feedback feedback={feedback} setFeedback={setFeedback} />
+      )}
     </>
   )
 }

@@ -1,17 +1,33 @@
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { satisfiedButtons, unsatisfiedButtons } from '../../constants/feedback'
-import { InitialFeedback } from '../../utils/feedback'
+import { RootState } from 'types'
+import { Feedback as FeedbackType } from '../../../types'
+import { feedbackUrl } from '../../constants/api'
+import {
+  feedbackConfirmationButton,
+  satisfiedButtons,
+  unsatisfiedButtons,
+} from '../../constants/feedback'
+import { useFetch } from '../../utils/hooks'
 import { useKeyPress } from '../../utils/manageEffects'
+import { setHeaders } from '../../utils/setData'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { ButtonsOptions } from './ButtonsOptions'
-import { ConfirmationButton } from './ConfirmationButton'
 import { InputOption } from './InputOption'
 import { UserFeedbackResume } from './UserFeedbackResume'
 
-export function UserFeedbackOptions({ activeTab, isFirst, feedback, setFeedback }) {
-  const [reasons, setReasons] = useState([])
+export function UserFeedbackOptions({
+  activeTab,
+  isFirst,
+  feedback,
+  setFeedback,
+}: {
+  activeTab: number
+  isFirst: boolean
+  feedback: FeedbackType
+  setFeedback: (feedback: FeedbackType) => void
+}) {
+  const [reasons, setReasons] = useState<string[]>([])
   const [otherReason, setOtherReason] = useState('')
   const [buttonsType, setButtonsType] = useState(
     activeTab === 0 ? satisfiedButtons : unsatisfiedButtons
@@ -59,5 +75,44 @@ export function UserFeedbackOptions({ activeTab, isFirst, feedback, setFeedback 
         setFeedback={setFeedback}
       />
     </GlobalColContainer>
+  )
+}
+
+export const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) => {
+  const streamId = useSelector((state: RootState) => state.user.lastStreamId)
+  const handleConfirm = () => {
+    otherReason &&
+      !reasons.includes(otherReason) &&
+      setFeedback({
+        ...feedback,
+        message: otherReason,
+      })
+
+    const data = {
+      is_good: !feedback.isGood ? true : false,
+      message: feedback.message,
+      reason: reasons[0],
+    }
+    console.log('data', data)
+    useFetch(`${feedbackUrl}/${streamId}`, 'POST', {
+      data: JSON.stringify(data),
+      headers: setHeaders(true),
+    })
+
+    setFeedback({
+      ...feedback,
+      isConfirmed: true,
+    })
+  }
+  const classNames = feedback.reasons.length ? 'text-dark-purple' : 'text-[#929292]'
+
+  return (
+    <button
+      role={feedbackConfirmationButton}
+      onClick={handleConfirm}
+      className={`user-feedback-confirmation-button ${classNames}`}
+    >
+      Confirmer
+    </button>
   )
 }

@@ -13,3 +13,5 @@ export const MFSProvider = ({ children }) => {
   )
   return <isMFSContext.Provider value={isMFS}>{children}</isMFSContext.Provider>
 }
+
+//VITE_ENV_NAME

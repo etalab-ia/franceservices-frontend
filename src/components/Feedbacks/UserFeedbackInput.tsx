@@ -4,9 +4,12 @@ import {
   secondaryButtons,
 } from '../../constants/feedback'
 import { UserFeedbackOptions } from './UserFeedbackOptions'
-// import { UserFeedbackThanks } from "./UserFeedbackThanks";
+import { UserFeedbackThanks } from './UserFeedbackThanks'
 import { UserFeedbackResume } from './UserFeedbackResume'
 
+/**
+ * Prints options
+ */
 export function UserFeedbackInput({ isFirst, feedback, setFeedback }) {
   const buttons = isFirst ? primaryButtons : secondaryButtons
   const activeTab = feedback.isGood
@@ -26,7 +29,7 @@ export function UserFeedbackInput({ isFirst, feedback, setFeedback }) {
       ) : (
         <div>
           <UserFeedbackResume feedback={feedback} />
-          {/* <UserFeedbackThanks /> */}
+          <UserFeedbackThanks />
         </div>
       )}
     </>

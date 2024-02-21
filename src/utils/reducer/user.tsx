@@ -50,6 +50,7 @@ const InitialUser: User = {
   chatId: 0,
   streamId: 0,
   history: [],
+  lastStreamId: 0,
 }
 
 type UserAction =
@@ -70,9 +71,15 @@ type UserAction =
   | { type: 'SET_STREAM_ID'; nextStreamId: number }
   | { type: 'SET_CHAT_ID'; nextChatId: number }
   | { type: 'ADD_HISTORY'; newItem: UserHistory }
+  | { type: 'SET_LAST_STREAM_ID'; nextLastStreamId: number }
 
 export const userReducer = (state: User = InitialUser, action: UserAction): User => {
   switch (action.type) {
+    case 'SET_LAST_STREAM_ID':
+      return {
+        ...state,
+        lastStreamId: action.nextLastStreamId,
+      }
     case 'ADD_HISTORY':
       return {
         ...state,

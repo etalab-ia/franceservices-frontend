@@ -17,7 +17,7 @@ export const UsefulLinks = ({
 
       {tiles.map((tile, key) => {
         return (
-          <div className="fr-mb-2w">
+          <div className="fr-mb-2w" key={key}>
             <SmallHorizontalTile tileProps={tile} />{' '}
           </div>
           /*                     <Tile
@@ -36,27 +36,28 @@ export const UsefulLinks = ({
 
 function SmallHorizontalTile({ tileProps }: { tileProps: TileType }) {
   return (
-    <a href={tileProps.linkProps.href}>
-      <div
-        className="fr-tile fr-tile--sm fr-tile--horizontal hover:bg-[#f6f6f6]"
-        id="tile-6661"
-      >
-        <div className="fr-tile__body">
-          <div className="fr-tile__content">
-            <h3 className="fr-tile__title">
-              <a
-                style={{ backgroundImage: 'none', textDecoration: 'none' }}
-                href={tileProps.linkProps.href}
-              >
-                {tileProps.title}
-              </a>
-            </h3>
-            <p className="fr-tile__detail">{tileProps.desc.key}</p>
-            <div className="fr-tile__start"></div>
-          </div>
+    /*     <a href={tileProps.linkProps.href}>
+     */ <div
+      className="fr-tile fr-tile--sm fr-tile--horizontal fr-enlarge-link  hover:bg-[#f6f6f6]"
+      id="tile-6661"
+    >
+      <div className="fr-tile__body">
+        <div className="fr-tile__content">
+          <h3 className="fr-tile__title">
+            <a
+              href={tileProps.linkProps.href}
+              style={{ backgroundImage: 'none', textDecoration: 'none' }}
+            >
+              {tileProps.title}
+            </a>
+          </h3>
+          <p className="fr-tile__detail">{tileProps.desc.key}</p>
+          <div className="fr-tile__start"></div>
         </div>
       </div>
-    </a>
+    </div>
+    /*     </a>
+     */
   )
 }
 

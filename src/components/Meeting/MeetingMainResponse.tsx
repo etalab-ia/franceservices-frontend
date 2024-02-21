@@ -1,5 +1,5 @@
 import { Button } from '@codegouvfr/react-dsfr/Button'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ArchiveType, RootState } from 'types'
 import { CurrQuestionContext } from '../../utils/context/questionContext'
@@ -20,12 +20,16 @@ import { MeetingStream } from './MeetingStream'
 
 export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefined }) {
   const [question, setQuestion] = useState('')
+  /*   const [feedback, setFeedback] = useState<FeedbackType>(InitialFeedback)
+   */
   const user = useSelector((state: RootState) => state.user)
   return (
     <>
       <DisplaySourceCards chunks={user.chunks} />
       <GlobalColContainer>
         <MeetingStream archive={archive} />
+        {/*         <Feedback isFirst={true} feedback={feedback} setFeedback={setFeedback} />
+         */}{' '}
         {!archive && (
           <NewQuestionInput questionInput={question} setQuestionInput={setQuestion} />
         )}

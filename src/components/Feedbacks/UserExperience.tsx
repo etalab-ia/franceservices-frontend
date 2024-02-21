@@ -25,11 +25,7 @@ export function UserExperience({ feedback, setFeedback }) {
             <Avatar user="agent" />
             <AskingResponseQuality tabsLen={tabsLen} />
           </GlobalRowContainer>
-          <Feedback
-            isFirst={tabsLen === 1}
-            feedback={feedback}
-            setFeedback={setFeedback}
-          />
+          <Feedback />
         </div>
       )}
     </>

@@ -100,6 +100,7 @@ export async function generateStream(
     headers,
   })
   dispatch({ type: 'SET_STREAM_ID', nextStreamId: stream.id })
+  dispatch({ type: 'SET_LAST_STREAM_ID', nextLastStreamId: stream.id })
 
   await useStream(dispatch, stream.id, isChat)
 }
