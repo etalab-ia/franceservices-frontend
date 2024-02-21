@@ -29,7 +29,6 @@
     "@reduxjs/toolkit": "^1.9.7",
     "@types/event-source-polyfill": "^1.0.5",
     "@types/jest": "^29.5.11",
-    "axios": "^1.5.0",
     "caniuse-lite": "^1.0.30001564",
     "dayjs": "^1.11.9",
     "event-source-polyfill": "^1.0.31",

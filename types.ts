@@ -26,6 +26,7 @@ export interface User {
   chatId: number // current chat id
   streamId: number // current stream id
   history: UserHistory[]
+  lastStreamId: number // Keeps track of the last stream id, used to send feedback with the right stream id
 }
 
 export type UserHistory = {
@@ -130,12 +131,13 @@ export type Chat = {
 } */
 
 export type ArchiveType = {
+  chat_id: number
+  context: string
   model_name: string
   mode: string
   query: string | undefined
   user_text: string
   limit: number
-  context: any
   institution: any
   links: any
   temperature: number
@@ -147,7 +149,6 @@ export type ArchiveType = {
   id: number
   is_streaming: boolean
   user_id: number
-  chat_id: number
   search_sids: string[]
   sheets: Sheet[]
   additionalSheets: Sheet[]
@@ -195,14 +196,37 @@ export type Tile = {
   horizontal?: boolean
 }
 
+/**
+ * Additional inputs for a meeting
+ */
 export type MeetingInputContext = {
   administrations: string[]
   themes: string[]
 }
 
+/**
+ * Useful links for the meeting's response
+ */
 export type WebService = {
   title: string
   institution: string
   url: string
   type: string
+}
+
+/**
+ * Feedback form after a meeting response
+ */
+export interface Feedback {
+  reasons: string[]
+  isConfirmed: boolean
+  isGood: number | undefined
+  message: string
+}
+
+export const InitialFeedback: Feedback = {
+  reasons: [],
+  isConfirmed: false,
+  isGood: undefined,
+  message: '',
 }

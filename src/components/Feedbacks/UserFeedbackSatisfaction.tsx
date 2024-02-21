@@ -4,8 +4,20 @@ import {
   secondaryButtons,
 } from '../../constants/feedback'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
+import { Feedback as FeedbackType } from '../../../types'
 
-export function UserFeedbackSatisfaction({ isFirst, feedback, setFeedback }) {
+/**
+ * These are the good or bad buttons that the user can click to give feedback
+ */
+export function UserFeedbackSatisfaction({
+  isFirst,
+  feedback,
+  setFeedback,
+}: {
+  isFirst: boolean
+  feedback: FeedbackType
+  setFeedback: (feedback: FeedbackType) => void
+}) {
   const buttons = isFirst ? primaryButtons : secondaryButtons
 
   const handleClick = (isGood: number) => {
