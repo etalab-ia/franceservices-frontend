@@ -6,12 +6,12 @@ export const primaryButtons = [
   {
     type: 'satisfaisant',
     img: thumbsUp,
-    name: 'Bon',
+    name: 'La réponse est pertinente',
   },
   {
     type: 'insatisfaisant',
     img: thumbsDown,
-    name: 'Mauvais',
+    name: "La réponse n'est pas pertinente",
   },
 ]
 

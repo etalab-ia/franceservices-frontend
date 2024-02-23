@@ -107,7 +107,9 @@ export function DisplayResponse({
     <>
       <DisplaySourceCards chunks={chunks} />
       <div className="fr-grid-row">
-        <div className={webservices.length ? `fr-col-sm-8` : 'fr-col-sm-12'}>
+        <div
+          className={webservices && webservices.length ? `fr-col-sm-8` : 'fr-col-sm-12'}
+        >
           <div className="text-xl font-bold">Synthèse par Albert</div>
           <GlobalParagraph>{response}</GlobalParagraph>
         </div>

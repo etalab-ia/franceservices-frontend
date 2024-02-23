@@ -15,7 +15,7 @@ export const ButtonsOptions = ({ isFirst, buttonsType, reasons, setReasons }) =>
       {isFirst &&
         buttonsType.map((button, index) => {
           const classNames = reasons.includes(buttonsType[index])
-            ? 'bg-purple'
+            ? 'fr-background-action-high--blue-france'
             : 'bg-[white]'
 
           return (
@@ -27,7 +27,9 @@ export const ButtonsOptions = ({ isFirst, buttonsType, reasons, setReasons }) =>
               >
                 <p
                   className={
-                    reasons.includes(buttonsType[index]) ? 'text-white' : 'text-purple'
+                    reasons.includes(buttonsType[index])
+                      ? 'text-white'
+                      : 'fr-text-action-high--blue-france'
                   }
                 >
                   {button}

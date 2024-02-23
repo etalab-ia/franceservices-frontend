@@ -109,7 +109,7 @@ export const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback
     <button
       role={feedbackConfirmationButton}
       onClick={handleConfirm}
-      className={`user-feedback-confirmation-button ${classNames}`}
+      className={`border-3  fr-border-action-high--blue-france fr-text-action-high--blue-france`}
     >
       Confirmer
     </button>
