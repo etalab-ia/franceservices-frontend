@@ -113,7 +113,7 @@ export function DisplayResponse({
           <div className="text-xl font-bold">Synthèse par Albert</div>
           <GlobalParagraph>{response}</GlobalParagraph>
         </div>
-        {webservices.length > 0 && (
+        {webservices && webservices.length > 0 && (
           <UsefulLinks webservices={webservices} extraClass="fr-col-sm-4" />
         )}
       </div>
@@ -165,17 +165,27 @@ export function DisplaySourceCards({ chunks }: { chunks: Chunk[] }) {
  * A card that display the source of a response, we get informations for this from the chunks
  */
 function SourceCard({ title, text, url }: { title: string; text: string; url: string }) {
+  const domain = new URL(url).hostname
   return (
-    <div className=" fr-col-12 fr-col-sm-4 border border-[rgba(221, 221, 221, 1)] fr-px-4w fr-py-2w max-w-[392px]">
-      <h4 className="line-clamp-2 fr-mb-2w">{title}</h4>
-      <p className=" line-clamp-3">{text}</p>
+    <div
+      className="fr-col-12 fr-col-sm-4 border border-[rgba(221, 221, 221, 1)] fr-px-4w fr-py-2w max-w-[392px] fr-background-action--high-blue relative"
+      style={{ position: 'relative' }}
+    >
+      <h4 className="font-bold line-clamp-2 fr-mb-2w">{title}</h4>
+      <p className=" line-clamp-3 fr-mb-4w">{text}</p>
       <a
-        className="line-clamp-1 font-bold mt-auto bottom"
+        className="font-bold mt-auto absolute bottom-0  fr-mb-2w no-external-link-icon "
         style={{ backgroundImage: 'none', textDecoration: 'none' }}
         href={url}
+        target="_blank"
+        rel="noopener noreferrer"
       >
-        {url}
+        <Badge text={domain} />
       </a>
     </div>
   )
+}
+
+function Badge({ text }: { text: string }) {
+  return <div className=" ">{text}</div>
 }
