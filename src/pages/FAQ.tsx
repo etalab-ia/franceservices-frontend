@@ -13,8 +13,10 @@ export function FAQ() {
           <div className="h6-container">
             <h6 className="font-bold text-2xl fr-pb-2w">{faq.albertInfo.categoryName}</h6>
           </div>
-          {faq.albertInfo.questions.map((question) => (
-            <Accordion label={question.label}>{question.content}</Accordion>
+          {faq.albertInfo.questions.map((question, index) => (
+            <Accordion key={index} label={question.label}>
+              {question.content}
+            </Accordion>
           ))}
           <CallOut className="fr-mt-3w">
             <>
@@ -32,8 +34,10 @@ export function FAQ() {
               {faq.albertUsage.categoryName}
             </h6>
           </div>
-          {faq.albertUsage.questions.map((question) => (
-            <Accordion label={question.label}>{question.content}</Accordion>
+          {faq.albertUsage.questions.map((question, index) => (
+            <Accordion key={index} label={question.label}>
+              {question.content}
+            </Accordion>
           ))}
         </div>
       </div>

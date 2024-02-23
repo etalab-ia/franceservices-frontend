@@ -1006,11 +1006,3 @@ video {
 
 
 }
-
-.no-external-link-icon a.urlextern,
-.no-external-link-icon a.interwiki,
-.no-external-link-icon a.windows,
-.no-external-link-icon a.mail {
-    background-image: none !important;
-    padding-left: 0 !important;
-}
