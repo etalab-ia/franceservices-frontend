@@ -37,7 +37,9 @@ export function UserFeedbackSatisfaction({
             onClick={() => handleClick(index)}
             key={index}
             className={`user-feedback-buttons ${
-              index === feedback.isGood ? 'bg-purple' : 'bg-white'
+              index === feedback.isGood
+                ? 'fr-background-action-high--blue-france'
+                : 'bg-white'
             }`}
             disabled={feedback.isConfirmed}
           >
@@ -48,7 +50,13 @@ export function UserFeedbackSatisfaction({
               }
               src={button.img}
             />
-            <p className={`${index === feedback.isGood ? 'text-white' : 'text-purple'}`}>
+            <p
+              className={`${
+                index === feedback.isGood
+                  ? 'text-white'
+                  : 'fr-text-action-high--blue-france'
+              }`}
+            >
               {button.name}
             </p>
           </button>
