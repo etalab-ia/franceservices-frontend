@@ -127,6 +127,13 @@ export const defaultInputFields = [
     themes: ['Allocation sociale', 'RSA'],
     administrations: ['CAF'],
   },
+  {
+    title: "Renouveler une carte d'identité perdue",
+    question:
+      "L'usager a perdu sa carte d'identité. Quelles sont les étapes à suivre pour la renouveler ?",
+    themes: ["Carte d'identité"],
+    administrations: ['ANTS'],
+  },
   // {
   // 	title: "Renouveler une carte de mobilité inclusion sans compte en ligne",
   // 	question:
