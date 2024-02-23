@@ -66,6 +66,7 @@ export function MeetingOutputs({
  * Display a list of accordion, each one contains a user query and the bot's response with sources and useful links
  */
 export function History({ history }: { history: UserHistory[] }) {
+  console.log('history', history)
   return (
     <>
       {history.map((h, index) => (
@@ -106,11 +107,13 @@ export function DisplayResponse({
     <>
       <DisplaySourceCards chunks={chunks} />
       <div className="fr-grid-row">
-        <div className="fr-col-sm-8">
+        <div className={webservices.length ? `fr-col-sm-8` : 'fr-col-sm-12'}>
           <div className="text-xl font-bold">Synthèse par Albert</div>
           <GlobalParagraph>{response}</GlobalParagraph>
         </div>
-        <UsefulLinks webservices={webservices} extraClass="fr-col-sm-4" />
+        {webservices.length > 0 && (
+          <UsefulLinks webservices={webservices} extraClass="fr-col-sm-4" />
+        )}
       </div>
     </>
   )

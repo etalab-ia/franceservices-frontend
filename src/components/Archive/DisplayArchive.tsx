@@ -12,6 +12,7 @@ import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { GlobalSubtitle } from '../Global/GlobalSubtitle'
 import { GlobalTitle } from '../Global/GlobalTitle'
 import { DisplayResponse, History } from '../Meeting/MeetingOutputs'
+import { setHeaders } from '../../utils/setData'
 
 /**********************************************************************************************
 		
@@ -31,27 +32,70 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
     }
     window.addEventListener('popstate', () => {})
     const { getStreamsUrl } = useApiUrls()
-    const [archive, setArchive] = useState<ArchiveType[]>()
+    const [archive, setArchive] = useState<UserHistory[]>()
     const token = localStorage.getItem('authToken')
     const [isLoading, setIsLoading] = useState(true)
-    const getStreamsFromChat = async () => {
-      const res = await useFetch(getStreamsUrl + `/${selectedChat.id}`, 'GET', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        data: null,
-      })
-      console.log('archive', res)
 
-      setArchive(res.streams)
-      setIsLoading(false)
+    const fetchStreamsAndSetHistory = async () => {
+      setIsLoading(true)
+      try {
+        // Fetch streams for the selected chat
+        const streamsResponse = await fetch(`${getStreamsUrl}/${selectedChat.id}`, {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }).then((res) => res.json())
+
+        if (!streamsResponse || !streamsResponse.streams) {
+          console.log('No streams found')
+          setIsLoading(false)
+          return
+        }
+
+        // Fetch chunks for each stream
+        const streamsHistory = await Promise.all(
+          streamsResponse.streams.map(async (stream) => {
+            const chunksResponse = await fetch(getChunksUrl, {
+              method: 'POST',
+              headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ uids: stream.rag_sources }),
+            }).then((res) => res.json())
+
+            return {
+              query: stream.query,
+              chunks: chunksResponse, // Ensure this matches expected structure
+              response: stream.response,
+              webservices: [], // Additional processing as needed
+            }
+          })
+        )
+
+        setArchive(streamsHistory)
+      } catch (error) {
+        console.error('Failed to fetch streams or chunks:', error)
+      } finally {
+        setIsLoading(false)
+      }
     }
 
     useEffect(() => {
-      getStreamsFromChat()
-    }, [])
+      fetchStreamsAndSetHistory()
+    }, [selectedChat.id])
 
-    if (isLoading) return <div>loading...</div>
+    if (isLoading)
+      if (isLoading)
+        if (isLoading)
+          // Dependency array ensure
+
+          // Reacting to changes in selectedChat.id
+
+          return <div>loading...</div>
+
     return (
       <>
         <div className="fr-mb-4w">
@@ -79,7 +123,7 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
         <div ref={ref as React.RefObject<HTMLDivElement>}>
           {/* {selectedChat.type === "qa" && <Chatbot archive={archive} />}*/}
           {/* {selectedChat.type === 'meeting' && <MeetingOutputs archive={archive} />} */}
-          <DisplayMeetingArchive streams={streamsToHistory(archive)} />
+          <DisplayMeetingArchive streams={archive} />
         </div>
       </>
     )
@@ -87,36 +131,36 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
 )
 
 function DisplayMeetingArchive({ streams }: { streams: UserHistory[] }) {
+  useEffect(() => {
+    console.log('streams', streams)
+  }, [])
+
   return (
     <>
-      {streams.map((stream, index) => (
-        <>
-          <GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
-          <GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
-          <GlobalParagraph>{stream.query}</GlobalParagraph>
-          {streams.length > 0 && (
-            <DisplayResponse
-              chunks={streams[0].chunks}
-              response={streams[0].response}
-              webservices={streams[0].webservices}
-            />
-          )}
-          <History history={streams.slice(1, streams.length - 1)} />
-        </>
-      ))}
+      <GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
+      <GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
+      <GlobalParagraph>{streams[0].query}</GlobalParagraph>
+
+      <div className="ft-container h-full w-full bg-red">
+        {streams.length > 0 && (
+          <DisplayResponse
+            chunks={streams[0].chunks}
+            response={streams[0].response}
+            webservices={streams[0].webservices}
+          />
+        )}
+        <History history={streams.slice(1, streams.length)} />
+      </div>
     </>
   )
 }
 
-function streamsToHistory(streams: any[]) {
+async function streamsToHistory(streams: any[]) {
   let history: UserHistory[] = []
   const token = localStorage.getItem('authToken')
-  streams.forEach((stream, index) => {
-    console.log('rag_sources', stream.rag_sources)
-    useFetch(getChunksUrl, 'POST', {
-      headers: {
-        Authorization: `Bearer ${token} `,
-      },
+  streams.forEach(async (stream, index) => {
+    await useFetch(getChunksUrl, 'POST', {
+      headers: setHeaders(false),
       data: JSON.stringify({ uids: stream.rag_sources }),
     }).then((res) => {
       history.push({

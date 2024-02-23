@@ -15,9 +15,7 @@ export function Feedback({
   feedback,
   setFeedback,
 }: { feedback: FeedbackType; setFeedback: (feedback: FeedbackType) => void }) {
-  console.log('feedback', feedback)
   const user = useSelector((state: RootState) => state.user)
-  console.log('streamID in feedback', user.lastStreamId)
   useEffect(() => {
     setFeedback(InitialFeedback)
   }, [])

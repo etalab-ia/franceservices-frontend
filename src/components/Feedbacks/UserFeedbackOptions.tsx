@@ -91,12 +91,11 @@ export const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback
     const data = {
       is_good: !feedback.isGood ? true : false,
       message: feedback.message,
-      reason: reasons[0],
+      reason: 'reliable_sources',
     }
-    console.log('data', data)
     useFetch(`${feedbackUrl}/${streamId}`, 'POST', {
       data: JSON.stringify(data),
-      headers: setHeaders(true),
+      headers: setHeaders(false),
     })
 
     setFeedback({

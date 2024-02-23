@@ -3,6 +3,9 @@ import { useFetch } from './hooks'
 
 const modelName: string = import.meta.env.VITE_MODEL_NAME as string
 
+/*
+ * isEventSource is true when fetching for a stream
+ */
 export const setHeaders = (isEventSource: boolean) => {
   const token = localStorage.getItem('authToken')
 
@@ -163,7 +166,6 @@ export const getIndexes = async (
       data: setIndexesBody(data, indexType, chunkSize, streamId),
       headers: setHeaders(false),
     })
-    console.log('idexes: ', res)
     dispatch({ type: actionType, [indexType]: res })
   } catch (error) {
     console.error('An error occurred: ', error)
