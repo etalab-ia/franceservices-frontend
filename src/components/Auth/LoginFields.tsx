@@ -2,7 +2,8 @@ import Input from '@codegouvfr/react-dsfr/Input'
 import { PasswordInput } from '@codegouvfr/react-dsfr/blocks/PasswordInput'
 
 export const LoginFields = ({ fields, handleChange, handleSubmit }) => {
-  function handleKeyDown(e: any) {
+  function handleKeyDown(e) {
+    e.preventDefault()
     if (e.key === 'Enter') {
       handleSubmit()
     }
@@ -18,7 +19,7 @@ export const LoginFields = ({ fields, handleChange, handleSubmit }) => {
             nativeInputProps={{
               ...field.nativeInputProps,
               onChange: handleChange,
-              onKeyDown: { handleKeyDown },
+              onKeyDown: handleKeyDown,
             }}
           />
         ) : (
@@ -29,7 +30,7 @@ export const LoginFields = ({ fields, handleChange, handleSubmit }) => {
             nativeInputProps={{
               ...field.nativeInputProps,
               onChange: handleChange,
-              onKeyDown: {},
+              onKeyDown: handleKeyDown,
             }}
           />
         )
