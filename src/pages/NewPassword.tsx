@@ -45,7 +45,11 @@ export function NewPassword({ authFailed, setAuthFailed }) {
 
   return (
     <LoginContainer>
-      <LoginFields fields={fields} handleChange={handleChange} />
+      <LoginFields
+        handleSubmit={handleClick}
+        fields={fields}
+        handleChange={handleChange}
+      />
       {authFailed && <ButtonInformation>{changePasswordFailed}</ButtonInformation>}
       <ButtonsGroup
         buttons={initButtonsSignup(
