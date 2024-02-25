@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { ArchiveType } from 'types'
-import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { SheetsAdditionalButtons } from './SheetsAdditionalButtons'
 import { SheetsTilesContainer } from './SheetsTilesContainer'
 
