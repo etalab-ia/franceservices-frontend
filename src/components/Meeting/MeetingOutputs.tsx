@@ -66,7 +66,6 @@ export function MeetingOutputs({
  * Display a list of accordion, each one contains a user query and the bot's response with sources and useful links
  */
 export function History({ history }: { history: UserHistory[] }) {
-  console.log('history', history)
   return (
     <>
       {history.map((h, index) => (

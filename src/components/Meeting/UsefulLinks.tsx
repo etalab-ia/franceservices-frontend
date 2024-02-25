@@ -1,4 +1,3 @@
-import { Tile } from '@codegouvfr/react-dsfr/Tile'
 import { Tile as TileType, WebService } from 'types'
 
 /*
@@ -18,16 +17,8 @@ export const UsefulLinks = ({
       {tiles.map((tile, key) => {
         return (
           <div className="fr-mb-2w" key={key}>
-            <SmallHorizontalTile tileProps={tile} />{' '}
+            <SmallHorizontalTile tileProps={tile} />
           </div>
-          /*                     <Tile
-            key={key}
-            horizontal
-            className="fr-mb-3v"
-            desc={tile.desc}
-            linkProps={tile.linkProps}
-            title={tile.title}
-          /> */
         )
       })}
     </div>
@@ -36,8 +27,7 @@ export const UsefulLinks = ({
 
 function SmallHorizontalTile({ tileProps }: { tileProps: TileType }) {
   return (
-    /*     <a href={tileProps.linkProps.href}>
-     */ <div
+    <div
       className="fr-tile fr-tile--sm fr-tile--horizontal fr-enlarge-link  hover:bg-[#f6f6f6]"
       id="tile-6661"
     >
@@ -56,8 +46,6 @@ function SmallHorizontalTile({ tileProps }: { tileProps: TileType }) {
         </div>
       </div>
     </div>
-    /*     </a>
-     */
   )
 }
 
