@@ -22,7 +22,7 @@ export const ButtonsOptions = ({ isFirst, buttonsType, reasons, setReasons }) =>
             <div key={index}>
               <button
                 role={feedbackButtonsChoice(button)}
-                className={`user-feedback-buttons ${classNames}`}
+                className={`user-feedback-buttons fr-text-action-high--blue-france ${classNames}`}
                 onClick={() => handleClick(index)}
               >
                 <p

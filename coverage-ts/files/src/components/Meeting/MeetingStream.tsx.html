@@ -11,18 +11,17 @@
 <link href="../../../../assets/source-file.css" type="text/css" rel="stylesheet">
     </head>
     <body>
-    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src/components/Meeting/MeetingStream.tsx</td><td class="">97.85%</td><td class="">80%</td><td class="">93</td><td class="">91</td><td class="">2</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { useSelector } from &quot;react-redux&quot;
-import { GlobalParagraph } from &quot;../Global/GlobalParagraph&quot;
-import { GlobalStream } from &quot;../Global/GlobalStream&quot;
-import { resultMeetingTitle } from &quot;../../constants/meeting&quot;
-import { GlobalSecondaryTitle } from &quot;../Global/GlobalSecondaryTitle&quot;
-import { MeetingFeedback } from &quot;./MeetingFeedback&quot;
-import { ResponseExplanation } from &quot;../Global/ResponseExplanation&quot;
-import { ArchiveType, RootState } from &quot;types&quot;
-import { useEffect, useState } from &quot;react&quot;
-import { useFetch } from &quot;../../utils/hooks&quot;
-import { useApiUrls } from &quot;../../constants/api&quot;
-import { setHeaders } from &quot;../../utils/setData&quot;
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src/components/Meeting/MeetingStream.tsx</td><td class="">97.89%</td><td class="">80%</td><td class="">95</td><td class="">93</td><td class="">2</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { useEffect, useState } from &#x27;react&#x27;
+import { useSelector } from &#x27;react-redux&#x27;
+import { ArchiveType, InitialFeedback, RootState } from &#x27;types&#x27;
+import { getChunksUrl } from &#x27;../../constants/api&#x27;
+import { resultMeetingTitle } from &#x27;../../constants/meeting&#x27;
+import { useFetch } from &#x27;../../utils/hooks&#x27;
+import { setHeaders } from &#x27;../../utils/setData&#x27;
+import { Feedback } from &#x27;../Feedbacks/Feedback&#x27;
+import { GlobalParagraph } from &#x27;../Global/GlobalParagraph&#x27;
+import { GlobalSecondaryTitle } from &#x27;../Global/GlobalSecondaryTitle&#x27;
+import { GlobalStream } from &#x27;../Global/GlobalStream&#x27;
 
 /*****************************************************************************************
 
@@ -34,50 +33,54 @@ import { setHeaders } from &quot;../../utils/setData&quot;
 
  *****************************************************************************************/
 export function MeetingStream({ archive }: { archive: ArchiveType | undefined }) {
-	const stream = useSelector((state: RootState) =&gt; state.stream)
-	const user = useSelector((state: RootState) =&gt; state.user)
-	const agentResponse = archive !== undefined ? archive.response : stream.historyStream[0]
-	const [chunks, setChunks] = useState([])
-	const { getChunksUrl } = useApiUrls()
+  const stream = useSelector((state: RootState) =&gt; state.stream)
+  const user = useSelector((state: RootState) =&gt; state.user)
+  const agentResponse = archive !== undefined ? archive.response : stream.historyStream[0]
+  const [chunks, setChunks] = useState([])
+  const [feedback, setFeedback] = useState(InitialFeedback)
 
-	const getChunks = async () =&gt; {
-		const data = {
-			uids: archive.rag_sources,
-		}
-		const chunksRes = await useFetch(getChunksUrl, &quot;POST&quot;, {
-			headers: setHeaders(false),
-			data: JSON.stringify(data),
-		})
+  const getChunks = async () =&gt; {
+    const data = {
+      uids: archive.rag_sources,
+    }
+    const chunksRes = await useFetch(getChunksUrl, &#x27;POST&#x27;, {
+      headers: setHeaders(false),
+      data: JSON.stringify(data),
+    })
+    setChunks(chunksRes)
+  }
 
-		setChunks(chunksRes)
-	}
+  useEffect(() =&gt; {
+    if (archive) {
+      getChunks()
+    }
+  }, [])
 
-	useEffect(() =&gt; {
-		if (archive !== undefined) {
-			getChunks()
-		}
-	}, [])
+  useEffect(() =&gt; {
+    if (!user.chunks.length) return
 
-	useEffect(() =&gt; {
-		if (!user.chunks.length) return
-
-		setChunks(user.chunks)
-	}, [user.chunks])
-	return (
-		&lt;&gt;
-			&lt;GlobalSecondaryTitle extraClass=&quot;fr-mb-2w &quot;&gt;{resultMeetingTitle}&lt;/GlobalSecondaryTitle&gt;
-			{stream.isStreaming ? (
-				&lt;GlobalStream response={stream.response} /&gt;
-			) : (
-				&lt;GlobalParagraph&gt;{agentResponse}&lt;/GlobalParagraph&gt;
-			)}
-			{!stream.isStreaming &amp;&amp; stream.historyStream.length !== 0 &amp;&amp; &lt;MeetingFeedback /&gt;}
-			&lt;ResponseExplanation chunks={chunks} /&gt;
-		&lt;/&gt;
-	)
+    setChunks(user.chunks)
+  }, [user.chunks])
+  return (
+    &lt;&gt;
+      &lt;GlobalSecondaryTitle extraClass=&quot;fr-mb-2w&quot;&gt;
+        {resultMeetingTitle}
+      &lt;/GlobalSecondaryTitle&gt;
+      {stream.isStreaming ? (
+        &lt;GlobalStream response={stream.response} /&gt;
+      ) : (
+        &lt;GlobalParagraph&gt;{agentResponse}&lt;/GlobalParagraph&gt;
+      )}
+      {/* [      {!stream.isStreaming &amp;&amp; stream.historyStream.length !== 0 &amp;&amp; &lt;MeetingFeedback /&gt;}
+] */}{&#x27; &#x27;}
+      {!stream.isStreaming &amp;&amp; stream.historyStream.length !== 0 &amp;&amp; (
+        &lt;Feedback feedback={feedback} setFeedback={setFeedback} /&gt;
+      )}
+    &lt;/&gt;
+  )
 }
-</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;src/components/Meeting/MeetingStream.tsx&quot;,&quot;line&quot;:25,&quot;character&quot;:7,&quot;text&quot;:&quot;agentResponse&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingStream.tsx&quot;,&quot;line&quot;:33,&quot;character&quot;:8,&quot;text&quot;:&quot;chunksRes&quot;,&quot;kind&quot;:1}]</pre></div>
-    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Wed, 31 Jan 2024 16:18:41 GMT</p>
+</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;src/components/Meeting/MeetingStream.tsx&quot;,&quot;line&quot;:24,&quot;character&quot;:8,&quot;text&quot;:&quot;agentResponse&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingStream.tsx&quot;,&quot;line&quot;:32,&quot;character&quot;:10,&quot;text&quot;:&quot;chunksRes&quot;,&quot;kind&quot;:1}]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Sun, 25 Feb 2024 17:47:59 GMT</p>
     </body>
   </html>
   

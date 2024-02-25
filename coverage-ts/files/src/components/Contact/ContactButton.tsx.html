@@ -11,60 +11,60 @@
 <link href="../../../../assets/source-file.css" type="text/css" rel="stylesheet">
     </head>
     <body>
-    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src/components/Contact/ContactButton.tsx</td><td class="">100.00%</td><td class="">80%</td><td class="">71</td><td class="">71</td><td class="">0</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { useState, Dispatch, SetStateAction } from &quot;react&quot;
-import Button from &quot;@codegouvfr/react-dsfr/Button&quot;
-import { ButtonInformation } from &quot;../Global/ButtonInformation&quot;
-import { useApiUrls } from &quot;../../constants/api&quot;
-import { setContactData, setHeaders } from &quot;../../utils/setData&quot;
-import { setUserInfos } from &quot;../../utils/manageConnexion&quot;
-import { useFetch } from &quot;../../utils/hooks&quot;
-import { UserAuth } from &quot;src/utils/auth&quot;
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src/components/Contact/ContactButton.tsx</td><td class="">100.00%</td><td class="">80%</td><td class="">70</td><td class="">70</td><td class="">0</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import Button from &#x27;@codegouvfr/react-dsfr/Button&#x27;
+import { Dispatch, SetStateAction, useState } from &#x27;react&#x27;
+import { UserAuth } from &#x27;src/utils/auth&#x27;
+import { useApiUrls } from &#x27;../../constants/api&#x27;
+import { useFetch } from &#x27;../../utils/hooks&#x27;
+import { setContactData, setHeaders } from &#x27;../../utils/setData&#x27;
+import { ButtonInformation } from &#x27;../Global/ButtonInformation&#x27;
 
 interface ContactButtonProps {
-	formData: {
-		title: string
-		administration: string
-		message: string
-		name: string
-	}
-	clearForm: () =&gt; void
-	setUserAuth: Dispatch&lt;SetStateAction&lt;UserAuth&gt;&gt;
+  formData: {
+    title: string
+    administration: string
+    message: string
+    name: string
+  }
+  clearForm: () =&gt; void
+  setUserAuth: Dispatch&lt;SetStateAction&lt;UserAuth&gt;&gt;
 }
 
 export function ContactButton({ formData, clearForm, setUserAuth }: ContactButtonProps) {
-	const [isSend, setIsSend] = useState(false)
-	const userToken = localStorage.getItem(&quot;authToken&quot;)
-	const { userUrl, contactUrl } = useApiUrls()
-	const handleClick = async () =&gt; {
-		//setUserInfos(userToken, setUserAuth, userUrl)
-		await useFetch(contactUrl, &quot;POST&quot;, {
-			data: setContactData(
-				formData.title + &quot; from: &quot; + formData.name,
-				formData.message,
-				formData.administration
-			),
-			headers: setHeaders(false),
-		})
-		clearForm()
-		setIsSend(true)
-	}
+  const [isSend, setIsSend] = useState(false)
+  const userToken = localStorage.getItem(&#x27;authToken&#x27;)
+  const { userUrl, contactUrl } = useApiUrls()
+  const handleClick = async () =&gt; {
+    //setUserInfos(userToken, setUserAuth, userUrl)
+    await useFetch(contactUrl, &#x27;POST&#x27;, {
+      data: setContactData(
+        formData.title + &#x27; from: &#x27; + formData.name,
+        formData.message,
+        formData.administration
+      ),
+      headers: setHeaders(false),
+    })
+    clearForm()
+    setIsSend(true)
+  }
 
-	const isCompleted = formData.title &amp;&amp; formData.administration &amp;&amp; formData.message &amp;&amp; formData.name
-	return (
-		&lt;&gt;
-			{isSend &amp;&amp; (
-				&lt;ButtonInformation&gt;
-					Votre message a bien été envoyé, merci pour votre retour !
-				&lt;/ButtonInformation&gt;
-			)}
-			&lt;Button onClick={handleClick} disabled={!isCompleted}&gt;
-				Envoyer
-			&lt;/Button&gt;
-		&lt;/&gt;
-	)
+  const isCompleted =
+    formData.title &amp;&amp; formData.administration &amp;&amp; formData.message &amp;&amp; formData.name
+  return (
+    &lt;&gt;
+      {isSend &amp;&amp; (
+        &lt;ButtonInformation&gt;
+          Votre message a bien été envoyé, merci pour votre retour !
+        &lt;/ButtonInformation&gt;
+      )}
+      &lt;Button onClick={handleClick} disabled={!isCompleted}&gt;
+        Envoyer
+      &lt;/Button&gt;
+    &lt;/&gt;
+  )
 }
 </textarea><pre id="annotations" style="display:none">[]</pre></div>
-    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Wed, 31 Jan 2024 16:18:41 GMT</p>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Sun, 25 Feb 2024 17:47:59 GMT</p>
     </body>
   </html>
   

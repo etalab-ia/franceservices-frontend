@@ -11,8 +11,16 @@
 <link href="../../../../assets/source-file.css" type="text/css" rel="stylesheet">
     </head>
     <body>
-    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src/utils/reducer/user.tsx</td><td class="">96.18%</td><td class="">80%</td><td class="">288</td><td class="">277</td><td class="">11</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { type Question, type Message } from &quot;types&quot;
-import { initialChatbotMessage } from &quot;../../constants/chatbotProps&quot;
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src/utils/reducer/user.tsx</td><td class="">100.00%</td><td class="">80%</td><td class="">304</td><td class="">304</td><td class="">0</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import {
+  UserHistory,
+  type Message,
+  type Question,
+  type User,
+  Sheet,
+  Chunk,
+  WebService,
+} from &#x27;types&#x27;
+import { initialChatbotMessage } from &#x27;../../constants/chatbotProps&#x27;
 
 /*****************************************************************************************************
 	
@@ -32,188 +40,200 @@ import { initialChatbotMessage } from &quot;../../constants/chatbotProps&quot;
 
  *****************************************************************************************************/
 
-// TODO:
-// - question: local state
-// - messages: check w/ backend /streams
-
 const InitialQuestion: Question = {
-	model_name: &quot;albert-light&quot;,
-	mode: &quot;rag&quot;,
-	query: &quot;&quot;,
-	limit: 7,
-	context: undefined,
-	institution: undefined,
-	links: undefined,
-	temperature: 20,
-	sources: [&quot;service-public&quot;, &quot;travail-emploi&quot;],
-	should_sids: [],
-	must_not_sids: [],
-}
-
-interface User {
-	question: Question // Question asked by user
-	messages: Message[] // Message exchanged between user &amp; agent
-	sheets: any[] // Sheets associated to the reponse from 0 to 2
-	additionalSheets: any[] // suggested sheets to from 3 to 9
-	chunks: any[] // Chunks associes a la reponse
-	webservices: any[] // Dans sheets webservices: liens utiles lies aux sheets
-	chatId: number // current chat id
-	streamId: number // current stream id
+  model_name: &#x27;albert-light&#x27;,
+  mode: &#x27;rag&#x27;,
+  query: &#x27;&#x27;,
+  limit: 7,
+  context: undefined,
+  institution: undefined, //TODO: remove
+  links: undefined,
+  temperature: 20,
+  sources: [&#x27;service-public&#x27;, &#x27;travail-emploi&#x27;],
+  should_sids: [],
+  must_not_sids: [],
 }
 
 const InitialUser: User = {
-	question: InitialQuestion,
-	messages: [{ text: initialChatbotMessage, sender: &quot;agent&quot; }],
-	sheets: [],
-	additionalSheets: [],
-	chunks: [],
-	webservices: [],
-	chatId: 0,
-	streamId: 0,
+  question: InitialQuestion,
+  messages: [{ text: initialChatbotMessage, sender: &#x27;agent&#x27; }],
+  sheets: [],
+  additionalSheets: [],
+  chunks: [],
+  webservices: [],
+  chatId: 0,
+  streamId: 0,
+  lastStreamId: 0,
+  history: [],
 }
 
 type UserAction =
-	| { type: &quot;SET_SHEETS&quot;; sheets: any[] }
-	| { type: &quot;SET_CHUNKS&quot;; chunks: any[] }
-	| { type: &quot;SET_SHEETS_FROM_ARCHIVE&quot;; sheets: any[]; additionalSheets: any[]; webservices: any[] }
-	| { type: &quot;REMOVE_SHEETS&quot;; indexToRemove: number }
-	| { type: &quot;ADD_SHEETS&quot;; indexToAdd: number }
-	| { type: &quot;SET_USER_QUERY&quot;; nextUserQuery: string; nextChatId: number }
-	| { type: &quot;RESET_QUESTION_FIELDS&quot; }
-	| { type: &quot;RESET_USER&quot; }
-	| { type: &quot;SET_MESSAGES&quot;; nextMessage: Message }
-	| { type: &quot;SET_STREAM_ID&quot;; nextStreamId: number }
-	| { type: &quot;SET_CHAT_ID&quot;; nextChatId: number }
+  | { type: &#x27;SET_SHEETS&#x27;; sheets: Sheet[] }
+  | { type: &#x27;SET_CHUNKS&#x27;; chunks: Chunk[] }
+  | {
+      type: &#x27;SET_SHEETS_FROM_ARCHIVE&#x27;
+      sheets: Sheet[]
+      additionalSheets: Sheet[]
+      webservices: WebService[]
+    }
+  | { type: &#x27;REMOVE_SHEETS&#x27;; indexToRemove: number }
+  | { type: &#x27;ADD_SHEETS&#x27;; indexToAdd: number }
+  | { type: &#x27;SET_USER_QUERY&#x27;; nextUserQuery: string; nextChatId: number }
+  | { type: &#x27;RESET_QUESTION_FIELDS&#x27; }
+  | { type: &#x27;RESET_USER&#x27; }
+  | { type: &#x27;SET_MESSAGES&#x27;; nextMessage: Message }
+  | { type: &#x27;SET_STREAM_ID&#x27;; nextStreamId: number }
+  | { type: &#x27;SET_CHAT_ID&#x27;; nextChatId: number }
+  | { type: &#x27;ADD_HISTORY&#x27;; newItem: UserHistory }
+  | { type: &#x27;SET_LAST_STREAM_ID&#x27;; nextLastStreamId: number }
 
 export const userReducer = (state: User = InitialUser, action: UserAction): User =&gt; {
-	switch (action.type) {
-		case &quot;SET_SHEETS&quot;:
-			return {
-				...state,
-				sheets: action.sheets.slice(0, 3),
-				additionalSheets: action.sheets.slice(3, 10),
-				webservices: action.sheets[0].web_services.slice(0, 3),
-			}
-		case &quot;SET_CHUNKS&quot;:
-			return {
-				...state,
-				chunks: action.chunks,
-			}
-		case &quot;SET_SHEETS_FROM_ARCHIVE&quot;:
-			return {
-				...state,
-				sheets: action.sheets,
-				additionalSheets: action.additionalSheets,
-				webservices: action.webservices,
-			}
-		case &quot;REMOVE_SHEETS&quot;: {
-			if (!state.sheets) return state
+  switch (action.type) {
+    case &#x27;SET_LAST_STREAM_ID&#x27;:
+      return {
+        ...state,
+        lastStreamId: action.nextLastStreamId,
+      }
+    case &#x27;ADD_HISTORY&#x27;:
+      return {
+        ...state,
+        history: [...state.history, action.newItem],
+      }
+    case &#x27;SET_SHEETS&#x27;:
+      return {
+        ...state,
+        sheets: action.sheets.slice(0, 3),
+        additionalSheets: action.sheets.slice(3, 10),
+        webservices: action.sheets[0].web_services?.slice(0, 3),
+      }
+    case &#x27;SET_CHUNKS&#x27;:
+      return {
+        ...state,
+        chunks: action.chunks,
+      }
+    case &#x27;SET_SHEETS_FROM_ARCHIVE&#x27;:
+      return {
+        ...state,
+        sheets: action.sheets,
+        additionalSheets: action.additionalSheets,
+        webservices: action.webservices,
+      }
+    case &#x27;REMOVE_SHEETS&#x27;: {
+      if (!state.sheets) return state
 
-			const sheets = state.sheets.filter((_, index) =&gt; action.indexToRemove !== index)
-			const additionalSheets = state.sheets.filter((_, index) =&gt; action.indexToRemove === index)
-			const nextMustNotSids = [...state.question.must_not_sids, additionalSheets[0].sid]
+      const sheets = state.sheets.filter((_, index) =&gt; action.indexToRemove !== index)
+      const additionalSheets = state.sheets.filter(
+        (_, index) =&gt; action.indexToRemove === index
+      )
+      const nextMustNotSids = [...state.question.must_not_sids, additionalSheets[0].sid]
 
-			if (JSON.stringify(nextMustNotSids) === JSON.stringify(state.question.must_not_sids))
-				return {
-					...state,
-					sheets: [...state.sheets, ...sheets],
-					additionalSheets: additionalSheets,
-				}
+      if (
+        JSON.stringify(nextMustNotSids) === JSON.stringify(state.question.must_not_sids)
+      )
+        return {
+          ...state,
+          sheets: [...state.sheets, ...sheets],
+          additionalSheets: additionalSheets,
+        }
 
-			return {
-				...state,
-				sheets: sheets,
-				additionalSheets: [...state.additionalSheets, ...additionalSheets],
-				question: {
-					...state.question,
-					must_not_sids: nextMustNotSids,
-				},
-			}
-		}
-		case &quot;ADD_SHEETS&quot;: {
-			if (!state.sheets) return state
+      return {
+        ...state,
+        sheets: sheets,
+        additionalSheets: [...state.additionalSheets, ...additionalSheets],
+        question: {
+          ...state.question,
+          must_not_sids: nextMustNotSids,
+        },
+      }
+    }
+    case &#x27;ADD_SHEETS&#x27;: {
+      if (!state.sheets) return state
 
-			const sheets = state.additionalSheets.filter((_, index) =&gt; action.indexToAdd === index)
-			const additionalSheets = state.additionalSheets.filter(
-				(_, index) =&gt; action.indexToAdd !== index
-			)
-			const nextShouldSids = [...state.sheets.map((sheet) =&gt; sheet.sid), sheets[0].sid]
-			const nextMustNotSids = state.question.must_not_sids.filter(
-				(sid) =&gt; !nextShouldSids.includes(sid)
-			)
+      const sheets = state.additionalSheets.filter(
+        (_, index) =&gt; action.indexToAdd === index
+      )
+      const additionalSheets = state.additionalSheets.filter(
+        (_, index) =&gt; action.indexToAdd !== index
+      )
+      const nextShouldSids = [...state.sheets.map((sheet) =&gt; sheet.sid), sheets[0].sid]
+      const nextMustNotSids = state.question.must_not_sids.filter(
+        (sid) =&gt; !nextShouldSids.includes(sid)
+      )
 
-			if (JSON.stringify(nextMustNotSids) === JSON.stringify(state.question.must_not_sids))
-				return {
-					...state,
-					sheets: [...state.sheets, ...sheets],
-					additionalSheets: additionalSheets,
-				}
+      if (
+        JSON.stringify(nextMustNotSids) === JSON.stringify(state.question.must_not_sids)
+      )
+        return {
+          ...state,
+          sheets: [...state.sheets, ...sheets],
+          additionalSheets: additionalSheets,
+        }
 
-			return {
-				...state,
-				sheets: [...state.sheets, ...sheets],
-				additionalSheets: additionalSheets,
-				question: {
-					...state.question,
-					must_not_sids: nextMustNotSids,
-				},
-			}
-		}
-		case &quot;SET_CHAT_ID&quot;:
-			return {
-				...state,
-				chatId: action.nextChatId,
-			}
-		case &quot;SET_USER_QUERY&quot;:
-			return {
-				...state,
-				question: {
-					...state.question,
-					query: action.nextUserQuery,
-				},
-				chatId: action.nextChatId,
-			}
-		case &quot;RESET_QUESTION_FIELDS&quot;:
-			return {
-				...state,
-				question: InitialQuestion,
-			}
-		case &quot;RESET_USER&quot;:
-			return InitialUser
-		case &quot;SET_MESSAGES&quot;:
-			if (state.messages.length &gt; 0) {
-				const lastMessage = state.messages[state.messages.length - 1]
+      return {
+        ...state,
+        sheets: [...state.sheets, ...sheets],
+        additionalSheets: additionalSheets,
+        question: {
+          ...state.question,
+          must_not_sids: nextMustNotSids,
+        },
+      }
+    }
+    case &#x27;SET_CHAT_ID&#x27;:
+      return {
+        ...state,
+        chatId: action.nextChatId,
+      }
+    case &#x27;SET_USER_QUERY&#x27;:
+      return {
+        ...state,
+        question: {
+          ...state.question,
+          query: action.nextUserQuery,
+        },
+        chatId: action.nextChatId,
+      }
+    case &#x27;RESET_QUESTION_FIELDS&#x27;:
+      return {
+        ...state,
+        question: InitialQuestion,
+      }
+    case &#x27;RESET_USER&#x27;:
+      return InitialUser
+    case &#x27;SET_MESSAGES&#x27;:
+      if (state.messages.length &gt; 0) {
+        const lastMessage = state.messages[state.messages.length - 1]
 
-				if (lastMessage.sender === action.nextMessage.sender) {
-					const updatedMessages = state.messages.slice(0, -1) // remove last message
-					const updatedLastMessage = {
-						...lastMessage,
-						text: lastMessage.text.concat(action.nextMessage.text),
-					} // update last message
-					updatedMessages.push(updatedLastMessage)
-					// action.nextMessage.text
-					return {
-						...state,
-						messages: updatedMessages,
-					}
-				}
-			}
-			return {
-				...state,
-				messages: [...state.messages, action.nextMessage],
-			}
-		case &quot;SET_STREAM_ID&quot;:
-			return {
-				...state,
-				streamId: action.nextStreamId,
-			}
-		default: {
-			return state
-		}
-	}
+        if (lastMessage.sender === action.nextMessage.sender) {
+          const updatedMessages = state.messages.slice(0, -1) // remove last message
+          const updatedLastMessage = {
+            ...lastMessage,
+            text: lastMessage.text.concat(action.nextMessage.text),
+          } // update last message
+          updatedMessages.push(updatedLastMessage)
+          // action.nextMessage.text
+          return {
+            ...state,
+            messages: updatedMessages,
+          }
+        }
+      }
+      return {
+        ...state,
+        messages: [...state.messages, action.nextMessage],
+      }
+    case &#x27;SET_STREAM_ID&#x27;:
+      return {
+        ...state,
+        streamId: action.nextStreamId,
+      }
+    default: {
+      return state
+    }
+  }
 }
-</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;src/utils/reducer/user.tsx&quot;,&quot;line&quot;:81,&quot;character&quot;:34,&quot;text&quot;:&quot;web_services&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/reducer/user.tsx&quot;,&quot;line&quot;:81,&quot;character&quot;:47,&quot;text&quot;:&quot;slice&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/reducer/user.tsx&quot;,&quot;line&quot;:98,&quot;character&quot;:39,&quot;text&quot;:&quot;_&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/reducer/user.tsx&quot;,&quot;line&quot;:99,&quot;character&quot;:49,&quot;text&quot;:&quot;_&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/reducer/user.tsx&quot;,&quot;line&quot;:100,&quot;character&quot;:81,&quot;text&quot;:&quot;sid&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/reducer/user.tsx&quot;,&quot;line&quot;:122,&quot;character&quot;:49,&quot;text&quot;:&quot;_&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/reducer/user.tsx&quot;,&quot;line&quot;:124,&quot;character&quot;:5,&quot;text&quot;:&quot;_&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/reducer/user.tsx&quot;,&quot;line&quot;:126,&quot;character&quot;:48,&quot;text&quot;:&quot;sheet&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/reducer/user.tsx&quot;,&quot;line&quot;:126,&quot;character&quot;:58,&quot;text&quot;:&quot;sheet&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/reducer/user.tsx&quot;,&quot;line&quot;:126,&quot;character&quot;:64,&quot;text&quot;:&quot;sid&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/utils/reducer/user.tsx&quot;,&quot;line&quot;:126,&quot;character&quot;:80,&quot;text&quot;:&quot;sid&quot;,&quot;kind&quot;:1}]</pre></div>
-    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Wed, 31 Jan 2024 16:18:41 GMT</p>
+</textarea><pre id="annotations" style="display:none">[]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Sun, 25 Feb 2024 17:47:59 GMT</p>
     </body>
   </html>
   

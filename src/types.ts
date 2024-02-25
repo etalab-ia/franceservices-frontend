@@ -159,7 +159,7 @@ export type ArchiveType = {
  * This object contains the result sent by the bot
  * it is used to track the state of the response
  */
-export type StreamState = {
+export type Stream = {
   response: string[]
   historyStream: string[]
   isStreaming: boolean

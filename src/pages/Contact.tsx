@@ -1,8 +1,6 @@
 import { Dispatch, SetStateAction } from 'react'
-import { UserAuth } from 'src/utils/auth'
+import { UserAuth } from 'utils/auth'
 import { ContactForm } from '../components/Contact/ContactForm'
-import { GlobalDiv } from '../components/Global/GlobalDiv'
-import { GlobalRowContainer } from '../components/Global/GlobalRowContainer'
 
 export function Contact({
   setUserAuth,

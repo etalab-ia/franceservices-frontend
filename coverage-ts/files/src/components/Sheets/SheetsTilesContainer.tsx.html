@@ -11,16 +11,16 @@
 <link href="../../../../assets/source-file.css" type="text/css" rel="stylesheet">
     </head>
     <body>
-    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src/components/Sheets/SheetsTilesContainer.tsx</td><td class="">98.31%</td><td class="">80%</td><td class="">118</td><td class="">116</td><td class="">2</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { useContext, useEffect, useState } from &quot;react&quot;
-import { useDispatch, useSelector } from &quot;react-redux&quot;
-import { setHeaders, setIndexesData } from &quot;../../utils/setData&quot;
-import { setTilesFromSheets } from &quot;../../utils/setData&quot;
-import { SheetsTiles } from &quot;./SheetsTiles&quot;
-import { SheetsAdditionalTilesTitle } from &quot;./SheetsAdditionalTilesTitle&quot;
-import { CurrQuestionContext } from &quot;../../utils/context/questionContext&quot;
-import { ArchiveType, RootState } from &quot;types&quot;
-import { useFetch } from &quot;../../utils/hooks&quot;
-import { useApiUrls } from &quot;../../constants/api&quot;
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src/components/Sheets/SheetsTilesContainer.tsx</td><td class="">100.00%</td><td class="">80%</td><td class="">104</td><td class="">104</td><td class="">0</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { useContext, useEffect, useState } from &#x27;react&#x27;
+import { useDispatch, useSelector } from &#x27;react-redux&#x27;
+import { ArchiveType, RootState, Sheet } from &#x27;types&#x27;
+import { useApiUrls } from &#x27;../../constants/api&#x27;
+import { CurrQuestionContext } from &#x27;../../utils/context/questionContext&#x27;
+import { useFetch } from &#x27;../../utils/hooks&#x27;
+import { setHeaders, setIndexesData } from &#x27;../../utils/setData&#x27;
+import { setTilesFromSheets } from &#x27;../../utils/setData&#x27;
+import { SheetsAdditionalTilesTitle } from &#x27;./SheetsAdditionalTilesTitle&#x27;
+import { SheetsTiles } from &#x27;./SheetsTiles&#x27;
 
 /****************************************************************************************
 	
@@ -30,66 +30,70 @@ import { useApiUrls } from &quot;../../constants/api&quot;
 *****************************************************************************************/
 
 export const SheetsTilesContainer = ({
-	archive,
-	isModifiable,
+  archive,
+  isModifiable,
 }: {
-	archive: ArchiveType
-	isModifiable: boolean
+  archive: ArchiveType
+  isModifiable: boolean
 }) =&gt; {
-	const user = useSelector((state: RootState) =&gt; state.user)
-	const [tiles, setTiles] = useState([])
-	const [additionalTiles, setAdditionalTiles] = useState([])
-	const { currQuestion } = useContext(CurrQuestionContext)
-	const dispatch = useDispatch()
-	const { getSheetsUrl, indexesUrl } = useApiUrls()
-	useEffect(() =&gt; {
-		const data = {
-			question: currQuestion.query,
-			must_not_sids: user.question.must_not_sids,
-		}
-		const streamId = archive ? archive.id : user.streamId
-		if (!streamId) return
+  const user = useSelector((state: RootState) =&gt; state.user)
+  const [tiles, setTiles] = useState([])
+  const [additionalTiles, setAdditionalTiles] = useState([])
+  const { currQuestion } = useContext(CurrQuestionContext)
+  const dispatch = useDispatch()
+  const { getSheetsUrl, indexesUrl } = useApiUrls()
+  useEffect(() =&gt; {
+    const data = {
+      question: currQuestion.query,
+      must_not_sids: user.question.must_not_sids,
+    }
+    const streamId = archive ? archive.id : user.streamId
+    if (!streamId) return
 
-		setIndexesData(data, setTiles, dispatch, JSON.stringify(streamId), indexesUrl)
-	}, [user.streamId, currQuestion])
+    setIndexesData(data, setTiles, dispatch, JSON.stringify(streamId), indexesUrl)
+  }, [user.streamId, currQuestion])
 
-	const getSheets = async () =&gt; {
-		const data = {
-			uids: archive.search_sids,
-		}
-		const sheets = await useFetch(getSheetsUrl, &quot;POST&quot;, {
-			headers: setHeaders(false),
-			data: JSON.stringify(data),
-		})
-		setTilesFromSheets(sheets, setTiles)
-	}
+  const getSheets = async () =&gt; {
+    const data = {
+      uids: archive.search_sids,
+    }
+    const sheets: Sheet[] = await useFetch(getSheetsUrl, &#x27;POST&#x27;, {
+      headers: setHeaders(false),
+      data: JSON.stringify(data),
+    })
+    setTilesFromSheets(sheets, setTiles)
+  }
 
-	useEffect(() =&gt; {
-		if (!archive || !archive.search_sids) return
+  useEffect(() =&gt; {
+    if (!archive || !archive.search_sids) return
 
-		getSheets()
-	}, [])
+    getSheets()
+  }, [])
 
-	useEffect(() =&gt; {
-		if (archive) return
-		setTilesFromSheets(user.sheets, setTiles)
-		setTilesFromSheets(user.additionalSheets, setAdditionalTiles)
-	}, [user.additionalSheets])
+  useEffect(() =&gt; {
+    if (archive) return
+    setTilesFromSheets(user.sheets, setTiles)
+    setTilesFromSheets(user.additionalSheets, setAdditionalTiles)
+  }, [user.additionalSheets])
 
-	return (
-		&lt;&gt;
-			&lt;SheetsTiles tiles={tiles} isModifiable={isModifiable} type=&quot;main&quot; /&gt;
-			{isModifiable &amp;&amp; additionalTiles.length !== 0 &amp;&amp; (
-				&lt;&gt;
-					&lt;SheetsAdditionalTilesTitle /&gt;
-					&lt;SheetsTiles tiles={additionalTiles} isModifiable={isModifiable} type=&quot;additional&quot; /&gt;
-				&lt;/&gt;
-			)}
-		&lt;/&gt;
-	)
+  return (
+    &lt;&gt;
+      {/*   &lt;SheetsTiles tiles={tiles} isModifiable={isModifiable} type=&quot;main&quot; /&gt;
+      {isModifiable &amp;&amp; additionalTiles.length !== 0 &amp;&amp; (
+        &lt;&gt;
+          &lt;SheetsAdditionalTilesTitle /&gt;
+          &lt;SheetsTiles
+            tiles={additionalTiles}
+            isModifiable={isModifiable}
+            type=&quot;additional&quot;
+          /&gt;
+        &lt;/&gt;
+      )} */}
+    &lt;/&gt;
+  )
 }
-</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;src/components/Sheets/SheetsTilesContainer.tsx&quot;,&quot;line&quot;:46,&quot;character&quot;:8,&quot;text&quot;:&quot;sheets&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Sheets/SheetsTilesContainer.tsx&quot;,&quot;line&quot;:50,&quot;character&quot;:21,&quot;text&quot;:&quot;sheets&quot;,&quot;kind&quot;:1}]</pre></div>
-    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Wed, 31 Jan 2024 16:18:41 GMT</p>
+</textarea><pre id="annotations" style="display:none">[]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Sun, 25 Feb 2024 17:47:59 GMT</p>
     </body>
   </html>
   

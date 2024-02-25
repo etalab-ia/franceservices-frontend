@@ -11,73 +11,77 @@
 <link href="../../../../assets/source-file.css" type="text/css" rel="stylesheet">
     </head>
     <body>
-    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src/components/Meeting/MeetingFeedback.tsx</td><td class="">97.30%</td><td class="">80%</td><td class="">74</td><td class="">72</td><td class="">2</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import thumbsUp from &quot;../../../icons/feedbacks/thumbsUp.svg&quot;
-import thumbsDown from &quot;../../../icons/feedbacks/thumbsDown.svg&quot;
-import { useFetch } from &quot;../../utils/hooks&quot;
-import { useApiUrls } from &quot;../../constants/api&quot;
-import { setHeaders } from &quot;../../utils/setData&quot;
-import { useState } from &quot;react&quot;
-import { ButtonInformation } from &quot;../Global/ButtonInformation&quot;
-import { thankFeedback } from &quot;../../constants/feedback&quot;
-import { GlobalParagraph } from &quot;../Global/GlobalParagraph&quot;
-import { useSelector } from &quot;react-redux&quot;
-import { RootState } from &quot;types&quot;
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src/components/Meeting/MeetingFeedback.tsx</td><td class="">97.30%</td><td class="">80%</td><td class="">74</td><td class="">72</td><td class="">2</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { useState } from &#x27;react&#x27;
+import { useSelector } from &#x27;react-redux&#x27;
+import { RootState } from &#x27;types&#x27;
+import thumbsDown from &#x27;../../../icons/feedbacks/thumbsDown.svg&#x27;
+import thumbsUp from &#x27;../../../icons/feedbacks/thumbsUp.svg&#x27;
+import { useApiUrls } from &#x27;../../constants/api&#x27;
+import { thankFeedback } from &#x27;../../constants/feedback&#x27;
+import { useFetch } from &#x27;../../utils/hooks&#x27;
+import { setHeaders } from &#x27;../../utils/setData&#x27;
+import { ButtonInformation } from &#x27;../Global/ButtonInformation&#x27;
+import { GlobalParagraph } from &#x27;../Global/GlobalParagraph&#x27;
 
 /*
  * User can select thumps up / down to give feedback
  */
 export const MeetingFeedback = () =&gt; {
-	const streamId = useSelector((state: RootState) =&gt; state.user.streamId)
-	const [isClicked, setIsClicked] = useState&lt;boolean | null&gt;(null)
-	const { feedbackUrl } = useApiUrls()
+  const streamId = useSelector((state: RootState) =&gt; state.user.streamId)
+  const [isClicked, setIsClicked] = useState&lt;boolean | null&gt;(null)
+  const { feedbackUrl } = useApiUrls()
 
-	const handleClick = (isGood: boolean | null) =&gt; {
-		const data = {
-			is_good: isGood,
-			message: &quot;&quot;,
-		}
-		useFetch(`${feedbackUrl}/${streamId}`, &quot;POST&quot;, {
-			data: JSON.stringify(data),
-			headers: setHeaders(false),
-		})
+  const handleClick = (isGood: boolean | null) =&gt; {
+    const data = {
+      is_good: isGood,
+      message: &#x27;&#x27;,
+    }
+    useFetch(`${feedbackUrl}/${streamId}`, &#x27;POST&#x27;, {
+      data: JSON.stringify(data),
+      headers: setHeaders(false),
+    })
 
-		setIsClicked(isGood)
-	}
+    setIsClicked(isGood)
+  }
 
-	return (
-		&lt;div className=&quot;fr-mt-2w&quot;&gt;
-			&lt;button
-				onClick={() =&gt; handleClick(true)}
-				className={`fr-mr-1w border border-[#DDD] ${isClicked === true ? &quot;bg-purple&quot; : &quot;bg-white&quot;}`}
-			&gt;
-				&lt;img
-					className={`fr-m-1w ${
-						isClicked &amp;&amp; isClicked === true ? &quot;mr-2 brightness-0 invert-[1]&quot; : &quot;mr-2&quot;
-					}`}
-					src={thumbsUp}
-					alt=&quot;Feedback positif&quot;
-				/&gt;
-			&lt;/button&gt;
-			&lt;button
-				onClick={() =&gt; handleClick(false)}
-				className={`fr-mr-1w border border-[#DDD] ${
-					isClicked === false ? &quot;bg-purple&quot; : &quot;bg-white&quot;
-				}`}
-			&gt;
-				&lt;img
-					className={`fr-m-1w ${isClicked === false ? &quot;mr-2 brightness-0 invert-[1]&quot; : &quot;mr-2&quot;}`}
-					src={thumbsDown}
-					alt=&quot;Feedback négatif&quot;
-				/&gt;
-			&lt;/button&gt;
-			{isClicked !== null &amp;&amp; (
-				&lt;GlobalParagraph extraClass=&quot;fr-text--xs&quot;&gt;{thankFeedback}&lt;/GlobalParagraph&gt;
-			)}
-		&lt;/div&gt;
-	)
+  return (
+    &lt;div className=&quot;fr-mt-2w&quot;&gt;
+      &lt;button
+        onClick={() =&gt; handleClick(true)}
+        className={`fr-mr-1w border border-[#DDD] ${
+          isClicked === true ? &#x27;bg-purple&#x27; : &#x27;bg-white&#x27;
+        }`}
+      &gt;
+        &lt;img
+          className={`fr-m-1w ${
+            isClicked &amp;&amp; isClicked === true ? &#x27;mr-2 brightness-0 invert-[1]&#x27; : &#x27;mr-2&#x27;
+          }`}
+          src={thumbsUp}
+          alt=&quot;Feedback positif&quot;
+        /&gt;
+      &lt;/button&gt;
+      &lt;button
+        onClick={() =&gt; handleClick(false)}
+        className={`fr-mr-1w border border-[#DDD] ${
+          isClicked === false ? &#x27;bg-purple&#x27; : &#x27;bg-white&#x27;
+        }`}
+      &gt;
+        &lt;img
+          className={`fr-m-1w ${
+            isClicked === false ? &#x27;mr-2 brightness-0 invert-[1]&#x27; : &#x27;mr-2&#x27;
+          }`}
+          src={thumbsDown}
+          alt=&quot;Feedback négatif&quot;
+        /&gt;
+      &lt;/button&gt;
+      {isClicked !== null &amp;&amp; (
+        &lt;GlobalParagraph extraClass=&quot;fr-text--xs&quot;&gt;{thankFeedback}&lt;/GlobalParagraph&gt;
+      )}
+    &lt;/div&gt;
+  )
 }
-</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;src/components/Meeting/MeetingFeedback.tsx&quot;,&quot;line&quot;:0,&quot;character&quot;:7,&quot;text&quot;:&quot;thumbsUp&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingFeedback.tsx&quot;,&quot;line&quot;:1,&quot;character&quot;:7,&quot;text&quot;:&quot;thumbsDown&quot;,&quot;kind&quot;:1}]</pre></div>
-    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Wed, 31 Jan 2024 16:18:41 GMT</p>
+</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;src/components/Meeting/MeetingFeedback.tsx&quot;,&quot;line&quot;:3,&quot;character&quot;:7,&quot;text&quot;:&quot;thumbsDown&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;src/components/Meeting/MeetingFeedback.tsx&quot;,&quot;line&quot;:4,&quot;character&quot;:7,&quot;text&quot;:&quot;thumbsUp&quot;,&quot;kind&quot;:1}]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Sun, 25 Feb 2024 17:47:59 GMT</p>
     </body>
   </html>
   

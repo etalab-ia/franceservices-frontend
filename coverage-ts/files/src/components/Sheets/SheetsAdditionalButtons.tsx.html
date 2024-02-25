@@ -11,19 +11,19 @@
 <link href="../../../../assets/source-file.css" type="text/css" rel="stylesheet">
     </head>
     <body>
-    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src/components/Sheets/SheetsAdditionalButtons.tsx</td><td class="">100.00%</td><td class="">80%</td><td class="">137</td><td class="">137</td><td class="">0</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { ModifyButton } from &quot;../Global/ModifyButton&quot;
-import { GlobalRowContainer } from &quot;../Global/GlobalRowContainer&quot;
-import { sheetsTitle } from &quot;../../constants/sheets&quot;
-import { GlobalSecondaryTitle } from &quot;../Global/GlobalSecondaryTitle&quot;
-import { GlobalColContainer } from &quot;../Global/GlobalColContainer&quot;
-import { useEffect, useState, useContext, Dispatch } from &quot;react&quot;
-import { useDispatch, useSelector } from &quot;react-redux&quot;
-import { generateStream } from &quot;../../utils/hooks&quot;
-import { emitCloseStream } from &quot;../../utils/eventsEmitter&quot;
-import { getIndexes } from &quot;../../utils/setData&quot;
-import { CurrQuestionContext } from &quot;../../utils/context/questionContext&quot;
-import { ArchiveType, RootState } from &quot;types&quot;
-import { useApiUrls } from &quot;../../constants/api&quot;
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">src/components/Sheets/SheetsAdditionalButtons.tsx</td><td class="">100.00%</td><td class="">80%</td><td class="">123</td><td class="">123</td><td class="">0</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { Dispatch, useContext, useEffect, useState } from &#x27;react&#x27;
+import { useDispatch, useSelector } from &#x27;react-redux&#x27;
+import { ArchiveType, RootState } from &#x27;types&#x27;
+import { useApiUrls, streamUrl } from &#x27;../../constants/api&#x27;
+import { sheetsTitle } from &#x27;../../constants/sheets&#x27;
+import { CurrQuestionContext } from &#x27;../../utils/context/questionContext&#x27;
+import { emitCloseStream } from &#x27;../../utils/eventsEmitter&#x27;
+import { generateStream } from &#x27;../../utils/hooks&#x27;
+import { getIndexes } from &#x27;../../utils/setData&#x27;
+import { GlobalColContainer } from &#x27;../Global/GlobalColContainer&#x27;
+import { GlobalRowContainer } from &#x27;../Global/GlobalRowContainer&#x27;
+import { GlobalSecondaryTitle } from &#x27;../Global/GlobalSecondaryTitle&#x27;
+import { ModifyButton } from &#x27;../Global/ModifyButton&#x27;
 
 /*****************************************************************************************
 	
@@ -37,84 +37,88 @@ import { useApiUrls } from &quot;../../constants/api&quot;
  *****************************************************************************************/
 
 export const SheetsAdditionalButtons = ({
-	isModifiable,
-	setIsModifiable,
-	archive,
+  isModifiable,
+  setIsModifiable,
+  archive,
 }: {
-	isModifiable: boolean
-	setIsModifiable: React.Dispatch&lt;React.SetStateAction&lt;boolean&gt;&gt;
-	archive: ArchiveType | undefined
+  isModifiable: boolean
+  setIsModifiable: React.Dispatch&lt;React.SetStateAction&lt;boolean&gt;&gt;
+  archive: ArchiveType | undefined
 }) =&gt; {
-	const buttonTitle = isModifiable ? &quot;Enregistrer&quot; : &quot;Modifier la section&quot;
-	const buttonIcon = isModifiable
-		? &quot;fr-icon-save-3-fill fr-icon--sm flex justify-end items-center&quot;
-		: &quot;fr-icon-settings-5-fill fr-icon--sm flex justify-end items-center&quot;
-	const user = useSelector((state: RootState) =&gt; state.user)
-	const [deletedSheets, setDeletedSheets] = useState([])
-	const dispatch = useDispatch()
-	const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
-	const { streamUrl, indexesUrl } = useApiUrls()
-	const handleClick = () =&gt; {
-		setIsModifiable(!isModifiable)
-	}
+  const buttonTitle = isModifiable ? &#x27;Enregistrer&#x27; : &#x27;Modifier la section&#x27;
+  const buttonIcon = isModifiable
+    ? &#x27;fr-icon-save-3-fill fr-icon--sm flex  items-center&#x27;
+    : &#x27;fr-icon-settings-5-fill fr-icon--sm flex  items-center&#x27;
+  const user = useSelector((state: RootState) =&gt; state.user)
+  const [deletedSheets, setDeletedSheets] = useState([])
+  const dispatch = useDispatch()
+  const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
+  const { indexesUrl } = useApiUrls()
+  const handleClick = () =&gt; {
+    setIsModifiable(!isModifiable)
+  }
 
-	useEffect(() =&gt; {
-		if (
-			!archive &amp;&amp;
-			!isModifiable &amp;&amp;
-			JSON.stringify(deletedSheets) !== JSON.stringify(user.question.must_not_sids)
-		)
-			setDeletedSheets(user.question.must_not_sids)
-	}, [isModifiable])
+  useEffect(() =&gt; {
+    if (
+      !archive &amp;&amp;
+      !isModifiable &amp;&amp;
+      JSON.stringify(deletedSheets) !== JSON.stringify(user.question.must_not_sids)
+    )
+      setDeletedSheets(user.question.must_not_sids)
+  }, [isModifiable])
 
-	useEffect(() =&gt; {
-		if (archive) return
+  useEffect(() =&gt; {
+    if (archive) return
 
-		if (!deletedSheets.length &amp;&amp; !currQuestion.must_not_sids.length) return
+    if (!deletedSheets.length &amp;&amp; !currQuestion.must_not_sids.length) return
 
-		updateCurrQuestion({
-			...currQuestion,
-			must_not_sids: deletedSheets,
-		})
-	}, [deletedSheets])
+    updateCurrQuestion({
+      ...currQuestion,
+      must_not_sids: deletedSheets,
+    })
+  }, [deletedSheets])
 
-	useEffect(() =&gt; {
-		if (archive || !user.chatId) return
+  useEffect(() =&gt; {
+    if (archive || !user.chatId) return
 
-		emitCloseStream()
-		generateStream(currQuestion, dispatch, user.chatId, streamUrl)
-	}, [currQuestion])
+    emitCloseStream()
+    generateStream(currQuestion, dispatch, user.chatId, false)
+  }, [currQuestion])
 
-	useEffect(() =&gt; {
-		if (!user.streamId || archive || !currQuestion.query) return
+  useEffect(() =&gt; {
+    if (!user.streamId || archive || !currQuestion.query) return
 
-		const data = {
-			question: currQuestion.query,
-			must_not_sids: user.question.must_not_sids,
-		}
-		getIndexes(
-			data,
-			dispatch,
-			&quot;chunks&quot;,
-			currQuestion.limit,
-			JSON.stringify(user.streamId),
-			indexesUrl
-		)
-	}, [user.streamId, currQuestion])
+    const data = {
+      question: currQuestion.query,
+      must_not_sids: user.question.must_not_sids,
+    }
+    getIndexes(
+      data,
+      dispatch,
+      &#x27;chunks&#x27;,
+      currQuestion.limit,
+      JSON.stringify(user.streamId),
+      indexesUrl
+    )
+  }, [user.streamId, currQuestion])
 
-	return (
-		&lt;GlobalRowContainer&gt;
-			&lt;GlobalSecondaryTitle&gt;{sheetsTitle}&lt;/GlobalSecondaryTitle&gt;
-			&lt;GlobalColContainer&gt;
-				{!archive &amp;&amp; (
-					&lt;ModifyButton handleClick={handleClick} text={buttonTitle} extraClass={buttonIcon} /&gt;
-				)}
-			&lt;/GlobalColContainer&gt;
-		&lt;/GlobalRowContainer&gt;
-	)
+  return (
+    &lt;div&gt;
+      {/*       &lt;GlobalSecondaryTitle&gt;{sheetsTitle}&lt;/GlobalSecondaryTitle&gt;
+      &lt;&gt;
+        {!archive &amp;&amp; (
+          &lt;ModifyButton
+            handleClick={handleClick}
+            text={buttonTitle}
+            extraClass={buttonIcon}
+          /&gt;
+        )}
+      &lt;/&gt; */}
+    &lt;/div&gt;
+  )
 }
 </textarea><pre id="annotations" style="display:none">[]</pre></div>
-    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Wed, 31 Jan 2024 16:18:41 GMT</p>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Sun, 25 Feb 2024 17:47:59 GMT</p>
     </body>
   </html>
   
