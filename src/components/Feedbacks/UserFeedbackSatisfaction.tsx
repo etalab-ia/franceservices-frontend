@@ -4,7 +4,7 @@ import {
   secondaryButtons,
 } from '../../constants/feedback'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
-import { Feedback as FeedbackType } from '../../../types'
+import { Feedback as FeedbackType } from 'types'
 
 /**
  * These are the good or bad buttons that the user can click to give feedback

@@ -1,4 +1,12 @@
-import { UserHistory, type Message, type Question, type User } from 'types'
+import {
+  UserHistory,
+  type Message,
+  type Question,
+  type User,
+  Sheet,
+  Chunk,
+  WebService,
+} from 'types'
 import { initialChatbotMessage } from '../../constants/chatbotProps'
 
 /*****************************************************************************************************
@@ -32,7 +40,7 @@ const InitialQuestion: Question = {
   query: '',
   limit: 7,
   context: undefined,
-  institution: undefined,
+  institution: undefined, //TODO: remove
   links: undefined,
   temperature: 20,
   sources: ['service-public', 'travail-emploi'],
@@ -49,18 +57,18 @@ const InitialUser: User = {
   webservices: [],
   chatId: 0,
   streamId: 0,
-  history: [],
   lastStreamId: 0,
+  history: [],
 }
 
 type UserAction =
-  | { type: 'SET_SHEETS'; sheets: any[] }
-  | { type: 'SET_CHUNKS'; chunks: any[] }
+  | { type: 'SET_SHEETS'; sheets: Sheet[] }
+  | { type: 'SET_CHUNKS'; chunks: Chunk[] }
   | {
       type: 'SET_SHEETS_FROM_ARCHIVE'
-      sheets: any[]
-      additionalSheets: any[]
-      webservices: any[]
+      sheets: Sheet[]
+      additionalSheets: Sheet[]
+      webservices: WebService[]
     }
   | { type: 'REMOVE_SHEETS'; indexToRemove: number }
   | { type: 'ADD_SHEETS'; indexToAdd: number }

@@ -3,7 +3,6 @@ import { Dispatch, SetStateAction, useState } from 'react'
 import { UserAuth } from 'src/utils/auth'
 import { useApiUrls } from '../../constants/api'
 import { useFetch } from '../../utils/hooks'
-import { setUserInfos } from '../../utils/manageConnexion'
 import { setContactData, setHeaders } from '../../utils/setData'
 import { ButtonInformation } from '../Global/ButtonInformation'
 

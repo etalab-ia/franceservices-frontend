@@ -1,18 +1,18 @@
 import { Button } from '@codegouvfr/react-dsfr/Button'
 import React, { useEffect, useState } from 'react'
 import ReactToPrint from 'react-to-print'
-import { ArchiveType, Chat, UserHistory } from '../../../types'
+import { Chat, UserHistory } from 'types'
 import { getChunksUrl, useApiUrls } from '../../constants/api'
 import {
   meetingAppointmentInformations,
   meetingAppointmentTitle,
 } from '../../constants/meeting'
 import { useFetch } from '../../utils/hooks'
+import { setHeaders } from '../../utils/setData'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { GlobalSubtitle } from '../Global/GlobalSubtitle'
 import { GlobalTitle } from '../Global/GlobalTitle'
 import { DisplayResponse, History } from '../Meeting/MeetingOutputs'
-import { setHeaders } from '../../utils/setData'
 
 /**********************************************************************************************
 		

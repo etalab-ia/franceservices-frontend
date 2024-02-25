@@ -1,8 +1,14 @@
-import { inputFields } from '../../constants/meetingInputFields'
+import { MeetingInputContext } from 'types'
 import { MeetingTags } from './MeetingTags'
 import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
 
-export function MeetingAdditionalInput({ context, setContext }) {
+export function MeetingAdditionalInput({
+  context,
+  setContext,
+}: {
+  context: MeetingInputContext
+  setContext: React.Dispatch<React.SetStateAction<MeetingInputContext>>
+}) {
   const handleSetTag = (tag, fieldName) => {
     if (fieldName === 'administrations')
       setContext((prevContext) => ({
@@ -40,3 +46,16 @@ export function MeetingAdditionalInput({ context, setContext }) {
     </div>
   )
 }
+
+export const inputFields = [
+  {
+    label: 'Thèmes associés',
+    name: 'themes',
+    className: 'fr-mr-1w',
+  },
+  {
+    label: 'Opérateurs concernés',
+    name: 'administrations',
+    className: 'fr-mr-1w',
+  },
+]

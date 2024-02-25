@@ -165,7 +165,7 @@ export function DisplaySourceCards({ chunks }: { chunks: Chunk[] }) {
  * A card that display the source of a response, we get informations for this from the chunks
  */
 function SourceCard({ title, text, url }: { title: string; text: string; url: string }) {
-  const domain = new URL(url).hostname
+  const domain = new URL(url).hostname.replace('www.', '')
   return (
     <div
       className="fr-col-12 fr-col-sm-4 border border-[rgba(221, 221, 221, 1)] fr-px-4w fr-py-2w max-w-[392px] fr-background-action--high-blue relative"
@@ -177,7 +177,6 @@ function SourceCard({ title, text, url }: { title: string; text: string; url: st
         className="font-bold mt-auto absolute bottom-0  fr-mb-2w no-external-link-icon "
         style={{ backgroundImage: 'none', textDecoration: 'none' }}
         href={url}
-        target="_blank"
         rel="noopener noreferrer"
       >
         <Badge text={domain} />
@@ -187,5 +186,9 @@ function SourceCard({ title, text, url }: { title: string; text: string; url: st
 }
 
 function Badge({ text }: { text: string }) {
-  return <div className=" ">{text}</div>
+  return (
+    <div className="fr-background-contrast--info fr-py-0.5v fr-px-2v  rounded">
+      <p className="fr-text-action-high--blue-france">{text}</p>
+    </div>
+  )
 }

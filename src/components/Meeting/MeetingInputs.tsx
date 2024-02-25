@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { CurrQuestionContext } from '../../utils/context/questionContext'
 import { updateQuestion } from '../../utils/setData'
 import { GlobalDiv } from '../Global/GlobalDiv'
@@ -33,13 +33,13 @@ import { MeetingInputContext } from 'types'
 
 export function MeetingInputs({
   setGenerate,
-  context,
-  setContext,
 }: {
   setGenerate: React.Dispatch<React.SetStateAction<boolean>>
-  context: MeetingInputContext
-  setContext: React.Dispatch<React.SetStateAction<MeetingInputContext>>
 }) {
+  const [context, setContext] = useState<MeetingInputContext>({
+    administrations: [],
+    themes: [],
+  })
   const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
   //TODO: REMOVE USEEFFECT
   useEffect(() => {

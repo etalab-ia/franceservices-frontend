@@ -39,7 +39,6 @@ export const setUserQuestion = (question) => {
   const data = {
     institution: question.institution,
     query: question.query,
-    user_text: '',
     context: question.context,
     links: question.links,
     temperature: question.temperature,

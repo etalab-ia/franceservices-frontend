@@ -1,5 +1,5 @@
 import { Tag } from '@codegouvfr/react-dsfr/Tag'
-import { Chat } from '../../types'
+import { Chat } from '../types'
 
 export const archiveHeaders = ['Nom de la conversation', 'Date de création']
 

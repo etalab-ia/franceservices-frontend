@@ -1,6 +1,6 @@
 import { EventSourcePolyfill } from 'event-source-polyfill'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, Question, RootState } from '../../types'
+import { AppDispatch, Question, RootState } from '../types'
 import { onCloseStream } from './eventsEmitter'
 import { setHeaders, setUserQuestion } from './setData'
 import { streamUrl } from '../constants/api'
