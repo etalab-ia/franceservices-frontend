@@ -1,4 +1,4 @@
-import { StreamState } from '../../../types'
+import { StreamState } from 'types'
 
 const initialStream = {
   response: [],

@@ -1,10 +1,7 @@
-import { Card } from '@codegouvfr/react-dsfr/Card'
-import { Tag } from '@codegouvfr/react-dsfr/Tag'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { ArchiveType, RootState } from 'types'
 import { meetingQRTitle } from '../../constants/meeting'
-import { GlobalSecondaryTitle } from '../Global/GlobalSecondaryTitle'
 
 /*****************************************************************************************
 	

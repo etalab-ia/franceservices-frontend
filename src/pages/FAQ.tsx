@@ -1,7 +1,6 @@
-import { GlobalTitle } from '../components/Global/GlobalTitle'
-import { fr } from '@codegouvfr/react-dsfr'
 import { Accordion } from '@codegouvfr/react-dsfr/Accordion'
 import { CallOut } from '@codegouvfr/react-dsfr/CallOut'
+import { GlobalTitle } from '../components/Global/GlobalTitle'
 
 export function FAQ() {
   return (

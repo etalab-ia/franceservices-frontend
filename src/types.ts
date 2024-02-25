@@ -1,4 +1,4 @@
-import { store } from './src/utils/reducer/reducer'
+import { store } from './utils/reducer/reducer'
 
 /**
  * The type of the Redux store
@@ -25,7 +25,7 @@ export interface User {
   webservices: any[] // Dans sheets webservices: liens utiles lies aux sheets
   chatId: number // current chat id
   streamId: number // current stream id
-  history: UserHistory[]
+  history: UserHistory[] // history of the user's questions and the bot's responses
   lastStreamId: number // Keeps track of the last stream id, used to send feedback with the right stream id
 }
 
@@ -51,10 +51,10 @@ export type Question = {
   context: string | undefined
   institution: string | undefined
   links: string | undefined
-  temperature: number
+  temperature: number // temperature (originality) of the response
   sources: ['service-public', 'travail-emploi']
-  should_sids: string[]
-  must_not_sids: string[]
+  should_sids: string[] // sheets id that should be used by the agent to generate the response
+  must_not_sids: string[] // sheets id forbidden to be used by agent to generate response
 }
 export const InitialQuestion: Question = {
   model_name: modelName,
@@ -136,7 +136,6 @@ export type ArchiveType = {
   model_name: string
   mode: string
   query: string | undefined
-  user_text: string
   limit: number
   institution: any
   links: any

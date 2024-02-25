@@ -1,3 +1,4 @@
+import { MeetingInputContext } from 'types'
 import { meetingContextualInfosTitle } from '../../constants/meeting'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { GlobalSubtitle } from '../Global/GlobalSubtitle'
@@ -14,7 +15,13 @@ import { MeetingDefaultQuestions } from './MeetingDefaultQuestions'
 
  */
 
-export function MeetingAdditionalInformations({ context, setContext }) {
+export function MeetingAdditionalInformations({
+  context,
+  setContext,
+}: {
+  context: MeetingInputContext
+  setContext: React.Dispatch<React.SetStateAction<MeetingInputContext>>
+}) {
   return (
     <GlobalColContainer>
       <GlobalSubtitle>{meetingContextualInfosTitle}</GlobalSubtitle>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { InitialQuestion, RootState, MeetingInputContext } from '../../types'
+import { InitialQuestion, RootState, MeetingInputContext } from '../types'
 import { MeetingInputs } from '../components/Meeting/MeetingInputs'
 import { MeetingOutputs } from '../components/Meeting/MeetingOutputs'
 import { CurrQuestionContext } from '../utils/context/questionContext'
@@ -25,10 +25,7 @@ export function Meeting() {
   const dispatch = useDispatch()
   const [generate, setGenerate] = useState(false)
   const [currQuestion, setCurrQuestion] = useState(InitialQuestion)
-  const [context, setContext] = useState<MeetingInputContext>({
-    administrations: [],
-    themes: [],
-  })
+
   const updateCurrQuestion = (newQuestion) => {
     setCurrQuestion(newQuestion)
   }
@@ -51,11 +48,7 @@ export function Meeting() {
         {generate ? (
           <MeetingOutputs archive={undefined} />
         ) : (
-          <MeetingInputs
-            setGenerate={setGenerate}
-            context={context}
-            setContext={setContext}
-          />
+          <MeetingInputs setGenerate={setGenerate} />
         )}
       </div>
     </CurrQuestionContext.Provider>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { InitialQuestion } from '../../types'
+import { InitialQuestion } from '../types'
 import { DisplayChatTab } from '../components/Chat/DisplayChatTab'
 import { CurrQuestionContext } from '../utils/context/questionContext'
 import { emitCloseStream } from '../utils/eventsEmitter'

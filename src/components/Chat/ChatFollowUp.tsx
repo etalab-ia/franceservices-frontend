@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Feedback, InitialFeedback } from '../../../types'
+import { Feedback, InitialFeedback } from 'types'
 import { UserExperience } from '../Feedbacks/UserExperience'
 // import { NewQuestion } from "./NewQuestion"
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'

@@ -1,4 +1,3 @@
-import { Accordion } from '@codegouvfr/react-dsfr/Accordion'
 import Pagination from '@codegouvfr/react-dsfr/Pagination'
 import { useState } from 'react'
 import { DisplayChunks } from './DisplayChunks'

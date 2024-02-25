@@ -134,13 +134,6 @@ export const defaultInputFields = [
     themes: ["Carte d'identité"],
     administrations: ['ANTS'],
   },
-  // {
-  // 	title: "Renouveler une carte de mobilité inclusion sans compte en ligne",
-  // 	question:
-  // 		"L’usager a perdu sa Carte de Mobilité Inclusion (CMI) stationnement. Il aimerait en refaire une.\n\nLa démarche se fait en ligne sur https://www.carte-mobilite-inclusion.fr.\n\nL’usager n'a jamais eu de compte sur le site et ne peut donc pas s'y connecter ou récupérer des informations.\n\nComment renouveler une CMI suite à une perte sans compte sur le site carte-mobilite-inclusion.fr ?",
-  // 	themes: ["Handicap", "Santé", "Allocation"],
-  // 	administrations: ["MDPH"],
-  // },
 ]
 
 export const resultMeetingTitle = 'Synthèse par Albert'

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Chat } from '../../../types'
+import { Chat } from 'types'
 import { useApiUrls } from '../../constants/api'
 import { useFetch } from '../../utils/hooks'
 import { Print } from './DisplayArchive'
