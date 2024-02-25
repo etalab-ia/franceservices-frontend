@@ -4,9 +4,9 @@ import { DisplayMessageTab } from '../Chat/DisplayMessageTab'
 import { StreamingMessage } from '../Chat/StreamingMessage'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { GlobalStream } from '../Global/GlobalStream'
-import { StreamState } from 'types'
+import { Stream } from 'types'
 
-export function DisplayStream({ stream }: { stream: StreamState }) {
+export function DisplayStream({ stream }: { stream: Stream }) {
   const tabsLen = stream.historyStream.length
   const [currLen, setCurrLen] = useState(tabsLen)
   const [activeTab, setActiveTab] = useState(tabsLen + 1)

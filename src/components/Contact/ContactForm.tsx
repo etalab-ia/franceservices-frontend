@@ -3,7 +3,7 @@ import { ContactButton } from './ContactButton'
 import { UserInformation } from './UserInformation'
 import { ContactFormInput } from './ContactFormInput'
 
-import { UserAuth } from 'src/utils/auth'
+import { UserAuth } from 'utils/auth'
 export type formDataTypes = {
   title: string
   administration: string

@@ -1,6 +1,6 @@
 import { ButtonsGroup } from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { UserAuth } from 'src/utils/auth'
+import { UserAuth } from 'utils/auth'
 import { LoginContainer } from '../components/Auth/LoginContainer'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'

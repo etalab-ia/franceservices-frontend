@@ -1,4 +1,4 @@
-import { StreamState } from 'types'
+import { Stream } from 'types'
 
 const initialStream = {
   response: [],
@@ -7,10 +7,7 @@ const initialStream = {
   activeTab: 1,
 }
 
-export const streamReducer = (
-  state: StreamState = initialStream,
-  action: StreamAction
-) => {
+export const streamReducer = (state: Stream = initialStream, action: StreamAction) => {
   switch (action.type) {
     case 'RESET_USER':
       return initialStream

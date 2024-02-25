@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { RootState } from 'types'
-import { Feedback as FeedbackType } from 'types'
+import { Feedback as FeedbackType, RootState } from 'types'
 import { feedbackUrl } from '../../constants/api'
 import {
   feedbackConfirmationButton,
@@ -78,7 +77,7 @@ export function UserFeedbackOptions({
   )
 }
 
-export const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) => {
+const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) => {
   const streamId = useSelector((state: RootState) => state.user.lastStreamId)
   const handleConfirm = () => {
     otherReason &&
@@ -103,8 +102,6 @@ export const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback
       isConfirmed: true,
     })
   }
-  const classNames = feedback.reasons.length ? 'text-dark-purple' : 'text-[#929292]'
-
   return (
     <button
       role={feedbackConfirmationButton}

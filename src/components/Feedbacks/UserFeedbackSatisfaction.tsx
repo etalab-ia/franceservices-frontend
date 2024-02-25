@@ -36,7 +36,7 @@ export function UserFeedbackSatisfaction({
             title={button.type}
             onClick={() => handleClick(index)}
             key={index}
-            className={`user-feedback-buttons ${
+            className={`user-feedback-buttons fr-text-action-high--blue-france ${
               index === feedback.isGood
                 ? 'fr-background-action-high--blue-france'
                 : 'bg-white'
