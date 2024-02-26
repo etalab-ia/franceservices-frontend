@@ -52,7 +52,7 @@ build:front:dinum:
     - | # build and push front image to gitlab registry
       docker login --username gitlab-ci-token --password $CI_JOB_TOKEN $CI_REGISTRY
       docker build --rm --file ./Dockerfile \
-      --build-arg VITE_API_URL=${CI_DEPLOY_HOST} \
+      --build-arg VITE_API_URL=${CI_DEPLOY_URL} \
       --build-arg VITE_ENVIRONMENT_NAME=${CI_ENVIRONMENT_NAME} \
       --tag ${CI_REGISTRY_IMAGE}/front/${CI_ENVIRONMENT_NAME}:${CI_FRONT_IMAGE_TAG}-${CI_COMMIT_BRANCH} .
       docker push ${CI_REGISTRY_IMAGE}/front/${CI_ENVIRONMENT_NAME}:${CI_FRONT_IMAGE_TAG}-${CI_COMMIT_BRANCH}
@@ -96,7 +96,7 @@ build:front:france services:
     - | # build and push front image to gitlab registry
       docker login --username gitlab-ci-token --password $CI_JOB_TOKEN $CI_REGISTRY
       docker build --rm --file ./Dockerfile \
-      --build-arg VITE_API_URL=${CI_DEPLOY_HOST} \
+      --build-arg VITE_API_URL=${CI_DEPLOY_URL} \
       --build-arg VITE_ENVIRONMENT_NAME=${CI_ENVIRONMENT_NAME} \
       --tag ${CI_REGISTRY_IMAGE}/front/${CI_ENVIRONMENT_NAME}:${CI_FRONT_IMAGE_TAG}-${CI_COMMIT_BRANCH} .
       docker push ${CI_REGISTRY_IMAGE}/front/${CI_ENVIRONMENT_NAME}:${CI_FRONT_IMAGE_TAG}-${CI_COMMIT_BRANCH}
