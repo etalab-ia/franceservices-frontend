@@ -131,10 +131,6 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
 )
 
 function DisplayMeetingArchive({ streams }: { streams: UserHistory[] }) {
-  useEffect(() => {
-    console.log('streams', streams)
-  }, [])
-
   return (
     <>
       <GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
