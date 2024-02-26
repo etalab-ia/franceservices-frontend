@@ -77,6 +77,7 @@ export function UserFeedbackOptions({
   )
 }
 
+//TODO: Send the full reasons array to the backend when back is ready
 const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) => {
   const streamId = useSelector((state: RootState) => state.user.lastStreamId)
   const handleConfirm = () => {
@@ -90,7 +91,7 @@ const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) => 
     const data = {
       is_good: !feedback.isGood ? true : false,
       message: feedback.message,
-      reason: 'reliable_sources',
+      reason: reasons[0],
     }
     useFetch(`${feedbackUrl}/${streamId}`, 'POST', {
       data: JSON.stringify(data),
@@ -106,9 +107,9 @@ const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) => 
     <button
       role={feedbackConfirmationButton}
       onClick={handleConfirm}
-      className={`border-3  fr-border-action-high--blue-france fr-text-action-high--blue-france`}
+      className={`border fr-text-action-high--blue-france`}
     >
-      Confirmer
+      <p className="fr-text-action-high--blue-france fr-p-1w"> Confirmer </p>
     </button>
   )
 }

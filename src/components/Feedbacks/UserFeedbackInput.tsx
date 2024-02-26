@@ -1,31 +1,34 @@
+import { useEffect, useState } from 'react'
+import { Feedback } from 'types'
 import {
   askingQualityPrecisions,
   primaryButtons,
   secondaryButtons,
 } from '../../constants/feedback'
 import { UserFeedbackOptions } from './UserFeedbackOptions'
-import { UserFeedbackThanks } from './UserFeedbackThanks'
 import { UserFeedbackResume } from './UserFeedbackResume'
-import { useEffect, useState } from 'react'
+import { UserFeedbackThanks } from './UserFeedbackThanks'
 
 /**
  * Prints options
  */
-export function UserFeedbackInput({ isFirst, feedback, setFeedback }) {
+export function UserFeedbackInput({
+  isFirst,
+  feedback,
+  setFeedback,
+}: { isFirst: boolean; feedback: Feedback; setFeedback: (feedback: Feedback) => void }) {
   const buttons = isFirst ? primaryButtons : secondaryButtons
   const activeTab = feedback.isGood
   const [showThanks, setShowThanks] = useState(false)
   useEffect(() => {
     if (feedback.isConfirmed) {
-      setShowThanks(true) // Show thanks immediately when confirmed
+      setShowThanks(true)
       const timer = setTimeout(() => {
-        setShowThanks(false) // Hide after 3 seconds
-      }, 3000) // 3000ms = 3 seconds
+        setShowThanks(false)
+      }, 3000)
 
-      return () => clearTimeout(timer) // Ensure timer is cleared on component unmount or before the next effect runs
+      return () => clearTimeout(timer)
     }
-    // Optionally, reset the showThanks state if feedback.isConfirmed is false.
-    // This depends on your application's logic and how feedback confirmation is handled.
   }, [feedback.isConfirmed])
   return (
     <>

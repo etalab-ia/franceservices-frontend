@@ -34,20 +34,19 @@ export const secondaryButtons = [
 ]
 
 export const satisfiedButtons = [
-  'Apporte un nouveau vocabulaire',
-  'Clair',
-  'Synthétique',
-  'Sources fiables',
-  'Autre raison',
+  { 'Clair ': 'clear' },
+  { 'Synthétique ': 'concise' },
+  { 'Sources fiables': 'reliable_sources' },
+  { 'Autre raison': 'other' },
 ] as const
 
 export const unsatisfiedButtons = [
-  'Les éléments sont faux',
-  'Manque de sources',
-  'Trop long',
-  'Incohérent',
-  'Fautes de grammaire',
-  'Autre raison',
+  { 'Les éléments sont faux': 'hallucinations' },
+  { 'Manque de sources': 'lack_of_sources' },
+  { 'Trop long': 'too_long' },
+  { 'Incohérent ': 'inconsistent' },
+  { 'Fautes de grammaire': 'grammar_errors' },
+  { 'Autre raison': 'other' },
 ] as const
 
 export const askingQuality = `Quelle est la qualité de ce message ?`

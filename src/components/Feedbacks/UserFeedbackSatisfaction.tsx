@@ -1,10 +1,6 @@
-import {
-  primaryButtons,
-  satisfactionButton,
-  secondaryButtons,
-} from '../../constants/feedback'
-import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { Feedback as FeedbackType } from 'types'
+import { primaryButtons, secondaryButtons } from '../../constants/feedback'
+import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 
 /**
  * These are the good or bad buttons that the user can click to give feedback
@@ -27,41 +23,53 @@ export function UserFeedbackSatisfaction({
       isGood: isGood,
     })
   }
-
   return (
     <GlobalRowContainer>
-      {buttons.map((button, index) => {
-        return (
-          <button
-            title={button.type}
-            onClick={() => handleClick(index)}
-            key={index}
-            className={`user-feedback-buttons fr-text-action-high--blue-france ${
-              index === feedback.isGood
-                ? 'fr-background-action-high--blue-france'
-                : 'bg-white'
-            }`}
-            disabled={feedback.isConfirmed}
-          >
-            <img
-              alt={satisfactionButton(button.type)}
-              className={
-                index === feedback.isGood ? 'mr-2 brightness-0 invert-[1]' : 'mr-2'
-              }
-              src={button.img}
-            />
-            <p
-              className={`${
-                index === feedback.isGood
-                  ? 'text-white'
-                  : 'fr-text-action-high--blue-france'
-              }`}
-            >
-              {button.name}
-            </p>
-          </button>
-        )
-      })}
+      <button
+        title={'satisfaisant'}
+        onClick={() => handleClick(0)}
+        className={`user-feedback-buttons ${
+          feedback.isGood || feedback.isGood === undefined
+            ? 'bg-white  fr-text-action-high--blue-france'
+            : 'fr-background-action-high--blue-france text-white'
+        }`}
+        disabled={feedback.isConfirmed}
+      >
+        <span
+          className={`fr-icon-thumbs-up ${feedback.isGood === 0 ? 'text-white' : ''}`}
+        />
+        <p
+          className={`${
+            feedback.isGood || feedback.isGood === undefined
+              ? 'fr-text-action-high--blue-france'
+              : 'text-white'
+          }`}
+        >
+          La réponse est pertinente
+        </p>
+      </button>
+
+      <button
+        title={'insatisfaisant'}
+        onClick={() => handleClick(1)}
+        className={`user-feedback-buttons  ${
+          feedback.isGood
+            ? 'fr-background-action-high--blue-france text-white'
+            : 'bg-white  fr-text-action-high--blue-france'
+        }`}
+        disabled={feedback.isConfirmed}
+      >
+        <span
+          className={` ${feedback.isGood === 1 ? 'text-white' : ''} fr-icon-thumbs-down`}
+        />
+        <p
+          className={`${
+            feedback.isGood ? 'text-white' : 'fr-text-action-high--blue-france'
+          }`}
+        >
+          La réponse n'est pas pertinente
+        </p>
+      </button>
     </GlobalRowContainer>
   )
 }

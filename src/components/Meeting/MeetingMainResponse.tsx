@@ -165,7 +165,7 @@ export function NewQuestionMeetingAdditionalInput({
       {inputFields.map((field, index) => {
         const tags = field.name === 'themes' ? context.themes : context.administrations
         return (
-          <div className="fr-mb-4w fr-col-5" key={index}>
+          <div className="fr-col-5" key={index}>
             <ThemesAndAdminsInput
               field={field}
               onTagSelect={(tag) => handleSetTag(tag, field.name)}
