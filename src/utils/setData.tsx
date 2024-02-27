@@ -4,6 +4,8 @@ import { useApiUrls } from '../constants/api'
 import { CurrQuestionContext } from './context/questionContext'
 import { useFetch } from './hooks'
 
+const modelName: string = import.meta.env.VITE_MODEL_NAME as string
+
 export const setHeaders = (isEventSource: boolean) => {
   const token = localStorage.getItem('authToken')
 
@@ -58,7 +60,7 @@ export const setQuestionFromRegeneration = (
   must_not_sids: string[]
 ) => {
   const data = {
-    model_name: 'albert-light',
+    model_name: modelName,
     mode: mode,
     query: text,
     limit: limit,

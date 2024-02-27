@@ -54,6 +54,8 @@ build:front:dinum:
       docker build --rm --file ./Dockerfile \
       --build-arg VITE_API_URL=${CI_DEPLOY_URL} \
       --build-arg VITE_ENVIRONMENT_NAME=${CI_ENVIRONMENT_NAME} \
+      --build-arg VITE_MODEL_NAME=${MODEL_NAME} \
+      --build-arg VITE_MODEL_MODE=${MODEL_MODE} \
       --tag ${CI_REGISTRY_IMAGE}/front/${CI_ENVIRONMENT_NAME}:${CI_FRONT_IMAGE_TAG}-${CI_COMMIT_BRANCH} .
       docker push ${CI_REGISTRY_IMAGE}/front/${CI_ENVIRONMENT_NAME}:${CI_FRONT_IMAGE_TAG}-${CI_COMMIT_BRANCH}
 
@@ -98,6 +100,8 @@ build:front:france services:
       docker build --rm --file ./Dockerfile \
       --build-arg VITE_API_URL=${CI_DEPLOY_URL} \
       --build-arg VITE_ENVIRONMENT_NAME=${CI_ENVIRONMENT_NAME} \
+      --build-arg VITE_MODEL_NAME=${MODEL_NAME} \
+      --build-arg VITE_MODEL_MODE=${MODEL_MODE} \
       --tag ${CI_REGISTRY_IMAGE}/front/${CI_ENVIRONMENT_NAME}:${CI_FRONT_IMAGE_TAG}-${CI_COMMIT_BRANCH} .
       docker push ${CI_REGISTRY_IMAGE}/front/${CI_ENVIRONMENT_NAME}:${CI_FRONT_IMAGE_TAG}-${CI_COMMIT_BRANCH}
 
