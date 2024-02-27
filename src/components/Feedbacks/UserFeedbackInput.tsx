@@ -7,7 +7,7 @@ import {
 } from '../../constants/feedback'
 import { UserFeedbackOptions } from './UserFeedbackOptions'
 import { UserFeedbackResume } from './UserFeedbackResume'
-import { UserFeedbackThanks } from './UserFeedbackThanks'
+import { FeedbackThanksMessage } from './FeedbackThanksMessage'
 
 /**
  * Prints options
@@ -45,7 +45,7 @@ export function UserFeedbackInput({
       ) : (
         <div>
           <UserFeedbackResume feedback={feedback} />
-          {showThanks && <UserFeedbackThanks />}
+          {showThanks && <FeedbackThanksMessage />}
         </div>
       )}
     </>

@@ -1,6 +1,6 @@
 import { thankFeedback, thankFeedbackRole } from '../../constants/feedback'
 
-export function UserFeedbackThanks() {
+export function FeedbackThanksMessage() {
   return (
     <div role={thankFeedbackRole} className="fr-mb-2w ">
       <span

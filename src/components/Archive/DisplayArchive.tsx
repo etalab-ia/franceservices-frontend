@@ -137,7 +137,7 @@ function DisplayMeetingArchive({ streams }: { streams: UserHistory[] }) {
       <GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
       <GlobalParagraph>{streams[0].query}</GlobalParagraph>
 
-      <div className="ft-container h-full w-full bg-red">
+      <div className="ft-container h-full w-full">
         {streams.length > 0 && (
           <DisplayResponse
             chunks={streams[0].chunks}

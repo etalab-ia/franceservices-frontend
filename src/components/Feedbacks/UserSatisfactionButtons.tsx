@@ -5,7 +5,7 @@ import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 /**
  * These are the good or bad buttons that the user can click to give feedback
  */
-export function UserFeedbackSatisfaction({
+export function UserSatisfactionButtons({
   isFirst,
   feedback,
   setFeedback,

@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Feedback as FeedbackType, InitialFeedback, RootState } from 'types'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { UserFeedbackInput } from './UserFeedbackInput'
-import { UserFeedbackSatisfaction } from './UserFeedbackSatisfaction'
+import { UserSatisfactionButtons } from './UserSatisfactionButtons'
 import { useSelector } from 'react-redux'
 
 /**
@@ -16,12 +16,13 @@ export function Feedback({
   setFeedback,
 }: { feedback: FeedbackType; setFeedback: (feedback: FeedbackType) => void }) {
   const user = useSelector((state: RootState) => state.user)
+  console.log('feedback', feedback)
   useEffect(() => {
     setFeedback(InitialFeedback)
   }, [])
   return (
     <GlobalColContainer>
-      <UserFeedbackSatisfaction
+      <UserSatisfactionButtons
         isFirst={true}
         feedback={feedback}
         setFeedback={setFeedback}

@@ -3,7 +3,6 @@ import { PasswordInput } from '@codegouvfr/react-dsfr/blocks/PasswordInput'
 
 export const LoginFields = ({ fields, handleChange, handleSubmit }) => {
   function handleKeyDown(e) {
-    e.preventDefault()
     if (e.key === 'Enter') {
       handleSubmit()
     }
