@@ -93,10 +93,8 @@ export async function generateStream(
   chatId: number,
   isChat: boolean
 ) {
-  console.log('generateStream')
   const headers = setHeaders(false)
   const stream_data = setUserQuestion(question)
-  console.log('stream_data', stream_data)
   const stream = await useFetch(streamUrl + `/chat/${chatId}`, 'POST', {
     data: JSON.stringify(stream_data),
     headers,
