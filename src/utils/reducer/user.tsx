@@ -1,4 +1,12 @@
-import { type Message, type Question } from 'types'
+import {
+  UserHistory,
+  type Message,
+  type Question,
+  type User,
+  Sheet,
+  Chunk,
+  WebService,
+} from 'types'
 import { initialChatbotMessage } from '../../constants/chatbotProps'
 
 /*****************************************************************************************************
@@ -23,29 +31,21 @@ import { initialChatbotMessage } from '../../constants/chatbotProps'
 // - question: local state
 // - messages: check w/ backend /streams
 
+const modelName: string = import.meta.env.VITE_MODEL_NAME as string
+const modelMode: string = import.meta.env.VITE_MODEL_MODE as string
+
 const InitialQuestion: Question = {
-  model_name: 'albert-light',
-  mode: 'rag',
+  model_name: modelName,
+  mode: modelMode,
   query: '',
   limit: 7,
   context: undefined,
-  institution: undefined,
+  institution: undefined, //TODO: remove
   links: undefined,
   temperature: 20,
   sources: ['service-public', 'travail-emploi'],
   should_sids: [],
   must_not_sids: [],
-}
-
-interface User {
-  question: Question // Question asked by user
-  messages: Message[] // Message exchanged between user & agent
-  sheets: any[] // Sheets associated to the reponse from 0 to 2
-  additionalSheets: any[] // suggested sheets to from 3 to 9
-  chunks: any[] // Chunks associes a la reponse
-  webservices: any[] // Dans sheets webservices: liens utiles lies aux sheets
-  chatId: number // current chat id
-  streamId: number // current stream id
 }
 
 const InitialUser: User = {
@@ -57,16 +57,18 @@ const InitialUser: User = {
   webservices: [],
   chatId: 0,
   streamId: 0,
+  lastStreamId: 0,
+  history: [],
 }
 
 type UserAction =
-  | { type: 'SET_SHEETS'; sheets: any[] }
-  | { type: 'SET_CHUNKS'; chunks: any[] }
+  | { type: 'SET_SHEETS'; sheets: Sheet[] }
+  | { type: 'SET_CHUNKS'; chunks: Chunk[] }
   | {
       type: 'SET_SHEETS_FROM_ARCHIVE'
-      sheets: any[]
-      additionalSheets: any[]
-      webservices: any[]
+      sheets: Sheet[]
+      additionalSheets: Sheet[]
+      webservices: WebService[]
     }
   | { type: 'REMOVE_SHEETS'; indexToRemove: number }
   | { type: 'ADD_SHEETS'; indexToAdd: number }
@@ -76,15 +78,27 @@ type UserAction =
   | { type: 'SET_MESSAGES'; nextMessage: Message }
   | { type: 'SET_STREAM_ID'; nextStreamId: number }
   | { type: 'SET_CHAT_ID'; nextChatId: number }
+  | { type: 'ADD_HISTORY'; newItem: UserHistory }
+  | { type: 'SET_LAST_STREAM_ID'; nextLastStreamId: number }
 
 export const userReducer = (state: User = InitialUser, action: UserAction): User => {
   switch (action.type) {
+    case 'SET_LAST_STREAM_ID':
+      return {
+        ...state,
+        lastStreamId: action.nextLastStreamId,
+      }
+    case 'ADD_HISTORY':
+      return {
+        ...state,
+        history: [...state.history, action.newItem],
+      }
     case 'SET_SHEETS':
       return {
         ...state,
         sheets: action.sheets.slice(0, 3),
         additionalSheets: action.sheets.slice(3, 10),
-        webservices: action.sheets[0].web_services.slice(0, 3),
+        webservices: action.sheets[0].web_services?.slice(0, 3),
       }
     case 'SET_CHUNKS':
       return {

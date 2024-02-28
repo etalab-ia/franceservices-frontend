@@ -1,10 +1,11 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { CurrQuestionContext } from '../../utils/context/questionContext'
 import { updateQuestion } from '../../utils/setData'
 import { GlobalDiv } from '../Global/GlobalDiv'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
-import { MeetingInformations } from './MeetingInformations'
+import { MeetingInputFields } from './MeetingInputFields'
 import { MeetingInputButton } from './MeetingInputButton'
+import { MeetingInputContext } from 'types'
 
 /*****************************************************************************************************
 	
@@ -23,24 +24,38 @@ import { MeetingInputButton } from './MeetingInputButton'
 
 	COMPONENTS:
 
-	**	MeetingInformations: set current question & context (administrations / themes) from user input
+	**	MeetingInputFields: set current question & context (administrations / themes) from user input
 
 	**	MeetingInputButton: setGenerate to true to switch to meeting stream page onClick
 			! Meeting generation button is disable when current question is empty
 
  *****************************************************************************************************/
 
-export function MeetingInputs({ setGenerate, context, setContext }) {
+export function MeetingInputs({
+  setGenerate,
+  generate,
+}: {
+  setGenerate: React.Dispatch<React.SetStateAction<boolean>>
+  generate: boolean
+}) {
+  const [context, setContext] = useState<MeetingInputContext>({
+    administrations: [],
+    themes: [],
+  })
   const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
-
+  //TODO: REMOVE USEEFFECT
   useEffect(() => {
     currQuestion.query && updateQuestion(currQuestion, updateCurrQuestion)
   }, [])
 
   return (
     <div style={{ width: '100%', flex: 1, flexGrow: 1, backgroundColor: '' }}>
-      <MeetingInformations context={context} setContext={setContext} />
-      <MeetingInputButton setGenerate={setGenerate} context={context} />
+      <MeetingInputFields context={context} setContext={setContext} />
+      <MeetingInputButton
+        setGenerate={setGenerate}
+        context={context}
+        generate={generate}
+      />
     </div>
   )
 }

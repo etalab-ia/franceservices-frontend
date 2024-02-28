@@ -1,8 +1,13 @@
-import { ArchiveType } from 'types'
+import { ArchiveType, RootState } from 'types'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { OneThirdScreenWidth } from '../Global/OneThirdScreenWidth'
 import { DisplaySheets } from '../Sheets/DisplaySheets'
 import { UsefulLinks } from './UsefulLinks'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getIndexes } from 'utils/setData'
+import { indexesUrl } from 'constants/api'
+import { emitCloseStream } from 'utils/eventsEmitter'
 
 /*****************************************************************************************
 	
@@ -21,14 +26,38 @@ import { UsefulLinks } from './UsefulLinks'
 export function MeetingAdditionalResponse({
   archive,
 }: { archive: ArchiveType | undefined }) {
+  const user = useSelector((state: RootState) => state.user)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (!user.streamId || archive) return
+
+    const data = {
+      question: user.question.query,
+      must_not_sids: user.question.must_not_sids,
+    }
+    getIndexes(
+      data,
+      dispatch,
+      'chunks',
+      user.question.limit,
+      JSON.stringify(user.streamId),
+      indexesUrl
+    )
+    getIndexes(
+      data,
+      dispatch,
+      'sheets',
+      user.question.limit,
+      JSON.stringify(user.streamId),
+      indexesUrl
+    )
+  }, [user.streamId, user.question])
   return (
     <OneThirdScreenWidth>
-      <DisplaySheets archive={archive ?? undefined} />
+      {/* <DisplaySheets archive={archive ?? undefined} /> */}
       <GlobalColContainer>
-        {!archive && (
-          <h3 className="text-2xl font-bold fr-pt-3w fr-pb-3w">Liens pratiques</h3>
-        )}
-        <UsefulLinks />
+        <UsefulLinks webservices={user.webservices} />
       </GlobalColContainer>
     </OneThirdScreenWidth>
   )

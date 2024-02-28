@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'types'
 import { userChatToolsFunc } from '../../utils/chat'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
@@ -9,7 +8,6 @@ export function UserChatTools({ isArchive }) {
   const stream = useSelector((state: RootState) => state.stream)
   const user = useSelector((state: RootState) => state.user)
   const archive = useSelector((state: RootState) => state.archive)
-  //const feedback = useSelector((state: RootState) => state.feedback)
   const dispatch = useDispatch()
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
 

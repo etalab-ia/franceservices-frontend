@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import { Feedback, InitialFeedback } from '../../utils/feedback'
+import { Feedback, InitialFeedback } from 'types'
 import { UserExperience } from '../Feedbacks/UserExperience'
 // import { NewQuestion } from "./NewQuestion"
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { DisplayStream } from '../Stream/DisplayStream'
 import { AvatarToolsContainer } from './AvatarToolsContainer'
-import { StreamState } from 'types'
+import { Stream } from 'types'
 
-export function ChatFollowUp({ stream }: { stream: StreamState }) {
+export function ChatFollowUp({ stream }: { stream: Stream }) {
   const [feedback, setFeedback] = useState<Feedback>(InitialFeedback)
   const conditionDiv = stream.response.length !== 0 || stream.historyStream.length !== 0
   // const newQuestionCondition = !stream.isStreaming && feedback.isConfirmed

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { rmContextFromQuestion } from 'src/utils/setData'
-import { InitialQuestion } from '../../types'
+import { useDispatch, useSelector } from 'react-redux'
+import { InitialQuestion, RootState, MeetingInputContext } from '../types'
 import { MeetingInputs } from '../components/Meeting/MeetingInputs'
 import { MeetingOutputs } from '../components/Meeting/MeetingOutputs'
 import { CurrQuestionContext } from '../utils/context/questionContext'
@@ -22,15 +22,10 @@ import { emitCloseStream } from '../utils/eventsEmitter'
  *****************************************************************************************************/
 
 export function Meeting() {
+  const dispatch = useDispatch()
   const [generate, setGenerate] = useState(false)
   const [currQuestion, setCurrQuestion] = useState(InitialQuestion)
-  const [context, setContext] = useState<{
-    administrations: string[]
-    themes: string[]
-  }>({
-    administrations: [],
-    themes: [],
-  })
+
   const updateCurrQuestion = (newQuestion) => {
     setCurrQuestion(newQuestion)
   }
@@ -41,17 +36,19 @@ export function Meeting() {
     }
   }, [generate])
 
+  useEffect(() => {
+    return () => {
+      dispatch({ type: 'RESET_USER' })
+    }
+  }, [])
+
   return (
     <CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>
       <div className="fr-container fr-my-3w">
         {generate ? (
-          <MeetingOutputs setGenerate={setGenerate} archive={undefined} />
+          <MeetingOutputs archive={undefined} />
         ) : (
-          <MeetingInputs
-            setGenerate={setGenerate}
-            context={context}
-            setContext={setContext}
-          />
+          <MeetingInputs setGenerate={setGenerate} generate={generate} />
         )}
       </div>
     </CurrQuestionContext.Provider>

@@ -22,7 +22,7 @@ export function ResetPassword({ setAuthFailed, userAuth, setUserAuth }) {
 
     if (res.status && res.status !== 200) setAuthFailed(true)
 
-    return (window.location.href = '/albert/login')
+    return (window.location.href = '/login')
   }
 
   return (

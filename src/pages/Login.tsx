@@ -1,6 +1,6 @@
 import { ButtonsGroup } from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { UserAuth } from 'src/utils/auth'
+import { UserAuth } from 'utils/auth'
 import { LoginContainer } from '../components/Auth/LoginContainer'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
@@ -42,7 +42,7 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
     checkIfCompletedFields()
   }
 
-  const handleClick = async () => {
+  const handleSubmit = async () => {
     const data = id.includes('@')
       ? { email: id, password: password }
       : { username: id, password: password }
@@ -70,9 +70,13 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
 
   return (
     <LoginContainer>
-      <LoginFields fields={loginFields} handleChange={handleChange} />
+      <LoginFields
+        fields={loginFields}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
       {authFailed && <ButtonInformation>{usernameOrPasswordError}</ButtonInformation>}
-      <ButtonsGroup buttons={initButtonsLogin(handleClick, isDisable)} />
+      <ButtonsGroup buttons={initButtonsLogin(handleSubmit, isDisable)} />
     </LoginContainer>
   )
 }

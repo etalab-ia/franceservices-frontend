@@ -1,8 +1,9 @@
 import { EventSourcePolyfill } from 'event-source-polyfill'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, Question, RootState } from '../../types'
+import { AppDispatch, Question, RootState } from '../types'
 import { onCloseStream } from './eventsEmitter'
 import { setHeaders, setUserQuestion } from './setData'
+import { streamUrl } from '../constants/api'
 
 export const useAppDispatch: () => AppDispatch = useDispatch
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
@@ -22,28 +23,27 @@ export const useFetch = async (url: string, method: string, props): Promise<any>
     }
 
     if (url.includes('start')) return response
-    else {
-      const jsonData = await response.json()
-      return jsonData
-    }
+    const jsonData = await response.json()
+    return jsonData
   } catch (error) {
     console.error('An error occurred: ', error)
     throw error
   }
 }
 
-function handleStreamMessage(e, dispatch, stream_chat) {
+function handleStreamMessage(e, dispatch, stream_chat, isChat: boolean) {
   try {
     const jsonData = JSON.parse(e.data)
     if (jsonData == '[DONE]') {
       stream_chat.close()
 
       dispatch({ type: 'SET_STREAM_ID', nextStreamId: 0 })
-      dispatch({ type: 'SET_CHAT_ID', nextChatId: 0 })
+      if (isChat) {
+        dispatch({ type: 'SET_CHAT_ID', nextChatId: 0 })
+      }
       return dispatch({ type: 'STOP_AGENT_STREAM' })
-    } else {
-      return dispatch({ type: 'GET_AGENT_STREAM', nextResponse: jsonData })
     }
+    return dispatch({ type: 'GET_AGENT_STREAM', nextResponse: jsonData })
   } catch (error) {
     console.error('An error occurred: ', error)
 
@@ -62,7 +62,7 @@ function handleStreamError(e, stream_chat) {
 /*
  **	Manage stream
  */
-export const useStream = async (dispatch, id: number, streamUrl: string) => {
+export const useStream = async (dispatch, id: number, isChat: boolean) => {
   const stream_chat = new EventSourcePolyfill(`${streamUrl}/${id}/start`, {
     headers: setHeaders(true),
     withCredentials: true,
@@ -70,7 +70,7 @@ export const useStream = async (dispatch, id: number, streamUrl: string) => {
 
   dispatch({ type: 'RESET_AGENT_STREAM' })
   stream_chat.onmessage = (e) => {
-    handleStreamMessage(e, dispatch, stream_chat)
+    handleStreamMessage(e, dispatch, stream_chat, isChat)
   }
   stream_chat.onerror = (e) => {
     handleStreamError(e, stream_chat)
@@ -80,7 +80,7 @@ export const useStream = async (dispatch, id: number, streamUrl: string) => {
       stream_chat.close()
     }
     dispatch({ type: 'SET_INITIAL_STREAM' })
-    dispatch({ type: 'SET_CHAT_ID', nextChatId: 0 })
+    //dispatch({ type: 'SET_CHAT_ID', nextChatId: 0 })
   })
 }
 
@@ -91,7 +91,7 @@ export async function generateStream(
   question: Question,
   dispatch,
   chatId: number,
-  streamUrl: string
+  isChat: boolean
 ) {
   const headers = setHeaders(false)
   const stream_data = setUserQuestion(question)
@@ -100,6 +100,7 @@ export async function generateStream(
     headers,
   })
   dispatch({ type: 'SET_STREAM_ID', nextStreamId: stream.id })
+  dispatch({ type: 'SET_LAST_STREAM_ID', nextLastStreamId: stream.id })
 
-  await useStream(dispatch, stream.id, streamUrl)
+  await useStream(dispatch, stream.id, isChat)
 }

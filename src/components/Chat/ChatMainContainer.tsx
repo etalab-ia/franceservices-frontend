@@ -42,7 +42,7 @@ export function ChatMainContainer({
           <Display messages={user.messages} archive={false} />
         )}
       </ChatOverflowManagementContainer>
-      {!archive && <UserMessage setGenerate={setGenerate} />}{' '}
+      {!archive && <UserMessage setGenerate={setGenerate} chatType={'qa'} />}{' '}
       {/* Display input if not in archive */}
     </ChatHeightContainer>
   )

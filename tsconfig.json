@@ -2,7 +2,7 @@
   "compilerOptions": {
     "moduleResolution": "Node",
     /* Visit https://aka.ms/tsconfig to read more about this file */
-    "baseUrl": ".", // This sets your project root as the base directory
+    "baseUrl": "src", // This sets your project root as the base directory
     "paths" : {
       "types": ["./types.ts"]
     },

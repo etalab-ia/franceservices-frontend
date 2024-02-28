@@ -13,21 +13,13 @@ import thumbsUp from '../../../icons/feedbacks/thumbsUp.svg'
 /*
  * Advices and examples of good and bad prompts
  */
-export function MeetingPromptAdvice({}) {
-  const [expandedItems, setExpandedItems] = useState([])
+export function MeetingPromptAdvice() {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false)
 
   const handleToggleAll = () => {
     setIsAccordionOpen(!isAccordionOpen)
   }
 
-  /*   const handleToggleItem = (index) => {
-    const updatedExpandedItems = [...expandedItems]
-
-    updatedExpandedItems[index] = !updatedExpandedItems[index]
-    setExpandedItems(updatedExpandedItems)
-  }
- */
   return (
     <>
       <div>{meetingInputGuidelines}</div>
@@ -50,7 +42,7 @@ export function MeetingPromptAdvice({}) {
 
             {ex.title}
           </div>
-          <p className="mb-4 text-justify fr-text--xs">{ex.description}</p>
+          <div className="mb-4 text-justify fr-text--xs">{ex.description}</div>
         </div>
       ))}
     </>

@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { ArchiveType, RootState } from 'types'
-import { useApiUrls } from '../../constants/api'
+import { ArchiveType, InitialFeedback, RootState } from 'types'
+import { getChunksUrl } from '../../constants/api'
 import { resultMeetingTitle } from '../../constants/meeting'
 import { useFetch } from '../../utils/hooks'
 import { setHeaders } from '../../utils/setData'
+import { Feedback } from '../Feedbacks/Feedback'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { GlobalSecondaryTitle } from '../Global/GlobalSecondaryTitle'
 import { GlobalStream } from '../Global/GlobalStream'
-import { ResponseExplanation } from '../Global/ResponseExplanation'
-import { MeetingFeedback } from './MeetingFeedback'
 
 /*****************************************************************************************
 
@@ -25,7 +24,7 @@ export function MeetingStream({ archive }: { archive: ArchiveType | undefined })
   const user = useSelector((state: RootState) => state.user)
   const agentResponse = archive !== undefined ? archive.response : stream.historyStream[0]
   const [chunks, setChunks] = useState([])
-  const { getChunksUrl } = useApiUrls()
+  const [feedback, setFeedback] = useState(InitialFeedback)
 
   const getChunks = async () => {
     const data = {
@@ -35,12 +34,11 @@ export function MeetingStream({ archive }: { archive: ArchiveType | undefined })
       headers: setHeaders(false),
       data: JSON.stringify(data),
     })
-
     setChunks(chunksRes)
   }
 
   useEffect(() => {
-    if (archive !== undefined) {
+    if (archive) {
       getChunks()
     }
   }, [])
@@ -52,7 +50,7 @@ export function MeetingStream({ archive }: { archive: ArchiveType | undefined })
   }, [user.chunks])
   return (
     <>
-      <GlobalSecondaryTitle extraClass="fr-mb-2w ">
+      <GlobalSecondaryTitle extraClass="fr-mb-2w">
         {resultMeetingTitle}
       </GlobalSecondaryTitle>
       {stream.isStreaming ? (
@@ -60,8 +58,11 @@ export function MeetingStream({ archive }: { archive: ArchiveType | undefined })
       ) : (
         <GlobalParagraph>{agentResponse}</GlobalParagraph>
       )}
-      {!stream.isStreaming && stream.historyStream.length !== 0 && <MeetingFeedback />}
-      <ResponseExplanation chunks={chunks} />
+      {/* [      {!stream.isStreaming && stream.historyStream.length !== 0 && <MeetingFeedback />}
+] */}{' '}
+      {!stream.isStreaming && stream.historyStream.length !== 0 && (
+        <Feedback feedback={feedback} setFeedback={setFeedback} />
+      )}
     </>
   )
 }

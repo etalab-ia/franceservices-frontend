@@ -39,13 +39,17 @@ export function NewPassword({ authFailed, setAuthFailed }) {
 
     if (res.status && res.status !== 200) setAuthFailed(true)
 
-    return (window.location.href = '/albert/login')
+    return (window.location.href = '/login')
   }
   const fields = signupFields.slice(2, signupFields.length)
 
   return (
     <LoginContainer>
-      <LoginFields fields={fields} handleChange={handleChange} />
+      <LoginFields
+        handleSubmit={handleClick}
+        fields={fields}
+        handleChange={handleChange}
+      />
       {authFailed && <ButtonInformation>{changePasswordFailed}</ButtonInformation>}
       <ButtonsGroup
         buttons={initButtonsSignup(
