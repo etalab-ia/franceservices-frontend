@@ -21,10 +21,7 @@ export function MeetingDefaultQuestions({ setContext }) {
 
   return (
     <GlobalRowContainer>
-      <span
-        className="fr-p-2w"
-        style={{ background: 'var(--background-alt-blue-france)' }}
-      >
+      <span className="fr-p-2w fr-background-alt--blue-france">
         {meetingDefaultQuestionsIntroduction}
         {defaultInputFields.map((field, index) => {
           return (

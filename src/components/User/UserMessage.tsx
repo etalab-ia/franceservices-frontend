@@ -1,13 +1,11 @@
 import { SearchBar } from '@codegouvfr/react-dsfr/SearchBar'
-import { useContext, useState } from 'react'
-import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
+import { useContext, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from 'types'
+import { chatUrl } from '../../constants/api'
+import { CurrQuestionContext } from '../../utils/context/questionContext'
 import { generateStream, useFetch } from '../../utils/hooks'
 import { setHeaders } from '../../utils/setData'
-import { streamUrl, chatUrl } from '../../constants/api'
-import { RootState } from 'types'
-import { CurrQuestionContext } from '../../utils/context/questionContext'
 
 /*
  **

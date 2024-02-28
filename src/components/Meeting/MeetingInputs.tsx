@@ -33,8 +33,10 @@ import { MeetingInputContext } from 'types'
 
 export function MeetingInputs({
   setGenerate,
+  generate,
 }: {
   setGenerate: React.Dispatch<React.SetStateAction<boolean>>
+  generate: boolean
 }) {
   const [context, setContext] = useState<MeetingInputContext>({
     administrations: [],
@@ -49,7 +51,11 @@ export function MeetingInputs({
   return (
     <div style={{ width: '100%', flex: 1, flexGrow: 1, backgroundColor: '' }}>
       <MeetingInputFields context={context} setContext={setContext} />
-      <MeetingInputButton setGenerate={setGenerate} context={context} />
+      <MeetingInputButton
+        setGenerate={setGenerate}
+        context={context}
+        generate={generate}
+      />
     </div>
   )
 }
