@@ -3,9 +3,12 @@ import { store } from './src/utils/reducer/reducer'
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 
+const modelName: string = import.meta.env.VITE_MODEL_NAME as string
+const modelMode: string = import.meta.env.VITE_MODEL_MODE as string
+
 export type Question = {
-  model_name: 'albert-light'
-  mode: 'rag'
+  model_name: string
+  mode: string
   query: string | undefined
   limit: number
   context: string | undefined
@@ -18,8 +21,8 @@ export type Question = {
 }
 
 export const InitialQuestion: Question = {
-  model_name: 'albert-light',
-  mode: 'rag',
+  model_name: modelName,
+  mode: modelMode,
   query: undefined,
   limit: 7,
   context: undefined,

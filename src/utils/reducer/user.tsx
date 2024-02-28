@@ -23,9 +23,12 @@ import { initialChatbotMessage } from '../../constants/chatbotProps'
 // - question: local state
 // - messages: check w/ backend /streams
 
+const modelName: string = import.meta.env.VITE_MODEL_NAME as string
+const modelMode: string = import.meta.env.VITE_MODEL_MODE as string
+
 const InitialQuestion: Question = {
-  model_name: 'albert-light',
-  mode: 'rag',
+  model_name: modelName,
+  mode: modelMode,
   query: '',
   limit: 7,
   context: undefined,
