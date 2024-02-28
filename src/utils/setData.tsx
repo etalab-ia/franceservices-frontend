@@ -47,6 +47,7 @@ export const setUserQuestion = (question) => {
     mode: question.mode,
     sources: question.sources,
     must_not_sids: question.must_not_sids,
+    with_history: true,
   }
 
   return data
