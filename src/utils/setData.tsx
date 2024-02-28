@@ -1,9 +1,11 @@
-import { Dispatch, SetStateAction, useContext } from 'react'
-import { Question } from 'types'
-import { useApiUrls } from '../constants/api'
-import { CurrQuestionContext } from './context/questionContext'
+import { Question, Sheet, Tile } from 'types'
 import { useFetch } from './hooks'
 
+const modelName: string = import.meta.env.VITE_MODEL_NAME as string
+
+/*
+ * isEventSource is true when fetching for a stream
+ */
 export const setHeaders = (isEventSource: boolean) => {
   const token = localStorage.getItem('authToken')
 
@@ -37,7 +39,6 @@ export const setUserQuestion = (question) => {
   const data = {
     institution: question.institution,
     query: question.query,
-    user_text: '',
     context: question.context,
     links: question.links,
     temperature: question.temperature,
@@ -46,6 +47,7 @@ export const setUserQuestion = (question) => {
     mode: question.mode,
     sources: question.sources,
     must_not_sids: question.must_not_sids,
+    with_history: true,
   }
 
   return data
@@ -58,7 +60,7 @@ export const setQuestionFromRegeneration = (
   must_not_sids: string[]
 ) => {
   const data = {
-    model_name: 'albert-light',
+    model_name: modelName,
     mode: mode,
     query: text,
     limit: limit,
@@ -72,7 +74,7 @@ export const setQuestionFromRegeneration = (
   return data
 }
 
-export const setQuestionWithContext = (question: string, context) => {
+export const addContextToQuestion = (question: string, context) => {
   const administrations = context.administrations.length
     ? 'Les administrations concernées par cette question sont : ' +
       context.administrations.map((adminstration) => adminstration)
@@ -164,7 +166,6 @@ export const getIndexes = async (
       data: setIndexesBody(data, indexType, chunkSize, streamId),
       headers: setHeaders(false),
     })
-
     dispatch({ type: actionType, [indexType]: res })
   } catch (error) {
     console.error('An error occurred: ', error)
@@ -175,10 +176,13 @@ export const getIndexes = async (
  * Get the sheets from the stream
  */
 export const setIndexesData = (
-  data,
-  setTiles,
+  data: {
+    question: string
+    must_not_sids: string[]
+  },
+  setTiles: React.Dispatch<React.SetStateAction<any[]>>,
   dispatch,
-  streamId,
+  streamId: string,
   indexesUrl: string
 ) => {
   setTiles([])
@@ -187,10 +191,9 @@ export const setIndexesData = (
   getIndexes(data, dispatch, 'sheets', 10, streamId, indexesUrl)
 }
 
-export const setTilesFromSheets = (sheets, setTiles) => {
-  if (!sheets || !sheets.length) return setTiles([])
-
+export const setTilesFromSheets = (sheets: Sheet[], setTiles: (any) => void) => {
   setTiles([])
+  if (!sheets || !sheets.length) return
 
   sheets.map((sheet) => {
     const url = sheet.url
@@ -200,8 +203,8 @@ export const setTilesFromSheets = (sheets, setTiles) => {
     domain = domain.replace(/^www\./, '')
     domain = domain.replace(/^entreprendre\./, '')
 
-    const newTile = {
-      linkProps: { to: sheet.url },
+    const newTile: Tile = {
+      linkProps: { href: sheet.url },
       enlargeLink: false,
       title: (
         <>
@@ -211,8 +214,8 @@ export const setTilesFromSheets = (sheets, setTiles) => {
           <p>{sheet.title}</p>
         </>
       ),
-      desc: domain,
+      desc: <>{domain}</>,
     }
-    setTiles((prevTiles) => [...prevTiles, newTile])
+    setTiles((prevTiles: Tile[]) => [...prevTiles, newTile])
   })
 }

@@ -1,3 +1,3 @@
 export const OneThirdScreenWidth = ({ children }) => {
-  return <div className="w-1/3">{children}</div>
+  return <div className="md:w-1/3 ">{children}</div>
 }

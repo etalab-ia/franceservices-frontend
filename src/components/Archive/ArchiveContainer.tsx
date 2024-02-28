@@ -1,8 +1,6 @@
-import { Table } from '@codegouvfr/react-dsfr/Table'
 import React, { useState } from 'react'
-import { Chat } from '../../../types'
+import { Chat } from 'types'
 import { archiveHeaders, setArchiveBody } from '../../utils/archive'
-import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { GlobalTitle } from '../Global/GlobalTitle'
 
 interface ArchiveContainerProps {
@@ -17,7 +15,9 @@ export function ArchiveContainer({ chatsId, setArchiveTab }: ArchiveContainerPro
     chatsId.sort((a, b) => {
       const dateA = new Date(a.creationDate)
       const dateB = new Date(b.creationDate)
-      return isDateAscending ? dateA - dateB : dateB - dateA
+      return isDateAscending
+        ? dateA.getTime() - dateB.getTime()
+        : dateB.getTime() - dateA.getTime()
     })
     setDateAscending(!isDateAscending)
   }

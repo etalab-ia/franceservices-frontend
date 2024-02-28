@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { ArchiveType } from 'types'
-import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { SheetsAdditionalButtons } from './SheetsAdditionalButtons'
 import { SheetsTilesContainer } from './SheetsTilesContainer'
 
@@ -29,13 +28,13 @@ export function DisplaySheets({ archive }: { archive: ArchiveType | undefined })
   const [isModifiable, setIsModifiable] = useState(false)
 
   return (
-    <GlobalColContainer>
+    <>
       <SheetsAdditionalButtons
         isModifiable={isModifiable}
         setIsModifiable={setIsModifiable}
         archive={archive}
       />
       <SheetsTilesContainer archive={archive} isModifiable={isModifiable} />
-    </GlobalColContainer>
+    </>
   )
 }

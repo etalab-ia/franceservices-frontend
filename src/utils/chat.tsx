@@ -27,7 +27,7 @@ const getLastMessage = (archive, stream, isArchive) => {
 	let newLimit = isArchive ? archive[archiveIndex].limit : user.question.limit
 	let newText = getLastMessage(archive[archiveIndex], stream, isArchive)
 	let newMode = feedback.reasons.length ? "simple" : "rag"
-	const { streamUrl } = useApiUrls()
+	const { } = useApiUrls()
 
 	if (feedback.reasons.includes("Trop long")) {
 		newText = "Résume ce texte : " + newText

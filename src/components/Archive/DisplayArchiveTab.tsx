@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
-import { Chat } from '../../../types'
+import { Chat } from 'types'
 import { useApiUrls } from '../../constants/api'
 import { useFetch } from '../../utils/hooks'
-import { GlobalRowContainer } from '../Global/GlobalRowContainer'
-import { Print } from '../Print/Print'
+import { Print } from './DisplayArchive'
 import { ArchiveContainer } from './ArchiveContainer'
 
 type ChatInfos = {

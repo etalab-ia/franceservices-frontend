@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { InitialQuestion } from '../../types'
+import { InitialQuestion } from '../types'
 import { DisplayChatTab } from '../components/Chat/DisplayChatTab'
-import { GlobalDiv } from '../components/Global/GlobalDiv'
-import { GlobalRowContainer } from '../components/Global/GlobalRowContainer'
 import { CurrQuestionContext } from '../utils/context/questionContext'
 import { emitCloseStream } from '../utils/eventsEmitter'
 

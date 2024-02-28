@@ -1,21 +1,21 @@
 import { ButtonProps } from '@codegouvfr/react-dsfr/Button'
 
-export const initButtonsLogin = (handleClick, isDisable) => {
+export const initButtonsLogin = (onSubmit, isDisable) => {
   const buttonsLogin = [
     {
       children: 'Connexion',
-      onClick: handleClick,
+      onClick: onSubmit,
       disabled: isDisable,
       priority: 'primary',
     },
     {
       children: 'Créer un compte',
-      onClick: () => (window.location.href = '/albert/signup'),
+      onClick: () => (window.location.href = '/signup'),
       priority: 'tertiary',
     },
     {
       children: 'Mot de passe oublié',
-      onClick: () => (window.location.href = '/albert/reset-password'),
+      onClick: () => (window.location.href = '/reset-password'),
       priority: 'tertiary',
     },
   ]
@@ -36,7 +36,7 @@ export const initButtonsSignup = (
     },
     {
       children: 'Retour',
-      onClick: () => (window.location.href = '/albert/login'),
+      onClick: () => (window.location.href = '/login'),
       priority: 'tertiary',
     },
   ]
@@ -53,7 +53,7 @@ export const initButtonsReset = (isDisable: boolean, handleClick: () => void) =>
     },
     {
       children: 'Retour',
-      onClick: () => (window.location.href = '/albert/login'),
+      onClick: () => (window.location.href = '/login'),
       priority: 'tertiary',
     },
   ]

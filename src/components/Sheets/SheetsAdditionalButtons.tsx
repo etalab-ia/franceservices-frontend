@@ -1,7 +1,7 @@
 import { Dispatch, useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ArchiveType, RootState } from 'types'
-import { useApiUrls } from '../../constants/api'
+import { indexesUrl, streamUrl } from '../../constants/api'
 import { sheetsTitle } from '../../constants/sheets'
 import { CurrQuestionContext } from '../../utils/context/questionContext'
 import { emitCloseStream } from '../../utils/eventsEmitter'
@@ -34,13 +34,12 @@ export const SheetsAdditionalButtons = ({
 }) => {
   const buttonTitle = isModifiable ? 'Enregistrer' : 'Modifier la section'
   const buttonIcon = isModifiable
-    ? 'fr-icon-save-3-fill fr-icon--sm flex justify-end items-center'
-    : 'fr-icon-settings-5-fill fr-icon--sm flex justify-end items-center'
+    ? 'fr-icon-save-3-fill fr-icon--sm flex  items-center'
+    : 'fr-icon-settings-5-fill fr-icon--sm flex  items-center'
   const user = useSelector((state: RootState) => state.user)
   const [deletedSheets, setDeletedSheets] = useState([])
   const dispatch = useDispatch()
   const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
-  const { streamUrl, indexesUrl } = useApiUrls()
   const handleClick = () => {
     setIsModifiable(!isModifiable)
   }
@@ -66,13 +65,6 @@ export const SheetsAdditionalButtons = ({
   }, [deletedSheets])
 
   useEffect(() => {
-    if (archive || !user.chatId) return
-
-    emitCloseStream()
-    generateStream(currQuestion, dispatch, user.chatId, streamUrl)
-  }, [currQuestion])
-
-  useEffect(() => {
     if (!user.streamId || archive || !currQuestion.query) return
 
     const data = {
@@ -87,12 +79,20 @@ export const SheetsAdditionalButtons = ({
       JSON.stringify(user.streamId),
       indexesUrl
     )
+    getIndexes(
+      data,
+      dispatch,
+      'sheets',
+      currQuestion.limit,
+      JSON.stringify(user.streamId),
+      indexesUrl
+    )
   }, [user.streamId, currQuestion])
 
   return (
-    <GlobalRowContainer>
-      <GlobalSecondaryTitle>{sheetsTitle}</GlobalSecondaryTitle>
-      <GlobalColContainer>
+    <div>
+      {/*       <GlobalSecondaryTitle>{sheetsTitle}</GlobalSecondaryTitle>
+      <>
         {!archive && (
           <ModifyButton
             handleClick={handleClick}
@@ -100,7 +100,7 @@ export const SheetsAdditionalButtons = ({
             extraClass={buttonIcon}
           />
         )}
-      </GlobalColContainer>
-    </GlobalRowContainer>
+      </> */}
+    </div>
   )
 }

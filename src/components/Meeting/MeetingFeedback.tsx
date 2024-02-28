@@ -7,7 +7,6 @@ import { useApiUrls } from '../../constants/api'
 import { thankFeedback } from '../../constants/feedback'
 import { useFetch } from '../../utils/hooks'
 import { setHeaders } from '../../utils/setData'
-import { ButtonInformation } from '../Global/ButtonInformation'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 
 /*
@@ -39,12 +38,10 @@ export const MeetingFeedback = () => {
           isClicked === true ? 'bg-purple' : 'bg-white'
         }`}
       >
-        <img
-          className={`fr-m-1w ${
-            isClicked && isClicked === true ? 'mr-2 brightness-0 invert-[1]' : 'mr-2'
-          }`}
-          src={thumbsUp}
-          alt="Feedback positif"
+        <span
+          className={`${
+            isClicked ? 'text-white' : 'fr-text-action-high--blue-france'
+          } fr-icon-thumbs-up `}
         />
       </button>
       <button

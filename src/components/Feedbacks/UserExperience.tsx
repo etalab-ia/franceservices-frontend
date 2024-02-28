@@ -4,7 +4,7 @@ import { askingQuality, redoAskingQuality } from '../../constants/feedback'
 import { Avatar } from '../Chat/Avatar'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { Feedback } from './Feedback'
-
+import { Feedback as FeedbackType } from 'types'
 const AskingResponseQuality = ({ tabsLen }) => {
   return (
     <div className="streaming fr-p-3v fr-ml-3v">
@@ -13,7 +13,10 @@ const AskingResponseQuality = ({ tabsLen }) => {
   )
 }
 
-export function UserExperience({ feedback, setFeedback }) {
+export function UserExperience({
+  feedback,
+  setFeedback,
+}: { feedback: FeedbackType; setFeedback: (feedback: FeedbackType) => void }) {
   const stream = useSelector((state: RootState) => state.stream)
   const tabsLen = stream.historyStream.length
 
@@ -25,11 +28,7 @@ export function UserExperience({ feedback, setFeedback }) {
             <Avatar user="agent" />
             <AskingResponseQuality tabsLen={tabsLen} />
           </GlobalRowContainer>
-          <Feedback
-            isFirst={tabsLen === 1}
-            feedback={feedback}
-            setFeedback={setFeedback}
-          />
+          <Feedback feedback={feedback} setFeedback={setFeedback} />
         </div>
       )}
     </>

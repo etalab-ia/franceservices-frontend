@@ -1,11 +1,10 @@
-import { fr } from '@codegouvfr/react-dsfr'
 import { Accordion } from '@codegouvfr/react-dsfr/Accordion'
 import { CallOut } from '@codegouvfr/react-dsfr/CallOut'
 import { GlobalTitle } from '../components/Global/GlobalTitle'
 
 export function FAQ() {
   return (
-    <div className="fr-container fr-p-4w h-full">
+    <div className="fr-container fr-p-4w">
       <GlobalTitle>Aide</GlobalTitle>
       <p className="fr-pb-2w">Des réponses aux questions fréquemment posées sur Albert</p>
       <div className="flex accordion-container accordion">
@@ -13,10 +12,10 @@ export function FAQ() {
           <div className="h6-container">
             <h6 className="font-bold text-2xl fr-pb-2w">{faq.albertInfo.categoryName}</h6>
           </div>
-          {faq.albertInfo.questions.map((question) => (
-            <div key={question.label}>
-              <Accordion label={question.label}>{question.content}</Accordion>
-            </div>
+          {faq.albertInfo.questions.map((question, index) => (
+            <Accordion key={index} label={question.label}>
+              {question.content}
+            </Accordion>
           ))}
           <CallOut className="fr-mt-3w">
             <>
@@ -34,10 +33,10 @@ export function FAQ() {
               {faq.albertUsage.categoryName}
             </h6>
           </div>
-          {faq.albertUsage.questions.map((question) => (
-            <div key={question.label}>
-              <Accordion label={question.label}>{question.content}</Accordion>
-            </div>
+          {faq.albertUsage.questions.map((question, index) => (
+            <Accordion key={index} label={question.label}>
+              {question.content}
+            </Accordion>
           ))}
         </div>
       </div>

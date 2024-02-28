@@ -108,35 +108,6 @@ export const meetingGenerateButton = `Générer la fiche rendez-vous`
 export const meetingAppointmentInformations = `Informations sur le rendez-vous`
 export const meetingAppointmentTitle = 'Fiche rendez-vous'
 
-export const setTilesFromContacts = (webservices, setTiles) => {
-  setTiles([])
-
-  if (!webservices || !webservices.length) return
-
-  webservices.map((webservice) => {
-    const url = webservice.url
-    const parsedUrl = new URL(url)
-    let domain = parsedUrl.hostname
-
-    domain = domain.replace(/^www\./, '')
-    domain = domain.replace(/^entreprendre\./, '')
-
-    const newTile = {
-      linkProps: { to: webservice.url },
-      title: (
-        <>
-          <p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">
-            {webservice.type}
-          </p>
-          <p>{webservice.institution}</p>
-        </>
-      ),
-      desc: domain,
-    }
-    setTiles((prevTiles) => [...prevTiles, newTile])
-  })
-}
-
 export const meetingDefaultQuestionsIntroduction = (
   <GlobalRowContainer>
     <h6 className="text-xl font-bold text-[##3A3A3A]">Tester Albert</h6>
@@ -156,14 +127,15 @@ export const defaultInputFields = [
     themes: ['Allocation sociale', 'RSA'],
     administrations: ['CAF'],
   },
-  // {
-  // 	title: "Renouveler une carte de mobilité inclusion sans compte en ligne",
-  // 	question:
-  // 		"L’usager a perdu sa Carte de Mobilité Inclusion (CMI) stationnement. Il aimerait en refaire une.\n\nLa démarche se fait en ligne sur https://www.carte-mobilite-inclusion.fr.\n\nL’usager n'a jamais eu de compte sur le site et ne peut donc pas s'y connecter ou récupérer des informations.\n\nComment renouveler une CMI suite à une perte sans compte sur le site carte-mobilite-inclusion.fr ?",
-  // 	themes: ["Handicap", "Santé", "Allocation"],
-  // 	administrations: ["MDPH"],
-  // },
+  {
+    title: "Renouveler une carte d'identité perdue",
+    question:
+      "L'usager a perdu sa carte d'identité. Quelles sont les étapes à suivre pour la renouveler ?",
+    themes: ["Carte d'identité"],
+    administrations: ['ANTS'],
+  },
 ]
 
-export const resultMeetingTitle = `Résultat`
-export const meetingQRTitle = `Questions fréquentes`
+export const resultMeetingTitle = 'Synthèse par Albert'
+export const meetingQRTitle =
+  'Des questions posées fréquemment pour des situations similaires :'
