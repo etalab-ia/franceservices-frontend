@@ -48,7 +48,7 @@ export function Meeting() {
         {generate ? (
           <MeetingOutputs archive={undefined} />
         ) : (
-          <MeetingInputs setGenerate={setGenerate} />
+          <MeetingInputs setGenerate={setGenerate} generate={generate} />
         )}
       </div>
     </CurrQuestionContext.Provider>

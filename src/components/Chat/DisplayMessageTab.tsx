@@ -18,7 +18,11 @@ export function DisplayMessageTab({
     dispatch({ type: 'SWITCH_TAB', nextTab: activeTab })
   }, [activeTab])
 
-  const handleClick = (activeTab, setActiveTab, step) => {
+  const handleClick = (
+    activeTab: number,
+    setActiveTab: React.Dispatch<React.SetStateAction<number>>,
+    step: number
+  ) => {
     setActiveTab(activeTab + step)
   }
 

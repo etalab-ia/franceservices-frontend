@@ -1,7 +1,7 @@
 import { Dispatch, useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ArchiveType, RootState } from 'types'
-import { useApiUrls, streamUrl } from '../../constants/api'
+import { indexesUrl, streamUrl } from '../../constants/api'
 import { sheetsTitle } from '../../constants/sheets'
 import { CurrQuestionContext } from '../../utils/context/questionContext'
 import { emitCloseStream } from '../../utils/eventsEmitter'
@@ -40,7 +40,6 @@ export const SheetsAdditionalButtons = ({
   const [deletedSheets, setDeletedSheets] = useState([])
   const dispatch = useDispatch()
   const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
-  const { indexesUrl } = useApiUrls()
   const handleClick = () => {
     setIsModifiable(!isModifiable)
   }
@@ -66,13 +65,6 @@ export const SheetsAdditionalButtons = ({
   }, [deletedSheets])
 
   useEffect(() => {
-    if (archive || !user.chatId) return
-
-    emitCloseStream()
-    generateStream(currQuestion, dispatch, user.chatId, false)
-  }, [currQuestion])
-
-  useEffect(() => {
     if (!user.streamId || archive || !currQuestion.query) return
 
     const data = {
@@ -83,6 +75,14 @@ export const SheetsAdditionalButtons = ({
       data,
       dispatch,
       'chunks',
+      currQuestion.limit,
+      JSON.stringify(user.streamId),
+      indexesUrl
+    )
+    getIndexes(
+      data,
+      dispatch,
+      'sheets',
       currQuestion.limit,
       JSON.stringify(user.streamId),
       indexesUrl

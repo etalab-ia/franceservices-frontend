@@ -1,7 +1,10 @@
 import { Button } from '@codegouvfr/react-dsfr/Button'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ArchiveType, MeetingInputContext, RootState } from 'types'
+import { emitCloseStream } from 'utils/eventsEmitter'
+import { generateStream } from 'utils/hooks'
+import { addContextToQuestion } from 'utils/setData'
 import { CurrQuestionContext } from '../../utils/context/questionContext'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { GlobalSecondaryTitle } from '../Global/GlobalSecondaryTitle'
@@ -22,16 +25,13 @@ import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
 
 export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefined }) {
   const [question, setQuestion] = useState('')
-  /*   const [feedback, setFeedback] = useState<FeedbackType>(InitialFeedback)
-   */
+
   const user = useSelector((state: RootState) => state.user)
   return (
     <>
       <DisplaySourceCards chunks={user.chunks} />
       <GlobalColContainer>
         <MeetingStream archive={archive} />
-        {/*         <Feedback isFirst={true} feedback={feedback} setFeedback={setFeedback} />
-         */}{' '}
         {!archive && (
           <NewQuestionInput questionInput={question} setQuestionInput={setQuestion} />
         )}
@@ -41,39 +41,48 @@ export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefi
   )
 }
 
-export function NewQuestionInput({ questionInput, setQuestionInput }) {
+export function NewQuestionInput({
+  questionInput,
+  setQuestionInput,
+}: {
+  questionInput: string
+  setQuestionInput: React.Dispatch<React.SetStateAction<string>>
+}) {
   const stream = useSelector((state: RootState) => state.stream)
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
-  const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
   const [isAdditionalInputOpened, setIsAdditionalInputOpened] = useState(false)
   const [context, setContext] = useState<MeetingInputContext>({
     administrations: [],
     themes: [],
   })
-
   const handleChange = (e) => {
     e.preventDefault()
 
     setQuestionInput(e.target.value)
   }
 
+  useEffect(() => {
+    emitCloseStream()
+    generateStream(user.question, dispatch, user.chatId, false)
+  }, [user.question])
+
   const handleSubmit = async () => {
     setIsAdditionalInputOpened(false)
-    updateCurrQuestion({ ...currQuestion, query: questionInput })
     dispatch({
       type: 'ADD_HISTORY',
       newItem: {
-        query: currQuestion.query,
+        query: questionInput,
         response: stream.historyStream[0],
         sheets: user.sheets,
         chunks: user.chunks,
         webservices: user.webservices,
       },
     })
+
     dispatch({
       type: 'SET_USER_QUERY',
-      nextUserQuery: questionInput,
+      nextUserQuery: addContextToQuestion(questionInput, context),
       nextChatId: user.chatId,
     })
     stream.historyStream.length &&
@@ -86,6 +95,7 @@ export function NewQuestionInput({ questionInput, setQuestionInput }) {
       type: 'SET_MESSAGES',
       nextMessage: { text: questionInput, sender: 'user' },
     })
+
     setQuestionInput('')
   }
 
