@@ -16,7 +16,6 @@ export function Feedback({
   setFeedback,
 }: { feedback: FeedbackType; setFeedback: (feedback: FeedbackType) => void }) {
   const user = useSelector((state: RootState) => state.user)
-  console.log('feedback', feedback)
   useEffect(() => {
     setFeedback(InitialFeedback)
   }, [])

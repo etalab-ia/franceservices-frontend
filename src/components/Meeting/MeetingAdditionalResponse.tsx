@@ -30,7 +30,6 @@ export function MeetingAdditionalResponse({
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log('useffect meetingAdditionalResponse')
     if (!user.streamId || archive) return
 
     const data = {

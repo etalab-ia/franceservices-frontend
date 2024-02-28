@@ -21,7 +21,6 @@ function useMeetingAdditionalResponse() {
     }
 
     if (user.streamId) {
-      console.log('useEffect meetingAdditionalResponse')
       const data = {
         question: user.question.query,
         must_not_sids: user.question.must_not_sids,
