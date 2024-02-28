@@ -27,3 +27,4 @@ dist-ssr
 
 coverage-ts
 coverage-ts/**
+coverage-ts/*
