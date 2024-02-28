@@ -1,38 +1,36 @@
 import { ButtonsGroup } from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import * as v from 'valibot'
+import { custom, email, object, parse, regex, string } from 'valibot'
 import { LoginContainer } from '../components/Auth/LoginContainer'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
 import { userUrl } from '../constants/api'
 import { initButtonsSignup } from '../constants/connexion'
-import { invalidEmail, invalidPassword } from '../constants/errorMessages'
 import { signupFields } from '../constants/inputFields'
 
 const passwordRegex = /^[A-Za-z\d$!%*+?&#_-]{8,20}$/
 
-const SignupSchema = v.object(
+const SignupSchema = object(
   {
-    username: v.string("Le nom d'utilisateur est invalide.", [
-      v.custom(
+    username: string("Le nom d'utilisateur est invalide.", [
+      custom(
         (username) => !username.includes('@'),
         "Le nom d'utilisateur ne doit pas contenir '@'."
       ),
     ]),
-    email: v.string('Adresse email valide', [v.email('Adresse email invalide.')]),
-    password: v.string('Le mot de passe est invalide.', [
-      v.regex(
+    email: string('Adresse email valide', [email('Adresse email invalide.')]),
+    password: string('Le mot de passe est invalide.', [
+      regex(
         passwordRegex,
         'Le mot de passe doit contenir entre 8 et 20 caractères et peut inclure des lettres, des chiffres et des caractères spéciaux ($!%*+?&#_-).'
       ),
     ]),
-    confirmationPassword: v.string(
+    confirmationPassword: string(
       'La confirmation du mot de passe doit être une chaîne valide.'
     ),
   },
   [
-    v.custom(
+    custom(
       (data) => data.password === data.confirmationPassword,
       'Les deux mots de passe doivent etre identiques'
     ),
@@ -79,7 +77,7 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
     }
 
     try {
-      v.parse(SignupSchema, { ...data, confirmationPassword: confPassword })
+      parse(SignupSchema, { ...data, confirmationPassword: confPassword })
     } catch (error) {
       console.error('Validation error:', error)
       setErrorMessage(error.message)
