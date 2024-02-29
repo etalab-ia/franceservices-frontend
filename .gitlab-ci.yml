@@ -78,7 +78,7 @@ deploy:front:dinum:
       docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
       docker container rm -f ${CI_ENVIRONMENT_NAME}-front || true
       docker image rm ${CI_REGISTRY_IMAGE}/front/${CI_ENVIRONMENT_NAME}:${CI_FRONT_IMAGE_TAG}-${CI_COMMIT_BRANCH} || true
-      docker run --detach --publish 4174:4173 --name ${CI_ENVIRONMENT_NAME}-front ${CI_REGISTRY_IMAGE}/front/${CI_ENVIRONMENT_NAME}:${CI_FRONT_IMAGE_TAG}-${CI_COMMIT_BRANCH}
+      docker run --restart always --detach --publish 4174:4173 --name ${CI_ENVIRONMENT_NAME}-front ${CI_REGISTRY_IMAGE}/front/${CI_ENVIRONMENT_NAME}:${CI_FRONT_IMAGE_TAG}-${CI_COMMIT_BRANCH}
       "
 
 ############# FRANCE SERVICES ##############
@@ -124,5 +124,5 @@ deploy:front:france services:
       docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
       docker container rm -f ${CI_ENVIRONMENT_NAME}-front || true
       docker image rm ${CI_REGISTRY_IMAGE}/front/${CI_ENVIRONMENT_NAME}:${CI_FRONT_IMAGE_TAG}-${CI_COMMIT_BRANCH} || true
-      docker run --detach --publish 4174:4173 --name ${CI_ENVIRONMENT_NAME}-front ${CI_REGISTRY_IMAGE}/front/${CI_ENVIRONMENT_NAME}:${CI_FRONT_IMAGE_TAG}-${CI_COMMIT_BRANCH}
+      docker run --restart always --detach --publish 4174:4173 --name ${CI_ENVIRONMENT_NAME}-front ${CI_REGISTRY_IMAGE}/front/${CI_ENVIRONMENT_NAME}:${CI_FRONT_IMAGE_TAG}-${CI_COMMIT_BRANCH}
       "
