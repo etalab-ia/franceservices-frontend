@@ -69,9 +69,9 @@ export function MeetingOutputs({
  */
 export function History({ history }: { history: UserHistory[] }) {
   return (
-    <>
+    <div className="fr-mt-5w">
       {history.map((h, index) => (
-        <div className="mb-5" key={index}>
+        <div className="fr-mb-1w " key={index}>
           <h3 className="fr-background-alt--blue-france text-ellipsis">
             <button
               className="fr-accordion__btn text-black text-ellipsis"
@@ -92,7 +92,7 @@ export function History({ history }: { history: UserHistory[] }) {
           </div>
         </div>
       ))}
-    </>
+    </div>
   )
 }
 
