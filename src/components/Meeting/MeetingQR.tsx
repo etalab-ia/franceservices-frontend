@@ -52,7 +52,12 @@ export function MeetingQR({
       )}
       {relatedQuestions.slice(0, 3).map((rq, index) => {
         return (
-          <div className="fr-mb-1w" key={index} onClick={() => setQuestion(rq.question)}>
+          <button
+            tabIndex={0}
+            className="fr-mb-1w w-full"
+            key={index}
+            onClick={() => setQuestion(rq.question)}
+          >
             <div
               style={{
                 width: '100%',
@@ -92,7 +97,7 @@ export function MeetingQR({
               title={rq.question}
               titleAs="h6"
             /> */}
-          </div>
+          </button>
         )
       })}
     </>
