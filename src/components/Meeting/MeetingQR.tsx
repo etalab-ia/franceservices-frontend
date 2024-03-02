@@ -48,11 +48,11 @@ export function MeetingQR({
   return (
     <>
       {relatedQuestions.length !== 0 && (
-        <p className="fr-pt-4w fr-mb-2w">{meetingQRTitle}</p>
+        <p className="fr-pt-3w fr-mb-2w">{meetingQRTitle}</p>
       )}
       {relatedQuestions.slice(0, 3).map((rq, index) => {
         return (
-          <div className="fr-mb-3v" key={index} onClick={() => setQuestion(rq.question)}>
+          <div className="fr-mb-1w" key={index} onClick={() => setQuestion(rq.question)}>
             <div
               style={{
                 width: '100%',
