@@ -29,10 +29,8 @@ export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefi
   const user = useSelector((state: RootState) => state.user)
   return (
     <>
-      <div className="fr-mb-5w">
-        <DisplaySourceCards chunks={user.chunks} />
-      </div>
-      <GlobalColContainer>
+      \ <DisplaySourceCards chunks={user.chunks} />
+      <GlobalColContainer extraClass="fr-mt-5w">
         <MeetingStream archive={archive} />
         {!archive && (
           <NewQuestionInput questionInput={question} setQuestionInput={setQuestion} />
