@@ -45,7 +45,7 @@ export function MeetingOutputs({
   }, [])
 
   return (
-    <div className="ft-container">
+    <div className="ft-container ">
       <div className="fr-mb-5w">
         <GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
         <GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
@@ -144,7 +144,7 @@ export function DisplaySourceCards({ chunks }: { chunks: Chunk[] }) {
   }
   return (
     <>
-      <div className="fr-grid-row fr-col-12 justify-between fr-mt-1w items-center w-full">
+      <div className="fr-grid-row fr-col-12 justify-between fr-mt-1w items-center w-full ">
         <h6 className="text-xl font-bold fr-mb-3v">Sources de réponses</h6>
         <Pagination
           count={Math.ceil(chunks.length / 3)}
@@ -169,10 +169,10 @@ function SourceCard({ title, text, url }: { title: string; text: string; url: st
   const domain = new URL(url).hostname.replace('www.', '')
   return (
     <div
-      className="fr-col-12 fr-col-sm-4 border border-[rgba(221, 221, 221, 1)] fr-px-4w fr-py-2w max-w-[392px] fr-background-action--high-blue relative"
+      className="fr-col-12 fr-col-sm-4 border border-[rgba(221, 221, 221, 1)] fr-px-4w fr-py-2w max-w-[392px] fr-background-action--high-blue relative "
       style={{ position: 'relative' }}
     >
-      <h4 className="font-bold line-clamp-2 fr-mb-2w">{title}</h4>
+      <h4 className="font-bold line-clamp-2 fr-mb-2w ">{title}</h4>
       <p className=" line-clamp-3 fr-mb-4w">{text}</p>
       <a
         className="font-bold mt-auto absolute bottom-0  fr-mb-2w no-external-link-icon "
