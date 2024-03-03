@@ -46,9 +46,11 @@ export function MeetingOutputs({
 
   return (
     <div className="ft-container">
-      <GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
-      <GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
-      <GlobalParagraph>{query}</GlobalParagraph>
+      <div className="fr-mb-5w">
+        <GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
+        <GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
+        <GlobalParagraph>{query}</GlobalParagraph>
+      </div>
       {user.history.length > 0 && (
         <DisplayResponse
           chunks={user.history[0].chunks}
@@ -67,9 +69,9 @@ export function MeetingOutputs({
  */
 export function History({ history }: { history: UserHistory[] }) {
   return (
-    <>
+    <div className="fr-mt-5w">
       {history.map((h, index) => (
-        <div className="mb-5" key={index}>
+        <div className="fr-mb-1w " key={index}>
           <h3 className="fr-background-alt--blue-france text-ellipsis">
             <button
               className="fr-accordion__btn text-black text-ellipsis"
@@ -90,7 +92,7 @@ export function History({ history }: { history: UserHistory[] }) {
           </div>
         </div>
       ))}
-    </>
+    </div>
   )
 }
 
@@ -104,13 +106,15 @@ export function DisplayResponse({
 }: { chunks: Chunk[]; response: string; webservices: WebService[] }) {
   return (
     <>
-      <DisplaySourceCards chunks={chunks} />
-      <div className="fr-grid-row">
+      <div className="fr-mb-5w">
+        <DisplaySourceCards chunks={chunks} />
+      </div>
+      <div className="fr-grid-row ">
         <div
           className={webservices && webservices.length ? `fr-col-sm-8` : 'fr-col-sm-12'}
         >
           <div className="text-xl font-bold">Synthèse par Albert</div>
-          <GlobalParagraph>{response}</GlobalParagraph>
+          <GlobalParagraph extraClass="fr-mr-3w">{response}</GlobalParagraph>
         </div>
         {webservices && webservices.length > 0 && (
           <UsefulLinks webservices={webservices} extraClass="fr-col-sm-4" />
@@ -143,7 +147,7 @@ export function DisplaySourceCards({ chunks }: { chunks: Chunk[] }) {
   return (
     <>
       <div className="fr-grid-row fr-col-12 justify-between fr-mt-1w items-center w-full">
-        <h6 className="text-xl font-bold">Sources de réponses</h6>
+        <h6 className="text-xl font-bold fr-mb-3v">Sources de réponses</h6>
         <Pagination
           count={Math.ceil(chunks.length / 3)}
           defaultPage={currentPage}
