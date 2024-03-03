@@ -53,7 +53,6 @@ export function MeetingQR({
       {relatedQuestions.slice(0, 3).map((rq, index) => {
         return (
           <button
-            tabIndex={0}
             className="fr-mb-1w w-full"
             key={index}
             onClick={() => setQuestion(rq.question)}
