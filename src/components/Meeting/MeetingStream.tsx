@@ -61,7 +61,9 @@ export function MeetingStream({ archive }: { archive: ArchiveType | undefined })
       {/* [      {!stream.isStreaming && stream.historyStream.length !== 0 && <MeetingFeedback />}
 ] */}{' '}
       {!stream.isStreaming && stream.historyStream.length !== 0 && (
-        <Feedback feedback={feedback} setFeedback={setFeedback} />
+        <div className="fr-mt-5w mb-[80px]">
+          <Feedback feedback={feedback} setFeedback={setFeedback} />
+        </div>
       )}
     </>
   )

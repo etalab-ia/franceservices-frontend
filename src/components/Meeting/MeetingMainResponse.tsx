@@ -29,7 +29,9 @@ export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefi
   const user = useSelector((state: RootState) => state.user)
   return (
     <>
-      <DisplaySourceCards chunks={user.chunks} />
+      <div className="fr-mb-5w">
+        <DisplaySourceCards chunks={user.chunks} />
+      </div>
       <GlobalColContainer>
         <MeetingStream archive={archive} />
         {!archive && (
@@ -72,7 +74,7 @@ export function NewQuestionInput({
     dispatch({
       type: 'ADD_HISTORY',
       newItem: {
-        query: questionInput,
+        query: user.question.query,
         response: stream.historyStream[0],
         sheets: user.sheets,
         chunks: user.chunks,
@@ -108,11 +110,11 @@ export function NewQuestionInput({
   return (
     <div>
       <div className=" w-full ">
-        <GlobalSecondaryTitle extraClass="fr-mt-4w fr-mb-2w">
+        <GlobalSecondaryTitle extraClass="fr-mt-4w fr-mb-3w">
           Poser une question complémentaire
         </GlobalSecondaryTitle>
         <textarea
-          style={{ minHeight: '10px' }}
+          style={{ minHeight: '10px', overflow: 'hidden' }}
           placeholder="Poser une nouvelle question"
           rows={1}
           onChange={handleChange}
