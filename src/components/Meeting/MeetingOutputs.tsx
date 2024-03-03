@@ -106,10 +106,8 @@ export function DisplayResponse({
 }: { chunks: Chunk[]; response: string; webservices: WebService[] }) {
   return (
     <>
-      <div className="fr-mb-5w">
-        <DisplaySourceCards chunks={chunks} />
-      </div>
-      <div className="fr-grid-row ">
+      <DisplaySourceCards chunks={chunks} />
+      <div className="fr-grid-row fr-mt-5w">
         <div
           className={webservices && webservices.length ? `fr-col-sm-8` : 'fr-col-sm-12'}
         >
@@ -146,7 +144,7 @@ export function DisplaySourceCards({ chunks }: { chunks: Chunk[] }) {
   }
   return (
     <>
-      <div className="fr-grid-row fr-col-12 justify-between fr-mt-1w items-center w-full">
+      <div className="fr-grid-row fr-col-12 justify-between fr-mt-1w items-center w-full bg-red-500">
         <h6 className="text-xl font-bold fr-mb-3v">Sources de réponses</h6>
         <Pagination
           count={Math.ceil(chunks.length / 3)}
