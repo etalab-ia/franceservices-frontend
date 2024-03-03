@@ -29,7 +29,7 @@ export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefi
   const user = useSelector((state: RootState) => state.user)
   return (
     <>
-      \ <DisplaySourceCards chunks={user.chunks} />
+      <DisplaySourceCards chunks={user.chunks} />
       <GlobalColContainer extraClass="fr-mt-5w">
         <MeetingStream archive={archive} />
         {!archive && (
