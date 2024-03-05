@@ -47,7 +47,7 @@ export function DisplayArchiveTabs() {
   return (
     <div className="fr-container">
       {archiveTab === null ? (
-        <ArchiveList chatsId={chatsId} setArchiveTab={setArchiveTab} />
+        <ArchiveList chatList={chatsId} setArchiveTab={setArchiveTab} />
       ) : (
         <DisplayArchive
           ref={ref}
