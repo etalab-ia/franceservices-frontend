@@ -4,15 +4,15 @@ import { archiveHeaders, setArchiveBody } from '../../utils/archive'
 import { GlobalTitle } from '../Global/GlobalTitle'
 
 interface ArchiveListProps {
-  chatsId: Chat[]
+  chatList: Chat[]
   setArchiveTab: React.Dispatch<React.SetStateAction<number | null>>
 }
 
-export function ArchiveList({ chatsId, setArchiveTab }: ArchiveListProps) {
+export function ArchiveList({ chatList, setArchiveTab }: ArchiveListProps) {
   const [isDateAscending, setDateAscending] = useState(true)
 
   const sortChatsByDate = () => {
-    chatsId.sort((a, b) => {
+    chatList.sort((a, b) => {
       const dateA = new Date(a.creationDate)
       const dateB = new Date(b.creationDate)
       return isDateAscending
@@ -49,7 +49,7 @@ export function ArchiveList({ chatsId, setArchiveTab }: ArchiveListProps) {
           </tr>
         </thead>
         <tbody>
-          {chatsId.map((chat, index) => (
+          {chatList.map((chat, index) => (
             <tr key={chat.id}>
               {setArchiveBody({
                 item: chat,
