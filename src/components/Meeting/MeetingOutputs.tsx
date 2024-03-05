@@ -1,7 +1,7 @@
 import Pagination from '@codegouvfr/react-dsfr/Pagination'
 import { useContext, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import type { ArchiveType, Chunk, RootState, UserHistory, WebService } from 'types'
+import type { ArchiveType, Chunk, RootState, UserHistory, WebService } from '@types'
 import {
   meetingAppointmentInformations,
   meetingAppointmentTitle,

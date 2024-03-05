@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'types'
+import { RootState } from '@types'
 import { userChatToolsFunc } from '../../utils/chat'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 

@@ -1,6 +1,6 @@
 import { Dispatch, useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ArchiveType, RootState } from 'types'
+import { ArchiveType, RootState } from '@types'
 import { indexesUrl, streamUrl } from '../../constants/api'
 import { sheetsTitle } from '../../constants/sheets'
 import { CurrQuestionContext } from '../../utils/context/questionContext'

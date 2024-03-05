@@ -1,4 +1,4 @@
-import { ArchiveType, RootState } from 'types'
+import { ArchiveType, RootState } from '@types'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { MeetingAdditionalResponse } from './MeetingAdditionalResponse'
 import { MeetingMainResponse } from './MeetingMainResponse'

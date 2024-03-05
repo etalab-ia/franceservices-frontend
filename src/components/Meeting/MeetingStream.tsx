@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { ArchiveType, InitialFeedback, RootState } from 'types'
+import { ArchiveType, InitialFeedback, RootState } from '@types'
 import { getChunksUrl } from '../../constants/api'
 import { resultMeetingTitle } from '../../constants/meeting'
 import { useFetch } from '../../utils/hooks'
@@ -36,12 +36,6 @@ export function MeetingStream({ archive }: { archive: ArchiveType | undefined })
     })
     setChunks(chunksRes)
   }
-
-  useEffect(() => {
-    if (archive) {
-      getChunks()
-    }
-  }, [])
 
   useEffect(() => {
     if (!user.chunks.length) return

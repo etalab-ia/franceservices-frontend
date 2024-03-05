@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { type Message, type RootState } from 'types'
+import { type Message, type RootState } from '@types'
 import { ChatFollowUp } from './ChatFollowUp'
 import { DisplayArrayMessages } from './DisplayArrayMessages'
 import { DisplaySingleMessage } from './DisplaySingleMessage'

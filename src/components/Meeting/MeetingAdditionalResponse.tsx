@@ -1,4 +1,4 @@
-import { ArchiveType, RootState } from 'types'
+import { ArchiveType, RootState } from '@types'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { OneThirdScreenWidth } from '../Global/OneThirdScreenWidth'
 import { DisplaySheets } from '../Sheets/DisplaySheets'

@@ -6,7 +6,7 @@ import {
   Sheet,
   Chunk,
   WebService,
-} from 'types'
+} from '@types'
 import { initialChatbotMessage } from '../../constants/chatbotProps'
 
 /*****************************************************************************************************

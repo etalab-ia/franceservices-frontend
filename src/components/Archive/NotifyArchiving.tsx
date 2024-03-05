@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { RootState } from 'types'
+import { RootState } from '@types'
 import { archiveNotificationRole } from '../../constants/archive'
 import { notifyArchiving } from '../../constants/chatbotProps'
 
