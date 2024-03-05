@@ -4,7 +4,7 @@ import { Footer } from '@codegouvfr/react-dsfr/Footer'
 import { Header } from '@codegouvfr/react-dsfr/Header'
 import { useContext, useEffect, useState } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { useApiUrls } from '../constants/api'
+import { signoutUrl, userUrl } from '../constants/api'
 import { quickAccessItemsFunc } from '../constants/header'
 import { navFunc } from '../constants/router'
 import Error404 from '../pages/404'
@@ -30,7 +30,6 @@ export const Root = () => {
   const dispatch = useAppDispatch()
   const [isLoading, setIsLoading] = useState(true)
   const isMFS = useContext(isMFSContext)
-  const { userUrl, signoutUrl, apiBase } = useApiUrls()
   useEffect(() => {
     checkConnexion(setUserAuth, userUrl).finally(() => setIsLoading(false))
   }, [dispatch])

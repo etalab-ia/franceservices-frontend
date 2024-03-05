@@ -1,7 +1,7 @@
 import Button from '@codegouvfr/react-dsfr/Button'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { UserAuth } from 'utils/auth'
-import { useApiUrls } from '../../constants/api'
+import { contactUrl } from '../../constants/api'
 import { useFetch } from '../../utils/hooks'
 import { setContactData, setHeaders } from '../../utils/setData'
 import { ButtonInformation } from '../Global/ButtonInformation'
@@ -20,7 +20,6 @@ interface ContactButtonProps {
 export function ContactButton({ formData, clearForm, setUserAuth }: ContactButtonProps) {
   const [isSend, setIsSend] = useState(false)
   const userToken = localStorage.getItem('authToken')
-  const { userUrl, contactUrl } = useApiUrls()
   const handleClick = async () => {
     //setUserInfos(userToken, setUserAuth, userUrl)
     await useFetch(contactUrl, 'POST', {
