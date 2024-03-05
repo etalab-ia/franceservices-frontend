@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ArchiveType, RootState, Sheet } from 'types'
+import { ArchiveType, RootState, Sheet } from '@types'
 import { useApiUrls } from '../../constants/api'
 import { CurrQuestionContext } from '../../utils/context/questionContext'
 import { useFetch } from '../../utils/hooks'

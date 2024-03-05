@@ -1,5 +1,5 @@
 import { Tile } from '@codegouvfr/react-dsfr/Tile'
-import type { Tile as TTile } from 'types'
+import type { Tile as TTile } from '@types'
 
 export const TileContainer = ({ children }) => {
   return (

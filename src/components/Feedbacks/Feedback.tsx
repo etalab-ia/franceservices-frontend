@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Feedback as FeedbackType, InitialFeedback, RootState } from 'types'
+import { Feedback as FeedbackType, InitialFeedback, RootState } from '@types'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { UserFeedbackInput } from './UserFeedbackInput'
 import { UserSatisfactionButtons } from './UserSatisfactionButtons'

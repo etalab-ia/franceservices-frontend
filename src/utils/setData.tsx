@@ -1,4 +1,4 @@
-import { Question, Sheet, Tile } from 'types'
+import { Question, Sheet, Tile } from '@types'
 import { useFetch } from './hooks'
 
 const modelName: string = import.meta.env.VITE_MODEL_NAME as string

@@ -1,6 +1,6 @@
 import { Tile } from '@codegouvfr/react-dsfr/Tile'
 import { useDispatch } from 'react-redux'
-import { Tile as TileType } from 'types'
+import { Tile as TileType } from '@types'
 
 export const SheetsTiles = ({
   tiles,

@@ -1,4 +1,4 @@
-import { Stream } from 'types'
+import { Stream } from '@types'
 
 const initialStream = {
   response: [],

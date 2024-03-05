@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { ArchiveType, RootState } from 'types'
+import { ArchiveType, RootState } from '@types'
 import { meetingQRTitle } from '../../constants/meeting'
 
 /*****************************************************************************************

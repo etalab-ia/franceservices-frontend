@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { RootState } from 'types'
+import { RootState } from '@types'
 import thumbsDown from '../../../icons/feedbacks/thumbsDown.svg'
 import thumbsUp from '../../../icons/feedbacks/thumbsUp.svg'
 import { useApiUrls } from '../../constants/api'

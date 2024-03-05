@@ -1,7 +1,7 @@
 import { Button } from '@codegouvfr/react-dsfr/Button'
 import React, { useEffect, useState } from 'react'
 import ReactToPrint from 'react-to-print'
-import { Chat, UserHistory } from 'types'
+import { Chat, UserHistory } from '@types'
 import { getChunksUrl, useApiUrls } from '../../constants/api'
 import {
   meetingAppointmentInformations,
@@ -48,7 +48,11 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
           },
         }).then((res) => res.json())
 
-        if (!streamsResponse || !streamsResponse.streams) {
+        if (
+          !streamsResponse ||
+          !streamsResponse.streams ||
+          streamsResponse.streams.length === 0
+        ) {
           console.log('No streams found')
           setIsLoading(false)
           return
@@ -57,20 +61,22 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
         // Fetch chunks for each stream
         const streamsHistory = await Promise.all(
           streamsResponse.streams.map(async (stream) => {
-            const chunksResponse = await fetch(getChunksUrl, {
-              method: 'POST',
-              headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ uids: stream.rag_sources }),
-            }).then((res) => res.json())
+            const chunksResponse = stream.rag_sources
+              ? await fetch(getChunksUrl, {
+                  method: 'POST',
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ uids: stream.rag_sources }),
+                }).then((res) => res.json())
+              : []
 
             return {
               query: stream.query,
-              chunks: chunksResponse, // Ensure this matches expected structure
+              chunks: chunksResponse,
               response: stream.response,
-              webservices: [], // Additional processing as needed
+              webservices: [],
             }
           })
         )
@@ -87,14 +93,7 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
       fetchStreamsAndSetHistory()
     }, [selectedChat.id])
 
-    if (isLoading)
-      if (isLoading)
-        if (isLoading)
-          // Dependency array ensure
-
-          // Reacting to changes in selectedChat.id
-
-          return <div>loading...</div>
+    if (isLoading) return <div>loading...</div>
 
     return (
       <>

@@ -1,4 +1,4 @@
-import { MeetingInputContext } from 'types'
+import { MeetingInputContext } from '@types'
 import { MeetingTags } from './MeetingTags'
 import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
 

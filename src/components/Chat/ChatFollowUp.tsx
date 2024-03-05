@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { Feedback, InitialFeedback } from 'types'
+import { Feedback, InitialFeedback } from '@types'
 import { UserExperience } from '../Feedbacks/UserExperience'
 // import { NewQuestion } from "./NewQuestion"
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { DisplayStream } from '../Stream/DisplayStream'
 import { AvatarToolsContainer } from './AvatarToolsContainer'
-import { Stream } from 'types'
+import { Stream } from '@types'
 
 export function ChatFollowUp({ stream }: { stream: Stream }) {
   const [feedback, setFeedback] = useState<Feedback>(InitialFeedback)
