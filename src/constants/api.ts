@@ -21,25 +21,3 @@ export const importUrl =
   'https://opendata.plus.transformation.gouv.fr/api/explore/v2.1/catalog/datasets/export-expa-c-riences/records?limit=5'
 
 export function getChunks() {}
-
-export const useApiUrls = () => {
-  return {
-    streamUrl,
-    chatUrl,
-    getChatsUrl,
-    getStreamsUrl,
-    indexesUrl,
-    institutionsUrl,
-    signinUrl,
-    signoutUrl,
-    resetPasswordMailUrl,
-    resetPasswordUrl,
-    userUrl,
-    contactUrl,
-    feedbackUrl,
-    getSheetsUrl,
-    getChunksUrl,
-    importUrl,
-    apiBase,
-  }
-}

@@ -2,7 +2,7 @@ import { Button } from '@codegouvfr/react-dsfr/Button'
 import React, { useEffect, useState } from 'react'
 import ReactToPrint from 'react-to-print'
 import { Chat, UserHistory } from '@types'
-import { getChunksUrl, useApiUrls } from '../../constants/api'
+import { getChunksUrl, getStreamsUrl } from '../../constants/api'
 import {
   meetingAppointmentInformations,
   meetingAppointmentTitle,
@@ -31,7 +31,6 @@ export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
       setArchiveTab(null)
     }
     window.addEventListener('popstate', () => {})
-    const { getStreamsUrl } = useApiUrls()
     const [archive, setArchive] = useState<UserHistory[]>()
     const token = localStorage.getItem('authToken')
     const [isLoading, setIsLoading] = useState(true)

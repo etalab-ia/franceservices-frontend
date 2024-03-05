@@ -1,11 +1,10 @@
+import { ArchiveType, RootState, Sheet } from '@types'
 import { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ArchiveType, RootState, Sheet } from '@types'
-import { useApiUrls } from '../../constants/api'
+import { getSheetsUrl, indexesUrl } from '../../constants/api'
 import { CurrQuestionContext } from '../../utils/context/questionContext'
 import { useFetch } from '../../utils/hooks'
-import { setHeaders, setIndexesData } from '../../utils/setData'
-import { setTilesFromSheets } from '../../utils/setData'
+import { setHeaders, setIndexesData, setTilesFromSheets } from '../../utils/setData'
 import { SheetsAdditionalTilesTitle } from './SheetsAdditionalTilesTitle'
 import { SheetsTiles } from './SheetsTiles'
 
@@ -28,7 +27,6 @@ export const SheetsTilesContainer = ({
   const [additionalTiles, setAdditionalTiles] = useState([])
   const { currQuestion } = useContext(CurrQuestionContext)
   const dispatch = useDispatch()
-  const { getSheetsUrl, indexesUrl } = useApiUrls()
   useEffect(() => {
     const data = {
       question: currQuestion.query,

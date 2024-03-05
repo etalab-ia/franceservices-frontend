@@ -4,7 +4,7 @@ import { UserAuth } from 'utils/auth'
 import { LoginContainer } from '../components/Auth/LoginContainer'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
-import { useApiUrls } from '../constants/api'
+import { signinUrl, userUrl } from '../constants/api'
 import { initButtonsLogin } from '../constants/connexion'
 import { usernameOrPasswordError } from '../constants/errorMessages'
 import { loginFields } from '../constants/inputFields'
@@ -21,7 +21,6 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
   const [isDisable, setIsDisable] = useState(true)
   const [password, setPassword] = useState('')
   const [id, setId] = useState('')
-  const { signinUrl, userUrl } = useApiUrls()
 
   useEffect(() => {
     checkIfCompletedFields()

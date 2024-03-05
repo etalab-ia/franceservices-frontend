@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
 import { Chat } from '@types'
-import { useApiUrls } from '../../constants/api'
+import { useEffect, useRef, useState } from 'react'
+import { getChatsUrl } from '../../constants/api'
 import { useFetch } from '../../utils/hooks'
-import { Print } from './DisplayArchive'
 import { ArchiveContainer } from './ArchiveContainer'
+import { Print } from './DisplayArchive'
 
 type ChatInfos = {
   chat_name: string
@@ -19,7 +19,6 @@ export function DisplayArchiveTabs() {
   const [archiveTab, setArchiveTab] = useState<number | null>(null)
   const ref = useRef<HTMLDivElement>(null)
   const token = localStorage.getItem('authToken')
-  const { getChatsUrl } = useApiUrls()
 
   const getChatsId = async () => {
     const res: ChatInfos[] = await useFetch(getChatsUrl, 'GET', {
