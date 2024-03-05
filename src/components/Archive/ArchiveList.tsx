@@ -3,12 +3,12 @@ import { Chat } from '@types'
 import { archiveHeaders, setArchiveBody } from '../../utils/archive'
 import { GlobalTitle } from '../Global/GlobalTitle'
 
-interface ArchiveContainerProps {
+interface ArchiveListProps {
   chatsId: Chat[]
   setArchiveTab: React.Dispatch<React.SetStateAction<number | null>>
 }
 
-export function ArchiveContainer({ chatsId, setArchiveTab }: ArchiveContainerProps) {
+export function ArchiveList({ chatsId, setArchiveTab }: ArchiveListProps) {
   const [isDateAscending, setDateAscending] = useState(true)
 
   const sortChatsByDate = () => {

@@ -1,7 +1,7 @@
 import { Button } from '@codegouvfr/react-dsfr/Button'
+import { Chat, UserHistory } from '@types'
 import React, { useEffect, useState } from 'react'
 import ReactToPrint from 'react-to-print'
-import { Chat, UserHistory } from '@types'
 import { getChunksUrl, getStreamsUrl } from '../../constants/api'
 import {
   meetingAppointmentInformations,
@@ -20,12 +20,12 @@ import { DisplayResponse, History } from '../Meeting/MeetingOutputs'
 
  **********************************************************************************************/
 
-interface PrintProps {
+interface DisplayArchiveProps {
   selectedChat: Chat
   setArchiveTab: React.Dispatch<React.SetStateAction<number | null>>
 }
 
-export const Print = React.forwardRef<HTMLDivElement, PrintProps>(
+export const DisplayArchive = React.forwardRef<HTMLDivElement, DisplayArchiveProps>(
   ({ selectedChat, setArchiveTab }, ref) => {
     const handleClick = () => {
       setArchiveTab(null)
