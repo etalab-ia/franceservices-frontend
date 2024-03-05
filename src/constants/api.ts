@@ -1,4 +1,5 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation } from '@tanstack/react-query'
+import { useSelector, useDispatch } from 'react-redux'
 const apiUrl = `${import.meta.env.VITE_API_URL}/api/v2`
 
 export const apiBase = apiUrl
@@ -20,4 +21,12 @@ export const getChunksUrl = apiBase + '/get_chunks'
 export const importUrl =
   'https://opendata.plus.transformation.gouv.fr/api/explore/v2.1/catalog/datasets/export-expa-c-riences/records?limit=5'
 
-export function getChunks() {}
+export function useAlbert() {
+  const getChunks = (chatId) =>
+    useQuery({
+      queryKey: ['getChunks', chatId],
+      queryFn: () => {},
+    })
+
+  return { getChunks }
+}
