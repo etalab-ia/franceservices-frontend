@@ -2,8 +2,8 @@ import { Chat } from '@types'
 import { useEffect, useRef, useState } from 'react'
 import { getChatsUrl } from '../../constants/api'
 import { useFetch } from '../../utils/hooks'
-import { ArchiveContainer } from './ArchiveContainer'
-import { Print } from './DisplayArchive'
+import { ArchiveList } from './ArchiveList'
+import { DisplayArchive } from './DisplayArchive'
 
 type ChatInfos = {
   chat_name: string
@@ -47,9 +47,9 @@ export function DisplayArchiveTabs() {
   return (
     <div className="fr-container">
       {archiveTab === null ? (
-        <ArchiveContainer chatsId={chatsId} setArchiveTab={setArchiveTab} />
+        <ArchiveList chatsId={chatsId} setArchiveTab={setArchiveTab} />
       ) : (
-        <Print
+        <DisplayArchive
           ref={ref}
           selectedChat={chatsId[archiveTab]}
           setArchiveTab={setArchiveTab}
