@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'types'
+import { RootState } from '@types'
 import { botQuestionRole } from '../../constants/global'
 import { NOT_SET } from '../../constants/status'
 import { GlobalRowContainer } from './GlobalRowContainer'

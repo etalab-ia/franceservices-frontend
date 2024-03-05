@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from 'types'
+import { RootState } from '@types'
 import { emitCloseStream } from 'utils/eventsEmitter'
 import { generateStream } from 'utils/hooks'
 

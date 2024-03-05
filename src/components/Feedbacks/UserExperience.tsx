@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux'
-import { RootState } from 'types'
+import { RootState } from '@types'
 import { askingQuality, redoAskingQuality } from '../../constants/feedback'
 import { Avatar } from '../Chat/Avatar'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { Feedback } from './Feedback'
-import { Feedback as FeedbackType } from 'types'
+import { Feedback as FeedbackType } from '@types'
 const AskingResponseQuality = ({ tabsLen }) => {
   return (
     <div className="streaming fr-p-3v fr-ml-3v">

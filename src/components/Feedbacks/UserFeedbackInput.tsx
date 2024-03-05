@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Feedback } from 'types'
+import { Feedback } from '@types'
 import {
   askingQualityPrecisions,
   primaryButtons,

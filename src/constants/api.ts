@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query'
 const apiUrl = `${import.meta.env.VITE_API_URL}/api/v2`
 
 export const apiBase = apiUrl
@@ -18,6 +19,8 @@ export const getSheetsUrl = apiBase + '/get_sheets'
 export const getChunksUrl = apiBase + '/get_chunks'
 export const importUrl =
   'https://opendata.plus.transformation.gouv.fr/api/explore/v2.1/catalog/datasets/export-expa-c-riences/records?limit=5'
+
+export function getChunks() {}
 
 export const useApiUrls = () => {
   return {
