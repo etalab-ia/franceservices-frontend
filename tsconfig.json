@@ -4,7 +4,8 @@
     /* Visit https://aka.ms/tsconfig to read more about this file */
     "baseUrl": "src", // This sets your project root as the base directory
     "paths" : {
-      "types": ["./types.ts"]
+      "@types": ["./types.ts"],
+      "@api": ["./src/constants/api.ts"]
     },
     /* Projects */
     // "incremental": true,                              /* Save .tsbuildinfo files to allow for incremental compilation of projects. */

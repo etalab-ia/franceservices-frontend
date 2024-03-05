@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Chat } from 'types'
+import { Chat } from '@types'
 import { archiveHeaders, setArchiveBody } from '../../utils/archive'
 import { GlobalTitle } from '../Global/GlobalTitle'
 

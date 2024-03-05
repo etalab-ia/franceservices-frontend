@@ -4,7 +4,7 @@ import { DisplayMessageTab } from '../Chat/DisplayMessageTab'
 import { StreamingMessage } from '../Chat/StreamingMessage'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { GlobalStream } from '../Global/GlobalStream'
-import { Stream } from 'types'
+import { Stream } from '@types'
 
 export function DisplayStream({ stream }: { stream: Stream }) {
   const tabsLen = stream.historyStream.length

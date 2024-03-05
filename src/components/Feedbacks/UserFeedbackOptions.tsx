@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Feedback as FeedbackType, RootState } from 'types'
+import { Feedback as FeedbackType, RootState } from '@types'
 import { feedbackUrl } from '../../constants/api'
 import {
   feedbackConfirmationButton,

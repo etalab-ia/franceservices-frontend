@@ -1,6 +1,6 @@
 import { Tag } from '@codegouvfr/react-dsfr/Tag'
 import { feedbackResume } from '../../constants/feedback'
-import { Feedback } from 'types'
+import { Feedback } from '@types'
 
 export function UserFeedbackResume({ feedback }: { feedback: Feedback }) {
   return (
