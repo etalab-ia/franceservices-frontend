@@ -1,14 +1,13 @@
+import { useAlbert } from '@api'
 import { Button } from '@codegouvfr/react-dsfr/Button'
 import { Chat, UserHistory } from '@types'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import ReactToPrint from 'react-to-print'
-import { getChunksUrl, getStreamsUrl } from '../../constants/api'
 import {
   meetingAppointmentInformations,
   meetingAppointmentTitle,
 } from '../../constants/meeting'
-import { useFetch } from '../../utils/hooks'
-import { setHeaders } from '../../utils/setData'
+import ShowError from '../Error/ShowError'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { GlobalSubtitle } from '../Global/GlobalSubtitle'
 import { GlobalTitle } from '../Global/GlobalTitle'
@@ -31,69 +30,18 @@ export const DisplayArchive = React.forwardRef<HTMLDivElement, DisplayArchivePro
       setArchiveTab(null)
     }
     window.addEventListener('popstate', () => {})
-    const [archive, setArchive] = useState<UserHistory[]>()
     const token = localStorage.getItem('authToken')
-    const [isLoading, setIsLoading] = useState(true)
+    const { getArchive } = useAlbert()
+    const { data: archive, error, isLoading } = getArchive(selectedChat.id)
 
-    const fetchStreamsAndSetHistory = async () => {
-      setIsLoading(true)
-      try {
-        // Fetch streams for the selected chat
-        const streamsResponse = await fetch(`${getStreamsUrl}/${selectedChat.id}`, {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }).then((res) => res.json())
-
-        if (
-          !streamsResponse ||
-          !streamsResponse.streams ||
-          streamsResponse.streams.length === 0
-        ) {
-          console.log('No streams found')
-          setIsLoading(false)
-          return
-        }
-
-        // Fetch chunks for each stream
-        const streamsHistory = await Promise.all(
-          streamsResponse.streams.map(async (stream) => {
-            const chunksResponse = stream.rag_sources
-              ? await fetch(getChunksUrl, {
-                  method: 'POST',
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify({ uids: stream.rag_sources }),
-                }).then((res) => res.json())
-              : []
-
-            return {
-              query: stream.query,
-              chunks: chunksResponse,
-              response: stream.response,
-              webservices: [],
-            }
-          })
-        )
-
-        setArchive(streamsHistory)
-      } catch (error) {
-        console.error('Failed to fetch streams or chunks:', error)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    useEffect(() => {
-      fetchStreamsAndSetHistory()
-    }, [selectedChat.id])
-
-    if (isLoading) return <div>loading...</div>
-
+    if (isLoading) return <div></div>
+    if (error || !archive.streams.length)
+      return (
+        <ShowError
+          title="Erreur"
+          message={`Nous n'avons pas trouvé de messages associés au chat numéro ${selectedChat.id} `}
+        />
+      )
     return (
       <>
         <div className="fr-mb-4w">
@@ -119,8 +67,6 @@ export const DisplayArchive = React.forwardRef<HTMLDivElement, DisplayArchivePro
           />
         </div>
         <div ref={ref as React.RefObject<HTMLDivElement>}>
-          {/* {selectedChat.type === "qa" && <Chatbot archive={archive} />}*/}
-          {/* {selectedChat.type === 'meeting' && <MeetingOutputs archive={archive} />} */}
           <DisplayMeetingArchive streams={archive} />
         </div>
       </>
@@ -147,23 +93,4 @@ function DisplayMeetingArchive({ streams }: { streams: UserHistory[] }) {
       </div>
     </>
   )
-}
-
-async function streamsToHistory(streams: any[]) {
-  let history: UserHistory[] = []
-  const token = localStorage.getItem('authToken')
-  streams.forEach(async (stream, index) => {
-    await useFetch(getChunksUrl, 'POST', {
-      headers: setHeaders(false),
-      data: JSON.stringify({ uids: stream.rag_sources }),
-    }).then((res) => {
-      history.push({
-        query: stream.query,
-        chunks: res,
-        response: stream.response,
-        webservices: [],
-      })
-    })
-  })
-  return history
 }
