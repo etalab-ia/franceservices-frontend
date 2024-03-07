@@ -84,11 +84,13 @@ export function History({ history }: { history: UserHistory[] }) {
             </button>
           </h3>
           <div className="fr-collapse" id={`history-${index}`}>
-            <DisplayResponse
-              chunks={h.chunks}
-              response={h.response}
-              webservices={h.webservices}
-            />
+            <div className="fr-mb-2w">
+              <DisplayResponse
+                chunks={h.chunks}
+                response={h.response}
+                webservices={h.webservices}
+              />
+            </div>
           </div>
         </div>
       ))}
@@ -111,7 +113,7 @@ export function DisplayResponse({
         <div
           className={webservices && webservices.length ? `fr-col-sm-8` : 'fr-col-sm-12'}
         >
-          <div className="text-xl font-bold">Synthèse par Albert</div>
+          <div className="text-xl font-bold">Réponse proposée par Albert</div>
           <GlobalParagraph extraClass="fr-mr-3w">{response}</GlobalParagraph>
         </div>
         {webservices && webservices.length > 0 && (
