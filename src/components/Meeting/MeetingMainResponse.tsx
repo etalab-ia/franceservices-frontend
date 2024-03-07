@@ -30,7 +30,7 @@ export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefi
   return (
     <>
       <DisplaySourceCards chunks={user.chunks} />
-      <GlobalColContainer extraClass="fr-mt-5w">
+      <GlobalColContainer extraClass="fr-mt-5w ">
         <MeetingStream archive={archive} />
         {!archive && (
           <NewQuestionInput questionInput={question} setQuestionInput={setQuestion} />
@@ -108,9 +108,14 @@ export function NewQuestionInput({
   return (
     <div>
       <div className=" w-full ">
-        <GlobalSecondaryTitle extraClass="fr-mt-4w fr-mb-3w">
+        <GlobalSecondaryTitle extraClass="fr-mt-4w">
           Poser une question complémentaire
         </GlobalSecondaryTitle>
+        <p className="fr-mb-3v text-xs">
+          Vous pouvez affiner la réponse proposée par Albert en posant une nouvelle
+          question relative à la situation de l’usager. Albert utilisera les échanges
+          précédents pour formuler une nouvelle réponse.
+        </p>
         <textarea
           style={{ minHeight: '10px', overflow: 'hidden' }}
           placeholder="Poser une nouvelle question"
