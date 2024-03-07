@@ -50,9 +50,7 @@ export function MeetingStream({ archive }: { archive: ArchiveType | undefined })
   }, [user.chunks])
   return (
     <>
-      <GlobalSecondaryTitle extraClass="fr-mb-2w">
-        {resultMeetingTitle}
-      </GlobalSecondaryTitle>
+      <div className="text-xl font-bold">Réponse proposée par Albert</div>
       {stream.isStreaming ? (
         <GlobalStream response={stream.response} />
       ) : (
