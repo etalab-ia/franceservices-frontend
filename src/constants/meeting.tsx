@@ -105,7 +105,7 @@ export const meetingPromptExamples = [
 
 export const meetingContextualInfosTitle = `Informations contextuelles`
 export const meetingGenerateButton = `Générer la fiche rendez-vous`
-export const meetingAppointmentInformations = `Informations sur le rendez-vous`
+export const meetingAppointmentInformations = `Votre question sur la situation de l’usager`
 export const meetingAppointmentTitle = 'Fiche rendez-vous'
 
 export const meetingDefaultQuestionsIntroduction = (
@@ -127,15 +127,8 @@ export const defaultInputFields = [
     themes: ['Allocation sociale', 'RSA'],
     administrations: ['CAF'],
   },
-  {
-    title: "Renouveler une carte d'identité perdue",
-    question:
-      "L'usager a perdu sa carte d'identité. Quelles sont les étapes à suivre pour la renouveler ?",
-    themes: ["Carte d'identité"],
-    administrations: ['ANTS'],
-  },
 ]
 
-export const resultMeetingTitle = 'Synthèse par Albert'
+export const resultMeetingTitle = 'Réponse proposée par Albert'
 export const meetingQRTitle =
   'Des questions posées fréquemment pour des situations similaires :'
