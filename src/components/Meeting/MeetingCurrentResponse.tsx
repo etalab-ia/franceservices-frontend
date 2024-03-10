@@ -8,9 +8,7 @@ import { useEffect, useRef } from 'react'
 /*
  *	Contains text response from the bot and additional informations like sheets and chunks, useful links
  */
-export function MeetingCurrentResponse({
-  archive,
-}: { archive: ArchiveType | undefined }) {
+export function MeetingCurrentResponse() {
   const user = useSelector((state: RootState) => state.user)
   const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
@@ -30,8 +28,8 @@ export function MeetingCurrentResponse({
         </>
       )}
       <GlobalRowContainer extraClass="fr-grid-row--center gap-[24px] ">
-        <MeetingMainResponse archive={archive} />
-        <MeetingAdditionalResponse archive={archive} />
+        <MeetingMainResponse archive={undefined} />
+        <MeetingAdditionalResponse archive={undefined} />
       </GlobalRowContainer>
     </>
   )
