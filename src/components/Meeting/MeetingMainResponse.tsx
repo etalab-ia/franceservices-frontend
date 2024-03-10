@@ -63,10 +63,10 @@ export function NewQuestionInput({
     setQuestionInput(e.target.value)
   }
 
-    useEffect(() => {
+  useEffect(() => {
     emitCloseStream()
     generateStream(user.question, dispatch, user.chatId, false)
-  }, [user.question]) 
+  }, [user.question])
 
   const handleSubmit = async () => {
     setIsAdditionalInputOpened(false)
