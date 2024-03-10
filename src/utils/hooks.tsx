@@ -3,7 +3,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, Question, RootState } from '../types'
 import { onCloseStream } from './eventsEmitter'
 import { setHeaders, setUserQuestion } from './setData'
-import { streamUrl } from '@api'
+import { getChunksUrl, streamUrl } from '@api'
 
 export const useAppDispatch: () => AppDispatch = useDispatch
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
@@ -31,12 +31,30 @@ export const useFetch = async (url: string, method: string, props): Promise<any>
   }
 }
 
-function handleStreamMessage(e, dispatch, stream_chat, isChat: boolean) {
+function handleStreamMessage(e, dispatch, stream_chat, id: number) {
   try {
     const jsonData = JSON.parse(e.data)
     if (jsonData == '[DONE]') {
       stream_chat.close()
+      const token = localStorage.getItem('authToken')
+      /*       const test = useFetch(`${streamUrl}/${id}`, 'GET', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
 
+        data: null,
+      }).then((res) => {
+        console.table('stream/streamID', res.rag_sources)
+        const sources = fetch(getChunksUrl, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ uids: res.rag_sources }),
+        }).then((res) => { res.json().then((data) => console.log('json', data))})
+      }) */
       dispatch({ type: 'SET_STREAM_ID', nextStreamId: 0 })
 
       return dispatch({ type: 'STOP_AGENT_STREAM' })
@@ -68,7 +86,7 @@ export const useStream = async (dispatch, id: number, isChat: boolean) => {
 
   dispatch({ type: 'RESET_AGENT_STREAM' })
   stream_chat.onmessage = (e) => {
-    handleStreamMessage(e, dispatch, stream_chat, isChat)
+    handleStreamMessage(e, dispatch, stream_chat, id)
   }
   stream_chat.onerror = (e) => {
     handleStreamError(e, stream_chat)
@@ -78,7 +96,6 @@ export const useStream = async (dispatch, id: number, isChat: boolean) => {
       stream_chat.close()
     }
     dispatch({ type: 'SET_INITIAL_STREAM' })
-    //dispatch({ type: 'SET_CHAT_ID', nextChatId: 0 })
   })
 }
 

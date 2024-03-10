@@ -7,9 +7,6 @@ export function concatQueries(
   let result = ''
   if (!previousQueries.length) return currentQuery
   for (let i = previousQueries.length; i > 0; i--) {
-    console.log('lengt', previousQueries.length)
-    console.log('concatQueries', i, previousQueries)
-
     if (i === previousQueries.length) {
       if (previousQueries[i - 1].query.length + currentQuery.length + 1 > 12500)
         return currentQuery
