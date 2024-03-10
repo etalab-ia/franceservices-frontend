@@ -22,25 +22,25 @@ import { emitCloseStream } from '../utils/eventsEmitter'
  *****************************************************************************************************/
 
 export function Meeting() {
-  const dispatch = useDispatch()
   const [generate, setGenerate] = useState(false)
   const [currQuestion, setCurrQuestion] = useState(InitialQuestion)
+  const stream = useSelector((state: RootState) => state.stream)
 
   const updateCurrQuestion = (newQuestion) => {
     setCurrQuestion(newQuestion)
   }
-
+  /* 
   useEffect(() => {
     if (!generate) {
       emitCloseStream()
     }
-  }, [generate])
+  }, [generate]) */
 
-  useEffect(() => {
+  /*   useEffect(() => {
     return () => {
       dispatch({ type: 'RESET_USER' })
     }
-  }, [])
+  }, []) */
 
   return (
     <CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>

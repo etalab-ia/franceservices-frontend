@@ -29,7 +29,6 @@ export function MeetingInputButton({
   context: MeetingInputContext
 }) {
   const dispatch = useDispatch()
-  const user = useSelector((state: RootState) => state.user)
   const stream = useSelector((state: RootState) => state.stream)
 
   const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)

@@ -51,11 +51,7 @@ export function MeetingInputs({
   return (
     <div style={{ width: '100%', flex: 1, flexGrow: 1, backgroundColor: '' }}>
       <MeetingInputFields context={context} setContext={setContext} />
-      <MeetingInputButton
-        setGenerate={setGenerate}
-        context={context}
-        generate={generate}
-      />
+      <MeetingInputButton setGenerate={setGenerate} context={context} />
     </div>
   )
 }
