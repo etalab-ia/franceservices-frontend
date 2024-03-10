@@ -30,16 +30,15 @@ export const DisplayArchive = React.forwardRef<HTMLDivElement, DisplayArchivePro
       setArchiveTab(null)
     }
     window.addEventListener('popstate', () => {})
-    const token = localStorage.getItem('authToken')
     const { getArchive } = useAlbert()
     const { data: archive, error, isLoading } = getArchive(selectedChat.id)
 
     if (isLoading) return <div></div>
-    if (error || !archive.streams.length)
+    if (error || !archive)
       return (
         <ShowError
-          title="Erreur"
-          message={`Nous n'avons pas trouvé de messages associés au chat numéro ${selectedChat.id} `}
+          title={`Erreur ${error.cause.status!}`}
+          message={`Nous n'avons pas trouvé de messages associés au chat numéro ${selectedChat.id}`}
         />
       )
     return (
