@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
 import { Chat } from '@types'
+import React, { useState } from 'react'
 import { archiveHeaders, setArchiveBody } from '../../utils/archive'
 import { GlobalTitle } from '../Global/GlobalTitle'
 
@@ -50,7 +50,7 @@ export function ArchiveList({ chatList, setArchiveTab }: ArchiveListProps) {
         </thead>
         <tbody>
           {chatList.map((chat, index) => (
-            <tr key={chat.id}>
+            <tr key={index}>
               {setArchiveBody({
                 item: chat,
                 index: index,
