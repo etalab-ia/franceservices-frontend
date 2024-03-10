@@ -1,57 +1,50 @@
+import { useState } from 'react'
 import {
-	meetingExamplesTitle,
-	meetingParagraph,
-	meetingPromptExamples,
-} from "../../constants/meeting"
-import { GlobalColContainer } from "../Global/GlobalColContainer"
-import { GlobalParagraph } from "../Global/GlobalParagraph"
-import { GlobalRowContainer } from "../Global/GlobalRowContainer"
-import { useState } from "react"
+  meetingExamplesTitle,
+  meetingInputGuidelines,
+  meetingPromptExamples,
+} from '../../constants/meeting'
+import { GlobalColContainer } from '../Global/GlobalColContainer'
+import { GlobalParagraph } from '../Global/GlobalParagraph'
+import { GlobalRowContainer } from '../Global/GlobalRowContainer'
+import thumbsDown from '../../../icons/feedbacks/thumbsDown.svg'
+import thumbsUp from '../../../icons/feedbacks/thumbsUp.svg'
 
 /*
  * Advices and examples of good and bad prompts
  */
-export function MeetingPromptAdvice({}) {
-	const [expandedItems, setExpandedItems] = useState([])
-	const [isAccordionOpen, setIsAccordionOpen] = useState(false)
+export function MeetingPromptAdvice() {
+  const [isAccordionOpen, setIsAccordionOpen] = useState(false)
 
-	const handleToggleAll = () => {
-		setIsAccordionOpen(!isAccordionOpen)
-	}
+  const handleToggleAll = () => {
+    setIsAccordionOpen(!isAccordionOpen)
+  }
 
-	const handleToggleItem = (index) => {
-		const updatedExpandedItems = [...expandedItems]
+  return (
+    <>
+      <div>{meetingInputGuidelines}</div>
+      <div className={'flex '} onClick={handleToggleAll}>
+        {meetingExamplesTitle}
+        <span
+          className={`fr-text-mention--grey fr-icon--sm fr-icon-arrow-${
+            isAccordionOpen ? 'up' : 'down'
+          }-s-line fr-my-1v`}
+        ></span>
+      </div>
+      {meetingPromptExamples.map((ex, index) => (
+        <div
+          className="fr-mt-1w"
+          key={index}
+          style={{ display: isAccordionOpen ? 'block' : 'none' }}
+        >
+          <div className="flex ">
+            <img src={ex.img} alt={ex.alt} className="mr-2" />
 
-		updatedExpandedItems[index] = !updatedExpandedItems[index]
-		setExpandedItems(updatedExpandedItems)
-	}
-
-	return (
-		<>
-			<GlobalColContainer>
-				<GlobalParagraph>{meetingParagraph}</GlobalParagraph>
-				<p className={`fr-my-2w`} onClick={handleToggleAll}>
-					{meetingExamplesTitle}
-					<span
-						className={`fr-icon-arrow-${isAccordionOpen ? "up" : "down"}-s-line fr-my-2w`}
-					></span>
-				</p>
-				{meetingPromptExamples.map((ex, index) => (
-					<div key={index} style={{ display: isAccordionOpen ? "block" : "none" }}>
-						<GlobalRowContainer>
-							<img className="fr-mr-1w" src={ex.img} alt={ex.alt} />
-							<p onClick={() => handleToggleItem(index)}>
-								{ex.title}
-								<span
-									className={`fr-icon-arrow-${expandedItems[index] ? "up" : "down"}-s-line`}
-									aria-hidden="true"
-								></span>
-							</p>
-						</GlobalRowContainer>
-						{expandedItems[index] && <p className="fr-mb-1w text-justify">{ex.description}</p>}
-					</div>
-				))}
-			</GlobalColContainer>
-		</>
-	)
+            {ex.title}
+          </div>
+          <div className="mb-4 text-justify fr-text--xs">{ex.description}</div>
+        </div>
+      ))}
+    </>
+  )
 }

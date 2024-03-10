@@ -8,6 +8,8 @@
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
+@tailwind components;
+@tailwind utilities;
 
 html, body {
     height: 100%;
@@ -109,8 +111,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-size: inherit;
-  font-weight: inherit;
+
 }
 
 /*
@@ -245,6 +246,7 @@ button,
 [type='reset'],
 [type='submit'] {
   -webkit-appearance: button;
+  appearance: button;
   /* 1 */
   background-color: transparent;
   /* 2 */
@@ -292,6 +294,7 @@ Correct the cursor style of increment and decrement buttons in Safari.
 
 [type='search'] {
   -webkit-appearance: textfield;
+  appearance: textfield;
   /* 1 */
   outline-offset: -2px;
   /* 2 */
@@ -542,16 +545,15 @@ video {
   padding-right: 1rem;
   justify-content: center;
   align-content: center;
+  align-items: center;
+  gap: 0.5rem;
   border-radius: 90px;
   border-style: solid;
   border-width: 1px;
   --tw-border-opacity: 1;
-  border-color: rgb(106 106 244 / var(--tw-border-opacity));
   --tw-text-opacity: 1;
-  color: rgb(106 106 244 / var(--tw-text-opacity));
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-  max-height: 40px;
 }
 
 /* TODO: change margin/padding/colors/height to dsfr one */
@@ -568,7 +570,6 @@ video {
   border-style: solid;
   border-width: 1px;
   --tw-border-opacity: 1;
-  border-color: rgb(221 221 221 / var(--tw-border-opacity));
 }
 
 /* AGENT */
@@ -986,7 +987,9 @@ video {
     min-height: Xpx; /* Replace X with a fixed height that fits the largest h6 */
     /* Optional: Add other styling as needed */
 }
-
+    .accordion-custom-button {
+      --text-spacing:0;--title-spacing:0;display:inline-flex;flex-direction:row;align-items:center;width:-moz-fit-content;width:fit-content;font-weight:500;font-size:1rem;line-height:1.5rem;min-height:3rem;padding:0.75rem 1rem;overflow:initial;max-width:100%;max-height:none;width:100%;text-align:left;margin:0;color:var(--text-disabled-grey);
+    }
 /* Styles for larger screens */
 @media (min-width: 1186px) {
     .accordion-container {
@@ -999,4 +1002,30 @@ video {
         flex-basis: 0;
         /* Adjust the width as necessary and add margin/padding for spacing */
     }
+
+
+}
+
+
+.fr-icon-thumbs-up::before,
+.fr-icon-thumbs-up::after {
+  -webkit-mask-image: url("icons/feedbacks/thumbsUp.svg");
+  mask-image: url("icons/feedbacks/thumbsUp.svg");
+    mask-size: 1rem 1rem;
+  width: 1rem;
+  height: 1rem;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fr-icon-thumbs-down::before,
+.fr-icon-thumbs-down::after {
+  -webkit-mask-image: url("icons/feedbacks/thumbsDown.svg");
+  mask-image: url("icons/feedbacks/thumbsDown.svg");
+    mask-size: 1rem 1rem;
+  width: 1rem;
+  height: 1rem;
+    display: flex;
+  align-items: center;
+  justify-content: center;
 }

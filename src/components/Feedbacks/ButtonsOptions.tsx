@@ -1,35 +1,61 @@
-import { feedbackButtonsChoice } from "../../constants/feedback"
+import {
+  feedbackButtonsChoice,
+  satisfiedButtons,
+  unsatisfiedButtons,
+} from '../../constants/feedback'
 
-export const ButtonsOptions = ({ isFirst, buttonsType, reasons, setReasons }) => {
-	const handleClick = (index) => {
-		if (reasons.includes(buttonsType[index])) {
-			setReasons(reasons.filter((reason) => reason !== buttonsType[index]))
-		} else {
-			setReasons([...reasons, buttonsType[index]])
-			if (buttonsType[index] === "Autre raison") return
-		}
-	}
+export function ButtonsOptions({
+  isFirst,
+  buttonsType,
+  reasons,
+  setReasons,
+}: {
+  isFirst: boolean
+  buttonsType: typeof satisfiedButtons | typeof unsatisfiedButtons
+  reasons: string[]
+  setReasons: (reasons: string[]) => void
+}) {
+  buttonsType
+  const handleClick = (index: number) => {
+    const reasonValue = Object.values(buttonsType[index])[0]
 
-	return (
-		<div className="wrap-message">
-			{isFirst &&
-				buttonsType.map((button, index) => {
-					const classNames = reasons.includes(buttonsType[index]) ? "bg-purple" : "bg-[white]"
+    if (reasons.includes(reasonValue)) {
+      setReasons(reasons.filter((reason) => reason !== reasonValue))
+    } else {
+      setReasons([...reasons, reasonValue])
+      if (reasonValue === 'other') return
+    }
+  }
 
-					return (
-						<div key={index}>
-							<button
-								role={feedbackButtonsChoice(button)}
-								className={`user-feedback-buttons ${classNames}`}
-								onClick={() => handleClick(index)}
-							>
-								<p className={reasons.includes(buttonsType[index]) ? "text-white" : "text-purple"}>
-									{button}
-								</p>
-							</button>
-						</div>
-					)
-				})}
-		</div>
-	)
+  return (
+    <div className="wrap-message">
+      {isFirst &&
+        buttonsType.map((button, index: number) => {
+          const reasonValue = Object.values(buttonsType[index])[0]
+          const classNames = reasons.includes(reasonValue)
+            ? 'fr-background-action-high--blue-france'
+            : 'bg-[white]'
+
+          return (
+            <div key={index}>
+              <button
+                role={feedbackButtonsChoice(button)}
+                className={`user-feedback-buttons fr-text-action-high--blue-france ${classNames}`}
+                onClick={() => handleClick(index)}
+              >
+                <p
+                  className={
+                    reasons.includes(reasonValue)
+                      ? 'text-white'
+                      : 'fr-text-action-high--blue-france'
+                  }
+                >
+                  {Object.keys(button)[0]}
+                </p>
+              </button>
+            </div>
+          )
+        })}
+    </div>
+  )
 }

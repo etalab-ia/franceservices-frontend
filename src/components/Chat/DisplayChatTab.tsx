@@ -1,6 +1,6 @@
-import { GlobalRowContainer } from "../Global/GlobalRowContainer"
-import { ChatMainContainer } from "./ChatMainContainer"
-import { ChatAdditionalContainer } from "./ChatAdditionalContainer"
+import { GlobalRowContainer } from '../Global/GlobalRowContainer'
+import { ChatAdditionalContainer } from './ChatAdditionalContainer'
+import { ChatMainContainer } from './ChatMainContainer'
 
 /**********************************************************************************************
 	
@@ -13,13 +13,16 @@ import { ChatAdditionalContainer } from "./ChatAdditionalContainer"
  **********************************************************************************************/
 
 // TODO WHEN BACK IS READY: change archive type
-export function DisplayChatTab({ archive, setGenerate }) {
-	return (
-		<div className="fr-container fr-py-3w ">
-			<div className="fr-grid-row fr-grid-row--gutters">
-				<ChatMainContainer archive={archive} setGenerate={setGenerate} />
-				<ChatAdditionalContainer archive={archive} />
-			</div>
-		</div>
-	)
+export function DisplayChatTab({
+  archive,
+  setGenerate,
+}: { archive: boolean; setGenerate: any }) {
+  return (
+    <div className="fr-container fr-py-3w ">
+      <div className="fr-grid-row fr-grid-row--gutters">
+        <ChatMainContainer archive={archive} setGenerate={setGenerate} />
+        <ChatAdditionalContainer archive={archive} />
+      </div>
+    </div>
+  )
 }

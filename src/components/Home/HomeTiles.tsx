@@ -1,30 +1,31 @@
-import { Tile } from "@codegouvfr/react-dsfr/Tile"
+import { Tile } from '@codegouvfr/react-dsfr/Tile'
+import type { Tile as TTile } from '@types'
 
 export const TileContainer = ({ children }) => {
-	return (
-		<div className="container fr-mr-2w" style={{ width: 282 }}>
-			{children}
-		</div>
-	)
+  return (
+    <div className="container fr-mr-2w" style={{ width: 282 }}>
+      {children}
+    </div>
+  )
 }
 
 export const HomeTiles = ({ tiles }) => {
-	return (
-		<div className="fr-grid-row">
-			{tiles.map((tile, key) => {
-				return (
-					<TileContainer key={key}>
-						<Tile
-							className={tile.className}
-							desc={tile.desc}
-							enlargeLink
-							linkProps={tile.linkProps}
-							imageUrl={tile.imageUrl}
-							title={tile.title}
-						/>
-					</TileContainer>
-				)
-			})}
-		</div>
-	)
+  return (
+    <div className="fr-grid-row">
+      {tiles.map((tile: TTile, index: number) => {
+        return (
+          <TileContainer key={index}>
+            <Tile
+              className={tile.className}
+              desc={tile.desc}
+              enlargeLink
+              linkProps={tile.linkProps}
+              imageUrl={tile.imageUrl}
+              title={tile.title}
+            />
+          </TileContainer>
+        )
+      })}
+    </div>
+  )
 }
