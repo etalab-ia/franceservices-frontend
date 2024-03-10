@@ -23,34 +23,15 @@ export const getChunksUrl = apiBase + '/get_chunks'
 export const importUrl =
   'https://opendata.plus.transformation.gouv.fr/api/explore/v2.1/catalog/datasets/export-expa-c-riences/records?limit=5'
 
-const AnySchema = v.any() // any
-
 export function useAlbert() {
-  const authToken = localStorage.getItem('authToken')
   const getArchive = (chatId: number) =>
     useQuery({
       queryKey: ['getArchive', chatId],
-      queryFn: () => fetchNewArchive(chatId),
+      queryFn: () => fetchArchive(chatId),
       enabled: !!chatId,
     })
 
   return { getArchive }
-}
-
-const fetchNewArchive = async (chatId: number): Promise<any> => {
-  const authToken = localStorage.getItem('authToken')
-  const response = await fetch(`${apiBase}/chat/archive/${chatId}`, {
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-      'Content-Type': 'application/json',
-    },
-  }).then((res) => res.json())
-
-  if (!response.ok) {
-    throw new Error('Network response was not ok')
-  }
-  console.log('response', response)
-  return response
 }
 
 const fetchArchive = async (chatId: number): Promise<UserHistory[]> => {
@@ -61,9 +42,10 @@ const fetchArchive = async (chatId: number): Promise<UserHistory[]> => {
       'Content-Type': 'application/json',
     },
   })
+  console.log('response', response)
 
   if (!response.ok) {
-    throw new Error('Network response was not ok')
+    throw new Error('Network response was not ok', { cause: response })
   }
   const responseData = await response.json()
 
