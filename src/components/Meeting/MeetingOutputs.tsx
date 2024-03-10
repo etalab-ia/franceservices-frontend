@@ -53,7 +53,7 @@ export function MeetingOutputs() {
         />
       )}
       <History history={user.history.slice(1)} />
-      <MeetingCurrentResponse archive={undefined} />
+      <MeetingCurrentResponse />
     </div>
   )
 }
