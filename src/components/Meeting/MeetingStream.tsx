@@ -19,23 +19,12 @@ import { GlobalStream } from '../Global/GlobalStream'
 		** ResponseExplanation: display chunks associated to response
 
  *****************************************************************************************/
-export function MeetingStream({ archive }: { archive: ArchiveType | undefined }) {
+export function MeetingStream() {
   const stream = useSelector((state: RootState) => state.stream)
   const user = useSelector((state: RootState) => state.user)
-  const agentResponse = archive !== undefined ? archive.response : stream.historyStream[0]
+  const agentResponse = stream.historyStream[0]
   const [chunks, setChunks] = useState([])
   const [feedback, setFeedback] = useState(InitialFeedback)
-
-  const getChunks = async () => {
-    const data = {
-      uids: archive.rag_sources,
-    }
-    const chunksRes = await useFetch(getChunksUrl, 'POST', {
-      headers: setHeaders(false),
-      data: JSON.stringify(data),
-    })
-    setChunks(chunksRes)
-  }
 
   useEffect(() => {
     if (!user.chunks.length) return

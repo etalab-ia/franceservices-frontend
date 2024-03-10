@@ -28,7 +28,7 @@ export function MeetingCurrentResponse() {
         </>
       )}
       <GlobalRowContainer extraClass="fr-grid-row--center gap-[24px] ">
-        <MeetingMainResponse archive={undefined} />
+        <MeetingMainResponse />
         <MeetingAdditionalResponse archive={undefined} />
       </GlobalRowContainer>
     </>

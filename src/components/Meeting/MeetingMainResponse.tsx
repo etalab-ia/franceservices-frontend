@@ -23,7 +23,7 @@ import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
 
  *****************************************************************************************************/
 
-export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefined }) {
+export function MeetingMainResponse() {
   const [question, setQuestion] = useState('')
 
   const user = useSelector((state: RootState) => state.user)
@@ -31,11 +31,11 @@ export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefi
     <>
       <DisplaySourceCards chunks={user.chunks} />
       <GlobalColContainer extraClass="fr-mt-5w">
-        <MeetingStream archive={archive} />
-        {!archive && (
-          <NewQuestionInput questionInput={question} setQuestionInput={setQuestion} />
-        )}
-        <MeetingQR archive={archive} setQuestion={setQuestion} />
+        <MeetingStream />
+
+        <NewQuestionInput questionInput={question} setQuestionInput={setQuestion} />
+
+        <MeetingQR setQuestion={setQuestion} />
       </GlobalColContainer>
     </>
   )
