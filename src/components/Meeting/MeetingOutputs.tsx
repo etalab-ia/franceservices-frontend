@@ -28,17 +28,11 @@ import { UsefulLinks } from './UsefulLinks'
 
  *****************************************************************************************************/
 
-export function MeetingOutputs({
-  archive,
-}: {
-  archive?: ArchiveType
-}) {
+export function MeetingOutputs() {
   const { currQuestion } = useContext(CurrQuestionContext)
   const user = useSelector((state: RootState) => state.user)
 
-  const [query, setQuery] = archive
-    ? useState(archive.query)
-    : useState<string>(currQuestion.query)
+  const [query, setQuery] = useState<string>(currQuestion.query)
 
   useEffect(() => {
     rmContextFromQuestion(query, setQuery)
@@ -59,7 +53,7 @@ export function MeetingOutputs({
         />
       )}
       <History history={user.history.slice(1)} />
-      <MeetingCurrentResponse archive={archive} />
+      <MeetingCurrentResponse archive={undefined} />
     </div>
   )
 }
