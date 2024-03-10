@@ -1,4 +1,4 @@
-# Miaou Frontend
+# Albert Frontend
 
 ## 🛠️ Configuration
 

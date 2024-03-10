@@ -1,7 +1,9 @@
-import { GlobalColContainer } from "../Global/GlobalColContainer"
-import { GlobalSubtitle } from "../Global/GlobalSubtitle"
-import { MeetingAdditionalInput } from "./MeetingAdditionalInput"
-import { MeetingDefaultQuestions } from "./MeetingDefaultQuestions"
+import { MeetingInputContext } from '@types'
+import { meetingContextualInfosTitle } from '../../constants/meeting'
+import { GlobalColContainer } from '../Global/GlobalColContainer'
+import { GlobalSubtitle } from '../Global/GlobalSubtitle'
+import { MeetingAdditionalInput } from './MeetingAdditionalInput'
+import { MeetingDefaultQuestions } from './MeetingDefaultQuestions'
 
 /*
 	MeetingadditionalInformations: optional inputs for themes and administrations
@@ -13,12 +15,18 @@ import { MeetingDefaultQuestions } from "./MeetingDefaultQuestions"
 
  */
 
-export function MeetingAdditionalInformations({ context, setContext }) {
-	return (
-		<GlobalColContainer>
-			<GlobalSubtitle>Informations contextuelles</GlobalSubtitle>
-			<MeetingAdditionalInput context={context} setContext={setContext} />
-			<MeetingDefaultQuestions setContext={setContext} />
-		</GlobalColContainer>
-	)
+export function MeetingAdditionalInformations({
+  context,
+  setContext,
+}: {
+  context: MeetingInputContext
+  setContext: React.Dispatch<React.SetStateAction<MeetingInputContext>>
+}) {
+  return (
+    <GlobalColContainer>
+      <GlobalSubtitle>{meetingContextualInfosTitle}</GlobalSubtitle>
+      <MeetingAdditionalInput context={context} setContext={setContext} />
+      <MeetingDefaultQuestions setContext={setContext} />
+    </GlobalColContainer>
+  )
 }

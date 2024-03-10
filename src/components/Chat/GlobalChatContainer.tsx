@@ -1,7 +1,7 @@
 export const GlobalChatContainer = ({ children }) => {
-	return (
-		<div className="chat fr-px-4w fr-pr-7w" id="chat">
-			{children}
-		</div>
-	)
+  return (
+    <div className="chat md:fr-px-4w md:fr-pr-7w" id="chat">
+      {children}
+    </div>
+  )
 }

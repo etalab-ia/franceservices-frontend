@@ -1,7 +1,7 @@
-import { InitialQuestion, Question } from "../../../types"
-import { createContext } from "react"
+import { createContext } from 'react'
+import { InitialQuestion, Question } from '@types'
 
 export const CurrQuestionContext = createContext({
-	currQuestion: InitialQuestion,
-	updateCurrQuestion: (question: Question) => {},
+  currQuestion: InitialQuestion,
+  updateCurrQuestion: (question: Question) => {},
 })
