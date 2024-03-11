@@ -50,7 +50,7 @@ export function MeetingStream({ archive }: { archive: ArchiveType | undefined })
   }, [user.chunks])
   return (
     <>
-      <div className="text-xl font-bold">Réponse proposée par Albert</div>
+      <div className="text-2xl font-bold">Réponse proposée par Albert</div>
       {stream.isStreaming ? (
         <GlobalStream response={stream.response} />
       ) : (
