@@ -12,7 +12,7 @@ export const UsefulLinks = ({
 
   return (
     <div className={`${extraClass} h-full`}>
-      <h3 className={'text-2xl font-bold fr-pb-3w '}>Liens pratiques</h3>
+      <h6 className={'text-xl font-bold fr-pb-3w '}>Liens pratiques</h6>
 
       {tiles.map((tile, key) => {
         return (

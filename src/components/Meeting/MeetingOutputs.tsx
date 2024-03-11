@@ -147,7 +147,9 @@ export function DisplaySourceCards({ chunks }: { chunks: Chunk[] }) {
   return (
     <>
       <div className="fr-grid-row fr-col-12 justify-between fr-mt-1w items-center w-full ">
-        <h6 className="text-xl font-bold fr-mb-3v">Sources de réponses</h6>
+        <h6 className="text-2xl font-bold fr-mb-3v">
+          Sources utilisées pour générer la réponses
+        </h6>
         <Pagination
           count={Math.ceil(chunks.length / 3)}
           defaultPage={currentPage}
