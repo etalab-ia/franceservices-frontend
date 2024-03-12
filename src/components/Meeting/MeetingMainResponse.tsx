@@ -13,6 +13,7 @@ import { MeetingQR } from './MeetingQR'
 import { MeetingStream } from './MeetingStream'
 import { MeetingTags } from './MeetingTags'
 import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
+import Separator from 'components/Global/Separator'
 /*****************************************************************************************************
 	
 	COMPONENTS:
@@ -23,19 +24,19 @@ import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
 
  *****************************************************************************************************/
 
-export function MeetingMainResponse({ archive }: { archive: ArchiveType | undefined }) {
+export function MeetingMainResponse() {
   const [question, setQuestion] = useState('')
 
   const user = useSelector((state: RootState) => state.user)
   return (
     <>
       <DisplaySourceCards chunks={user.chunks} />
-      <GlobalColContainer extraClass="fr-mt-5w ">
-        <MeetingStream archive={archive} />
-        {!archive && (
-          <NewQuestionInput questionInput={question} setQuestionInput={setQuestion} />
-        )}
-        <MeetingQR archive={archive} setQuestion={setQuestion} />
+      <GlobalColContainer extraClass="fr-mt-5w">
+        <MeetingStream />
+
+        <NewQuestionInput questionInput={question} setQuestionInput={setQuestion} />
+
+        <MeetingQR setQuestion={setQuestion} />
       </GlobalColContainer>
     </>
   )

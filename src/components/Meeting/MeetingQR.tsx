@@ -1,6 +1,6 @@
+import { RootState } from '@types'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { ArchiveType, RootState } from '@types'
 import { meetingQRTitle } from '../../constants/meeting'
 
 /*****************************************************************************************
@@ -11,15 +11,11 @@ import { meetingQRTitle } from '../../constants/meeting'
 		For now we get the related questions from the sheets
  *****************************************************************************************/
 export function MeetingQR({
-  archive,
   setQuestion,
 }: {
-  archive: ArchiveType | undefined
   setQuestion: React.Dispatch<React.SetStateAction<string>>
 }) {
-  const sheets = archive
-    ? archive.sheets
-    : useSelector((state: RootState) => state.user.sheets)
+  const sheets = useSelector((state: RootState) => state.user.sheets)
   const [relatedQuestions, setRelatedQuestions] = useState([])
 
   useEffect(() => {
@@ -86,16 +82,6 @@ export function MeetingQR({
                 {rq.question}
               </div>
             </div>
-            {/*             <Card
-              background
-              border
-              end={<Tag>{rq.sid}</Tag>}
-              enlargeLink
-              linkProps={{ href: rq.url }}
-              size="small"
-              title={rq.question}
-              titleAs="h6"
-            /> */}
           </button>
         )
       })}

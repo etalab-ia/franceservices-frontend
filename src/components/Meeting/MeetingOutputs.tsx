@@ -13,6 +13,7 @@ import { GlobalSubtitle } from '../Global/GlobalSubtitle'
 import { GlobalTitle } from '../Global/GlobalTitle'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { UsefulLinks } from './UsefulLinks'
+import Separator from 'components/Global/Separator'
 
 /*****************************************************************************************************
 	Displays Albert's response and the modify button
@@ -40,10 +41,12 @@ export function MeetingOutputs() {
 
   return (
     <div className="ft-container ">
-      <div className="fr-mb-5w">
-        <GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
-        <GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
-        <GlobalParagraph>{query}</GlobalParagraph>
+      <div className="fr-mb-5w ">
+        <h2 className="fr-my-2w">{meetingAppointmentTitle}</h2>
+        <h5>{meetingAppointmentInformations}</h5>
+        <GlobalParagraph extraClass="fr-background-alt--blue-france fr-p-2w">
+          {query}
+        </GlobalParagraph>
       </div>
       {user.history.length > 0 && (
         <DisplayResponse
@@ -107,12 +110,13 @@ export function DisplayResponse({
         <div
           className={webservices && webservices.length ? `fr-col-sm-8` : 'fr-col-sm-12'}
         >
-          <div className="text-xl font-bold">Réponse proposée par Albert</div>
+          <h3>Réponse proposée par Albert</h3>
           <GlobalParagraph extraClass="fr-mr-3w">{response}</GlobalParagraph>
         </div>
         {webservices && webservices.length > 0 && (
           <UsefulLinks webservices={webservices} extraClass="fr-col-sm-4" />
         )}
+        <Separator extraClass="fr-mt-5w" />
       </div>
     </>
   )
@@ -141,9 +145,7 @@ export function DisplaySourceCards({ chunks }: { chunks: Chunk[] }) {
   return (
     <>
       <div className="fr-grid-row fr-col-12 justify-between fr-mt-1w items-center w-full ">
-        <h6 className="text-2xl font-bold fr-mb-3v">
-          Sources utilisées pour générer la réponses
-        </h6>
+        <h3 className=" fr-mb-3v">Sources utilisées pour générer la réponses</h3>
         <Pagination
           count={Math.ceil(chunks.length / 3)}
           defaultPage={currentPage}
@@ -151,7 +153,7 @@ export function DisplaySourceCards({ chunks }: { chunks: Chunk[] }) {
           className="fr-mt-3v"
         />
       </div>
-      <div className="fr-grid-row fr-col-12 fr-mt-2v fr-mb-2w gap-2">
+      <div className="fr-grid-row fr-col-12 fr-mb-2w gap-2">
         {chunks.slice(startIndex, endIndex).map((c, index) => (
           <SourceCard key={`chunk-${index}`} title={c.title} text={c.text} url={c.url} />
         ))}
@@ -170,7 +172,7 @@ function SourceCard({ title, text, url }: { title: string; text: string; url: st
       className="fr-col-12 fr-col-sm-4 border border-[rgba(221, 221, 221, 1)] fr-px-4w fr-py-2w max-w-[392px] fr-background-action--high-blue relative "
       style={{ position: 'relative' }}
     >
-      <h4 className="font-bold line-clamp-2 fr-mb-2w ">{title}</h4>
+      <p className="font-bold line-clamp-2 fr-mb-2w ">{title}</p>
       <p className=" line-clamp-3 fr-mb-4w">{text}</p>
       <a
         className="font-bold mt-auto absolute bottom-0  fr-mb-2w no-external-link-icon "
