@@ -29,18 +29,6 @@ export function Meeting() {
   const updateCurrQuestion = (newQuestion) => {
     setCurrQuestion(newQuestion)
   }
-  /* 
-  useEffect(() => {
-    if (!generate) {
-      emitCloseStream()
-    }
-  }, [generate]) */
-
-  /*   useEffect(() => {
-    return () => {
-      dispatch({ type: 'RESET_USER' })
-    }
-  }, []) */
 
   return (
     <CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>
