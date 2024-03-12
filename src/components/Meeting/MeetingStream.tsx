@@ -9,6 +9,7 @@ import { Feedback } from '../Feedbacks/Feedback'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { GlobalSecondaryTitle } from '../Global/GlobalSecondaryTitle'
 import { GlobalStream } from '../Global/GlobalStream'
+import Separator from 'components/Global/Separator'
 
 /*****************************************************************************************
 
@@ -19,23 +20,12 @@ import { GlobalStream } from '../Global/GlobalStream'
 		** ResponseExplanation: display chunks associated to response
 
  *****************************************************************************************/
-export function MeetingStream({ archive }: { archive: ArchiveType | undefined }) {
+export function MeetingStream() {
   const stream = useSelector((state: RootState) => state.stream)
   const user = useSelector((state: RootState) => state.user)
-  const agentResponse = archive !== undefined ? archive.response : stream.historyStream[0]
+  const agentResponse = stream.historyStream[0]
   const [chunks, setChunks] = useState([])
   const [feedback, setFeedback] = useState(InitialFeedback)
-
-  const getChunks = async () => {
-    const data = {
-      uids: archive.rag_sources,
-    }
-    const chunksRes = await useFetch(getChunksUrl, 'POST', {
-      headers: setHeaders(false),
-      data: JSON.stringify(data),
-    })
-    setChunks(chunksRes)
-  }
 
   useEffect(() => {
     if (!user.chunks.length) return
@@ -44,17 +34,18 @@ export function MeetingStream({ archive }: { archive: ArchiveType | undefined })
   }, [user.chunks])
   return (
     <>
-      <div className="text-2xl font-bold">Réponse proposée par Albert</div>
+      <h3>Réponse proposée par Albert</h3>
       {stream.isStreaming ? (
         <GlobalStream response={stream.response} />
       ) : (
         <GlobalParagraph>{agentResponse}</GlobalParagraph>
       )}
       {/* [      {!stream.isStreaming && stream.historyStream.length !== 0 && <MeetingFeedback />}
-] */}{' '}
+] */}
       {!stream.isStreaming && stream.historyStream.length !== 0 && (
-        <div className="fr-mt-5w mb-[80px]">
+        <div className="fr-mt-5w ">
           <Feedback feedback={feedback} setFeedback={setFeedback} />
+          <Separator extraClass="fr-mt-5w" />
         </div>
       )}
     </>
