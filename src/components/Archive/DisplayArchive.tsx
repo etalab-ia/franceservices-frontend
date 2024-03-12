@@ -77,7 +77,7 @@ function DisplayMeetingArchive({ streams }: { streams: UserHistory[] }) {
   return (
     <>
       <GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
-      <GlobalSubtitle>{meetingAppointmentInformations}</GlobalSubtitle>
+      <h5>{meetingAppointmentInformations}</h5>
       <GlobalParagraph>{streams[0].query}</GlobalParagraph>
 
       <div className="ft-container h-full w-full">
