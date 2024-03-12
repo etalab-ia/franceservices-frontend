@@ -9,6 +9,7 @@ import { Feedback } from '../Feedbacks/Feedback'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { GlobalSecondaryTitle } from '../Global/GlobalSecondaryTitle'
 import { GlobalStream } from '../Global/GlobalStream'
+import Separator from 'components/Global/Separator'
 
 /*****************************************************************************************
 
@@ -33,19 +34,18 @@ export function MeetingStream() {
   }, [user.chunks])
   return (
     <>
-      <GlobalSecondaryTitle extraClass="fr-mb-2w">
-        {resultMeetingTitle}
-      </GlobalSecondaryTitle>
+      <h3>Réponse proposée par Albert</h3>
       {stream.isStreaming ? (
         <GlobalStream response={stream.response} />
       ) : (
         <GlobalParagraph>{agentResponse}</GlobalParagraph>
       )}
       {/* [      {!stream.isStreaming && stream.historyStream.length !== 0 && <MeetingFeedback />}
-] */}{' '}
+] */}
       {!stream.isStreaming && stream.historyStream.length !== 0 && (
-        <div className="fr-mt-5w mb-[80px]">
+        <div className="fr-mt-5w ">
           <Feedback feedback={feedback} setFeedback={setFeedback} />
+          <Separator extraClass="fr-mt-5w" />
         </div>
       )}
     </>

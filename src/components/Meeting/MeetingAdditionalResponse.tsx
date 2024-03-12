@@ -23,14 +23,12 @@ import { emitCloseStream } from 'utils/eventsEmitter'
 
  *****************************************************************************************/
 
-export function MeetingAdditionalResponse({
-  archive,
-}: { archive: ArchiveType | undefined }) {
+export function MeetingAdditionalResponse() {
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (!user.streamId || archive) return
+    if (!user.streamId) return
 
     const data = {
       question: user.question.query,
@@ -54,7 +52,7 @@ export function MeetingAdditionalResponse({
     )
   }, [user.streamId, user.question])
   return (
-    <OneThirdScreenWidth>
+    <OneThirdScreenWidth extraClass="fr-mt-5w">
       {/* <DisplaySheets archive={archive ?? undefined} /> */}
       <GlobalColContainer>
         <UsefulLinks webservices={user.webservices} />

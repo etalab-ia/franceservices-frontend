@@ -4,6 +4,7 @@ import { MeetingAdditionalResponse } from './MeetingAdditionalResponse'
 import { MeetingMainResponse } from './MeetingMainResponse'
 import { useSelector } from 'react-redux'
 import { useEffect, useRef } from 'react'
+import Separator from 'components/Global/Separator'
 
 /*
  *	Contains text response from the bot and additional informations like sheets and chunks, useful links
@@ -19,17 +20,17 @@ export function MeetingCurrentResponse() {
     <>
       {user.history.length !== 0 && (
         <>
-          <h3 ref={ref} className="font-bold ">
-            Votre question
-          </h3>
+          <h5 ref={ref} className="fr-mt-5w fr-mb-1w">
+            Votre question complémentaire
+          </h5>
           <div className="min-h-12 fr-mb-2w fr-background-alt--blue-france flex items-center fr-p-2w ">
             <p>{user.question.query}</p>
           </div>
         </>
       )}
-      <GlobalRowContainer extraClass="fr-grid-row--center gap-[24px] ">
+      <GlobalRowContainer extraClass="fr-grid-row--center">
         <MeetingMainResponse />
-        <MeetingAdditionalResponse archive={undefined} />
+        <MeetingAdditionalResponse />
       </GlobalRowContainer>
     </>
   )
