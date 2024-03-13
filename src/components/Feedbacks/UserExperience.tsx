@@ -23,12 +23,16 @@ export function UserExperience({
   return (
     <>
       {stream.activeTab === tabsLen && (
-        <div>
+        <div className="fr-mb-3w">
           <GlobalRowContainer>
             <Avatar user="agent" />
             <AskingResponseQuality tabsLen={tabsLen} />
           </GlobalRowContainer>
-          <Feedback feedback={feedback} setFeedback={setFeedback} />
+          <div className="flex justify-center">
+            <div className="w-5/6">
+              <Feedback feedback={feedback} setFeedback={setFeedback} />
+            </div>
+          </div>
         </div>
       )}
     </>

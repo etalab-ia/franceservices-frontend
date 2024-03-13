@@ -67,7 +67,7 @@ export function UserMessage({ setGenerate }) {
     const newParams = { maxLength: 800 }
     const updatedParams = { ...params, ...newParams }
 
-    return <input {...updatedParams} />
+    return <input {...updatedParams} disabled={stream.isStreaming} />
   }
 
   return (

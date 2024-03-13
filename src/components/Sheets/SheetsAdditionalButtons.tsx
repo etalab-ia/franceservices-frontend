@@ -6,6 +6,8 @@ import { indexesUrl, streamUrl } from '../../constants/api'
 import { sheetsTitle } from '../../constants/sheets'
 import { CurrQuestionContext } from '../../utils/context/questionContext'
 import { getIndexes } from '../../utils/setData'
+import { GlobalSecondaryTitle } from 'components/Global/GlobalSecondaryTitle'
+import { ModifyButton } from 'components/Global/ModifyButton'
 
 /*****************************************************************************************
 	
@@ -86,7 +88,7 @@ export const SheetsAdditionalButtons = ({
 
   return (
     <div>
-      {/*       <GlobalSecondaryTitle>{sheetsTitle}</GlobalSecondaryTitle>
+      <GlobalSecondaryTitle>{sheetsTitle}</GlobalSecondaryTitle>
       <>
         {!archive && (
           <ModifyButton
@@ -95,7 +97,7 @@ export const SheetsAdditionalButtons = ({
             extraClass={buttonIcon}
           />
         )}
-      </> */}
+      </>
     </div>
   )
 }
