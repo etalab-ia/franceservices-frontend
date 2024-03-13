@@ -7,7 +7,6 @@ type Error404Props = {
 }
 
 export function ShowError({ title, message, errorNumber }: Error404Props) {
-  console.log('error')
   return (
     <div className="fr-my-7w fr-mt-md-12w fr-mb-md-10w fr-grid-row fr-grid-row--gutters fr-grid-row--middle fr-grid-row--center">
       <div className="fr-py-0 fr-col-12 fr-col-md-6">

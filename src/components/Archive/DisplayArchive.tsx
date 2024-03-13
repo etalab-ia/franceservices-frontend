@@ -1,4 +1,4 @@
-import { useAlbert } from '@api'
+import { useGetArchive } from '@api'
 import { Button } from '@codegouvfr/react-dsfr/Button'
 import { Chat, UserHistory } from '@types'
 import React from 'react'
@@ -30,17 +30,24 @@ export const DisplayArchive = React.forwardRef<HTMLDivElement, DisplayArchivePro
       setArchiveTab(null)
     }
     window.addEventListener('popstate', () => {})
-    const { getArchive } = useAlbert()
-    const { data: archive, error, isLoading } = getArchive(selectedChat.id)
 
+    const { data: archive, error, isLoading, isError } = useGetArchive(selectedChat.id)
+    console.log('archive', archive)
     if (isLoading) return <div></div>
-    if (error || !archive)
+    if (isError || !archive || !archive.length) {
       return (
         <ShowError
-          title={`Erreur ${error.cause.status!}`}
+          title={`Erreur ${
+            error && error.cause
+              ? error.cause.status
+              : !archive.length
+                ? "l'archive est vide"
+                : ''
+          }`}
           message={`Nous n'avons pas trouvé de messages associés au chat numéro ${selectedChat.id}`}
         />
       )
+    }
     return (
       <>
         <div className="fr-mb-4w">
