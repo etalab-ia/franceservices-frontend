@@ -1,4 +1,4 @@
-import { thankFeedback, thankFeedbackRole } from '../../constants/feedback'
+import { thankFeedback, thankFeedbackRole } from '@constants/feedback'
 
 export function FeedbackThanksMessage() {
   return (

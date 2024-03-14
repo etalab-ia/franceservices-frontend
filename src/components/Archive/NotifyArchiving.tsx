@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { RootState } from '@types'
-import { archiveNotificationRole } from '../../constants/archive'
-import { notifyArchiving } from '../../constants/chatbotProps'
+import { archiveNotificationRole } from '@constants/archive'
+import { notifyArchiving } from '@constants/chatbotProps'
 
 export function NotifyArchiving() {
   const user = useSelector((state: RootState) => state.user)

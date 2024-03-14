@@ -6,9 +6,9 @@ import { useSelector } from 'react-redux'
 import {
   meetingAppointmentInformations,
   meetingAppointmentTitle,
-} from '../../constants/meeting'
-import { CurrQuestionContext } from '../../utils/context/questionContext'
-import { rmContextFromQuestion } from '../../utils/setData'
+} from '@constants/meeting'
+import { CurrQuestionContext } from '@utils/context/questionContext'
+import { rmContextFromQuestion } from '@utils/setData'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { UsefulLinks } from './UsefulLinks'
@@ -41,19 +41,19 @@ export function MeetingOutputs() {
     <div className="ft-container ">
       <div className="fr-mb-5w ">
         <h2 className="fr-my-2w">{meetingAppointmentTitle}</h2>
-        <h5>{meetingAppointmentInformations}</h5>
+        {/*         <h5>{meetingAppointmentInformations}</h5>
         <GlobalParagraph extraClass="fr-background-alt--blue-france fr-p-2w">
           {query}
-        </GlobalParagraph>
+        </GlobalParagraph> */}
       </div>
-      {user.history.length > 0 && (
+      {/*       {user.history.length > 0 && (
         <DisplayResponse
           chunks={user.history[0].chunks}
           response={user.history[0].response}
           webservices={user.history[0].webservices}
         />
-      )}
-      <History history={user.history.slice(1)} />
+      )} */}
+      <History history={user.history} />
       <MeetingCurrentResponse />
     </div>
   )
@@ -63,17 +63,25 @@ export function MeetingOutputs() {
  * Display a list of accordion, each one contains a user query and the bot's response with sources and useful links
  */
 export function History({ history }: { history: UserHistory[] }) {
+  const [openedAccordion, setOpenedAccordion] = useState(-1)
   return (
     <div className="fr-mt-5w">
       {history.map((h, index) => (
         <div className="fr-mb-1w " key={index}>
-          <h3 className="fr-background-alt--blue-france text-ellipsis">
+          <h3 className="fr-background-alt--blue-france">
             <button
-              className="fr-accordion__btn text-black text-ellipsis"
+              className="fr-accordion__btn text-black "
               aria-expanded="false"
               aria-controls={`history-${index}`}
+              onClick={() => setOpenedAccordion((prev) => (prev === -1 ? index : -1))}
             >
-              <p className="text-ellipsis overflow-hidden whitespace-nowrap block">
+              <p
+                className={`${
+                  openedAccordion === index
+                    ? ''
+                    : 'text-ellipsis overflow-hidden whitespace-nowrap block'
+                } fr-text--lg`}
+              >
                 {h.query}
               </p>
             </button>
@@ -143,7 +151,7 @@ export function DisplaySourceCards({ chunks }: { chunks: Chunk[] }) {
   return (
     <>
       <div className="fr-grid-row fr-col-12 justify-between fr-mt-1w items-center w-full ">
-        <h3 className=" fr-mb-3v">Sources utilisées pour générer la réponses</h3>
+        <h3 className=" fr-mb-3v">Sources utilisées pour générer la réponse</h3>
         <Pagination
           count={Math.ceil(chunks.length / 3)}
           defaultPage={currentPage}

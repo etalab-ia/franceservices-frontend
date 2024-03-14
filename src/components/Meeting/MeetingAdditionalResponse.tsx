@@ -6,7 +6,7 @@ import { UsefulLinks } from './UsefulLinks'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getIndexes } from 'utils/setData'
-import { indexesUrl } from 'constants/api'
+import { indexesUrl } from '@api'
 import { emitCloseStream } from 'utils/eventsEmitter'
 
 /*****************************************************************************************

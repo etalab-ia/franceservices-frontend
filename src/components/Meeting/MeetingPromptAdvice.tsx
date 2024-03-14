@@ -1,14 +1,5 @@
+import { meetingInputGuidelines, meetingPromptExamples } from '@constants/meeting'
 import { useState } from 'react'
-import {
-  meetingExamplesTitle,
-  meetingInputGuidelines,
-  meetingPromptExamples,
-} from '../../constants/meeting'
-import { GlobalColContainer } from '../Global/GlobalColContainer'
-import { GlobalParagraph } from '../Global/GlobalParagraph'
-import { GlobalRowContainer } from '../Global/GlobalRowContainer'
-import thumbsDown from '../../../icons/feedbacks/thumbsDown.svg'
-import thumbsUp from '../../../icons/feedbacks/thumbsUp.svg'
 
 /*
  * Advices and examples of good and bad prompts
@@ -24,11 +15,16 @@ export function MeetingPromptAdvice() {
     <>
       <div>{meetingInputGuidelines}</div>
       <div className={'flex '} onClick={handleToggleAll}>
-        {meetingExamplesTitle}
+        <p
+          className="fr-text-mention--grey fr-text--xs hover:cursor-pointer "
+          style={{ margin: 0, padding: 0 }}
+        >
+          Voir des exemples
+        </p>
         <span
           className={`fr-text-mention--grey fr-icon--sm fr-icon-arrow-${
             isAccordionOpen ? 'up' : 'down'
-          }-s-line fr-my-1v`}
+          }-s-line fr-my-1v hover:cursor-pointer`}
         ></span>
       </div>
       {meetingPromptExamples.map((ex, index) => (

@@ -1,5 +1,5 @@
 import { Input } from '@codegouvfr/react-dsfr/Input'
-import { askingReasons, feedbackAdditionalInput } from '../../constants/feedback'
+import { askingReasons, feedbackAdditionalInput } from '@constants/feedback'
 
 /**
  * This is the free input from feedback, it allows the user to type in any reason for a good/bad feedback
