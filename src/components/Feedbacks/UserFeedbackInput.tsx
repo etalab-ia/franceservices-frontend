@@ -4,7 +4,7 @@ import {
   askingQualityPrecisions,
   primaryButtons,
   secondaryButtons,
-} from '../../constants/feedback'
+} from '@constants/feedback'
 import { UserFeedbackOptions } from './UserFeedbackOptions'
 import { UserFeedbackResume } from './UserFeedbackResume'
 import { FeedbackThanksMessage } from './FeedbackThanksMessage'

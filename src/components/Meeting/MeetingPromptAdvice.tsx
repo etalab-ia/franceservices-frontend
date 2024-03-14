@@ -3,7 +3,7 @@ import {
   meetingExamplesTitle,
   meetingInputGuidelines,
   meetingPromptExamples,
-} from '../../constants/meeting'
+} from '@constants/meeting'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'

@@ -3,7 +3,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, Question, RootState } from '../types'
 import { onCloseStream } from './eventsEmitter'
 import { setHeaders, setUserQuestion } from './setData'
-import { streamUrl } from '../constants/api'
+import { streamUrl } from '@api'
 
 export const useAppDispatch: () => AppDispatch = useDispatch
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector

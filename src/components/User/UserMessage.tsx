@@ -2,10 +2,10 @@ import { SearchBar } from '@codegouvfr/react-dsfr/SearchBar'
 import { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@types'
-import { chatUrl } from '../../constants/api'
-import { CurrQuestionContext } from '../../utils/context/questionContext'
-import { generateStream, useFetch } from '../../utils/hooks'
-import { setHeaders } from '../../utils/setData'
+import { chatUrl } from '@api'
+import { CurrQuestionContext } from '@utils/context/questionContext'
+import { generateStream, useFetch } from '@utils/hooks'
+import { setHeaders } from '@utils/setData'
 
 /*
  **

@@ -1,9 +1,9 @@
 import Button from '@codegouvfr/react-dsfr/Button'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { UserAuth } from 'utils/auth'
-import { contactUrl } from '../../constants/api'
-import { useFetch } from '../../utils/hooks'
-import { setContactData, setHeaders } from '../../utils/setData'
+import { contactUrl } from '@api'
+import { useFetch } from '@utils/hooks'
+import { setContactData, setHeaders } from '@utils/setData'
 import { ButtonInformation } from '../Global/ButtonInformation'
 
 interface ContactButtonProps {

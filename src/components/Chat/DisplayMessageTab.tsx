@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import next from '../../../icons/usertools/next.svg'
 import previous from '../../../icons/usertools/previous.svg'
-import { nextImgDescription, previousImgDescription } from '../../constants/chatbotProps'
+import { nextImgDescription, previousImgDescription } from '@constants/chatbotProps'
 
 export function DisplayMessageTab({
   isDisplayable,

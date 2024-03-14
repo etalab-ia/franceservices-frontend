@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { InitialQuestion } from '../types'
 import { DisplayChatTab } from '../components/Chat/DisplayChatTab'
-import { CurrQuestionContext } from '../utils/context/questionContext'
-import { emitCloseStream } from '../utils/eventsEmitter'
+import { CurrQuestionContext } from '@utils/context/questionContext'
+import { emitCloseStream } from '@utils/eventsEmitter'
 
 // TODO WHEN BACK IS READY: change archive type
 export function Chatbot({ archive }: { archive: boolean }) {

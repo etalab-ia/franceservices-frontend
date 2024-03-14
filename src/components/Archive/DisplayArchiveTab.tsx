@@ -1,7 +1,7 @@
 import { Chat } from '@types'
 import { useEffect, useRef, useState } from 'react'
-import { getChatsUrl } from '../../constants/api'
-import { useFetch } from '../../utils/hooks'
+import { getChatsUrl } from '@api'
+import { useFetch } from '@utils/hooks'
 import { ArchiveList } from './ArchiveList'
 import { DisplayArchive } from './DisplayArchive'
 

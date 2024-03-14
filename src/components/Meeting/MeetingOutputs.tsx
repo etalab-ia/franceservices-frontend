@@ -6,9 +6,9 @@ import { useSelector } from 'react-redux'
 import {
   meetingAppointmentInformations,
   meetingAppointmentTitle,
-} from '../../constants/meeting'
-import { CurrQuestionContext } from '../../utils/context/questionContext'
-import { rmContextFromQuestion } from '../../utils/setData'
+} from '@constants/meeting'
+import { CurrQuestionContext } from '@utils/context/questionContext'
+import { rmContextFromQuestion } from '@utils/setData'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { UsefulLinks } from './UsefulLinks'

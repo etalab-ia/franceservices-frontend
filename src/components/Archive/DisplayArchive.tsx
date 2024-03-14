@@ -6,10 +6,9 @@ import ReactToPrint from 'react-to-print'
 import {
   meetingAppointmentInformations,
   meetingAppointmentTitle,
-} from '../../constants/meeting'
+} from '@constants/meeting'
 import ShowError from '../Error/ShowError'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
-import { GlobalSubtitle } from '../Global/GlobalSubtitle'
 import { GlobalTitle } from '../Global/GlobalTitle'
 import { DisplayResponse, History } from '../Meeting/MeetingOutputs'
 
