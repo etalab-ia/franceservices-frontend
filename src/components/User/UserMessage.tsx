@@ -2,10 +2,10 @@ import { SearchBar } from '@codegouvfr/react-dsfr/SearchBar'
 import { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@types'
-import { chatUrl } from '../../constants/api'
-import { CurrQuestionContext } from '../../utils/context/questionContext'
-import { generateStream, useFetch } from '../../utils/hooks'
-import { setHeaders } from '../../utils/setData'
+import { chatUrl } from '@api'
+import { CurrQuestionContext } from '@utils/context/questionContext'
+import { generateStream, useFetch } from '@utils/hooks'
+import { setHeaders } from '@utils/setData'
 
 /*
  **
@@ -48,6 +48,7 @@ export function UserMessage({ setGenerate }) {
       type: 'SET_MESSAGES',
       nextMessage: { text: questionInput, sender: 'user' },
     })
+    setQuestionInput('')
     setGenerate(true)
   }
 
@@ -60,7 +61,6 @@ export function UserMessage({ setGenerate }) {
     if (!user.question.query.length || !user.chatId) return
 
     generateStream(user.question, dispatch, user.chatId, true)
-    dispatch({ type: 'RESET_FEEDBACK' })
   }, [user.question])
 
   const handleRenderInput = (params) => {

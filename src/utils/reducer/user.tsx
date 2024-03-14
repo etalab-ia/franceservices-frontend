@@ -7,7 +7,7 @@ import {
   Chunk,
   WebService,
 } from '@types'
-import { initialChatbotMessage } from '../../constants/chatbotProps'
+import { initialChatbotMessage } from '@constants/chatbotProps'
 
 /*****************************************************************************************************
 	

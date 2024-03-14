@@ -2,14 +2,14 @@ import { useContext } from 'react'
 import { GlobalDiv } from '../components/Global/GlobalDiv'
 import { GlobalTitle } from '../components/Global/GlobalTitle'
 import { HomeTiles } from '../components/Home/HomeTiles'
-import { ressourcesTitle, toolsTitle } from '../constants/home'
+import { ressourcesTitle, toolsTitle } from '@constants/home'
 import {
   MFSressourcesTiles,
   MFStoolsTiles,
   generalistRessourcesTiles,
   toolsTiles,
-} from '../constants/inputFields'
-import { isMFSContext } from '../utils/context/isMFSContext'
+} from '@constants/inputFields'
+import { isMFSContext } from '@utils/context/isMFSContext'
 
 export function Home() {
   const isMFS = useContext(isMFSContext)

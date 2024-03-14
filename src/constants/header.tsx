@@ -1,4 +1,4 @@
-import { handleSignout } from '../utils/manageConnexion'
+import { handleSignout } from '@utils/manageConnexion'
 
 export function quickAccessItemsFunc(userAuth, setUserAuth, signoutUrl) {
   const quickAccessItemsProps = [

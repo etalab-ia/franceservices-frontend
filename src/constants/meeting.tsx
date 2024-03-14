@@ -51,11 +51,6 @@ export const meetingInputGuidelines = (
   </>
 )
 
-export const meetingExamplesTitle = (
-  <p className="fr-text-mention--grey fr-text--xs" style={{ margin: 0 }}>
-    Voir des exemples
-  </p>
-)
 export const meetingPromptExamples = [
   {
     img: thumbsUp,
