@@ -60,7 +60,6 @@ export function UserMessage({ setGenerate }) {
     if (!user.question.query.length || !user.chatId) return
 
     generateStream(user.question, dispatch, user.chatId, true)
-    dispatch({ type: 'RESET_FEEDBACK' })
   }, [user.question])
 
   const handleRenderInput = (params) => {
