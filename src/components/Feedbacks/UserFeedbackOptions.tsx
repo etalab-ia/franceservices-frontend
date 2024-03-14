@@ -1,15 +1,13 @@
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Feedback as FeedbackType, RootState } from '@types'
-import { feedbackUrl } from '@api'
+import { useAddFeedback } from '@api'
 import {
   feedbackConfirmationButton,
   satisfiedButtons,
   unsatisfiedButtons,
 } from '@constants/feedback'
-import { useFetch } from '@utils/hooks'
+import { Feedback as FeedbackType, RootState } from '@types'
 import { useKeyPress } from '@utils/manageEffects'
-import { setHeaders } from '@utils/setData'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { ButtonsOptions } from './ButtonsOptions'
 import { InputOption } from './InputOption'
@@ -80,6 +78,8 @@ export function UserFeedbackOptions({
 //TODO: Send the full reasons array to the backend when back is ready
 const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) => {
   const streamId = useSelector((state: RootState) => state.user.lastStreamId)
+  const { refetch } = useAddFeedback(feedback, streamId, reasons) // We must use refetch so we can call it inside onClick
+
   const handleConfirm = () => {
     otherReason &&
       !reasons.includes(otherReason) &&
@@ -87,17 +87,7 @@ const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) => 
         ...feedback,
         message: otherReason,
       })
-
-    const data = {
-      is_good: !feedback.isGood ? true : false,
-      message: feedback.message,
-      reason: reasons[0],
-    }
-    useFetch(`${feedbackUrl}/${streamId}`, 'POST', {
-      data: JSON.stringify(data),
-      headers: setHeaders(false),
-    })
-
+    refetch()
     setFeedback({
       ...feedback,
       isConfirmed: true,
