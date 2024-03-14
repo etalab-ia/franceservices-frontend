@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Feedback as FeedbackType, RootState } from '@types'
-import { feedbackUrl } from '../../constants/api'
+import { feedbackUrl } from '@api'
 import {
   feedbackConfirmationButton,
   satisfiedButtons,
   unsatisfiedButtons,
-} from '../../constants/feedback'
-import { useFetch } from '../../utils/hooks'
-import { useKeyPress } from '../../utils/manageEffects'
-import { setHeaders } from '../../utils/setData'
+} from '@constants/feedback'
+import { useFetch } from '@utils/hooks'
+import { useKeyPress } from '@utils/manageEffects'
+import { setHeaders } from '@utils/setData'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { ButtonsOptions } from './ButtonsOptions'
 import { InputOption } from './InputOption'

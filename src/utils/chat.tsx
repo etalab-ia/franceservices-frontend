@@ -1,7 +1,7 @@
 import copy from '../../icons/usertools/copy.svg'
 import redo from '../../icons/usertools/redo.svg'
-import { useApiUrls } from '../constants/api'
-import { NOT_SET } from '../constants/status'
+import { useApiUrls } from '@api'
+import { NOT_SET } from '@constants/status'
 import { generateStream } from './hooks'
 import { setQuestionFromRegeneration } from './setData'
 

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
-import { CurrQuestionContext } from '../../utils/context/questionContext'
-import { updateQuestion } from '../../utils/setData'
+import { CurrQuestionContext } from '@utils/context/questionContext'
+import { updateQuestion } from '@utils/setData'
 import { GlobalDiv } from '../Global/GlobalDiv'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { MeetingInputFields } from './MeetingInputFields'

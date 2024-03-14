@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { RootState } from '@types'
-import { askingQuality, redoAskingQuality } from '../../constants/feedback'
+import { askingQuality, redoAskingQuality } from '@constants/feedback'
 import { Avatar } from '../Chat/Avatar'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { Feedback } from './Feedback'

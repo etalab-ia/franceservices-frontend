@@ -1,11 +1,11 @@
 import { Button } from '@codegouvfr/react-dsfr/Button'
 import { useContext } from 'react'
-import { defaultButtonChoice } from '../../constants/chatbotProps'
+import { defaultButtonChoice } from '@constants/chatbotProps'
 import {
   defaultInputFields,
   meetingDefaultQuestionsIntroduction,
-} from '../../constants/meeting'
-import { CurrQuestionContext } from '../../utils/context/questionContext'
+} from '@constants/meeting'
+import { CurrQuestionContext } from '@utils/context/questionContext'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 
 export function MeetingDefaultQuestions({ setContext }) {

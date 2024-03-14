@@ -1,12 +1,16 @@
+import { signoutUrl, userUrl } from '@api'
 import { Badge } from '@codegouvfr/react-dsfr/Badge'
 import { headerFooterDisplayItem } from '@codegouvfr/react-dsfr/Display'
 import { Footer } from '@codegouvfr/react-dsfr/Footer'
 import { Header } from '@codegouvfr/react-dsfr/Header'
+import { quickAccessItemsFunc } from '@constants/header'
+import { navFunc } from '@constants/router'
+import { InitialUserAuth, UserAuth } from '@utils/auth'
+import { isMFSContext } from '@utils/context/isMFSContext'
+import { useAppDispatch } from '@utils/hooks'
+import { checkConnexion } from '@utils/localStorage'
 import { useContext, useEffect, useState } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { signoutUrl, userUrl } from '../constants/api'
-import { quickAccessItemsFunc } from '../constants/header'
-import { navFunc } from '../constants/router'
 import Error404 from '../pages/404'
 import { Chatbot } from '../pages/Chatbot'
 import { Contact } from '../pages/Contact'
@@ -18,10 +22,6 @@ import { Meeting } from '../pages/Meeting'
 import { NewPassword } from '../pages/NewPassword'
 import { ResetPassword } from '../pages/ResetPassword'
 import { Signup } from '../pages/Signup'
-import { InitialUserAuth, UserAuth } from '../utils/auth'
-import { isMFSContext } from '../utils/context/isMFSContext'
-import { useAppDispatch } from '../utils/hooks'
-import { checkConnexion } from '../utils/localStorage'
 
 export const Root = () => {
   const navigationData = navFunc()
@@ -87,7 +87,7 @@ export const Root = () => {
               !userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />
             }
           />
-        )}{' '}
+        )}
         {isMFS ? (
           <Route
             path="/meeting"

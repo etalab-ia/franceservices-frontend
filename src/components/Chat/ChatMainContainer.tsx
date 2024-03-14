@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@types'
-import { scrollToBottom } from '../../utils/manageEffects'
+import { scrollToBottom } from '@utils/manageEffects'
 import { UserMessage } from '../User/UserMessage'
 import { ChatHeightContainer } from './ChatHeightContainer'
 import { ChatOverflowManagementContainer } from './ChatOverflowManagementContainer'

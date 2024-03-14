@@ -5,7 +5,9 @@
     "baseUrl": "src", // This sets your project root as the base directory
     "paths" : {
       "@types": ["./types.ts"],
-      "@api": ["./constants/api.ts"]
+      "@api": ["./api"],
+      "@utils/*": ["./utils/*"],
+      "@constants/*" : ["./constants/*"]
     },
     /* Projects */
     // "incremental": true,                              /* Save .tsbuildinfo files to allow for incremental compilation of projects. */

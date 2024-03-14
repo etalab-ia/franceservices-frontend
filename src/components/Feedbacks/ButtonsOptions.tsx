@@ -2,7 +2,7 @@ import {
   feedbackButtonsChoice,
   satisfiedButtons,
   unsatisfiedButtons,
-} from '../../constants/feedback'
+} from '@constants/feedback'
 
 export function ButtonsOptions({
   isFirst,
