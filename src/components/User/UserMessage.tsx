@@ -48,6 +48,7 @@ export function UserMessage({ setGenerate }) {
       type: 'SET_MESSAGES',
       nextMessage: { text: questionInput, sender: 'user' },
     })
+    setQuestionInput('')
     setGenerate(true)
   }
 
