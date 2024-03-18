@@ -63,6 +63,7 @@ export function NewQuestionInput({
 
     setQuestionInput(e.target.value)
   }
+  console.log('histo', user.history)
 
   useEffect(() => {
     emitCloseStream()
@@ -81,13 +82,11 @@ export function NewQuestionInput({
         webservices: user.webservices,
       },
     })
-
+    console.log('histo2', user.history)
     dispatch({
       type: 'SET_USER_QUERY',
-      nextUserQuery: concatQueries(
-        addContextToQuestion(questionInput, context),
-        user.history
-      ),
+      nextUserQuery: addContextToQuestion(questionInput, context),
+
       nextChatId: user.chatId,
     })
     stream.historyStream.length &&
