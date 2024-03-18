@@ -16,7 +16,7 @@
 
     "push-patch": "npm version patch && git push",
     "push-minor": "npm version minor && git push",
-    "push-major": "npm version major && git push" 
+    "push-major": "npm version major && git push"  
   },
   "dependencies": {
     "@codegouvfr/react-dsfr": "^1.0.4",
