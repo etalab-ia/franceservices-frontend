@@ -5,16 +5,18 @@ export function concatQueries(
   previousQueries: UserHistory[]
 ): string {
   let result = ''
+  if (!previousQueries.length) return currentQuery
+  for (let i = previousQueries.length; i > 0; i--) {
+    console.log('lengt', previousQueries.length)
+    console.log('concatQueries', i, previousQueries)
 
-  for (let i = previousQueries.length - 1; i >= 0; i--) {
-    //console.log('concatQueries', i, previousQueries[i].query)
-    if (i === previousQueries.length - 1) {
-      if (previousQueries[i].query.length + currentQuery.length + 1 > 12500)
+    if (i === previousQueries.length) {
+      if (previousQueries[i - 1].query.length + currentQuery.length + 1 > 12500)
         return currentQuery
-      result = previousQueries[i].query + '\n' + currentQuery
+      result = previousQueries[i - 1].query + '\n' + currentQuery
     } else {
-      if (previousQueries[i].query.length + result.length + 1 > 12500) return result
-      result = previousQueries[i].query + '\n' + result
+      if (previousQueries[i - 1].query.length + result.length + 1 > 12500) return result
+      result = previousQueries[i - 1].query + '\n' + result
     }
   }
   return result
