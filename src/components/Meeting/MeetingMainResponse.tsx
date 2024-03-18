@@ -14,6 +14,7 @@ import { MeetingStream } from './MeetingStream'
 import { MeetingTags } from './MeetingTags'
 import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
 import Separator from 'components/Global/Separator'
+import { concatQueries } from '@utils/concatQueries'
 /*****************************************************************************************************
 	
 	COMPONENTS:
@@ -83,7 +84,10 @@ export function NewQuestionInput({
 
     dispatch({
       type: 'SET_USER_QUERY',
-      nextUserQuery: addContextToQuestion(questionInput, context),
+      nextUserQuery: concatQueries(
+        addContextToQuestion(questionInput, context),
+        user.history
+      ),
       nextChatId: user.chatId,
     })
     stream.historyStream.length &&
