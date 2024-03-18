@@ -42,6 +42,14 @@ export function MeetingAdditionalResponse() {
       JSON.stringify(user.streamId),
       indexesUrl
     )
+    getIndexes(
+      data,
+      dispatch,
+      'sheets',
+      user.question.limit,
+      JSON.stringify(user.streamId),
+      indexesUrl
+    )
   }, [user.streamId, user.question])
   return (
     <OneThirdScreenWidth extraClass="fr-mt-5w">
