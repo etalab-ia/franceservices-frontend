@@ -10,7 +10,7 @@ export function useGetArchive(chatId: number) {
   })
 }
 
-const fetchArchive = async (chatId: number): Promise<any> => {
+const fetchArchive = async (chatId: number) => {
   const authToken = localStorage.getItem('authToken')
   const response = await fetch(`${getStreamsUrl}/${chatId}`, {
     headers: {

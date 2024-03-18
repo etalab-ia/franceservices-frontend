@@ -101,7 +101,7 @@ export const meetingPromptExamples = [
 export const meetingContextualInfosTitle = `Informations contextuelles`
 export const meetingGenerateButton = `Générer la fiche rendez-vous`
 export const meetingAppointmentInformations = `Votre question sur la situation de l’usager`
-export const meetingAppointmentTitle = 'Fiche rendez-vous'
+export const meetingAppointmentTitle = 'Échanger avec Albert'
 
 export const meetingDefaultQuestionsIntroduction = (
   <GlobalRowContainer>

@@ -1,13 +1,12 @@
-import Button from '@codegouvfr/react-dsfr/Button'
-import { useContext, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { chatUrl } from '@api'
+import Button from '@codegouvfr/react-dsfr/Button'
 import { meetingGenerateButton } from '@constants/meeting'
-import { CurrQuestionContext } from '@utils/context/questionContext'
-import { generateStream, useFetch } from '@utils/hooks'
-import { setHeaders, addContextToQuestion } from '@utils/setData'
 import { MeetingInputContext, RootState } from '@types'
-import { emitCloseStream } from 'utils/eventsEmitter'
+import { CurrQuestionContext } from '@utils/context/questionContext'
+import { useFetch } from '@utils/hooks'
+import { addContextToQuestion, setHeaders } from '@utils/setData'
+import { useContext } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 /**
 	Button to send user query to /stream endpoint & switch to meeting stream page

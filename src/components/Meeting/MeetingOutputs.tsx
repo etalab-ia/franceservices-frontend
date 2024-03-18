@@ -14,18 +14,18 @@ import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { UsefulLinks } from './UsefulLinks'
 
 /*****************************************************************************************************
-	Displays Albert's response and the modify button
-  Archive is undefined when the user is not on an archive
+    Displays Albert's response and the modify button
+    Archive is undefined when the user is not on an archive
 
-	GENERAL: display:
-		- main informations: user prompt, stream response, response explanation / chunks
-		- additional informations: sheets, related questions, webservices
+    GENERAL: display:
+      - main informations: user prompt, stream response, response explanation / chunks
+      - additional informations: sheets, related questions, webservices
 
-	-----------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------
 
-	**	archive: meeting page is not editable when the user is on an archive
+    **	archive: meeting page is not editable when the user is on an archive
 
- *****************************************************************************************************/
+  *****************************************************************************************************/
 
 export function MeetingOutputs() {
   const { currQuestion } = useContext(CurrQuestionContext)
@@ -42,17 +42,17 @@ export function MeetingOutputs() {
       <div className="fr-mb-5w ">
         <h2 className="fr-my-2w">{meetingAppointmentTitle}</h2>
         {/*         <h5>{meetingAppointmentInformations}</h5>
-        <GlobalParagraph extraClass="fr-background-alt--blue-france fr-p-2w">
-          {query}
-        </GlobalParagraph> */}
+          <GlobalParagraph extraClass="fr-background-alt--blue-france fr-p-2w">
+            {query}
+          </GlobalParagraph> */}
       </div>
       {/*       {user.history.length > 0 && (
-        <DisplayResponse
-          chunks={user.history[0].chunks}
-          response={user.history[0].response}
-          webservices={user.history[0].webservices}
-        />
-      )} */}
+          <DisplayResponse
+            chunks={user.history[0].chunks}
+            response={user.history[0].response}
+            webservices={user.history[0].webservices}
+          />
+        )} */}
       <History history={user.history} />
       <MeetingCurrentResponse />
     </div>
