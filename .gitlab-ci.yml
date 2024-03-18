@@ -42,7 +42,6 @@ build:front:dinum:
       name: dinum
   rules:
     - if: $CI_COMMIT_BRANCH == "staging" || $CI_COMMIT_BRANCH == "main"
-      when: manual
       allow_failure: true  # to avoid blocked state
   stage: build
   image: docker:latest
@@ -64,7 +63,6 @@ deploy:front:dinum:
     name: dinum
   rules:
     - if: $CI_COMMIT_BRANCH == "staging" || $CI_COMMIT_BRANCH == "main"
-      when: manual
       allow_failure: true  # to avoid blocked state
   stage: deploy
   image: alpine:latest
@@ -88,7 +86,6 @@ build:front:france services:
       name: franceservices
   rules:
     - if: $CI_COMMIT_BRANCH == "staging" || $CI_COMMIT_BRANCH == "main"
-      when: manual
       allow_failure: true  # to avoid blocked state
   stage: build
   image: docker:latest
@@ -110,7 +107,6 @@ deploy:front:france services:
     name: franceservices
   rules:
     - if: $CI_COMMIT_BRANCH == "staging" || $CI_COMMIT_BRANCH == "main"
-      when: manual
       allow_failure: true  # to avoid blocked state
   stage: deploy
   image: alpine:latest
