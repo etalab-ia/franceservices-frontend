@@ -8,6 +8,7 @@ import { useEffect } from 'react'
 import { getIndexes } from 'utils/setData'
 import { indexesUrl } from '@api'
 import { emitCloseStream } from 'utils/eventsEmitter'
+import { concatQueries } from '@utils/concatQueries'
 
 /*****************************************************************************************
 	
@@ -31,7 +32,7 @@ export function MeetingAdditionalResponse() {
     if (!user.streamId) return
 
     const data = {
-      question: user.question.query,
+      question: concatQueries(user.question.query, user.history),
       must_not_sids: user.question.must_not_sids,
     }
     getIndexes(
