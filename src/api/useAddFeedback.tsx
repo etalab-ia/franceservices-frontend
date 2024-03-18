@@ -1,16 +1,21 @@
 import { feedbackUrl } from '@api'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { Chat, Feedback } from '@types'
 
-export function useAddFeedback(feedback: Feedback, streamId: number, reasons: string[]) {
-  return useQuery({
-    queryKey: ['addFeedback'],
-    queryFn: () => addFeedback(feedback, streamId, reasons),
-    enabled: false,
+export function useAddFeedback() {
+  return useMutation({
+    mutationKey: ['addFeedback'],
+    mutationFn: (params: AddFeedbackParams) => addFeedback(params),
   })
 }
 
-const addFeedback = async (feedback: Feedback, streamId: number, reasons: string[]) => {
+interface AddFeedbackParams {
+  feedback: Feedback
+  streamId: number
+  reasons: string[]
+}
+
+const addFeedback = async ({ feedback, streamId, reasons }: AddFeedbackParams) => {
   const authToken = localStorage.getItem('authToken')
   const data = {
     is_good: !feedback.isGood ? true : false,
