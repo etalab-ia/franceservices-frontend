@@ -11,7 +11,7 @@
     "prebuild": "only-include-used-icons",
     "format": "npx @biomejs/biome format . --write",
     "prepare": "husky install",
-    "ts-coverage": "typescript-coverage-report",
+    "ts-coverage": "typescript-coverage-report", 
     "knip": "knip",
 
     "push-patch": "npm version patch && git push",
