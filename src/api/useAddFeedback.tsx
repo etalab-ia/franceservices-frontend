@@ -10,11 +10,7 @@ export function useAddFeedback(feedback: Feedback, streamId: number, reasons: st
   })
 }
 
-const addFeedback = async (
-  feedback: Feedback,
-  streamId: number,
-  reasons: string[]
-): Promise<any> => {
+const addFeedback = async (feedback: Feedback, streamId: number, reasons: string[]) => {
   const authToken = localStorage.getItem('authToken')
   const data = {
     is_good: !feedback.isGood ? true : false,

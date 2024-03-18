@@ -26,28 +26,40 @@ export function UserMessage({ setGenerate }) {
 
   const handleClick = async () => {
     updateCurrQuestion({ ...currQuestion, query: questionInput })
-    const headers = setHeaders(false)
-    const chat_data = { chat_type: 'qa' }
-    const chat = await useFetch(chatUrl, 'POST', {
-      data: JSON.stringify(chat_data),
-      headers,
-    })
-    dispatch({ type: 'SET_CHAT_ID', nextChatId: chat.id })
+
+    let chatId = user.chatId
+
+    if (user.chatId === 0) {
+      const headers = setHeaders(false)
+      const chat_data = { chat_type: 'qa' }
+      const chat = await useFetch(chatUrl, 'POST', {
+        data: JSON.stringify(chat_data),
+        headers,
+      })
+      chatId = chat.id
+      dispatch({ type: 'SET_CHAT_ID', nextChatId: chatId })
+    }
+
     dispatch({
       type: 'SET_USER_QUERY',
       nextUserQuery: questionInput,
-      nextChatId: chat.id,
+      nextChatId: chatId, // Use the updated chatId here
     })
-    stream.historyStream.length &&
+
+    if (stream.historyStream.length) {
       dispatch({
         type: 'SET_MESSAGES',
         nextMessage: { text: stream.historyStream, sender: 'agent' },
       })
+    }
+
     dispatch({ type: 'RESET_STREAM_HISTORY' })
+
     dispatch({
       type: 'SET_MESSAGES',
       nextMessage: { text: questionInput, sender: 'user' },
     })
+
     setQuestionInput('')
     setGenerate(true)
   }

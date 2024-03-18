@@ -25,6 +25,7 @@ export function ChatMainContainer({
   const dispatch = useDispatch()
 
   useEffect(() => {
+    console.log('resetuser', user.chatId)
     !archive && dispatch({ type: 'RESET_USER' })
   }, [])
 
@@ -42,7 +43,7 @@ export function ChatMainContainer({
           <Display messages={user.messages} archive={false} />
         )}
       </ChatOverflowManagementContainer>
-      {!archive && <UserMessage setGenerate={setGenerate} chatType={'qa'} />}{' '}
+      {!archive && <UserMessage setGenerate={setGenerate} />}{' '}
       {/* Display input if not in archive */}
     </ChatHeightContainer>
   )
