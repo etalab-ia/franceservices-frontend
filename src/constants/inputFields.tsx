@@ -77,7 +77,7 @@ export const MFStoolsTiles = [
     desc: 'Accéder',
     linkProps: { to: '/history' },
     imageUrl: question,
-    title: 'Mes fiches rendez-vous',
+    title: 'Mon historique',
   },
 ]
 
