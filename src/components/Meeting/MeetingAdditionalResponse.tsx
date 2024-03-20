@@ -1,15 +1,11 @@
-import { ArchiveType, RootState } from '@types'
+import { indexesUrl } from '@api'
+import { RootState } from '@types'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getIndexes } from 'utils/setData'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { OneThirdScreenWidth } from '../Global/OneThirdScreenWidth'
-import { DisplaySheets } from '../Sheets/DisplaySheets'
 import { UsefulLinks } from './UsefulLinks'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import { getIndexes, setHeaders } from 'utils/setData'
-import { indexesUrl, streamUrl } from '@api'
-import { emitCloseStream } from 'utils/eventsEmitter'
-import { concatQueries } from '@utils/concatQueries'
-import { useFetch } from '@utils/hooks'
 
 /*****************************************************************************************
 	
@@ -33,7 +29,7 @@ export function MeetingAdditionalResponse() {
     if (!user.streamId) return
 
     const data = {
-      question: concatQueries(user.question.query, user.history),
+      question: user.question.query,
       must_not_sids: user.question.must_not_sids,
     }
     getIndexes(
@@ -52,17 +48,6 @@ export function MeetingAdditionalResponse() {
       JSON.stringify(user.streamId),
       indexesUrl
     )
-    const token = localStorage.getItem('authToken')
-    const test = useFetch(`${streamUrl}/${user.streamId}`, 'GET', {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-
-      data: null,
-    })
-
-    console.log('test', test)
   }, [user.streamId, user.question])
   return (
     <OneThirdScreenWidth extraClass="fr-mt-5w">
