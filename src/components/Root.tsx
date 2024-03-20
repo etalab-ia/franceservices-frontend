@@ -10,7 +10,7 @@ import { isMFSContext } from '@utils/context/isMFSContext'
 import { useAppDispatch } from '@utils/hooks'
 import { checkConnexion } from '@utils/localStorage'
 import { useContext, useEffect, useState } from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Error404 from '../pages/404'
 import { Chatbot } from '../pages/Chatbot'
 import { Contact } from '../pages/Contact'
@@ -24,6 +24,7 @@ import { ResetPassword } from '../pages/ResetPassword'
 import { Signup } from '../pages/Signup'
 
 export const Root = () => {
+  const location = useLocation()
   const navigationData = navFunc()
   const [userAuth, setUserAuth] = useState<UserAuth>(InitialUserAuth)
   const [authFailed, setAuthFailed] = useState(false)
@@ -175,13 +176,15 @@ export const Root = () => {
         />
         <Route path="*" element={<Error404 />} />
       </Routes>
-      <Footer
-        bottomItems={[headerFooterDisplayItem]}
-        accessibility="partially compliant"
-        termsLinkProps={{
-          href: '#',
-        }}
-      />
+      {location.pathname !== '/chat' && (
+        <Footer
+          bottomItems={[headerFooterDisplayItem]}
+          accessibility="partially compliant"
+          termsLinkProps={{
+            href: '#',
+          }}
+        />
+      )}
     </div>
   )
 }
