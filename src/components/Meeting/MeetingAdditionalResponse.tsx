@@ -1,6 +1,5 @@
 import { indexesUrl } from '@api'
 import { RootState } from '@types'
-import { concatQueries } from '@utils/concatQueries'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getIndexes } from 'utils/setData'
@@ -30,7 +29,7 @@ export function MeetingAdditionalResponse() {
     if (!user.streamId) return
 
     const data = {
-      question: concatQueries(user.question.query, user.history),
+      question: user.question.query,
       must_not_sids: user.question.must_not_sids,
     }
     getIndexes(
