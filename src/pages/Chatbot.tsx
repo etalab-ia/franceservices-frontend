@@ -20,7 +20,6 @@ export function Chatbot({ archive }: { archive: boolean }) {
   }
 
   const handleMount = async () => {
-    console.log('handleMount')
     emitCloseStream()
     dispatch({ type: 'SET_CHAT_ID', nextChatId: 0 })
     dispatch({ type: 'SET_STREAM_ID', nextChatId: 0 })

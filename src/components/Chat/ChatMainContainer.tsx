@@ -25,7 +25,6 @@ export function ChatMainContainer({
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log('resetuser', user.chatId)
     !archive && dispatch({ type: 'RESET_USER' })
   }, [])
 
