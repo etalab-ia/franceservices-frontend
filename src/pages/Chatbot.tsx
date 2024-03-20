@@ -19,13 +19,10 @@ export function Chatbot({ archive }: { archive: boolean }) {
     setCurrQuestion(newQuestion)
   }
 
-  const handleMount = async () => {
+  useEffect(() => {
     emitCloseStream()
     dispatch({ type: 'SET_CHAT_ID', nextChatId: 0 })
     dispatch({ type: 'SET_STREAM_ID', nextChatId: 0 })
-  }
-  useEffect(() => {
-    handleMount()
   }, [])
 
   return (

@@ -25,8 +25,17 @@ export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
   }
 
   const handleClick = async () => {
+    if (stream.historyStream.length) {
+      dispatch({
+        type: 'SET_MESSAGES',
+        nextMessage: { text: stream.historyStream, sender: 'agent' },
+      })
+    }
     updateCurrQuestion({ ...currQuestion, query: questionInput })
-
+    dispatch({
+      type: 'SET_MESSAGES',
+      nextMessage: { text: questionInput, sender: 'user' },
+    })
     let chatId = user.chatId
 
     if (user.chatId === 0) {
@@ -46,19 +55,7 @@ export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
       nextChatId: chatId, // Use the updated chatId here
     })
 
-    if (stream.historyStream.length) {
-      dispatch({
-        type: 'SET_MESSAGES',
-        nextMessage: { text: stream.historyStream, sender: 'agent' },
-      })
-    }
-
     dispatch({ type: 'RESET_STREAM_HISTORY' })
-
-    dispatch({
-      type: 'SET_MESSAGES',
-      nextMessage: { text: questionInput, sender: 'user' },
-    })
 
     setQuestionInput('')
     setGenerate(true)
