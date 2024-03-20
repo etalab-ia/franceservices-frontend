@@ -1,13 +1,12 @@
 import {
+  Chunk,
+  Sheet,
   UserHistory,
+  WebService,
   type Message,
   type Question,
   type User,
-  Sheet,
-  Chunk,
-  WebService,
 } from '@types'
-import { initialChatbotMessage } from '@constants/chatbotProps'
 
 /*****************************************************************************************************
 	
@@ -50,7 +49,7 @@ const InitialQuestion: Question = {
 
 const InitialUser: User = {
   question: InitialQuestion,
-  messages: [{ text: initialChatbotMessage, sender: 'agent' }],
+  messages: [],
   sheets: [],
   additionalSheets: [],
   chunks: [],
