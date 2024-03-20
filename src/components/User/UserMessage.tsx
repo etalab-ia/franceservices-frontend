@@ -6,16 +6,16 @@ import { chatUrl } from '@api'
 import { CurrQuestionContext } from '@utils/context/questionContext'
 import { generateStream, useFetch } from '@utils/hooks'
 import { setHeaders } from '@utils/setData'
+import Button from '@codegouvfr/react-dsfr/Button'
 
 /*
  **
  */
-export function UserMessage({ setGenerate }) {
+export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
   const stream = useSelector((state: RootState) => state.stream)
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
-  const [questionInput, setQuestionInput] = useState('')
-
+  console.log('question input', questionInput)
   const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
 
   const handleChange = (e) => {
@@ -81,17 +81,49 @@ export function UserMessage({ setGenerate }) {
 
     return <input {...updatedParams} disabled={stream.isStreaming} />
   }
+  function handleKeyDown(e: any) {
+    if (e.key === 'Enter' && questionInput !== '' && !stream.isStreaming) {
+      e.preventDefault()
+      handleClick()
+    }
+  }
+
+  console.log('input')
+  console.log(questionInput)
 
   return (
-    <div className="flex justify-center">
-      <SearchBar
+    <div className="">
+      <textarea
+        style={{ minHeight: '10px', overflow: 'hidden' }}
+        placeholder="Poser une nouvelle question"
+        rows={1}
+        onChange={handleChange}
+        value={questionInput}
+        onKeyDown={handleKeyDown}
+        className="fr-input justify-end"
+        id="textarea"
+        name="textarea"
+      ></textarea>
+      <div className="flex justify-end">
+        <Button
+          onClick={handleClick}
+          disabled={questionInput.trim() === '' || stream.isStreaming}
+          className="fr-btn align-end"
+          title="Rechercher"
+          iconId="fr-icon-search-line"
+        >
+          Rechercher
+        </Button>
+      </div>
+      {/*       <SearchBar
         label="Poser votre question"
         className="w-5/6"
         onButtonClick={handleClick}
         //@ts-expect-error
         onChange={handleChange}
         renderInput={handleRenderInput}
-      />
+        value={questionInput}
+      /> */}
     </div>
   )
 }

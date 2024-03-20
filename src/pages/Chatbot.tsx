@@ -30,9 +30,7 @@ export function Chatbot({ archive }: { archive: boolean }) {
 
   return (
     <CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>
-      <div className="ft-container">
-        <DisplayChatTab archive={archive} setGenerate={setGenerate} />
-      </div>
+      <DisplayChatTab archive={archive} setGenerate={setGenerate} />
     </CurrQuestionContext.Provider>
   )
 }
