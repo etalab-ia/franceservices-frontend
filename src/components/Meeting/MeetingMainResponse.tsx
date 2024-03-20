@@ -60,7 +60,6 @@ export function NewQuestionInput({
 
     setQuestionInput(e.target.value)
   }
-  console.log('histo', user.history)
 
   useEffect(() => {
     emitCloseStream()
@@ -79,7 +78,6 @@ export function NewQuestionInput({
         webservices: user.webservices,
       },
     })
-    console.log('histo2', user.history)
     dispatch({
       type: 'SET_USER_QUERY',
       nextUserQuery: addContextToQuestion(questionInput, context),
@@ -102,6 +100,7 @@ export function NewQuestionInput({
 
   function handleKeyDown(e: any) {
     if (e.key === 'Enter' && questionInput !== '' && !stream.isStreaming) {
+      e.preventDefault()
       handleSubmit()
     }
   }
