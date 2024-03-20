@@ -37,7 +37,7 @@ export function ChatMainContainer({
   console.log('user CHAT', user)
   return (
     <ChatHeightContainer>
-      {user.messages.length <= 1 && (
+      {user.messages.length <= 0 && (
         <QuestionsSuggestionList
           setQuestionInput={setQuestionInput}
           questions={['test', 'test2', 'test3']}

@@ -24,7 +24,7 @@ export function DisplayChatTab({
   return (
     <div className="fr-container fr-grid-row fr-grid-row--center h-full">
       <div className="fr-col-8  fr-grid-row--center">
-        {user.messages.length <= 1 && <NewChatHeader />}
+        {user.messages.length <= 0 && <NewChatHeader />}
         <div className="fr-grid-row fr-grid-row--gutters">
           <ChatMainContainer archive={archive} setGenerate={setGenerate} />
         </div>
