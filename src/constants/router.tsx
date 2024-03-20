@@ -29,7 +29,7 @@ export function navFunc() {
               isActive: currentPath === '/meeting',
             },
             {
-              text: 'Mes fiches rendez-vous',
+              text: 'Mon historique',
               linkProps: {
                 to: '/history',
               },
