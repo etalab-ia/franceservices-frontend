@@ -72,7 +72,7 @@ export function History({ history }: { history: UserHistory[] }) {
         <div className="fr-mb-1w " key={index}>
           <h3 className="fr-background-alt--blue-france">
             <button
-              className="fr-accordion__btn text-black "
+              className="fr-accordion__btn fr-text-default--grey"
               aria-expanded="false"
               aria-controls={`history-${index}`}
               onClick={() => setOpenedAccordion((prev) => (prev === -1 ? index : -1))}
