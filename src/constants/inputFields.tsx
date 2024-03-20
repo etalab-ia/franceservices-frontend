@@ -70,7 +70,7 @@ export const MFStoolsTiles = [
     desc: 'Accéder',
     linkProps: { to: '/meeting' },
     imageUrl: meeting,
-    title: 'Préparer un rendez-vous',
+    title: 'Échanger avec Albert',
   },
   {
     className: 'fr-tile fr-tile--no-icon fr-enlarge-link',
