@@ -57,21 +57,6 @@ export function MeetingOutputs() {
         )} */}
       <History history={user.history} />
       <MeetingCurrentResponse />
-      <button
-        onClick={() => {
-          const token = localStorage.getItem('authToken')
-          const test = useFetch(`${streamUrl}/805`, 'GET', {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-
-            data: null,
-          })
-        }}
-      >
-        click
-      </button>
     </div>
   )
 }
