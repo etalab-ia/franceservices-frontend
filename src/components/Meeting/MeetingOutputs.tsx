@@ -12,6 +12,8 @@ import { rmContextFromQuestion } from '@utils/setData'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { UsefulLinks } from './UsefulLinks'
+import { useFetch } from '@utils/hooks'
+import { streamUrl } from '@api'
 
 /*****************************************************************************************************
     Displays Albert's response and the modify button
@@ -55,6 +57,21 @@ export function MeetingOutputs() {
         )} */}
       <History history={user.history} />
       <MeetingCurrentResponse />
+      <button
+        onClick={() => {
+          const token = localStorage.getItem('authToken')
+          const test = useFetch(`${streamUrl}/805`, 'GET', {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+
+            data: null,
+          })
+        }}
+      >
+        click
+      </button>
     </div>
   )
 }
