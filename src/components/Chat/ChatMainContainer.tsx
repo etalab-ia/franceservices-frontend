@@ -19,11 +19,10 @@ import { set } from 'valibot'
  */
 export function ChatMainContainer({
   archive,
-  setGenerate,
-}: { archive: boolean; setGenerate: any }) {
+  setQuestionInput,
+}: { archive: boolean; setQuestionInput: any }) {
   const user = useSelector((state: RootState) => state.user)
   const stream = useSelector((state: RootState) => state.stream)
-  const [questionInput, setQuestionInput] = useState('')
 
   const dispatch = useDispatch()
 
@@ -36,28 +35,30 @@ export function ChatMainContainer({
   }, [user, stream, dispatch])
   console.log('user CHAT', user)
   return (
-    <ChatHeightContainer>
-      {user.messages.length <= 0 && (
-        <QuestionsSuggestionList
-          setQuestionInput={setQuestionInput}
-          questions={['test', 'test2', 'test3']}
-        />
-      )}
-      <ChatOverflowManagementContainer>
-        {archive ? (
-          <Display messages={[]} archive={true} />
-        ) : (
-          <Display messages={user.messages} archive={false} />
+    <>
+      <ChatHeightContainer>
+        {user.messages.length <= 0 && (
+          <QuestionsSuggestionList
+            setQuestionInput={setQuestionInput}
+            questions={['test', 'test2', 'test3']}
+          />
         )}
-      </ChatOverflowManagementContainer>
-      {!archive && (
+        <ChatOverflowManagementContainer>
+          {archive ? (
+            <Display messages={[]} archive={true} />
+          ) : (
+            <Display messages={user.messages} archive={false} />
+          )}
+        </ChatOverflowManagementContainer>
+      </ChatHeightContainer>
+      {/*       {!archive && (
         <UserMessage
           setGenerate={setGenerate}
           questionInput={questionInput}
           setQuestionInput={setQuestionInput}
         />
-      )}{' '}
-    </ChatHeightContainer>
+      )} */}
+    </>
   )
 }
 

@@ -6,6 +6,7 @@ import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { MeetingInputFields } from './MeetingInputFields'
 import { MeetingInputButton } from './MeetingInputButton'
 import { MeetingInputContext } from '@types'
+import { useDispatch } from 'react-redux'
 
 /*****************************************************************************************************
 	
@@ -33,19 +34,20 @@ import { MeetingInputContext } from '@types'
 
 export function MeetingInputs({
   setGenerate,
-  generate,
 }: {
   setGenerate: React.Dispatch<React.SetStateAction<boolean>>
-  generate: boolean
 }) {
   const [context, setContext] = useState<MeetingInputContext>({
     administrations: [],
     themes: [],
   })
+  const dispatch = useDispatch()
   const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
   //TODO: REMOVE USEEFFECT
   useEffect(() => {
     currQuestion.query && updateQuestion(currQuestion, updateCurrQuestion)
+    console.log('reset')
+    dispatch({ type: 'RESET_USER' })
   }, [])
 
   return (
