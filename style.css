@@ -524,13 +524,7 @@ video {
 
 .user-chat {
   --tw-bg-opacity: 1;
-  background-color: rgb(245 245 254 / var(--tw-bg-opacity));
-  display: flex;
-  width: -moz-fit-content;
-  width: fit-content;
-  border-radius: 30px;
-  margin-top: 0px;
-  text-align: justify;
+
 }
 
 /* TODO: change margin/padding/colors/height to dsfr one */
