@@ -20,6 +20,3 @@ export const userAvatarDescription = "Avatar de l'utilisateur / utilisatrice."
 export const previousImgDescription =
   "Bouton d'accès au message précédent généré par le robot."
 export const nextImgDescription = "Bouton d'accès au message suivant généré par le robot."
-export const initialChatbotMessage = [
-  "Bonjour, je suis Albert, l'outil d’intelligence artificielle interministériel prêt à répondre à vos questions administratives. Quelle est votre question aujourd'hui ? Notez que je suis toujours en plein développement, et ne demande qu'à m'améliorer !",
-]

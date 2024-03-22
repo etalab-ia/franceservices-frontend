@@ -12,6 +12,8 @@ import { rmContextFromQuestion } from '@utils/setData'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { UsefulLinks } from './UsefulLinks'
+import { useFetch } from '@utils/hooks'
+import { streamUrl } from '@api'
 
 /*****************************************************************************************************
     Displays Albert's response and the modify button
@@ -70,7 +72,7 @@ export function History({ history }: { history: UserHistory[] }) {
         <div className="fr-mb-1w " key={index}>
           <h3 className="fr-background-alt--blue-france">
             <button
-              className="fr-accordion__btn text-black "
+              className="fr-accordion__btn fr-text-default--grey"
               aria-expanded="false"
               aria-controls={`history-${index}`}
               onClick={() => setOpenedAccordion((prev) => (prev === -1 ? index : -1))}

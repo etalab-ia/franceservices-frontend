@@ -45,6 +45,7 @@ export const unsatisfiedButtons = [
   { 'Manque de sources': 'lack_of_sources' },
   { 'Trop long': 'too_long' },
   { 'Incohérent ': 'inconsistent' },
+  { Imprécis: 'imprecise' },
   { 'Fautes de grammaire': 'grammar_errors' },
   { 'Autre raison': 'other' },
 ] as const

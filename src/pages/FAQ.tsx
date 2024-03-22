@@ -121,11 +121,11 @@ const faq = {
         content: (
           <div>
             <p className="fr-mb-3w">
-              A partir de la page d’accueil, cliquer sur “Préparer un rendez-vous”. Sur
-              cette page, vous êtes invité à décrire la situation de l’usager que vous
-              recevez. Veillez à respecter les bonnes pratiques pour décrire la situation
-              indiquée sous le champ associé. Vous pouvez également indiquer les thèmes
-              associés à la situation et les opérateurs concernés.{' '}
+              A partir de la page d’accueil, cliquer sur “Échanger avec Albert”. Sur cette
+              page, vous êtes invité à décrire la situation de l’usager que vous recevez.
+              Veillez à respecter les bonnes pratiques pour décrire la situation indiquée
+              sous le champ associé. Vous pouvez également indiquer les thèmes associés à
+              la situation et les opérateurs concernés.{' '}
             </p>
             <p className="fr-mb-3w">
               Une fois la situation de l’usager décrite, cliquez sur le bouton “générer la

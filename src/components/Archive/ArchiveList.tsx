@@ -24,7 +24,7 @@ export function ArchiveList({ chatList, setArchiveTab }: ArchiveListProps) {
 
   return (
     <div className="fr-container fr-pt-5w">
-      <GlobalTitle>Consulter mes fiches rendez-vous</GlobalTitle>
+      <GlobalTitle>Consulter mon historique</GlobalTitle>
       <table className="w-full">
         <thead style={{ borderBottom: '2px solid #000' }}>
           <tr>

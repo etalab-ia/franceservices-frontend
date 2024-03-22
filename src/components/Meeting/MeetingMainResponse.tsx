@@ -1,11 +1,10 @@
 import { Button } from '@codegouvfr/react-dsfr/Button'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ArchiveType, MeetingInputContext, RootState } from 'types'
+import { MeetingInputContext, RootState } from 'types'
 import { emitCloseStream } from 'utils/eventsEmitter'
 import { generateStream } from 'utils/hooks'
 import { addContextToQuestion } from 'utils/setData'
-import { CurrQuestionContext } from '@utils/context/questionContext'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { GlobalSecondaryTitle } from '../Global/GlobalSecondaryTitle'
 import { DisplaySourceCards } from './MeetingOutputs'
@@ -13,7 +12,6 @@ import { MeetingQR } from './MeetingQR'
 import { MeetingStream } from './MeetingStream'
 import { MeetingTags } from './MeetingTags'
 import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
-import Separator from 'components/Global/Separator'
 /*****************************************************************************************************
 	
 	COMPONENTS:
@@ -80,10 +78,10 @@ export function NewQuestionInput({
         webservices: user.webservices,
       },
     })
-
     dispatch({
       type: 'SET_USER_QUERY',
       nextUserQuery: addContextToQuestion(questionInput, context),
+
       nextChatId: user.chatId,
     })
     stream.historyStream.length &&
@@ -102,6 +100,7 @@ export function NewQuestionInput({
 
   function handleKeyDown(e: any) {
     if (e.key === 'Enter' && questionInput !== '' && !stream.isStreaming) {
+      e.preventDefault()
       handleSubmit()
     }
   }

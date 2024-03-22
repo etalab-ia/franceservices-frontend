@@ -1,19 +1,21 @@
 {
   "name": "albert",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.3",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build && npx tailwindcss -i ./style.css -o ./dist/style.css --minify",
     "lint": "npx @biomejs/biome lint  .",
     "preview": "vite preview",
-    "predev": "only-include-used-icons",
     "prebuild": "only-include-used-icons",
     "format": "npx @biomejs/biome format . --write",
     "prepare": "husky install",
     "ts-coverage": "typescript-coverage-report",
-    "knip": "knip"
+    "knip": "knip",
+    "push-patch": "npm version patch && git push",
+    "push-minor": "npm version minor && git push",
+    "push-major": "npm version major && git push"
   },
   "dependencies": {
     "@codegouvfr/react-dsfr": "^1.0.4",

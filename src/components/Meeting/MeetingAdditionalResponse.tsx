@@ -1,13 +1,11 @@
-import { ArchiveType, RootState } from '@types'
+import { indexesUrl } from '@api'
+import { RootState } from '@types'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getIndexes } from 'utils/setData'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { OneThirdScreenWidth } from '../Global/OneThirdScreenWidth'
-import { DisplaySheets } from '../Sheets/DisplaySheets'
 import { UsefulLinks } from './UsefulLinks'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import { getIndexes } from 'utils/setData'
-import { indexesUrl } from '@api'
-import { emitCloseStream } from 'utils/eventsEmitter'
 
 /*****************************************************************************************
 	
@@ -38,6 +36,14 @@ export function MeetingAdditionalResponse() {
       data,
       dispatch,
       'chunks',
+      user.question.limit,
+      JSON.stringify(user.streamId),
+      indexesUrl
+    )
+    getIndexes(
+      data,
+      dispatch,
+      'sheets',
       user.question.limit,
       JSON.stringify(user.streamId),
       indexesUrl

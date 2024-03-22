@@ -19,21 +19,15 @@ export function Chatbot({ archive }: { archive: boolean }) {
     setCurrQuestion(newQuestion)
   }
 
-  const handleMount = async () => {
-    console.log('handleMount')
+  useEffect(() => {
     emitCloseStream()
     dispatch({ type: 'SET_CHAT_ID', nextChatId: 0 })
     dispatch({ type: 'SET_STREAM_ID', nextChatId: 0 })
-  }
-  useEffect(() => {
-    handleMount()
   }, [])
 
   return (
     <CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>
-      <div className="ft-container">
-        <DisplayChatTab archive={archive} setGenerate={setGenerate} />
-      </div>
+      <DisplayChatTab archive={archive} setGenerate={setGenerate} />
     </CurrQuestionContext.Provider>
   )
 }
