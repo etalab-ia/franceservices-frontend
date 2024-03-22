@@ -22,14 +22,14 @@ export function navFunc() {
           isActive: currentPath === '/chat' || currentPath === '/meeting',
           menuLinks: [
             {
-              text: 'Préparer un rendez-vous',
+              text: 'Échanger avec Albert',
               linkProps: {
                 to: '/meeting',
               },
               isActive: currentPath === '/meeting',
             },
             {
-              text: 'Mes fiches rendez-vous',
+              text: 'Mon historique',
               linkProps: {
                 to: '/history',
               },

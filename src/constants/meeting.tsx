@@ -2,7 +2,7 @@ import thumbsDown from '../../icons/feedbacks/thumbsDown.svg'
 import thumbsUp from '../../icons/feedbacks/thumbsUp.svg'
 import { GlobalRowContainer } from '../components/Global/GlobalRowContainer'
 
-export const meetingTitle = 'Préparer un rendez-vous'
+export const meetingTitle = 'Échanger avec Albert'
 export const meetingSubtitle = 'Description de la situation de l’usager'
 export const meetingInputGuidelines = (
   <>

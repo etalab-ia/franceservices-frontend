@@ -78,7 +78,7 @@ export function UserFeedbackOptions({
 //TODO: Send the full reasons array to the backend when back is ready
 const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) => {
   const streamId = useSelector((state: RootState) => state.user.lastStreamId)
-  const { refetch } = useAddFeedback(feedback, streamId, reasons) // We must use refetch so we can call it inside onClick
+  const addFeedback = useAddFeedback()
 
   const handleConfirm = () => {
     otherReason &&
@@ -87,7 +87,7 @@ const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) => 
         ...feedback,
         message: otherReason,
       })
-    refetch()
+    addFeedback.mutate({ feedback, streamId, reasons })
     setFeedback({
       ...feedback,
       isConfirmed: true,

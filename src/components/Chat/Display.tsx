@@ -19,7 +19,12 @@ export function Display({
         return Array.isArray(message.text) ? (
           <DisplayArrayMessages key={index} messages={message.text} />
         ) : (
-          <DisplaySingleMessage key={index} sender={message.sender} text={message.text} />
+          <DisplaySingleMessage
+            key={index}
+            sender={message.sender}
+            text={message.text}
+            isFirst={index === 0}
+          />
         )
       })}
       {!archive && <ChatFollowUp stream={stream} />}

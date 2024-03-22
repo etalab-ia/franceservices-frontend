@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query'
 import { Chat } from '@types'
 
 export function useGetChats() {
-  console.log('useGetChats')
   return useQuery({
     queryKey: ['getChats'],
     queryFn: () => fetchChats(),
