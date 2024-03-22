@@ -89,7 +89,7 @@ export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
   console.log(questionInput)
 
   return (
-    <div className="">
+    <div className="fr-container sticky bottom-0 left-0 right-0 z-10">
       <textarea
         style={{ minHeight: '10px', overflow: 'hidden' }}
         placeholder="Poser une nouvelle question"

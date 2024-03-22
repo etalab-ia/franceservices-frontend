@@ -3,6 +3,8 @@ import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { ChatAdditionalContainer } from './ChatAdditionalContainer'
 import { ChatMainContainer } from './ChatMainContainer'
 import { RootState } from '@types'
+import { UserMessage } from 'components/User/UserMessage'
+import { useState } from 'react'
 
 /**********************************************************************************************
 	
@@ -20,15 +22,21 @@ export function DisplayChatTab({
   setGenerate,
 }: { archive: boolean; setGenerate: any }) {
   const user = useSelector((state: RootState) => state.user)
+  const [questionInput, setQuestionInput] = useState('')
 
   return (
     <div className="fr-container fr-grid-row fr-grid-row--center h-full">
       <div className="fr-col-8  fr-grid-row--center">
         {user.messages.length <= 0 && <NewChatHeader />}
         <div className="fr-grid-row fr-grid-row--gutters">
-          <ChatMainContainer archive={archive} setGenerate={setGenerate} />
+          <ChatMainContainer archive={archive} setQuestionInput={setQuestionInput} />
         </div>
       </div>
+      <UserMessage
+        setGenerate={setGenerate}
+        questionInput={questionInput}
+        setQuestionInput={setQuestionInput}
+      />
     </div>
   )
 }
