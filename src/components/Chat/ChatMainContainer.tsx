@@ -33,7 +33,6 @@ export function ChatMainContainer({
   useEffect(() => {
     scrollToBottom()
   }, [user, stream, dispatch])
-  console.log('user CHAT', user)
   return (
     <>
       <ChatHeightContainer>
