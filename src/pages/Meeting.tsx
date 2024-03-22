@@ -33,11 +33,7 @@ export function Meeting() {
   return (
     <CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>
       <div className="fr-container fr-my-3w">
-        {generate ? (
-          <MeetingOutputs />
-        ) : (
-          <MeetingInputs setGenerate={setGenerate} generate={generate} />
-        )}
+        {generate ? <MeetingOutputs /> : <MeetingInputs setGenerate={setGenerate} />}
       </div>
     </CurrQuestionContext.Provider>
   )
