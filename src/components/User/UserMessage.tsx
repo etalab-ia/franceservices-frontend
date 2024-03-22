@@ -15,7 +15,6 @@ export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
   const stream = useSelector((state: RootState) => state.stream)
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
-  console.log('question input', questionInput)
   const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
 
   const handleChange = (e) => {
@@ -84,9 +83,6 @@ export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
       handleClick()
     }
   }
-
-  console.log('input')
-  console.log(questionInput)
 
   return (
     <div className="fr-container sticky bottom-0 left-0 right-0 z-10">

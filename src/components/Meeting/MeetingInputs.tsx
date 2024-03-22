@@ -46,7 +46,6 @@ export function MeetingInputs({
   //TODO: REMOVE USEEFFECT
   useEffect(() => {
     currQuestion.query && updateQuestion(currQuestion, updateCurrQuestion)
-    console.log('reset')
     dispatch({ type: 'RESET_USER' })
   }, [])
 
