@@ -26,7 +26,7 @@ export function DisplayChatTab({
 
   return (
     <div className="fr-container fr-grid-row fr-grid-row--center h-full">
-      <div className="fr-col-md-8 h-[85vh] overflow-scroll  ">
+      <div className="fr-col-md-8 h-[85vh] overflow-scroll no-scrollbar">
         {user.messages.length <= 0 && <NewChatHeader />}
         <ChatMainContainer archive={archive} setQuestionInput={setQuestionInput} />
       </div>
