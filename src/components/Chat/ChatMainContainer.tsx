@@ -35,7 +35,7 @@ export function ChatMainContainer({
   }, [user, stream, dispatch])
   return (
     <>
-      <ChatHeightContainer>
+      <div className="">
         {user.messages.length <= 0 && (
           <QuestionsSuggestionList
             setQuestionInput={setQuestionInput}
@@ -49,7 +49,7 @@ export function ChatMainContainer({
             <Display messages={user.messages} archive={false} />
           )}
         </ChatOverflowManagementContainer>
-      </ChatHeightContainer>
+      </div>
       {/*       {!archive && (
         <UserMessage
           setGenerate={setGenerate}

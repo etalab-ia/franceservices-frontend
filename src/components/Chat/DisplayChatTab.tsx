@@ -26,11 +26,9 @@ export function DisplayChatTab({
 
   return (
     <div className="fr-container fr-grid-row fr-grid-row--center h-full">
-      <div className="fr-col-8  fr-grid-row--center">
+      <div className="fr-col-md-8 h-[85vh] overflow-scroll  ">
         {user.messages.length <= 0 && <NewChatHeader />}
-        <div className="fr-grid-row fr-grid-row--gutters">
-          <ChatMainContainer archive={archive} setQuestionInput={setQuestionInput} />
-        </div>
+        <ChatMainContainer archive={archive} setQuestionInput={setQuestionInput} />
       </div>
       <UserMessage
         setGenerate={setGenerate}

@@ -85,7 +85,7 @@ export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
   }
 
   return (
-    <div className="fr-container sticky bottom-0 left-0 right-0 z-10">
+    <div className=" sticky bottom-0 left-0 right-0 z-10 fr-col-12 fr-col-md-8 fr-background-default--grey fr-py-1w md:fr-py-3w ">
       <textarea
         style={{ minHeight: '10px', overflow: 'hidden' }}
         placeholder="Poser une nouvelle question"
