@@ -42,13 +42,13 @@ export function ChatMainContainer({
             questions={['test', 'test2', 'test3']}
           />
         )}
-        <ChatOverflowManagementContainer>
+        <div className="flex flex-grow overflow-y-scroll overflow-x-hidden">
           {archive ? (
             <Display messages={[]} archive={true} />
           ) : (
             <Display messages={user.messages} archive={false} />
           )}
-        </ChatOverflowManagementContainer>
+        </div>
       </div>
       {/*       {!archive && (
         <UserMessage
