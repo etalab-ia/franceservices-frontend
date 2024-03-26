@@ -27,7 +27,7 @@ export function Display({
           />
         )
       })}
-      {!archive && <ChatFollowUp stream={stream} />}
+      {!archive && <ChatFollowUp />}
     </GlobalChatContainer>
   )
 }
