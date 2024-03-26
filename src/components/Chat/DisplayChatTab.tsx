@@ -16,7 +16,6 @@ import { useState } from 'react'
 
  **********************************************************************************************/
 
-// TODO WHEN BACK IS READY: change archive type
 export function DisplayChatTab({
   archive,
   setGenerate,

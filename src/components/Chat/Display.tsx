@@ -12,7 +12,7 @@ export function Display({
   messages,
   archive,
 }: { messages: Message[]; archive: boolean }) {
-  const stream = useSelector((state: RootState) => state.stream)
+  const user = useSelector((state: RootState) => state.user)
   return (
     <GlobalChatContainer>
       {messages.map((message, index) => {
@@ -24,6 +24,7 @@ export function Display({
             sender={message.sender}
             text={message.text}
             isFirst={index === 0}
+            chunks={user.chunks}
           />
         )
       })}

@@ -1,12 +1,11 @@
-import { SearchBar } from '@codegouvfr/react-dsfr/SearchBar'
-import { useContext, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { chatUrl, indexesUrl } from '@api'
+import Button from '@codegouvfr/react-dsfr/Button'
 import { RootState } from '@types'
-import { chatUrl } from '@api'
 import { CurrQuestionContext } from '@utils/context/questionContext'
 import { generateStream, useFetch } from '@utils/hooks'
-import { setHeaders } from '@utils/setData'
-import Button from '@codegouvfr/react-dsfr/Button'
+import { getIndexes, setHeaders } from '@utils/setData'
+import { useContext, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 /*
  **
@@ -27,7 +26,7 @@ export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
     if (stream.historyStream.length) {
       dispatch({
         type: 'SET_MESSAGES',
-        nextMessage: { text: stream.historyStream, sender: 'agent' },
+        nextMessage: { text: stream.historyStream, sender: 'agent', chunks: user.chunks },
       })
     }
     updateCurrQuestion({ ...currQuestion, query: questionInput })
@@ -70,7 +69,21 @@ export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
 
     generateStream(user.question, dispatch, user.chatId, true)
   }, [user.question])
-
+  useEffect(() => {
+    if (!user.streamId) return
+    const data = {
+      question: user.question.query,
+      must_not_sids: user.question.must_not_sids,
+    }
+    getIndexes(
+      data,
+      dispatch,
+      'chunks',
+      user.question.limit,
+      JSON.stringify(user.streamId),
+      indexesUrl
+    )
+  }, [user.streamId])
   const handleRenderInput = (params) => {
     const newParams = { maxLength: 800 }
     const updatedParams = { ...params, ...newParams }
