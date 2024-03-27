@@ -25,7 +25,6 @@ export function ButtonsOptions({
       setButtonsType(newArray)
     }
     const reasonValue = buttonsType[index].type
-    console.log('buttonsType', buttonsType)
     if (!reasonValue.includes('tag-')) {
       if (reasons.includes(reasonValue)) {
         setReasons(reasons.filter((reason) => reason !== reasonValue))
