@@ -25,7 +25,9 @@ html, body {
     height: 100%;
     margin: 0;
 }
-
+.external-link-icon::after {
+  display: none;
+}
 *,
 ::before,
 ::after {

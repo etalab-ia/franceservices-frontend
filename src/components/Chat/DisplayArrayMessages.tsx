@@ -5,14 +5,15 @@ import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { Avatar } from './Avatar'
 import { DisplayMessageTab } from './DisplayMessageTab'
 import { StreamingMessage } from './StreamingMessage'
-import type { Chunk, RootState } from '@types'
+import type { Chunk, Message, RootState } from '@types'
 
-export function DisplayArrayMessages({ messages }) {
-  const tabsLen = messages.length
-  const conditionTab = messages.length > 1
+export function DisplayArrayMessages({ message }: { message: Message }) {
+  const tabsLen = message.text.length
+  const conditionTab = message.text.length > 1
   const [activeTab, setActiveTab] = useState(tabsLen + 1)
   const dispatch = useDispatch()
   const user = useSelector((state: RootState) => state.user)
+  console.log('messss', message)
 
   useEffect(() => {
     dispatch({ type: 'SWITCH_TAB', nextTab: activeTab })
@@ -20,9 +21,9 @@ export function DisplayArrayMessages({ messages }) {
 
   return (
     <GlobalRowContainer>
-      <GlobalRowContainer extraClass="fr-grid-row--center bg-red-500">
+      <GlobalRowContainer extraClass="fr-grid-row--center">
         <Avatar user="agent" />
-        <StreamingMessage>{messages[activeTab - 1]}</StreamingMessage>
+        <StreamingMessage>{message.text[activeTab - 1]}</StreamingMessage>
       </GlobalRowContainer>
       <DisplayMessageTab
         isDisplayable={conditionTab}
@@ -31,12 +32,12 @@ export function DisplayArrayMessages({ messages }) {
         setActiveTab={setActiveTab}
         extraClass="fr-ml-10w"
       />
-      <SourcesAccordion chunks={user.chunks} />
+      <SourcesAccordion chunks={message.chunks} />
     </GlobalRowContainer>
   )
 }
 
-function SourcesAccordion({ chunks }: { chunks: Chunk[] }) {
+export function SourcesAccordion({ chunks }: { chunks: Chunk[] }) {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false)
 
   const handleToggleAll = () => {
@@ -44,7 +45,7 @@ function SourcesAccordion({ chunks }: { chunks: Chunk[] }) {
   }
 
   return (
-    <div className="fr-grid-col  fr-mb-2w">
+    <div className="fr-grid-col fr-mb-2w">
       <div className={'fr-grid-row '} onClick={handleToggleAll}>
         <p
           className="fr-text-mention--  hover:cursor-pointer font-bold"
@@ -76,9 +77,11 @@ function SourcesAccordion({ chunks }: { chunks: Chunk[] }) {
 function SourceCard({ title, url }: { title: string; url: string }) {
   return (
     <a href={url} target="_blank" rel="noreferrer" className="external-link-icon ">
-      <div className="bg-[#f4f6ff] fr-p-2w fr-grid-row max-w-[248px] h-[128px] ">
-        <div className="flex font-bold fr-text-title--blue-france">{'Fiche: '}</div>
-        <div className="mb- text-justify  fr-text-title--blue-france">{title}</div>
+      <div className="bg-[#f4f6ff] fr-p-2w  w-[248px] h-[128px] ">
+        <div className="flex font-bold fr-mb-2v fr-text-title--blue-france">
+          {'Fiche: \n'}
+        </div>
+        <div className="fr-text-title--blue-france">{title}</div>
       </div>
     </a>
   )
