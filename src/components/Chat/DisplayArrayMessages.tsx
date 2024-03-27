@@ -76,7 +76,7 @@ export function SourcesAccordion({ chunks }: { chunks: Chunk[] }) {
 function SourceCard({ title, url }: { title: string; url: string }) {
   return (
     <a href={url} target="_blank" rel="noreferrer" className="external-link-icon ">
-      <div className="bg-[#f4f6ff] fr-p-2w  w-[248px] h-[128px] ">
+      <div className="bg-[#f4f6ff] fr-p-2w  w-[248px] h-[128px] rounded">
         <div className="flex font-bold fr-mb-2v fr-text-title--blue-france">
           {'Fiche: \n'}
         </div>
