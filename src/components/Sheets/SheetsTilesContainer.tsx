@@ -1,10 +1,10 @@
-import { ArchiveType, RootState, Sheet } from '@types'
-import { useContext, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { getSheetsUrl, indexesUrl } from '@api'
+import type { ArchiveType, RootState, Sheet } from '@types'
 import { CurrQuestionContext } from '@utils/context/questionContext'
 import { useFetch } from '@utils/hooks'
 import { setHeaders, setIndexesData, setTilesFromSheets } from '@utils/setData'
+import { useContext, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { SheetsAdditionalTilesTitle } from './SheetsAdditionalTilesTitle'
 import { SheetsTiles } from './SheetsTiles'
 

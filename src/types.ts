@@ -1,4 +1,4 @@
-import { store } from './utils/reducer/reducer'
+import type { store } from './utils/reducer/reducer'
 
 /**
  * The type of the Redux store

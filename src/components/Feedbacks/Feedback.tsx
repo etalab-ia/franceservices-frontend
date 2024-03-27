@@ -1,9 +1,9 @@
-import { useEffect } from 'react'
 import { type Feedback as FeedbackType, InitialFeedback, type RootState } from '@types'
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { UserFeedbackInput } from './UserFeedbackInput'
 import { UserSatisfactionButtons } from './UserSatisfactionButtons'
-import { useSelector } from 'react-redux'
 
 /**
  * This component is the feedback form that the user will see after receiving a response

@@ -1,10 +1,10 @@
-import { ArchiveType, RootState } from '@types'
+import { ArchiveType, type RootState } from '@types'
+import Separator from 'components/Global/Separator'
+import { useEffect, useRef } from 'react'
+import { useSelector } from 'react-redux'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { MeetingAdditionalResponse } from './MeetingAdditionalResponse'
 import { MeetingMainResponse } from './MeetingMainResponse'
-import { useSelector } from 'react-redux'
-import { useEffect, useRef } from 'react'
-import Separator from 'components/Global/Separator'
 
 /*
  *	Contains text response from the bot and additional informations like sheets and chunks, useful links

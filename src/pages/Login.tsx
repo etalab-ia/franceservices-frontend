@@ -1,15 +1,15 @@
-import { ButtonsGroup } from '@codegouvfr/react-dsfr/ButtonsGroup'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { UserAuth } from 'utils/auth'
-import { LoginContainer } from '../components/Auth/LoginContainer'
-import { LoginFields } from '../components/Auth/LoginFields'
-import { ButtonInformation } from '../components/Global/ButtonInformation'
 import { signinUrl, userUrl } from '@api'
+import { ButtonsGroup } from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { initButtonsLogin } from '@constants/connexion'
 import { usernameOrPasswordError } from '@constants/errorMessages'
 import { loginFields } from '@constants/inputFields'
 import { useFetch } from '@utils/hooks'
 import { setUserInfos } from '@utils/manageConnexion'
+import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'
+import type { UserAuth } from 'utils/auth'
+import { LoginContainer } from '../components/Auth/LoginContainer'
+import { LoginFields } from '../components/Auth/LoginFields'
+import { ButtonInformation } from '../components/Global/ButtonInformation'
 
 interface LoginProps {
   authFailed: boolean

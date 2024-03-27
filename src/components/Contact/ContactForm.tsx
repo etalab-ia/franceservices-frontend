@@ -1,9 +1,9 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { type Dispatch, type SetStateAction, useState } from 'react'
 import { ContactButton } from './ContactButton'
-import { UserInformation } from './UserInformation'
 import { ContactFormInput } from './ContactFormInput'
+import { UserInformation } from './UserInformation'
 
-import { UserAuth } from 'utils/auth'
+import type { UserAuth } from 'utils/auth'
 export type formDataTypes = {
   title: string
   administration: string

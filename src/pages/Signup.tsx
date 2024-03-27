@@ -1,12 +1,12 @@
+import { userUrl } from '@api'
 import { ButtonsGroup } from '@codegouvfr/react-dsfr/ButtonsGroup'
+import { initButtonsSignup } from '@constants/connexion'
+import { signupFields } from '@constants/inputFields'
 import { useState } from 'react'
 import { custom, email, object, parse, regex, string } from 'valibot'
 import { LoginContainer } from '../components/Auth/LoginContainer'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
-import { userUrl } from '@api'
-import { initButtonsSignup } from '@constants/connexion'
-import { signupFields } from '@constants/inputFields'
 
 const passwordRegex = /^[A-Za-z\d$!%*+?&#_-]{8,20}$/
 

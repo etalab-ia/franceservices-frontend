@@ -1,9 +1,9 @@
+import { resetPasswordMailUrl } from '@api'
 import ButtonsGroup from '@codegouvfr/react-dsfr/ButtonsGroup'
 import Input from '@codegouvfr/react-dsfr/Input'
-import { LoginContainer } from '../components/Auth/LoginContainer'
-import { resetPasswordMailUrl } from '@api'
 import { initButtonsReset } from '@constants/connexion'
 import { useFetch } from '@utils/hooks'
+import { LoginContainer } from '../components/Auth/LoginContainer'
 
 export function ResetPassword({ setAuthFailed, userAuth, setUserAuth }) {
   const handleChange = (e) => {

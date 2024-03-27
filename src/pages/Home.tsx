@@ -1,7 +1,3 @@
-import { useContext } from 'react'
-import { GlobalDiv } from '../components/Global/GlobalDiv'
-import { GlobalTitle } from '../components/Global/GlobalTitle'
-import { HomeTiles } from '../components/Home/HomeTiles'
 import { ressourcesTitle, toolsTitle } from '@constants/home'
 import {
   MFSressourcesTiles,
@@ -10,6 +6,10 @@ import {
   toolsTiles,
 } from '@constants/inputFields'
 import { isMFSContext } from '@utils/context/isMFSContext'
+import { useContext } from 'react'
+import { GlobalDiv } from '../components/Global/GlobalDiv'
+import { GlobalTitle } from '../components/Global/GlobalTitle'
+import { HomeTiles } from '../components/Home/HomeTiles'
 
 export function Home() {
   const isMFS = useContext(isMFSContext)

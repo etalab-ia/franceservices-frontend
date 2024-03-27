@@ -1,7 +1,7 @@
 import {
   feedbackButtonsChoice,
-  satisfiedButtons,
-  unsatisfiedButtons,
+  type satisfiedButtons,
+  type unsatisfiedButtons,
 } from '@constants/feedback'
 
 export function ButtonsOptions({

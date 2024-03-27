@@ -1,5 +1,5 @@
+import type { ArchiveType } from '@types'
 import { useState } from 'react'
-import { ArchiveType } from '@types'
 import { SheetsAdditionalButtons } from './SheetsAdditionalButtons'
 import { SheetsTilesContainer } from './SheetsTilesContainer'
 
