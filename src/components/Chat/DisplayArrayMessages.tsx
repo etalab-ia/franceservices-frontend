@@ -13,7 +13,6 @@ export function DisplayArrayMessages({ message }: { message: Message }) {
   const [activeTab, setActiveTab] = useState(tabsLen + 1)
   const dispatch = useDispatch()
   const user = useSelector((state: RootState) => state.user)
-  console.log('messss', message)
 
   useEffect(() => {
     dispatch({ type: 'SWITCH_TAB', nextTab: activeTab })
