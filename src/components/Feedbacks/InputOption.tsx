@@ -64,7 +64,7 @@ export function InputOption({
               onClick={handleClick}
             />
           }
-          label="Autre raison"
+          label=""
           nativeInputProps={{
             role: feedbackAdditionalInput,
             name: 'otherReason',

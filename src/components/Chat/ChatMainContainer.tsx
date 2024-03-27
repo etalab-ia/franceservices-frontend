@@ -1,4 +1,4 @@
-import { RootState } from '@types'
+import type { RootState } from '@types'
 import { scrollToBottom } from '@utils/manageEffects'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
