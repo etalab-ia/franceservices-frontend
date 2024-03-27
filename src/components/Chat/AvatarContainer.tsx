@@ -1,8 +1,8 @@
 export function AvatarContainer({ children }) {
   return (
     <div>
-      <div className="avatar ">
-        <div className="fr-p-2w">{children}</div>
+      <div className="avatar disable-avatar">
+        <div className="">{children}</div>
       </div>
     </div>
   )
