@@ -1,6 +1,6 @@
 import { feedbackUrl } from '@api'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { Chat, Feedback } from '@types'
+import type { Feedback } from '@types'
 
 export function useAddFeedback() {
   return useMutation({
@@ -20,7 +20,12 @@ const addFeedback = async ({ feedback, streamId, reasons }: AddFeedbackParams) =
   const data = {
     is_good: !feedback.isGood ? true : false,
     message: feedback.message,
-    reason: reasons[0],
+    reason:
+      reasons[0] === 'other'
+        ? reasons[1] && reasons[1].length
+          ? reasons[1]
+          : null
+        : reasons[0],
   }
   const res = await fetch(`${feedbackUrl}/${streamId}`, {
     method: 'POST',

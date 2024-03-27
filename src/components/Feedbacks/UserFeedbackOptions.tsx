@@ -4,7 +4,7 @@ import {
   satisfiedButtons,
   unsatisfiedButtons,
 } from '@constants/feedback'
-import { Feedback as FeedbackType, RootState } from '@types'
+import type { Feedback as FeedbackType, RootState } from '@types'
 import { useKeyPress } from '@utils/manageEffects'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'

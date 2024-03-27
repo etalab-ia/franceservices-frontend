@@ -5,7 +5,7 @@ import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { Avatar } from './Avatar'
 import { DisplayMessageTab } from './DisplayMessageTab'
 import { StreamingMessage } from './StreamingMessage'
-import { Chunk, RootState } from '@types'
+import type { Chunk, RootState } from '@types'
 
 export function DisplayArrayMessages({ messages }) {
   const tabsLen = messages.length
@@ -44,10 +44,10 @@ function SourcesAccordion({ chunks }: { chunks: Chunk[] }) {
   }
 
   return (
-    <div className="fr-grid-col fr-mb-2w">
-      <div className={'fr-grid-row'} onClick={handleToggleAll}>
+    <div className="fr-grid-col  fr-mb-2w">
+      <div className={'fr-grid-row '} onClick={handleToggleAll}>
         <p
-          className="fr-text-mention--  hover:cursor-pointer "
+          className="fr-text-mention--  hover:cursor-pointer font-bold"
           style={{ margin: 0, padding: 0 }}
         >
           Fiches documentaires associées à la réponse
@@ -58,15 +58,17 @@ function SourcesAccordion({ chunks }: { chunks: Chunk[] }) {
           }-s-line fr-my-1v hover:cursor-pointer`}
         ></span>
       </div>
-      {chunks.slice(0, 3).map((chunk, index) => (
-        <div
-          className="fr-mt-1w"
-          key={index}
-          style={{ display: isAccordionOpen ? 'block' : 'none' }}
-        >
-          <SourceCard {...chunk} />
-        </div>
-      ))}
+      <div className="fr-grid-row gap-4">
+        {chunks.slice(0, 3).map((chunk, index) => (
+          <div
+            className="fr-mt-1w"
+            key={index}
+            style={{ display: isAccordionOpen ? 'block' : 'none' }}
+          >
+            <SourceCard {...chunk} />
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
@@ -81,8 +83,8 @@ function SourceCard({
   source,
 }: Chunk) {
   return (
-    <a href={url} target="_blank" rel="noreferrer">
-      <div className="bg-[#f4f6ff] fr-p-2w fr-grid-row ">
+    <a href={url} target="_blank" rel="noreferrer" className="external-link-icon ">
+      <div className="bg-[#f4f6ff] fr-p-2w fr-grid-row max-w-[248px] h-[128px] ">
         <div className="flex font-bold fr-text-title--blue-france">{'Fiche: '}</div>
         <div className="mb- text-justify  fr-text-title--blue-france">{title}</div>
       </div>
