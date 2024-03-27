@@ -44,8 +44,10 @@ export function UserFeedbackOptions({
           message: otherReason,
         })
       e.target.value = ''
-      f
-      setReasons(reasons.filter((reason) => reason !== 'Autre raison'))
+
+      setReasons(
+        reasons.filter((reason) => reason !== 'Autre raison' && !reason.includes('tag-'))
+      )
     }
   })
 
@@ -64,6 +66,7 @@ export function UserFeedbackOptions({
         reasons={reasons}
         setReasons={setReasons}
         setButtonsType={setButtonsType}
+        setOtherReason={setOtherReason}
       />
       <InputOption
         reasons={reasons}
