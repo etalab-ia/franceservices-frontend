@@ -20,10 +20,10 @@ export function ChatFollowUp() {
     <>
       {conditionDiv && (
         <div>
-          <GlobalRowContainer extraClass="fr-grid-row--center ">
+          <div className="fr-grid-row">
             <AvatarToolsContainer />
             <DisplayStream stream={stream} />
-          </GlobalRowContainer>
+          </div>
           <SourcesAccordion chunks={user.chunks} />
           {!stream.isStreaming && (
             <UserExperience feedback={feedback} setFeedback={setFeedback} />

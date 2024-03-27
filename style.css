@@ -21,6 +21,9 @@
           scrollbar-width: none;  /* Firefox */
     }
   }
+@media(max-width: 992px) {
+.disable-avatar {display: none;}
+}
 html, body {
     height: 100%;
     margin: 0;
@@ -518,7 +521,6 @@ video {
 
 .avatar {
   --tw-bg-opacity: 1;
-  background-color: rgb(245 245 254 / var(--tw-bg-opacity));
   border-radius: 9999px;
   justify-content: center;
   align-items: center;
