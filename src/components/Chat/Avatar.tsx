@@ -4,11 +4,23 @@ import { robotAvatarDescription, userAvatarDescription } from '@constants/chatbo
 import { AvatarContainer } from './AvatarContainer'
 
 export function Avatar({ user }) {
+  const theme = localStorage.getItem('scheme')
+  console.log('theme', theme)
   return (
     <AvatarContainer>
       {user === 'agent' ? (
+        theme === 'dark' ? (
+          <div>
+            <img src={agentAvatar} alt={robotAvatarDescription} />
+          </div>
+        ) : (
+          <div>
+            <img src={agentAvatar} alt={robotAvatarDescription} />
+          </div>
+        )
+      ) : theme === 'dark' ? (
         <div>
-          <img src={agentAvatar} alt={robotAvatarDescription} />
+          <img src={userAvatar} alt={userAvatarDescription} />
         </div>
       ) : (
         <div>
