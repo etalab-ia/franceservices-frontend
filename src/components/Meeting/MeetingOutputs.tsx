@@ -1,19 +1,14 @@
 import Pagination from '@codegouvfr/react-dsfr/Pagination'
+import { meetingAppointmentTitle } from '@constants/meeting'
 import type { Chunk, RootState, UserHistory, WebService } from '@types'
+import { CurrQuestionContext } from '@utils/context/questionContext'
+import { rmContextFromQuestion } from '@utils/setData'
 import Separator from 'components/Global/Separator'
 import { useContext, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import {
-  meetingAppointmentInformations,
-  meetingAppointmentTitle,
-} from '@constants/meeting'
-import { CurrQuestionContext } from '@utils/context/questionContext'
-import { rmContextFromQuestion } from '@utils/setData'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { UsefulLinks } from './UsefulLinks'
-import { useFetch } from '@utils/hooks'
-import { streamUrl } from '@api'
 
 /*****************************************************************************************************
     Displays Albert's response and the modify button

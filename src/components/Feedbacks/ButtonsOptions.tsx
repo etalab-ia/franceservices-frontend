@@ -9,32 +9,45 @@ export function ButtonsOptions({
   buttonsType,
   reasons,
   setReasons,
+  setButtonsType,
+  setOtherReason,
 }: {
   isFirst: boolean
   buttonsType: typeof satisfiedButtons | typeof unsatisfiedButtons
   reasons: string[]
   setReasons: (reasons: string[]) => void
+  setOtherReason: React.Dispatch<React.SetStateAction<string>>
+  setButtonsType: any
 }) {
-  buttonsType
   const handleClick = (index: number) => {
-    const reasonValue = Object.values(buttonsType[index])[0]
-
-    if (reasons.includes(reasonValue)) {
-      setReasons(reasons.filter((reason) => reason !== reasonValue))
-    } else {
-      setReasons([...reasons, reasonValue])
-      if (reasonValue === 'other') return
+    if (isOtherReasonButton(buttonsType[index])) {
+      const newArray = buttonsType.filter((b) => b.type !== buttonsType[index].type)
+      console.log('newArray', newArray)
+      setButtonsType(newArray)
+    }
+    const reasonValue = buttonsType[index].type
+    console.log('buttonsType', buttonsType)
+    if (!reasonValue.includes('tag-')) {
+      if (reasons.includes(reasonValue)) {
+        setReasons(reasons.filter((reason) => reason !== reasonValue))
+        if (reasonValue === 'other') {
+          setOtherReason('')
+        }
+      } else {
+        setReasons([...reasons, reasonValue])
+      }
     }
   }
 
   return (
     <div className="wrap-message">
       {isFirst &&
-        buttonsType.map((button, index: number) => {
-          const reasonValue = Object.values(buttonsType[index])[0]
-          const classNames = reasons.includes(reasonValue)
-            ? 'fr-background-action-high--blue-france'
-            : 'bg-[white]'
+        buttonsType.map((button: { text: string; type: string }, index: number) => {
+          const reasonValue = buttonsType[index].type
+          const classNames =
+            reasons.includes(reasonValue) || isOtherReasonButton(button)
+              ? 'fr-background-action-high--blue-france'
+              : 'bg-[white]'
 
           return (
             <div key={index}>
@@ -45,12 +58,12 @@ export function ButtonsOptions({
               >
                 <p
                   className={
-                    reasons.includes(reasonValue)
+                    reasons.includes(reasonValue) || isOtherReasonButton(button)
                       ? 'text-white'
                       : 'fr-text-action-high--blue-france'
                   }
                 >
-                  {Object.keys(button)[0]}
+                  {button.text}
                 </p>
               </button>
             </div>
@@ -58,4 +71,8 @@ export function ButtonsOptions({
         })}
     </div>
   )
+}
+
+function isOtherReasonButton(button) {
+  return button.type.includes('tag-')
 }

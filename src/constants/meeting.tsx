@@ -98,9 +98,10 @@ export const meetingPromptExamples = [
   },
 ]
 
-export const meetingContextualInfosTitle = `Informations contextuelles`
-export const meetingGenerateButton = `Générer la fiche rendez-vous`
-export const meetingAppointmentInformations = `Votre question sur la situation de l’usager`
+export const meetingContextualInfosTitle = 'Informations contextuelles'
+export const meetingGenerateButton = 'Échanger avec Albert'
+export const meetingAppointmentInformations =
+  'Votre question sur la situation de l’usager'
 export const meetingAppointmentTitle = 'Échanger avec Albert'
 
 export const meetingDefaultQuestionsIntroduction = (
