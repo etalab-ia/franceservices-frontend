@@ -20,7 +20,7 @@ export function DisplayArrayMessages({ messages }) {
 
   return (
     <GlobalRowContainer>
-      <GlobalRowContainer extraClass="fr-grid-row--center bg-red-500">
+      <GlobalRowContainer extraClass="fr-grid-row--center ">
         <Avatar user="agent" />
         <StreamingMessage>{messages[activeTab - 1]}</StreamingMessage>
       </GlobalRowContainer>
@@ -81,10 +81,10 @@ function SourceCard({
   source,
 }: Chunk) {
   return (
-    <a href={url} target="_blank" rel="noreferrer">
-      <div className="bg-[#f4f6ff] fr-p-2w fr-grid-row ">
+    <a href={url} target="_blank" rel="noreferrer" className="external-link-icon">
+      <div className="bg-[#f4f6ff] fr-p-2w fr-grid-row">
         <div className="flex font-bold fr-text-title--blue-france">{'Fiche: '}</div>
-        <div className="mb- text-justify  fr-text-title--blue-france">{title}</div>
+        <div className="mb- text-justify fr-text-title--blue-france">{title}</div>
       </div>
     </a>
   )
