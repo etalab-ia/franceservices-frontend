@@ -18,7 +18,7 @@
     "push-major": "npm version major && git push"
   },
   "dependencies": {
-    "@codegouvfr/react-dsfr": "^1.0.4",
+    "@codegouvfr/react-dsfr": "^1.9.5",
     "@reduxjs/toolkit": "^1.9.7",
     "@tanstack/react-query": "^5.24.8",
     "@types/event-source-polyfill": "^1.0.5",
