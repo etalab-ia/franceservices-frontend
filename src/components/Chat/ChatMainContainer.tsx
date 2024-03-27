@@ -19,7 +19,6 @@ export function ChatMainContainer({
 }: { archive: boolean; setQuestionInput: any }) {
   const user = useSelector((state: RootState) => state.user)
   const stream = useSelector((state: RootState) => state.stream)
-  console.log('user', user)
   const dispatch = useDispatch()
 
   useEffect(() => {
