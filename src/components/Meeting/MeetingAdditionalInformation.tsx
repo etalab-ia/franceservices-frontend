@@ -1,5 +1,5 @@
-import { MeetingInputContext } from '@types'
 import { meetingContextualInfosTitle } from '@constants/meeting'
+import type { MeetingInputContext } from '@types'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { GlobalSubtitle } from '../Global/GlobalSubtitle'
 import { MeetingAdditionalInput } from './MeetingAdditionalInput'

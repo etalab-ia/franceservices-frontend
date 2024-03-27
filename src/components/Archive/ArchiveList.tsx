@@ -1,6 +1,7 @@
-import { Chat } from '@types'
-import React, { useState } from 'react'
+import type { Chat } from '@types'
 import { archiveHeaders, setArchiveBody } from '@utils/archive'
+import type React from 'react'
+import { useState } from 'react'
 import { GlobalTitle } from '../Global/GlobalTitle'
 
 interface ArchiveListProps {

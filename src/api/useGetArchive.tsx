@@ -1,6 +1,6 @@
 import { getChunksUrl, getStreamsUrl } from '@api'
 import { useQuery } from '@tanstack/react-query'
-import { UserHistory } from '@types'
+import type { UserHistory } from '@types'
 
 export function useGetArchive(chatId: number) {
   return useQuery({

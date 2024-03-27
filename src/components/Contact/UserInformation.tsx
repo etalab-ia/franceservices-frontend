@@ -1,7 +1,7 @@
 import Input from '@codegouvfr/react-dsfr/Input'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
-import { type formDataTypes } from './ContactForm'
+import type { formDataTypes } from './ContactForm'
 
 export function UserInformation({
   setFormData,

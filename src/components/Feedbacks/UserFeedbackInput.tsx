@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react'
-import type { Feedback } from '@types'
 import {
   askingQualityPrecisions,
   primaryButtons,
   secondaryButtons,
 } from '@constants/feedback'
+import type { Feedback } from '@types'
+import { useEffect, useState } from 'react'
+import { FeedbackThanksMessage } from './FeedbackThanksMessage'
 import { UserFeedbackOptions } from './UserFeedbackOptions'
 import { UserFeedbackResume } from './UserFeedbackResume'
-import { FeedbackThanksMessage } from './FeedbackThanksMessage'
 
 /**
  * Prints options

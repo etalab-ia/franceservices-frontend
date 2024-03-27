@@ -1,7 +1,7 @@
 import { chatUrl } from '@api'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { meetingGenerateButton } from '@constants/meeting'
-import { MeetingInputContext, RootState } from '@types'
+import type { MeetingInputContext, RootState } from '@types'
 import { CurrQuestionContext } from '@utils/context/questionContext'
 import { useFetch } from '@utils/hooks'
 import { addContextToQuestion, setHeaders } from '@utils/setData'
