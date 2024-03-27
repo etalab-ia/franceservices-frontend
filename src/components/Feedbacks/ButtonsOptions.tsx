@@ -10,11 +10,13 @@ export function ButtonsOptions({
   reasons,
   setReasons,
   setButtonsType,
+  setOtherReason,
 }: {
   isFirst: boolean
   buttonsType: typeof satisfiedButtons | typeof unsatisfiedButtons
   reasons: string[]
   setReasons: (reasons: string[]) => void
+  setOtherReason: React.Dispatch<React.SetStateAction<string>>
   setButtonsType: any
 }) {
   const handleClick = (index: number) => {
@@ -25,10 +27,15 @@ export function ButtonsOptions({
     }
     const reasonValue = buttonsType[index].type
     console.log('buttonsType', buttonsType)
-    if (reasons.includes(reasonValue)) {
-      setReasons(reasons.filter((reason) => reason !== reasonValue))
-    } else {
-      setReasons([...reasons, reasonValue])
+    if (!reasonValue.includes('tag-')) {
+      if (reasons.includes(reasonValue)) {
+        setReasons(reasons.filter((reason) => reason !== reasonValue))
+        if (reasonValue === 'other') {
+          setOtherReason('')
+        }
+      } else {
+        setReasons([...reasons, reasonValue])
+      }
     }
   }
 
@@ -67,6 +74,5 @@ export function ButtonsOptions({
 }
 
 function isOtherReasonButton(button) {
-  console.log('button', button)
   return button.type.includes('tag-')
 }
