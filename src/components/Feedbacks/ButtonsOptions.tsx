@@ -45,7 +45,8 @@ export function ButtonsOptions({
         buttonsType.map((button: { text: string; type: string }, index: number) => {
           const reasonValue = buttonsType[index].type
           const classNames =
-            reasons.includes(reasonValue) || isOtherReasonButton(button)
+            reasons.includes(reasonValue) ||
+            (isOtherReasonButton(button) && reasons.includes('other'))
               ? 'fr-background-action-high--blue-france'
               : 'bg-[white]'
 
@@ -58,7 +59,8 @@ export function ButtonsOptions({
               >
                 <p
                   className={
-                    reasons.includes(reasonValue) || isOtherReasonButton(button)
+                    reasons.includes(reasonValue) ||
+                    (isOtherReasonButton(button) && reasons.includes('other'))
                       ? 'text-white'
                       : 'fr-text-action-high--blue-france'
                   }
