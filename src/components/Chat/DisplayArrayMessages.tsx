@@ -1,11 +1,10 @@
-import { useState } from 'react'
-import { useEffect } from 'react'
+import type { Chunk, Message, RootState } from '@types'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { Avatar } from './Avatar'
 import { DisplayMessageTab } from './DisplayMessageTab'
 import { StreamingMessage } from './StreamingMessage'
-import type { Chunk, Message, RootState } from '@types'
 
 export function DisplayArrayMessages({ message }: { message: Message }) {
   const tabsLen = message.text.length
