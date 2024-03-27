@@ -34,20 +34,20 @@ export const secondaryButtons = [
 ]
 
 export const satisfiedButtons = [
-  { 'Clair ': 'clear' },
-  { 'Synthétique ': 'concise' },
-  { 'Sources fiables': 'reliable_sources' },
-  { 'Autre raison': 'other' },
+  { text: 'Clair ', type: 'clear' },
+  { text: 'Synthétique ', type: 'concise' },
+  { text: 'Sources fiables', type: 'reliable_sources' },
+  { text: 'Autre raison', type: 'other' },
 ] as const
 
 export const unsatisfiedButtons = [
-  { 'Les éléments sont faux': 'hallucinations' },
-  { 'Manque de sources': 'lack_of_sources' },
-  { 'Trop long': 'too_long' },
-  { 'Incohérent ': 'inconsistent' },
-  { Imprécis: 'imprecise' },
-  { 'Fautes de grammaire': 'grammar_errors' },
-  { 'Autre raison': 'other' },
+  { text: 'Les éléments sont faux', type: 'hallucinations' },
+  { text: 'Manque de sources', type: 'lack_of_sources' },
+  { text: 'Trop long', type: 'too_long' },
+  { text: 'Incohérent ', type: 'inconsistent' },
+  { text: 'Imprécis', type: 'imprecise' },
+  { text: 'Fautes de grammaire', type: 'grammar_errors' },
+  { text: 'Autre raison', type: 'other' },
 ] as const
 
 export const askingQuality = `Quelle est la qualité de ce message ?`
