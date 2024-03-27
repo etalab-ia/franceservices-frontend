@@ -29,7 +29,7 @@ export function UserFeedbackOptions({
   const [buttonsType, setButtonsType] = useState(
     activeTab === 0 ? satisfiedButtons : unsatisfiedButtons
   )
-
+  console.log('reasons ', reasons, ' otherReason ', otherReason)
   useEffect(() => {
     setReasons([])
     setButtonsType(activeTab === 0 ? satisfiedButtons : unsatisfiedButtons)
@@ -44,6 +44,7 @@ export function UserFeedbackOptions({
           message: otherReason,
         })
       e.target.value = ''
+      f
       setReasons(reasons.filter((reason) => reason !== 'Autre raison'))
     }
   })
@@ -62,8 +63,15 @@ export function UserFeedbackOptions({
         buttonsType={buttonsType}
         reasons={reasons}
         setReasons={setReasons}
+        setButtonsType={setButtonsType}
       />
-      <InputOption reasons={reasons} setOtherReason={setOtherReason} isFirst={isFirst} />
+      <InputOption
+        reasons={reasons}
+        setOtherReason={setOtherReason}
+        setButtonsType={setButtonsType}
+        isFirst={isFirst}
+        buttonsType={buttonsType}
+      />
       <UserFeedbackResume feedback={feedback} />
       <ConfirmationButton
         reasons={reasons}

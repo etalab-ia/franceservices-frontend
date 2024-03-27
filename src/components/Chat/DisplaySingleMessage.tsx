@@ -1,6 +1,13 @@
+import { Chunk } from '@types'
 import { Avatar } from './Avatar'
+import { useState } from 'react'
 
-export const DisplaySingleMessage = ({ sender, text, isFirst }) => {
+export const DisplaySingleMessage = ({
+  sender,
+  text,
+  isFirst,
+  chunks,
+}: { sender: 'user' | 'agent'; text: string[]; isFirst: boolean; chunks: Chunk[] }) => {
   const isUser = sender === 'user'
   const classNames = isUser
     ? isFirst

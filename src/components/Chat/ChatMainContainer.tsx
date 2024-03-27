@@ -1,12 +1,8 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@types'
 import { scrollToBottom } from '@utils/manageEffects'
-import { UserMessage } from '../User/UserMessage'
-import { ChatHeightContainer } from './ChatHeightContainer'
-import { ChatOverflowManagementContainer } from './ChatOverflowManagementContainer'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Display } from './Display'
-import { set } from 'valibot'
 
 // TODO WHEN BACK IS READY: change archive type
 /*
@@ -23,7 +19,7 @@ export function ChatMainContainer({
 }: { archive: boolean; setQuestionInput: any }) {
   const user = useSelector((state: RootState) => state.user)
   const stream = useSelector((state: RootState) => state.stream)
-
+  console.log('user', user)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -35,28 +31,21 @@ export function ChatMainContainer({
   }, [user, stream, dispatch])
   return (
     <>
-      <ChatHeightContainer>
+      <div className="">
         {user.messages.length <= 0 && (
           <QuestionsSuggestionList
             setQuestionInput={setQuestionInput}
             questions={['test', 'test2', 'test3']}
           />
         )}
-        <ChatOverflowManagementContainer>
+        <div className="flex flex-grow overflow-y-scroll overflow-x-hidden">
           {archive ? (
             <Display messages={[]} archive={true} />
           ) : (
             <Display messages={user.messages} archive={false} />
           )}
-        </ChatOverflowManagementContainer>
-      </ChatHeightContainer>
-      {/*       {!archive && (
-        <UserMessage
-          setGenerate={setGenerate}
-          questionInput={questionInput}
-          setQuestionInput={setQuestionInput}
-        />
-      )} */}
+        </div>
+      </div>
     </>
   )
 }
