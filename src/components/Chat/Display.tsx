@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { type Message, type RootState } from '@types'
+import type { Message, RootState } from '@types'
 import { ChatFollowUp } from './ChatFollowUp'
 import { DisplayArrayMessages } from './DisplayArrayMessages'
 import { DisplaySingleMessage } from './DisplaySingleMessage'
@@ -17,7 +17,7 @@ export function Display({
     <GlobalChatContainer>
       {messages.map((message, index) => {
         return Array.isArray(message.text) ? (
-          <DisplayArrayMessages key={index} messages={message.text} />
+          <DisplayArrayMessages key={index} message={message} />
         ) : (
           <DisplaySingleMessage
             key={index}
