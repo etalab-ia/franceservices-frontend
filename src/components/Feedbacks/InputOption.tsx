@@ -23,9 +23,10 @@ export function InputOption({
   setButtonsType: any
   buttonsType: typeof satisfiedButtons | typeof unsatisfiedButtons
 }) {
+  const [inputValue, setInputValue] = useState('')
   const [errorDuplicate, setErrorDuplicate] = useState(false)
   const handleNewReason = (e) => {
-    setOtherReason(e.target.value)
+    setInputValue(e.target.value)
   }
   const handleEnter = (e) => {
     if (e.key === 'Enter' && e.target.name === 'otherReason') {
@@ -34,20 +35,35 @@ export function InputOption({
         setErrorDuplicate(true)
         return
       }
-      setOtherReason(e.target.value)
-      setButtonsType((p) => [
-        ...p,
-        { text: e.target.value, type: `tag-${e.target.value}` },
-      ])
+      setOtherReason(inputValue)
+      setButtonsType((p) => [...p, { text: inputValue, type: `tag-${inputValue}` }])
       e.target.value = ''
+      setInputValue('')
+
       setErrorDuplicate(false)
     }
   }
+  function handleClick(e) {
+    if (buttonsType.find((r) => r.text === inputValue)) {
+      setErrorDuplicate(true)
+      return
+    }
+    setOtherReason(inputValue)
+    setButtonsType((p) => [...p, { text: inputValue, type: `tag-${inputValue}` }])
+    setInputValue('')
+    setErrorDuplicate(false)
+  }
+
   return (
     <>
       {(reasons.includes('other') || !isFirst) && (
         <Input
-          iconId="fr-icon-arrow-right-line"
+          addon={
+            <button
+              className="fr-btn fr-btn-- fr-icon-arrow-right-line"
+              onClick={handleClick}
+            />
+          }
           label="Autre raison"
           nativeInputProps={{
             role: feedbackAdditionalInput,
@@ -55,6 +71,7 @@ export function InputOption({
             placeholder: askingReasons,
             onChange: handleNewReason,
             onKeyDown: handleEnter,
+            value: inputValue,
           }}
         />
       )}
