@@ -65,7 +65,7 @@ function SourcesAccordion({ chunks }: { chunks: Chunk[] }) {
             key={index}
             style={{ display: isAccordionOpen ? 'block' : 'none' }}
           >
-            <SourceCard {...chunk} />
+            <SourceCard title={chunk.title} url={chunk.url} />
           </div>
         ))}
       </div>
@@ -73,15 +73,7 @@ function SourcesAccordion({ chunks }: { chunks: Chunk[] }) {
   )
 }
 
-function SourceCard({
-  title,
-  url,
-  introduction,
-  text,
-  context,
-  surtitre,
-  source,
-}: Chunk) {
+function SourceCard({ title, url }: { title: string; url: string }) {
   return (
     <a href={url} target="_blank" rel="noreferrer" className="external-link-icon ">
       <div className="bg-[#f4f6ff] fr-p-2w fr-grid-row max-w-[248px] h-[128px] ">
