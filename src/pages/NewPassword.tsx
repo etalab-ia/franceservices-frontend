@@ -9,6 +9,7 @@ import { LoginContainer } from '../components/Auth/LoginContainer'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
 import ShowError from 'components/Error/ShowError'
+import { contactEmailAdress } from '@constants/global'
 
 export function NewPassword({ authFailed, setAuthFailed }) {
   const [password, setPassword] = useState('')
@@ -46,10 +47,7 @@ export function NewPassword({ authFailed, setAuthFailed }) {
   if (!token)
     return (
       <div className="fr-container">
-        <ShowError
-          title={'Token invalide, veuillez contacter notre équipe'}
-          message="contact@albert.fr"
-        />
+        <ShowError message={'Token invalide, veuillez contacter notre équipe'} />
       </div>
     )
 
