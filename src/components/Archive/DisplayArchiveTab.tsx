@@ -13,7 +13,7 @@ export function DisplayArchiveTabs() {
   if (isError || !chats || !chats.length)
     return (
       <ShowError
-        title={`Erreur ${error && error.cause.status}`}
+        errorNumber={error && error.cause.status}
         message={`Nous n'avons pas réussi a trouver vos archives.`}
       />
     )
