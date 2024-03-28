@@ -2,8 +2,8 @@ import { Input } from '@codegouvfr/react-dsfr/Input'
 import {
   askingReasons,
   feedbackAdditionalInput,
-  satisfiedButtons,
-  unsatisfiedButtons,
+  type satisfiedButtons,
+  type unsatisfiedButtons,
 } from '@constants/feedback'
 import { useState } from 'react'
 

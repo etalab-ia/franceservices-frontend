@@ -1,7 +1,7 @@
-import { RootState } from '@types'
+import { meetingQRTitle } from '@constants/meeting'
+import type { RootState } from '@types'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { meetingQRTitle } from '@constants/meeting'
 
 /*****************************************************************************************
 	

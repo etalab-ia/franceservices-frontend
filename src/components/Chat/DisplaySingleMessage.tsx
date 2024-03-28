@@ -1,6 +1,6 @@
-import { Chunk } from '@types'
-import { Avatar } from './Avatar'
+import type { Chunk } from '@types'
 import { useState } from 'react'
+import { Avatar } from './Avatar'
 
 export const DisplaySingleMessage = ({
   sender,

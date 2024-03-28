@@ -1,4 +1,4 @@
-import { ArchiveType, RootState } from '@types'
+import type { ArchiveType, RootState } from '@types'
 import { useContext, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 

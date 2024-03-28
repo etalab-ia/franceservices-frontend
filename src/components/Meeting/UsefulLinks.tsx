@@ -1,4 +1,4 @@
-import { Tile as TileType, WebService } from '@types'
+import type { Tile as TileType, WebService } from '@types'
 
 /*
  * Tiles containing useful links for the meeting's response

@@ -1,6 +1,6 @@
 import { chatUrl, indexesUrl } from '@api'
 import Button from '@codegouvfr/react-dsfr/Button'
-import { RootState } from '@types'
+import type { RootState } from '@types'
 import { CurrQuestionContext } from '@utils/context/questionContext'
 import { generateStream, useFetch } from '@utils/hooks'
 import { getIndexes, setHeaders } from '@utils/setData'

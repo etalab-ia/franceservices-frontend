@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { ArchiveType, InitialFeedback, RootState } from '@types'
 import { getChunksUrl } from '@api'
 import { resultMeetingTitle } from '@constants/meeting'
+import { ArchiveType, InitialFeedback, type RootState } from '@types'
 import { useFetch } from '@utils/hooks'
 import { setHeaders } from '@utils/setData'
+import Separator from 'components/Global/Separator'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Feedback } from '../Feedbacks/Feedback'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { GlobalSecondaryTitle } from '../Global/GlobalSecondaryTitle'
 import { GlobalStream } from '../Global/GlobalStream'
-import Separator from 'components/Global/Separator'
 
 /*****************************************************************************************
 

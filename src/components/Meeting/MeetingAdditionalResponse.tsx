@@ -1,5 +1,5 @@
 import { indexesUrl } from '@api'
-import { RootState } from '@types'
+import type { RootState } from '@types'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getIndexes } from 'utils/setData'

@@ -1,7 +1,7 @@
 import {
   feedbackButtonsChoice,
-  satisfiedButtons,
-  unsatisfiedButtons,
+  type satisfiedButtons,
+  type unsatisfiedButtons,
 } from '@constants/feedback'
 
 export function ButtonsOptions({
@@ -22,11 +22,9 @@ export function ButtonsOptions({
   const handleClick = (index: number) => {
     if (isOtherReasonButton(buttonsType[index])) {
       const newArray = buttonsType.filter((b) => b.type !== buttonsType[index].type)
-      console.log('newArray', newArray)
       setButtonsType(newArray)
     }
     const reasonValue = buttonsType[index].type
-    console.log('buttonsType', buttonsType)
     if (!reasonValue.includes('tag-')) {
       if (reasons.includes(reasonValue)) {
         setReasons(reasons.filter((reason) => reason !== reasonValue))

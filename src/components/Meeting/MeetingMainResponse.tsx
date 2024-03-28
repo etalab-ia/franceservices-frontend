@@ -1,7 +1,7 @@
 import { Button } from '@codegouvfr/react-dsfr/Button'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { MeetingInputContext, RootState } from 'types'
+import type { MeetingInputContext, RootState } from 'types'
 import { emitCloseStream } from 'utils/eventsEmitter'
 import { generateStream } from 'utils/hooks'
 import { addContextToQuestion } from 'utils/setData'
