@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { LoginContainer } from '../components/Auth/LoginContainer'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
+import ShowError from 'components/Error/ShowError'
 
 export function NewPassword({ authFailed, setAuthFailed }) {
   const [password, setPassword] = useState('')
@@ -41,6 +42,16 @@ export function NewPassword({ authFailed, setAuthFailed }) {
     return (window.location.href = '/login')
   }
   const fields = signupFields.slice(2, signupFields.length)
+
+  if (!token)
+    return (
+      <div className="fr-container">
+        <ShowError
+          title={'Token invalide, veuillez contacter notre équipe'}
+          message="contact@albert.fr"
+        />
+      </div>
+    )
 
   return (
     <LoginContainer>
