@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction } from 'react'
-import { UserAuth } from 'utils/auth'
+import type { Dispatch, SetStateAction } from 'react'
+import type { UserAuth } from 'utils/auth'
 import { ContactForm } from '../components/Contact/ContactForm'
 
 export function Contact({

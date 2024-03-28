@@ -1,12 +1,12 @@
 import { useGetArchive } from '@api'
 import { Button } from '@codegouvfr/react-dsfr/Button'
-import { Chat, UserHistory } from '@types'
-import React from 'react'
-import ReactToPrint from 'react-to-print'
 import {
   meetingAppointmentInformations,
   meetingAppointmentTitle,
 } from '@constants/meeting'
+import type { Chat, UserHistory } from '@types'
+import React from 'react'
+import ReactToPrint from 'react-to-print'
 import ShowError from '../Error/ShowError'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { GlobalTitle } from '../Global/GlobalTitle'

@@ -1,11 +1,11 @@
-import { RootState } from '@types'
+import { feedbackUrl } from '@api'
+import { thankFeedback } from '@constants/feedback'
+import type { RootState } from '@types'
+import { useFetch } from '@utils/hooks'
+import { setHeaders } from '@utils/setData'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import thumbsDown from '../../../icons/feedbacks/thumbsDown.svg'
-import { feedbackUrl } from '@api'
-import { thankFeedback } from '@constants/feedback'
-import { useFetch } from '@utils/hooks'
-import { setHeaders } from '@utils/setData'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 
 /*

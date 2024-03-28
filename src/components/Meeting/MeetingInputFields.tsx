@@ -1,5 +1,5 @@
-import { MeetingInputContext } from '@types'
 import { meetingTitle } from '@constants/meeting'
+import type { MeetingInputContext } from '@types'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { GlobalTitle } from '../Global/GlobalTitle'
 import { MeetingAdditionalInformations } from './MeetingAdditionalInformation'

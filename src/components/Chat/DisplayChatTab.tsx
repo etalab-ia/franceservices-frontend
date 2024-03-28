@@ -1,10 +1,10 @@
+import type { RootState } from '@types'
+import { UserMessage } from 'components/User/UserMessage'
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { ChatAdditionalContainer } from './ChatAdditionalContainer'
 import { ChatMainContainer } from './ChatMainContainer'
-import { RootState } from '@types'
-import { UserMessage } from 'components/User/UserMessage'
-import { useState } from 'react'
 
 /**********************************************************************************************
 	

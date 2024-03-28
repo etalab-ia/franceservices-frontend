@@ -1,11 +1,11 @@
-import {
+import type {
   Chunk,
+  Message,
+  Question,
   Sheet,
+  User,
   UserHistory,
   WebService,
-  type Message,
-  type Question,
-  type User,
 } from '@types'
 
 /*****************************************************************************************************

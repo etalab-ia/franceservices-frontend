@@ -1,5 +1,5 @@
-import { Feedback as FeedbackType } from '@types'
 import { primaryButtons, secondaryButtons } from '@constants/feedback'
+import type { Feedback as FeedbackType } from '@types'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 
 /**

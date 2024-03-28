@@ -1,13 +1,13 @@
-import { ButtonsGroup } from '@codegouvfr/react-dsfr/ButtonsGroup'
-import { useState } from 'react'
-import { LoginContainer } from '../components/Auth/LoginContainer'
-import { LoginFields } from '../components/Auth/LoginFields'
-import { ButtonInformation } from '../components/Global/ButtonInformation'
 import { resetPasswordUrl } from '@api'
+import { ButtonsGroup } from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { initButtonsSignup } from '@constants/connexion'
 import { changePasswordFailed } from '@constants/errorMessages'
 import { signupFields } from '@constants/inputFields'
 import { useFetch } from '@utils/hooks'
+import { useState } from 'react'
+import { LoginContainer } from '../components/Auth/LoginContainer'
+import { LoginFields } from '../components/Auth/LoginFields'
+import { ButtonInformation } from '../components/Global/ButtonInformation'
 
 export function NewPassword({ authFailed, setAuthFailed }) {
   const [password, setPassword] = useState('')

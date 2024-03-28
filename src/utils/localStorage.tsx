@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction } from 'react'
-import { UserAuth } from './auth'
+import type { Dispatch, SetStateAction } from 'react'
+import type { UserAuth } from './auth'
 import { setUserInfos } from './manageConnexion'
 
 export function checkConnexion(

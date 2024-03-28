@@ -19,7 +19,6 @@ export function ChatMainContainer({
 }: { archive: boolean; setQuestionInput: any }) {
   const user = useSelector((state: RootState) => state.user)
   const stream = useSelector((state: RootState) => state.stream)
-  console.log('user', user)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -31,20 +30,18 @@ export function ChatMainContainer({
   }, [user, stream, dispatch])
   return (
     <>
-      <div className="">
+      <div className=" overflow-y-scroll overflow-x-hidden flex flex-grow ">
         {user.messages.length <= 0 && (
           <QuestionsSuggestionList
             setQuestionInput={setQuestionInput}
             questions={['test', 'test2', 'test3']}
           />
         )}
-        <div className="flex flex-grow overflow-y-scroll overflow-x-hidden">
-          {archive ? (
-            <Display messages={[]} archive={true} />
-          ) : (
-            <Display messages={user.messages} archive={false} />
-          )}
-        </div>
+        {archive ? (
+          <Display messages={[]} archive={true} />
+        ) : (
+          <Display messages={user.messages} archive={false} />
+        )}
       </div>
     </>
   )

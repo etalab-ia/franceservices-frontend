@@ -1,6 +1,6 @@
-import { useSelector } from 'react-redux'
-import { RootState } from '@types'
 import { redoUserQuestion } from '@constants/chatbotProps'
+import type { RootState } from '@types'
+import { useSelector } from 'react-redux'
 import { NotifyArchiving } from '../Archive/NotifyArchiving'
 import { BotQuestion } from '../Global/BotQuestion'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'

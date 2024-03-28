@@ -1,6 +1,6 @@
 import { getChatsUrl } from '@api'
 import { useQuery } from '@tanstack/react-query'
-import { Chat } from '@types'
+import type { Chat } from '@types'
 
 export function useGetChats() {
   return useQuery({

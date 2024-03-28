@@ -1,9 +1,9 @@
-import { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 import { Navigate } from 'react-router-dom'
-import { InitialUserAuth, UserAuth } from './auth'
+import { InitialUserAuth, type UserAuth } from './auth'
 import { useFetch } from './hooks'
 
-export const storeAuth = async (token: string) => {
+const storeAuth = async (token: string) => {
   localStorage.setItem('authToken', token)
 }
 
@@ -34,7 +34,7 @@ export const setUserInfos = async (
   return setUserAuth(InitialUserAuth)
 }
 
-export const rmAuth = () => {
+const rmAuth = () => {
   localStorage.removeItem('authToken')
 }
 
