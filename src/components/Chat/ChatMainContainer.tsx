@@ -30,7 +30,7 @@ export function ChatMainContainer({
   }, [user, stream, dispatch])
   return (
     <>
-      <div className=" overflow-y-scroll overflow-x-hidden flex flex-grow ">
+      <div className=" bg-red-500 flex flex-grow h=full">
         {user.messages.length <= 0 && (
           <QuestionsSuggestionList
             setQuestionInput={setQuestionInput}

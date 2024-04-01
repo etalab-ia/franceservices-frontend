@@ -26,12 +26,9 @@ export function DisplayStream({ stream }: { stream: Stream }) {
   }, [])
 
   return (
-    <GlobalColContainer>
+    <div>
       {conditionStream ? (
-        <GlobalStream
-          response={stream.response}
-          extraClass="streaming fr-mb-4w fr-p-3v fr-ml-3v"
-        />
+        <GlobalStream response={stream.response} extraClass="streaming fr-mb-4w " />
       ) : (
         <StreamingMessage>{stream.historyStream[activeTab - 1]}</StreamingMessage>
       )}
@@ -42,6 +39,6 @@ export function DisplayStream({ stream }: { stream: Stream }) {
         setActiveTab={setActiveTab}
         extraClass="fr-ml-2w"
       />
-    </GlobalColContainer>
+    </div>
   )
 }
