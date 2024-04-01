@@ -1,23 +1,37 @@
-import type { Chunk } from '@types'
-import { useState } from 'react'
+import type { Chunk, RootState } from '@types'
+import { useEffect, useRef, useState } from 'react'
 import { Avatar } from './Avatar'
+import { useSelector } from 'react-redux'
 
+//User's message
 export const DisplaySingleMessage = ({
   sender,
   text,
   isFirst,
   chunks,
-}: { sender: 'user' | 'agent'; text: string[]; isFirst: boolean; chunks: Chunk[] }) => {
+  index,
+}: {
+  sender: 'user' | 'agent'
+  text: string[]
+  isFirst: boolean
+  chunks: Chunk[]
+  index: number
+}) => {
   const isUser = sender === 'user'
-  const classNames = isUser
-    ? isFirst
-      ? 'fr-mt-5w user-message w-full'
-      : `user-message w-full `
-    : ''
+  const classNames = isFirst ? 'fr-mt-5w user-message w-full ' : 'user-message w-full  '
+  const ref = useRef(null)
+  const user = useSelector((state: RootState) => state.user)
 
+  useEffect(() => {
+    if (user.messages.length > 0 && isUser && index === user.messages.length - 1) {
+      console.log('ref')
+      ref.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+    }
+  }, [user.messages])
   return (
-    <div className={classNames}>
-      <div className={`${isUser ? 'fr-mr-2w w-full' : 'fr-ml-2w'}`}>
+    <div className={`${classNames} bg-blue-500`} ref={ref}>
+      <div className="fr-col-1" />
+      <div className={'fr2w w-full fr-col-10'}>
         <p
           className={
             isUser
@@ -28,7 +42,7 @@ export const DisplaySingleMessage = ({
           {text}
         </p>
       </div>
-      {isUser && <Avatar user={sender} />}
+      <div className="fr-col-1">{isUser && <Avatar user={sender} />}</div>
     </div>
   )
 }

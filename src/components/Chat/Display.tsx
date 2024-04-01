@@ -13,6 +13,7 @@ export function Display({
   archive,
 }: { messages: Message[]; archive: boolean }) {
   const user = useSelector((state: RootState) => state.user)
+
   return (
     <GlobalChatContainer>
       {messages.map((message, index) => {
@@ -21,6 +22,7 @@ export function Display({
         ) : (
           <DisplaySingleMessage
             key={index}
+            index={index}
             sender={message.sender}
             text={message.text}
             isFirst={index === 0}

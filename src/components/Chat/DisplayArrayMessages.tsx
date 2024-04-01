@@ -19,9 +19,14 @@ export function DisplayArrayMessages({ message }: { message: Message }) {
 
   return (
     <GlobalRowContainer>
-      <GlobalRowContainer extraClass="fr-grid-row--center">
-        <Avatar user="agent" />
-        <StreamingMessage>{message.text[activeTab - 1]}</StreamingMessage>
+      <GlobalRowContainer extraClass="fr-grid-row--center ">
+        <div className="fr-col-1">
+          <Avatar user="agent" />
+        </div>
+        <div className="fr-col-10">
+          <StreamingMessage>{message.text[activeTab - 1]}</StreamingMessage>
+        </div>
+        <div className="fr-col-1" />
       </GlobalRowContainer>
       <DisplayMessageTab
         isDisplayable={conditionTab}
@@ -30,7 +35,12 @@ export function DisplayArrayMessages({ message }: { message: Message }) {
         setActiveTab={setActiveTab}
         extraClass="fr-ml-10w"
       />
-      <SourcesAccordion chunks={message.chunks} />
+      <div className="fr-grid-row fr-col">
+        <div className="fr-col-1" />
+        <div className="fr-col-11">
+          <SourcesAccordion chunks={message.chunks} />
+        </div>
+      </div>
     </GlobalRowContainer>
   )
 }
@@ -75,7 +85,7 @@ export function SourcesAccordion({ chunks }: { chunks: Chunk[] }) {
 function SourceCard({ title, url }: { title: string; url: string }) {
   return (
     <a href={url} target="_blank" rel="noreferrer" className="external-link-icon ">
-      <div className="bg-[#f4f6ff] fr-p-2w  w-[248px] h-[128px] rounded">
+      <div className="bg-[#f4f6ff] fr-p-2w  w-[248px] h-[128px] rounded transition ease-in-out hover:opacity-70 hover:scale-105 active:scale-100">
         <div className="flex font-bold fr-mb-2v fr-text-title--blue-france">
           {'Fiche: \n'}
         </div>
