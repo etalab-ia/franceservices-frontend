@@ -176,14 +176,14 @@ export const Root = () => {
         />
         <Route path="*" element={<Error404 />} />
       </Routes>
-
+      {/* 
       <Footer
         bottomItems={[headerFooterDisplayItem]}
         accessibility="partially compliant"
         termsLinkProps={{
           href: '#',
         }}
-      />
+      /> */}
     </div>
   )
 }

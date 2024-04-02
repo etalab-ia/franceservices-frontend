@@ -5,7 +5,6 @@ import { AvatarContainer } from './AvatarContainer'
 
 export function Avatar({ user }) {
   const theme = localStorage.getItem('scheme')
-  console.log('theme', theme)
   return (
     <AvatarContainer>
       {user === 'agent' ? (
