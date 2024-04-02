@@ -85,11 +85,11 @@ export function SourcesAccordion({ chunks }: { chunks: Chunk[] }) {
 function SourceCard({ title, url }: { title: string; url: string }) {
   return (
     <a href={url} target="_blank" rel="noreferrer" className="external-link-icon ">
-      <div className="bg-[#f4f6ff] fr-p-2w  w-[248px] h-[128px] rounded transition ease-in-out hover:opacity-70 hover:scale-105 active:scale-100">
+      <div className="bg-[#f4f6ff] fr-p-2w  w-[248px] h-[128px] rounded transition ease-in-out hover:opacity-70 hover:scale-105 active:scale-100 ">
         <div className="flex font-bold fr-mb-2v fr-text-title--blue-france">
           {'Fiche: \n'}
         </div>
-        <div className="fr-text-title--blue-france">{title}</div>
+        <div className="fr-text-title--blue-france line-clamp-3">{title}</div>
       </div>
     </a>
   )

@@ -18,18 +18,18 @@ export const DisplaySingleMessage = ({
   index: number
 }) => {
   const isUser = sender === 'user'
-  const classNames = isFirst ? 'fr-mt-5w user-message w-full ' : 'user-message w-full  '
+  const classNames = isFirst ? 'fr-mt-5w user-message w-full ' : 'user-message w-full'
   const ref = useRef(null)
   const user = useSelector((state: RootState) => state.user)
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (user.messages.length > 0 && isUser && index === user.messages.length - 1) {
       console.log('ref')
       ref.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
     }
-  }, [user.messages])
+  }, [user.messages]) */
   return (
-    <div className={`${classNames} bg-blue-500`} ref={ref}>
+    <div className={`${classNames} `} ref={ref}>
       <div className="fr-col-1" />
       <div className={'fr2w w-full fr-col-10'}>
         <p

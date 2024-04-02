@@ -4,6 +4,7 @@ import { ChatFollowUp } from './ChatFollowUp'
 import { DisplayArrayMessages } from './DisplayArrayMessages'
 import { DisplaySingleMessage } from './DisplaySingleMessage'
 import { GlobalChatContainer } from './GlobalChatContainer'
+import { useEffect, useRef } from 'react'
 
 /*
  *
@@ -12,8 +13,12 @@ export function Display({
   messages,
   archive,
 }: { messages: Message[]; archive: boolean }) {
+  const endOfMessagesRef = useRef(null)
   const user = useSelector((state: RootState) => state.user)
-
+  useEffect(() => {
+    endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
+  console.log('messages', messages)
   return (
     <GlobalChatContainer>
       {messages.map((message, index) => {
@@ -31,6 +36,7 @@ export function Display({
         )
       })}
       {!archive && <ChatFollowUp />}
+      <div ref={endOfMessagesRef} />
     </GlobalChatContainer>
   )
 }

@@ -30,7 +30,7 @@ export function ChatMainContainer({
   }, [user, stream, dispatch])
   return (
     <>
-      <div className=" bg-red-500 flex flex-grow h=full">
+      <div className="   ">
         {user.messages.length <= 0 && (
           <QuestionsSuggestionList
             setQuestionInput={setQuestionInput}
@@ -55,7 +55,7 @@ function QuestionsSuggestionList({
   setQuestionInput: React.Dispatch<React.SetStateAction<string>>
 }) {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 w-full">
       {questions.map((q, index) => {
         return (
           <div
