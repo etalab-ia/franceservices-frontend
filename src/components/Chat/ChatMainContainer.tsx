@@ -1,5 +1,4 @@
 import type { RootState } from '@types'
-import { scrollToBottom } from '@utils/manageEffects'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Display } from './Display'
@@ -41,29 +40,5 @@ export function ChatMainContainer({
         )}
       </div>
     </>
-  )
-}
-
-function QuestionsSuggestionList({
-  questions,
-  setQuestionInput,
-}: {
-  questions: string[]
-  setQuestionInput: React.Dispatch<React.SetStateAction<string>>
-}) {
-  return (
-    <div className="flex gap-2 w-full ">
-      {questions.map((q, index) => {
-        return (
-          <div
-            onClick={() => setQuestionInput(q)}
-            key={index}
-            className=" fr-background-alt--blue-france rounded bg-contain fr-p-2w fr-text--lg cursor-pointer"
-          >
-            {q}
-          </div>
-        )
-      })}
-    </div>
   )
 }

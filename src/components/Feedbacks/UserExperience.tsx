@@ -25,7 +25,7 @@ export function UserExperience({
       {stream.activeTab === tabsLen && (
         <div className="fr-mb-3w">
           <GlobalRowContainer>
-            <div className="disable-avatar">
+            <div className="hide-on-smallscreen">
               <Avatar user="agent" />
             </div>
             <AskingResponseQuality tabsLen={tabsLen} />

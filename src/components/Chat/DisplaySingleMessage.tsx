@@ -22,8 +22,8 @@ export const DisplaySingleMessage = ({
 
   return (
     <div className={`${classNames} `}>
-      <div className="fr-col-1" />
-      <div className={'fr2w w-full fr-col-10'}>
+      <div className="fr-col-1 hide-on-smallscreen" />
+      <div className={' w-full fr-col fr-col-md-10'}>
         <p
           className={
             isUser
@@ -34,7 +34,9 @@ export const DisplaySingleMessage = ({
           {text}
         </p>
       </div>
-      <div className="fr-col-1">{isUser && <Avatar user={sender} />}</div>
+      <div className="fr-col-1 fr-pl-2w hide-on-smallscreen">
+        {isUser && <Avatar user={sender} />}
+      </div>
     </div>
   )
 }

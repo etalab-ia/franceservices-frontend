@@ -20,13 +20,13 @@ export function DisplayArrayMessages({ message }: { message: Message }) {
   return (
     <GlobalRowContainer>
       <GlobalRowContainer extraClass="fr-grid-row--center ">
-        <div className="fr-col-1">
+        <div className="fr-col-1 hide-on-smallscreen">
           <Avatar user="agent" />
         </div>
-        <div className="fr-col-10">
+        <div className="fr-col-11 fr-col-md-10">
           <StreamingMessage>{message.text[activeTab - 1]}</StreamingMessage>
         </div>
-        <div className="fr-col-1" />
+        <div className="fr-col-1 hide-on-smallscreen" />
       </GlobalRowContainer>
       <DisplayMessageTab
         isDisplayable={conditionTab}
