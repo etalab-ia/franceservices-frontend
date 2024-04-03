@@ -25,9 +25,6 @@ export function ChatMainContainer({
     !archive && dispatch({ type: 'RESET_USER' })
   }, [])
 
-  useEffect(() => {
-    scrollToBottom()
-  }, [user, stream, dispatch])
   return (
     <>
       <div className=" flex flex-col justify-items-center  ">

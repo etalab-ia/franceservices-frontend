@@ -25,7 +25,9 @@ export function UserExperience({
       {stream.activeTab === tabsLen && (
         <div className="fr-mb-3w">
           <GlobalRowContainer>
-            <Avatar user="agent" />
+            <div className="disable-avatar">
+              <Avatar user="agent" />
+            </div>
             <AskingResponseQuality tabsLen={tabsLen} />
           </GlobalRowContainer>
           <div className="flex justify-center">

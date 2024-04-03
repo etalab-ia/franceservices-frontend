@@ -17,30 +17,30 @@ export function Display({
   const user = useSelector((state: RootState) => state.user)
   const stream = useSelector((state: RootState) => state.stream)
   useEffect(() => {
-    endOfMessagesRef.current?.scrollIntoView({
-      block: 'end',
-      inline: 'nearest',
-    })
-  }, [messages, stream.isStreaming])
+    console.log('scroll')
+    endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages, stream])
   console.log('messages', messages)
   return (
-    <GlobalChatContainer>
-      {messages.map((message, index) => {
-        return Array.isArray(message.text) ? (
-          <DisplayArrayMessages key={index} message={message} />
-        ) : (
-          <DisplaySingleMessage
-            key={index}
-            index={index}
-            sender={message.sender}
-            text={message.text}
-            isFirst={index === 0}
-            chunks={user.chunks}
-          />
-        )
-      })}
-      {!archive && <ChatFollowUp />}
-      <div id="endOfMessages" ref={endOfMessagesRef} />
-    </GlobalChatContainer>
+    <div>
+      <div className=" w-full md:w-[992px]" id="chat" ref={endOfMessagesRef}>
+        {messages.map((message, index) => {
+          return Array.isArray(message.text) ? (
+            <DisplayArrayMessages key={index} message={message} />
+          ) : (
+            <DisplaySingleMessage
+              key={index}
+              index={index}
+              sender={message.sender}
+              text={message.text}
+              isFirst={index === 0}
+              chunks={user.chunks}
+            />
+          )
+        })}
+        {!archive && <ChatFollowUp />}
+      </div>
+      <div ref={endOfMessagesRef}></div>
+    </div>
   )
 }
