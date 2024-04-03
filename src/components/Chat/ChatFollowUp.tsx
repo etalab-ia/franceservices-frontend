@@ -19,15 +19,13 @@ export function ChatFollowUp() {
   const user = useSelector((state: RootState) => state.user)
 
   // Scroll into view when the component updates
-  useEffect(() => {
-    followUpRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-  }, [stream, user.messages])
+
   return (
     <>
       {conditionDiv && (
         <div ref={followUpRef}>
-          <div className="fr-grid-row fr-col ">
-            <div className="fr-col-1">
+          <div className="fr-grid-row fr-grid-row--center fr-col ">
+            <div className="fr-col-1 disable-avatar">
               <AvatarToolsContainer />
             </div>
             <div className="fr-col-10">
