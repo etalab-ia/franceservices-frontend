@@ -118,8 +118,9 @@ export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
               disabled={questionInput.trim() === '' || stream.isStreaming}
               className="fr-btn align-end"
               title="Rechercher"
-              iconId="fr-icon-search-line"
+              /* iconId="fr-icon-search-line" */
             >
+              <span className="fr-icon-search-line fr-icon--sm fr-mr-md-1w"></span>
               {window.innerWidth > 992 ? 'Rechercher' : null}
             </Button>
           </div>

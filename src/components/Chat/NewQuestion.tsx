@@ -12,7 +12,7 @@ export function NewQuestion() {
   return (
     <>
       <GlobalRowContainer>
-        <div className="disable-avatar">
+        <div className="hide-on-smallscreen">
           <Avatar user="agent" />
         </div>
         {redoUserQuestion}

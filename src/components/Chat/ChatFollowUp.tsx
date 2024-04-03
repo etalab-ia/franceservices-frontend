@@ -24,14 +24,14 @@ export function ChatFollowUp() {
     <>
       {conditionDiv && (
         <div ref={followUpRef}>
-          <div className="fr-grid-row fr-grid-row--center fr-col ">
-            <div className="fr-col-1 disable-avatar">
+          <div className="fr-grid-row fr-grid-row--center  ">
+            <div className="fr-col-1 hide-on-smallscreen">
               <AvatarToolsContainer />
             </div>
             <div className="fr-col-10">
               <DisplayStream stream={stream} />
             </div>
-            <div className="fr-col-1" />
+            <div className="fr-col-1 hide-on-smallscreen" />
           </div>
 
           <div className="fr-grid-row fr-col ">

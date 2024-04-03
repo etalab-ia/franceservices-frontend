@@ -51,10 +51,10 @@ function NewChatHeader({ setQuestionInput }) {
         </p>
         <div className="fr-grid-row fr-grid-row--middle fr-mb-4w fr-background-alt--blue-france fr-p-2w">
           <span
-            className="fr-col-1 fr-icon-info-fill fr-text-action-high--blue-france "
+            className="fr-col-1 fr-icon-info-fill fr-text-action-high--blue-france fr-mr-2w fr-mr-md-1v"
             aria-hidden="true"
           ></span>
-          <p className="fr-col">
+          <p className="fr-col-10">
             Je suis toujours en plein développement, et ne demande qu'à m'améliorer !
             N’hésitez pas à faire des retours sur les résultats que je vous propose pour
             me dire vous les trouvez bien 👍 ou non 👎.

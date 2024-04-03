@@ -22,7 +22,7 @@
     }
   }
 @media(max-width: 992px) {
-.disable-avatar {display: none;}
+.hide-on-smallscreen {display: none;}
 }
 html, body {
     height: 100%;
@@ -601,7 +601,6 @@ video {
 }
 
 .streaming {
-  text-align: justify;
   border-radius: 10px;
 }
 
