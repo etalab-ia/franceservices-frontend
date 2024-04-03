@@ -15,9 +15,13 @@ export function Display({
 }: { messages: Message[]; archive: boolean }) {
   const endOfMessagesRef = useRef(null)
   const user = useSelector((state: RootState) => state.user)
+  const stream = useSelector((state: RootState) => state.stream)
   useEffect(() => {
-    endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
+    endOfMessagesRef.current?.scrollIntoView({
+      block: 'end',
+      inline: 'nearest',
+    })
+  }, [messages, stream.isStreaming])
   console.log('messages', messages)
   return (
     <GlobalChatContainer>
@@ -36,7 +40,7 @@ export function Display({
         )
       })}
       {!archive && <ChatFollowUp />}
-      <div ref={endOfMessagesRef} />
+      <div id="endOfMessages" ref={endOfMessagesRef} />
     </GlobalChatContainer>
   )
 }

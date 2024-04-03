@@ -34,7 +34,7 @@ export const Root = () => {
   useEffect(() => {
     checkConnexion(setUserAuth, userUrl).finally(() => setIsLoading(false))
   }, [dispatch])
-
+  console.log('location', location)
   if (isLoading) {
     return <div></div>
   }
@@ -176,14 +176,16 @@ export const Root = () => {
         />
         <Route path="*" element={<Error404 />} />
       </Routes>
-      {/* 
-      <Footer
-        bottomItems={[headerFooterDisplayItem]}
-        accessibility="partially compliant"
-        termsLinkProps={{
-          href: '#',
-        }}
-      /> */}
+
+      {location.pathname != '/chat' && (
+        <Footer
+          bottomItems={[headerFooterDisplayItem]}
+          accessibility="partially compliant"
+          termsLinkProps={{
+            href: '#',
+          }}
+        />
+      )}
     </div>
   )
 }

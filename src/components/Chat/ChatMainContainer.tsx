@@ -30,13 +30,13 @@ export function ChatMainContainer({
   }, [user, stream, dispatch])
   return (
     <>
-      <div className="   ">
-        {user.messages.length <= 0 && (
+      <div className=" flex flex-col justify-items-center  ">
+        {/*         {user.messages.length <= 0 && (
           <QuestionsSuggestionList
             setQuestionInput={setQuestionInput}
             questions={['test', 'test2', 'test3']}
           />
-        )}
+        )} */}
         {archive ? (
           <Display messages={[]} archive={true} />
         ) : (
@@ -55,7 +55,7 @@ function QuestionsSuggestionList({
   setQuestionInput: React.Dispatch<React.SetStateAction<string>>
 }) {
   return (
-    <div className="flex gap-2 w-full">
+    <div className="flex gap-2 w-full ">
       {questions.map((q, index) => {
         return (
           <div
