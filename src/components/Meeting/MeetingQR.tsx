@@ -44,7 +44,7 @@ export function MeetingQR({
   return (
     <>
       {relatedQuestions.length !== 0 && (
-        <p className="fr-pt-3w fr-mb-2w">{meetingQRTitle}</p>
+        <p className="fr-pt-3w fr-mb-2w flex md:flex-col">{meetingQRTitle}</p>
       )}
       {relatedQuestions.slice(0, 3).map((rq, index) => {
         return (
@@ -70,17 +70,19 @@ export function MeetingQR({
                 cursor: 'pointer',
               }}
             >
-              <div
-                style={{
-                  color: '#3A3A3A',
-                  fontSize: 16,
-                  fontFamily: 'Marianne',
-                  fontWeight: '400',
-                  wordWrap: 'break-word',
-                }}
-              >
-                {rq.question}
-              </div>
+              {window.innerWidth < 992 && (
+                <div
+                  style={{
+                    color: '#3A3A3A',
+                    fontSize: 16,
+                    fontFamily: 'Marianne',
+                    fontWeight: '400',
+                    wordWrap: 'break-word',
+                  }}
+                >
+                  {rq.question}
+                </div>
+              )}
             </div>
           </button>
         )
