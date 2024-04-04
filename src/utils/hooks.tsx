@@ -36,27 +36,7 @@ function handleStreamMessage(e, dispatch, stream_chat, id: number) {
     const jsonData = JSON.parse(e.data)
     if (jsonData == '[DONE]') {
       stream_chat.close()
-      const token = localStorage.getItem('authToken')
-      /*       const test = useFetch(`${streamUrl}/${id}`, 'GET', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-
-        data: null,
-      }).then((res) => {
-        console.table('stream/streamID', res.rag_sources)
-        const sources = fetch(getChunksUrl, {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ uids: res.rag_sources }),
-        }).then((res) => { res.json().then((data) => console.log('json', data))})
-      }) */
       dispatch({ type: 'SET_STREAM_ID', nextStreamId: 0 })
-
       return dispatch({ type: 'STOP_AGENT_STREAM' })
     }
     return dispatch({ type: 'GET_AGENT_STREAM', nextResponse: jsonData })

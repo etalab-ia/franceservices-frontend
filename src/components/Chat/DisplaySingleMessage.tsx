@@ -1,33 +1,29 @@
 import type { Chunk, RootState } from '@types'
 import { useEffect, useRef, useState } from 'react'
-import { Avatar } from './Avatar'
 import { useSelector } from 'react-redux'
+import { Avatar } from './Avatar'
 
 //User's message
 export const DisplaySingleMessage = ({
   sender,
   text,
   isFirst,
-  chunks,
-  index,
 }: {
   sender: 'user' | 'agent'
   text: string[]
   isFirst: boolean
-  chunks: Chunk[]
-  index: number
 }) => {
   const isUser = sender === 'user'
-  const classNames = isFirst ? 'fr-mt-5w user-message w-full ' : 'user-message w-full'
+  const classNames = isFirst ? 'fr-mt-5w user-message w-full' : 'user-message w-full'
 
   return (
-    <div className={`${classNames} `}>
+    <div className={`${classNames}`}>
       <div className="fr-col-1 hide-on-smallscreen" />
-      <div className={' w-full fr-col fr-col-md-10'}>
+      <div className={'fr-col fr-col-md-10 w-full'}>
         <p
           className={
             isUser
-              ? 'rounded fr-mb-4w fr-p-2w fr-background-action-low--blue-france'
+              ? 'fr-mb-4w fr-p-2w fr-background-action-low--blue-france rounded'
               : 'agent-chat fr-mb-4w fr-p-2w'
           }
         >

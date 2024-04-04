@@ -1,6 +1,6 @@
 import { robotAvatarDescription, userAvatarDescription } from '@constants/chatbotProps'
-import userAvatar from '../../../icons/chat/Bulle-Utilisateur.svg'
 import agentAvatar from '../../../icons/chat/Bulle-Albert.svg'
+import userAvatar from '../../../icons/chat/Bulle-Utilisateur.svg'
 import { AvatarContainer } from './AvatarContainer'
 
 export function Avatar({ user }) {
