@@ -38,7 +38,8 @@ export type UserHistory = {
 
 export type Message = {
   text: string[]
-  sources: Chunk[]
+  chunks: Chunk[]
+  sheets: Sheet[]
   sender: 'user' | 'agent'
 }
 

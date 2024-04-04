@@ -1,10 +1,9 @@
 import type { Message, RootState } from '@types'
+import { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { ChatFollowUp } from './ChatFollowUp'
 import { DisplayArrayMessages } from './DisplayArrayMessages'
 import { DisplaySingleMessage } from './DisplaySingleMessage'
-import { GlobalChatContainer } from './GlobalChatContainer'
-import { useEffect, useRef } from 'react'
 
 /*
  *
@@ -17,24 +16,21 @@ export function Display({
   const user = useSelector((state: RootState) => state.user)
   const stream = useSelector((state: RootState) => state.stream)
   useEffect(() => {
-    console.log('scroll')
     endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, stream])
   console.log('messages', messages)
   return (
     <div>
-      <div className=" w-full md:w-[992px]" id="chat" ref={endOfMessagesRef}>
+      <div className="w-full md:w-[992px]" id="chat" ref={endOfMessagesRef}>
         {messages.map((message, index) => {
           return Array.isArray(message.text) ? (
             <DisplayArrayMessages key={index} message={message} />
           ) : (
             <DisplaySingleMessage
               key={index}
-              index={index}
               sender={message.sender}
               text={message.text}
               isFirst={index === 0}
-              chunks={user.chunks}
             />
           )
         })}

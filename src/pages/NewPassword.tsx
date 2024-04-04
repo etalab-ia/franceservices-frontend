@@ -2,14 +2,14 @@ import { resetPasswordUrl } from '@api'
 import { ButtonsGroup } from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { initButtonsSignup } from '@constants/connexion'
 import { changePasswordFailed } from '@constants/errorMessages'
+import { contactEmailAdress } from '@constants/global'
 import { signupFields } from '@constants/inputFields'
 import { useFetch } from '@utils/hooks'
+import ShowError from 'components/Error/ShowError'
 import { useState } from 'react'
 import { LoginContainer } from '../components/Auth/LoginContainer'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
-import ShowError from 'components/Error/ShowError'
-import { contactEmailAdress } from '@constants/global'
 
 export function NewPassword({ authFailed, setAuthFailed }) {
   const [password, setPassword] = useState('')
