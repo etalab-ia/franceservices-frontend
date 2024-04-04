@@ -1,6 +1,6 @@
-import type { Chunk, Message, RootState } from '@types'
+import type { Message, Sheet } from '@types'
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { Avatar } from './Avatar'
 import { DisplayMessageTab } from './DisplayMessageTab'
@@ -11,7 +11,6 @@ export function DisplayArrayMessages({ message }: { message: Message }) {
   const conditionTab = message.text.length > 1
   const [activeTab, setActiveTab] = useState(tabsLen + 1)
   const dispatch = useDispatch()
-  const user = useSelector((state: RootState) => state.user)
 
   useEffect(() => {
     dispatch({ type: 'SWITCH_TAB', nextTab: activeTab })
@@ -19,9 +18,14 @@ export function DisplayArrayMessages({ message }: { message: Message }) {
 
   return (
     <GlobalRowContainer>
-      <GlobalRowContainer extraClass="fr-grid-row--center">
-        <Avatar user="agent" />
-        <StreamingMessage>{message.text[activeTab - 1]}</StreamingMessage>
+      <GlobalRowContainer extraClass="fr-grid-row--center ">
+        <div className="fr-col-1 hide-on-smallscreen">
+          <Avatar user="agent" />
+        </div>
+        <div className="fr-col-11 fr-col-md-10">
+          <StreamingMessage>{message.text[activeTab - 1]}</StreamingMessage>
+        </div>
+        <div className="fr-col-1 hide-on-smallscreen" />
       </GlobalRowContainer>
       <DisplayMessageTab
         isDisplayable={conditionTab}
@@ -30,12 +34,17 @@ export function DisplayArrayMessages({ message }: { message: Message }) {
         setActiveTab={setActiveTab}
         extraClass="fr-ml-10w"
       />
-      <SourcesAccordion chunks={message.chunks} />
+      <div className="fr-grid-row fr-col">
+        <div className="fr-col-1" />
+        <div className="fr-col-11">
+          <SourcesAccordion sheets={message.sheets} />
+        </div>
+      </div>
     </GlobalRowContainer>
   )
 }
 
-export function SourcesAccordion({ chunks }: { chunks: Chunk[] }) {
+export function SourcesAccordion({ sheets }: { sheets: Sheet[] }) {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false)
 
   const handleToggleAll = () => {
@@ -43,12 +52,9 @@ export function SourcesAccordion({ chunks }: { chunks: Chunk[] }) {
   }
 
   return (
-    <div className="fr-grid-col fr-mb-2w">
-      <div className={'fr-grid-row '} onClick={handleToggleAll}>
-        <p
-          className="fr-text-mention--  hover:cursor-pointer font-bold"
-          style={{ margin: 0, padding: 0 }}
-        >
+    <div className="fr-mb-2w">
+      <div className={'fr-grid-row'} onClick={handleToggleAll}>
+        <p className="font-bold hover:cursor-pointer" style={{ margin: 0, padding: 0 }}>
           Fiches documentaires associées à la réponse
         </p>
         <span
@@ -58,7 +64,7 @@ export function SourcesAccordion({ chunks }: { chunks: Chunk[] }) {
         ></span>
       </div>
       <div className="fr-grid-row gap-4">
-        {chunks.slice(0, 3).map((chunk, index) => (
+        {sheets.slice(0, 3).map((chunk, index) => (
           <div
             className="fr-mt-1w"
             key={index}
@@ -74,12 +80,12 @@ export function SourcesAccordion({ chunks }: { chunks: Chunk[] }) {
 
 function SourceCard({ title, url }: { title: string; url: string }) {
   return (
-    <a href={url} target="_blank" rel="noreferrer" className="external-link-icon ">
-      <div className="bg-[#f4f6ff] fr-p-2w  w-[248px] h-[128px] rounded">
-        <div className="flex font-bold fr-mb-2v fr-text-title--blue-france">
+    <a href={url} target="_blank" rel="noreferrer" className="external-link-icon">
+      <div className="fr-p-2w h-[128px] w-[248px] rounded bg-[#f4f6ff] transition ease-in-out active:scale-100 hover:scale-105 hover:opacity-70">
+        <div className="fr-mb-2v fr-text-title--blue-france flex font-bold">
           {'Fiche: \n'}
         </div>
-        <div className="fr-text-title--blue-france">{title}</div>
+        <div className="fr-text-title--blue-france line-clamp-3">{title}</div>
       </div>
     </a>
   )

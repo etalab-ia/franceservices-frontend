@@ -12,7 +12,9 @@ export function NewQuestion() {
   return (
     <>
       <GlobalRowContainer>
-        <Avatar user="agent" />
+        <div className="hide-on-smallscreen">
+          <Avatar user="agent" />
+        </div>
         {redoUserQuestion}
       </GlobalRowContainer>
       {/* <BotQuestion id="newQuestion" choice={user.choices.newQuestion} /> */}
