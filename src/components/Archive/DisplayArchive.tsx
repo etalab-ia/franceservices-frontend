@@ -35,13 +35,7 @@ export const DisplayArchive = React.forwardRef<HTMLDivElement, DisplayArchivePro
     if (isError || !archive || !archive.length) {
       return (
         <ShowError
-          title={`Erreur ${
-            error && error.cause
-              ? error.cause.status
-              : !archive.length
-                ? "l'archive est vide"
-                : ''
-          }`}
+          errorNumber={error && error.cause.status}
           message={`Nous n'avons pas trouvé de messages associés au chat numéro ${selectedChat.id}`}
         />
       )

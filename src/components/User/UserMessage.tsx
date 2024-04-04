@@ -24,9 +24,15 @@ export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
 
   const handleClick = async () => {
     if (stream.historyStream.length) {
+      console.log('dispatch sheets', user.sheets)
       dispatch({
         type: 'SET_MESSAGES',
-        nextMessage: { text: stream.historyStream, sender: 'agent', chunks: user.chunks },
+        nextMessage: {
+          text: stream.historyStream,
+          sender: 'agent',
+          chunks: user.chunks,
+          sheets: user.sheets,
+        },
       })
     }
     updateCurrQuestion({ ...currQuestion, query: questionInput })
@@ -59,11 +65,6 @@ export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
     setGenerate(true)
   }
 
-  /*
-
-	**
-
-	*/
   useEffect(() => {
     if (!user.question.query.length || !user.chatId) return
 
@@ -78,7 +79,7 @@ export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
     getIndexes(
       data,
       dispatch,
-      'chunks',
+      'sheets',
       user.question.limit,
       JSON.stringify(user.streamId),
       indexesUrl
@@ -98,38 +99,43 @@ export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
   }
 
   return (
-    <div className=" sticky bottom-0 left-0 right-0 z-10 fr-col-12 fr-col-md-8 fr-background-default--grey fr-py-1w md:fr-py-3w ">
-      <textarea
-        style={{ minHeight: '10px', overflow: 'hidden' }}
-        placeholder="Poser une nouvelle question"
-        rows={1}
-        onChange={handleChange}
-        value={questionInput}
-        onKeyDown={handleKeyDown}
-        className="fr-input justify-end"
-        id="textarea"
-        name="textarea"
-      ></textarea>
-      <div className="flex justify-end">
-        <Button
-          onClick={handleClick}
-          disabled={questionInput.trim() === '' || stream.isStreaming}
-          className="fr-btn align-end"
-          title="Rechercher"
-          iconId="fr-icon-search-line"
-        >
-          Rechercher
-        </Button>
+    <div className="fr-background-default--grey fr-py-1w md:fr-py-3w sticky right-0 bottom-0 left-0 z-10 w-full md:w-[992px]">
+      <div className="fr-grid-row fr-grid-row--center">
+        <div className="fr-col-10">
+          <textarea
+            style={{ minHeight: '10px', overflow: 'hidden' }}
+            placeholder="Poser une nouvelle question"
+            rows={1}
+            onChange={handleChange}
+            value={questionInput}
+            onKeyDown={handleKeyDown}
+            className="fr-input justify-end"
+            id="textarea"
+            name="textarea"
+          ></textarea>
+          <div className="flex justify-end">
+            <Button
+              onClick={handleClick}
+              disabled={questionInput.trim() === '' || stream.isStreaming}
+              className="fr-btn align-end"
+              title="Rechercher"
+              /* iconId="fr-icon-search-line" */
+            >
+              <span className="fr-icon-search-line fr-icon--sm fr-mr-md-1w"></span>
+              {window.innerWidth > 992 ? 'Rechercher' : null}
+            </Button>
+          </div>
+        </div>
+        {/*       <SearchBar
+          label="Poser votre question"
+          className="w-5/6"
+          onButtonClick={handleClick}
+          //@ts-expect-error
+          onChange={handleChange}
+          renderInput={handleRenderInput}
+          value={questionInput}
+        /> */}
       </div>
-      {/*       <SearchBar
-        label="Poser votre question"
-        className="w-5/6"
-        onButtonClick={handleClick}
-        //@ts-expect-error
-        onChange={handleChange}
-        renderInput={handleRenderInput}
-        value={questionInput}
-      /> */}
     </div>
   )
 }
