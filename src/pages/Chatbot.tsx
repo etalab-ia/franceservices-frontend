@@ -11,10 +11,10 @@ export function Chatbot({ archive }: { archive: boolean }) {
   const [currQuestion, setCurrQuestion] = useState(InitialQuestion)
   const [generate, setGenerate] = useState(false)
 
-  if (!generate) {
+  /*   if (!generate) {
     emitCloseStream()
   }
-
+ */
   const updateCurrQuestion = (newQuestion) => {
     setCurrQuestion(newQuestion)
   }
@@ -23,6 +23,11 @@ export function Chatbot({ archive }: { archive: boolean }) {
     emitCloseStream()
     dispatch({ type: 'SET_CHAT_ID', nextChatId: 0 })
     dispatch({ type: 'SET_STREAM_ID', nextChatId: 0 })
+    return () => {
+      console.log('return')
+      emitCloseStream()
+      dispatch({ type: 'RESET_USER' })
+    }
   }, [])
 
   return (
