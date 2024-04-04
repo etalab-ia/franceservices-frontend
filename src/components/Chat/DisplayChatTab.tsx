@@ -2,17 +2,16 @@ import type { RootState } from '@types'
 import { UserMessage } from 'components/User/UserMessage'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { GlobalRowContainer } from '../Global/GlobalRowContainer'
-import { ChatAdditionalContainer } from './ChatAdditionalContainer'
 import { ChatMainContainer } from './ChatMainContainer'
 
 /**********************************************************************************************
+ 
+  **	This is the main wrapper around chat components
 	
-	COMPONENTS:
-	
-	**	ChatMainContainer: chat div between user & agent
-
-	**	ChatAdditionalContainer: additional informations given to user as sheets
+  COMPONENTS:
+  **  NewChatHeader: welcome message + exemple questions
+  **  ChatMainContainer: List of messages between user and agent
+  **  UserMessage: input for user
 
  **********************************************************************************************/
 
@@ -25,7 +24,7 @@ export function DisplayChatTab({
 
   return (
     <div className="flex flex-col items-center">
-      <div className="min-h-[70vh] w-full md:w-[992px] overflow-y-auto">
+      <div className="min-h-[70vh] w-full overflow-y-auto md:w-[992px]">
         {user.messages.length <= 0 && (
           <NewChatHeader setQuestionInput={setQuestionInput} />
         )}
@@ -80,7 +79,7 @@ function QuestionsSuggestionList({
   setQuestionInput: React.Dispatch<React.SetStateAction<string>>
 }) {
   return (
-    <div className="flex gap-2 w-full ">
+    <div className="flex w-full gap-2">
       {questions.map((q, index) => {
         return (
           <div

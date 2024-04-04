@@ -19,13 +19,18 @@ export const DisplaySingleMessage = ({
   return (
     <div className={`${classNames}`}>
       <div className="fr-col-1 hide-on-smallscreen" />
-      <div className={'fr-col fr-col-md-10 w-full'}>
+      <div className="fr-col fr-col-md-10 w-full">
         <p
           className={
             isUser
-              ? 'fr-mb-4w fr-p-2w fr-background-action-low--blue-france rounded'
-              : 'agent-chat fr-mb-4w fr-p-2w'
+              ? 'fr-mb-4w fr-p-2w fr-background-action-low--blue-france text-wrap rounded'
+              : 'agent-chat fr-mb-4w fr-p-2w text-wrap'
           }
+          style={{
+            wordWrap: 'break-word', // Ensures words break to prevent overflow
+            overflowWrap: 'break-word', // Breaks the word to prevent overflow
+            whiteSpace: 'pre-wrap', // Maintains whitespace formatting and allows normal word wrap within the content
+          }}
         >
           {text}
         </p>
