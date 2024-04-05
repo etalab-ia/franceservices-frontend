@@ -3,7 +3,7 @@ import type { Tile as TTile } from '@types'
 
 const TileContainer = ({ children }) => {
   return (
-    <div className="container fr-mr-2w" style={{ width: 282 }}>
+    <div className="fr-mr-2w container" style={{ width: 282 }}>
       {children}
     </div>
   )
