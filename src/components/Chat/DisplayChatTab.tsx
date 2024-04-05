@@ -64,7 +64,10 @@ function NewChatHeader({ setQuestionInput }) {
         </div>
         <QuestionsSuggestionList
           setQuestionInput={setQuestionInput}
-          questions={['test', 'test2', 'test3']}
+          questions={[
+            "Qu'est-ce que la CAF ?",
+            "Comment renouveler une carte d'identité ?",
+          ]}
         />
       </div>
     </div>
