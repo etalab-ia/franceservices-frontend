@@ -88,7 +88,7 @@ function QuestionsSuggestionList({
           <div
             onClick={() => setQuestionInput(q)}
             key={index}
-            className=" fr-background-alt--blue-france rounded bg-contain fr-p-2w fr-text--lg cursor-pointer"
+            className="fr-background-alt--blue-france fr-p-2w fr-text--lg cursor-pointer rounded bg-contain"
           >
             {q}
           </div>

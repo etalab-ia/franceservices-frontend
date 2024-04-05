@@ -99,7 +99,7 @@ export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
   }
 
   return (
-    <div className="fr-background-default--grey fr-py-1w md:fr-py-3w sticky right-0 bottom-0 left-0 z-10 w-full md:w-[992px]">
+    <div className="fr-background-default--grey fr-pb-1w md:fr-pb-3w sticky right-0 bottom-0 left-0 z-10 w-full md:w-[992px]">
       <div className="fr-grid-row fr-grid-row--center">
         <div className="fr-col-10">
           <textarea
