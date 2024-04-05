@@ -20,7 +20,7 @@ const fetchArchive = async (chatId: number) => {
   })
 
   if (!response.ok) {
-    console.log('error: response not ok', response)
+    console.error('error: response not ok', response)
     throw new Error('Network response was not ok', { cause: response })
   }
   const responseData = await response.json()

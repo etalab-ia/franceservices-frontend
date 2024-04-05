@@ -38,7 +38,7 @@ const addFeedback = async ({ feedback, streamId, reasons }: AddFeedbackParams) =
   })
 
   if (!res.ok) {
-    console.log('error: response not ok', res)
+    console.error('error: response not ok', res)
     throw new Error("Impossible d'envoyer le feedback", { cause: res })
   }
   const result = await res.json()

@@ -34,13 +34,12 @@ export const Root = () => {
   useEffect(() => {
     checkConnexion(setUserAuth, userUrl).finally(() => setIsLoading(false))
   }, [dispatch])
-  console.log('location', location)
   if (isLoading) {
     return <div></div>
   }
 
   return (
-    <div className="h-screen w-screen flex-col justify-between  " id="screen">
+    <div className="h-screen w-screen flex-col justify-between" id="screen">
       <Header
         brandTop="DINUM / Etalab"
         serviceTitle={

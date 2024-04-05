@@ -24,7 +24,6 @@ export function Chatbot({ archive }: { archive: boolean }) {
     dispatch({ type: 'SET_CHAT_ID', nextChatId: 0 })
     dispatch({ type: 'SET_STREAM_ID', nextChatId: 0 })
     return () => {
-      console.log('return')
       emitCloseStream()
       dispatch({ type: 'RESET_USER' })
     }

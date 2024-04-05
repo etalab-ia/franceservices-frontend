@@ -24,7 +24,6 @@ export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
 
   const handleClick = async () => {
     if (stream.historyStream.length) {
-      console.log('dispatch sheets', user.sheets)
       dispatch({
         type: 'SET_MESSAGES',
         nextMessage: {

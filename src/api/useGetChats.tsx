@@ -23,7 +23,7 @@ const fetchChats = async (): Promise<Chat[]> => {
   })
 
   if (!res.ok) {
-    console.log('error: response not ok', res)
+    console.error('error: response not ok', res)
     throw new Error('Impossible de récupérer les archives', { cause: res })
   }
   const chats = await res.json()
