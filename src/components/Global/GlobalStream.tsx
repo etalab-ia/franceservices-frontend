@@ -3,7 +3,7 @@ export const GlobalStream = ({
   extraClass,
 }: { response: any[]; extraClass?: string }) => {
   return (
-    <div className={`  fr-my-1w  ${extraClass}`}>
+    <div className={`fr-my-1w ${extraClass}`}>
       {response.map((item, index) => (
         <span key={index}>
           {item.split('\n').map((line, lineIndex) => (

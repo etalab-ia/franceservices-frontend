@@ -55,7 +55,7 @@ export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
     dispatch({
       type: 'SET_USER_QUERY',
       nextUserQuery: questionInput,
-      nextChatId: chatId, // Use the updated chatId here
+      nextChatId: chatId,
     })
 
     dispatch({ type: 'RESET_STREAM_HISTORY' })
@@ -125,15 +125,6 @@ export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
             </Button>
           </div>
         </div>
-        {/*       <SearchBar
-          label="Poser votre question"
-          className="w-5/6"
-          onButtonClick={handleClick}
-          //@ts-expect-error
-          onChange={handleChange}
-          renderInput={handleRenderInput}
-          value={questionInput}
-        /> */}
       </div>
     </div>
   )

@@ -12,9 +12,9 @@ export function Display({
   messages,
   archive,
 }: { messages: Message[]; archive: boolean }) {
-  const endOfMessagesRef = useRef(null)
-  const user = useSelector((state: RootState) => state.user)
+  const endOfMessagesRef = useRef(null) // We use this ref to scroll to the end of the messages
   const stream = useSelector((state: RootState) => state.stream)
+
   useEffect(() => {
     endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, stream])

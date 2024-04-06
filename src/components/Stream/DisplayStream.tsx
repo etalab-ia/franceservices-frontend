@@ -28,7 +28,7 @@ export function DisplayStream({ stream }: { stream: Stream }) {
   return (
     <div>
       {conditionStream ? (
-        <GlobalStream response={stream.response} extraClass="streaming fr-mb-4w " />
+        <GlobalStream response={stream.response} extraClass="streaming fr-mb-4w" />
       ) : (
         <StreamingMessage>{stream.historyStream[activeTab - 1]}</StreamingMessage>
       )}

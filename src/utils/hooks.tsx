@@ -1,6 +1,6 @@
-import { getChunksUrl, streamUrl } from '@api'
+import { streamUrl } from '@api'
 import { EventSourcePolyfill } from 'event-source-polyfill'
-import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector, type TypedUseSelectorHook } from 'react-redux'
 import type { AppDispatch, Question, RootState } from '../types'
 import { onCloseStream } from './eventsEmitter'
 import { setHeaders, setUserQuestion } from './setData'
