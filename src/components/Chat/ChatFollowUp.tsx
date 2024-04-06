@@ -6,7 +6,7 @@ import { DisplayStream } from '../Stream/DisplayStream'
 import { AvatarToolsContainer } from './AvatarToolsContainer'
 import { SourcesAccordion } from './DisplayArrayMessages'
 
-// Last message of the chat
+// Last message of the chat with feedback
 export function ChatFollowUp() {
   const [feedback, setFeedback] = useState<Feedback>(InitialFeedback)
   const stream = useSelector((state: RootState) => state.stream)

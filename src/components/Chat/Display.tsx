@@ -5,9 +5,6 @@ import { ChatFollowUp } from './ChatFollowUp'
 import { DisplayArrayMessages } from './DisplayArrayMessages'
 import { DisplaySingleMessage } from './DisplaySingleMessage'
 
-/*
- *
- */
 export function Display({
   messages,
   archive,

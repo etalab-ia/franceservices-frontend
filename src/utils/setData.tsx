@@ -175,7 +175,7 @@ export const getIndexes = async (
 /*
  * Get the sheets from the stream
  */
-export const setIndexesData = (
+const setIndexesData = (
   data: {
     question: string
     must_not_sids: string[]
@@ -191,7 +191,7 @@ export const setIndexesData = (
   getIndexes(data, dispatch, 'sheets', 10, streamId, indexesUrl)
 }
 
-export const setTilesFromSheets = (sheets: Sheet[], setTiles: (any) => void) => {
+const setTilesFromSheets = (sheets: Sheet[], setTiles: (any) => void) => {
   setTiles([])
   if (!sheets || !sheets.length) return
 

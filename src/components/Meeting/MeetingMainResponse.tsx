@@ -40,7 +40,7 @@ export function MeetingMainResponse() {
   )
 }
 
-export function NewQuestionInput({
+function NewQuestionInput({
   questionInput,
   setQuestionInput,
 }: {
@@ -155,7 +155,7 @@ export function NewQuestionInput({
   )
 }
 
-export function NewQuestionMeetingAdditionalInput({
+function NewQuestionMeetingAdditionalInput({
   context,
   setContext,
 }: {
@@ -200,7 +200,7 @@ export function NewQuestionMeetingAdditionalInput({
   )
 }
 
-export const inputFields = [
+const inputFields = [
   {
     label: 'Thèmes associés',
     name: 'themes',

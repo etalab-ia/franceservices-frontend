@@ -5,16 +5,9 @@ import { Display } from './Display'
 
 /*
  * ChatMainContainer: chat div between user & agent
- * ChatAdditionalContainer: additional informations given to user as sheets
- * ChatOverflowManagementContainer: manage overflow of chat
- * ChatHeightContainer: manage height of chat
- * UserMessage: input for user
  * Display: display messages
  */
-export function ChatMainContainer({
-  archive,
-  setQuestionInput,
-}: { archive: boolean; setQuestionInput: any }) {
+export function ChatMainContainer({ archive }: { archive: boolean }) {
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
 

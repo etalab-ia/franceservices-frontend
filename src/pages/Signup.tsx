@@ -128,7 +128,7 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
   )
 }
 
-export const useFetch = async (url, method, props) => {
+const useFetch = async (url, method, props) => {
   const { data, headers } = props
   try {
     const response = await fetch(url, {

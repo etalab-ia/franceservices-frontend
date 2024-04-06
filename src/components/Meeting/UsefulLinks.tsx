@@ -52,7 +52,7 @@ function SmallHorizontalTile({ tileProps }: { tileProps: TileType }) {
 /**
  * Helper function to generate tiles props from webservices
  */
-export const setUsefulLinksTilesProps = (webservices: WebService[]) => {
+const setUsefulLinksTilesProps = (webservices: WebService[]) => {
   const tiles: TileType[] = []
   webservices.map((webservice) => {
     const url = webservice.url

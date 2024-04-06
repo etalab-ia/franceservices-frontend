@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-export const scrollToBottom = () => {
+const scrollToBottom = () => {
   const chatDiv = document.getElementById('chat')
 
   if (!chatDiv) return

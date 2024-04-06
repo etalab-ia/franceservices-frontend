@@ -93,5 +93,3 @@ const routeDefs = {
   history: defineRoute('/history'),
   faq: defineRoute('/FAQ'),
 }
-
-export const { RouteProvider, useRoute, routes } = createRouter(routeDefs)

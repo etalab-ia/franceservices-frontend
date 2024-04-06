@@ -61,6 +61,6 @@ export const feedbackButtonsChoice = (button) =>
 export const feedbackConfirmationButton = `Bouton de confirmation des retours d'expérience de la conversation.`
 export const feedbackAdditionalInput = `Champ de saisie permettant de rajouter des retours d'expérience non proposés.`
 export const feedbackResume = `Résumé des retours d'expérience.`
-export const satisfactionButton = (type) =>
+const satisfactionButton = (type) =>
   `Bouton pour indiquer que la réponse générée est ${type}`
 export const thankFeedbackRole = `Message de remerciement pour le retour d'expérience.`

@@ -70,19 +70,17 @@ export function MeetingQR({
                 cursor: 'pointer',
               }}
             >
-              {window.innerWidth < 992 && (
-                <div
-                  style={{
-                    color: '#3A3A3A',
-                    fontSize: 16,
-                    fontFamily: 'Marianne',
-                    fontWeight: '400',
-                    wordWrap: 'break-word',
-                  }}
-                >
-                  {rq.question}
-                </div>
-              )}
+              <div
+                style={{
+                  color: '#3A3A3A',
+                  fontSize: 16,
+                  fontFamily: 'Marianne',
+                  fontWeight: '400',
+                  wordWrap: 'break-word',
+                }}
+              >
+                {rq.question}
+              </div>
             </div>
           </button>
         )

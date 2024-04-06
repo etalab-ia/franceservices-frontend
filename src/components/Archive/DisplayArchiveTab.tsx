@@ -14,7 +14,7 @@ export function DisplayArchiveTabs() {
     return (
       <ShowError
         errorNumber={error && error.cause.status}
-        message={`Nous n'avons pas réussi a trouver vos archives.`}
+        message={"Nous n'avons pas réussi a trouver vos archives."}
       />
     )
 
