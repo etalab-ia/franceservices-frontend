@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { UserExperience } from '../Feedbacks/UserExperience'
 import { DisplayStream } from '../Stream/DisplayStream'
 import { AvatarToolsContainer } from './AvatarToolsContainer'
-import { SourcesAccordion } from './DisplayArrayMessages'
+import SourcesAccordion from './SourcesAccordion'
 
 // Last message of the chat with feedback
 export function ChatFollowUp() {
