@@ -1,7 +1,8 @@
 import Input from '@codegouvfr/react-dsfr/Input'
 import { PasswordInput } from '@codegouvfr/react-dsfr/blocks/PasswordInput'
 import Fuse from 'fuse.js'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import Papa from 'papaparse'
 
 export const LoginFields = ({
   fields,
@@ -20,17 +21,44 @@ export const LoginFields = ({
   return (
     <>
       {fields.map((field, index) => {
-        return field.nativeInputProps.type === 'password' ? (
-          <PasswordInput
-            label={field.label}
-            key={index}
-            hintText={field.hintText}
-            nativeInputProps={{
-              ...field.nativeInputProps,
-              onChange: handleChange,
-              onKeyDown: handleKeyDown,
-            }}
-          />
+        return field.nativeInputProps.type === 'password' &&
+          field.nativeInputProps.name === 'password' ? (
+          <div className="fr-mb-2w">
+            <PasswordInput
+              label={field.label}
+              key={index}
+              nativeInputProps={{
+                ...field.nativeInputProps,
+                onChange: handleChange,
+                onKeyDown: handleKeyDown,
+              }}
+            />
+            <p className="fr-text--xs max-h-[16px] fr-mb-1w">
+              Le mot de passe doit contenir au moins:
+            </p>
+
+            <div className="flex max-h-[16px] fr-mb-1w">
+              <span
+                className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
+                aria-hidden="true"
+              ></span>
+              <p className="fr-text-default--info fr-text--xs">8 caractères</p>
+            </div>
+            <div className="flex max-h-[16px] fr-mb-1w">
+              <span
+                className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
+                aria-hidden="true"
+              ></span>
+              <p className="fr-text-default--info fr-text--xs"> 1 caractère spécial</p>
+            </div>
+            <div className="flex max-h-[16px] fr-mb-1w">
+              <span
+                className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
+                aria-hidden="true"
+              ></span>
+              <p className="fr-text-default--info fr-text--xs"> 1 chiffre</p>
+            </div>
+          </div>
         ) : field.nativeInputProps.type === 'mfs' ? (
           <MFSInput
             key={index}
@@ -63,29 +91,10 @@ const options = {
   keys: ['name'],
 }
 
-export function MFSInput({
-  selectedValue,
-  setSelectedValue,
-  matricule,
-  setMatricule,
-}: {
-  selectedValue: string
-  setSelectedValue: any
-  matricule: string
-  setMatricule: any
-}) {
+export function MFSInput({ selectedValue, setSelectedValue, matricule, setMatricule }) {
   const [searchResults, setSearchResults] = useState([])
+  const [data, setData] = useState([])
   const [selectedIndex, setSelectedIndex] = useState(-1)
-  console.log('value', selectedValue)
-  const fuse = useMemo(() => new Fuse(maisonsFranceServiceType, options), [])
-
-  const handleSearch = (e) => {
-    const value = e.target.value
-    setSelectedValue(value)
-    setSelectedIndex(-1)
-    setSearchResults(value ? fuse.search(value).map((result) => result.item) : [])
-    setMatricule('')
-  }
 
   const handleKeyDown = (e) => {
     if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
@@ -96,7 +105,7 @@ export function MFSInput({
           : Math.max(selectedIndex - 1, 0)
       if (newIndex >= 0 && newIndex <= 4) {
         setSelectedIndex(newIndex)
-        setSelectedValue(searchResults[newIndex]?.name || '')
+        setSelectedValue(searchResults[newIndex]?.lib_fs || '')
       }
     } else if (e.key === 'Enter') {
       e.preventDefault()
@@ -104,20 +113,46 @@ export function MFSInput({
       if (selectedResult) {
         handleSelect(selectedResult)
       } else {
-        handleSelect(selectedValue)
-        resetSelection()
+        // resetSelection()
       }
     }
   }
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('/mfs.csv')
+      const reader = response.body.getReader()
+      const result = await reader.read() // raw array
+      const decoder = new TextDecoder('utf-8')
+      const csv = decoder.decode(result.value) // the CSV text
+      const parsedData = Papa.parse(csv, { header: true }).data
+      setData(parsedData)
+    }
 
-  const handleSelect = (result) => {
-    setSelectedValue(result.name)
-    setMatricule(result.matricule)
-    resetSelection()
+    fetchData()
+  }, [])
+
+  const fuse = useMemo(
+    () =>
+      new Fuse(data, {
+        keys: ['lib_fs'],
+        includeScore: true,
+        threshold: 0.2,
+      }),
+    [data]
+  )
+
+  const handleSearch = (e) => {
+    const value = e.target.value
+    setSelectedValue(value)
+    const results = fuse.search(value)
+    setSearchResults(results.slice(0, 5).map((result) => result.item))
+    setMatricule('')
+    setSelectedIndex(-1)
   }
 
-  const resetSelection = () => {
-    //  setSelectedValue('')
+  const handleSelect = (item) => {
+    setSelectedValue(item.lib_fs)
+    setMatricule(item.id_fs)
     setSearchResults([])
     setSelectedIndex(-1)
   }
@@ -131,37 +166,32 @@ export function MFSInput({
           nativeInputProps={{
             onChange: handleSearch,
             onKeyDown: handleKeyDown,
+
             value: selectedValue,
             name: 'mfs',
             tabIndex: 0,
           }}
         />
         <div tabIndex={-1} className="fr-mb-2v">
-          {searchResults.slice(0, 5).map((result, index) => (
+          {searchResults.map((item, index) => (
             <div
               className={`fr-card cursor-pointer p-0 ${
                 selectedIndex === index ? 'bg-light-grey' : ''
               }`}
-              key={result.name}
-              onClick={() => handleSelect(result)}
+              key={index}
+              onClick={() => handleSelect(item)}
             >
-              <p className="fr-ml-3w fr-mt-1w fr-mb-1w">{result.name}</p>
+              <p className="fr-ml-3w fr-mt-1w fr-mb-1w">{item.lib_fs}</p>
             </div>
           ))}
         </div>
       </div>
       <Input
+        disabled
         label="Matricule"
         className="fr-mb-1w fr-ml- fr-col-4 ml-auto"
-        nativeInputProps={{ value: matricule }}
-        disabled
+        nativeInputProps={{ value: matricule, disabled: true }}
       />
     </div>
   )
 }
-
-const maisonsFranceServiceType = [
-  { name: 'test', matricule: '123456789' },
-  { name: 'test2', matricule: 'hjkhk' },
-  { name: 'onoo', matricule: 'kjhhi' },
-]

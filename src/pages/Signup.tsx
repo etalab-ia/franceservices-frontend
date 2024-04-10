@@ -2,15 +2,19 @@ import { userUrl } from '@api'
 import { ButtonsGroup } from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { initButtonsSignup } from '@constants/connexion'
 import { signupFields } from '@constants/inputFields'
-import { useEffect, useMemo, useState } from 'react'
-import { custom, email, object, parse, regex, string, minLength } from 'valibot'
-import { LoginContainer } from '../components/Auth/LoginContainer'
-import { LoginFields, MFSInput } from '../components/Auth/LoginFields'
+import { useState } from 'react'
+import {
+  custom,
+  email,
+  maxLength,
+  minLength,
+  object,
+  parse,
+  regex,
+  string,
+} from 'valibot'
+import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
-import Fuse from 'fuse.js'
-import Input from '@codegouvfr/react-dsfr/Input'
-
-const passwordRegex = /^[A-Za-z\d$!%*+?&#_-]{8,20}$/
 
 const SignupSchema = object(
   {
@@ -22,13 +26,13 @@ const SignupSchema = object(
     ]),
     email: string('Adresse email valide', [email('Adresse email invalide.')]),
     matricule: string('Le matricule est invalide.', [
-      minLength(8, 'Veuillez selectionner une maison France Services'),
+      minLength(1, 'Veuillez selectionner une maison France Services'),
     ]),
     password: string('Le mot de passe est invalide.', [
-      regex(
-        passwordRegex,
-        'Le mot de passe doit contenir entre 8 et 20 caractères et peut inclure des lettres, des chiffres et des caractères spéciaux ($!%*+?&#_-).'
-      ),
+      minLength(8, 'Le mot de passe doit contenir au moins 8 charactères.'),
+      maxLength(20, 'Le mot de passe doit contenir au plus 20 charactères.'),
+      regex(/[0-9]/, 'Le mot de passe doit contenir un chiffre.'),
+      regex(/[^A-Za-z0-9]/, 'Le mot de passe doit contenir un charactère spécial.'),
     ]),
     confirmationPassword: string(
       'La confirmation du mot de passe doit être une chaîne valide.'
@@ -123,7 +127,7 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
 
   return (
     <div className="fr-container">
-      <div className="max-w-[812px]">
+      <div className="max-w-[50%]">
         <h1 className="fr-text-title--blue-france fr-mt-5w fr-mb-2w">
           Créer votre compte
         </h1>

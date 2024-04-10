@@ -28,7 +28,7 @@ export const signupFields = [
   },
   {
     label: 'Mot de passe',
-    hintText: 'Le mot de passe doit contenir entre 8 et 20 caractères.',
+
     nativeInputProps: {
       name: 'password',
       type: 'password',
