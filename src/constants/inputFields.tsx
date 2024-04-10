@@ -21,6 +21,12 @@ export const signupFields = [
     },
   },
   {
+    label: 'Maison France Services',
+    nativeInputProps: {
+      type: 'mfs',
+    },
+  },
+  {
     label: 'Mot de passe',
     hintText: 'Le mot de passe doit contenir entre 8 et 20 caractères.',
     nativeInputProps: {
