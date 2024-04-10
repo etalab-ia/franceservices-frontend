@@ -84,13 +84,6 @@ export const LoginFields = ({
   )
 }
 
-const options = {
-  includeScore: true,
-  includeMatches: true,
-  threshold: 0.2,
-  keys: ['name'],
-}
-
 export function MFSInput({ selectedValue, setSelectedValue, matricule, setMatricule }) {
   const [searchResults, setSearchResults] = useState([])
   const [data, setData] = useState([])
@@ -121,9 +114,9 @@ export function MFSInput({ selectedValue, setSelectedValue, matricule, setMatric
     const fetchData = async () => {
       const response = await fetch('/mfs.csv')
       const reader = response.body.getReader()
-      const result = await reader.read() // raw array
+      const result = await reader.read()
       const decoder = new TextDecoder('utf-8')
-      const csv = decoder.decode(result.value) // the CSV text
+      const csv = decoder.decode(result.value)
       const parsedData = Papa.parse(csv, { header: true }).data
       setData(parsedData)
     }

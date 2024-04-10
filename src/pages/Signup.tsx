@@ -126,8 +126,8 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
   }
 
   return (
-    <div className="fr-container">
-      <div className="max-w-[50%]">
+    <div className="fr-container fr-grid-row">
+      <div className="fr-col fr-col-md-6">
         <h1 className="fr-text-title--blue-france fr-mt-5w fr-mb-2w">
           Créer votre compte
         </h1>
