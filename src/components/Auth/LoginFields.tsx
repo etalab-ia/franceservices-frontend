@@ -21,8 +21,9 @@ export const LoginFields = ({
   return (
     <>
       {fields.map((field, index) => {
-        return field.nativeInputProps.type === 'password' &&
-          field.nativeInputProps.name === 'password' ? (
+        return (field.nativeInputProps.type === 'password' &&
+          field.nativeInputProps.name === 'password') ||
+          field.nativeInputProps.name === 'passwordSignup' ? (
           <div className="fr-mb-2w">
             <PasswordInput
               label={field.label}
@@ -33,31 +34,38 @@ export const LoginFields = ({
                 onKeyDown: handleKeyDown,
               }}
             />
-            <p className="fr-text--xs max-h-[16px] fr-mb-1w">
-              Le mot de passe doit contenir au moins:
-            </p>
 
-            <div className="flex max-h-[16px] fr-mb-1w">
-              <span
-                className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
-                aria-hidden="true"
-              ></span>
-              <p className="fr-text-default--info fr-text--xs">8 caractères</p>
-            </div>
-            <div className="flex max-h-[16px] fr-mb-1w">
-              <span
-                className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
-                aria-hidden="true"
-              ></span>
-              <p className="fr-text-default--info fr-text--xs"> 1 caractère spécial</p>
-            </div>
-            <div className="flex max-h-[16px] fr-mb-1w">
-              <span
-                className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
-                aria-hidden="true"
-              ></span>
-              <p className="fr-text-default--info fr-text--xs"> 1 chiffre</p>
-            </div>
+            {field.nativeInputProps.name === 'passwordSignup' && (
+              <div>
+                <p className="fr-text--xs fr-mb-1w max-h-[16px]">
+                  Le mot de passe doit contenir au moins:
+                </p>
+                <div className="fr-mb-1w flex max-h-[16px]">
+                  <span
+                    className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
+                    aria-hidden="true"
+                  ></span>
+                  <p className="fr-text-default--info fr-text--xs">8 caractères</p>
+                </div>
+                <div className="fr-mb-1w flex max-h-[16px]">
+                  <span
+                    className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
+                    aria-hidden="true"
+                  ></span>
+                  <p className="fr-text-default--info fr-text--xs">
+                    {' '}
+                    1 caractère spécial
+                  </p>
+                </div>
+                <div className="fr-mb-1w flex max-h-[16px]">
+                  <span
+                    className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
+                    aria-hidden="true"
+                  ></span>
+                  <p className="fr-text-default--info fr-text--xs"> 1 chiffre</p>
+                </div>
+              </div>
+            )}
           </div>
         ) : field.nativeInputProps.type === 'mfs' ? (
           <MFSInput

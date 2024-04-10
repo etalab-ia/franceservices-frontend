@@ -68,14 +68,23 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
   }
 
   return (
-    <LoginContainer>
-      <LoginFields
-        fields={loginFields}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-      />
-      {authFailed && <ButtonInformation>{usernameOrPasswordError}</ButtonInformation>}
-      <ButtonsGroup buttons={initButtonsLogin(handleSubmit, isDisable)} />
-    </LoginContainer>
+    <div className="fr-container fr-mb-8w">
+      <div className="fr-grid-row">
+        <div className="fr-col fr-col-md-6">
+          <h1 className="fr-text-title--blue-france fr-mt-5w fr-mb-2w">Se connecter</h1>
+          <p className="fr-mb-4w">
+            Ce serv ice est à destination des France services participant à
+            l’expérimentation Albert France services.
+          </p>
+          <LoginFields
+            fields={loginFields}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+          />
+          {authFailed && <ButtonInformation>{usernameOrPasswordError}</ButtonInformation>}
+          <ButtonsGroup buttons={initButtonsLogin(handleSubmit, isDisable)} />
+        </div>{' '}
+      </div>
+    </div>
   )
 }

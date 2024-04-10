@@ -30,7 +30,7 @@ export const signupFields = [
     label: 'Mot de passe',
 
     nativeInputProps: {
-      name: 'password',
+      name: 'passwordSignup',
       type: 'password',
     },
   },

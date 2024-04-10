@@ -15,6 +15,7 @@ import {
 } from 'valibot'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
+import { useNavigate } from 'react-router-dom'
 
 const SignupSchema = object(
   {
@@ -51,6 +52,8 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
   const [errorMesage, setErrorMessage] = useState('')
   const [selectedMFS, setSelectedMFS] = useState('')
   const [selectedMatricule, setSelectedMatricule] = useState('')
+  const [sent, setSent] = useState(false)
+  let navigate = useNavigate()
   const handleChange = (e) => {
     e.preventDefault()
 
@@ -117,7 +120,7 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
         }
         setAuthFailed(true)
       } else {
-        window.location.href = '/login'
+        setSent(true)
       }
     } catch (error) {
       console.error('Fetch error:', error)
@@ -126,31 +129,54 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
   }
 
   return (
-    <div className="fr-container fr-grid-row">
-      <div className="fr-col fr-col-md-6">
-        <h1 className="fr-text-title--blue-france fr-mt-5w fr-mb-2w">
-          Créer votre compte
-        </h1>
-        <p className="fr-mb-4w">
-          Créer votre compte en quelques instant pour utiliser Albert France services.
-        </p>
-        <LoginFields
-          fields={signupFields}
-          handleChange={handleChange}
-          selectedValue={selectedMFS}
-          setSelectedValue={setSelectedMFS}
-          matricule={selectedMatricule}
-          setMatricule={setSelectedMatricule}
-          handleSubmit={handleClick}
-        />
-        {authFailed && <ButtonInformation>{errorMesage}</ButtonInformation>}
-        <ButtonsGroup
-          buttons={initButtonsSignup(
-            handleValidatePassword,
-            handleClick,
-            'Créer un compte'
+    <div className="fr-container">
+      <div className="fr-grid-row fr-mt-4w cursor-pointer" onClick={() => navigate(-1)}>
+        <span className="fr-icon-arrow-go-back-fill fr-text-title--blue-france fr-mr-2v" />
+        <p>Retour</p>
+      </div>
+      <div className="fr-grid-row">
+        <div className="fr-col fr-col-md-6 fr-mt-1w">
+          <h1 className="fr-text-title--blue-france fr-mt-5w fr-mb-2w">
+            Créer votre compte
+          </h1>
+          <p className="fr-mb-4w">
+            Créer votre compte en quelques instant pour utiliser Albert France services.
+          </p>
+          {!sent && (
+            <div>
+              <LoginFields
+                fields={signupFields}
+                handleChange={handleChange}
+                selectedValue={selectedMFS}
+                setSelectedValue={setSelectedMFS}
+                matricule={selectedMatricule}
+                setMatricule={setSelectedMatricule}
+                handleSubmit={handleClick}
+              />
+              {authFailed && <ButtonInformation>{errorMesage}</ButtonInformation>}
+              <ButtonsGroup
+                buttons={initButtonsSignup(
+                  handleValidatePassword,
+                  handleClick,
+                  'Créer un compte'
+                )}
+              />
+            </div>
           )}
-        />
+          {sent && (
+            <div className="fr-container fr-grid-row fr-pb-5w">
+              {' '}
+              <span
+                className="fr-icon-success-line fr-text-default--success flex flex-row gap-2"
+                aria-hidden="true"
+              >
+                Votre compte a bien été créé. Il va être activé par un administrateur dans
+                les plus brefs délais. Vous recevrez une confirmation de l’activation à
+                l’adresse email que vous avez renseignée.
+              </span>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )
