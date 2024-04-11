@@ -2,7 +2,7 @@ import { userUrl } from '@api'
 import { ButtonsGroup } from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { initButtonsSignup } from '@constants/connexion'
 import { signupFields } from '@constants/inputFields'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import {
   custom,
   email,
@@ -16,6 +16,7 @@ import {
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
 import { useNavigate } from 'react-router-dom'
+import { isMFSContext } from '@utils/context/isMFSContext'
 
 const SignupSchema = object(
   {
@@ -53,6 +54,8 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
   const [selectedMFS, setSelectedMFS] = useState('')
   const [selectedMatricule, setSelectedMatricule] = useState('')
   const [sent, setSent] = useState(false)
+  const isMFS = useContext(isMFSContext)
+
   let navigate = useNavigate()
   const handleChange = (e) => {
     e.preventDefault()
@@ -140,7 +143,8 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
             Créer votre compte
           </h1>
           <p className="fr-mb-4w">
-            Créer votre compte en quelques instant pour utiliser Albert France services.
+            Créer votre compte en quelques instant pour utiliser Albert
+            {isMFS ? ' France services' : ''}.
           </p>
           {!sent && (
             <div>

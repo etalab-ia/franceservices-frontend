@@ -3,6 +3,8 @@ import { PasswordInput } from '@codegouvfr/react-dsfr/blocks/PasswordInput'
 import Fuse from 'fuse.js'
 import { useEffect, useMemo, useState } from 'react'
 import Papa from 'papaparse'
+import { isMFSContext } from '@utils/context/isMFSContext'
+import { useContext } from 'react'
 
 export const LoginFields = ({
   fields,
@@ -13,6 +15,7 @@ export const LoginFields = ({
   matricule,
   setMatricule,
 }) => {
+  const isMFS = useContext(isMFSContext)
   function handleKeyDown(e) {
     if (e.key === 'Enter') {
       handleSubmit()
@@ -67,7 +70,7 @@ export const LoginFields = ({
               </div>
             )}
           </div>
-        ) : field.nativeInputProps.type === 'mfs' ? (
+        ) : field.nativeInputProps.type === 'mfs' && isMFS ? (
           <MFSInput
             key={index}
             selectedValue={selectedValue}
@@ -75,7 +78,7 @@ export const LoginFields = ({
             matricule={matricule}
             setMatricule={setMatricule}
           />
-        ) : (
+        ) : field.nativeInputProps.type !== 'mfs' ? (
           <Input
             label={field.label}
             key={index}
@@ -86,6 +89,8 @@ export const LoginFields = ({
               onKeyDown: handleKeyDown,
             }}
           />
+        ) : (
+          <></>
         )
       })}
     </>

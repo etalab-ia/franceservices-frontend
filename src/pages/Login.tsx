@@ -5,11 +5,19 @@ import { usernameOrPasswordError } from '@constants/errorMessages'
 import { loginFields } from '@constants/inputFields'
 import { useFetch } from '@utils/hooks'
 import { setUserInfos } from '@utils/manageConnexion'
-import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'
+import {
+  type Dispatch,
+  type SetStateAction,
+  useEffect,
+  useState,
+  useContext,
+} from 'react'
 import type { UserAuth } from 'utils/auth'
 import { LoginContainer } from '../components/Auth/LoginContainer'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
+import { isMFSContext } from '@utils/context/isMFSContext'
+import { is } from 'valibot'
 
 interface LoginProps {
   authFailed: boolean
@@ -21,6 +29,7 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
   const [isDisable, setIsDisable] = useState(true)
   const [password, setPassword] = useState('')
   const [id, setId] = useState('')
+  const isMFS = useContext(isMFSContext)
 
   useEffect(() => {
     checkIfCompletedFields()
@@ -72,10 +81,12 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
       <div className="fr-grid-row">
         <div className="fr-col fr-col-md-6">
           <h1 className="fr-text-title--blue-france fr-mt-5w fr-mb-2w">Se connecter</h1>
-          <p className="fr-mb-4w">
-            Ce serv ice est à destination des France services participant à
-            l’expérimentation Albert France services.
-          </p>
+          {isMFS && (
+            <p className="fr-mb-4w">
+              Ce service est à destination des France services participant à
+              l’expérimentation Albert France services.
+            </p>
+          )}
           <LoginFields
             fields={loginFields}
             handleChange={handleChange}
