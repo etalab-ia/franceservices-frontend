@@ -9,7 +9,8 @@ export type AppDispatch = typeof store.dispatch
 
 const modelName: string = import.meta.env.VITE_MODEL_NAME as string
 const modelMode: string = import.meta.env.VITE_MODEL_MODE as string
-/****************************************************************
+const modelTemperature: string = import.meta.env.VITE_MODEL_TEMPERATURE as string
+/****************************************************************;
  *                             USER                             *
  *            All the types used in the redux store             *
  *                 to track the user's question                 *
@@ -66,7 +67,7 @@ export const InitialQuestion: Question = {
   context: undefined,
   institution: undefined,
   links: undefined,
-  temperature: 20,
+  temperature: parseFloat(modelTemperature),
   sources: ['service-public', 'travail-emploi'],
   should_sids: [],
   must_not_sids: [],

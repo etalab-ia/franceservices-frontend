@@ -7,7 +7,6 @@ import { GlobalColContainer } from '../Global/GlobalColContainer'
 export function UserChatTools({ isArchive }) {
   const stream = useSelector((state: RootState) => state.stream)
   const user = useSelector((state: RootState) => state.user)
-  const archive = useSelector((state: RootState) => state.archive)
   const dispatch = useDispatch()
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
 
@@ -17,7 +16,7 @@ export function UserChatTools({ isArchive }) {
   }
 
   return (
-    <div className="flex items-center fr-mt-2w">
+    <div className="fr-mt-2w flex items-center">
       <GlobalColContainer>
         {userChatToolsFunc({ stream, archive, user }, dispatch).map((tool, index) => (
           <button
