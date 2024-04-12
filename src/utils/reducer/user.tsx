@@ -32,6 +32,7 @@ import type {
 
 const modelName: string = import.meta.env.VITE_MODEL_NAME as string
 const modelMode: string = import.meta.env.VITE_MODEL_MODE as string
+const modelTemperature: string = import.meta.env.VITE_MODEL_TEMPERATURE as string
 
 const InitialQuestion: Question = {
   model_name: modelName,
@@ -41,7 +42,7 @@ const InitialQuestion: Question = {
   context: undefined,
   institution: undefined, //TODO: remove
   links: undefined,
-  temperature: 20,
+  temperature: parseFloat(modelTemperature),
   sources: ['service-public', 'travail-emploi'],
   should_sids: [],
   must_not_sids: [],
