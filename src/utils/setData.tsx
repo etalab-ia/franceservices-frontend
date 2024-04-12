@@ -2,6 +2,7 @@ import type { Question, Sheet, Tile } from '@types'
 import { useFetch } from './hooks'
 
 const modelName: string = import.meta.env.VITE_MODEL_NAME as string
+const modelTemperature: string = import.meta.env.VITE_MODEL_TEMPERATURE as string
 
 /*
  * isEventSource is true when fetching for a stream
@@ -59,6 +60,7 @@ export const setQuestionFromRegeneration = (
   limit: number,
   must_not_sids: string[]
 ) => {
+  console.log('temp', modelTemperature)
   const data = {
     model_name: modelName,
     mode: mode,
@@ -67,7 +69,7 @@ export const setQuestionFromRegeneration = (
     context: '',
     institution: '',
     links: '',
-    temperature: 20,
+    temperature: parseFloat(modelTemperature),
     must_not_sids: must_not_sids,
   }
 

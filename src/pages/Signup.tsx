@@ -90,7 +90,7 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
       username: userAuth.username,
       email: userAuth.email,
       password: password,
-      france_services: selectedMFS,
+      organization: selectedMFS,
       matricule: selectedMatricule,
     }
 

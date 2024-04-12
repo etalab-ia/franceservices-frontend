@@ -56,6 +56,7 @@ build:front:dinum:
       --build-arg VITE_ENVIRONMENT_NAME=${CI_ENVIRONMENT_NAME} \
       --build-arg VITE_MODEL_NAME=${MODEL_NAME} \
       --build-arg VITE_MODEL_MODE=${MODEL_MODE} \
+      --build-arg VITE_MODEL_TEMPERATURE=${MODEL_TEMPERATURE} \
       --build-arg VITE_MATOMO_URL=${MATOMO_URL} \
       --tag ${CI_REGISTRY_IMAGE}/front/${CI_ENVIRONMENT_NAME}:${CI_FRONT_IMAGE_TAG}-${CI_COMMIT_BRANCH} .
       docker push ${CI_REGISTRY_IMAGE}/front/${CI_ENVIRONMENT_NAME}:${CI_FRONT_IMAGE_TAG}-${CI_COMMIT_BRANCH}
@@ -103,6 +104,7 @@ build:front:france services:
       --build-arg VITE_ENVIRONMENT_NAME=${CI_ENVIRONMENT_NAME} \
       --build-arg VITE_MODEL_NAME=${MODEL_NAME} \
       --build-arg VITE_MODEL_MODE=${MODEL_MODE} \
+      --build-arg VITE_MODEL_TEMPERATURE=${MODEL_TEMPERATURE} \
       --build-arg VITE_MATOMO_URL=${MATOMO_URL} \
       --tag ${CI_REGISTRY_IMAGE}/front/${CI_ENVIRONMENT_NAME}:${CI_FRONT_IMAGE_TAG}-${CI_COMMIT_BRANCH} .
       docker push ${CI_REGISTRY_IMAGE}/front/${CI_ENVIRONMENT_NAME}:${CI_FRONT_IMAGE_TAG}-${CI_COMMIT_BRANCH}
