@@ -52,14 +52,9 @@ function SourceTooltip({
   sheetUrl,
 }: { text: string; source: string; sourceSite: string; sheetUrl: string }) {
   return (
-    <div className="no-underline-link">
-      <a
-        href={sheetUrl}
-        id="clickable"
-        className="no-underline-link"
-        style={{ textDecoration: 'none !important;' }}
-      >
-        <span className="fr-icon-quote-fill fr-text-action-high--blue-cumulus fr-mr-2v no-underline-link text-decoration-none inline-block" />
+    <div>
+      <a href={sheetUrl} id="clickable">
+        <span className="fr-icon-quote-fill fr-text-action-high--blue-cumulus fr-mr-2v" />
       </a>
       <Tooltip
         place="bottom"
@@ -67,6 +62,7 @@ function SourceTooltip({
         style={{
           zIndex: 1000,
           backgroundColor: 'white',
+          borderRadius: '0px',
           color: 'black',
           boxShadow:
             'rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px',
