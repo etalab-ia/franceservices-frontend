@@ -109,7 +109,7 @@ function Source({
           {sourceSite}
         </p>
         <a
-          className="external-link-icon ml-auto no-underline-link"
+          className="external-link-icon ml-auto"
           href={sheetUrl}
           target="_blank"
           rel="noreferrer"
