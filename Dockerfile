@@ -15,7 +15,7 @@ COPY . .
 RUN npm run build
 
 COPY fetch_and_process_mfs.sh /app/fetch_and_process_mfs.sh
-RUN (crontab -l ; echo "0 0 * * 0 /app/fetch_and_process_mfs.sh") | crontab
+#RUN (crontab -l ; echo "0 0 * * 0 /app/fetch_and_process_mfs.sh") | crontab
 
 
 CMD cron && npm run preview && ./fetch_and_process_mfs.sh
