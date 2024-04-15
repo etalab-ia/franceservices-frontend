@@ -18,4 +18,4 @@ COPY fetch_and_process_mfs.sh /app/fetch_and_process_mfs.sh
 #RUN (crontab -l ; echo "0 0 * * 0 /app/fetch_and_process_mfs.sh") | crontab
 
 
-CMD cron && npm run preview && ./fetch_and_process_mfs.sh
+CMD npm run preview && ./fetch_and_process_mfs.sh
