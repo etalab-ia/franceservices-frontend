@@ -1,4 +1,3 @@
-import { useApiUrls } from '@api'
 import { NOT_SET } from '@constants/status'
 import copy from '../../icons/usertools/copy.svg'
 import redo from '../../icons/usertools/redo.svg'
