@@ -163,7 +163,7 @@ export type ArchiveType = {
  * it is used to track the state of the response
  */
 export type Stream = {
-  response: string[]
+  response: string
   historyStream: string[]
   isStreaming: boolean
   activeTab: number // deprecated
