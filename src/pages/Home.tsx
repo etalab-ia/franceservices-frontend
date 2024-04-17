@@ -20,43 +20,31 @@ const testText = `La procédure de rétablissement en cas de surendettement comp
   Si le surendetté possède un patrimoine pouvant être vendu, une liquidation judiciaire est prononcée\
   <ref text="Lorsque le surendetté possède un patrimoine pouvant être vendu,\
    la procédure de rétablissement consiste à effacer les dettes et est prononcée avec liquidation judiciaire (vente des biens).">\
-  [28e7fcf81deee0ff_0]</ref>. \
+  [28e7fcf81deee0ff_0]</ref>. \n
   Dans le cas contraire, une procédure sans liquidation judiciaire est engagée\
   <ref text="Elle est prononcée sans liquidation judiciaire (c'est-à-dire sans vente des biens) lorsque la personne surendettée\
   ne possède pas de patrimoine.">[4c4511d1c0e6dc4c_0]</ref>. `
-/* const replacedText = reactStringReplace(
-  testText,
-  /<ref text="(.*?)">(.*?)<\/ref>/g,
-  (match, i) => {
-    const tooltipText = match[1] // Text for the tooltip content
-    const displayText = match[2] // Text to display where the ref was
-    return (
-      <SourceTooltip
-        key={i}
-        id={`tooltip-${i}`} // Unique ID for each tooltip
-        text={tooltipText}
-        source={displayText}
-        sourceSite="service-public.fr"
-        sheetUrl="https://www.google.com"
-      />
-    )
-  }
-) */
 
 const replacedText = reactStringReplace(
   testText,
-  /<ref text="([^"]+)">[^<]*<\/ref>/g,
+  /<ref text="([^"]+)">[^<]*<\/ref>./g,
   (match, i) => (
-    <div>
-      <SourceTooltip
-        id={`tooltip-${i}`}
-        text={match}
-        source="Source Name"
-        sourceSite="Source Site Name"
-        sheetUrl={`https://example.com/${match[2]}`}
-      />
-    </div>
+    <SourceTooltip
+      key={i}
+      id={`tooltip-${i}`}
+      text={match}
+      source="Source Name"
+      sourceSite="Source Site Name"
+      sheetUrl={`https://example.com/${match[2]}`}
+    />
   )
+)
+
+console.log(
+  replacedText.flatMap((part, index, array) => [
+    part,
+    index < array.length - 1 && <br key={index + 'br'} />,
+  ])
 )
 
 import reactStringReplace from 'react-string-replace'
@@ -77,9 +65,7 @@ export function Home() {
   const tiles = isMFS ? MFSressourcesTiles : generalistRessourcesTiles
   return (
     <div className="fr-container">
-      {replacedText.map((content, index) => (
-        <div key={index}>{content}</div>
-      ))}
+      <div>{replacedText}</div>
       <GlobalDiv>
         <GlobalTitle>{toolsTitle}</GlobalTitle>
         <HomeTiles tiles={isMFS ? MFStoolsTiles : toolsTiles} />
@@ -98,11 +84,20 @@ function SourceTooltip({
   source,
   sourceSite,
   sheetUrl,
-}: { id: string; text: string; source: string; sourceSite: string; sheetUrl: string }) {
+}: {
+  id: string
+  text: string
+  source: string
+  sourceSite: string
+  sheetUrl: string
+}) {
   return (
-    // Ensure everything in this span is styled to stay inline
     <span style={{ position: 'relative', display: 'inline' }}>
-      <a href={sheetUrl} id={id} style={{ textDecoration: 'none', display: 'inline' }}>
+      <a
+        href={sheetUrl}
+        id={id}
+        style={{ textDecoration: 'none', display: 'inline', color: 'inherit' }}
+      >
         <span
           className="fr-icon-quote-fill fr-text-action-high--blue-cumulus fr-mr-2v"
           style={{ display: 'inline' }}
@@ -112,7 +107,7 @@ function SourceTooltip({
         place="bottom"
         opacity={1}
         style={{
-          position: 'absolute', // Ensure the tooltip is positioned absolutely to not affect layout
+          position: 'absolute',
           zIndex: 1000,
           backgroundColor: 'white',
           borderRadius: '0px',
@@ -138,7 +133,7 @@ function Source({
   sheetUrl,
 }: { text: string; source: string; sourceSite: string; sheetUrl: string }) {
   return (
-    <div className="fr-p-2w max-w-[392px] break-words text-wrap">
+    <div className="fr-p-2w max-w-[392px] break-words text-wrap inline-block">
       <p className="fr-mb-1w fr-text--sm fr-text-mention--grey">
         Passage utilisé pour générer cette phrase
       </p>
@@ -149,7 +144,7 @@ function Source({
           {sourceSite}
         </p>
         <a
-          className="external-link-icon ml-auto"
+          className="external-link-icon ml-auto no-underline"
           href={sheetUrl}
           target="_blank"
           rel="noreferrer"
