@@ -24,7 +24,7 @@ export function DisplayArrayMessages({ message }: { message: Message }) {
           <Avatar user="agent" />
         </div>
         <div className="fr-col-11 fr-col-md-10">
-          <StreamingMessage>{message.text[activeTab - 1]}</StreamingMessage>
+          <StreamingMessage response={message.text[activeTab - 1] ?? ''} />
         </div>
         <div className="fr-col-1 hide-on-smallscreen" />
       </GlobalRowContainer>

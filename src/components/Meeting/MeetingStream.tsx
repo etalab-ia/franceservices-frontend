@@ -9,12 +9,12 @@ import { useSelector } from 'react-redux'
 import { Feedback } from '../Feedbacks/Feedback'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { GlobalSecondaryTitle } from '../Global/GlobalSecondaryTitle'
-import { GlobalStream } from '../Global/GlobalStream'
+import { CurrentStream } from '../Global/CurrentStream'
 
 /*****************************************************************************************
 
 		** MeetingStream 
-			Prints answer stream with GlobalStream
+			Prints answer stream with CurrentStream
 			
 		** MeetingFeedback: set isGood & send feedback with thumbs icons
 		** ResponseExplanation: display chunks associated to response
@@ -36,7 +36,7 @@ export function MeetingStream() {
     <>
       <h3>Réponse proposée par Albert</h3>
       {stream.isStreaming ? (
-        <GlobalStream response={stream.response} />
+        <CurrentStream response={stream.response} />
       ) : (
         <GlobalParagraph>{agentResponse}</GlobalParagraph>
       )}
