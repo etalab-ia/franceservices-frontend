@@ -13,7 +13,6 @@ export const CurrentStream = ({
           </span>
         ))}
       </span>
-      )
     </div>
   )
 }
