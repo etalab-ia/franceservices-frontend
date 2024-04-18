@@ -117,25 +117,11 @@ abbr:where([title]) {
 }
 
 /*
-Remove the default font size and weight for headings.
-*/
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-
-}
-
-/*
 Reset links to optimize for opt-in styling instead of opt-out.
 */
 
 a {
   color: inherit;
-  text-decoration: inherit;
 }
 
 /*
@@ -508,9 +494,6 @@ video {
   background-color: rgb(238 238 238 / var(--tw-bg-opacity));
 }
 
-/* Normal grey */
-
-/* Dark grey */
 
 /* GLOBAL */
 
@@ -562,22 +545,6 @@ video {
   --tw-text-opacity: 1;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-}
-
-/* TODO: change margin/padding/colors/height to dsfr one */
-
-.user-feedback-confirmation-button {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  margin-top: 0.5rem;
-  font-weight: 700;
-  width: -moz-fit-content;
-  width: fit-content;
-  border-style: solid;
-  border-width: 1px;
-  --tw-border-opacity: 1;
 }
 
 /* AGENT */

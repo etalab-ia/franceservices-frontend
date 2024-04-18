@@ -61,9 +61,5 @@ The project is composed as follows:<br/><br/>
 #### More
 Implementation of a [combineReducers](https://redux.js.org/api/combinereducers) to manage the application's various states, available in /utils/reducer/reducer.jsx. To use it, a [Store](https://redux.js.org/api/store) wraps the ``Root`` component.<br/><br/>
 States:
-- [x] ``archive``: store previous conversations
-- [x] ``auth``: user information & user token
-- [x] ``feedback``: information on the quality of the response submitted to the user and returned to the model in order to adapt response re-generation
-- [x] ``stream``: robot-generated stream management
-- [x] ``tabs``: side tab management (chatbot, history, saved)
-- [x] ``user``: information entered by the user: questions asked and choices made throughout the user journey
+- [x] ``stream``: Handles the current bot's response, it is also used to check if the bot is streaming or not.
+- [x] ``user``: current chat and stream ids, message history

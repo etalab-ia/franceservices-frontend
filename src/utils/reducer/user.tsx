@@ -1,12 +1,4 @@
-import type {
-  Chunk,
-  Message,
-  Question,
-  Sheet,
-  User,
-  UserHistory,
-  WebService,
-} from '@types'
+import type { Chunk, Message, Question, Sheet, User, UserHistory } from '@types'
 
 /*****************************************************************************************************
 	
@@ -25,10 +17,6 @@ import type {
 	**	must_not_sids: sheets id forbidden to be used by agent to generate response
 
  *****************************************************************************************************/
-
-// TODO:
-// - question: local state
-// - messages: check w/ backend /streams
 
 const modelName: string = import.meta.env.VITE_MODEL_NAME as string
 const modelMode: string = import.meta.env.VITE_MODEL_MODE as string
@@ -63,13 +51,6 @@ const InitialUser: User = {
 type UserAction =
   | { type: 'SET_SHEETS'; sheets: Sheet[] }
   | { type: 'SET_CHUNKS'; chunks: Chunk[] }
-  | {
-      type: 'SET_SHEETS_FROM_ARCHIVE'
-      sheets: Sheet[]
-      additionalSheets: Sheet[]
-      webservices: WebService[]
-    }
-  | { type: 'REMOVE_SHEETS'; indexToRemove: number }
   | { type: 'ADD_SHEETS'; indexToAdd: number }
   | { type: 'SET_USER_QUERY'; nextUserQuery: string; nextChatId: number }
   | { type: 'RESET_QUESTION_FIELDS' }
@@ -104,41 +85,6 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
         ...state,
         chunks: action.chunks,
       }
-    case 'SET_SHEETS_FROM_ARCHIVE':
-      return {
-        ...state,
-        sheets: action.sheets,
-        additionalSheets: action.additionalSheets,
-        webservices: action.webservices,
-      }
-    case 'REMOVE_SHEETS': {
-      if (!state.sheets) return state
-
-      const sheets = state.sheets.filter((_, index) => action.indexToRemove !== index)
-      const additionalSheets = state.sheets.filter(
-        (_, index) => action.indexToRemove === index
-      )
-      const nextMustNotSids = [...state.question.must_not_sids, additionalSheets[0].sid]
-
-      if (
-        JSON.stringify(nextMustNotSids) === JSON.stringify(state.question.must_not_sids)
-      )
-        return {
-          ...state,
-          sheets: [...state.sheets, ...sheets],
-          additionalSheets: additionalSheets,
-        }
-
-      return {
-        ...state,
-        sheets: sheets,
-        additionalSheets: [...state.additionalSheets, ...additionalSheets],
-        question: {
-          ...state.question,
-          must_not_sids: nextMustNotSids,
-        },
-      }
-    }
     case 'ADD_SHEETS': {
       if (!state.sheets) return state
 
