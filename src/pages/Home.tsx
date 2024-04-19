@@ -12,6 +12,7 @@ import { GlobalTitle } from '../components/Global/GlobalTitle'
 import { HomeTiles } from '../components/Home/HomeTiles'
 
 import reactStringReplace from 'react-string-replace'
+import { SourceTooltip } from 'components/Sources/SourceTooltip'
 
 const testText = `La procédure de rétablissement en cas de surendettement comporte plusieurs étapes.\
  Tout d'abord, la personne concernée doit répondre à certaines conditions pour être éligible à cette procédure.\
@@ -45,19 +46,6 @@ console.log(
     index < array.length - 1 && <br key={index + 'br'} />,
   ])
 )
-
-import reactStringReplace from 'react-string-replace'
-
-const testText = `La procédure de rétablissement en cas de surendettement comporte plusieurs étapes.\
- Tout d'abord, la personne concernée doit répondre à certaines conditions pour être éligible à cette procédure.\
-  Ensuite, la commission de surendettement ouvre la procédure avec l'accord du surendetté.\
-  Si le surendetté possède un patrimoine pouvant être vendu, une liquidation judiciaire est prononcée\
-  <ref text="Lorsque le surendetté possède un patrimoine pouvant être vendu,\
-   la procédure de rétablissement consiste à effacer les dettes et est prononcée avec liquidation judiciaire (vente des biens).">\
-  [28e7fcf81deee0ff_0]</ref>. \n
-  Dans le cas contraire, une procédure sans liquidation judiciaire est engagée\
-  <ref text="Elle est prononcée sans liquidation judiciaire (c'est-à-dire sans vente des biens) lorsque la personne surendettée\
-  ne possède pas de patrimoine.">[4c4511d1c0e6dc4c_0]</ref>. `
 
 export function Home() {
   const isMFS = useContext(isMFSContext)

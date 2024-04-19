@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { DisplayMessageTab } from '../Chat/DisplayMessageTab'
 import { CurrentStream } from '../Global/CurrentStream'
-import { CurrentStream } from '../Global/CurrentStream'
 
 export function DisplayStream({ stream }: { stream: Stream }) {
   const tabsLen = stream.historyStream.length
