@@ -6,8 +6,11 @@ import type { formDataTypes } from './ContactForm'
 export function UserInformation({
   setFormData,
   formData,
-}: { setFormData: any; formData: formDataTypes }) {
-  const handleChange = (e) => {
+}: {
+  setFormData: React.Dispatch<React.SetStateAction<formDataTypes>>
+  formData: formDataTypes
+}) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setFormData((prevData: formDataTypes) => ({
       ...prevData,
