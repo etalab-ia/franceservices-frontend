@@ -122,6 +122,7 @@ Reset links to optimize for opt-in styling instead of opt-out.
 
 a {
   color: inherit;
+  text-decoration: inherit;
 }
 
 /*
@@ -1009,7 +1010,13 @@ video {
   background-color: white;
   color: black;
   padding: 10px;
+  border-bottom: 0px solid !important;
 }
+.tooltip a {
+  text-decoration: none !important;
+  border-bottom: 0px solid !important;
+}
+
 .no-underline-link {
   text-decoration: none !important;
 }
