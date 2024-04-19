@@ -3,16 +3,15 @@ import { Tooltip } from 'react-tooltip'
 export function SourceTooltip({
   id,
   text,
-  source,
-  sourceSite,
-  sheetUrl,
+  sourceId,
 }: {
   id: string
   text: string
-  source: string
-  sourceSite: string
-  sheetUrl: string
+  sourceId: string
 }) {
+  const sheetUrl = `https://example.com/${sourceId}`
+  const source = sourceId
+  const sourceSite = 'Source Site Name'
   return (
     <span
       className="fr-ml-1v"

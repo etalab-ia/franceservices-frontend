@@ -38,7 +38,7 @@ export function DisplayArrayMessages({ message }: { message: Message }) {
       <div className="fr-grid-row fr-col">
         <div className="fr-col-1" />
         <div className="fr-col-11">
-          <SourcesAccordion sheets={message.sheets} />
+          {/* <SourcesAccordion sheets={message.sheets} /> */}
         </div>
       </div>
     </GlobalRowContainer>

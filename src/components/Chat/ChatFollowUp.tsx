@@ -31,7 +31,7 @@ export function ChatFollowUp() {
           <div className="fr-grid-row fr-col">
             <div className="fr-col-1" />
             <div className="fr-col-11">
-              <SourcesAccordion sheets={user.sheets} />
+              {/* <SourcesAccordion sheets={user.sheets} /> */}
             </div>
           </div>
           {!stream.isStreaming && (
