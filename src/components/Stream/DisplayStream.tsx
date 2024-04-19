@@ -28,9 +28,7 @@ export function DisplayStream({ stream }: { stream: Stream }) {
       {conditionStream ? (
         <CurrentStream response={stream.response} extraClass="streaming fr-mb-4w" />
       ) : (
-        <CurrentStream
-          response={stream.historyStream[activeTab - 1] ?? ''}
-        ></CurrentStream>
+        <CurrentStream response={stream.historyStream[activeTab - 1] ?? ''} />
       )}
       <DisplayMessageTab
         isDisplayable={conditionTab}

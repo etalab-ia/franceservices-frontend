@@ -14,16 +14,21 @@ export function SourceTooltip({
   sheetUrl: string
 }) {
   return (
-    <span className="fr-ml-1v" style={{ position: 'relative', display: 'inline' }}>
+    <span
+      className="fr-ml-1v"
+      style={{ position: 'relative', display: 'inline', textDecoration: 'none' }}
+    >
       <a
         href={sheetUrl}
         id={id}
-        style={{ textDecoration: 'none', display: 'inline', color: 'inherit' }}
+        style={{
+          textDecoration: 'none',
+          display: 'inline',
+          color: 'inherit',
+          borderBottom: '0px solid !important',
+        }}
       >
-        <span
-          className="fr-icon-quote-fill fr-text-action-high--blue-cumulus fr-mr-2v"
-          style={{ display: 'inline' }}
-        />
+        <span className="fr-icon-quote-fill fr-text-action-high--blue-cumulus fr-mr-2v" />
       </a>
       <Tooltip
         place="bottom"
