@@ -63,3 +63,15 @@ Implementation of a [combineReducers](https://redux.js.org/api/combinereducers) 
 States:
 - [x] ``stream``: Handles the current bot's response, it is also used to check if the bot is streaming or not.
 - [x] ``user``: current chat and stream ids, message history
+
+### Environment variables
+
+We are using [ViteJS](https://vitejs.dev/) to build the project so every env variable name is prefixed with `VITE_`.
+
+VITE_API_URL -- the url to the api instance.\
+VITE_MATOMO_URL -- the url to the matomo instance.\
+VITE_ENVIRONMENT_NAME -- and extra variable currently used to display different features in the UI for FranceServices.\
+
+VITE_MODEL_NAME -- the model to use for queries, you can find a list in [here](https://huggingface.co/AgentPublic)\
+VITE_MODEL_MODE -- model mode for instance 'rag'\
+VITE_MODEL_TEMPERATURE -- the temperature used by the model to generate the response. between 1 and 100\
