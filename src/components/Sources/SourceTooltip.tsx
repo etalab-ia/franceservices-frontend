@@ -1,3 +1,4 @@
+import { useGetChunk } from '@api'
 import { Tooltip } from 'react-tooltip'
 
 export function SourceTooltip({
@@ -10,25 +11,28 @@ export function SourceTooltip({
   sourceId: string
 }) {
   const sheetUrl = `https://example.com/${sourceId}`
-  const source = sourceId
+  const source = 'sourceId'
   const sourceSite = 'Source Site Name'
+  //const { data, error } = useGetChunk(sourceId)
+  //console.log('chunk',data, error)
+  const handleNavigation = () => {
+    window.open(sheetUrl, '_blank')
+  }
+
   return (
-    <span
-      className="fr-ml-1v"
-      style={{ position: 'relative', display: 'inline', textDecoration: 'none' }}
-    >
-      <a
-        href={sheetUrl}
+    <span className="fr-ml-1v" style={{ position: 'relative', display: 'inline' }}>
+      <div
         id={id}
+        onClick={handleNavigation}
         style={{
-          textDecoration: 'none',
+          cursor: 'pointer',
           display: 'inline',
           color: 'inherit',
           borderBottom: '0px solid !important',
         }}
       >
         <span className="fr-icon-quote-fill fr-text-action-high--blue-cumulus fr-mr-2v" />
-      </a>
+      </div>
       <Tooltip
         place="bottom"
         opacity={1}
@@ -40,7 +44,6 @@ export function SourceTooltip({
           color: 'black',
           boxShadow:
             'rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px',
-          opacity: 1,
         }}
         anchorSelect={`#${id}`}
         clickable
