@@ -27,14 +27,45 @@ const SignupSchema = object(
       ),
     ]),
     email: string('Adresse email valide', [email('Adresse email invalide.')]),
-    matricule: string('Le matricule est invalide.', [
-      minLength(1, 'Veuillez selectionner une maison France Services'),
-    ]),
     password: string('Le mot de passe est invalide.', [
       minLength(8, 'Le mot de passe doit contenir au moins 8 charactères.'),
-      maxLength(20, 'Le mot de passe doit contenir au plus 20 charactères.'),
+      maxLength(128, 'Le mot de passe doit contenir au plus 128 charactères.'),
       regex(/[0-9]/, 'Le mot de passe doit contenir un chiffre.'),
       regex(/[^A-Za-z0-9]/, 'Le mot de passe doit contenir un charactère spécial.'),
+      regex(
+        /[^A-Za-z0-9$!%*+-?&#_=.,:;@]{8,128}/,
+        'Les charactères spéciaux autorisés sont $!%*+-?&#_=.,:;@'
+      ),
+    ]),
+    confirmationPassword: string(
+      'La confirmation du mot de passe doit être une chaîne valide.'
+    ),
+  },
+  [
+    custom(
+      (data) => data.password === data.confirmationPassword,
+      'Les deux mots de passe doivent etre identiques'
+    ),
+  ]
+)
+const SignupSchemaMFS = object(
+  {
+    username: string("Le nom d'utilisateur est invalide.", [
+      custom(
+        (username) => !username.includes('@'),
+        "Le nom d'utilisateur ne doit pas contenir '@'."
+      ),
+    ]),
+    email: string('Adresse email valide', [email('Adresse email invalide.')]),
+    password: string('Le mot de passe est invalide.', [
+      minLength(8, 'Le mot de passe doit contenir au moins 8 charactères.'),
+      maxLength(128, 'Le mot de passe doit contenir au plus 128 charactères.'),
+      regex(/[0-9]/, 'Le mot de passe doit contenir un chiffre.'),
+      regex(/[^A-Za-z0-9]/, 'Le mot de passe doit contenir un charactère spécial.'),
+      regex(
+        /[^A-Za-z0-9$!%*+-?&#_=.,:;@]{8,128}/,
+        'Les charactères spéciaux autorisés sont $!%*+-?&#_=.,:;@'
+      ),
     ]),
     confirmationPassword: string(
       'La confirmation du mot de passe doit être une chaîne valide.'
@@ -65,7 +96,7 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
         ...userAuth,
         username: e.target.value,
       })
-    else if (e.target.name === 'password') setPassword(e.target.value)
+    else if (e.target.name === 'passwordSignup') setPassword(e.target.value)
     else if (e.target.name === 'confirmationPassword') setConfPassword(e.target.value)
     else if (e.target.name === 'email')
       setUserAuth({
@@ -75,6 +106,7 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
   }
 
   const handleValidatePassword = (auth) => {
+    console.log('password', password)
     return (
       userAuth.username &&
       userAuth.username.length &&
@@ -86,16 +118,25 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
   }
 
   const handleClick = async () => {
-    const data = {
-      username: userAuth.username,
-      email: userAuth.email,
-      password: password,
-      organization: selectedMFS,
-      matricule: selectedMatricule,
-    }
-
+    const data = isMFS
+      ? {
+          username: userAuth.username,
+          email: userAuth.email,
+          password: password,
+          organization: selectedMFS,
+          matricule: selectedMatricule,
+        }
+      : {
+          username: userAuth.username,
+          email: userAuth.email,
+          password: password,
+        }
+    console.log('data', data, 'password', password, 'confPassword', confPassword)
     try {
-      parse(SignupSchema, { ...data, confirmationPassword: confPassword })
+      parse(isMFS ? SignupSchemaMFS : SignupSchema, {
+        ...data,
+        confirmationPassword: confPassword,
+      })
     } catch (error) {
       console.error('Validation error:', error)
       setErrorMessage(error.message)
@@ -169,7 +210,6 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
           )}
           {sent && (
             <div className="fr-container fr-grid-row fr-pb-5w">
-              {' '}
               <span
                 className="fr-icon-success-line fr-text-default--success flex flex-row gap-2"
                 aria-hidden="true"

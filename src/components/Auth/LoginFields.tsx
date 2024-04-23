@@ -27,7 +27,7 @@ export const LoginFields = ({
         return (field.nativeInputProps.type === 'password' &&
           field.nativeInputProps.name === 'password') ||
           field.nativeInputProps.name === 'passwordSignup' ? (
-          <div className="fr-mb-2w">
+          <div className="fr-mb-2w" key={index}>
             <PasswordInput
               label={field.label}
               key={index}
@@ -56,8 +56,7 @@ export const LoginFields = ({
                     aria-hidden="true"
                   ></span>
                   <p className="fr-text-default--info fr-text--xs">
-                    {' '}
-                    1 caractère spécial
+                    1 caractère spécial $!%*+-?&#_=.,:;@,
                   </p>
                 </div>
                 <div className="fr-mb-1w flex max-h-[16px]">
@@ -89,9 +88,7 @@ export const LoginFields = ({
               onKeyDown: handleKeyDown,
             }}
           />
-        ) : (
-          <></>
-        )
+        ) : null
       })}
     </>
   )

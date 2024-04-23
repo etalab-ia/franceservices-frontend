@@ -7,7 +7,8 @@
       "@types": ["./types.ts"],
       "@api": ["./api"],
       "@utils/*": ["./utils/*"],
-      "@constants/*": ["./constants/*"]
+      "@constants/*": ["./constants/*"],
+      "@hooks/*": ["./utils/hooks/*"]
     },
     /* Projects */
     // "incremental": true,                              /* Save .tsbuildinfo files to allow for incremental compilation of projects. */

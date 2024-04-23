@@ -1,4 +1,5 @@
 import { useGetChunk } from '@api'
+import useWindowDimensions from '@hooks/useWindowDimensions'
 import { Tooltip } from 'react-tooltip'
 
 export function SourceTooltip({
@@ -18,12 +19,11 @@ export function SourceTooltip({
   const handleNavigation = () => {
     window.open(sheetUrl, '_blank')
   }
-
+  const { width, height } = useWindowDimensions()
   return (
     <span className="fr-ml-1v" style={{ position: 'relative', display: 'inline' }}>
       <div
         id={id}
-        onClick={handleNavigation}
         style={{
           cursor: 'pointer',
           display: 'inline',
@@ -31,7 +31,7 @@ export function SourceTooltip({
           borderBottom: '0px solid !important',
         }}
       >
-        <span className="fr-icon-quote-fill fr-text-action-high--blue-cumulus fr-mr-2v" />
+        <span className="fr-text--xs fr-icon-quote-fill fr-text-action-high--blue-cumulus fr-mr-2v" />
       </div>
       <Tooltip
         place="bottom"
