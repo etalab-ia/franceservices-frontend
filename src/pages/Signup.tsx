@@ -106,7 +106,6 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
   }
 
   const handleValidatePassword = (auth) => {
-    console.log('password', password)
     return (
       userAuth.username &&
       userAuth.username.length &&
@@ -131,7 +130,6 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
           email: userAuth.email,
           password: password,
         }
-    console.log('data', data, 'password', password, 'confPassword', confPassword)
     try {
       parse(isMFS ? SignupSchemaMFS : SignupSchema, {
         ...data,

@@ -9,9 +9,7 @@ export function FAQ() {
       <p className="fr-pb-2w">Des réponses aux questions fréquemment posées sur Albert</p>
       <div className="flex accordion-container accordion">
         <div className="flex flex-col accordion">
-          <div className="h6-container">
-            <h6 className="font-bold text-2xl fr-pb-2w">{faq.albertInfo.categoryName}</h6>
-          </div>
+          <h6 className="font-bold text-2xl fr-pb-2w">{faq.albertInfo.categoryName}</h6>
           {faq.albertInfo.questions.map((question, index) => (
             <Accordion key={index} label={question.label}>
               {question.content}
@@ -28,11 +26,7 @@ export function FAQ() {
           </CallOut>
         </div>
         <div className="flex flex-col accordion">
-          <div className="h6-container">
-            <h6 className="font-bold text-2xl fr-pb-2w">
-              {faq.albertUsage.categoryName}
-            </h6>
-          </div>
+          <h6 className="font-bold text-2xl fr-pb-2w">{faq.albertUsage.categoryName}</h6>
           {faq.albertUsage.questions.map((question, index) => (
             <Accordion key={index} label={question.label}>
               {question.content}

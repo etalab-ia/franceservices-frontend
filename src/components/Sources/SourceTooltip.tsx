@@ -11,15 +11,6 @@ export function SourceTooltip({
   text: string
   sourceId: string
 }) {
-  const sheetUrl = `https://example.com/${sourceId}`
-  const source = 'sourceId'
-  const sourceSite = 'Source Site Name'
-  //const { data, error } = useGetChunk(sourceId)
-  //console.log('chunk',data, error)
-  const handleNavigation = () => {
-    window.open(sheetUrl, '_blank')
-  }
-  const { width, height } = useWindowDimensions()
   return (
     <span className="fr-ml-1v" style={{ position: 'relative', display: 'inline' }}>
       <div
@@ -49,38 +40,74 @@ export function SourceTooltip({
         clickable
         noArrow
       >
-        <Source text={text} source={source} sourceSite={sourceSite} sheetUrl={sheetUrl} />
+        <Source sourceId={sourceId} />
       </Tooltip>
     </span>
   )
 }
 
-function Source({
-  text,
-  source,
-  sourceSite,
-  sheetUrl,
-}: { text: string; source: string; sourceSite: string; sheetUrl: string }) {
+function Source({ sourceId }: { sourceId: string }) {
+  const { data, error } = useGetChunk(sourceId)
+  const getDomainFromUrl = (url) => {
+    try {
+      const newUrl = new URL(url)
+      return newUrl.hostname
+    } catch (error) {
+      console.error('Invalid URL', error)
+      return ''
+    }
+  }
+
+  const handleNavigation = () => {
+    window.open(data.url, '_blank')
+  }
+  if (error) {
+    return <p>Erreur: Albert n'a pas pu récupérer cette source.</p>
+  }
+  if (!data) return <LoadingSpinner />
+
+  const domainName = getDomainFromUrl(data.url)
+
   return (
     <div className="fr-p-2w inline-block max-w-[392px] text-wrap break-words">
       <p className="fr-mb-1w fr-text--sm fr-text-mention--grey">
         Passage utilisé pour générer cette phrase
       </p>
-      <p className="fr-text--lg">{text}</p>
-      <p className="fr-mb-1w">Extrait de: {source}</p>
+      <p className="fr-text--lg">{data.text}</p>
+      <p className="fr-mb-1w">Extrait de: {data.source}</p>
       <div className="fr-grid-row w-full">
-        <p className="fr-badge fr-badge--sm fr-badge--info fr-badge--no-icon">
-          {sourceSite}
-        </p>
+        {domainName && domainName.length && (
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href={domainName}
+            className="fr-badge fr-badge--sm fr-badge--info fr-badge--no-icon "
+          >
+            {domainName.slice(4, data.url.length - 3)}
+          </a>
+        )}
         <a
           className="external-link-icon ml-auto no-underline"
-          href={sheetUrl}
+          href={data.url}
           target="_blank"
           rel="noreferrer"
         >
           <span className="fr-icon-arrow-right-line" />
         </a>
       </div>
+    </div>
+  )
+}
+
+function LoadingSpinner() {
+  return (
+    <div
+      className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+      role="status"
+    >
+      <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+        Loading...
+      </span>
     </div>
   )
 }

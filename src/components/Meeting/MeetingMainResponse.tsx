@@ -28,8 +28,8 @@ export function MeetingMainResponse() {
   const user = useSelector((state: RootState) => state.user)
   return (
     <>
-      <DisplaySourceCards chunks={user.chunks} />
-      <GlobalColContainer extraClass="fr-mt-5w">
+      {/*       <DisplaySourceCards chunks={user.chunks} />
+       */} <GlobalColContainer extraClass="fr-mt-5w">
         <MeetingStream />
 
         <NewQuestionInput questionInput={question} setQuestionInput={setQuestion} />

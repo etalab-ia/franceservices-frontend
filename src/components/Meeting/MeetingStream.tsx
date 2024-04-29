@@ -10,6 +10,7 @@ import { Feedback } from '../Feedbacks/Feedback'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { GlobalSecondaryTitle } from '../Global/GlobalSecondaryTitle'
 import { CurrentStream } from '../Global/CurrentStream'
+import { TextWithSources } from 'components/Sources/TextWithSources'
 
 /*****************************************************************************************
 
@@ -36,14 +37,14 @@ export function MeetingStream() {
     <>
       <h3>Réponse proposée par Albert</h3>
       {stream.isStreaming ? (
-        <CurrentStream response={stream.response} />
+        <TextWithSources text={stream.response} />
       ) : (
-        <GlobalParagraph>{agentResponse}</GlobalParagraph>
+        <TextWithSources text={agentResponse}></TextWithSources>
       )}
       {/* [      {!stream.isStreaming && stream.historyStream.length !== 0 && <MeetingFeedback />}
 ] */}
       {!stream.isStreaming && stream.historyStream.length !== 0 && (
-        <div className="fr-mt-5w ">
+        <div className="fr-mt-5w">
           <Feedback feedback={feedback} setFeedback={setFeedback} />
           <Separator extraClass="fr-mt-5w" />
         </div>

@@ -60,7 +60,6 @@ export const setQuestionFromRegeneration = (
   limit: number,
   must_not_sids: string[]
 ) => {
-  console.log('temp', modelTemperature)
   const data = {
     model_name: modelName,
     mode: mode,

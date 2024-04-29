@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { UsefulLinks } from './UsefulLinks'
+import { TextWithSources } from 'components/Sources/TextWithSources'
 
 /*****************************************************************************************************
     Displays Albert's response and the modify button
@@ -108,13 +109,14 @@ export function DisplayResponse({
 }: { chunks: Chunk[]; response: string; webservices: WebService[] }) {
   return (
     <>
-      <DisplaySourceCards chunks={chunks} />
+      {/* <DisplaySourceCards chunks={chunks} /> */}
       <div className="fr-grid-row fr-mt-5w">
         <div
           className={webservices && webservices.length ? `fr-col-sm-8` : 'fr-col-sm-12'}
         >
           <h3>Réponse proposée par Albert</h3>
-          <GlobalParagraph extraClass="fr-mr-3w">{response}</GlobalParagraph>
+          {/*  <GlobalParagraph extraClass="fr-mr-3w">{response}</GlobalParagraph> */}
+          <TextWithSources text={response} />
         </div>
         {webservices && webservices.length > 0 && (
           <UsefulLinks webservices={webservices} extraClass="fr-col-sm-4" />

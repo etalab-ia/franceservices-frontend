@@ -69,7 +69,6 @@ export function NewPassword({ authFailed, setAuthFailed }) {
   }
 
   const handleClick = async () => {
-    console.log('password', password, 'confPassword', confPassword)
     try {
       const data = {
         password: password,
