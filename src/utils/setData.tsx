@@ -68,7 +68,7 @@ export const setQuestionFromRegeneration = (
     context: '',
     institution: '',
     links: '',
-    temperature: parseFloat(modelTemperature),
+    temperature: modelTemperature,
     must_not_sids: must_not_sids,
   }
 

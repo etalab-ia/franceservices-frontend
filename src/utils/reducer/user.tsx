@@ -20,7 +20,7 @@ import type { Chunk, Message, Question, Sheet, User, UserHistory } from '@types'
 
 const modelName: string = import.meta.env.VITE_MODEL_NAME as string
 const modelMode: string = import.meta.env.VITE_MODEL_MODE as string
-const modelTemperature: string = import.meta.env.VITE_MODEL_TEMPERATURE as string
+const modelTemperature: number = import.meta.env.VITE_MODEL_TEMPERATURE as number
 
 const InitialQuestion: Question = {
   model_name: modelName,
@@ -30,7 +30,7 @@ const InitialQuestion: Question = {
   context: undefined,
   institution: undefined, //TODO: remove
   links: undefined,
-  temperature: parseFloat(modelTemperature),
+  temperature: modelTemperature,
   sources: ['service-public', 'travail-emploi'],
   should_sids: [],
   must_not_sids: [],
