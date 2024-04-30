@@ -2,7 +2,7 @@ import type { Question, Sheet, Tile } from '@types'
 import { useFetch } from './hooks'
 
 const modelName: string = import.meta.env.VITE_MODEL_NAME as string
-const modelTemperature: string = import.meta.env.VITE_MODEL_TEMPERATURE as string
+const modelTemperature: number = import.meta.env.VITE_MODEL_TEMPERATURE as number
 
 /*
  * isEventSource is true when fetching for a stream
