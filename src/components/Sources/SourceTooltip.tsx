@@ -1,18 +1,19 @@
 import { useGetChunk } from '@api'
-import useWindowDimensions from '@hooks/useWindowDimensions'
 import { Tooltip } from 'react-tooltip'
+import useWindowDimensions from '../../utils/hooks/useWindowDimensions'
 
 export function SourceTooltip({
   id,
-  text,
+  content,
   sourceId,
 }: {
   id: string
-  text: string
+  content: string
   sourceId: string
 }) {
+  const windowDimensions = useWindowDimensions()
   return (
-    <span className="fr-ml-1v" style={{ position: 'relative', display: 'inline' }}>
+    <span className="fr-ml-1v relative inline">
       <div
         id={id}
         style={{
@@ -35,28 +36,21 @@ export function SourceTooltip({
           color: 'black',
           boxShadow:
             'rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px',
+          maxHeight: `${windowDimensions.height - 200}px`,
+          overflowY: 'auto',
         }}
         anchorSelect={`#${id}`}
         clickable
         noArrow
       >
-        <Source sourceId={sourceId} />
+        <Source sourceId={sourceId} content={content} />
       </Tooltip>
     </span>
   )
 }
 
-function Source({ sourceId }: { sourceId: string }) {
+export function Source({ sourceId, content }: { sourceId: string; content: string }) {
   const { data, error } = useGetChunk(sourceId)
-  const getDomainFromUrl = (url) => {
-    try {
-      const newUrl = new URL(url)
-      return newUrl.hostname
-    } catch (error) {
-      console.error('Invalid URL', error)
-      return ''
-    }
-  }
 
   const handleNavigation = () => {
     window.open(data.url, '_blank')
@@ -64,24 +58,29 @@ function Source({ sourceId }: { sourceId: string }) {
   if (error) {
     return <p>Erreur: Albert n'a pas pu récupérer cette source.</p>
   }
-  if (!data) return <LoadingSpinner />
+  if (!data)
+    return (
+      <div className="flex h-[100%] flex-col items-center justify-center">
+        <LoadingSpinner />
+      </div>
+    )
 
   const domainName = getDomainFromUrl(data.url)
 
   return (
-    <div className="fr-p-2w inline-block max-w-[392px] text-wrap break-words">
+    <div className="fr-p-2w inline-block max-w-[392px] text-wrap break-words h-[100%] flex flex-col">
       <p className="fr-mb-1w fr-text--sm fr-text-mention--grey">
         Passage utilisé pour générer cette phrase
       </p>
-      <p className="fr-text--lg">{data.text}</p>
-      <p className="fr-mb-1w">Extrait de: {data.source}</p>
-      <div className="fr-grid-row w-full">
+      <p className="fr-text--lg ">{content}</p>
+      <p className="fr-mb-1w">Extrait de: {data.title}</p>
+      <div className="fr-grid-row w-full fr-mt-3w">
         {domainName && domainName.length && (
           <a
             target="_blank"
             rel="noreferrer"
             href={domainName}
-            className="fr-badge fr-badge--sm fr-badge--info fr-badge--no-icon "
+            className="fr-badge fr-badge--sm fr-badge--info fr-badge--no-icon"
           >
             {domainName.slice(4, data.url.length - 3)}
           </a>
@@ -102,7 +101,7 @@ function Source({ sourceId }: { sourceId: string }) {
 function LoadingSpinner() {
   return (
     <div
-      className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
+      className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-current border-e-transparent border-solid align-[-0.125em] text-primary motion-reduce:animate-[spin_1.5s_linear_infinite]"
       role="status"
     >
       <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
@@ -110,4 +109,14 @@ function LoadingSpinner() {
       </span>
     </div>
   )
+}
+
+const getDomainFromUrl = (url) => {
+  try {
+    const newUrl = new URL(url)
+    return newUrl.hostname
+  } catch (error) {
+    console.error('Invalid URL', error)
+    return ''
+  }
 }
