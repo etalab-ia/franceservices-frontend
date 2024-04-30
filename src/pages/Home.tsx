@@ -29,8 +29,8 @@ export function Home() {
 
   return (
     <div className="fr-container">
-      <TextWithSources text={testText} />
-      <GlobalDiv>
+      {/*       <TextWithSources text={testText} />
+       */} <GlobalDiv>
         <GlobalTitle>{toolsTitle}</GlobalTitle>
         <HomeTiles tiles={isMFS ? MFStoolsTiles : toolsTiles} />
       </GlobalDiv>

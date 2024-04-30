@@ -68,13 +68,13 @@ export function Source({ sourceId, content }: { sourceId: string; content: strin
   const domainName = getDomainFromUrl(data.url)
 
   return (
-    <div className="fr-p-2w inline-block max-w-[392px] text-wrap break-words h-[100%] flex flex-col">
+    <div className="fr-p-2w flex h-[100%] max-w-[392px] flex-col text-wrap break-words">
       <p className="fr-mb-1w fr-text--sm fr-text-mention--grey">
         Passage utilisé pour générer cette phrase
       </p>
-      <p className="fr-text--lg ">{content}</p>
+      <p className="fr-text--lg">{content}</p>
       <p className="fr-mb-1w">Extrait de: {data.title}</p>
-      <div className="fr-grid-row w-full fr-mt-3w">
+      <div className="fr-grid-row fr-mt-3w w-full">
         {domainName && domainName.length && (
           <a
             target="_blank"
