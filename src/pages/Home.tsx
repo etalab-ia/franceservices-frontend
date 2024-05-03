@@ -12,6 +12,8 @@ import { GlobalDiv } from '../components/Global/GlobalDiv'
 import { GlobalTitle } from '../components/Global/GlobalTitle'
 import { HomeTiles } from '../components/Home/HomeTiles'
 
+const temperature = import.meta.env.VITE_MODEL_TEMPERATURE as number
+console.log('temperature', temperature)
 const testText = `SANS CROCHETS \
   <ref text="Lorsque le surendetté possède un patrimoine pouvant être vendu,\
    la procédure de rétablissement consiste à effacer les dettes et est prononcée avec liquidation judiciaire (vente des biens).">72e183f2620ab27a</ref>. \n

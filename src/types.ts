@@ -9,7 +9,7 @@ export type AppDispatch = typeof store.dispatch
 
 const modelName: string = import.meta.env.VITE_MODEL_NAME as string
 const modelMode: string = import.meta.env.VITE_MODEL_MODE as string
-const modelTemperature: number = import.meta.env.VITE_MODEL_TEMPERATURE as number
+const modelTemperature: number = 70 //import.meta.env.VITE_MODEL_TEMPERATURE as number
 /****************************************************************;
  *                             USER                             *
  *            All the types used in the redux store             *
