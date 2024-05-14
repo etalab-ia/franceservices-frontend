@@ -1,7 +1,6 @@
 import { isMFSContext } from '@utils/context/isMFSContext'
 import { useContext } from 'react'
 import { useLocation } from 'react-router-dom'
-import { createRouter, defineRoute } from 'type-route'
 
 export function navFunc() {
   const isMFS = useContext(isMFSContext)
@@ -83,13 +82,4 @@ export function navFunc() {
       ]
 
   return navDefs
-}
-
-const routeDefs = {
-  home: defineRoute('/home'),
-  meeting: defineRoute('/meeting'),
-  chat: defineRoute('/chat'),
-  contact: defineRoute('/contact'),
-  history: defineRoute('/history'),
-  faq: defineRoute('/FAQ'),
 }

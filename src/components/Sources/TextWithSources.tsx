@@ -17,7 +17,6 @@ export function TextWithSources({ text }) {
       reactStringReplace(text, /(<ref text="[^"]+"[^<]*<\/ref>\.?)/g, (match, i) => {
         const regex = /<ref text="([^"]+)">\[?([^\]<:]{16})[^\]<]*\]?<\/ref>/
         const content = regex.exec(match)
-        console.log('content', content[2])
         if (content) {
           if (windowSize.width > 992) {
             return (
