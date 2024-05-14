@@ -76,10 +76,7 @@ export const Root = () => {
           }
         />
         {isMFS ? (
-          <Route
-            path="/FAQ"
-            element={!userAuth.isLogin ? <Navigate to="/login" /> : <FAQ />}
-          />
+          <Route path="/FAQ" element=<FAQ /> />
         ) : (
           <Route
             path={'/FAQ'}
