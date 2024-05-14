@@ -1,5 +1,5 @@
-.env
-style.css
+.env.development
+..bfg-report
 
 # Logs
 logs
@@ -26,4 +26,6 @@ dist-ssr
 *.sln
 *.sw?
 
-/public/dsfr/
+coverage-ts
+coverage-ts/**
+coverage-ts/*
