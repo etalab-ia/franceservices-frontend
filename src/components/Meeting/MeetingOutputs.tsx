@@ -4,12 +4,11 @@ import type { Chunk, RootState, UserHistory, WebService } from '@types'
 import { CurrQuestionContext } from '@utils/context/questionContext'
 import { rmContextFromQuestion } from '@utils/setData'
 import Separator from 'components/Global/Separator'
+import { TextWithSources } from 'components/Sources/TextWithSources'
 import { useContext, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { GlobalParagraph } from '../Global/GlobalParagraph'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { UsefulLinks } from './UsefulLinks'
-import { TextWithSources } from 'components/Sources/TextWithSources'
 
 /*****************************************************************************************************
     Displays Albert's response and the modify button
@@ -39,18 +38,7 @@ export function MeetingOutputs() {
     <div className="ft-container ">
       <div className="fr-mb-5w ">
         <h2 className="fr-my-2w">{meetingAppointmentTitle}</h2>
-        {/*         <h5>{meetingAppointmentInformations}</h5>
-          <GlobalParagraph extraClass="fr-background-alt--blue-france fr-p-2w">
-            {query}
-          </GlobalParagraph> */}
       </div>
-      {/*       {user.history.length > 0 && (
-          <DisplayResponse
-            chunks={user.history[0].chunks}
-            response={user.history[0].response}
-            webservices={user.history[0].webservices}
-          />
-        )} */}
       <History history={user.history} />
       <MeetingCurrentResponse />
     </div>
@@ -108,22 +96,17 @@ export function DisplayResponse({
   webservices,
 }: { chunks: Chunk[]; response: string; webservices: WebService[] }) {
   return (
-    <>
-      {/* <DisplaySourceCards chunks={chunks} /> */}
-      <div className="fr-grid-row fr-mt-5w">
-        <div
-          className={webservices && webservices.length ? `fr-col-sm-8` : 'fr-col-sm-12'}
-        >
-          <h3>Réponse proposée par Albert</h3>
-          {/*  <GlobalParagraph extraClass="fr-mr-3w">{response}</GlobalParagraph> */}
-          <TextWithSources text={response} />
-        </div>
-        {webservices && webservices.length > 0 && (
-          <UsefulLinks webservices={webservices} extraClass="fr-col-sm-4" />
-        )}
-        <Separator extraClass="fr-mt-5w" />
+    <div className="fr-grid-row fr-mt-5w">
+      <div className={webservices && webservices.length ? `fr-col-sm-8` : 'fr-col-sm-12'}>
+        <h3>Réponse proposée par Albert</h3>
+        {/*  <GlobalParagraph extraClass="fr-mr-3w">{response}</GlobalParagraph> */}
+        <TextWithSources text={response} />
       </div>
-    </>
+      {webservices && webservices.length > 0 && (
+        <UsefulLinks webservices={webservices} extraClass="fr-col-sm-4" />
+      )}
+      <Separator extraClass="fr-mt-5w" />
+    </div>
   )
 }
 
@@ -149,8 +132,8 @@ export function DisplaySourceCards({ chunks }: { chunks: Chunk[] }) {
   }
   return (
     <>
-      <div className="fr-grid-row fr-col-12 justify-between fr-mt-1w items-center w-full ">
-        <h3 className=" fr-mb-3v">Sources utilisées pour générer la réponse</h3>
+      <div className="fr-grid-row fr-col-12 fr-mt-1w w-full items-center justify-between">
+        <h3 className="fr-mb-3v">Sources utilisées pour générer la réponse</h3>
         <Pagination
           count={Math.ceil(chunks.length / 3)}
           defaultPage={currentPage}

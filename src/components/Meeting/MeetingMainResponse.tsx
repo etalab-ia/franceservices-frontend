@@ -7,8 +7,7 @@ import { generateStream } from 'utils/hooks'
 import { addContextToQuestion } from 'utils/setData'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { GlobalSecondaryTitle } from '../Global/GlobalSecondaryTitle'
-import { DisplaySourceCards } from './MeetingOutputs'
-import { MeetingQR } from './MeetingQR'
+import { MeetingRelatedQuestions } from './MeetingRelatedQuestions'
 import { MeetingStream } from './MeetingStream'
 import { MeetingTags } from './MeetingTags'
 import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
@@ -18,23 +17,19 @@ import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
 
 		**	MeetingStream: display stream & chunks from GET /indexes chunks used to generate response
 
-		**	MeetingQR: set related questions cards from sheets informations
+		**	MeetingRelatedQuestions: set related questions cards from sheets informations
 
  *****************************************************************************************************/
 
 export function MeetingMainResponse() {
   const [question, setQuestion] = useState('')
 
-  const user = useSelector((state: RootState) => state.user)
   return (
     <>
-      {/*       <DisplaySourceCards chunks={user.chunks} />
-       */} <GlobalColContainer extraClass="fr-mt-5w">
+      <GlobalColContainer extraClass="fr-mt-5w">
         <MeetingStream />
-
         <NewQuestionInput questionInput={question} setQuestionInput={setQuestion} />
-
-        <MeetingQR setQuestion={setQuestion} />
+        <MeetingRelatedQuestions setQuestion={setQuestion} />
       </GlobalColContainer>
     </>
   )
@@ -106,8 +101,8 @@ function NewQuestionInput({
   }
 
   return (
-    <div>
-      <div className=" w-full ">
+    <>
+      <div className="w">
         <GlobalSecondaryTitle extraClass="fr-mt-4w">
           Poser une question complémentaire
         </GlobalSecondaryTitle>
@@ -136,11 +131,11 @@ function NewQuestionInput({
           onClick={() => setIsAdditionalInputOpened(!isAdditionalInputOpened)}
           disabled={stream.isStreaming}
           className="fr-btn"
-          title="Rechercher"
+          title="Recherche avancée"
           iconId={
             isAdditionalInputOpened ? 'fr-icon-arrow-up-s-line' : 'fr-icon-add-line'
           }
-        ></Button>
+        />
         <Button
           onClick={handleSubmit}
           disabled={questionInput === '' || stream.isStreaming}
@@ -151,7 +146,7 @@ function NewQuestionInput({
           Rechercher
         </Button>
       </div>
-    </div>
+    </>
   )
 }
 
