@@ -46,7 +46,7 @@ export function MeetingAdditionalResponse() {
     )
   }, [user.streamId, user.question])
   return (
-    <OneThirdScreenWidth extraClass="fr-mt-5w">
+    <OneThirdScreenWidth>
       <GlobalColContainer>
         <UsefulLinks webservices={user.webservices} />
       </GlobalColContainer>

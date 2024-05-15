@@ -1,5 +1,4 @@
-import { ArchiveType, type RootState } from '@types'
-import Separator from 'components/Global/Separator'
+import type { RootState } from '@types'
 import { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'

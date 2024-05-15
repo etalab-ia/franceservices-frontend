@@ -54,27 +54,6 @@ export const setUserQuestion = (question) => {
   return data
 }
 
-export const setQuestionFromRegeneration = (
-  mode: string,
-  text,
-  limit: number,
-  must_not_sids: string[]
-) => {
-  const data = {
-    model_name: modelName,
-    mode: mode,
-    query: text,
-    limit: limit,
-    context: '',
-    institution: '',
-    links: '',
-    temperature: modelTemperature,
-    must_not_sids: must_not_sids,
-  }
-
-  return data
-}
-
 export const addContextToQuestion = (question: string, context) => {
   const administrations = context.administrations.length
     ? 'Les administrations concernées par cette question sont : ' +
