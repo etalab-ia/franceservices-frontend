@@ -21,7 +21,7 @@ export function MeetingCurrentResponse() {
       <h5 ref={ref} className="fr-mt-5w fr-mb-1w">
         {`Votre question ${user.history.length ? 'complémentaire' : ''}`}
       </h5>
-      <div className="min-h-12 fr-mb-2w fr-background-alt--blue-france flex items-center fr-p-2w ">
+      <div className="fr-mb-2w fr-background-alt--blue-france fr-p-2w flex min-h-12 items-center">
         <p>{user.question.query}</p>
       </div>
 

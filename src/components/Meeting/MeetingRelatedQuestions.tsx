@@ -1,4 +1,4 @@
-import { meetingQRTitle } from '@constants/meeting'
+import { MeetingRelatedQuestionsTitle } from '@constants/meeting'
 import type { RootState } from '@types'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 		Frequently asked question suggestions
 		For now we get the related questions from the sheets
  *****************************************************************************************/
-export function MeetingQR({
+export function MeetingRelatedQuestions({
   setQuestion,
 }: {
   setQuestion: React.Dispatch<React.SetStateAction<string>>
@@ -44,7 +44,9 @@ export function MeetingQR({
   return (
     <>
       {relatedQuestions.length !== 0 && (
-        <p className="fr-pt-3w fr-mb-2w flex md:flex-col">{meetingQRTitle}</p>
+        <p className="fr-pt-3w fr-mb-2w flex md:flex-col">
+          {MeetingRelatedQuestionsTitle}
+        </p>
       )}
       {relatedQuestions.slice(0, 3).map((rq, index) => {
         return (
@@ -53,34 +55,8 @@ export function MeetingQR({
             key={index}
             onClick={() => setQuestion(rq.question)}
           >
-            <div
-              style={{
-                width: '100%',
-                height: '100%',
-                paddingLeft: 16,
-                paddingRight: 16,
-                paddingTop: 12,
-                paddingBottom: 12,
-                background: '#F5F5FE',
-                borderRadius: 5,
-                justifyContent: 'flex-start',
-                alignItems: 'flex-start',
-                gap: 10,
-                display: 'inline-flex',
-                cursor: 'pointer',
-              }}
-            >
-              <div
-                style={{
-                  color: '#3A3A3A',
-                  fontSize: 16,
-                  fontFamily: 'Marianne',
-                  fontWeight: '400',
-                  wordWrap: 'break-word',
-                }}
-              >
-                {rq.question}
-              </div>
+            <div className="fr-px-2w fr-py-3v inline-flex h-full w-full rounded bg-[#F5F5FE]">
+              {rq.question}
             </div>
           </button>
         )

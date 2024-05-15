@@ -42,6 +42,10 @@ export const Root = () => {
     <div className="h-screen w-screen flex-col justify-between" id="screen">
       <Header
         brandTop="DINUM / Etalab"
+        homeLinkProps={{
+          href: '/home',
+          title: 'Accueil - Albert',
+        }}
         serviceTitle={
           <>
             ALBERT {isMFS ? 'France services' : 'Chat'}{' '}
@@ -53,7 +57,6 @@ export const Root = () => {
         serviceTagline={
           isMFS ? 'Aide à l’accompagnement des usagers France services' : ''
         }
-        homeLinkProps={{ title: 'Albert', href: '/' }}
         navigation={userAuth.isLogin && navigationData}
         // @ts-expect-error TS(2322) FIXME: Type '({ iconId: string; linkProps: { style: { poi... Remove this comment to see the full error message
         quickAccessItems={
@@ -76,10 +79,7 @@ export const Root = () => {
           }
         />
         {isMFS ? (
-          <Route
-            path="/FAQ"
-            element={!userAuth.isLogin ? <Navigate to="/login" /> : <FAQ />}
-          />
+          <Route path="/FAQ" element=<FAQ /> />
         ) : (
           <Route
             path={'/FAQ'}

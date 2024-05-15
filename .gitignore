@@ -1,4 +1,5 @@
 .env.development
+..bfg-report
 
 # Logs
 logs
