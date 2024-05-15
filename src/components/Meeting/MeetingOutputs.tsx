@@ -9,6 +9,9 @@ import { useContext, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { UsefulLinks } from './UsefulLinks'
+import { GlobalRowContainer } from 'components/Global/GlobalRowContainer'
+import { OneThirdScreenWidth } from 'components/Global/OneThirdScreenWidth'
+import { GlobalColContainer } from 'components/Global/GlobalColContainer'
 
 /*****************************************************************************************************
     Displays Albert's response and the modify button
@@ -35,8 +38,8 @@ export function MeetingOutputs() {
   }, [])
 
   return (
-    <div className="ft-container ">
-      <div className="fr-mb-5w ">
+    <div className="ft-container">
+      <div className="fr-mb-5w">
         <h2 className="fr-my-2w">{meetingAppointmentTitle}</h2>
       </div>
       <History history={user.history} />
@@ -53,7 +56,7 @@ export function History({ history }: { history: UserHistory[] }) {
   return (
     <div className="fr-mt-5w">
       {history.map((h, index) => (
-        <div className="fr-mb-1w " key={index}>
+        <div className="fr-mb-1w" key={index}>
           <h3 className="fr-background-alt--blue-france">
             <button
               className="fr-accordion__btn fr-text-default--grey"
@@ -65,8 +68,8 @@ export function History({ history }: { history: UserHistory[] }) {
                 className={`${
                   openedAccordion === index
                     ? ''
-                    : 'text-ellipsis overflow-hidden whitespace-nowrap block'
-                } fr-text--lg`}
+                    : 'block overflow-hidden text-ellipsis whitespace-nowrap'
+                }fr-text--lg`}
               >
                 {h.query}
               </p>
@@ -96,17 +99,22 @@ export function DisplayResponse({
   webservices,
 }: { chunks: Chunk[]; response: string; webservices: WebService[] }) {
   return (
-    <div className="fr-grid-row fr-mt-5w">
-      <div className={webservices && webservices.length ? `fr-col-sm-8` : 'fr-col-sm-12'}>
-        <h3>Réponse proposée par Albert</h3>
-        {/*  <GlobalParagraph extraClass="fr-mr-3w">{response}</GlobalParagraph> */}
-        <TextWithSources text={response} />
-      </div>
+    <GlobalRowContainer extraClass="fr-mt-2w">
+      <GlobalColContainer>
+        <div key={response}>
+          <h3>Réponse proposée par Albert</h3>
+          <TextWithSources text={response} />
+        </div>
+      </GlobalColContainer>
       {webservices && webservices.length > 0 && (
-        <UsefulLinks webservices={webservices} extraClass="fr-col-sm-4" />
+        <OneThirdScreenWidth extraClass="fr-mt-5w">
+          <GlobalColContainer>
+            <UsefulLinks webservices={webservices} />
+          </GlobalColContainer>
+        </OneThirdScreenWidth>
       )}
       <Separator extraClass="fr-mt-5w" />
-    </div>
+    </GlobalRowContainer>
   )
 }
 
@@ -157,13 +165,13 @@ function SourceCard({ title, text, url }: { title: string; text: string; url: st
   const domain = new URL(url).hostname.replace('www.', '')
   return (
     <div
-      className="fr-col-12 fr-col-sm-4 border border-[rgba(221, 221, 221, 1)] fr-px-4w fr-py-2w max-w-[392px] fr-background-action--high-blue relative "
+      className="fr-col-12 fr-col-sm-4 221, 221, 1)] fr-px-4w fr-py-2w fr-background-action--high-blue relative max-w-[392px] border border-[rgba(221,"
       style={{ position: 'relative' }}
     >
-      <p className="font-bold line-clamp-2 fr-mb-2w ">{title}</p>
-      <p className=" line-clamp-3 fr-mb-4w">{text}</p>
+      <p className="fr-mb-2w line-clamp-2 font-bold">{title}</p>
+      <p className="fr-mb-4w line-clamp-3">{text}</p>
       <a
-        className="font-bold mt-auto absolute bottom-0  fr-mb-2w no-external-link-icon "
+        className="fr-mb-2w no-external-link-icon absolute bottom-0 mt-auto font-bold"
         style={{ backgroundImage: 'none', textDecoration: 'none' }}
         href={url}
         rel="noopener noreferrer"
@@ -176,7 +184,7 @@ function SourceCard({ title, text, url }: { title: string; text: string; url: st
 
 function Badge({ text }: { text: string }) {
   return (
-    <div className="fr-background-contrast--info fr-py-0.5v fr-px-2v  rounded">
+    <div className="fr-background-contrast--info fr-py-0.5v fr-px-2v rounded">
       <p className="fr-text-action-high--blue-france">{text}</p>
     </div>
   )
