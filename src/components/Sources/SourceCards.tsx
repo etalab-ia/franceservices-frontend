@@ -1,4 +1,6 @@
 import Pagination from '@codegouvfr/react-dsfr/Pagination'
+import type { Chunk } from '@types'
+import { useState } from 'react'
 
 /**
  * Display an array of chunks in cards with a pagination

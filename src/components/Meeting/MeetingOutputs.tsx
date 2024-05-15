@@ -1,5 +1,5 @@
 import { meetingAppointmentTitle } from '@constants/meeting'
-import type { Chunk, RootState, UserHistory, WebService } from '@types'
+import type { RootState, UserHistory, WebService } from '@types'
 import { CurrQuestionContext } from '@utils/context/questionContext'
 import { rmContextFromQuestion } from '@utils/setData'
 import { GlobalColContainer } from 'components/Global/GlobalColContainer'
