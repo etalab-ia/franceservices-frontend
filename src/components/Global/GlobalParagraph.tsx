@@ -9,7 +9,7 @@ export const GlobalParagraph = ({
       {typeof children !== 'string'
         ? children
         : children.split('\n').map((line, lineIndex) => (
-            <Linkify target="_blank" key={lineIndex}>
+            <Linkify target="_blank" key={line}>
               {lineIndex > 0 && <br />}
               {line}
             </Linkify>

@@ -1,10 +1,9 @@
 import Input from '@codegouvfr/react-dsfr/Input'
 import { PasswordInput } from '@codegouvfr/react-dsfr/blocks/PasswordInput'
-import Fuse from 'fuse.js'
-import { useEffect, useMemo, useState } from 'react'
-import Papa from 'papaparse'
 import { isMFSContext } from '@utils/context/isMFSContext'
-import { useContext } from 'react'
+import Fuse from 'fuse.js'
+import Papa from 'papaparse'
+import { useContext, useEffect, useMemo, useState } from 'react'
 
 export const LoginFields = ({
   fields,
@@ -23,14 +22,14 @@ export const LoginFields = ({
   }
   return (
     <>
-      {fields.map((field, index) => {
+      {fields.map((field) => {
         return (field.nativeInputProps.type === 'password' &&
           field.nativeInputProps.name === 'password') ||
           field.nativeInputProps.name === 'passwordSignup' ? (
-          <div className="fr-mb-2w" key={index}>
+          <div className="fr-mb-2w" key={field}>
             <PasswordInput
               label={field.label}
-              key={index}
+              key={field}
               nativeInputProps={{
                 ...field.nativeInputProps,
                 onChange: handleChange,
@@ -71,7 +70,7 @@ export const LoginFields = ({
           </div>
         ) : field.nativeInputProps.type === 'mfs' && isMFS ? (
           <MFSInput
-            key={index}
+            key={field}
             selectedValue={selectedValue}
             setSelectedValue={setSelectedValue}
             matricule={matricule}
@@ -80,7 +79,7 @@ export const LoginFields = ({
         ) : field.nativeInputProps.type !== 'mfs' ? (
           <Input
             label={field.label}
-            key={index}
+            key={field}
             hintText={field.hintText}
             nativeInputProps={{
               ...field.nativeInputProps,
@@ -94,7 +93,7 @@ export const LoginFields = ({
   )
 }
 
-export function MFSInput({ selectedValue, setSelectedValue, matricule, setMatricule }) {
+function MFSInput({ selectedValue, setSelectedValue, matricule, setMatricule }) {
   const [searchResults, setSearchResults] = useState([])
   const [data, setData] = useState([])
   const [selectedIndex, setSelectedIndex] = useState(-1)

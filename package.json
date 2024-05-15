@@ -36,7 +36,6 @@
     "react-to-print": "^2.14.15",
     "react-tooltip": "^5.26.3",
     "redux": "^4.2.1",
-    "type-route": "^1.0.1",
     "valibot": "^0.25.0"
   },
   "devDependencies": {
