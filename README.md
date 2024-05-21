@@ -2,7 +2,7 @@
 
 > ⚠️ DISCLAIMER:
 > This project went open source very recently, here are some caveats:
-> - The code might contain useless components and code that are used specifically for France Services, the project will be splitted in the future.
+> - The code might contain components and code that are of no use to you and that are used specifically for France Services, the project will be splitted in the future.
 > - The Accessibility of the project is not total according to the [RGAA criterias](https://accessibilite.numerique.gouv.fr/)
 > - The documentation is not complete
 
@@ -13,8 +13,8 @@ This repo aims to provide a visual interface to interact with Albert's (the Fren
 
 ### Tech stack
 
-[ViteJS](https://vitejs.dev/) \
-[React](https://react.dev/) \
+[ViteJS](https://vitejs.dev/)  
+[React](https://react.dev/)  
 [Tailwind](https://tailwindcss.com/)
 #### DSFR
 
@@ -24,8 +24,8 @@ DSFR is already installed, here are some useful resources:
 - [Accessibility](https://accessibilite.numerique.gouv.fr/): RGAA criterias
 #### State management
 
-[Redux](https://redux.js.org/) 👉 for global state management <br />
-[React-Query](https://tanstack.com/query/latest) 👉 for querying and caching
+[Redux](https://redux.js.org/) 👉 for global client state management  
+[React-Query](https://tanstack.com/query/latest) 👉 for querying, caching and async state management  
 
 
 #### Validation
@@ -34,23 +34,25 @@ We use [Valibot](https://valibot.dev) to validate users input, this is a lightwe
 
 
 #### More
-Implementation of a [combineReducers](https://redux.js.org/api/combinereducers) to manage the application's various states, available in /utils/reducer/reducer.jsx. To use it, a [Store](https://redux.js.org/api/store) wraps the ``Root`` component.<br/><br/>
+Implementation of a [combineReducers](https://redux.js.org/api/combinereducers) to manage the application's various states, available in /utils/reducer/reducer.jsx. To use it, a [Store](https://redux.js.org/api/store) wraps the ``Root`` component.  
 
 ## Launch project
 
 Scripts are available in `package.json`
 
-Install dependencies:<br/><br/>
+Install dependencies:  
 `npm i`
 
 ### Dev mode
 
-Create tailwind file:<br/><br/>
+Create tailwind file:  
 `npx tailwind -i src/style/style.css -o style.css`
 
-Launch dev mode:<br/><br/>
+Launch dev mode:  
 `npm run dev`
 
+### Production mode
+Check out the [Vite docs](https://vitejs.dev/guide/static-deploy.html)
 
 ## Environment variables
 
@@ -64,6 +66,14 @@ We are using [ViteJS](https://vitejs.dev/) to build the project so every env var
 **VITE_MODEL_MODE** -- model mode for instance 'rag'\
 **VITE_MODEL_TEMPERATURE** -- the temperature used by the model to generate the response. between 1 and 100\
 
-## States
+## API 
+
+Albert front uses [tanstack-query](https://tanstack.com/query/latest/docs/framework/react/overview) (react-query) to interact with the backend.  
+Functions are located in the `src/api` folder and can be importe via @api.
+
+All the api's endpoints are referenced in [src/api/routes.ts](src/api/routes.ts)
+
+
+## Redux states
 - [x] ``stream``: Handles the current bot's response, it is also used to check if the bot is streaming or not.
 - [x] ``user``: current chat and stream ids, message history
