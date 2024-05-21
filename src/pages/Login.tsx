@@ -3,21 +3,19 @@ import { ButtonsGroup } from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { initButtonsLogin } from '@constants/connexion'
 import { usernameOrPasswordError } from '@constants/errorMessages'
 import { loginFields } from '@constants/inputFields'
+import { isMFSContext } from '@utils/context/isMFSContext'
 import { useFetch } from '@utils/hooks'
 import { setUserInfos } from '@utils/manageConnexion'
 import {
-  type Dispatch,
-  type SetStateAction,
+  useContext,
   useEffect,
   useState,
-  useContext,
+  type Dispatch,
+  type SetStateAction,
 } from 'react'
 import type { UserAuth } from 'utils/auth'
-import { LoginContainer } from '../components/Auth/LoginContainer'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
-import { isMFSContext } from '@utils/context/isMFSContext'
-import { is } from 'valibot'
 
 interface LoginProps {
   authFailed: boolean
@@ -33,11 +31,10 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
 
   useEffect(() => {
     checkIfCompletedFields()
-  }, [password])
+  }, [])
 
   const checkIfCompletedFields = () => {
-    if (password.length && ((id && id.length) || (password && password.length)))
-      setIsDisable(false)
+    if (password.length && (id?.length || password?.length)) setIsDisable(false)
     else setIsDisable(true)
   }
 

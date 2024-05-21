@@ -20,7 +20,7 @@
     _mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
   </script>
   <script type="module">
-    const matomoUrl = "%VITE_MATOMO_URL%"
+    const matomoUrl = "<%= matomoUrl %>"
     const d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
     g.async = true; g.src = matomoUrl; s.parentNode.insertBefore(g, s);
   </script>

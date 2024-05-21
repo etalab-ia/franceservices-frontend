@@ -26,10 +26,9 @@ export const LoginFields = ({
         return (field.nativeInputProps.type === 'password' &&
           field.nativeInputProps.name === 'password') ||
           field.nativeInputProps.name === 'passwordSignup' ? (
-          <div className="fr-mb-2w" key={field}>
+          <div className="fr-mb-2w" key={field.label}>
             <PasswordInput
               label={field.label}
-              key={field}
               nativeInputProps={{
                 ...field.nativeInputProps,
                 onChange: handleChange,
@@ -70,7 +69,7 @@ export const LoginFields = ({
           </div>
         ) : field.nativeInputProps.type === 'mfs' && isMFS ? (
           <MFSInput
-            key={field}
+            key={field.label}
             selectedValue={selectedValue}
             setSelectedValue={setSelectedValue}
             matricule={matricule}
@@ -79,7 +78,7 @@ export const LoginFields = ({
         ) : field.nativeInputProps.type !== 'mfs' ? (
           <Input
             label={field.label}
-            key={field}
+            key={field.label}
             hintText={field.hintText}
             nativeInputProps={{
               ...field.nativeInputProps,
