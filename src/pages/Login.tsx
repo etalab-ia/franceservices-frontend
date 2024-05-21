@@ -7,6 +7,7 @@ import { isMFSContext } from '@utils/context/isMFSContext'
 import { useFetch } from '@utils/hooks'
 import { setUserInfos } from '@utils/manageConnexion'
 import {
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -29,22 +30,24 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
   const [id, setId] = useState('')
   const isMFS = useContext(isMFSContext)
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     checkIfCompletedFields()
-  }, [])
+  }, [password, id])
 
-  const checkIfCompletedFields = () => {
-    if (password.length && (id?.length || password?.length)) setIsDisable(false)
-    else setIsDisable(true)
-  }
+  const checkIfCompletedFields = useCallback(() => {
+    setIsDisable(!(password.length && id.length))
+  }, [password, id])
 
   const handleChange = (e) => {
     e.preventDefault()
 
-    if (e.target.name === 'username') setId(e.target.value)
-    if (e.target.name === 'password') setPassword(e.target.value)
-
-    checkIfCompletedFields()
+    if (e.target.name === 'username') {
+      setId(e.target.value)
+    }
+    if (e.target.name === 'password') {
+      setPassword(e.target.value)
+    }
   }
 
   const handleSubmit = async () => {
@@ -62,7 +65,6 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
 
       if ((res.status && res.success !== true) || !res.token) {
         // Set authFailed to true if the response status is not 200 or token is not received
-
         setAuthFailed(true)
       } else {
         // On successful authentication, set user info
@@ -91,7 +93,7 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
           />
           {authFailed && <ButtonInformation>{usernameOrPasswordError}</ButtonInformation>}
           <ButtonsGroup buttons={initButtonsLogin(handleSubmit, isDisable)} />
-        </div>{' '}
+        </div>
       </div>
     </div>
   )
