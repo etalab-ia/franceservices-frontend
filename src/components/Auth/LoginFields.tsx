@@ -22,14 +22,15 @@ export const LoginFields = ({
   }
   return (
     <>
-      {fields.map((field) => {
+      {fields.map((field, index) => {
+        // Adding index here as a key suffix
+        const fieldKey = `${field.nativeInputProps.name}-${index}` // Ensuring unique key
         return (field.nativeInputProps.type === 'password' &&
           field.nativeInputProps.name === 'password') ||
           field.nativeInputProps.name === 'passwordSignup' ? (
-          <div className="fr-mb-2w" key={field}>
+          <div className="fr-mb-2w" key={fieldKey}>
             <PasswordInput
               label={field.label}
-              key={field}
               nativeInputProps={{
                 ...field.nativeInputProps,
                 onChange: handleChange,
@@ -70,7 +71,7 @@ export const LoginFields = ({
           </div>
         ) : field.nativeInputProps.type === 'mfs' && isMFS ? (
           <MFSInput
-            key={field}
+            key={fieldKey}
             selectedValue={selectedValue}
             setSelectedValue={setSelectedValue}
             matricule={matricule}
@@ -79,7 +80,7 @@ export const LoginFields = ({
         ) : field.nativeInputProps.type !== 'mfs' ? (
           <Input
             label={field.label}
-            key={field}
+            key={fieldKey}
             hintText={field.hintText}
             nativeInputProps={{
               ...field.nativeInputProps,
@@ -168,7 +169,6 @@ function MFSInput({ selectedValue, setSelectedValue, matricule, setMatricule }) 
           nativeInputProps={{
             onChange: handleSearch,
             onKeyDown: handleKeyDown,
-
             value: selectedValue,
             name: 'mfs',
             tabIndex: 0,
