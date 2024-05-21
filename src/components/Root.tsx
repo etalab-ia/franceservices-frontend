@@ -28,14 +28,13 @@ export const Root = () => {
   const navigationData = navFunc()
   const [userAuth, setUserAuth] = useState<UserAuth>(InitialUserAuth)
   const [authFailed, setAuthFailed] = useState(false)
-  const dispatch = useAppDispatch()
   const [isLoading, setIsLoading] = useState(true)
   const isMFS = useContext(isMFSContext)
   useEffect(() => {
     checkConnexion(setUserAuth, userUrl).finally(() => setIsLoading(false))
-  }, [dispatch])
+  }, [])
   if (isLoading) {
-    return <div></div>
+    return <div />
   }
 
   return (
