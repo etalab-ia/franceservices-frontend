@@ -26,6 +26,8 @@ dist-ssr
 *.sln
 *.sw?
 
+*.min.js
+
 coverage-ts
 coverage-ts/**
 coverage-ts/*
