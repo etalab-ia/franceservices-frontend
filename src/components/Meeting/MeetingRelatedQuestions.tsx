@@ -1,6 +1,6 @@
 import { MeetingRelatedQuestionsTitle } from '@constants/meeting'
 import type { RootState } from '@types'
-import { useEffect, useState } from 'react'
+import { createRef, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 /*****************************************************************************************
@@ -17,27 +17,35 @@ export function MeetingRelatedQuestions({
 }) {
   const sheets = useSelector((state: RootState) => state.user.sheets)
   const [relatedQuestions, setRelatedQuestions] = useState([])
+  const stream = useSelector((state: RootState) => state.stream)
+  const ref = createRef<HTMLDivElement>()
 
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [ref.current, stream.response])
   useEffect(() => {
     if (!sheets || !sheets.length) return
 
     let updatedQuestions = []
     setRelatedQuestions([])
 
-    sheets.forEach((sheet) => {
-      sheet.related_questions &&
-        sheet.related_questions.forEach((qr) => {
-          const object = updatedQuestions.some((obj) => {
-            return obj.sid === qr.sid
-          })
+    for (const sheet of sheets) {
+      if (sheet.related_questions) {
+        for (const qr of sheet.related_questions) {
+          const objectExists = updatedQuestions.some((obj) => obj.sid === qr.sid)
 
-          if (!object)
+          if (!objectExists) {
             updatedQuestions = [
               ...updatedQuestions,
               { question: qr.question, sid: qr.sid, url: qr.url },
             ]
-        })
-    })
+          }
+        }
+      }
+    }
+
     setRelatedQuestions(updatedQuestions)
   }, [sheets])
 
@@ -55,7 +63,10 @@ export function MeetingRelatedQuestions({
             key={index}
             onClick={() => setQuestion(rq.question)}
           >
-            <div className="fr-px-2w fr-py-3v inline-flex h-full w-full rounded bg-[#F5F5FE]">
+            <div
+              ref={ref}
+              className="fr-px-2w fr-py-3v inline-flex h-full w-full rounded bg-[#F5F5FE]"
+            >
               {rq.question}
             </div>
           </button>

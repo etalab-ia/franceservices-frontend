@@ -21,7 +21,8 @@
     "rules": {
       "suspicious": {
         "noExplicitAny": "off"
-      }
+      },
+      "correctness": { "useExhaustiveDependencies": "off" }
     }
   },
   "formatter": {
