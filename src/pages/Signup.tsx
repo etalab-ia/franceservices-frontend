@@ -87,7 +87,7 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
   const [sent, setSent] = useState(false)
   const isMFS = useContext(isMFSContext)
 
-  let navigate = useNavigate()
+  const navigate = useNavigate()
   const handleChange = (e) => {
     e.preventDefault()
 

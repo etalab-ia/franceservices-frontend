@@ -47,14 +47,14 @@ export const LoginFields = ({
                   <span
                     className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
                     aria-hidden="true"
-                  ></span>
+                  />
                   <p className="fr-text-default--info fr-text--xs">8 caractères</p>
                 </div>
                 <div className="fr-mb-1w flex max-h-[16px]">
                   <span
                     className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
                     aria-hidden="true"
-                  ></span>
+                  />
                   <p className="fr-text-default--info fr-text--xs">
                     1 caractère spécial $!%*+-?&#_=.,:;@,
                   </p>
@@ -63,7 +63,7 @@ export const LoginFields = ({
                   <span
                     className="fr-icon-info-fill fr-icon--sm fr-text-default--info fr-mr-2v"
                     aria-hidden="true"
-                  ></span>
+                  />
                   <p className="fr-text-default--info fr-text--xs"> 1 chiffre</p>
                 </div>
               </div>

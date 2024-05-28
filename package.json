@@ -40,7 +40,7 @@
     "vite-plugin-html": "^3.2.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.6.3",
+    "@biomejs/biome": "1.7.3",
     "@types/node": "^20.11.17",
     "@types/papaparse": "^5.3.14",
     "@types/react": "^18.2.46",

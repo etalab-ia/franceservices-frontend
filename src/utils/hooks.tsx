@@ -34,7 +34,7 @@ export const useFetch = async (url: string, method: string, props): Promise<any>
 function handleStreamMessage(e, dispatch, stream_chat, id: number) {
   try {
     const jsonData = JSON.parse(e.data)
-    if (jsonData == '[DONE]') {
+    if (jsonData === '[DONE]') {
       stream_chat.close()
       dispatch({ type: 'SET_STREAM_ID', nextStreamId: 0 })
       return dispatch({ type: 'STOP_AGENT_STREAM' })

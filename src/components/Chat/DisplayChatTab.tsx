@@ -28,7 +28,7 @@ export function DisplayChatTab({
         {user.messages.length <= 0 && (
           <NewChatHeader setQuestionInput={setQuestionInput} />
         )}
-        <ChatMainContainer archive={archive} setQuestionInput={setQuestionInput} />
+        <ChatMainContainer archive={archive} />
       </div>
       <UserMessage
         setGenerate={setGenerate}
@@ -52,7 +52,7 @@ function NewChatHeader({ setQuestionInput }) {
           <span
             className="fr-col-1 fr-icon-info-fill fr-text-action-high--blue-france fr-mr-2w fr-mr-md-1v"
             aria-hidden="true"
-          ></span>
+          />
           <p className="fr-col-10">
             Je suis toujours en plein développement, et ne demande qu'à m'améliorer !
             N’hésitez pas à faire des retours sur les résultats que je vous propose pour

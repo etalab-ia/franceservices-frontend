@@ -6,7 +6,6 @@ import { emitCloseStream } from 'utils/eventsEmitter'
 import { generateStream } from 'utils/hooks'
 import { addContextToQuestion } from 'utils/setData'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
-import { GlobalSecondaryTitle } from '../Global/GlobalSecondaryTitle'
 import { MeetingRelatedQuestions } from './MeetingRelatedQuestions'
 import { MeetingStream } from './MeetingStream'
 import { MeetingTags } from './MeetingTags'
@@ -28,8 +27,8 @@ export function MeetingMainResponse() {
     <>
       <GlobalColContainer extraClass="fr-mt-5w">
         <MeetingStream />
-        <NewQuestionInput questionInput={question} setQuestionInput={setQuestion} />
         <MeetingRelatedQuestions setQuestion={setQuestion} />
+        <NewQuestionInput questionInput={question} setQuestionInput={setQuestion} />
       </GlobalColContainer>
     </>
   )
@@ -101,28 +100,19 @@ function NewQuestionInput({
   }
 
   return (
-    <>
-      <div className="w">
-        <GlobalSecondaryTitle extraClass="fr-mt-4w">
-          Poser une question complémentaire
-        </GlobalSecondaryTitle>
-        <p className="fr-mb-3v text-xs">
-          Vous pouvez affiner la réponse proposée par Albert en posant une nouvelle
-          question relative à la situation de l’usager. Albert utilisera les échanges
-          précédents pour formuler une nouvelle réponse.
-        </p>
-        <textarea
-          style={{ minHeight: '10px', overflow: 'hidden' }}
-          placeholder="Poser une nouvelle question"
-          rows={1}
-          onChange={handleChange}
-          value={questionInput}
-          onKeyDown={handleKeyDown}
-          className="fr-input justify-end"
-          id="textarea"
-          name="textarea"
-        ></textarea>
-      </div>
+    <div className="fr-mt-2w fr-pb-2w  sticky right-0 bottom-0 left-0 z-10 bg-white">
+      <textarea
+        style={{ minHeight: '10px', overflow: 'hidden' }}
+        placeholder="Poser une nouvelle question"
+        rows={1}
+        onChange={handleChange}
+        value={questionInput}
+        onKeyDown={handleKeyDown}
+        className="fr-input justify-end"
+        id="textarea"
+        name="textarea"
+      ></textarea>
+
       {isAdditionalInputOpened && (
         <NewQuestionMeetingAdditionalInput context={context} setContext={setContext} />
       )}
@@ -146,7 +136,12 @@ function NewQuestionInput({
           Rechercher
         </Button>
       </div>
-    </>
+      <p className="fr-my-3v text-xs">
+        Vous pouvez affiner la réponse proposée par Albert en posant une nouvelle question
+        relative à la situation de l’usager. Albert utilisera les échanges précédents pour
+        formuler une nouvelle réponse.
+      </p>
+    </div>
   )
 }
 

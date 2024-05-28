@@ -28,7 +28,7 @@ export function MeetingOutputs() {
 
   useEffect(() => {
     rmContextFromQuestion(query, setQuery)
-  }, [])
+  }, [query])
 
   return (
     <>
@@ -47,7 +47,7 @@ export function History({ history }: { history: UserHistory[] }) {
   return (
     <div className="fr-mt-5w">
       {history.map((h, index) => (
-        <div className="fr-mb-1w" key={index}>
+        <div className="fr-mb-1w" key={h.query}>
           <h3 className="fr-background-alt--blue-france">
             <button
               className="fr-accordion__btn fr-text-default--grey"
@@ -93,7 +93,7 @@ export function DisplayResponse({
         </div>
       </GlobalColContainer>
       {webservices && webservices.length > 0 && (
-        <OneThirdScreenWidth extraClass="fr-mt-5w">
+        <OneThirdScreenWidth extraClass="">
           <GlobalColContainer>
             <UsefulLinks webservices={webservices} />
           </GlobalColContainer>

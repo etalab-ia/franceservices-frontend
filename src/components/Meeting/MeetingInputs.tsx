@@ -3,8 +3,6 @@ import { CurrQuestionContext } from '@utils/context/questionContext'
 import { updateQuestion } from '@utils/setData'
 import { useContext, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { GlobalDiv } from '../Global/GlobalDiv'
-import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { MeetingInputButton } from './MeetingInputButton'
 import { MeetingInputFields } from './MeetingInputFields'
 

@@ -8,7 +8,9 @@
       ".vscode",
       ".github",
       "./utility/icons/icons.json",
-      "*.min.js"
+      "*.min.js",
+      "*.css",
+      "dist"
     ]
   },
   "organizeImports": {
