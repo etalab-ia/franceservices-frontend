@@ -18,13 +18,13 @@ export default function SourcesAccordion({ sheets }: { sheets: Sheet[] }) {
           className={`fr-text-mention--grey fr-icon--sm fr-icon-arrow-${
             isAccordionOpen ? 'up' : 'down'
           }-s-line fr-my-1v hover:cursor-pointer`}
-        ></span>
+        />
       </div>
       <div className="fr-grid-row gap-4">
-        {sheets.slice(0, 3).map((chunk, index) => (
+        {sheets.slice(0, 3).map((chunk) => (
           <div
             className="fr-mt-1w"
-            key={index}
+            key={chunk.hash}
             style={{ display: isAccordionOpen ? 'block' : 'none' }}
           >
             <SourceCard title={chunk.title} url={chunk.url} />

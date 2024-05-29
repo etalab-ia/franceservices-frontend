@@ -15,7 +15,7 @@ export function DisplayStream({ stream }: { stream: Stream }) {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (tabsLen != currLen) setCurrLen(tabsLen)
+    if (tabsLen !== currLen) setCurrLen(tabsLen)
     setActiveTab(tabsLen)
   }, [tabsLen])
 

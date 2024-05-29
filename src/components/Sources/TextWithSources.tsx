@@ -1,8 +1,8 @@
-import reactStringReplace from 'react-string-replace'
-import { Source, SourceTooltip } from './SourceTooltip'
+import useWindowDimensions from '@utils/hooks/useWindowDimensions'
 import { useEffect, useState } from 'react'
 import ReactModal from 'react-modal'
-import useWindowDimensions from '@utils/hooks/useWindowDimensions'
+import reactStringReplace from 'react-string-replace'
+import { Source, SourceTooltip } from './SourceTooltip'
 
 export function TextWithSources({ text }) {
   const [textWithSources, setTextWithSources] = useState<any | null>(null)

@@ -23,8 +23,7 @@ export const LoginFields = ({
   return (
     <>
       {fields.map((field, index) => {
-        // Adding index here as a key suffix
-        const fieldKey = `${field.nativeInputProps.name}-${index}` // Ensuring unique key
+        const fieldKey = `${field.nativeInputProps.name}-${index}`
         return (field.nativeInputProps.type === 'password' &&
           field.nativeInputProps.name === 'password') ||
           field.nativeInputProps.name === 'passwordSignup' ? (
@@ -180,7 +179,7 @@ function MFSInput({ selectedValue, setSelectedValue, matricule, setMatricule }) 
               className={`fr-card cursor-pointer p-0 ${
                 selectedIndex === index ? 'bg-light-grey' : ''
               }`}
-              key={index}
+              key={item}
               onClick={() => handleSelect(item)}
             >
               <p className="fr-ml-3w fr-mt-1w fr-mb-1w">{item.lib_fs}</p>

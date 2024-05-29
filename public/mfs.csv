@@ -397,9 +397,6 @@
 "424","France services CC Haute Sarthe Alpes mancelles"
 "425","France services Brûlon"
 "426","France services CC Sud Sarthe"
-,
-,
-Permanences sur rendez-vous,  le mercredi de 9h à 12h à Mansigné
 "427","France services Valgelon La Rochette"
 "428","France services Saint Michel de Maurienne"
 "429","France services Yenne"
@@ -780,9 +777,6 @@ Permanences sur rendez-vous,  le mercredi de 9h à 12h à Mansigné
 "842","France services Mulhouse - Drouot"
 "843","France services La Poste d'Ottmarsheim"
 "844","France services de Montpellier - Centre social Espace Famille Adages"
-,
-,
-Tous les mardis matins,"Non"
 "845","France services Face Hérault Alco"
 "846","France services La Poste de La Salvetat-sur-Agout"
 "847","France services Gignac"
@@ -1434,17 +1428,28 @@ Tous les mardis matins,"Non"
 "1813","France services Bulle de Vie"
 "1814","France services Centre d'animation sociale Jean-Claude Laude"
 "1815","France services Communauté de communes Orée de Bercé bélinois"
-,
-,
-Marigné-Laillé (Mairie) : 1er lundi du mois 14h-17h  ,
-,
-,
-Saint Biez en Belin (Mairie) : 2ème lundi du mois : 9h-12h  ,
-,
-,
-Saint Ouen en Belin (Mairie) : 3ème lundi du mois 9h-12h  ,
-,
-,
+
+,
+
+,
+Marigné-Laillé (Mairie) : 1er lundi du mois 14h-17h  
+,
+
+,
+
+,
+Saint Biez en Belin (Mairie) : 2ème lundi du mois : 9h-12h  
+,
+
+,
+
+,
+Saint Ouen en Belin (Mairie) : 3ème lundi du mois 9h-12h  
+,
+
+,
+
+,
 Téloché (Mairie) :1er lundi du mois : 9h-12h","Site principal"
 "1816","France services Ville de Rouen"
 "1817","France services du Territoire Saint-Romain de Colbosc"
@@ -1715,20 +1720,33 @@ Téloché (Mairie) :1er lundi du mois : 9h-12h","Site principal"
 "2090","France services Pimms Médiation Cours"
 "2091","France services Maison du Rhône de Genas"
 "2092","France services CC Sud Est Pays Manceau"
-,
-,
-Lundi 9h00-12h00 : Parigné-l’Évêque / 13h30-17h00 : Changé  ,
-,
-,
-Mardi 9h00-12h00 : Brette-les-Pins / 13h30-17h00 : Parigné-l’Évêque  ,
-,
-,
+
+,
+
+,
+Lundi 9h00-12h00 : Parigné-l’Évêque / 13h30-17h00 : Changé  
+,
+
+,
+
+,
+Mardi 9h00-12h00 : Brette-les-Pins / 13h30-17h00 : Parigné-l’Évêque  
+,
+
+,
+
+,
 Mercredi 9h00-12h00 : Changé,
-,
-,
-Jeudi 9h00-12h00 : Saint-Mars-d’Outillé / 13h30-17h00 : Parigné-l’Évêque  ,
-,
-,
+
+,
+
+,
+Jeudi 9h00-12h00 : Saint-Mars-d’Outillé / 13h30-17h00 : Parigné-l’Évêque  
+,
+
+,
+
+,
 Vendredi 9h00-12h00 : Changé / 13h30-17h00 : Parigné-l’Évêque","Site principal"
 "2093","France services du Centre Social Lares"
 "2094","France services Bourg-Saint-Maurice"
@@ -2263,8 +2281,10 @@ Vendredi 9h00-12h00 : Changé / 13h30-17h00 : Parigné-l’Évêque","Site princ
 "2630","France services de Valenciennes - Maison du Citoyen"
 "2631","France services de Saint-André-Lez-Lille"
 "2632","France services de Mons-en-Baroeul"
-,
-,
+
+,
+
+,
 ","59410"
 "2633","France services de Sin Le Noble"
 "2634","France services de Beauvais - MAJI"
@@ -2302,8 +2322,10 @@ Vendredi 9h00-12h00 : Changé / 13h30-17h00 : Parigné-l’Évêque","Site princ
 "2666","France services de Graulhet"
 "2667","France services de La Londe-les-Maures"
 "2668","France services d'Hyères"
-,
-,
+
+,
+
+,
 ","83069"
 "2669","France services de Pignans"
 "2670","France services de La Roche-sur-Yon - Bourg-sous-la-Roche"

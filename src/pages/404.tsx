@@ -39,7 +39,7 @@ const Error404 = () => {
 							</li> */}
             </ul>
           </div>
-          <div className="fr-col-12 fr-col-md-3 fr-col-offset-md-1 fr-px-6w fr-px-md-0 fr-py-0"></div>
+          <div className="fr-col-12 fr-col-md-3 fr-col-offset-md-1 fr-px-6w fr-px-md-0 fr-py-0" />
         </div>
       </div>
     </main>

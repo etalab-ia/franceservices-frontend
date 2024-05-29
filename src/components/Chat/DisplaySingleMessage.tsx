@@ -1,6 +1,6 @@
 import { Avatar } from './Avatar'
 
-//User's message
+// User's message
 export const DisplaySingleMessage = ({
   sender,
   text,

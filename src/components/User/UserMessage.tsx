@@ -8,7 +8,7 @@ import { useContext, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 /*
- **
+ ** The user input
  */
 export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
   const stream = useSelector((state: RootState) => state.stream)
@@ -111,16 +111,15 @@ export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
             className="fr-input justify-end"
             id="textarea"
             name="textarea"
-          ></textarea>
+          />
           <div className="flex justify-end">
             <Button
               onClick={handleClick}
               disabled={questionInput.trim() === '' || stream.isStreaming}
               className="fr-btn align-end"
               title="Rechercher"
-              /* iconId="fr-icon-search-line" */
             >
-              <span className="fr-icon-search-line fr-icon--sm fr-mr-md-1w"></span>
+              <span className="fr-icon-search-line fr-icon--sm fr-mr-md-1w" />
               {window.innerWidth > 992 ? 'Rechercher' : null}
             </Button>
           </div>

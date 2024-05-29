@@ -21,7 +21,7 @@ export function MeetingStream() {
       {stream.isStreaming ? (
         <TextWithSources text={stream.response} />
       ) : (
-        <TextWithSources text={agentResponse}></TextWithSources>
+        <TextWithSources text={agentResponse} />
       )}
 
       {!stream.isStreaming && stream.historyStream.length !== 0 && (

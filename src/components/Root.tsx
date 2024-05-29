@@ -175,7 +175,7 @@ export const Root = () => {
         <Route path="*" element={<Error404 />} />
       </Routes>
 
-      {location.pathname != '/chat' && (
+      {location.pathname !== '/chat' && (
         <Footer
           bottomItems={[headerFooterDisplayItem]}
           accessibility="partially compliant"
