@@ -52,9 +52,6 @@ export function SourceTooltip({
 export function Source({ sourceId, content }: { sourceId: string; content: string }) {
   const { data, error } = useGetChunk(sourceId)
 
-  const handleNavigation = () => {
-    window.open(data.url, '_blank')
-  }
   if (error) {
     return <p>Erreur: Albert n'a pas pu récupérer cette source.</p>
   }
@@ -75,7 +72,7 @@ export function Source({ sourceId, content }: { sourceId: string; content: strin
       <p className="fr-text--lg">{content}</p>
       <p className="fr-mb-1w">Extrait de: {data.title}</p>
       <div className="fr-grid-row fr-mt-3w w-full">
-        {domainName && domainName.length && (
+        {domainName?.length && (
           <a
             target="_blank"
             rel="noreferrer"

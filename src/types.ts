@@ -124,15 +124,6 @@ export type Chat = {
   userId: number | undefined
 }
 
-/* export const InitialChat: Chat = {
-  name: undefined,
-  type: undefined,
-  creationDate: undefined,
-  updatedDate: undefined,
-  id: undefined,
-  userId: undefined,
-} */
-
 export type ArchiveType = {
   chat_id: number
   context: string

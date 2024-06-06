@@ -59,6 +59,7 @@ export function MeetingRelatedQuestions({
       {relatedQuestions.slice(0, 3).map((rq, index) => {
         return (
           <button
+            type="button"
             className="fr-mb-1w w-full"
             key={index}
             onClick={() => setQuestion(rq.question)}

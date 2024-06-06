@@ -4,7 +4,7 @@ const apiBase = `${import.meta.env.VITE_API_URL}/api/v2`
 export const streamUrl = `${apiBase}/stream`
 export const chatUrl = `${apiBase}/chat`
 export const getChatsUrl = `${apiBase}/chats?desc=true`
-export const getStreamsUrl = `${apiBase}/chat/archive`
+export const getArchiveUrl = `${apiBase}/chat/archive`
 export const indexesUrl = `${apiBase}/indexes`
 export const institutionsUrl = `${apiBase}/institutions`
 export const signinUrl = `${apiBase}/sign_in`

@@ -50,6 +50,7 @@ export function History({ history }: { history: UserHistory[] }) {
         <div className="fr-mb-1w" key={h.query}>
           <h3 className="fr-background-alt--blue-france">
             <button
+              type="button"
               className="fr-accordion__btn fr-text-default--grey"
               aria-expanded="false"
               aria-controls={`history-${index}`}
@@ -89,7 +90,8 @@ export function DisplayResponse({
       <GlobalColContainer>
         <div key={response}>
           <h3>Réponse proposée par Albert</h3>
-          <TextWithSources text={response} />
+          {/*  <TextWithSources text={response} /> */}
+          <p>{response}</p>
         </div>
       </GlobalColContainer>
       {webservices && webservices.length > 0 && (

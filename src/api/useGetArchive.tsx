@@ -1,4 +1,4 @@
-import { getChunksUrl, getStreamsUrl } from '@api'
+import { getChunksUrl, getArchiveUrl } from '@api'
 import { useQuery } from '@tanstack/react-query'
 import type { UserHistory } from '@types'
 
@@ -12,7 +12,7 @@ export function useGetArchive(chatId: number) {
 
 const fetchArchive = async (chatId: number) => {
   const authToken = localStorage.getItem('authToken')
-  const response = await fetch(`${getStreamsUrl}/${chatId}`, {
+  const response = await fetch(`${getArchiveUrl}/${chatId}`, {
     headers: {
       Authorization: `Bearer ${authToken}`,
       'Content-Type': 'application/json',
