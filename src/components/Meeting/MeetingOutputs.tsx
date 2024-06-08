@@ -90,8 +90,7 @@ export function DisplayResponse({
       <GlobalColContainer>
         <div key={response}>
           <h3>Réponse proposée par Albert</h3>
-          {/*  <TextWithSources text={response} /> */}
-          <p>{response}</p>
+          <TextWithSources text={response} />
         </div>
       </GlobalColContainer>
       {webservices && webservices.length > 0 && (

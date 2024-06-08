@@ -22,9 +22,9 @@ export interface User {
   messages: Message[] // Message exchanged between user & agent
   sheets: Sheet[] // Sheets associated to the reponse from 0 to 2
   additionalSheets: Sheet[] // suggested sheets to from 3 to 9
-  chunks: Chunk[] // Chunks associes a la reponse
+  chunks: Chunk[] // Chunks for the current response
   webservices: any[] // Dans sheets webservices: liens utiles lies aux sheets
-  chatId: number // current chat id
+  chatId: number // current chat id+
   streamId: number // current stream id
   history: UserHistory[] // history of the user's questions and the bot's responses
   lastStreamId: number // Keeps track of the last stream id, used to send feedback with the right stream id

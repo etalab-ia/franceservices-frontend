@@ -17,6 +17,7 @@ import { Contact } from '../pages/Contact'
 import { FAQ } from '../pages/FAQ'
 import { History } from '../pages/History'
 import { Home } from '../pages/Home'
+import { NewHome } from '../pages/NewHome'
 import { Login } from '../pages/Login'
 import { Meeting } from '../pages/Meeting'
 import { NewPassword } from '../pages/NewPassword'
@@ -102,7 +103,7 @@ export const Root = () => {
         )}
         <Route
           path="/home"
-          element={!userAuth.isLogin ? <Navigate to="/login" /> : <Home />}
+          element={!userAuth.isLogin ? <Navigate to="/login" /> : <NewHome />}
         />
         <Route
           path="/"

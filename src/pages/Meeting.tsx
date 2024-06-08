@@ -24,7 +24,6 @@ import { InitialQuestion, MeetingInputContext, type RootState } from '../types'
 export function Meeting() {
   const [generate, setGenerate] = useState(false)
   const [currQuestion, setCurrQuestion] = useState(InitialQuestion)
-  const stream = useSelector((state: RootState) => state.stream)
 
   const updateCurrQuestion = (newQuestion) => {
     setCurrQuestion(newQuestion)
