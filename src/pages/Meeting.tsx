@@ -1,10 +1,4 @@
-import { CurrQuestionContext } from '@utils/context/questionContext'
-import { emitCloseStream } from '@utils/eventsEmitter'
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { MeetingInputs } from '../components/Meeting/MeetingInputs'
 import { MeetingOutputs } from '../components/Meeting/MeetingOutputs'
-import { InitialQuestion, MeetingInputContext, type RootState } from '../types'
 
 /*****************************************************************************************************
 	
@@ -22,18 +16,9 @@ import { InitialQuestion, MeetingInputContext, type RootState } from '../types'
  *****************************************************************************************************/
 
 export function Meeting() {
-  const [generate, setGenerate] = useState(false)
-  const [currQuestion, setCurrQuestion] = useState(InitialQuestion)
-
-  const updateCurrQuestion = (newQuestion) => {
-    setCurrQuestion(newQuestion)
-  }
-
   return (
-    <CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>
-      <div className="fr-container fr-my-3w">
-        {generate ? <MeetingOutputs /> : <MeetingInputs setGenerate={setGenerate} />}
-      </div>
-    </CurrQuestionContext.Provider>
+    <div className="fr-container fr-my-3w">
+      <MeetingOutputs />
+    </div>
   )
 }

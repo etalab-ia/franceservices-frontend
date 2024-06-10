@@ -90,7 +90,7 @@ export async function generateStream(
 ) {
   const headers = setHeaders(false)
   const stream_data = setUserQuestion(question)
-  const stream = await useFetch(streamUrl + `/chat/${chatId}`, 'POST', {
+  const stream = await useFetch(`${streamUrl}/chat/${chatId}`, 'POST', {
     data: JSON.stringify(stream_data),
     headers,
   })

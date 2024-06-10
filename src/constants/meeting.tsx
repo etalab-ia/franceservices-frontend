@@ -102,7 +102,7 @@ export const meetingContextualInfosTitle = 'Informations contextuelles'
 export const meetingGenerateButton = 'Échanger avec Albert'
 export const meetingAppointmentInformations =
   'Votre question sur la situation de l’usager'
-export const meetingAppointmentTitle = 'Échanger avec Albert'
+export const meetingAppointmentTitle = 'Poser une question à Albert'
 
 export const meetingDefaultQuestionsIntroduction = (
   <GlobalRowContainer>

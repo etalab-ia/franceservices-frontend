@@ -1,5 +1,11 @@
 import { meetingAppointmentTitle } from '@constants/meeting'
-import type { RootState, UserHistory, WebService } from '@types'
+import {
+  InitialQuestion,
+  type Question,
+  type RootState,
+  type UserHistory,
+  type WebService,
+} from '@types'
 import { CurrQuestionContext } from '@utils/context/questionContext'
 import { rmContextFromQuestion } from '@utils/setData'
 import { GlobalColContainer } from 'components/Global/GlobalColContainer'
@@ -8,7 +14,7 @@ import { OneThirdScreenWidth } from 'components/Global/OneThirdScreenWidth'
 import Separator from 'components/Global/Separator'
 import { TextWithSources } from 'components/Sources/TextWithSources'
 import { useContext, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { UsefulLinks } from './UsefulLinks'
 
@@ -22,20 +28,31 @@ import { UsefulLinks } from './UsefulLinks'
   *****************************************************************************************************/
 
 export function MeetingOutputs() {
-  const { currQuestion } = useContext(CurrQuestionContext)
   const user = useSelector((state: RootState) => state.user)
+  const [currQuestion, setCurrQuestion] = useState(InitialQuestion)
+  const dispatch = useDispatch()
   const [query, setQuery] = useState<string>(currQuestion.query)
+  const updateCurrQuestion = (newQuestion: Question) => {
+    setCurrQuestion(newQuestion)
+  }
 
   useEffect(() => {
-    rmContextFromQuestion(query, setQuery)
+    if (user.chatId === 0) return
+    if (query !== '') rmContextFromQuestion(query, setQuery)
   }, [query])
 
+  useEffect(() => {
+    return () => {
+      dispatch({ type: 'RESET_USER' })
+      console.log('reset user')
+    }
+  }, [])
   return (
-    <>
+    <CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>
       <h2 className="fr-my-2w fr-mb-5w">{meetingAppointmentTitle}</h2>
-      <History history={user.history} />
+      {user.history.length > 0 && <History history={user.history} />}
       <MeetingCurrentResponse />
-    </>
+    </CurrQuestionContext.Provider>
   )
 }
 
@@ -93,7 +110,7 @@ export function DisplayResponse({
           <TextWithSources text={response} />
         </div>
       </GlobalColContainer>
-      {webservices && webservices.length > 0 && (
+      {webservices?.length && (
         <OneThirdScreenWidth extraClass="">
           <GlobalColContainer>
             <UsefulLinks webservices={webservices} />

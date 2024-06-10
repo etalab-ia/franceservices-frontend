@@ -42,7 +42,7 @@ function SmallHorizontalTile({ tileProps }: { tileProps: TileType }) {
             </a>
           </h3>
           <p className="fr-tile__detail">{tileProps.desc.key}</p>
-          <div className="fr-tile__start"></div>
+          <div className="fr-tile__start" />
         </div>
       </div>
     </div>

@@ -3,34 +3,29 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import type { MeetingInputContext, RootState } from 'types'
 import { emitCloseStream } from 'utils/eventsEmitter'
-import { generateStream } from 'utils/hooks'
-import { addContextToQuestion } from 'utils/setData'
+import { generateStream, useFetch } from 'utils/hooks'
+import { addContextToQuestion, setHeaders } from 'utils/setData'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { MeetingRelatedQuestions } from './MeetingRelatedQuestions'
 import { MeetingStream } from './MeetingStream'
 import { MeetingTags } from './MeetingTags'
 import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
-/*****************************************************************************************************
-	
-	COMPONENTS:
-
-		**	MeetingStream: display stream & chunks from GET /indexes chunks used to generate response
-
-		**	MeetingRelatedQuestions: set related questions cards from sheets informations
-
- *****************************************************************************************************/
+import { chatUrl } from '@api'
 
 export function MeetingMainResponse() {
   const [question, setQuestion] = useState('')
+  const user = useSelector((state: RootState) => state.user)
 
   return (
-    <>
-      <GlobalColContainer extraClass="fr-mt-5w">
-        <MeetingStream />
-        <MeetingRelatedQuestions setQuestion={setQuestion} />
-        <NewQuestionInput questionInput={question} setQuestionInput={setQuestion} />
-      </GlobalColContainer>
-    </>
+    <GlobalColContainer extraClass="fr-mt-5w bg-red-400">
+      {user.chatId !== 0 && (
+        <>
+          <MeetingStream />
+          <MeetingRelatedQuestions setQuestion={setQuestion} />
+        </>
+      )}
+      <NewQuestionInput questionInput={question} setQuestionInput={setQuestion} />
+    </GlobalColContainer>
   )
 }
 
@@ -49,40 +44,59 @@ function NewQuestionInput({
     administrations: [],
     themes: [],
   })
-  const handleChange = (e) => {
-    e.preventDefault()
 
+  const handleChange = (e) => {
     setQuestionInput(e.target.value)
   }
 
   useEffect(() => {
     emitCloseStream()
-    generateStream(user.question, dispatch, user.chatId, false)
-  }, [user.question])
+    if (user.chatId && user.question.query) {
+      generateStream(user.question, dispatch, user.chatId, false)
+    }
+  }, [user.question, user.chatId])
 
   const handleSubmit = async () => {
+    let chatId = user.chatId
+    if (!chatId) {
+      const headers = setHeaders(false)
+      const chat = await useFetch(chatUrl, 'POST', {
+        data: JSON.stringify({ chat_type: 'meeting' }),
+        headers,
+      })
+      chatId = chat.id
+      dispatch({ type: 'SET_CHAT_ID', nextChatId: chatId })
+      console.log('chat', chat)
+    }
+
     setIsAdditionalInputOpened(false)
-    dispatch({
-      type: 'ADD_HISTORY',
-      newItem: {
-        query: user.question.query,
-        response: stream.historyStream[0],
-        sheets: user.sheets,
-        chunks: user.chunks,
-        webservices: user.webservices,
-      },
-    })
+
+    if (stream.historyStream.length) {
+      dispatch({
+        type: 'ADD_HISTORY',
+        newItem: {
+          query: user.question.query,
+          response: stream.historyStream[0],
+          sheets: user.sheets,
+          chunks: user.chunks,
+          webservices: user.webservices,
+        },
+      })
+    }
+
     dispatch({
       type: 'SET_USER_QUERY',
       nextUserQuery: addContextToQuestion(questionInput, context),
-
-      nextChatId: user.chatId,
+      nextChatId: chatId,
     })
-    stream.historyStream.length &&
+
+    if (stream.historyStream.length) {
       dispatch({
         type: 'SET_MESSAGES',
         nextMessage: { text: stream.historyStream, sender: 'agent' },
       })
+    }
+
     dispatch({ type: 'RESET_STREAM_HISTORY' })
     dispatch({
       type: 'SET_MESSAGES',
@@ -92,15 +106,15 @@ function NewQuestionInput({
     setQuestionInput('')
   }
 
-  function handleKeyDown(e: any) {
-    if (e.key === 'Enter' && questionInput !== '' && !stream.isStreaming) {
+  const handleKeyDown = (e: any) => {
+    if (e.key === 'Enter' && questionInput && !stream.isStreaming) {
       e.preventDefault()
       handleSubmit()
     }
   }
 
   return (
-    <div className="fr-mt-2w fr-pb-2w  sticky right-0 bottom-0 left-0 z-10 bg-white">
+    <div className="mt-auto fr-pb-2w sticky right-0 bottom-0 left-0 z-10 bg-white ">
       <textarea
         style={{ minHeight: '10px', overflow: 'hidden' }}
         placeholder="Poser une nouvelle question"
@@ -111,7 +125,7 @@ function NewQuestionInput({
         className="fr-input justify-end"
         id="textarea"
         name="textarea"
-      ></textarea>
+      />
 
       {isAdditionalInputOpened && (
         <NewQuestionMeetingAdditionalInput context={context} setContext={setContext} />
@@ -128,7 +142,7 @@ function NewQuestionInput({
         />
         <Button
           onClick={handleSubmit}
-          disabled={questionInput === '' || stream.isStreaming}
+          disabled={!questionInput || stream.isStreaming}
           className="fr-btn"
           title="Rechercher"
           iconId="fr-icon-search-line"
@@ -153,52 +167,35 @@ function NewQuestionMeetingAdditionalInput({
   setContext: React.Dispatch<React.SetStateAction<MeetingInputContext>>
 }) {
   const handleSetTag = (tag, fieldName) => {
-    if (fieldName === 'administrations')
-      setContext((prevContext) => ({
-        ...prevContext,
-        administrations: [...prevContext.administrations, tag],
-      }))
-    else if (fieldName === 'themes')
-      setContext((prevContext) => ({
-        ...prevContext,
-        themes: [...prevContext.themes, tag],
-      }))
+    setContext((prevContext) => ({
+      ...prevContext,
+      [fieldName]: [...prevContext[fieldName], tag],
+    }))
   }
 
   return (
     <div className="fr-mt-2w fr-grid-row gap-8">
-      {inputFields.map((field, index) => {
-        const tags = field.name === 'themes' ? context.themes : context.administrations
-        return (
-          <div className="fr-col-5" key={index}>
-            <ThemesAndAdminsInput
-              field={field}
-              onTagSelect={(tag) => handleSetTag(tag, field.name)}
-              themes={context.themes}
-              administrations={context.administrations}
-            />
-            <MeetingTags
-              setContext={setContext}
-              context={context}
-              field={field}
-              tags={tags}
-            />
-          </div>
-        )
-      })}
+      {inputFields.map((field, index) => (
+        <div className="fr-col-5" key={index}>
+          <ThemesAndAdminsInput
+            field={field}
+            onTagSelect={(tag) => handleSetTag(tag, field.name)}
+            themes={context.themes}
+            administrations={context.administrations}
+          />
+          <MeetingTags
+            setContext={setContext}
+            context={context}
+            field={field}
+            tags={context[field.name]}
+          />
+        </div>
+      ))}
     </div>
   )
 }
 
 const inputFields = [
-  {
-    label: 'Thèmes associés',
-    name: 'themes',
-    className: 'fr-mr-1w',
-  },
-  {
-    label: 'Opérateurs concernés',
-    name: 'administrations',
-    className: 'fr-mr-1w',
-  },
+  { label: 'Thèmes associés', name: 'themes', className: 'fr-mr-1w' },
+  { label: 'Opérateurs concernés', name: 'administrations', className: 'fr-mr-1w' },
 ]
