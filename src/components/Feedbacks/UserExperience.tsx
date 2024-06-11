@@ -1,6 +1,5 @@
 import { askingQuality, redoAskingQuality } from '@constants/feedback'
-import type { RootState } from '@types'
-import type { Feedback as FeedbackType } from '@types'
+import type { Feedback as FeedbackType, RootState } from '@types'
 import { useSelector } from 'react-redux'
 import { Avatar } from '../Chat/Avatar'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'

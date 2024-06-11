@@ -1,4 +1,3 @@
-import { robotAvatarDescription, userAvatarDescription } from '@constants/chatbotProps'
 import agentAvatar from '../../../icons/chat/Bulle-Albert.svg'
 import userAvatar from '../../../icons/chat/Bulle-Utilisateur.svg'
 
@@ -9,20 +8,20 @@ export function Avatar({ user }) {
       {user === 'agent' ? (
         theme === 'dark' ? (
           <div>
-            <img src={agentAvatar} alt={robotAvatarDescription} />
+            <img src={agentAvatar} alt="Avatar de Albert" />
           </div>
         ) : (
           <div>
-            <img src={agentAvatar} alt={robotAvatarDescription} />
+            <img src={agentAvatar} alt="Avatar de Albert" />
           </div>
         )
       ) : theme === 'dark' ? (
         <div>
-          <img src={userAvatar} alt={userAvatarDescription} />
+          <img src={userAvatar} alt="Avatar de l'utilisateur" />
         </div>
       ) : (
         <div>
-          <img src={userAvatar} alt={userAvatarDescription} />
+          <img src={userAvatar} alt="Avatar de l'utilisateur" />
         </div>
       )}
     </div>

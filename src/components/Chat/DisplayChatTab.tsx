@@ -15,10 +15,7 @@ import { ChatMainContainer } from './ChatMainContainer'
 
  **********************************************************************************************/
 
-export function DisplayChatTab({
-  archive,
-  setGenerate,
-}: { archive: boolean; setGenerate: any }) {
+export function DisplayChatTab() {
   const user = useSelector((state: RootState) => state.user)
   const [questionInput, setQuestionInput] = useState('')
 
@@ -28,13 +25,9 @@ export function DisplayChatTab({
         {user.messages.length <= 0 && (
           <NewChatHeader setQuestionInput={setQuestionInput} />
         )}
-        <ChatMainContainer archive={archive} />
+        <ChatMainContainer />
       </div>
-      <UserMessage
-        setGenerate={setGenerate}
-        questionInput={questionInput}
-        setQuestionInput={setQuestionInput}
-      />
+      <UserMessage questionInput={questionInput} setQuestionInput={setQuestionInput} />
     </div>
   )
 }

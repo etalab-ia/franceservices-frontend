@@ -26,6 +26,7 @@ export function UserSatisfactionButtons({
   return (
     <GlobalRowContainer>
       <button
+        type="button"
         title={'satisfaisant'}
         onClick={() => handleClick(0)}
         className={`user-feedback-buttons ${
@@ -50,6 +51,7 @@ export function UserSatisfactionButtons({
       </button>
 
       <button
+        type="button"
         title={'insatisfaisant'}
         onClick={() => handleClick(1)}
         className={`user-feedback-buttons  ${

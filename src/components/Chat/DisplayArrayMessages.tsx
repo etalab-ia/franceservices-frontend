@@ -4,8 +4,7 @@ import { useDispatch } from 'react-redux'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { Avatar } from './Avatar'
 import { DisplayMessageTab } from './DisplayMessageTab'
-import { StreamingMessage } from './StreamingMessage'
-import SourcesAccordion from './SourcesAccordion'
+import { GlobalParagraph } from 'components/Global/GlobalParagraph'
 
 export function DisplayArrayMessages({ message }: { message: Message }) {
   const tabsLen = message.text.length
@@ -16,7 +15,7 @@ export function DisplayArrayMessages({ message }: { message: Message }) {
   useEffect(() => {
     dispatch({ type: 'SWITCH_TAB', nextTab: activeTab })
   }, [])
-
+  console.log('here')
   return (
     <GlobalRowContainer>
       <GlobalRowContainer extraClass="fr-grid-row--center ">
@@ -24,7 +23,7 @@ export function DisplayArrayMessages({ message }: { message: Message }) {
           <Avatar user="agent" />
         </div>
         <div className="fr-col-11 fr-col-md-10">
-          <StreamingMessage response={message.text[activeTab - 1] ?? ''} />
+          <GlobalParagraph>{message.text[0]}</GlobalParagraph>
         </div>
         <div className="fr-col-1 hide-on-smallscreen" />
       </GlobalRowContainer>
@@ -35,12 +34,6 @@ export function DisplayArrayMessages({ message }: { message: Message }) {
         setActiveTab={setActiveTab}
         extraClass="fr-ml-10w"
       />
-      <div className="fr-grid-row fr-col">
-        <div className="fr-col-1" />
-        <div className="fr-col-11">
-          {/* <SourcesAccordion sheets={message.sheets} /> */}
-        </div>
-      </div>
     </GlobalRowContainer>
   )
 }

@@ -7,23 +7,14 @@
  *****************************************************************************************************/
 
 import { startReactDsfr } from '@codegouvfr/react-dsfr/spa'
-import {
-  QueryClient,
-  QueryClientProvider,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query'
-import React from 'react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { BrowserRouter, Link } from 'react-router-dom'
 import { Root } from './components/Root'
 import { MFSProvider } from './utils/context/isMFSContext'
 import { store } from './utils/reducer/reducer'
 
-// @ts-expect-error TS(2322) FIXME: Type 'ForwardRefExoticComponent<LinkProps & RefAtt... Remove this comment to see the full error message
 startReactDsfr({ defaultColorScheme: 'system', Link })
 const queryClient = new QueryClient()
 

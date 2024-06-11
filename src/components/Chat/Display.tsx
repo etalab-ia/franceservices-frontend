@@ -5,10 +5,7 @@ import { ChatFollowUp } from './ChatFollowUp'
 import { DisplayArrayMessages } from './DisplayArrayMessages'
 import { DisplaySingleMessage } from './DisplaySingleMessage'
 
-export function Display({
-  messages,
-  archive,
-}: { messages: Message[]; archive: boolean }) {
+export function Display({ messages }: { messages: Message[] }) {
   const endOfMessagesRef = useRef(null) // We use this ref to scroll to the end of the messages
   const stream = useSelector((state: RootState) => state.stream)
 
@@ -30,9 +27,9 @@ export function Display({
             />
           )
         })}
-        {!archive && <ChatFollowUp />}
+        <ChatFollowUp />
       </div>
-      <div ref={endOfMessagesRef}></div>
+      <div ref={endOfMessagesRef} />
     </div>
   )
 }

@@ -9,11 +9,11 @@ import {
 import { CurrQuestionContext } from '@utils/context/questionContext'
 import { rmContextFromQuestion } from '@utils/setData'
 import { GlobalColContainer } from 'components/Global/GlobalColContainer'
+import { GlobalParagraph } from 'components/Global/GlobalParagraph'
 import { GlobalRowContainer } from 'components/Global/GlobalRowContainer'
 import { OneThirdScreenWidth } from 'components/Global/OneThirdScreenWidth'
 import Separator from 'components/Global/Separator'
-import { TextWithSources } from 'components/Sources/TextWithSources'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { UsefulLinks } from './UsefulLinks'
@@ -107,7 +107,7 @@ export function DisplayResponse({
       <GlobalColContainer>
         <div key={response}>
           <h3>Réponse proposée par Albert</h3>
-          <TextWithSources text={response} />
+          <GlobalParagraph>{response}</GlobalParagraph>
         </div>
       </GlobalColContainer>
       {webservices?.length && (

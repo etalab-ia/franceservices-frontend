@@ -32,6 +32,7 @@ export function DisplayMessageTab({
         <div className={`${extraClass} flex flex-row fr-mb-4w`}>
           {activeTab > 1 && (
             <button
+              type="button"
               className="fr-mr-1w"
               onClick={() => handleClick(activeTab, setActiveTab, -1)}
             >
@@ -43,6 +44,7 @@ export function DisplayMessageTab({
           </p>
           {activeTab < tabsLen && (
             <button
+              type="button"
               className="fr-ml-1w"
               onClick={() => handleClick(activeTab, setActiveTab, 1)}
             >

@@ -60,6 +60,7 @@ export function InputOption({
         <Input
           addon={
             <button
+              type="button"
               className="fr-btn fr-btn-- fr-icon-arrow-right-line"
               onClick={handleClick}
             />

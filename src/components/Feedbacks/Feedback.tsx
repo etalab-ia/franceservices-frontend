@@ -1,6 +1,5 @@
-import { type Feedback as FeedbackType, InitialFeedback, type RootState } from '@types'
+import { InitialFeedback, type Feedback as FeedbackType } from '@types'
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { UserFeedbackInput } from './UserFeedbackInput'
 import { UserSatisfactionButtons } from './UserSatisfactionButtons'
@@ -15,7 +14,6 @@ export function Feedback({
   feedback,
   setFeedback,
 }: { feedback: FeedbackType; setFeedback: (feedback: FeedbackType) => void }) {
-  const user = useSelector((state: RootState) => state.user)
   useEffect(() => {
     setFeedback(InitialFeedback)
   }, [])

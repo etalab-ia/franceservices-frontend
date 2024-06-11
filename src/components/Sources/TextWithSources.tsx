@@ -1,10 +1,14 @@
 import useWindowDimensions from '@utils/hooks/useWindowDimensions'
 import { useEffect, useState } from 'react'
+import Linkify from 'react-linkify'
 import ReactModal from 'react-modal'
 import reactStringReplace from 'react-string-replace'
 import { Source, SourceTooltip } from './SourceTooltip'
 
-export function TextWithSources({ text }) {
+export function TextWithSources({
+  text,
+  extraClass,
+}: { text: string; extraClass?: string }) {
   const [textWithSources, setTextWithSources] = useState<any | null>(null)
   const [modal, setModal] = useState({
     isOpen: false,
@@ -42,7 +46,7 @@ export function TextWithSources({ text }) {
     )
   }, [text])
   return (
-    <>
+    <div className={`${extraClass} `}>
       <ReactModal
         isOpen={modal.isOpen}
         onRequestClose={() => setModal({ isOpen: false, content: '', sourceId: '' })}
@@ -51,7 +55,7 @@ export function TextWithSources({ text }) {
       >
         <Source content={modal.content} sourceId={modal.sourceId} />
       </ReactModal>
-      {textWithSources}
-    </>
+      <Linkify target="_blank">{textWithSources}</Linkify>
+    </div>
   )
 }

@@ -1,0 +1,9 @@
+{
+  "paths": {
+    "@types": ["./types.ts"],
+    "@api": ["./api/*"],
+    "@utils/*": ["./utils/*"],
+    "@constants/*": ["./constants/*"],
+    "@hooks/*": ["./utils/hooks/*"]
+  }
+}

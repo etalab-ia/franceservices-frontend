@@ -20,7 +20,7 @@ export function ContactFormSubmitButton({ formData, clearForm }: ContactButtonPr
   const handleClick = async () => {
     await useFetch(contactUrl, 'POST', {
       data: setContactData(
-        formData.title + ' from: ' + formData.name,
+        `${formData.title} from: ${formData.name}`,
         formData.message,
         formData.administration
       ),

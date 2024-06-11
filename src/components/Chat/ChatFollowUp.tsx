@@ -5,6 +5,8 @@ import { UserExperience } from '../Feedbacks/UserExperience'
 import { DisplayStream } from '../Stream/DisplayStream'
 import { AvatarToolsContainer } from './AvatarToolsContainer'
 import SourcesAccordion from './SourcesAccordion'
+import { TextWithSources } from 'components/Sources/TextWithSources'
+import { GlobalParagraph } from 'components/Global/GlobalParagraph'
 
 // Last message of the chat with feedback
 export function ChatFollowUp() {
@@ -23,17 +25,15 @@ export function ChatFollowUp() {
               <AvatarToolsContainer />
             </div>
             <div className="fr-col-10">
-              <DisplayStream stream={stream} />
+              {stream.isStreaming ? (
+                <TextWithSources text={stream.response} />
+              ) : (
+                <GlobalParagraph>{stream.historyStream[0] ?? ''}</GlobalParagraph>
+              )}
             </div>
             <div className="fr-col-1 hide-on-smallscreen" />
           </div>
 
-          <div className="fr-grid-row fr-col">
-            <div className="fr-col-1" />
-            <div className="fr-col-11">
-              {/* <SourcesAccordion sheets={user.sheets} /> */}
-            </div>
-          </div>
           {!stream.isStreaming && (
             <UserExperience feedback={feedback} setFeedback={setFeedback} />
           )}

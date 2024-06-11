@@ -113,9 +113,7 @@ export const Root = () => {
         {!isMFS ? (
           <Route
             path="/chat"
-            element={
-              !userAuth.isLogin ? <Navigate to="/login" /> : <Chatbot archive={false} />
-            }
+            element={!userAuth.isLogin ? <Navigate to="/login" /> : <Chatbot />}
           />
         ) : (
           <Route

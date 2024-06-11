@@ -51,6 +51,7 @@ export function ButtonsOptions({
           return (
             <div key={index}>
               <button
+                type="button"
                 role={feedbackButtonsChoice(button)}
                 className={`user-feedback-buttons fr-text-action-high--blue-france ${classNames}`}
                 onClick={() => handleClick(index)}

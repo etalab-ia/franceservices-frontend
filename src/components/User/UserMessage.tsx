@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 /*
  ** The user input
  */
-export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
+export function UserMessage({ questionInput, setQuestionInput }) {
   const stream = useSelector((state: RootState) => state.stream)
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
@@ -61,7 +61,6 @@ export function UserMessage({ setGenerate, questionInput, setQuestionInput }) {
     dispatch({ type: 'RESET_STREAM_HISTORY' })
 
     setQuestionInput('')
-    setGenerate(true)
   }
 
   useEffect(() => {

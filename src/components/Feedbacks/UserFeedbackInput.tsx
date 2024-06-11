@@ -12,6 +12,7 @@ import { UserFeedbackResume } from './UserFeedbackResume'
 /**
  * Prints options
  */
+
 export function UserFeedbackInput({
   isFirst,
   feedback,

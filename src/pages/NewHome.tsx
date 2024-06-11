@@ -1,7 +1,10 @@
 import { useGetChatArchiveById, useGetChats } from '@api'
 import { MFStoolsTiles, generalistRessourcesTiles } from '@constants/inputFields'
 import { isMFSContext } from '@utils/context/isMFSContext'
+import { GlobalParagraph } from 'components/Global/GlobalParagraph'
 import Separator from 'components/Global/Separator'
+import Button from '@codegouvfr/react-dsfr/Button'
+
 import {
   useContext,
   useEffect,
@@ -10,6 +13,7 @@ import {
   type SetStateAction,
 } from 'react'
 import { useInView } from 'react-intersection-observer'
+import { useNavigate } from 'react-router-dom'
 
 export function NewHome() {
   const isMFS = useContext(isMFSContext)
@@ -17,11 +21,29 @@ export function NewHome() {
 
   return (
     <div className="fr-container fr-mb-12w flex flex-col gap-4">
+      <HomeHeader />
       <ChatList />
     </div>
   )
 }
 
+function HomeHeader() {
+  const navigate = useNavigate()
+
+  const handleNewQuestion = () => {
+    navigate('/chat')
+  }
+  return (
+    <div className="fr-mt-5w">
+      <div className="fr-grid-row">
+        <h3 className="fr-text-title--blue-france">Mes échanges</h3>
+        <Button onClick={handleNewQuestion} className="ml-auto" iconId="fr-icon-add-line">
+          Poser une nouvelle question
+        </Button>
+      </div>
+    </div>
+  )
+}
 function ChatList() {
   const { ref, inView } = useInView()
   const [selectedChatId, setSelectedChatId] = useState<number | null>(null)
@@ -108,11 +130,9 @@ function ChatList() {
 
 function QuestionsSidePanel({ selectedChatId }: { selectedChatId: number }) {
   return (
-    <div className="fr-px-1w">
-      <div className="fr-mb-1v">
-        <h6>Les questions de cet échange</h6>
-        <QuestionList selectedChatId={selectedChatId} />
-      </div>
+    <div className="fr-pl-3w ">
+      <h6>Les questions de cet échange</h6>
+      <QuestionList selectedChatId={selectedChatId} />
     </div>
   )
 }

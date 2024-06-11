@@ -25,7 +25,7 @@ export function MeetingPromptAdvice() {
           className={`fr-text-mention--grey fr-icon--sm fr-icon-arrow-${
             isAccordionOpen ? 'up' : 'down'
           }-s-line fr-my-1v hover:cursor-pointer`}
-        ></span>
+        />
       </div>
       {meetingPromptExamples.map((ex, index) => (
         <div

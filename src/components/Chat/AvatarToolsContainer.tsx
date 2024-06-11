@@ -1,4 +1,3 @@
-import { UserChatTools } from '../User/UserChatTools'
 import { Avatar } from './Avatar'
 
 export function AvatarToolsContainer() {
@@ -7,7 +6,6 @@ export function AvatarToolsContainer() {
       <div className="w-fit">
         <Avatar user="agent" />
       </div>
-      <UserChatTools isArchive={false} />
     </div>
   )
 }

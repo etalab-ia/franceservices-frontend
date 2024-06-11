@@ -1,12 +1,11 @@
 import { streamUrl } from '@api'
 import { EventSourcePolyfill } from 'event-source-polyfill'
-import { useDispatch, useSelector, type TypedUseSelectorHook } from 'react-redux'
-import type { AppDispatch, Question, RootState } from '../types'
+import { useDispatch } from 'react-redux'
+import type { AppDispatch, Question } from '../types'
 import { onCloseStream } from './eventsEmitter'
 import { setHeaders, setUserQuestion } from './setData'
 
 export const useAppDispatch: () => AppDispatch = useDispatch
-const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 export const useFetch = async (url: string, method: string, props): Promise<any> => {
   const { data, headers } = props

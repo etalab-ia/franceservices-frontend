@@ -104,17 +104,6 @@ export const meetingAppointmentInformations =
   'Votre question sur la situation de l’usager'
 export const meetingAppointmentTitle = 'Poser une question à Albert'
 
-export const meetingDefaultQuestionsIntroduction = (
-  <GlobalRowContainer>
-    <h6 className="text-xl font-bold text-[##3A3A3A]">Tester Albert</h6>
-    <p className="text-[##3A3A3A] fr-mt-3v fr-mb-1v">
-      Ceci est votre première utilisation d’Albert et vous souhaitez comprendre simplement
-      son fonctionnement ? Nous vous avons préparé deux scénarios de tests pour cela. Il
-      suffit de cliquer sur l’une des options ci-dessous.
-    </p>
-  </GlobalRowContainer>
-)
-
 export const defaultInputFields = [
   {
     title: 'Comprendre une saisie RSA par la CAF',

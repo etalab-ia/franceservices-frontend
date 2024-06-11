@@ -4,12 +4,8 @@ import { TextWithSources } from 'components/Sources/TextWithSources'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Feedback } from '../Feedbacks/Feedback'
+import { GlobalParagraph } from 'components/Global/GlobalParagraph'
 
-/*****************************************************************************************
-
-		** MeetingStream 
-			Prints answer stream with CurrentStream
- *****************************************************************************************/
 export function MeetingStream() {
   const stream = useSelector((state: RootState) => state.stream)
   const agentResponse = stream.historyStream[0]
@@ -21,9 +17,8 @@ export function MeetingStream() {
       {stream.isStreaming ? (
         <TextWithSources text={stream.response} />
       ) : (
-        <TextWithSources text={agentResponse} />
+        <GlobalParagraph>{agentResponse}</GlobalParagraph>
       )}
-
       {!stream.isStreaming && stream.historyStream.length !== 0 && (
         <div className="fr-mt-5w">
           <Feedback feedback={feedback} setFeedback={setFeedback} />

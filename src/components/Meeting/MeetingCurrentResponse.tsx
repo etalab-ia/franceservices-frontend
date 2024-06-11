@@ -1,11 +1,11 @@
 import type { RootState } from '@types'
+import { GlobalColContainer } from 'components/Global/GlobalColContainer'
+import { OneThirdScreenWidth } from 'components/Global/OneThirdScreenWidth'
 import { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { MeetingAdditionalResponse } from './MeetingAdditionalResponse'
 import { MeetingMainResponse } from './MeetingMainResponse'
-import { OneThirdScreenWidth } from 'components/Global/OneThirdScreenWidth'
-import { GlobalColContainer } from 'components/Global/GlobalColContainer'
 
 /*
  *	Contains text response from the bot and additional informations like sheets and chunks, useful links
@@ -39,7 +39,7 @@ export function MeetingCurrentResponse() {
   )
 }
 
-export function MeetingFirstQuestionHelper() {
+function MeetingFirstQuestionHelper() {
   return (
     <OneThirdScreenWidth>
       <GlobalColContainer>

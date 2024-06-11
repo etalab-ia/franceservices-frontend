@@ -28,14 +28,7 @@ export function MeetingAdditionalResponse() {
       question: user.question.query,
       must_not_sids: user.question.must_not_sids,
     }
-    getIndexes(
-      data,
-      dispatch,
-      'chunks',
-      user.question.limit,
-      JSON.stringify(user.streamId),
-      indexesUrl
-    )
+
     getIndexes(
       data,
       dispatch,

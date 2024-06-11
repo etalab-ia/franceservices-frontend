@@ -18,14 +18,10 @@ interface AddFeedbackParams {
 const addFeedback = async ({ feedback, streamId, reasons }: AddFeedbackParams) => {
   const authToken = localStorage.getItem('authToken')
   const data = {
-    is_good: !feedback.isGood ? true : false,
+    is_good: !feedback.isGood,
     message: feedback.message,
     reason:
-      reasons[0] === 'other'
-        ? reasons[1] && reasons[1].length
-          ? reasons[1]
-          : null
-        : reasons[0],
+      reasons[0] === 'other' ? (reasons[1]?.length ? reasons[1] : null) : reasons[0],
   }
   const res = await fetch(`${feedbackUrl}/${streamId}`, {
     method: 'POST',
