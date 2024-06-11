@@ -1,4 +1,3 @@
-import { MeetingRelatedQuestionsTitle } from '@constants/meeting'
 import type { RootState } from '@types'
 import { createRef, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -53,7 +52,7 @@ export function MeetingRelatedQuestions({
     <>
       {relatedQuestions.length !== 0 && (
         <p className="fr-pt-3w fr-mb-2w flex md:flex-col">
-          {MeetingRelatedQuestionsTitle}
+          Des questions posées fréquemment pour des situations similaires :
         </p>
       )}
       {relatedQuestions.slice(0, 3).map((rq, index) => {

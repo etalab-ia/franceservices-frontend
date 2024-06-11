@@ -24,12 +24,12 @@ export function MeetingMainResponse() {
           <MeetingRelatedQuestions setQuestion={setQuestion} />
         </>
       )}
-      <NewQuestionInput questionInput={question} setQuestionInput={setQuestion} />
+      <QuestionInput questionInput={question} setQuestionInput={setQuestion} />
     </GlobalColContainer>
   )
 }
 
-function NewQuestionInput({
+function QuestionInput({
   questionInput,
   setQuestionInput,
 }: {

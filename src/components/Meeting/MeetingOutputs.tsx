@@ -1,4 +1,3 @@
-import { meetingAppointmentTitle } from '@constants/meeting'
 import {
   InitialQuestion,
   type Question,
@@ -49,7 +48,7 @@ export function MeetingOutputs() {
   }, [])
   return (
     <CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>
-      <h2 className="fr-my-2w fr-mb-5w">{meetingAppointmentTitle}</h2>
+      <h2 className="fr-my-2w fr-mb-5w">Poser une question à Albert</h2>
       {user.history.length > 0 && <History history={user.history} />}
       <MeetingCurrentResponse />
     </CurrQuestionContext.Provider>

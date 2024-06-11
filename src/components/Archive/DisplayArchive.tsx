@@ -1,9 +1,5 @@
 import { useGetArchive } from '@api'
 import { Button } from '@codegouvfr/react-dsfr/Button'
-import {
-  meetingAppointmentInformations,
-  meetingAppointmentTitle,
-} from '@constants/meeting'
 import type { Chat, UserHistory } from '@types'
 import React from 'react'
 import ReactToPrint from 'react-to-print'
@@ -75,8 +71,8 @@ export const DisplayArchive = React.forwardRef<HTMLDivElement, DisplayArchivePro
 function DisplayMeetingArchive({ streams }: { streams: UserHistory[] }) {
   return (
     <>
-      <GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
-      <h5>{meetingAppointmentInformations}</h5>
+      <GlobalTitle>Poser une question à Albert</GlobalTitle>
+      <h5> Votre question sur la situation de l’usager</h5>
       <GlobalParagraph>{streams[0].query}</GlobalParagraph>
 
       <div className="ft-container h-full w-full">

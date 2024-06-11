@@ -7,7 +7,6 @@ import { quickAccessItemsFunc } from '@constants/header'
 import { navFunc } from '@constants/router'
 import { InitialUserAuth, type UserAuth } from '@utils/auth'
 import { isMFSContext } from '@utils/context/isMFSContext'
-import { useAppDispatch } from '@utils/hooks'
 import { checkConnexion } from '@utils/localStorage'
 import { useContext, useEffect, useState } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
@@ -17,9 +16,9 @@ import { Contact } from '../pages/Contact'
 import { FAQ } from '../pages/FAQ'
 import { History } from '../pages/History'
 import { Home } from '../pages/Home'
-import { NewHome } from '../pages/NewHome'
 import { Login } from '../pages/Login'
 import { Meeting } from '../pages/Meeting'
+import { NewHome } from '../pages/NewHome'
 import { NewPassword } from '../pages/NewPassword'
 import { ResetPassword } from '../pages/ResetPassword'
 import { Signup } from '../pages/Signup'
@@ -35,7 +34,7 @@ export const Root = () => {
     checkConnexion(setUserAuth, userUrl).finally(() => setIsLoading(false))
   }, [])
   if (isLoading) {
-    return <div />
+    return null
   }
 
   return (
@@ -58,7 +57,6 @@ export const Root = () => {
           isMFS ? 'Aide à l’accompagnement des usagers France services' : ''
         }
         navigation={userAuth.isLogin && navigationData}
-        // @ts-expect-error TS(2322) FIXME: Type '({ iconId: string; linkProps: { style: { poi... Remove this comment to see the full error message
         quickAccessItems={
           userAuth.isLogin ? quickAccessItemsFunc(userAuth, setUserAuth, signoutUrl) : []
         }

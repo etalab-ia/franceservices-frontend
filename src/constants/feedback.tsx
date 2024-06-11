@@ -50,12 +50,13 @@ export const unsatisfiedButtons = [
   { text: 'Autre raison', type: 'other' },
 ] as const
 
-export const askingQuality = `Quelle est la qualité de ce message ?`
-export const redoAskingQuality = `Cette réponse est-elle mieux ou moins bien ?`
+export const askingQuality = 'Quelle est la qualité de ce message ?'
+export const redoAskingQuality = 'Cette réponse est-elle mieux ou moins bien ?'
 export const askingQualityPrecisions = (type) =>
   `Pour quelles raisons trouvez-vous ce résultat ${type} ?`
-export const askingReasons = `Donnez-nous d’autres raisons, autant que vous le souhaitez.`
-export const thankFeedback = `Merci pour votre retour ! Il permettra d’améliorer les futurs résultats.`
+export const askingReasons = 'Donnez-nous d’autres raisons, autant que vous le souhaitez.'
+export const thankFeedback =
+  'Merci pour votre retour ! Il permettra d’améliorer les futurs résultats.'
 export const feedbackButtonsChoice = (button) =>
   `Bouton permettant de sélectionner le retour d'expérience "${button}".`
 export const feedbackConfirmationButton = `Bouton de confirmation des retours d'expérience de la conversation.`

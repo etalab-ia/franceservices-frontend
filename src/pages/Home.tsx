@@ -1,4 +1,3 @@
-import { ressourcesTitle, toolsTitle } from '@constants/home'
 import {
   MFStoolsTiles,
   generalistRessourcesTiles,
@@ -15,9 +14,9 @@ export function Home() {
 
   return (
     <div className="fr-container fr-mb-12w flex flex-col gap-4">
-      <GlobalTitle>{toolsTitle}</GlobalTitle>
+      <GlobalTitle>Mes outils</GlobalTitle>
       <HomeTiles tiles={isMFS ? MFStoolsTiles : toolsTiles} />
-      <GlobalTitle>{ressourcesTitle}</GlobalTitle>
+      <GlobalTitle>Mes ressources</GlobalTitle>
       <HomeTiles tiles={tiles} />
     </div>
   )
