@@ -1,3 +1,4 @@
+import { chatUrl } from '@api'
 import { Button } from '@codegouvfr/react-dsfr/Button'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,20 +11,21 @@ import { MeetingRelatedQuestions } from './MeetingRelatedQuestions'
 import { MeetingStream } from './MeetingStream'
 import { MeetingTags } from './MeetingTags'
 import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
-import { chatUrl } from '@api'
 
 export function MeetingMainResponse() {
   const [question, setQuestion] = useState('')
   const user = useSelector((state: RootState) => state.user)
 
   return (
-    <GlobalColContainer extraClass="fr-mt-5w bg-red-400">
-      {user.chatId !== 0 && (
-        <>
-          <MeetingStream />
-          <MeetingRelatedQuestions setQuestion={setQuestion} />
-        </>
-      )}
+    <GlobalColContainer extraClass="fr-mt-5w  flex flex-col justify-between">
+      <div>
+        {user.chatId !== 0 && (
+          <>
+            <MeetingStream />
+            <MeetingRelatedQuestions setQuestion={setQuestion} />
+          </>
+        )}
+      </div>
       <QuestionInput questionInput={question} setQuestionInput={setQuestion} />
     </GlobalColContainer>
   )
@@ -114,7 +116,7 @@ function QuestionInput({
   }
 
   return (
-    <div className="mt-auto fr-pb-2w sticky right-0 bottom-0 left-0 z-10 bg-white ">
+    <div className="mt-auto fr-pb-2w sticky right-0 bottom-0 left-0 z-10 bg-white">
       <textarea
         style={{ minHeight: '10px', overflow: 'hidden' }}
         placeholder="Poser une nouvelle question"
