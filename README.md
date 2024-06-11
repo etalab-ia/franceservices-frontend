@@ -3,7 +3,7 @@
 > ⚠️ DISCLAIMER :
 > Ce projet est devenu open source très récemment, voici quelques mises en garde :
 > - Le code peut contenir des composants et du code qui ne vous sont pas utiles et qui sont utilisés spécifiquement pour France Services, le projet sera scindé dans le futur.
-> - L'accessibilité du projet n'est pas totale selon les [critères du RGAA] (https://accessibilite.numerique.gouv.fr/)
+> - L'accessibilité du projet n'est pas totale selon les [critères du RGAA](https://accessibilite.numerique.gouv.fr/)
 > - La documentation n'est pas complète
 
 ## 🎯 Objectif général
@@ -20,8 +20,8 @@ Ce repo a pour but de fournir une interface visuelle pour interagir avec l'API d
 
 DSFR est déjà installé, voici quelques ressources utiles :
 - [Basics](https://www.systeme-de-design.gouv.fr/) : marges, taille de police, design, picto etc.
-- Composants](https://components.react-dsfr.codegouv.studio/)
-- Accessibilité](https://accessibilite.numerique.gouv.fr/) : Critères RGAA
+- [Composants](https://components.react-dsfr.codegouv.studio/)
+- [Accessibilité](https://accessibilite.numerique.gouv.fr/) : Critères RGAA
 #### Gestion des états
 
 [Redux](https://redux.js.org/) 👉 pour la gestion globale de l'état du client  
