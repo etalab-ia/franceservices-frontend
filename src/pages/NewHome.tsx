@@ -14,6 +14,7 @@ import {
 } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { useNavigate } from 'react-router-dom'
+import ShowError from 'components/Error/ShowError'
 
 export function NewHome() {
   const isMFS = useContext(isMFSContext)
@@ -62,7 +63,7 @@ function ChatList() {
 
   if (error) {
     console.log(error)
-    return <div>Error loading chats</div>
+    return <ShowError message={error.message} errorNumber={error.status} />
   }
 
   //const chats = data?.pages.flatMap((page) => page.chats) ?? [] TODO: remove when back fixed skip argument
@@ -143,7 +144,6 @@ function QuestionList({ selectedChatId }: { selectedChatId: number }) {
   if (error) {
     console.log(error)
   }
-  console.log('archive', archive)
 
   if (!archive) {
     return null
@@ -194,8 +194,6 @@ function ChatListRow({
   useEffect(() => {
     setAnimate(true)
   }, [])
-
-  console.log('selectedChatId', selectedChatId)
 
   return (
     <>

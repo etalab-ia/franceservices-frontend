@@ -15,7 +15,6 @@ export function DisplayArrayMessages({ message }: { message: Message }) {
   useEffect(() => {
     dispatch({ type: 'SWITCH_TAB', nextTab: activeTab })
   }, [])
-  console.log('here')
   return (
     <GlobalRowContainer>
       <GlobalRowContainer extraClass="fr-grid-row--center ">

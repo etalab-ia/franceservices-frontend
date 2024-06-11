@@ -27,7 +27,7 @@ export const DisplayArchive = React.forwardRef<HTMLDivElement, DisplayArchivePro
     window.addEventListener('popstate', () => {})
 
     const { data: archive, error, isLoading, isError } = useGetArchive(selectedChat.id)
-    if (isLoading) return <div></div>
+    if (isLoading) return null
     if (isError || !archive || !archive.length) {
       return (
         <ShowError

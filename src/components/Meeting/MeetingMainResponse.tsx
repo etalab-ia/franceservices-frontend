@@ -68,7 +68,6 @@ function QuestionInput({
       })
       chatId = chat.id
       dispatch({ type: 'SET_CHAT_ID', nextChatId: chatId })
-      console.log('chat', chat)
     }
 
     setIsAdditionalInputOpened(false)

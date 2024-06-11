@@ -10,7 +10,7 @@ export const GlobalParagraph = ({
       {typeof children !== 'string'
         ? children
         : children.split('\n').map((line, lineIndex) => (
-            <div key={line} className="fr-mb-2v">
+            <div key={line + lineIndex} className="fr-mb-2v">
               <Linkify>
                 <TextWithSources text={line} />
               </Linkify>

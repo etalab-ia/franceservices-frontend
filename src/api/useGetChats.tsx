@@ -43,7 +43,6 @@ const fetchChats = async ({
   pageParam = 0,
 }): Promise<{ chats: Chat[]; nextPage: number | null }> => {
   const authToken = localStorage.getItem('authToken')
-  console.log('pageParam', pageParam) // Added for debugging
   const res = await fetch(`${getChatsUrl}?skip=${pageParam}&limit=10&desc=true`, {
     method: 'GET',
     credentials: 'include',
@@ -55,7 +54,7 @@ const fetchChats = async ({
 
   if (!res.ok) {
     console.error('error: response not ok', res)
-    throw new Error('Impossible de récupérer les archives', { cause: res })
+    throw new Error('Impossible de récupérer les chats', { cause: res })
   }
 
   const chats = await res.json()

@@ -43,7 +43,6 @@ export function MeetingOutputs() {
   useEffect(() => {
     return () => {
       dispatch({ type: 'RESET_USER' })
-      console.log('reset user')
     }
   }, [])
   return (
@@ -105,7 +104,7 @@ export function DisplayResponse({
     <GlobalRowContainer extraClass="fr-mt-5w">
       <GlobalColContainer>
         <div key={response}>
-          <h3>Réponse proposée par Albert</h3>
+          <h3>Réponse proposée par </h3>
           <GlobalParagraph>{response}</GlobalParagraph>
         </div>
       </GlobalColContainer>
