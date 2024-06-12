@@ -4,12 +4,14 @@ import useWindowDimensions from '../../utils/hooks/useWindowDimensions'
 
 export function SourceTooltip({
   id,
-  content,
-  sourceId,
+  title,
+  text,
+  sourceUrl,
 }: {
   id: string
-  content: string
-  sourceId: string
+  title: string
+  text: string
+  sourceUrl: string
 }) {
   const windowDimensions = useWindowDimensions()
   return (
@@ -43,48 +45,40 @@ export function SourceTooltip({
         clickable
         noArrow
       >
-        <Source sourceId={sourceId} content={content} />
+        <Source sourceUrl={sourceUrl} text={text} title={title} />
       </Tooltip>
     </span>
   )
 }
 
-export function Source({ sourceId, content }: { sourceId: string; content: string }) {
-  const { data, error } = useGetChunk(sourceId)
-
-  if (error) {
-    return <p>Erreur: Albert n'a pas pu récupérer cette source.</p>
-  }
-  if (!data)
-    return (
-      <div className="flex h-[100%] flex-col items-center justify-center">
-        <LoadingSpinner />
-      </div>
-    )
-
-  const domainName = getDomainFromUrl(data.url)
+export function Source({
+  sourceUrl,
+  text,
+  title,
+}: { sourceUrl: string; text: string; title: string }) {
+  const domainName = getDomainFromUrl(sourceUrl)
 
   return (
     <div className="fr-p-2w flex h-[100%] max-w-[392px] flex-col text-wrap break-words">
       <p className="fr-mb-1w fr-text--sm fr-text-mention--grey">
         Passage utilisé pour générer cette phrase
       </p>
-      <p className="fr-text--lg">{content}</p>
-      <p className="fr-mb-1w">Extrait de: {data.title}</p>
+      <p className="fr-text--lg">{text}</p>
+      <p className="fr-mb-1w">Extrait de: {title}</p>
       <div className="fr-grid-row fr-mt-3w w-full">
-        {domainName?.length && (
+        {domainName?.origin.length && (
           <a
             target="_blank"
             rel="noreferrer"
-            href={domainName}
+            href={domainName.origin}
             className="fr-badge fr-badge--sm fr-badge--info fr-badge--no-icon"
           >
-            {domainName.slice(4, data.url.length - 3)}
+            {domainName.hostname.slice(4, sourceUrl.length - 3)}
           </a>
         )}
         <a
           className="external-link-icon ml-auto no-underline"
-          href={data.url}
+          href={sourceUrl}
           target="_blank"
           rel="noreferrer"
         >
@@ -108,12 +102,12 @@ function LoadingSpinner() {
   )
 }
 
-const getDomainFromUrl = (url) => {
+const getDomainFromUrl = (url: string) => {
   try {
     const newUrl = new URL(url)
-    return newUrl.hostname
+    return { hostname: newUrl.hostname, origin: newUrl.origin }
   } catch (error) {
     console.error('Invalid URL', error)
-    return ''
+    return null
   }
 }

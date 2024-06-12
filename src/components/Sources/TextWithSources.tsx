@@ -12,48 +12,65 @@ export function TextWithSources({
   const [textWithSources, setTextWithSources] = useState<any | null>(null)
   const [modal, setModal] = useState({
     isOpen: false,
+    title: '',
     content: '',
-    sourceId: '',
+    sourceUrl: '',
   })
   const windowSize = useWindowDimensions()
   useEffect(() => {
     setTextWithSources(
-      reactStringReplace(text, /(<ref text="[^"]+"[^<]*<\/ref>\.?)/g, (match, i) => {
-        const regex = /<ref text="([^"]+)">\[?([^\]<:]{16})[^\]<]*\]?<\/ref>/
-        const content = regex.exec(match)
-        if (content) {
-          if (windowSize.width > 992) {
+      reactStringReplace(
+        text,
+        /(<ref title="[^"]*"\s* text="[^"]*"\s*>\s*\[?https?:\/\/[^\s<]*\]?\s*<\/ref>)/g,
+        (match, i) => {
+          const regex =
+            /<ref title="([^"]+)"\s+text="([^"]+)"\s*>\s*(https?:\/\/[^\s<]+)\s*<\/ref>/s
+          const content = regex.exec(match)
+
+          if (content) {
+            if (windowSize.width > 992) {
+              return (
+                <SourceTooltip
+                  key={i}
+                  id={`tooltip-${i + text.length}`}
+                  title={content[1]}
+                  text={content[2]}
+                  sourceUrl={content[3]}
+                />
+              )
+            }
             return (
-              <SourceTooltip
+              <span
                 key={i}
-                id={`tooltip-${i + text.length}`}
-                content={content[1]}
-                sourceId={content[2]}
+                className="fr-text--xs fr-icon-quote-fill fr-text-action-high--blue-cumulus fr-mr-2v focus:border focus:border-5"
+                onClick={() =>
+                  setModal({
+                    isOpen: true,
+                    title: content[1],
+                    content: content[2],
+                    sourceUrl: content[3],
+                  })
+                }
               />
             )
           }
-          return (
-            <span
-              className="fr-text--xs fr-icon-quote-fill fr-text-action-high--blue-cumulus fr-mr-2v focus:border focus:border-5"
-              onClick={() =>
-                setModal({ isOpen: true, content: content[1], sourceId: content[2] })
-              }
-            />
-          )
+          return <></>
         }
-        return <></>
-      })
+      )
     )
-  }, [text])
+  }, [text, windowSize.width])
+
   return (
     <div className={`${extraClass} `}>
       <ReactModal
         isOpen={modal.isOpen}
-        onRequestClose={() => setModal({ isOpen: false, content: '', sourceId: '' })}
+        onRequestClose={() =>
+          setModal({ isOpen: false, title: '', content: '', sourceUrl: '' })
+        }
         style={{ overlay: { zIndex: 1000 }, content: { padding: 0, margin: 0 } }}
         shouldCloseOnOverlayClick={true}
       >
-        <Source content={modal.content} sourceId={modal.sourceId} />
+        <Source title={modal.title} content={modal.content} sourceUrl={modal.sourceUrl} />
       </ReactModal>
       <Linkify target="_blank">{textWithSources}</Linkify>
     </div>
