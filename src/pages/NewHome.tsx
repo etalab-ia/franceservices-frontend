@@ -17,9 +17,6 @@ import { useNavigate } from 'react-router-dom'
 import ShowError from 'components/Error/ShowError'
 
 export function NewHome() {
-  const isMFS = useContext(isMFSContext)
-  const tiles = isMFS ? MFStoolsTiles : generalistRessourcesTiles
-
   return (
     <div className="fr-container fr-mb-12w flex flex-col gap-4">
       <HomeHeader />
@@ -30,9 +27,13 @@ export function NewHome() {
 
 function HomeHeader() {
   const navigate = useNavigate()
+  const isMFS = useContext(isMFSContext)
 
   const handleNewQuestion = () => {
-    navigate('/chat')
+    if (isMFS) {
+      console.log('isMFS', isMFS)
+      navigate('/meeting')
+    } else navigate('/chat')
   }
   return (
     <div className="fr-mt-5w">
