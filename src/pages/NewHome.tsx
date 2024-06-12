@@ -132,8 +132,15 @@ function ChatList() {
 
 function QuestionsSidePanel({ selectedChatId }: { selectedChatId: number }) {
   return (
-    <div className="fr-pl-3w ">
-      <h6>Les questions de cet échange</h6>
+    <div className="fr-pl-3w">
+      <div className="flex flex-wrap justify-between items-center">
+        <h6>Les questions de cet échange</h6>
+        <button type="button" className="mt-2 sm:mt-0">
+          <span className="fr-icon-arrow-right-line fr-text-action-high--blue-france">
+            Accéder à cet échange
+          </span>
+        </button>
+      </div>
       <QuestionList selectedChatId={selectedChatId} />
     </div>
   )
@@ -190,11 +197,6 @@ function ChatListRow({
     ? new Date(updatedDate).toLocaleDateString('fr-FR')
     : null
   const today = new Date().toLocaleDateString('fr-FR')
-  const [animate, setAnimate] = useState(false)
-
-  useEffect(() => {
-    setAnimate(true)
-  }, [])
 
   return (
     <>
@@ -206,7 +208,7 @@ function ChatListRow({
         tabIndex={0}
         className={`fr-grid-row fr-grid-row--center fr-py-2w w-full ${
           selectedChatId === id ? 'fr-background-action-low--blue-france' : ''
-        } ${animate ? 'slideInLeft' : ''}`}
+        } `}
       >
         <div className="fr-col-6 fr-px-1w">
           <p className={`${selectedChatId === id ? 'font-semibold' : ''}`}>{name}</p>
