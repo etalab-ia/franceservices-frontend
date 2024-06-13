@@ -17,7 +17,7 @@ export function MeetingMainResponse() {
   const user = useSelector((state: RootState) => state.user)
 
   return (
-    <GlobalColContainer extraClass="fr-mt-5w  flex flex-col justify-between">
+    <GlobalColContainer extraClass="fr-mt-5w flex flex-col justify-between bg-red-400 ">
       <div>
         {user.chatId !== 0 && (
           <>
@@ -115,7 +115,7 @@ function QuestionInput({
   }
 
   return (
-    <div className="mt-auto fr-pb-2w sticky right-0 bottom-0 left-0 z-10 bg-white">
+    <div className="fr-mt-2v sticky right-0 bottom-0 left-0 z-10 bg-white">
       <textarea
         style={{ minHeight: '10px', overflow: 'hidden' }}
         placeholder="Poser une nouvelle question"
@@ -151,11 +151,6 @@ function QuestionInput({
           Rechercher
         </Button>
       </div>
-      <p className="fr-my-3v text-xs">
-        Vous pouvez affiner la réponse proposée par Albert en posant une nouvelle question
-        relative à la situation de l’usager. Albert utilisera les échanges précédents pour
-        formuler une nouvelle réponse.
-      </p>
     </div>
   )
 }

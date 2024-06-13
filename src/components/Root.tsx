@@ -101,7 +101,7 @@ export const Root = () => {
         )}
         <Route
           path="/home"
-          element={!userAuth.isLogin ? <Navigate to="/login" /> : <NewHome />}
+          element={!userAuth.isLogin ? <Navigate to="/login" /> : <Home />}
         />
         <Route
           path="/"

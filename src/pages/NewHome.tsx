@@ -1,10 +1,9 @@
 import { useGetChatArchiveById, useGetChats } from '@api'
-import { MFStoolsTiles, generalistRessourcesTiles } from '@constants/inputFields'
-import { isMFSContext } from '@utils/context/isMFSContext'
-import { GlobalParagraph } from 'components/Global/GlobalParagraph'
-import Separator from 'components/Global/Separator'
 import Button from '@codegouvfr/react-dsfr/Button'
+import { isMFSContext } from '@utils/context/isMFSContext'
+import Separator from 'components/Global/Separator'
 
+import ShowError from 'components/Error/ShowError'
 import {
   useContext,
   useEffect,
@@ -14,30 +13,15 @@ import {
 } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { useNavigate } from 'react-router-dom'
-import ShowError from 'components/Error/ShowError'
-import { TextWithSources } from 'components/Sources/TextWithSources'
 
 export function NewHome() {
   return (
     <div className="fr-container fr-mb-12w flex flex-col gap-4">
-      <TextWithSources text={testText} />
       <HomeHeader />
       <ChatList />
     </div>
   )
 }
-
-const testText = `Pour obtenir la caf, il est possible de solliciter un prêt à l'amélioration
- de l'habitat si vous êtes propriétaire ou locataire et que vous réalisez des travaux
-  dans votre résidence principale. Selon la Caisse d'Allocations Familiales (Caf) 
-  <ref title="Prêts à l'amélioration de l'habitat de la Caf" text="Votre caisse d'allocations familiales 
-  (Caf) peut vous accorder un prêt à l'amélioration de l'habitat pour faire des travaux 
-  (rénovation, isolation...) dans votre résidence principale. Ce prêt est également accordé
-   si vous êtes assistante maternelle (assistant maternel) et que vous gardez des enfants à
-    votre domicile." >[https://www.service-public.fr/particuliers/vosdroits/F1616]</ref>, 
-    vous pouvez vous adresser à votre Caf pour demander ce prêt.
-    ref2: <ref title="Un salarié peut-il faire plusieurs périodes d'essai chez le même employeur ?" 
-    text="La période d'essai d'un CDD n'est pas renouvelable." >https://www.service-public.fr/particuliers/vosdroits/F13919</ref> `
 
 function HomeHeader() {
   const navigate = useNavigate()
