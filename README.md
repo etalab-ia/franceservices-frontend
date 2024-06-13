@@ -61,13 +61,13 @@ Nous utilisons [ViteJS](https://vitejs.dev/) pour construire le projet donc chaq
 **VITE_MATOMO_URL** -- l'url de l'instance de matomo pour l'analyse (optionnel)  
 **VITE_ENVIRONMENT_NAME** -- une variable optionnelle utilisée pour afficher des fonctionnalités spécifiques pour les usagers de France Services.  
 
-**VITE_MODEL_NAME** -- le modèle à utiliser pour les requêtes, vous pouvez trouver une liste [ici](https://huggingface.co/AgentPublic)  
-**VITE_MODEL_MODE** -- chaque modèle possède plusieurs modes lui permettant de répondre différemment: rag, rag-gt
-**VITE_MODEL_TEMPERATURE** -- la température utilisée par le modèle pour générer la réponse. Entre 1 et 100
+**VITE_MODEL_NAME** -- le modèle à utiliser pour les requêtes, vous pouvez trouver une liste ici [ici](https://huggingface.co/AgentPublic)  
+**VITE_MODEL_MODE** -- chaque modèle possède plusieurs modes lui permettant de répondre différemment: rag, rag-gt  
+**VITE_MODEL_TEMPERATURE** -- la température utilisée par le modèle pour générer la réponse. Entre 1 et 100  
 
  ## API 
 
-[Voici tous les points d'accès utilisés par Albert](https://albert.etalab.gouv.fr/api/v2/docs#/)
+[Voici tous les points d'accès utilisés par Albert](https://albert.etalab.gouv.fr/api/v2/docs#/)  
 Note : La documentation des endpoints n'est pas encore complète.
 
 Albert front utilise [tanstack-query](https://tanstack.com/query/latest/docs/framework/react/overview) (react-query) pour interagir avec le backend.  
