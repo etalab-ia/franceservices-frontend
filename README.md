@@ -59,9 +59,9 @@ Nous utilisons [ViteJS](https://vitejs.dev/) pour construire le projet donc chaq
 
 **VITE_API_URL** -- url pour les requêtes de l'api.  
 **VITE_MATOMO_URL** -- l'url de l'instance de matomo pour l'analyse (optionnel)  
-**VITE_ENVIRONMENT_NAME** -- une varialbe optionnelle utilisée pour afficher des fonctionnalités spécifiques pour les usagers de France Services.  
+**VITE_ENVIRONMENT_NAME** -- une variable optionnelle utilisée pour afficher des fonctionnalités spécifiques pour les usagers de France Services.  
 
-**VITE_MODEL_NAME** -- le modèle à utiliser pour les requêtes, vous pouvez trouver une liste ici [ici](https://huggingface.co/AgentPublic)  
+**VITE_MODEL_NAME** -- le modèle à utiliser pour les requêtes, vous pouvez trouver une liste [ici](https://huggingface.co/AgentPublic)  
 **VITE_MODEL_MODE** -- chaque modèle possède plusieurs modes lui permettant de répondre différemment: rag, rag-gt
 **VITE_MODEL_TEMPERATURE** -- la température utilisée par le modèle pour générer la réponse. Entre 1 et 100
 
