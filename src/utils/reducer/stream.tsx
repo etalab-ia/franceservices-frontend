@@ -53,6 +53,11 @@ export const streamReducer = (state: Stream = initialStream, action: StreamActio
         ...state,
         activeTab: action.nextTab,
       }
+    case 'SET_IS_STREAMING':
+      return {
+        ...state,
+        isStreaming: action.nextIsStreaming,
+      }
     default: {
       return state
     }
@@ -69,3 +74,4 @@ type StreamAction =
   | { type: 'SET_STREAM_HISTORY'; nextStream: string }
   | { type: 'RESET_STREAM_HISTORY' }
   | { type: 'SWITCH_TAB'; nextTab: number }
+  | { type: 'SET_IS_STREAMING'; nextIsStreaming: boolean }

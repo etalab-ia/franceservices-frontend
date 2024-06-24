@@ -1,4 +1,4 @@
-import { useGetChatArchiveById, useGetChats } from '@api'
+import { getArchiveUrl, useGetChatArchiveById, useGetChats } from '@api'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { isMFSContext } from '@utils/context/isMFSContext'
 import Separator from 'components/Global/Separator'
@@ -12,6 +12,7 @@ import {
   type SetStateAction,
 } from 'react'
 import { useInView } from 'react-intersection-observer'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 export function NewHome() {
@@ -48,7 +49,7 @@ function ChatList() {
   const [selectedChatId, setSelectedChatId] = useState<number | null>(null)
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, error } = useGetChats()
   const [isMounted, setIsMounted] = useState(false)
-
+  console.log('data', data)
   useEffect(() => {
     setIsMounted(true)
   }, [])
@@ -71,7 +72,7 @@ function ChatList() {
       numberOfMessages: 3,
       themes: ['Allocation sociale', 'RSA', 'CAF', 'Aides financieres'],
       updatedDate: '2024-06-04T09:41:16.446431',
-      id: 1255,
+      id: 2583,
     },
     {
       name: 'Allocations sociales: la CAD peut-elle faire une saisie sur le RSA ?',
@@ -128,11 +129,17 @@ function ChatList() {
 }
 
 function QuestionsSidePanel({ selectedChatId }: { selectedChatId: number }) {
+  const navigate = useNavigate()
+
+  const handleButtonClick = () => {
+    navigate(`/meeting/${selectedChatId}`)
+  }
+  console.log('selectedChatId', selectedChatId)
   return (
     <div className="fr-pl-3w">
       <div className="flex flex-wrap justify-between items-center">
         <h6>Les questions de cet échange</h6>
-        <button type="button" className="mt-2 sm:mt-0">
+        <button type="button" className="mt-2 sm:mt-0" onClick={handleButtonClick}>
           <span className="fr-icon-arrow-right-line fr-text-action-high--blue-france">
             Accéder à cet échange
           </span>
@@ -145,7 +152,7 @@ function QuestionsSidePanel({ selectedChatId }: { selectedChatId: number }) {
 
 function QuestionList({ selectedChatId }: { selectedChatId: number }) {
   const { data: archive, error } = useGetChatArchiveById(selectedChatId)
-
+  const dispatch = useDispatch()
   if (error) {
     console.log(error)
   }
@@ -161,7 +168,17 @@ function QuestionList({ selectedChatId }: { selectedChatId: number }) {
             type="button"
             className="fr-mb-1w w-full"
             key={index}
-            onClick={() => {}}
+            onClick={async (e) => {
+              const authToken = localStorage.getItem('authToken')
+              const response = await fetch(`${getArchiveUrl}/${stream.chat_id}`, {
+                headers: {
+                  Authorization: `Bearer ${authToken}`,
+                  'Content-Type': 'application/json',
+                },
+              })
+              if (!response.ok) return
+              dispatch({ type: 'ADD_HISTORY', newItem: stream })
+            }}
           >
             <div className="fr-px-2w fr-py-3v inline-flex h-full w-full rounded bg-[#F5F5FE]">
               {stream.query}

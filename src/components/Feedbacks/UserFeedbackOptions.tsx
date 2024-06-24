@@ -43,10 +43,6 @@ export function UserFeedbackOptions({
           message: otherReason,
         })
       e.target.value = ''
-
-      setReasons(
-        reasons.filter((reason) => reason !== 'Autre raison' && !reason.includes('tag-'))
-      )
     }
   })
 

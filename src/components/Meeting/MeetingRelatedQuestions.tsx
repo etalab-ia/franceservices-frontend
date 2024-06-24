@@ -7,16 +7,16 @@ import { useSelector } from 'react-redux'
 	COMPONENTS:
 
 		Frequently asked question suggestions
-		For now we get the related questions from the sheets
+		We get the related questions from the sheets
  *****************************************************************************************/
 export function MeetingRelatedQuestions({
   setQuestion,
 }: {
-  setQuestion: React.Dispatch<React.SetStateAction<string>>
+  setQuestion
 }) {
   const sheets = useSelector((state: RootState) => state.user.sheets)
-  const [relatedQuestions, setRelatedQuestions] = useState([])
   const stream = useSelector((state: RootState) => state.stream)
+  const [relatedQuestions, setRelatedQuestions] = useState([])
   const ref = createRef<HTMLDivElement>()
 
   useEffect(() => {
@@ -61,7 +61,9 @@ export function MeetingRelatedQuestions({
             type="button"
             className="fr-mb-1w w-full"
             key={index}
-            onClick={() => setQuestion(rq.question)}
+            onClick={() => {
+              setQuestion(rq.question)
+            }}
           >
             <div
               ref={ref}

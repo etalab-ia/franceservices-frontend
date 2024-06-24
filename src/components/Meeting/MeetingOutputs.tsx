@@ -1,9 +1,9 @@
 import {
   InitialQuestion,
+  type WebService,
   type Question,
   type RootState,
   type UserHistory,
-  type WebService,
 } from '@types'
 import { CurrQuestionContext } from '@utils/context/questionContext'
 import { rmContextFromQuestion } from '@utils/setData'
@@ -16,53 +16,59 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { UsefulLinks } from './UsefulLinks'
+import { useGetArchive } from '@api'
+import { MeetingQuestionInput } from './MeetingQuestionInput'
 
-/*****************************************************************************************************
-    Displays Albert's response(s) 
-
-    GENERAL: display:
-      - main informations: user prompt, stream response, response explanation / chunks
-      - additional informations (sources): sheets, related questions, webservices
-
-  *****************************************************************************************************/
-
-export function MeetingOutputs() {
+export function MeetingOutputs({ chatId }: { chatId?: number }) {
   const user = useSelector((state: RootState) => state.user)
   const [currQuestion, setCurrQuestion] = useState(InitialQuestion)
   const dispatch = useDispatch()
-  const [query, setQuery] = useState<string>(currQuestion.query)
   const updateCurrQuestion = (newQuestion: Question) => {
     setCurrQuestion(newQuestion)
   }
+  const [question, setQuestion] = useState('')
+
+  const { data: archiveData, isLoading, error } = useGetArchive(chatId)
 
   useEffect(() => {
-    if (user.chatId === 0) return
-    if (query !== '') rmContextFromQuestion(query, setQuery)
-  }, [query])
+    if (chatId !== undefined && archiveData) {
+      console.log('archiveData', archiveData)
+      if (Array.isArray(archiveData)) {
+        archiveData.forEach((historyItem) => {
+          dispatch({ type: 'ADD_HISTORY', newItem: historyItem })
+        })
+      }
+    } else {
+      if (user.chatId === 0) return
+    }
+  }, [chatId, archiveData, dispatch])
 
   useEffect(() => {
     return () => {
       dispatch({ type: 'RESET_USER' })
     }
-  }, [])
+  }, [dispatch])
+
   return (
     <CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>
       <h2 className="fr-my-2w fr-mb-5w">Poser une question à Albert</h2>
       {user.history.length > 0 && <History history={user.history} />}
-      <MeetingCurrentResponse />
+      <MeetingCurrentResponse setQuestion={setQuestion} />
+      <div className="fr-grid-row fr-mt-5w">
+        <div className="fr-col-8">
+          <MeetingQuestionInput questionInput={question} setQuestionInput={setQuestion} />
+        </div>
+      </div>
     </CurrQuestionContext.Provider>
   )
 }
 
-/**
- * Display a list of accordion, each one contains a previous user query and the bot's response with sources and useful links
- */
 export function History({ history }: { history: UserHistory[] }) {
   const [openedAccordion, setOpenedAccordion] = useState(-1)
   return (
     <div className="fr-mt-5w">
       {history.map((h, index) => (
-        <div className="fr-mb-1w" key={h.query}>
+        <div className="fr-mb-1w" key={h.query + index}>
           <h3 className="fr-background-alt--blue-france">
             <button
               type="button"
@@ -93,9 +99,6 @@ export function History({ history }: { history: UserHistory[] }) {
   )
 }
 
-/**
- * Display the response of the bot with the sources and useful links
- */
 export function DisplayResponse({
   response,
   webservices,
@@ -104,12 +107,12 @@ export function DisplayResponse({
     <GlobalRowContainer extraClass="fr-mt-5w">
       <GlobalColContainer>
         <div key={response}>
-          <h3>Réponse proposée par </h3>
+          <h3>Réponse proposée par Albert</h3>
           <GlobalParagraph>{response}</GlobalParagraph>
         </div>
       </GlobalColContainer>
-      {webservices?.length && (
-        <OneThirdScreenWidth extraClass="">
+      {webservices.length !== 0 && (
+        <OneThirdScreenWidth>
           <GlobalColContainer>
             <UsefulLinks webservices={webservices} />
           </GlobalColContainer>

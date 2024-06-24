@@ -1,6 +1,6 @@
 import { Tag } from '@codegouvfr/react-dsfr/Tag'
 
-export function MeetingTags({ setContext, context, field, tags }) {
+export function MeetingTags({ setContext, field, tags }) {
   const handleClick = (e) => {
     e.preventDefault()
 

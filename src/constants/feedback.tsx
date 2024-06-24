@@ -37,7 +37,6 @@ export const satisfiedButtons = [
   { text: 'Clair ', type: 'clear' },
   { text: 'Synthétique ', type: 'concise' },
   { text: 'Sources fiables', type: 'reliable_sources' },
-  { text: 'Autre raison', type: 'other' },
 ] as const
 
 export const unsatisfiedButtons = [
@@ -47,7 +46,6 @@ export const unsatisfiedButtons = [
   { text: 'Incohérent ', type: 'inconsistent' },
   { text: 'Imprécis', type: 'imprecise' },
   { text: 'Fautes de grammaire', type: 'grammar_errors' },
-  { text: 'Autre raison', type: 'other' },
 ] as const
 
 export const askingQuality = 'Quelle est la qualité de ce message ?'

@@ -87,22 +87,37 @@ export const Root = () => {
           />
         )}
         {isMFS ? (
-          <Route
-            path="/meeting"
-            element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
-          />
+          <>
+            <Route
+              path="/meeting"
+              element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
+            />
+            <Route
+              path="/meeting/:id"
+              element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
+            />
+          </>
         ) : (
-          <Route
-            path={'/meeting'}
-            element={
-              !userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />
-            }
-          />
+          <>
+            <Route
+              path={'/meeting'}
+              element={
+                !userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />
+              }
+            />
+            <Route
+              path={'/meeting/:id'}
+              element={
+                !userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />
+              }
+            />
+          </>
         )}
         <Route
           path="/home"
           element={!userAuth.isLogin ? <Navigate to="/login" /> : <Home />}
         />
+        <Route path="/newhome" element={<NewHome />} />
         <Route
           path="/"
           element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/home" />}
@@ -172,7 +187,7 @@ export const Root = () => {
         <Route path="*" element={<Error404 />} />
       </Routes>
 
-      {location.pathname !== '/chat' && (
+      {!location.pathname.includes('meeting') && location.pathname !== '/chat' && (
         <Footer
           bottomItems={[headerFooterDisplayItem]}
           accessibility="partially compliant"

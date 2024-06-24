@@ -1,24 +1,18 @@
+import { useParams } from 'react-router-dom'
 import { MeetingOutputs } from '../components/Meeting/MeetingOutputs'
-
-/*****************************************************************************************************
-	
-	VARIABLES:
-	
-	**	generate: to determine whether the user is in the description or stream phase
-			true: user entered prompt informations & click on generate button
-			false:
-				- user has just arrived on the meeting page
-				- OR clicked on the modify button. If so, emitCloseStream is called
-	
-	**	currQuestion: description provided by the user
-	**	context: additional informations provided by the user: administrations and themes tags
-
- *****************************************************************************************************/
+import { useDispatch } from 'react-redux'
 
 export function Meeting() {
+  const { id } = useParams<{ id: string }>()
+  const dispatch = useDispatch()
+  if (id)
+    dispatch({
+      type: 'SET_CHAT_ID',
+      nextChatId: Number(id),
+    })
   return (
     <div className="fr-container fr-my-3w">
-      <MeetingOutputs />
+      <MeetingOutputs chatId={id ? Number(id) : undefined} />
     </div>
   )
 }
