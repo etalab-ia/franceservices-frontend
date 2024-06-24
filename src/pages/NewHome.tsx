@@ -72,7 +72,7 @@ function ChatList() {
       numberOfMessages: 3,
       themes: ['Allocation sociale', 'RSA', 'CAF', 'Aides financieres'],
       updatedDate: '2024-06-04T09:41:16.446431',
-      id: 2583,
+      id: 2736,
     },
     {
       name: 'Allocations sociales: la CAD peut-elle faire une saisie sur le RSA ?',
@@ -157,7 +157,7 @@ function QuestionList({ selectedChatId }: { selectedChatId: number }) {
     console.log(error)
   }
 
-  if (!archive) {
+  if (!archive || !archive.streams) {
     return null
   }
   return (

@@ -1,21 +1,25 @@
 import { GlobalColContainer } from 'components/Global/GlobalColContainer'
 import { OneThirdScreenWidth } from 'components/Global/OneThirdScreenWidth'
 
-export function FirstQuestionExample(setQuestionInput) {
+export function FirstQuestionExample({
+  setQuestionInput,
+}: { setQuestionInput: (question: string) => void }) {
   return (
-    <>
-      <h6>Première utilisation ?</h6>
+    <div className="flex flex-col gap-1">
+      <h6 style={{ lineHeight: 1 }} className="mt-0 pt-0 ">
+        Première utilisation ?
+      </h6>
       <p>Cliquez sur la question pour tester Albert</p>
       <button
         type="button"
-        className="fr-mb-1w w-full"
+        className="fr-mb-1w "
         onClick={() => setQuestionInput('Peut-on faire une saisie sur le RSA ?')}
       >
         <div className="fr-px-2w fr-py-3v inline-flex h-full w-full rounded bg-[#F5F5FE]">
           Peut-on faire une saisie sur le RSA ?
         </div>
       </button>
-    </>
+    </div>
   )
 }
 export function MeetingFirstQuestionHelper(setQuestionInput) {
@@ -23,7 +27,7 @@ export function MeetingFirstQuestionHelper(setQuestionInput) {
     <OneThirdScreenWidth>
       <GlobalColContainer>
         <h5 className="fr-pb-2w">Conseils pour poser une question</h5>
-        <h6 className="fr-text-md fr-pb-3v">À faire:</h6>
+        <p className=" font-bold fr-text-md fr-pb-3v">À faire:</p>
         {goodGuidelines.map((badge, index) => (
           <div
             key={badge.title}
@@ -32,7 +36,7 @@ export function MeetingFirstQuestionHelper(setQuestionInput) {
             <QuestionsGuidelinesCard {...badge} />
           </div>
         ))}
-        <h6 className="fr-text-md fr-pb-3v fr-pt-2w">À ne pas faire:</h6>
+        <p className=" font-bold fr-text-md fr-pb-3v fr-pt-2w">À ne pas faire:</p>
         {badGuidelines.map((badge, index) => (
           <div
             key={badge.title}
@@ -41,7 +45,6 @@ export function MeetingFirstQuestionHelper(setQuestionInput) {
             <QuestionsGuidelinesCard {...badge} />
           </div>
         ))}
-        <FirstQuestionExample setQuestionInput={setQuestionInput} />
       </GlobalColContainer>
     </OneThirdScreenWidth>
   )

@@ -1,12 +1,11 @@
+import { useGetArchive } from '@api'
 import {
   InitialQuestion,
-  type WebService,
-  type Question,
   type RootState,
   type UserHistory,
+  type WebService,
 } from '@types'
 import { CurrQuestionContext } from '@utils/context/questionContext'
-import { rmContextFromQuestion } from '@utils/setData'
 import { GlobalColContainer } from 'components/Global/GlobalColContainer'
 import { GlobalParagraph } from 'components/Global/GlobalParagraph'
 import { GlobalRowContainer } from 'components/Global/GlobalRowContainer'
@@ -15,31 +14,25 @@ import Separator from 'components/Global/Separator'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
-import { UsefulLinks } from './UsefulLinks'
-import { useGetArchive } from '@api'
 import { MeetingQuestionInput } from './MeetingQuestionInput'
+import { UsefulLinks } from './UsefulLinks'
 
 export function MeetingOutputs({ chatId }: { chatId?: number }) {
   const user = useSelector((state: RootState) => state.user)
   const [currQuestion, setCurrQuestion] = useState(InitialQuestion)
   const dispatch = useDispatch()
-  const updateCurrQuestion = (newQuestion: Question) => {
-    setCurrQuestion(newQuestion)
-  }
   const [question, setQuestion] = useState('')
 
-  const { data: archiveData, isLoading, error } = useGetArchive(chatId)
+  const { data: archiveData } = useGetArchive(chatId)
+  console.log('archive', archiveData)
 
   useEffect(() => {
     if (chatId !== undefined && archiveData) {
-      console.log('archiveData', archiveData)
       if (Array.isArray(archiveData)) {
-        archiveData.forEach((historyItem) => {
-          dispatch({ type: 'ADD_HISTORY', newItem: historyItem })
+        archiveData.reverse().forEach((item) => {
+          dispatch({ type: 'ADD_HISTORY', newItem: item })
         })
       }
-    } else {
-      if (user.chatId === 0) return
     }
   }, [chatId, archiveData, dispatch])
 
@@ -50,21 +43,19 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
   }, [dispatch])
 
   return (
-    <CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>
-      <h2 className="fr-my-2w fr-mb-5w">Poser une question à Albert</h2>
+    <CurrQuestionContext.Provider
+      value={{ currQuestion, updateCurrQuestion: setCurrQuestion }}
+    >
       {user.history.length > 0 && <History history={user.history} />}
       <MeetingCurrentResponse setQuestion={setQuestion} />
-      <div className="fr-grid-row fr-mt-5w">
-        <div className="fr-col-8">
-          <MeetingQuestionInput questionInput={question} setQuestionInput={setQuestion} />
-        </div>
-      </div>
+      <MeetingQuestionInput questionInput={question} setQuestionInput={setQuestion} />
     </CurrQuestionContext.Provider>
   )
 }
 
 export function History({ history }: { history: UserHistory[] }) {
   const [openedAccordion, setOpenedAccordion] = useState(-1)
+
   return (
     <div className="fr-mt-5w">
       {history.map((h, index) => (

@@ -11,7 +11,7 @@ export function Meeting() {
       nextChatId: Number(id),
     })
   return (
-    <div className="fr-container fr-my-3w">
+    <div className="fr-container fr-mt-3w ">
       <MeetingOutputs chatId={id ? Number(id) : undefined} />
     </div>
   )

@@ -9,7 +9,9 @@ import { MeetingMainResponse } from './MeetingMainResponse'
 /*
  *	Contains text response from the bot and additional informations like sheets, chunks anduseful links
  */
-export function MeetingCurrentResponse(setQuestion) {
+export function MeetingCurrentResponse({
+  setQuestion,
+}: { setQuestion: (question: string) => void }) {
   const user = useSelector((state: RootState) => state.user)
   const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {

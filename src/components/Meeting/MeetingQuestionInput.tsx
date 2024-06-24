@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
 import { MeetingTags } from './MeetingTags'
+import { FirstQuestionExample } from './MeetingFirstQuestionSidePanel'
 
 export function MeetingQuestionInput({
   questionInput,
@@ -24,7 +25,7 @@ export function MeetingQuestionInput({
     administrations: [],
     themes: [],
   })
-
+  const [isFirstQuestion, setIsFirstQuestion] = useState(true)
   const handleChange = (e) => {
     setQuestionInput(e.target.value)
   }
@@ -38,6 +39,7 @@ export function MeetingQuestionInput({
 
   const handleSubmit = async () => {
     console.log('submit')
+    setIsFirstQuestion(false)
     let chatId = user.chatId
     dispatch({ type: 'SET_IS_STREAMING', nextIsStreaming: true })
 
@@ -96,42 +98,50 @@ export function MeetingQuestionInput({
   }
 
   return (
-    <div className="fixed right-0 bottom-0 left-0 z-10 bg-white fr-container">
-      <div className="fr-col-8 fr-pr-2w">
-        <textarea
-          style={{ minHeight: '10px', overflow: 'hidden' }}
-          placeholder="Poser une nouvelle question"
-          rows={1}
-          onChange={handleChange}
-          value={questionInput}
-          onKeyDown={handleKeyDown}
-          className="fr-input justify-end"
-          id="textarea"
-          name="textarea"
-        />
-        {isAdditionalInputOpened && (
-          <NewQuestionMeetingAdditionalInput context={context} setContext={setContext} />
-        )}
-        <div className="flex justify-between">
-          <Button
-            onClick={() => setIsAdditionalInputOpened(!isAdditionalInputOpened)}
-            disabled={stream.isStreaming}
-            className="fr-btn"
-            title="Recherche avancée"
-            iconId={
-              isAdditionalInputOpened ? 'fr-icon-arrow-up-s-line' : 'fr-icon-add-line'
-            }
+    <div className="fixed fr-container right-0 bottom-0 left-0 p-0 z-10 bg-white fr-mt-2w">
+      <div className="fr-grid-row relative ">
+        <div className="fr-col-8 fr-pr-2w">
+          <textarea
+            style={{ minHeight: '10px', overflow: 'hidden' }}
+            placeholder="Poser une nouvelle question"
+            rows={1}
+            onChange={handleChange}
+            value={questionInput}
+            onKeyDown={handleKeyDown}
+            className="fr-input justify-end"
+            id="textarea"
+            name="textarea"
           />
-          <Button
-            onClick={handleSubmit}
-            disabled={!questionInput || stream.isStreaming}
-            className="fr-btn"
-            title="Rechercher"
-            iconId="fr-icon-search-line"
-          >
-            Rechercher
-          </Button>
+          {isAdditionalInputOpened && (
+            <NewQuestionMeetingAdditionalInput
+              context={context}
+              setContext={setContext}
+            />
+          )}
+          <div className="flex justify-between">
+            <Button
+              onClick={() => setIsAdditionalInputOpened(!isAdditionalInputOpened)}
+              disabled={stream.isStreaming}
+              className="fr-btn"
+              title="Recherche avancée"
+              iconId={
+                isAdditionalInputOpened ? 'fr-icon-arrow-up-s-line' : 'fr-icon-add-line'
+              }
+            />
+            <Button
+              onClick={handleSubmit}
+              disabled={!questionInput || stream.isStreaming}
+              className="fr-btn"
+              title="Rechercher"
+              iconId="fr-icon-search-line"
+            >
+              Rechercher
+            </Button>
+          </div>
         </div>
+        {isFirstQuestion && !stream.isStreaming && !stream.historyStream.length && (
+          <FirstQuestionExample setQuestionInput={setQuestionInput} />
+        )}
       </div>
     </div>
   )

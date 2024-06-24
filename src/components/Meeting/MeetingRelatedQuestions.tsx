@@ -12,7 +12,7 @@ import { useSelector } from 'react-redux'
 export function MeetingRelatedQuestions({
   setQuestion,
 }: {
-  setQuestion
+  setQuestion: (question: string) => void
 }) {
   const sheets = useSelector((state: RootState) => state.user.sheets)
   const stream = useSelector((state: RootState) => state.stream)
