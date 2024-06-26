@@ -13,11 +13,23 @@ export function MeetingCurrentResponse({
   setQuestion,
 }: { setQuestion: (question: string) => void }) {
   const user = useSelector((state: RootState) => state.user)
+  const stream = useSelector((state: RootState) => state.stream)
+
   const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
     if (ref.current === null) return
     ref.current.scrollIntoView({ behavior: 'smooth' })
   }, [user.messages])
+  const refBottom = useRef<HTMLDivElement>(null)
+  /*   useEffect(() => {
+    if (refBottom.current) {
+      console.log('REEEEEF', refBottom.current)
+      refBottom.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+      })
+    }
+  }, [refBottom.current, stream.isStreaming]) */
   return (
     <>
       {user.question.query && (
@@ -36,6 +48,7 @@ export function MeetingCurrentResponse({
         {user.chatId !== 0 && <MeetingAdditionalResponse />}
         {!user.chatId && <MeetingFirstQuestionHelper />}
       </GlobalRowContainer>
+      <div ref={refBottom} />
     </>
   )
 }

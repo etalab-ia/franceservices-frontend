@@ -15,15 +15,8 @@ export function MeetingRelatedQuestions({
   setQuestion: (question: string) => void
 }) {
   const sheets = useSelector((state: RootState) => state.user.sheets)
-  const stream = useSelector((state: RootState) => state.stream)
   const [relatedQuestions, setRelatedQuestions] = useState([])
-  const ref = createRef<HTMLDivElement>()
 
-  useEffect(() => {
-    if (ref.current) {
-      ref.current.scrollIntoView({ behavior: 'smooth' })
-    }
-  }, [ref.current, stream.response])
   useEffect(() => {
     if (!sheets || !sheets.length) return
 
@@ -49,7 +42,7 @@ export function MeetingRelatedQuestions({
   }, [sheets])
 
   return (
-    <>
+    <div className="fr-mb-4w">
       {relatedQuestions.length !== 0 && (
         <p className="fr-pt-3w fr-mb-2w flex md:flex-col">
           Des questions posées fréquemment pour des situations similaires :
@@ -65,15 +58,12 @@ export function MeetingRelatedQuestions({
               setQuestion(rq.question)
             }}
           >
-            <div
-              ref={ref}
-              className="fr-px-2w fr-py-3v inline-flex h-full w-full rounded bg-[#F5F5FE]"
-            >
+            <div className="fr-px-2w fr-py-3v inline-flex h-full w-full rounded bg-[#F5F5FE]">
               {rq.question}
             </div>
           </button>
         )
       })}
-    </>
+    </div>
   )
 }

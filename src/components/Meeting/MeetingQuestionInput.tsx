@@ -38,7 +38,6 @@ export function MeetingQuestionInput({
   }, [user.question, user.chatId])
 
   const handleSubmit = async () => {
-    console.log('submit')
     setIsFirstQuestion(false)
     let chatId = user.chatId
     dispatch({ type: 'SET_IS_STREAMING', nextIsStreaming: true })
@@ -99,8 +98,8 @@ export function MeetingQuestionInput({
 
   return (
     <div className="fixed fr-container right-0 bottom-0 left-0 p-0 z-10 bg-white fr-mt-2w">
-      <div className="fr-grid-row relative ">
-        <div className="fr-col-8 fr-pr-2w">
+      <div className="flex flex-row items-stretch">
+        <div className="fr-col-8 fr-pr-2w self-end">
           <textarea
             style={{ minHeight: '10px', overflow: 'hidden' }}
             placeholder="Poser une nouvelle question"
@@ -139,9 +138,10 @@ export function MeetingQuestionInput({
             </Button>
           </div>
         </div>
-        {isFirstQuestion && !stream.isStreaming && !stream.historyStream.length && (
-          <FirstQuestionExample setQuestionInput={setQuestionInput} />
-        )}
+        {isFirstQuestion &&
+          !stream.isStreaming &&
+          !stream.historyStream.length &&
+          !user.chatId && <FirstQuestionExample setQuestionInput={setQuestionInput} />}
       </div>
     </div>
   )

@@ -11,7 +11,7 @@ import { GlobalParagraph } from 'components/Global/GlobalParagraph'
 import { GlobalRowContainer } from 'components/Global/GlobalRowContainer'
 import { OneThirdScreenWidth } from 'components/Global/OneThirdScreenWidth'
 import Separator from 'components/Global/Separator'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { MeetingQuestionInput } from './MeetingQuestionInput'
@@ -22,9 +22,9 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
   const [currQuestion, setCurrQuestion] = useState(InitialQuestion)
   const dispatch = useDispatch()
   const [question, setQuestion] = useState('')
+  const stream = useSelector((state: RootState) => state.stream)
 
   const { data: archiveData } = useGetArchive(chatId)
-  console.log('archive', archiveData)
 
   useEffect(() => {
     if (chatId !== undefined && archiveData) {
@@ -41,7 +41,13 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
       dispatch({ type: 'RESET_USER' })
     }
   }, [dispatch])
-
+  const ref = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (ref.current) {
+      console.log('REEEEEF', ref.current)
+      ref.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [ref.current, stream])
   return (
     <CurrQuestionContext.Provider
       value={{ currQuestion, updateCurrQuestion: setCurrQuestion }}
@@ -49,6 +55,7 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
       {user.history.length > 0 && <History history={user.history} />}
       <MeetingCurrentResponse setQuestion={setQuestion} />
       <MeetingQuestionInput questionInput={question} setQuestionInput={setQuestion} />
+      <div ref={ref} />
     </CurrQuestionContext.Provider>
   )
 }
@@ -102,7 +109,7 @@ export function DisplayResponse({
           <GlobalParagraph>{response}</GlobalParagraph>
         </div>
       </GlobalColContainer>
-      {webservices.length !== 0 && (
+      {webservices?.length !== 0 && (
         <OneThirdScreenWidth>
           <GlobalColContainer>
             <UsefulLinks webservices={webservices} />

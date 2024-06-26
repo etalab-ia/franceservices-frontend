@@ -29,7 +29,7 @@ export function MeetingMainResponse({
         {user.chatId !== 0 && (
           <>
             <MeetingStream />
-            {!stream.isStreaming && <MeetingRelatedQuestions setQuestion={setQuestion} />}
+            <MeetingRelatedQuestions setQuestion={setQuestion} />
           </>
         )}
       </div>

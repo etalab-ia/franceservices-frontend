@@ -14,6 +14,7 @@ import {
 import { useInView } from 'react-intersection-observer'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { LoadingSpinner } from 'components/LoadingSpinner'
 
 export function NewHome() {
   return (
@@ -65,8 +66,8 @@ function ChatList() {
     return <ShowError message={error.message} errorNumber={error.status} />
   }
 
-  //const chats = data?.pages.flatMap((page) => page.chats) ?? [] TODO: remove when back fixed skip argument
-  const chats = [
+  const chats = data?.pages.flatMap((page) => page.chats) ?? []
+  /*   const chats = [
     {
       name: 'Allocations sociales: la CAD peut-elle faire une saisie sur le RSA ?',
       numberOfMessages: 3,
@@ -96,7 +97,7 @@ function ChatList() {
       id: 1254,
     },
   ]
-
+ */
   type TestChatType = {
     name: string
     numberOfMessages?: number
@@ -119,7 +120,7 @@ function ChatList() {
           </div>
         ))}
         <div ref={ref} style={{ height: 1 }} />
-        {isFetchingNextPage && <p>Loading more...</p>}
+        {isFetchingNextPage && <LoadingSpinner />}
       </div>
       <div className="fr-col-6">
         {selectedChatId && <QuestionsSidePanel selectedChatId={selectedChatId} />}
