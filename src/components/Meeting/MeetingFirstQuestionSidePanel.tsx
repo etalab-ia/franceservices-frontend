@@ -5,11 +5,11 @@ export function FirstQuestionExample({
   setQuestionInput,
 }: { setQuestionInput: (question: string) => void }) {
   return (
-    <div className="flex flex-col gap-1">
-      <h6 style={{ lineHeight: 1 }} className="mt-0 pt-0 ">
+    <div className="">
+      <h6 style={{ lineHeight: 1 }} className="fr-mb-3v">
         Première utilisation ?
       </h6>
-      <p>Cliquez sur la question pour tester Albert</p>
+      <p className="fr-mb-3v">Cliquez sur la question pour tester Albert</p>
       <button
         type="button"
         className="fr-mb-1w "
@@ -26,8 +26,8 @@ export function MeetingFirstQuestionHelper(setQuestionInput) {
   return (
     <OneThirdScreenWidth>
       <GlobalColContainer>
-        <h5 className="fr-pb-2w">Conseils pour poser une question</h5>
-        <p className=" font-bold fr-text-md fr-pb-3v">À faire:</p>
+        <h5 className="fr-mb-2w">Conseils pour poser une question</h5>
+        <p className=" font-bold fr-text-md fr-mb-3v">À faire:</p>
         {goodGuidelines.map((badge, index) => (
           <div
             key={badge.title}
@@ -36,7 +36,7 @@ export function MeetingFirstQuestionHelper(setQuestionInput) {
             <QuestionsGuidelinesCard {...badge} />
           </div>
         ))}
-        <p className=" font-bold fr-text-md fr-pb-3v fr-pt-2w">À ne pas faire:</p>
+        <p className=" font-bold fr-text-md fr-mb-3v fr-pt-2w">À ne pas faire:</p>
         {badGuidelines.map((badge, index) => (
           <div
             key={badge.title}
@@ -63,11 +63,11 @@ function QuestionsGuidelinesCard({
 
   return (
     <div
-      className={`fr-grid-row fr-grid-row--middle   fr-badge--${
+      className={`fr-grid-row fr-grid-row--middle fr-badge--${
         good ? 'success' : 'error'
       } fr-p-1w rounded`}
     >
-      <span className={`${iconClass} mr-2 fr-col-1 `} />
+      <span className={`${iconClass} fr-mr-3v fr-col-1`} />
 
       <div className="fr-col-10 ">
         <strong>{title}</strong>

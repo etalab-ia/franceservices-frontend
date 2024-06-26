@@ -45,15 +45,12 @@ function HomeHeader() {
     </div>
   )
 }
+
 function ChatList() {
   const { ref, inView } = useInView()
   const [selectedChatId, setSelectedChatId] = useState<number | null>(null)
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, error } = useGetChats()
-  const [isMounted, setIsMounted] = useState(false)
   console.log('data', data)
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
 
   useEffect(() => {
     if (inView && hasNextPage) {
@@ -107,7 +104,7 @@ function ChatList() {
   }
 
   return (
-    <div className={`fr-mt-2w fr-grid-row w-full ${isMounted ? 'slideInLeft' : ''}`}>
+    <div className={'fr-mt-2w fr-grid-row w-full'}>
       <div className="fr-col-6" style={{ height: '500px', overflowY: 'auto' }}>
         {chats.map((chat: TestChatType, index) => (
           <div key={index}>
@@ -151,7 +148,7 @@ function QuestionsSidePanel({ selectedChatId }: { selectedChatId: number }) {
   )
 }
 
-function QuestionList({ selectedChatId }: { selectedChatId: number }) {
+function QuestionList({ selectedChatId }) {
   const { data: archive, error } = useGetChatArchiveById(selectedChatId)
   const dispatch = useDispatch()
   if (error) {
@@ -161,14 +158,18 @@ function QuestionList({ selectedChatId }: { selectedChatId: number }) {
   if (!archive || !archive.streams) {
     return null
   }
+
   return (
     <>
       {archive.streams.map((stream, index) => (
-        <div className="fr-mb-1v" key={index}>
+        <div
+          key={index}
+          className="fr-mb-1v fade-in-left"
+          style={{ animationDelay: `${index * 0.1}s` }}
+        >
           <button
             type="button"
             className="fr-mb-1w w-full"
-            key={index}
             onClick={async (e) => {
               const authToken = localStorage.getItem('authToken')
               const response = await fetch(`${getArchiveUrl}/${stream.chat_id}`, {
@@ -182,7 +183,9 @@ function QuestionList({ selectedChatId }: { selectedChatId: number }) {
             }}
           >
             <div className="fr-px-2w fr-py-3v inline-flex h-full w-full rounded bg-[#F5F5FE]">
-              {stream.query}
+              <p className="block overflow-hidden text-ellipsis whitespace-nowrap">
+                {stream.query}
+              </p>
             </div>
           </button>
         </div>

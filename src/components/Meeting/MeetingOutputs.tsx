@@ -66,30 +66,35 @@ export function History({ history }: { history: UserHistory[] }) {
   return (
     <div className="fr-mt-5w">
       {history.map((h, index) => (
-        <div className="fr-mb-1w" key={h.query + index}>
-          <h3 className="fr-background-alt--blue-france">
-            <button
-              type="button"
-              className="fr-accordion__btn fr-text-default--grey"
-              aria-expanded="false"
-              aria-controls={`history-${index}`}
-              onClick={() => setOpenedAccordion((prev) => (prev === -1 ? index : -1))}
+        <div className="fr-mb-1w " key={h.query + index}>
+          <button
+            type="button"
+            className="fr-accordion__btn fr-text-default--grey "
+            aria-expanded={openedAccordion === index ? 'true' : 'false'}
+            aria-controls={`history-${index}`}
+            onClick={() => setOpenedAccordion((prev) => (prev === index ? -1 : index))}
+          >
+            <p
+              className={`fr-text--lg ${
+                openedAccordion === index
+                  ? 'block overflow-hidden text- whitespace-normal break-words'
+                  : 'block overflow-hidden text-ellipsis whitespace-nowrap'
+              }`}
             >
-              <p
-                className={`${
-                  openedAccordion === index
-                    ? ''
-                    : 'block overflow-hidden text-ellipsis whitespace-nowrap'
-                }fr-text--lg`}
-              >
-                {h.query}
-              </p>
-            </button>
-          </h3>
-          <div className="fr-collapse" id={`history-${index}`}>
-            <div className="fr-mb-2w">
-              <DisplayResponse response={h.response} webservices={h.webservices} />
-            </div>
+              {h.query}
+            </p>
+          </button>
+          <div
+            className={`fr-collapse ${
+              openedAccordion === index ? 'fr-collapse--expanded' : ''
+            }`}
+            id={`history-${index}`}
+          >
+            {openedAccordion === index && (
+              <div className="fr-mb-2w">
+                <DisplayResponse response={h.response} webservices={h.webservices} />
+              </div>
+            )}
           </div>
         </div>
       ))}

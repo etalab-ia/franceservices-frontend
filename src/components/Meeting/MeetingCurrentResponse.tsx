@@ -37,8 +37,10 @@ export function MeetingCurrentResponse({
           <h5 ref={ref} className="fr-mt-5w fr-mb-1w">
             {`Votre question ${user.history.length ? 'complémentaire' : ''}`}
           </h5>
-          <div className="fr-mb-2w fr-background-alt--blue-france fr-p-2w flex min-h-12 items-center">
-            <p>{user.question.query}</p>
+          <div className=" fr-mb-2w fr-background-alt--blue-france fr-p-2w flex min-h-12 items-center">
+            <p className="block overflow-hidden text-ellipsis whitespace-nowrap">
+              {user.question.query}
+            </p>
           </div>
         </>
       )}
