@@ -35,7 +35,7 @@ function HomeHeader() {
     } else navigate('/chat')
   }
   return (
-    <div className="fr-mt-5w">
+    <div className="fr-mt-5w ">
       <div className="fr-grid-row">
         <h3 className="fr-text-title--blue-france">Mes échanges</h3>
         <Button onClick={handleNewQuestion} className="ml-auto" iconId="fr-icon-add-line">
@@ -105,7 +105,7 @@ function ChatList() {
 
   return (
     <div className={'fr-mt-2w fr-grid-row w-full'}>
-      <div className="fr-col-6" style={{ height: '500px', overflowY: 'auto' }}>
+      <div className="fr-col-6 overflow-y-auto h-[66vh]">
         {chats.map((chat: TestChatType, index) => (
           <div key={index}>
             <ChatListRow
@@ -134,8 +134,8 @@ function QuestionsSidePanel({ selectedChatId }: { selectedChatId: number }) {
   }
   console.log('selectedChatId', selectedChatId)
   return (
-    <div className="fr-pl-3w">
-      <div className="flex flex-wrap justify-between items-center">
+    <div className="fr-pl-3w fade-in-left">
+      <div className="flex flex-wrap justify-between items-center fr-mb-2w">
         <h6>Les questions de cet échange</h6>
         <button type="button" className="mt-2 sm:mt-0" onClick={handleButtonClick}>
           <span className="fr-icon-arrow-right-line fr-text-action-high--blue-france">
@@ -232,7 +232,7 @@ function ChatListRow({
           <p className={`${selectedChatId === id ? 'font-semibold' : ''}`}>{name}</p>
           <p>{dateFormatted === today ? 'Aujourd’hui' : dateFormatted}</p>
         </div>
-        <div className="ml-auto fr-col-6 fr-px-1w">
+        {/*         <div className="ml-auto fr-col-6 fr-px-1w">
           <div className="flex flex-wrap gap-2">
             <p
               className={`fr-tag fr-tag--sm fr-text-action-high--blue-france ${
@@ -241,7 +241,7 @@ function ChatListRow({
                   : 'bg-white'
               }`}
             >
-              {numberOfMessages} messages
+              {numberOfMessages} message{numberOfMessages > 1 ? 's' : ''}
             </p>
             {themes?.map((theme: string, index) => (
               <p
@@ -256,7 +256,7 @@ function ChatListRow({
               </p>
             ))}
           </div>
-        </div>
+        </div> */}
       </button>
     </>
   )

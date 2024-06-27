@@ -37,12 +37,12 @@ const fetchArchive = async (chatId: number) => {
             body: JSON.stringify({ uids: stream.rag_sources }),
           }).then((res) => res.json())
         : []
-
+      console.log('chunksResponse', chunksResponse)
       return {
         query: stream.query,
         chunks: chunksResponse,
         response: stream.response,
-        webservices: [],
+        webservices: chunksResponse[0]?.web_services.slice(0, 3),
       }
     })
   )

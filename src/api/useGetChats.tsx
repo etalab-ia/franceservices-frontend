@@ -15,7 +15,7 @@ export function useGetAllChats() {
 const fetchAllChats = async (): Promise<Chat[]> => {
   const authToken = localStorage.getItem('authToken')
 
-  const res = await fetch(`${getChatsUrl}`, {
+  const res = await fetch(`${getChatsUrl}?desc=true`, {
     method: 'GET',
     credentials: 'include',
     headers: {
@@ -43,14 +43,17 @@ const fetchChats = async ({
   pageParam = 0,
 }): Promise<{ chats: Chat[]; nextPage: number | null }> => {
   const authToken = localStorage.getItem('authToken')
-  const res = await fetch(`${getChatsUrl}?skip=${pageParam}&limit=10&desc=true`, {
-    method: 'GET',
-    credentials: 'include',
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-      'Content-Type': 'application/json',
-    },
-  })
+  const res = await fetch(
+    `${getChatsUrl}?desc=true&skip=${pageParam}&limit=10&desc=true`,
+    {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+        'Content-Type': 'application/json',
+      },
+    }
+  )
 
   if (!res.ok) {
     console.error('error: response not ok', res)

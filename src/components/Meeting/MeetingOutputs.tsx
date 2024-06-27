@@ -29,9 +29,9 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
   useEffect(() => {
     if (chatId !== undefined && archiveData) {
       if (Array.isArray(archiveData)) {
-        archiveData.reverse().forEach((item) => {
-          dispatch({ type: 'ADD_HISTORY', newItem: item })
-        })
+        for (let i = archiveData.length - 1; i >= 0; i--) {
+          dispatch({ type: 'ADD_HISTORY', newItem: archiveData[i] })
+        }
       }
     }
   }, [chatId, archiveData, dispatch])
@@ -44,7 +44,6 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
   const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
     if (ref.current) {
-      console.log('REEEEEF', ref.current)
       ref.current.scrollIntoView({ behavior: 'smooth' })
     }
   }, [ref.current, stream])
@@ -67,23 +66,25 @@ export function History({ history }: { history: UserHistory[] }) {
     <div className="fr-mt-5w">
       {history.map((h, index) => (
         <div className="fr-mb-1w " key={h.query + index}>
-          <button
-            type="button"
-            className="fr-accordion__btn fr-text-default--grey "
-            aria-expanded={openedAccordion === index ? 'true' : 'false'}
-            aria-controls={`history-${index}`}
-            onClick={() => setOpenedAccordion((prev) => (prev === index ? -1 : index))}
-          >
-            <p
-              className={`fr-text--lg ${
-                openedAccordion === index
-                  ? 'block overflow-hidden text- whitespace-normal break-words'
-                  : 'block overflow-hidden text-ellipsis whitespace-nowrap'
-              }`}
+          <h3 className="fr-background-alt--blue-france">
+            <button
+              type="button"
+              className="fr-accordion__btn fr-text-default--grey "
+              aria-expanded={openedAccordion === index ? 'true' : 'false'}
+              aria-controls={`history-${index}`}
+              onClick={() => setOpenedAccordion((prev) => (prev === index ? -1 : index))}
             >
-              {h.query}
-            </p>
-          </button>
+              <p
+                className={`fr-text--lg ${
+                  openedAccordion === index
+                    ? 'block overflow-hidden break-words'
+                    : 'block overflow-hidden text-ellipsis whitespace-nowrap'
+                }`}
+              >
+                {h.query}
+              </p>
+            </button>
+          </h3>
           <div
             className={`fr-collapse ${
               openedAccordion === index ? 'fr-collapse--expanded' : ''

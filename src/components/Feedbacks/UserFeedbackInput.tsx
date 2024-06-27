@@ -34,7 +34,7 @@ export function UserFeedbackInput({
   return (
     <>
       {!feedback.isConfirmed ? (
-        <div>
+        <>
           <p className="mt-4">{askingQualityPrecisions(buttons[activeTab].type)}</p>
           <UserFeedbackOptions
             activeTab={activeTab}
@@ -42,12 +42,12 @@ export function UserFeedbackInput({
             feedback={feedback}
             setFeedback={setFeedback}
           />
-        </div>
+        </>
       ) : (
-        <div>
+        <>
           <UserFeedbackResume feedback={feedback} />
           {showThanks && <FeedbackThanksMessage />}
-        </div>
+        </>
       )}
     </>
   )
