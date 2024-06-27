@@ -46,9 +46,7 @@ export function MeetingCurrentResponse({
       )}
 
       <GlobalRowContainer extraClass="fr-grid-row fr-mt-5w">
-        {user.chatId !== 0 && user.lastStreamId !== 0 && (
-          <MeetingMainResponse setQuestion={setQuestion} />
-        )}
+        <MeetingMainResponse setQuestion={setQuestion} />
         {user.chatId !== 0 && user.lastStreamId !== 0 && <MeetingAdditionalResponse />}
         {!user.chatId && <MeetingFirstQuestionHelper />}
       </GlobalRowContainer>

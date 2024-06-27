@@ -27,13 +27,6 @@ export function navFunc() {
               },
               isActive: currentPath === '/meeting',
             },
-            {
-              text: 'Mon historique',
-              linkProps: {
-                to: '/history',
-              },
-              isActive: currentPath === '/history',
-            },
           ],
         },
         {
