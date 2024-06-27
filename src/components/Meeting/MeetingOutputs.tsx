@@ -51,7 +51,9 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
     <CurrQuestionContext.Provider
       value={{ currQuestion, updateCurrQuestion: setCurrQuestion }}
     >
-      {user.history.length > 0 && <History history={user.history} />}
+      {user.history.length > 0 && (
+        <History history={user.history} unfoldLast={chatId !== undefined} />
+      )}
       <MeetingCurrentResponse setQuestion={setQuestion} />
       <MeetingQuestionInput questionInput={question} setQuestionInput={setQuestion} />
       <div ref={ref} />
@@ -59,9 +61,14 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
   )
 }
 
-export function History({ history }: { history: UserHistory[] }) {
-  const [openedAccordion, setOpenedAccordion] = useState(-1)
-
+export function History({
+  history,
+  unfoldLast,
+}: { history: UserHistory[]; unfoldLast: boolean }) {
+  const [openedAccordion, setOpenedAccordion] = useState(
+    unfoldLast ? history.length - 1 : -1
+  )
+  const [unfold, setUnfold] = useState(unfoldLast)
   return (
     <div className="fr-mt-5w">
       {history.map((h, index) => (
@@ -72,7 +79,10 @@ export function History({ history }: { history: UserHistory[] }) {
               className="fr-accordion__btn fr-text-default--grey "
               aria-expanded={openedAccordion === index ? 'true' : 'false'}
               aria-controls={`history-${index}`}
-              onClick={() => setOpenedAccordion((prev) => (prev === index ? -1 : index))}
+              onClick={() => {
+                setUnfold(false)
+                setOpenedAccordion((prev) => (prev === index ? -1 : index))
+              }}
             >
               <p
                 className={`fr-text--lg ${

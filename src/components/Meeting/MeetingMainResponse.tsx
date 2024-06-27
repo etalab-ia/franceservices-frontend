@@ -26,7 +26,7 @@ export function MeetingMainResponse({
             </p>
           </>
         )}
-        {user.chatId !== 0 && (
+        {user.chatId !== 0 && user.lastStreamId !== 0 && (
           <>
             <MeetingStream />
             <MeetingRelatedQuestions setQuestion={setQuestion} />

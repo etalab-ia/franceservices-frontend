@@ -50,7 +50,6 @@ function ChatList() {
   const { ref, inView } = useInView()
   const [selectedChatId, setSelectedChatId] = useState<number | null>(null)
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, error } = useGetChats()
-  console.log('data', data)
 
   useEffect(() => {
     if (inView && hasNextPage) {
@@ -132,7 +131,6 @@ function QuestionsSidePanel({ selectedChatId }: { selectedChatId: number }) {
   const handleButtonClick = () => {
     navigate(`/meeting/${selectedChatId}`)
   }
-  console.log('selectedChatId', selectedChatId)
   return (
     <div className="fr-pl-3w fade-in-left">
       <div className="flex flex-wrap justify-between items-center fr-mb-2w">
