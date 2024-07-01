@@ -18,12 +18,12 @@ const fetchArchive = async (chatId: number) => {
       'Content-Type': 'application/json',
     },
   })
-
   if (!response.ok) {
     console.error('error: response not ok', response)
     throw new Error('Network response was not ok', { cause: response })
   }
   const responseData = await response.json()
+  console.log('response', responseData)
   const streamsHistory: UserHistory[] = await Promise.all(
     responseData.streams.map(async (stream) => {
       const chunksResponse = stream.rag_sources
@@ -36,6 +36,7 @@ const fetchArchive = async (chatId: number) => {
             body: JSON.stringify({ uids: stream.rag_sources }),
           }).then((res) => res.json())
         : []
+      console.log('chunks', chunksResponse)
       return {
         query: stream.query,
         chunks: chunksResponse,

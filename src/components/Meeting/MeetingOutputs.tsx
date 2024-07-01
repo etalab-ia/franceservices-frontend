@@ -25,7 +25,7 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
   const stream = useSelector((state: RootState) => state.stream)
 
   const { data: archiveData } = useGetArchive(chatId)
-
+  console.log('userhisto', user.history)
   useEffect(() => {
     if (chatId !== undefined && archiveData) {
       if (Array.isArray(archiveData)) {
@@ -68,7 +68,7 @@ export function History({
   const [openedAccordion, setOpenedAccordion] = useState(
     unfoldLast ? history.length - 1 : -1
   )
-  const [unfold, setUnfold] = useState(unfoldLast)
+  console.log('history', history)
   return (
     <div className="fr-mt-5w">
       {history.map((h, index) => (
@@ -80,7 +80,6 @@ export function History({
               aria-expanded={openedAccordion === index ? 'true' : 'false'}
               aria-controls={`history-${index}`}
               onClick={() => {
-                setUnfold(false)
                 setOpenedAccordion((prev) => (prev === index ? -1 : index))
               }}
             >

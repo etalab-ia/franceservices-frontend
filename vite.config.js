@@ -44,6 +44,6 @@ export default ({ mode }) => {
       strictPort: true,
       port: 4173,
     },
-    base: '',
+    base: './',
   })
 }
