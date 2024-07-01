@@ -1,6 +1,9 @@
 import react from '@vitejs/plugin-react'
 import path from 'node:path'
 import url from 'rollup-plugin-url'
+
+import { defineConfig } from 'vite'
+
 import tailwindcss from 'tailwindcss'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
