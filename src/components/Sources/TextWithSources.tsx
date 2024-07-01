@@ -21,11 +21,13 @@ export function TextWithSources({
     setTextWithSources(
       reactStringReplace(
         text,
-        /(<ref title="[^"]*"\s* text="[^"]*"\s*>\s*\[?https?:\/\/[^\s<]*\]?\s*<\/ref>)/g,
+        /(<ref .*?>\s*\[?https?:\/\/[^\s<]*\]?\s*<\/ref>)/g,
         (match, i) => {
-          const regex =
+          const regexA =
             /<ref title="([^"]+)"\s+text="([^"]+)"\s*>\s*(https?:\/\/[^\s<]+)\s*<\/ref>/s
-          const content = regex.exec(match)
+          const regexB =
+            /<ref text="([^"]+)"\s+title="([^"]+)"\s*>\s*(https?:\/\/[^\s<]+)\s*<\/ref>/s
+          const content = regexA.exec(match) || regexB.exec(match)
 
           if (content) {
             if (windowSize.width > 992) {
