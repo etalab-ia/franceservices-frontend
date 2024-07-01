@@ -41,10 +41,12 @@ const fetchArchive = async (chatId: number) => {
         query: stream.query,
         chunks: chunksResponse,
         response: stream.response,
-        webservices: chunksResponse[0]?.web_services.slice(0, 3),
+        webservices: chunksResponse[0]?.web_services
+          ? chunksResponse[0]?.web_services.slice(0, 3)
+          : [],
       }
     })
   )
-
+  console.log('streamsHistory', streamsHistory)
   return streamsHistory
 }

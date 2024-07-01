@@ -12,20 +12,7 @@ export default ({ mode }) => {
   const isProduction = mode === 'production'
 
   return defineConfig({
-    plugins: [
-      react(),
-      tailwindcss(),
-      url(),
-      tsconfigPaths(),
-      createHtmlPlugin({
-        // Use createHtmlPlugin
-        inject: {
-          data: {
-            matomoUrl: process.env.VITE_MATOMO_URL, // Correct injection
-          },
-        },
-      }),
-    ],
+    plugins: [react(), tailwindcss(), url(), tsconfigPaths()],
     build: {
       outDir: 'dist',
       cssCodeSplit: false,
@@ -44,6 +31,6 @@ export default ({ mode }) => {
       strictPort: true,
       port: 4173,
     },
-    base: './',
+    base: '',
   })
 }
