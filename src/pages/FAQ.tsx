@@ -6,9 +6,7 @@ export function FAQ() {
   return (
     <div className="fr-container fr-p-4w">
       <GlobalTitle>Aide</GlobalTitle>
-      <p className="fr-pb-2w">
-        Des réponses aux questions fréquemment posées sur Albert:
-      </p>
+      <p className="fr-pb-2w">Des réponses aux questions fréquemment posées sur Albert</p>
       <div className="flex accordion-container accordion">
         <div className="flex flex-col accordion">
           <h6 className="font-bold text-2xl fr-pb-2w">{faq.albertInfo.categoryName}</h6>
