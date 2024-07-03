@@ -15,7 +15,7 @@ export function FirstQuestionExample({
         className="fr-mb-1w "
         onClick={() => setQuestionInput('Peut-on faire une saisie sur le RSA ?')}
       >
-        <div className="fr-px-2w fr-py-3v inline-flex h-full w-full rounded bg-[#F5F5FE]">
+        <div className="fr-px-2w fr-py-3v inline-flex h-full w-full rounded fr-background-alt--blue-france">
           Peut-on faire une saisie sur le RSA ?
         </div>
       </button>

@@ -97,7 +97,7 @@ export function MeetingQuestionInput({
   }
 
   return (
-    <div className="fixed fr-container right-0 bottom-0 left-0 p-0 z-10 bg-white fr-mt-2w">
+    <div className="fixed fr-container right-0 bottom-0 left-0 p-0 z-10 fr-background-default--grey fr-mt-2w">
       <div className="flex flex-row items-stretch">
         <div className="fr-col-8 fr-pr-2w self-end">
           <textarea

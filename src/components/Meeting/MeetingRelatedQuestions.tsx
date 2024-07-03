@@ -58,7 +58,7 @@ export function MeetingRelatedQuestions({
               setQuestion(rq.question)
             }}
           >
-            <div className="fr-px-2w fr-py-3v inline-flex h-full w-full rounded bg-[#F5F5FE]">
+            <div className="fr-px-2w fr-py-3v inline-flex h-full w-full rounded fr-background-alt--blue-france">
               {rq.question}
             </div>
           </button>

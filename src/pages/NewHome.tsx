@@ -180,7 +180,7 @@ function QuestionList({ selectedChatId }) {
               dispatch({ type: 'ADD_HISTORY', newItem: stream })
             }}
           >
-            <div className="fr-px-2w fr-py-3v inline-flex h-full w-full rounded bg-[#F5F5FE]">
+            <div className="fr-px-2w fr-py-3v inline-flex h-full w-full rounded fr-background-alt--blue-france">
               <p className="block overflow-hidden text-ellipsis whitespace-nowrap">
                 {stream.query}
               </p>
