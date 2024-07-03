@@ -28,6 +28,6 @@ export default () => {
       strictPort: true,
       port: 4173,
     },
-    base: '/',
+    base: '',
   })
 }
