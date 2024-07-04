@@ -10,24 +10,18 @@ export function navFunc() {
   const navDefs: any[] = isMFS
     ? [
         {
-          text: 'Accueil',
+          text: 'Mes échanges',
           linkProps: {
             to: '/home',
           },
           isActive: currentPath === '/home',
         },
         {
-          text: 'Mes outils',
-          isActive: currentPath === '/chat' || currentPath === '/meeting',
-          menuLinks: [
-            {
-              text: 'Échanger avec Albert',
-              linkProps: {
-                to: '/meeting',
-              },
-              isActive: currentPath === '/meeting',
-            },
-          ],
+          text: 'Poser une nouvelle question',
+          linkProps: {
+            to: '/meeting',
+          },
+          isActive: currentPath === '/meeting',
         },
         {
           text: 'Aide',
