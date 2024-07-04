@@ -16,6 +16,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { MeetingQuestionInput } from './MeetingQuestionInput'
 import { UsefulLinks } from './UsefulLinks'
+import Accordion from '@mui/material/Accordion'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import AccordionSummary from '@mui/material/AccordionSummary'
 
 export function MeetingOutputs({ chatId }: { chatId?: number }) {
   const user = useSelector((state: RootState) => state.user)
@@ -73,39 +76,15 @@ export function History({
     <div className="fr-mt-5w">
       {history.map((h, index) => (
         <div className="fr-mb-1w " key={h.query + index}>
-          <h3 className="fr-background-alt--blue-france">
-            <button
-              type="button"
-              className="fr-accordion__btn fr-text-default--grey "
-              aria-expanded={openedAccordion === index ? 'true' : 'false'}
-              aria-controls={`history-${index}`}
-              onClick={() => {
-                setOpenedAccordion((prev) => (prev === index ? -1 : index))
-              }}
-            >
-              <p
-                className={`fr-text--lg ${
-                  openedAccordion === index
-                    ? 'block overflow-hidden break-words'
-                    : 'block overflow-hidden text-ellipsis whitespace-nowrap'
-                }`}
-              >
-                {h.query}
-              </p>
-            </button>
-          </h3>
-          <div
-            className={`fr-collapse ${
-              openedAccordion === index ? 'fr-collapse--expanded' : ''
-            }`}
-            id={`history-${index}`}
-          >
-            {openedAccordion === index && (
-              <div className="fr-mb-2w">
-                <DisplayResponse response={h.response} webservices={h.webservices} />
-              </div>
-            )}
-          </div>
+          <Accordion>
+            <AccordionSummary aria-controls="panel1-content" id="panel1-header">
+              Accordion 1
+            </AccordionSummary>
+            <AccordionDetails>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+              malesuada lacus ex, sit amet blandit leo lobortis eget.
+            </AccordionDetails>
+          </Accordion>
         </div>
       ))}
     </div>
