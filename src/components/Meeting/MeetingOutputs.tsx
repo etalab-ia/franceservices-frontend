@@ -19,6 +19,7 @@ import { UsefulLinks } from './UsefulLinks'
 import Accordion from '@mui/material/Accordion'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import AccordionSummary from '@mui/material/AccordionSummary'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 export function MeetingOutputs({ chatId }: { chatId?: number }) {
   const user = useSelector((state: RootState) => state.user)
@@ -77,12 +78,16 @@ export function History({
       {history.map((h, index) => (
         <div className="fr-mb-1w " key={h.query + index}>
           <Accordion>
-            <AccordionSummary aria-controls="panel1-content" id="panel1-header">
-              Accordion 1
+            <AccordionSummary
+              aria-controls="panel1-content"
+              id="panel1-header"
+              expandIcon={<ExpandMoreIcon />}
+              sx={{ backgroundColor: 'red' }}
+            >
+              {h.query}
             </AccordionSummary>
             <AccordionDetails>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-              malesuada lacus ex, sit amet blandit leo lobortis eget.
+              <DisplayResponse response={h.response} webservices={h.webservices} />
             </AccordionDetails>
           </Accordion>
         </div>
@@ -90,6 +95,59 @@ export function History({
     </div>
   )
 }
+
+/*
+export function History({
+  history,
+  unfoldLast,
+}: { history: UserHistory[]; unfoldLast: boolean }) {
+  const [openedAccordion, setOpenedAccordion] = useState(
+    unfoldLast ? history.length - 1 : -1
+  )
+  console.log('history', history)
+  return (
+    <div className="fr-mt-5w">
+      {history.map((h, index) => (
+        <div className="fr-mb-1w " key={h.query + index}>
+          <h3 className="fr-background-alt--blue-france">
+            <button
+              type="button"
+              className="fr-accordion__btn fr-text-default--grey "
+              aria-expanded={openedAccordion === index ? 'true' : 'false'}
+              aria-controls={`history-${index}`}
+              onClick={() => {
+                setOpenedAccordion((prev) => (prev === index ? -1 : index))
+              }}
+            >
+              <p
+                className={`fr-text--lg ${
+                  openedAccordion === index
+                    ? 'block overflow-hidden break-words'
+                    : 'block overflow-hidden text-ellipsis whitespace-nowrap'
+                }`}
+              >
+                {h.query}
+              </p>
+            </button>
+          </h3>
+          <div
+            className={`fr-collapse ${
+              openedAccordion === index ? 'fr-collapse--expanded' : ''
+            }`}
+            id={`history-${index}`}
+          >
+            {openedAccordion === index && (
+              <div className="fr-mb-2w">
+                <DisplayResponse response={h.response} webservices={h.webservices} />
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+  */
 
 export function DisplayResponse({
   response,

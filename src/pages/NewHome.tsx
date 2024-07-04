@@ -165,27 +165,13 @@ function QuestionList({ selectedChatId }) {
           className="fr-mb-1v fade-in-left"
           style={{ animationDelay: `${index * 0.1}s` }}
         >
-          <button
-            type="button"
-            className="fr-mb-1w w-full"
-            onClick={async (e) => {
-              const authToken = localStorage.getItem('authToken')
-              const response = await fetch(`${getArchiveUrl}/${stream.chat_id}`, {
-                headers: {
-                  Authorization: `Bearer ${authToken}`,
-                  'Content-Type': 'application/json',
-                },
-              })
-              if (!response.ok) return
-              dispatch({ type: 'ADD_HISTORY', newItem: stream })
-            }}
-          >
+          <div className="fr-mb-1w w-full">
             <div className="fr-px-2w fr-py-3v inline-flex h-full w-full rounded fr-background-alt--blue-france">
               <p className="block overflow-hidden text-ellipsis whitespace-nowrap">
                 {stream.query}
               </p>
             </div>
-          </button>
+          </div>
         </div>
       ))}
     </>
