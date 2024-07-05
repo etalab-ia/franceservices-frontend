@@ -1,5 +1,6 @@
 import { Tooltip } from 'react-tooltip'
 import useWindowDimensions from '../../utils/hooks/useWindowDimensions'
+import { useState } from 'react'
 
 export function SourceTooltip({
   id,
@@ -14,10 +15,27 @@ export function SourceTooltip({
 }) {
   const windowDimensions = useWindowDimensions()
   const scheme = localStorage.getItem('scheme')
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      setIsOpen(true)
+    } else if (e.key === 'Escape') {
+      setIsOpen(false)
+    }
+  }
+
   return (
     <span className="fr-ml-1v relative inline">
       <div
         id={id}
+        tabIndex={0}
+        role="button"
+        aria-pressed={isOpen}
+        onClick={() => setIsOpen(true)}
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
+        onKeyDown={handleKeyDown}
         style={{
           cursor: 'pointer',
           display: 'inline',
@@ -28,6 +46,8 @@ export function SourceTooltip({
         <span className="fr-text--xs fr-icon-quote-fill fr-text-action-high--blue-cumulus fr-mr-2v" />
       </div>
       <Tooltip
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
         place="bottom"
         opacity={1}
         className={`${scheme === 'dark' ? 'fr-background-alt--grey' : ''} `}
@@ -45,8 +65,17 @@ export function SourceTooltip({
         anchorSelect={`#${id}`}
         clickable
         noArrow
+        imperativeModeOnly
       >
-        <Source sourceUrl={sourceUrl} text={text} title={title} />
+        <div
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') {
+              setIsOpen(false)
+            }
+          }}
+        >
+          <Source sourceUrl={sourceUrl} text={text} title={title} />
+        </div>
       </Tooltip>
     </span>
   )

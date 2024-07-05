@@ -100,7 +100,9 @@ export function TextWithSources({
         >
           &times;
         </button>
-        <Source title={modal.title} text={modal.content} sourceUrl={modal.sourceUrl} />
+        <div className="pb-10px">
+          <Source title={modal.title} text={modal.content} sourceUrl={modal.sourceUrl} />
+        </div>
       </ReactModal>
       <Linkify target="_blank">{textWithSources}</Linkify>
     </div>
