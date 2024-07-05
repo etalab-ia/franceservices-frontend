@@ -52,6 +52,7 @@ export function SourceTooltip({
         opacity={1}
         className={`${scheme === 'dark' ? 'fr-background-alt--grey' : ''} `}
         style={{
+          padding: '0px',
           position: 'absolute',
           zIndex: 1000,
           backgroundColor: 'white',
@@ -63,11 +64,13 @@ export function SourceTooltip({
           overflowY: 'auto',
         }}
         anchorSelect={`#${id}`}
+        imperativeModeOnly
         clickable
         noArrow
-        imperativeModeOnly
       >
         <div
+          onMouseEnter={() => setIsOpen(true)}
+          onMouseLeave={() => setIsOpen(false)}
           onKeyDown={(e) => {
             if (e.key === 'Escape') {
               setIsOpen(false)
@@ -89,7 +92,7 @@ export function Source({
   const domainName = getDomainFromUrl(sourceUrl)
 
   return (
-    <div className="fr-p-2w flex h-[100%] max-w-[392px] flex-col text-wrap break-words fr-text-default--grey">
+    <div className="fr-p-4w flex h-[100%] max-w-[392px] flex-col text-wrap break-words fr-text-default--grey">
       <p className="fr-mb-1w fr-text--sm fr-text-mention--grey">
         Passage utilisé pour générer cette phrase
       </p>
