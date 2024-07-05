@@ -24,6 +24,13 @@ export function navFunc() {
           isActive: currentPath === '/meeting',
         },
         {
+          text: 'Vos outils numériques',
+          linkProps: {
+            to: '/outils',
+          },
+          isActive: currentPath === '/outils',
+        },
+        {
           text: 'Aide',
           linkProps: {
             to: '/FAQ',
