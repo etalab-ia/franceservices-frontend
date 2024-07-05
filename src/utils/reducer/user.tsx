@@ -52,7 +52,6 @@ const InitialUser: User = {
 type UserAction =
   | { type: 'SET_SHEETS'; sheets: Sheet[] }
   | { type: 'SET_CHUNKS'; chunks: Chunk[] }
-  | { type: 'ADD_SHEETS'; indexToAdd: number }
   | { type: 'SET_USER_QUERY'; nextUserQuery: string; nextChatId: number }
   | { type: 'RESET_QUESTION_FIELDS' }
   | { type: 'RESET_USER' }
@@ -74,51 +73,28 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
         ...state,
         history: [...state.history, action.newItem],
       }
-    case 'SET_SHEETS':
+    case 'SET_SHEETS': {
+      let webServices = []
+      for (let i = 0; i < action.sheets.length && webServices.length < 3; i++) {
+        if (action.sheets[i].web_services) {
+          webServices = webServices.concat(
+            action.sheets[i].web_services.slice(0, 3 - webServices.length)
+          )
+        }
+      }
       return {
         ...state,
         sheets: action.sheets.slice(0, 3),
         additionalSheets: action.sheets.slice(3, 10),
-        webservices: action.sheets[0].web_services?.slice(0, 3),
+        webservices: webServices,
       }
+    }
     case 'SET_CHUNKS':
       return {
         ...state,
         chunks: action.chunks,
       }
-    case 'ADD_SHEETS': {
-      if (!state.sheets) return state
 
-      const sheets = state.additionalSheets.filter(
-        (_, index) => action.indexToAdd === index
-      )
-      const additionalSheets = state.additionalSheets.filter(
-        (_, index) => action.indexToAdd !== index
-      )
-      const nextShouldSids = [...state.sheets.map((sheet) => sheet.sid), sheets[0].sid]
-      const nextMustNotSids = state.question.must_not_sids.filter(
-        (sid) => !nextShouldSids.includes(sid)
-      )
-
-      if (
-        JSON.stringify(nextMustNotSids) === JSON.stringify(state.question.must_not_sids)
-      )
-        return {
-          ...state,
-          sheets: [...state.sheets, ...sheets],
-          additionalSheets: additionalSheets,
-        }
-
-      return {
-        ...state,
-        sheets: [...state.sheets, ...sheets],
-        additionalSheets: additionalSheets,
-        question: {
-          ...state.question,
-          must_not_sids: nextMustNotSids,
-        },
-      }
-    }
     case 'SET_CHAT_ID':
       return {
         ...state,

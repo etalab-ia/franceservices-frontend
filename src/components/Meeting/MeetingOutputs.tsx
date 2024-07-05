@@ -29,7 +29,6 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
   const stream = useSelector((state: RootState) => state.stream)
 
   const { data: archiveData } = useGetArchive(chatId)
-  console.log('userhisto', user.history)
   useEffect(() => {
     if (chatId !== undefined && archiveData) {
       if (Array.isArray(archiveData)) {
@@ -72,7 +71,6 @@ export function History({
   const [openedAccordion, setOpenedAccordion] = useState(
     unfoldLast ? history.length - 1 : -1
   )
-  console.log('history', history)
   return (
     <div className="fr-mt-5w">
       {history.map((h, index) => (
