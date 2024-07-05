@@ -16,6 +16,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { MeetingQuestionInput } from './MeetingQuestionInput'
 import { UsefulLinks } from './UsefulLinks'
+import Accordion from '@mui/material/Accordion'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 export function MeetingOutputs({ chatId }: { chatId?: number }) {
   const user = useSelector((state: RootState) => state.user)
@@ -73,6 +77,38 @@ export function History({
     <div className="fr-mt-5w">
       {history.map((h, index) => (
         <div className="fr-mb-1w " key={h.query + index}>
+          <Accordion>
+            <AccordionSummary
+              aria-controls="panel1-content"
+              id="panel1-header"
+              expandIcon={<ExpandMoreIcon />}
+              sx={{ backgroundColor: 'red' }}
+            >
+              {h.query}
+            </AccordionSummary>
+            <AccordionDetails>
+              <DisplayResponse response={h.response} webservices={h.webservices} />
+            </AccordionDetails>
+          </Accordion>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+/*
+export function History({
+  history,
+  unfoldLast,
+}: { history: UserHistory[]; unfoldLast: boolean }) {
+  const [openedAccordion, setOpenedAccordion] = useState(
+    unfoldLast ? history.length - 1 : -1
+  )
+  console.log('history', history)
+  return (
+    <div className="fr-mt-5w">
+      {history.map((h, index) => (
+        <div className="fr-mb-1w " key={h.query + index}>
           <h3 className="fr-background-alt--blue-france">
             <button
               type="button"
@@ -111,6 +147,7 @@ export function History({
     </div>
   )
 }
+  */
 
 export function DisplayResponse({
   response,
