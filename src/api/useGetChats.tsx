@@ -52,7 +52,7 @@ const fetchChats = async ({
         Authorization: `Bearer ${authToken}`,
         'Content-Type': 'application/json',
       },
-    }
+    },
   )
 
   if (!res.ok) {

@@ -23,7 +23,7 @@ const SignupSchema = object(
     username: string("Le nom d'utilisateur est invalide.", [
       custom(
         (username) => !username.includes('@'),
-        "Le nom d'utilisateur ne doit pas contenir '@'."
+        "Le nom d'utilisateur ne doit pas contenir '@'.",
       ),
     ]),
     email: string('Adresse email valide', [email('Adresse email invalide.')]),
@@ -34,26 +34,26 @@ const SignupSchema = object(
       regex(/[^A-Za-z0-9]/, 'Le mot de passe doit contenir un charactère spécial.'),
       regex(
         /[^A-Za-z0-9$!%*+-?&#_=.,:;@]{8,128}/,
-        'Les charactères spéciaux autorisés sont $!%*+-?&#_=.,:;@'
+        'Les charactères spéciaux autorisés sont $!%*+-?&#_=.,:;@',
       ),
     ]),
     confirmationPassword: string(
-      'La confirmation du mot de passe doit être une chaîne valide.'
+      'La confirmation du mot de passe doit être une chaîne valide.',
     ),
   },
   [
     custom(
       (data) => data.password === data.confirmationPassword,
-      'Les deux mots de passe doivent etre identiques'
+      'Les deux mots de passe doivent etre identiques',
     ),
-  ]
+  ],
 )
 const SignupSchemaMFS = object(
   {
     username: string("Le nom d'utilisateur est invalide.", [
       custom(
         (username) => !username.includes('@'),
-        "Le nom d'utilisateur ne doit pas contenir '@'."
+        "Le nom d'utilisateur ne doit pas contenir '@'.",
       ),
     ]),
     email: string('Adresse email valide', [email('Adresse email invalide.')]),
@@ -64,19 +64,19 @@ const SignupSchemaMFS = object(
       regex(/[^A-Za-z0-9]/, 'Le mot de passe doit contenir un charactère spécial.'),
       regex(
         /[^A-Za-z0-9$!%*+-?&#_=.,:;@]{8,128}/,
-        'Les charactères spéciaux autorisés sont $!%*+-?&#_=.,:;@'
+        'Les charactères spéciaux autorisés sont $!%*+-?&#_=.,:;@',
       ),
     ]),
     confirmationPassword: string(
-      'La confirmation du mot de passe doit être une chaîne valide.'
+      'La confirmation du mot de passe doit être une chaîne valide.',
     ),
   },
   [
     custom(
       (data) => data.password === data.confirmationPassword,
-      'Les deux mots de passe doivent etre identiques'
+      'Les deux mots de passe doivent etre identiques',
     ),
-  ]
+  ],
 )
 export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
   const [password, setPassword] = useState('')
@@ -201,7 +201,7 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
                 buttons={initButtonsSignup(
                   handleValidatePassword,
                   handleClick,
-                  'Créer un compte'
+                  'Créer un compte',
                 )}
               />
             </div>

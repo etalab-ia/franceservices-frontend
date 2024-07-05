@@ -54,12 +54,12 @@ export const setUserQuestion = (question: Question) => {
 export const addContextToQuestion = (question: string, context) => {
   const administrations = context.administrations.length
     ? `Les administrations concernées par cette question sont : ${context.administrations.map(
-        (adminstration) => adminstration
+        (adminstration) => adminstration,
       )}`
     : ''
   const themes = context.themes.length
     ? `La question porte sur les thèmes suivants : ${context.themes.map(
-        (theme) => theme
+        (theme) => theme,
       )}`
     : ''
   const questionWithContext = `${question}\n${administrations}\n${themes}`
@@ -69,7 +69,7 @@ export const addContextToQuestion = (question: string, context) => {
 
 export const rmContextFromQuestion = (
   str: string,
-  setQuery: React.Dispatch<React.SetStateAction<string>> | undefined
+  setQuery: React.Dispatch<React.SetStateAction<string>> | undefined,
 ) => {
   const context = [
     'Les administrations concernées par cette question sont : ',
@@ -136,7 +136,7 @@ export const getIndexes = async (
   indexType: 'sheets' | 'chunks',
   chunkSize: number,
   streamId: string,
-  indexesUrl: string
+  indexesUrl: string,
 ) => {
   const actionType = indexType === 'sheets' ? 'SET_SHEETS' : 'SET_CHUNKS'
   if (indexType === 'sheets' && data.must_not_sids.length !== 0) return

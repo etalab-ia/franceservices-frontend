@@ -78,7 +78,7 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
       for (let i = 0; i < action.sheets.length && webServices.length < 3; i++) {
         if (action.sheets[i].web_services) {
           webServices = webServices.concat(
-            action.sheets[i].web_services.slice(0, 3 - webServices.length)
+            action.sheets[i].web_services.slice(0, 3 - webServices.length),
           )
         }
       }

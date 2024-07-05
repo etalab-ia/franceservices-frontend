@@ -43,7 +43,7 @@ const fetchArchive = async (chatId: number) => {
           ? chunksResponse[0]?.web_services.slice(0, 3)
           : [],
       }
-    })
+    }),
   )
   return streamsHistory
 }

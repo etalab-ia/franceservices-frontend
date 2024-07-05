@@ -22,7 +22,7 @@ export function ContactFormSubmitButton({ formData, clearForm }: ContactButtonPr
       data: setContactData(
         `${formData.title} from: ${formData.name}`,
         formData.message,
-        formData.administration
+        formData.administration,
       ),
       headers: setHeaders(false),
     })

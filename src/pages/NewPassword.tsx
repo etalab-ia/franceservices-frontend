@@ -25,7 +25,7 @@ const PasswordSchema = object(
     username: string("Le nom d'utilisateur est invalide.", [
       custom(
         (username) => !username.includes('@'),
-        "Le nom d'utilisateur ne doit pas contenir '@'."
+        "Le nom d'utilisateur ne doit pas contenir '@'.",
       ),
     ]),
     email: string('Adresse email valide', [email('Adresse email invalide.')]),
@@ -36,19 +36,19 @@ const PasswordSchema = object(
       regex(/[^A-Za-z0-9]/, 'Le mot de passe doit contenir un caractère spécial.'),
       regex(
         /[^A-Za-z0-9$!%*+-?&#_=.,:;@]{8,128}/,
-        'Les charactères spéciaux autorisés sont $!%*+-?&#_=.,:;@'
+        'Les charactères spéciaux autorisés sont $!%*+-?&#_=.,:;@',
       ),
     ]),
     confirmationPassword: string(
-      'La confirmation du mot de passe doit être une chaîne valide.'
+      'La confirmation du mot de passe doit être une chaîne valide.',
     ),
   },
   [
     custom(
       (data) => data.password === data.confirmationPassword,
-      'Les deux mots de passe doivent etre identiques'
+      'Les deux mots de passe doivent etre identiques',
     ),
-  ]
+  ],
 )
 export function NewPassword({ authFailed, setAuthFailed }) {
   const [password, setPassword] = useState('')
@@ -116,7 +116,7 @@ export function NewPassword({ authFailed, setAuthFailed }) {
         buttons={initButtonsSignup(
           handleValidatePassword,
           handleClick,
-          'Changer de mot de passe'
+          'Changer de mot de passe',
         )}
       />
     </LoginContainer>

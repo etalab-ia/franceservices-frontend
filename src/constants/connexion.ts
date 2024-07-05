@@ -26,7 +26,7 @@ export const initButtonsLogin = (onSubmit, isDisable) => {
 export const initButtonsSignup = (
   handleValidatePassword: (any?) => any,
   handleClick: () => void,
-  children: React.ReactNode
+  children: React.ReactNode,
 ) => {
   const buttonsSignup: [ButtonProps, ...ButtonProps[]] = [
     {

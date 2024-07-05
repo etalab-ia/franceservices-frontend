@@ -25,7 +25,7 @@ export function UserFeedbackOptions({
   const [reasons, setReasons] = useState<string[]>([])
   const [otherReason, setOtherReason] = useState('')
   const [buttonsType, setButtonsType] = useState(
-    activeTab === 0 ? satisfiedButtons : unsatisfiedButtons
+    activeTab === 0 ? satisfiedButtons : unsatisfiedButtons,
   )
   useEffect(() => {
     setReasons([])

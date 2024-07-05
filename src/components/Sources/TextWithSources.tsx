@@ -57,8 +57,8 @@ export function TextWithSources({
             )
           }
           return <></>
-        }
-      )
+        },
+      ),
     )
   }, [text, windowSize.width])
 

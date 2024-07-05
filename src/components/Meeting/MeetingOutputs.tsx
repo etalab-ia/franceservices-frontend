@@ -69,13 +69,13 @@ export function History({
   unfoldLast,
 }: { history: UserHistory[]; unfoldLast: boolean }) {
   const [openedAccordion, setOpenedAccordion] = useState(
-    unfoldLast ? history.length - 1 : -1
+    unfoldLast ? history.length - 1 : -1,
   )
   return (
-    <div className="fr-mt-5w">
+    <div className="fr-mt-5w ">
       {history.map((h, index) => (
-        <div className="fr-mb-1w " key={h.query + index}>
-          <Accordion sx={{ border: 0, boxShadow: 0 }}>
+        <div className="fr-mb-1w" key={h.query + index}>
+          <Accordion sx={{ boxShadow: 0 }}>
             <AccordionSummary
               aria-controls="panel1-content"
               id="panel1-header"
@@ -85,6 +85,7 @@ export function History({
                 color: 'var(--text-default-grey)',
                 overflow: 'hidden',
                 wordBreak: 'break-word',
+                ':focus': { border: 3 },
               }}
             >
               {h.query}
