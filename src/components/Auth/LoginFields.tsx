@@ -140,7 +140,7 @@ function MFSInput({ selectedValue, setSelectedValue, matricule, setMatricule }) 
         includeScore: true,
         threshold: 0.2,
       }),
-    [data]
+    [data],
   )
 
   const handleSearch = (e) => {

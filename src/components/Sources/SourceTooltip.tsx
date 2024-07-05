@@ -1,5 +1,6 @@
 import { Tooltip } from 'react-tooltip'
 import useWindowDimensions from '../../utils/hooks/useWindowDimensions'
+import { useState } from 'react'
 
 export function SourceTooltip({
   id,
@@ -14,10 +15,27 @@ export function SourceTooltip({
 }) {
   const windowDimensions = useWindowDimensions()
   const scheme = localStorage.getItem('scheme')
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      setIsOpen(true)
+    } else if (e.key === 'Escape') {
+      setIsOpen(false)
+    }
+  }
+
   return (
     <span className="fr-ml-1v relative inline">
       <div
         id={id}
+        tabIndex={0}
+        role="button"
+        aria-pressed={isOpen}
+        onClick={() => setIsOpen(true)}
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
+        onKeyDown={handleKeyDown}
         style={{
           cursor: 'pointer',
           display: 'inline',
@@ -28,10 +46,13 @@ export function SourceTooltip({
         <span className="fr-text--xs fr-icon-quote-fill fr-text-action-high--blue-cumulus fr-mr-2v" />
       </div>
       <Tooltip
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
         place="bottom"
         opacity={1}
         className={`${scheme === 'dark' ? 'fr-background-alt--grey' : ''} `}
         style={{
+          padding: '0px',
           position: 'absolute',
           zIndex: 1000,
           backgroundColor: 'white',
@@ -43,10 +64,21 @@ export function SourceTooltip({
           overflowY: 'auto',
         }}
         anchorSelect={`#${id}`}
+        imperativeModeOnly
         clickable
         noArrow
       >
-        <Source sourceUrl={sourceUrl} text={text} title={title} />
+        <div
+          onMouseEnter={() => setIsOpen(true)}
+          onMouseLeave={() => setIsOpen(false)}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') {
+              setIsOpen(false)
+            }
+          }}
+        >
+          <Source sourceUrl={sourceUrl} text={text} title={title} />
+        </div>
       </Tooltip>
     </span>
   )
@@ -60,7 +92,7 @@ export function Source({
   const domainName = getDomainFromUrl(sourceUrl)
 
   return (
-    <div className="fr-p-2w flex h-[100%] max-w-[392px] flex-col text-wrap break-words fr-text-default--grey">
+    <div className="fr-p-4w flex h-[100%] max-w-[392px] flex-col text-wrap break-words fr-text-default--grey">
       <p className="fr-mb-1w fr-text--sm fr-text-mention--grey">
         Passage utilisé pour générer cette phrase
       </p>

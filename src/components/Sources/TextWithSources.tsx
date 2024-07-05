@@ -57,8 +57,8 @@ export function TextWithSources({
             )
           }
           return <></>
-        }
-      )
+        },
+      ),
     )
   }, [text, windowSize.width])
 
@@ -69,10 +69,40 @@ export function TextWithSources({
         onRequestClose={() =>
           setModal({ isOpen: false, title: '', content: '', sourceUrl: '' })
         }
-        style={{ overlay: { zIndex: 1000 }, content: { padding: 0, margin: 0 } }}
+        style={{
+          overlay: { zIndex: 1000, backgroundColor: 'rgba(0, 0, 0, 0.5)' },
+          content: {
+            padding: '20px',
+            margin: 'auto',
+            maxWidth: '500px',
+            maxHeight: '60vh',
+            overflow: 'auto',
+            borderRadius: '8px',
+          },
+        }}
         shouldCloseOnOverlayClick={true}
       >
-        <Source title={modal.title} content={modal.content} sourceUrl={modal.sourceUrl} />
+        <button
+          type="button"
+          onClick={() =>
+            setModal({ isOpen: false, title: '', content: '', sourceUrl: '' })
+          }
+          style={{
+            position: 'absolute',
+            top: '10px',
+            right: '10px',
+            background: 'none',
+            border: 'none',
+            fontSize: '1.5rem',
+            cursor: 'pointer',
+            padding: '5',
+          }}
+        >
+          &times;
+        </button>
+        <div className="pb-10px">
+          <Source title={modal.title} text={modal.content} sourceUrl={modal.sourceUrl} />
+        </div>
       </ReactModal>
       <Linkify target="_blank">{textWithSources}</Linkify>
     </div>

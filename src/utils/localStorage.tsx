@@ -4,7 +4,7 @@ import { setUserInfos } from './manageConnexion'
 
 export function checkConnexion(
   setUserAuth: Dispatch<SetStateAction<UserAuth>>,
-  userUrl: string
+  userUrl: string,
 ) {
   return new Promise<void>((resolve) => {
     const authToken = localStorage.getItem('authToken')

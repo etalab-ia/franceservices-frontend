@@ -20,6 +20,6 @@ client_1.default.createRoot(document.getElementById('root')).render(
         <Root_1.Root />
       </react_redux_1.Provider>
     </isMFSContext_1.MFSProvider>
-  </react_router_dom_1.BrowserRouter>
+  </react_router_dom_1.BrowserRouter>,
   //</React.StrictMode>
 )

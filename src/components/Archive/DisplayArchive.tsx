@@ -65,7 +65,7 @@ export const DisplayArchive = React.forwardRef<HTMLDivElement, DisplayArchivePro
         </div>
       </>
     )
-  }
+  },
 )
 
 function DisplayMeetingArchive({ streams }: { streams: UserHistory[] }) {

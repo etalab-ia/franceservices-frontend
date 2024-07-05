@@ -80,7 +80,7 @@ export function UserMessage({ questionInput, setQuestionInput }) {
       'sheets',
       user.question.limit,
       JSON.stringify(user.streamId),
-      indexesUrl
+      indexesUrl,
     )
   }, [user.streamId])
   const handleRenderInput = (params) => {

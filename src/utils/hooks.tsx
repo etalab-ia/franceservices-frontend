@@ -85,7 +85,7 @@ export async function generateStream(
   question: Question,
   dispatch,
   chatId: number,
-  isChat: boolean
+  isChat: boolean,
 ) {
   const headers = setHeaders(false)
   const stream_data = setUserQuestion(question)
