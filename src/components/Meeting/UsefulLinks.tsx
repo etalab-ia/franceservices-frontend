@@ -28,7 +28,7 @@ export const UsefulLinks = ({
 function SmallHorizontalTile({ tileProps }: { tileProps: TileType }) {
   return (
     <div
-      className="fr-tile fr-tile--sm fr-tile--horizontal fr-enlarge-link  hover:bg-[#f6f6f6]"
+      className="fr-tile fr-tile--sm fr-tile--horizontal fr-enlarge-link  "
       id="tile-6661"
     >
       <div className="fr-tile__body">

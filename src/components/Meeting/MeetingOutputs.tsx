@@ -85,6 +85,8 @@ export function History({
               sx={{
                 backgroundColor: 'var(--background-action-low-blue-france)',
                 color: 'var(--text-default-grey)',
+                overflow: 'hidden',
+                wordBreak: 'break-word',
               }}
             >
               {h.query}
@@ -161,7 +163,7 @@ export function DisplayResponse({
       <GlobalColContainer>
         <div key={response}>
           <h3>Réponse proposée par Albert</h3>
-          <GlobalParagraph>{response}</GlobalParagraph>
+          <GlobalParagraph extraClass="fr-text-default--grey">{response}</GlobalParagraph>
         </div>
       </GlobalColContainer>
       {webservices?.length !== 0 && (
