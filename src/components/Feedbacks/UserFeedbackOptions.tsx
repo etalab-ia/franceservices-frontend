@@ -5,7 +5,6 @@ import {
   unsatisfiedButtons,
 } from '@constants/feedback'
 import type { Feedback as FeedbackType, RootState } from '@types'
-import { useKeyPress } from '@utils/manageEffects'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
@@ -55,7 +54,6 @@ export function UserFeedbackOptions({
   )
 }
 
-//TODO: Send the full reasons array to the backend when back is ready
 const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) => {
   const streamId = useSelector((state: RootState) => state.user.lastStreamId)
   const addFeedback = useAddFeedback()

@@ -423,6 +423,11 @@ video {
   margin-bottom: 0.5rem;
 }
 
+.user-feedback-buttons:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
 /* AGENT */
 
 .chat {

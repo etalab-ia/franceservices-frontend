@@ -13,6 +13,7 @@ export function SourceTooltip({
   sourceUrl: string
 }) {
   const windowDimensions = useWindowDimensions()
+  const scheme = localStorage.getItem('scheme')
   return (
     <span className="fr-ml-1v relative inline">
       <div
@@ -29,7 +30,7 @@ export function SourceTooltip({
       <Tooltip
         place="bottom"
         opacity={1}
-        className="fr-background-alt--grey"
+        className={`${scheme === 'dark' ? 'fr-background-alt--grey' : ''} `}
         style={{
           position: 'absolute',
           zIndex: 1000,
