@@ -41,6 +41,10 @@ export const Root = () => {
     <div className="h-screen w-screen flex-col justify-between" id="screen">
       <Header
         brandTop="DINUM / Etalab"
+        brandTopLinkProps={{
+          href: '/home',
+          title: 'Direction interministérielle du numérique',
+        }}
         homeLinkProps={{
           href: '/home',
           title: 'Accueil - Albert',

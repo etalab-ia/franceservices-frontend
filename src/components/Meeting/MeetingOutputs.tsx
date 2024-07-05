@@ -77,16 +77,19 @@ export function History({
     <div className="fr-mt-5w">
       {history.map((h, index) => (
         <div className="fr-mb-1w " key={h.query + index}>
-          <Accordion>
+          <Accordion sx={{ border: 0, boxShadow: 0 }}>
             <AccordionSummary
               aria-controls="panel1-content"
               id="panel1-header"
               expandIcon={<ExpandMoreIcon />}
-              sx={{ backgroundColor: 'red' }}
+              sx={{
+                backgroundColor: 'var(--background-action-low-blue-france)',
+                color: 'var(--text-default-grey)',
+              }}
             >
               {h.query}
             </AccordionSummary>
-            <AccordionDetails>
+            <AccordionDetails sx={{ backgroundColor: 'var(--background-default-grey)' }}>
               <DisplayResponse response={h.response} webservices={h.webservices} />
             </AccordionDetails>
           </Accordion>
