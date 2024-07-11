@@ -31,7 +31,7 @@ export function MeetingCurrentResponse({
     }
   }, [refBottom.current, stream.isStreaming]) */
   return (
-    <>
+    <div className="h">
       {user.question.query && (
         <>
           <h5 ref={ref} className="fr-mt-5w fr-mb-1w">
@@ -51,6 +51,6 @@ export function MeetingCurrentResponse({
         {!user.chatId && <MeetingFirstQuestionHelper />}
       </GlobalRowContainer>
       <div ref={refBottom} />
-    </>
+    </div>
   )
 }

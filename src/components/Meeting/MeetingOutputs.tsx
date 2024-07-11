@@ -20,6 +20,10 @@ import Accordion from '@mui/material/Accordion'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import {
+  FirstQuestionExample,
+  MeetingFirstQuestionHelper,
+} from './MeetingFirstQuestionSidePanel'
 
 export function MeetingOutputs({ chatId }: { chatId?: number }) {
   const user = useSelector((state: RootState) => state.user)
@@ -54,12 +58,26 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
     <CurrQuestionContext.Provider
       value={{ currQuestion, updateCurrQuestion: setCurrQuestion }}
     >
-      {user.history.length > 0 && (
-        <History history={user.history} unfoldLast={chatId !== undefined} />
-      )}
-      <MeetingCurrentResponse setQuestion={setQuestion} />
-      <MeetingQuestionInput questionInput={question} setQuestionInput={setQuestion} />
-      <div ref={ref} />
+      <div className="h-[70vh]">
+        <div className="min-h-[70vh]">
+          {user.history.length > 0 && (
+            <History history={user.history} unfoldLast={chatId !== undefined} />
+          )}
+          <MeetingCurrentResponse setQuestion={setQuestion} />
+          <div ref={ref} />
+        </div>
+        <div className="sticky mt-auto p-0 right-0 bottom-0 left-0 z-10 fr-grid-row">
+          <div className="w-full  fr-grid-row">
+            <div className="mt-auto  fr-col-8 w-full">
+              <MeetingQuestionInput
+                questionInput={question}
+                setQuestionInput={setQuestion}
+              />
+            </div>
+            {!user.chatId && <FirstQuestionExample setQuestionInput={setQuestion} />}
+          </div>
+        </div>
+      </div>
     </CurrQuestionContext.Provider>
   )
 }
@@ -68,11 +86,8 @@ export function History({
   history,
   unfoldLast,
 }: { history: UserHistory[]; unfoldLast: boolean }) {
-  const [openedAccordion, setOpenedAccordion] = useState(
-    unfoldLast ? history.length - 1 : -1,
-  )
   return (
-    <div className="fr-mt-5w ">
+    <div className="fr-mt-5w">
       {history.map((h, index) => (
         <div className="fr-mb-1w" key={h.query + index}>
           <Accordion sx={{ boxShadow: 0 }}>

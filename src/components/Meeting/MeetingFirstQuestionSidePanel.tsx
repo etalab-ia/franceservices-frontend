@@ -1,11 +1,13 @@
+import type { RootState } from '@types'
 import { GlobalColContainer } from 'components/Global/GlobalColContainer'
 import { OneThirdScreenWidth } from 'components/Global/OneThirdScreenWidth'
+import { useSelector } from 'react-redux'
 
 export function FirstQuestionExample({
   setQuestionInput,
 }: { setQuestionInput: (question: string) => void }) {
   return (
-    <div className="">
+    <div className="fr-mb-2w">
       <h6 style={{ lineHeight: 1 }} className="fr-mb-3v">
         Première utilisation ?
       </h6>
@@ -26,7 +28,7 @@ export function MeetingFirstQuestionHelper(setQuestionInput) {
   return (
     <OneThirdScreenWidth>
       <GlobalColContainer>
-        <h5 className="fr-mb-2w">Conseils pour poser une question</h5>
+        <h5 className="fr-mb-2w ">Conseils pour poser une question</h5>
         <p className=" font-bold fr-text-md fr-mb-3v">À faire:</p>
         {goodGuidelines.map((badge, index) => (
           <div

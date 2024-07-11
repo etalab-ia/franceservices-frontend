@@ -11,7 +11,7 @@ export const UsefulLinks = ({
     !webservices || !webservices.length ? [] : setUsefulLinksTilesProps(webservices)
 
   return (
-    <div className={`${extraClass} h-full`}>
+    <div className={`${extraClass} `}>
       <h6 className={'fr-pb-2w '}>Liens pratiques</h6>
 
       {tiles.map((tile, key) => {
