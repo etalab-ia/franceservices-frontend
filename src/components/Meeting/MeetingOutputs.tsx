@@ -1,4 +1,8 @@
 import { useGetArchive } from '@api'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import Accordion from '@mui/material/Accordion'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import AccordionSummary from '@mui/material/AccordionSummary'
 import {
   InitialQuestion,
   type RootState,
@@ -14,12 +18,10 @@ import Separator from 'components/Global/Separator'
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
+import { FirstQuestionExample } from './MeetingFirstQuestionSidePanel'
 import { MeetingQuestionInput } from './MeetingQuestionInput'
 import { UsefulLinks } from './UsefulLinks'
-import Accordion from '@mui/material/Accordion'
-import AccordionDetails from '@mui/material/AccordionDetails'
-import AccordionSummary from '@mui/material/AccordionSummary'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { Skeleton } from '@mui/material'
 
 export function MeetingOutputs({ chatId }: { chatId?: number }) {
   const user = useSelector((state: RootState) => state.user)
@@ -28,7 +30,7 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
   const [question, setQuestion] = useState('')
   const stream = useSelector((state: RootState) => state.stream)
 
-  const { data: archiveData } = useGetArchive(chatId)
+  const { data: archiveData, isLoading } = useGetArchive(chatId)
   useEffect(() => {
     if (chatId !== undefined && archiveData) {
       if (Array.isArray(archiveData)) {
@@ -54,12 +56,38 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
     <CurrQuestionContext.Provider
       value={{ currQuestion, updateCurrQuestion: setCurrQuestion }}
     >
-      {user.history.length > 0 && (
-        <History history={user.history} unfoldLast={chatId !== undefined} />
-      )}
-      <MeetingCurrentResponse setQuestion={setQuestion} />
-      <MeetingQuestionInput questionInput={question} setQuestionInput={setQuestion} />
-      <div ref={ref} />
+      <div className="h-[70vh]">
+        <div className="min-h-[70vh]">
+          {isLoading && (
+            <>
+              <Skeleton height={'50px'} variant="rectangular" className="fr-mb-1w" />
+              <Skeleton height={'50px'} variant="rectangular" className="fr-mb-1w" />
+              <Skeleton height={'50px'} variant="rectangular" className="fr-mb-1w" />
+            </>
+          )}
+          {user.history.length > 0 && (
+            <History history={user.history} unfoldLast={chatId !== undefined} />
+          )}
+          <MeetingCurrentResponse setQuestion={setQuestion} />
+          <div ref={ref} />
+        </div>
+        <div className="sticky mt-auto p-0 right-0 bottom-0 left-0 z-10 fr-grid-row">
+          <div className="w-full fr-grid-row">
+            <div className="mt-auto fr-col-8 w-full">
+              <MeetingQuestionInput
+                questionInput={question}
+                setQuestionInput={setQuestion}
+              />
+            </div>
+            {!user.chatId && (
+              <div className="">
+                {' '}
+                <FirstQuestionExample setQuestionInput={setQuestion} />
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </CurrQuestionContext.Provider>
   )
 }
@@ -68,13 +96,10 @@ export function History({
   history,
   unfoldLast,
 }: { history: UserHistory[]; unfoldLast: boolean }) {
-  const [openedAccordion, setOpenedAccordion] = useState(
-    unfoldLast ? history.length - 1 : -1,
-  )
   return (
-    <div className="fr-mt-5w ">
+    <div className="fr-mt-5w">
       {history.map((h, index) => (
-        <div className="fr-mb-1w" key={h.query + index}>
+        <div className="fr-mb-1w fade-in-left" key={h.query + index}>
           <Accordion sx={{ boxShadow: 0 }}>
             <AccordionSummary
               aria-controls="panel1-content"

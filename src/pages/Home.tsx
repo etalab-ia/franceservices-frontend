@@ -148,7 +148,6 @@ function QuestionsSidePanel({ selectedChatId }: { selectedChatId: number }) {
 
 function QuestionList({ selectedChatId }) {
   const { data: archive, error } = useGetChatArchiveById(selectedChatId)
-  const dispatch = useDispatch()
   if (error) {
     console.log(error)
   }

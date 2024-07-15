@@ -10,7 +10,7 @@ export function MeetingStream() {
   const agentResponse = stream.historyStream[0]
 
   return (
-    <>
+    <div className="h">
       <h3>Réponse proposée par Albert</h3>
       {stream.isStreaming ? (
         <TextWithSources text={stream.response} />
@@ -23,6 +23,6 @@ export function MeetingStream() {
           <Separator extraClass="fr-mt-5w" />
         </div>
       )}
-    </>
+    </div>
   )
 }

@@ -42,7 +42,7 @@ export function MeetingRelatedQuestions({
   }, [sheets])
 
   return (
-    <div className="fr-mb-4w">
+    <div className="fr-mb-w fr-mb-4w mt-auto">
       {relatedQuestions.length !== 0 && (
         <p className="fr-pt-3w fr-mb-2w flex md:flex-col">
           Des questions posées fréquemment pour des situations similaires :

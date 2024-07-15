@@ -11,7 +11,7 @@ export function MeetingMainResponse({
   const stream = useSelector((state: RootState) => state.stream)
 
   return (
-    <GlobalColContainer extraClass="fr-mb-7w">
+    <GlobalColContainer extraClass=" h-[100%]">
       <div>
         {!user.chatId && (
           <>
@@ -27,10 +27,10 @@ export function MeetingMainResponse({
           </>
         )}
         {user.chatId !== 0 && user.lastStreamId !== 0 && (
-          <>
+          <div className="flex flex-col space-between flex-grow">
             <MeetingStream />
             <MeetingRelatedQuestions setQuestion={setQuestion} />
-          </>
+          </div>
         )}
       </div>
     </GlobalColContainer>

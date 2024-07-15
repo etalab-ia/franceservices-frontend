@@ -25,7 +25,6 @@ export function MeetingQuestionInput({
     administrations: [],
     themes: [],
   })
-  const [isFirstQuestion, setIsFirstQuestion] = useState(true)
   const handleChange = (e) => {
     setQuestionInput(e.target.value)
   }
@@ -38,7 +37,6 @@ export function MeetingQuestionInput({
   }, [user.question, user.chatId])
 
   const handleSubmit = async () => {
-    setIsFirstQuestion(false)
     let chatId = user.chatId
     dispatch({ type: 'SET_IS_STREAMING', nextIsStreaming: true })
 
@@ -97,11 +95,11 @@ export function MeetingQuestionInput({
   }
 
   return (
-    <div className="fixed fr-container right-0 bottom-0 left-0 p-0 z-10 fr-background-default--grey fr-mt-2w">
-      <div className="flex flex-row items-stretch">
-        <div className="fr-col-8 fr-pr-2w self-end">
+    <div className="">
+      <div className=" flex fr-background-default--grey  ">
+        <div className="fr-col fr-pr-2v">
           <textarea
-            style={{ minHeight: '10px', overflow: 'hidden' }}
+            style={{ minHeight: '40px', maxHeight: '168px', overflow: 'hidden' }}
             placeholder="Poser une nouvelle question"
             rows={1}
             onChange={handleChange}
@@ -138,10 +136,6 @@ export function MeetingQuestionInput({
             </Button>
           </div>
         </div>
-        {isFirstQuestion &&
-          !stream.isStreaming &&
-          !stream.historyStream.length &&
-          !user.chatId && <FirstQuestionExample setQuestionInput={setQuestionInput} />}
       </div>
     </div>
   )
