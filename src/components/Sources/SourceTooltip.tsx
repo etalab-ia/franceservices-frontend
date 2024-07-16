@@ -1,6 +1,11 @@
 import { Tooltip } from 'react-tooltip'
 import useWindowDimensions from '../../utils/hooks/useWindowDimensions'
 import { useState } from 'react'
+import { createPortal } from 'react-dom'
+
+// This is needed to display the tooltip on top of every other element
+const domNode = document.createElement('div')
+document.body.appendChild(domNode)
 
 export function SourceTooltip({
   id,
@@ -45,41 +50,45 @@ export function SourceTooltip({
       >
         <span className="fr-text--xs fr-icon-quote-fill fr-text-action-high--blue-cumulus fr-mr-2v" />
       </div>
-      <Tooltip
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        place="bottom"
-        opacity={1}
-        className={`${scheme === 'dark' ? 'fr-background-alt--grey' : ''} `}
-        style={{
-          padding: '0px',
-          position: 'absolute',
-          zIndex: 1000,
-          backgroundColor: 'white',
-          borderRadius: '0px',
-          color: 'black',
-          boxShadow:
-            'rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px',
-          maxHeight: `${windowDimensions.height - 200}px`,
-          overflowY: 'auto',
-        }}
-        anchorSelect={`#${id}`}
-        imperativeModeOnly
-        clickable
-        noArrow
-      >
-        <div
-          onMouseEnter={() => setIsOpen(true)}
-          onMouseLeave={() => setIsOpen(false)}
-          onKeyDown={(e) => {
-            if (e.key === 'Escape') {
-              setIsOpen(false)
-            }
+
+      {createPortal(
+        <Tooltip
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          place="bottom"
+          opacity={1}
+          className={`${scheme === 'dark' ? 'fr-background-alt--grey' : ''} `}
+          style={{
+            padding: '0px',
+            position: 'absolute',
+            zIndex: 99999,
+            backgroundColor: 'white',
+            borderRadius: '0px',
+            color: 'black',
+            boxShadow:
+              'rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px',
+            maxHeight: `${windowDimensions.height - 200}px`,
+            overflowY: 'auto',
           }}
+          anchorSelect={`#${id}`}
+          imperativeModeOnly
+          clickable
+          noArrow
         >
-          <Source sourceUrl={sourceUrl} text={text} title={title} />
-        </div>
-      </Tooltip>
+          <div
+            onMouseEnter={() => setIsOpen(true)}
+            onMouseLeave={() => setIsOpen(false)}
+            onKeyDown={(e) => {
+              if (e.key === 'Escape') {
+                setIsOpen(false)
+              }
+            }}
+          >
+            <Source sourceUrl={sourceUrl} text={text} title={title} />
+          </div>
+        </Tooltip>,
+        domNode,
+      )}
     </span>
   )
 }
@@ -92,7 +101,10 @@ export function Source({
   const domainName = getDomainFromUrl(sourceUrl)
 
   return (
-    <div className="fr-p-4w flex h-[100%] max-w-[392px] flex-col text-wrap break-words fr-text-default--grey">
+    <div
+      className="fr-p-4w flex h-[100%] max-w-[392px] flex-col text-wrap break-words fr-text-default--grey"
+      style={{ zIndex: 10000 }}
+    >
       <p className="fr-mb-1w fr-text--sm fr-text-mention--grey">
         Passage utilisé pour générer cette phrase
       </p>
