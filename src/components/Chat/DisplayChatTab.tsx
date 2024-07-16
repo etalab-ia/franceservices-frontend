@@ -67,7 +67,7 @@ function NewChatHeader({ setQuestionInput }) {
   )
 }
 
-function QuestionsSuggestionList({
+export function QuestionsSuggestionList({
   questions,
   setQuestionInput,
 }: {

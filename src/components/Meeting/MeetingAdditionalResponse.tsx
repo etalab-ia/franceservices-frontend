@@ -48,7 +48,7 @@ export function MeetingAdditionalResponse() {
   return (
     <OneThirdScreenWidth>
       <GlobalColContainer>
-        <UsefulLinks webservices={user.webservices} />
+        {user.webservices?.length && <UsefulLinks webservices={user.webservices} />}
       </GlobalColContainer>
     </OneThirdScreenWidth>
   )

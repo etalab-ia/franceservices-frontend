@@ -207,7 +207,7 @@ function ChatListRow({
           setSelectedChatId(id)
         }}
         tabIndex={0}
-        className={`fr-grid-row fr-grid-row--center fr-py-2w w-full ${
+        className={`fr-grid-row fr-grid-row--center text-left fr-py-1w w-full ${
           selectedChatId === id ? 'fr-background-action-low--blue-france' : ''
         } `}
       >
