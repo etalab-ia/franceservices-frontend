@@ -91,7 +91,6 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
     </CurrQuestionContext.Provider>
   )
 }
-
 export function History({
   history,
   unfoldLast,
@@ -100,7 +99,7 @@ export function History({
     <div className="fr-mt-5w">
       {history.map((h, index) => (
         <div className="fr-mb-1w fade-in-left" key={h.query + index}>
-          <Accordion sx={{ boxShadow: 0 }}>
+          <Accordion sx={{ boxShadow: 0, position: 'relative', zIndex: 1 }}>
             <AccordionSummary
               aria-controls="panel1-content"
               id="panel1-header"
@@ -111,11 +110,19 @@ export function History({
                 overflow: 'hidden',
                 wordBreak: 'break-word',
                 ':focus': { border: 3 },
+                position: 'relative',
+                zIndex: 1,
               }}
             >
               {h.query}
             </AccordionSummary>
-            <AccordionDetails sx={{ backgroundColor: 'var(--background-default-grey)' }}>
+            <AccordionDetails
+              sx={{
+                backgroundColor: 'var(--background-default-grey)',
+                position: 'relative',
+                zIndex: 1,
+              }}
+            >
               <DisplayResponse response={h.response} webservices={h.webservices} />
             </AccordionDetails>
           </Accordion>
