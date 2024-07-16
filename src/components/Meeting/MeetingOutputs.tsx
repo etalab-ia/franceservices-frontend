@@ -79,12 +79,12 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
                 setQuestionInput={setQuestion}
               />
             </div>
-            {!user.chatId && (
+            {/*            {!user.chatId && (
               <div className="">
                 {' '}
                 <FirstQuestionExample setQuestionInput={setQuestion} />
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>
