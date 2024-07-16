@@ -107,8 +107,7 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
 
   const handleValidatePassword = (auth) => {
     return (
-      userAuth.username &&
-      userAuth.username.length &&
+      userAuth.username?.length &&
       userAuth.email.length &&
       userAuth.email.includes('@') &&
       password.length &&
@@ -122,8 +121,8 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
           username: userAuth.username,
           email: userAuth.email,
           password: password,
-          organization: selectedMFS,
-          matricule: selectedMatricule,
+          organization_name: selectedMFS,
+          organization_id: selectedMatricule,
         }
       : {
           username: userAuth.username,
