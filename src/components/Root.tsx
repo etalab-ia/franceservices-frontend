@@ -29,12 +29,12 @@ export const Root = () => {
   const [authFailed, setAuthFailed] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const isMFS = useContext(isMFSContext)
-  useEffect(() => {
+  /*   useEffect(() => {
     checkConnexion(setUserAuth, userUrl).finally(() => setIsLoading(false))
   }, [])
   if (isLoading) {
     return null
-  }
+  } */
 
   return (
     <div className="h-screen w-screen flex-col justify-between" id="screen">
@@ -101,10 +101,7 @@ export const Root = () => {
             />
           </>
         )}
-        <Route
-          path="/home"
-          element={!userAuth.isLogin ? <Navigate to="/login" /> : <NewHome />}
-        />
+        <Route path="/home" element={<NewHome />} />
         <Route
           path="/"
           element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/home" />}

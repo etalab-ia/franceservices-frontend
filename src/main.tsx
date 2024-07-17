@@ -6,7 +6,11 @@ import { BrowserRouter, Link } from 'react-router-dom'
 import { Root } from './components/Root'
 import { MFSProvider } from './utils/context/isMFSContext'
 import { store } from './utils/reducer/reducer'
+import { AuthProvider } from 'react-oidc-context'
 import React, { useEffect } from 'react'
+
+import { onSigninCallback, userManager } from '@utils/keycloak'
+import ProtectedApp from 'components/Auth/keycloak/ProtectedApp'
 
 function App() {
   useEffect(() => {
@@ -22,13 +26,17 @@ function App() {
 
   return (
     <BrowserRouter basename="/">
-      <MFSProvider>
-        <Provider store={store}>
-          <QueryClientProvider client={queryClient}>
-            <Root />
-          </QueryClientProvider>
-        </Provider>
-      </MFSProvider>
+      <AuthProvider userManager={userManager} onSigninCallback={onSigninCallback}>
+        <MFSProvider>
+          <Provider store={store}>
+            <QueryClientProvider client={queryClient}>
+              <ProtectedApp>
+                <Root />
+              </ProtectedApp>
+            </QueryClientProvider>
+          </Provider>
+        </MFSProvider>
+      </AuthProvider>
     </BrowserRouter>
   )
 }

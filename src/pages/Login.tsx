@@ -17,6 +17,7 @@ import {
 import type { UserAuth } from 'utils/auth'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
+import { useAuth } from 'react-oidc-context'
 
 interface LoginProps {
   authFailed: boolean
@@ -29,8 +30,10 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
   const [password, setPassword] = useState('')
   const [id, setId] = useState('')
   const isMFS = useContext(isMFSContext)
+  const auth = useAuth()
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  console.log('auth', auth)
+
   useEffect(() => {
     checkIfCompletedFields()
   }, [password, id])
