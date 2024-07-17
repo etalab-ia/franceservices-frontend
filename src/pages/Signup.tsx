@@ -8,7 +8,7 @@ import { LoginContainer } from '../components/Auth/LoginContainer'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
 
-const passwordRegex = /^[A-Za-z\d$!%*+?&#_-]{8,20}$/
+const passwordRegex = /^[A-Za-z\d$!%*+-?&#_=.,:;@,]{8,20}$/
 
 const SignupSchema = object(
   {
