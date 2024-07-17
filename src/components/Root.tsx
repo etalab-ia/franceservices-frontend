@@ -34,7 +34,6 @@ export const Root = () => {
   useEffect(() => {
     checkConnexion(setUserAuth, userUrl).finally(() => setIsLoading(false))
   }, [dispatch])
-  console.log('location', location)
   if (isLoading) {
     return <div></div>
   }

@@ -18,7 +18,6 @@ export function Display({
   useEffect(() => {
     endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, stream])
-  console.log('messages', messages)
   return (
     <div>
       <div className="w-full md:w-[992px]" id="chat" ref={endOfMessagesRef}>
