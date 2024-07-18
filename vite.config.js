@@ -25,7 +25,7 @@ export default ({ mode }) => {
       },
       host: true,
       strictPort: true,
-      port: 4174,
+      port: 4173,
     },
     base: '',
   })
