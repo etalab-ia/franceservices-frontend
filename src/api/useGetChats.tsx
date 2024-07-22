@@ -1,7 +1,6 @@
 import { getChatsUrl } from '@api'
-import { useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import type { Chat } from '@types'
-import { useInfiniteQuery } from '@tanstack/react-query'
 
 // Get all user chats
 export function useGetAllChats() {
@@ -41,8 +40,10 @@ const fetchAllChats = async (): Promise<Chat[]> => {
 
 const fetchChats = async ({
   pageParam = 0,
+  queryKey,
 }): Promise<{ chats: Chat[]; nextPage: number | null }> => {
-  const authToken = localStorage.getItem('authToken')
+  const [_, authToken] = queryKey
+  console.log('fetchChats', authToken)
   const res = await fetch(
     `${getChatsUrl}?desc=true&skip=${pageParam}&limit=10&desc=true`,
     {
@@ -83,9 +84,10 @@ type ChatInfos = {
   user_id: number
 }
 
-export function useGetChats() {
+export function useGetChats(authToken) {
+  console.log('useGetChats', authToken)
   return useInfiniteQuery({
-    queryKey: ['getChats'],
+    queryKey: ['getChats', authToken],
     queryFn: fetchChats,
     getNextPageParam: (lastPage) => lastPage.nextPage ?? null,
     initialPageParam: 0,
