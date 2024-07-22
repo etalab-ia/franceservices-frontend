@@ -1,4 +1,4 @@
-import { signoutUrl, userUrl } from '@api'
+import { signoutUrl } from '@api'
 import { Badge } from '@codegouvfr/react-dsfr/Badge'
 import { headerFooterDisplayItem } from '@codegouvfr/react-dsfr/Display'
 import { Footer } from '@codegouvfr/react-dsfr/Footer'
@@ -7,34 +7,27 @@ import { quickAccessItemsFunc } from '@constants/header'
 import { navFunc } from '@constants/router'
 import { InitialUserAuth, type UserAuth } from '@utils/auth'
 import { isMFSContext } from '@utils/context/isMFSContext'
-import { checkConnexion } from '@utils/localStorage'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Error404 from '../pages/404'
 import { Chatbot } from '../pages/Chatbot'
 import { Contact } from '../pages/Contact'
 import { FAQ } from '../pages/FAQ'
-import { NewHome } from '../pages/Home'
-import { Login } from '../pages/Login'
+import { Home } from '../pages/Home'
 import { Meeting } from '../pages/Meeting'
 import { NewPassword } from '../pages/NewPassword'
 import { ResetPassword } from '../pages/ResetPassword'
 import { Signup } from '../pages/Signup'
 import { Tools } from '../pages/Tools'
+import { useAuth, withAuthenticationRequired } from 'react-oidc-context'
 
 export const Root = () => {
   const location = useLocation()
   const navigationData = navFunc()
   const [userAuth, setUserAuth] = useState<UserAuth>(InitialUserAuth)
   const [authFailed, setAuthFailed] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
   const isMFS = useContext(isMFSContext)
-  /*   useEffect(() => {
-    checkConnexion(setUserAuth, userUrl).finally(() => setIsLoading(false))
-  }, [])
-  if (isLoading) {
-    return null
-  } */
+  const auth = useAuth()
 
   return (
     <div className="h-screen w-screen flex-col justify-between" id="screen">
@@ -55,80 +48,33 @@ export const Root = () => {
         serviceTagline={
           isMFS ? 'Aide à l’accompagnement des usagers France services' : ''
         }
-        navigation={userAuth.isLogin && navigationData}
-        quickAccessItems={
-          userAuth.isLogin ? quickAccessItemsFunc(userAuth, setUserAuth, signoutUrl) : []
-        }
+        navigation={auth.isAuthenticated && navigationData}
+        quickAccessItems={quickAccessItemsFunc()}
       />
       <Routes>
-        <Route
-          path="/login"
-          element={
-            !userAuth.isLogin ? (
-              <Login
-                authFailed={authFailed}
-                setAuthFailed={setAuthFailed}
-                setUserAuth={setUserAuth}
-              />
-            ) : (
-              <Navigate to="/home" />
-            )
-          }
-        />
         {isMFS ? (
-          <Route path="/FAQ" element=<FAQ /> />
+          <Route path="/FAQ" element={<FAQ />} />
         ) : (
-          <Route
-            path={'/FAQ'}
-            element={
-              !userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />
-            }
-          />
+          <Route path="/FAQ" element={<Error404 />} />
         )}
         {isMFS && (
           <>
-            <Route
-              path="/meeting"
-              element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
-            />
-            <Route
-              path="/meeting/:id"
-              element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
-            />
-            <Route
-              path="/outils"
-              element={!userAuth.isLogin ? <Navigate to="/login" /> : <Tools />}
-            />
+            <Route path="/meeting" element={<ProtectedRoute component={Meeting} />} />
+            <Route path="/meeting/:id" element={<ProtectedRoute component={Meeting} />} />
+            <Route path="/outils" element={<ProtectedRoute component={Tools} />} />
           </>
         )}
-        <Route path="/home" element={<NewHome />} />
-        <Route
-          path="/"
-          element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/home" />}
-        />
+        <Route path="/home" element={<ProtectedRoute component={Home} />} />
+        <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/404" element={<Error404 />} />
         {!isMFS ? (
-          <Route
-            path="/chat"
-            element={!userAuth.isLogin ? <Navigate to="/login" /> : <Chatbot />}
-          />
+          <Route path="/chat" element={<ProtectedRoute component={Chatbot} />} />
         ) : (
-          <Route
-            path={'/chat'}
-            element={
-              !userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />
-            }
-          />
+          <Route path="/chat" element={<Navigate to="/404" />} />
         )}
         <Route
           path="/contact"
-          element={
-            !userAuth.isLogin ? (
-              <Navigate to="/login" />
-            ) : (
-              <Contact setUserAuth={setUserAuth} />
-            )
-          }
+          element={<ProtectedRoute component={<Contact setUserAuth={setUserAuth} />} />}
         />
         <Route
           path="/signup"
@@ -169,4 +115,11 @@ export const Root = () => {
       )}
     </div>
   )
+}
+
+const ProtectedRoute = ({ component: Component, ...props }) => {
+  const ProtectedComponent = withAuthenticationRequired(Component, {
+    OnRedirecting: () => <div>Redirecting to the login page...</div>,
+  })
+  return <ProtectedComponent {...props} />
 }

@@ -1,22 +1,24 @@
-import { getArchiveUrl, useGetChatArchiveById, useGetChats } from '@api'
+import { useGetChatArchiveById, useGetChats } from '@api'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { isMFSContext } from '@utils/context/isMFSContext'
 import Separator from 'components/Global/Separator'
 
 import ShowError from 'components/Error/ShowError'
+import { LoadingSpinner } from 'components/LoadingSpinner'
 import {
+  type Dispatch,
+  type SetStateAction,
   useContext,
   useEffect,
   useState,
-  type Dispatch,
-  type SetStateAction,
 } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { LoadingSpinner } from 'components/LoadingSpinner'
+import { useAuth } from 'react-oidc-context'
 
-export function NewHome() {
+export function Home() {
+  const auth = useAuth()
+  console.log('auth', auth)
   return (
     <div className="fr-container fr-mb-12w flex flex-col gap-4">
       <HomeHeader />
@@ -63,37 +65,7 @@ function ChatList() {
   }
 
   const chats = data?.pages.flatMap((page) => page.chats) ?? []
-  /*   const chats = [
-    {
-      name: 'Allocations sociales: la CAD peut-elle faire une saisie sur le RSA ?',
-      numberOfMessages: 3,
-      themes: ['Allocation sociale', 'RSA', 'CAF', 'Aides financieres'],
-      updatedDate: '2024-06-04T09:41:16.446431',
-      id: 2736,
-    },
-    {
-      name: 'Allocations sociales: la CAD peut-elle faire une saisie sur le RSA ?',
-      numberOfMessages: 3,
-      themes: ['Allocation sociale', 'RSA', 'CAF', 'Aides financieres'],
-      updatedDate: '2024-08-04T09:41:16.446431',
-      id: 1256,
-    },
-    {
-      name: 'Allocations sociales: la CAD peut-elle faire une saisie sur le RSA ?',
-      numberOfMessages: 3,
-      themes: ['Allocation sociale', 'RSA', 'CAF', 'Aides financieres'],
-      updatedDate: '2024-08-04T09:41:16.446431',
-      id: 1253,
-    },
-    {
-      name: 'Allocations sociales: la CAD peut-elle faire une saisie sur le RSA ?',
-      numberOfMessages: 3,
-      themes: ['Allocation sociale', 'RSA', 'CAF', 'Aides financieres'],
-      updatedDate: '2024-08-04T09:41:16.446431',
-      id: 1254,
-    },
-  ]
- */
+
   type TestChatType = {
     name: string
     numberOfMessages?: number

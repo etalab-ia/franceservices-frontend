@@ -8,6 +8,7 @@ export const userManager = new UserManager({
   userStore: new WebStorageStateStore({ store: window.sessionStorage }),
   monitorSession: true, // this allows cross tab login/logout detection,
   client_secret: '4VlaxhrEXcIxyqTQCTSdD6lhhIHkOm8s',
+  automaticSilentRenew: true,
 })
 
 export const onSigninCallback = () => {

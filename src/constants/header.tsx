@@ -1,22 +1,26 @@
-import { handleSignout } from '@utils/manageConnexion'
+import { useAuth } from 'react-oidc-context'
 
-export function quickAccessItemsFunc(userAuth, setUserAuth, signoutUrl) {
+export function quickAccessItemsFunc() {
+  const auth = useAuth()
   const quickAccessItemsProps = [
     {
       iconId: 'fr-icon-user-line',
       linkProps: {
         style: { pointerEvents: 'none' },
       },
-      text: userAuth.username,
+      text: auth.user?.profile?.preferred_username,
     },
     {
       iconId: 'fr-icon-logout-box-r-line',
       linkProps: {
-        onClick: () => handleSignout(setUserAuth, signoutUrl),
+        onClick: () => {
+          auth.removeUser()
+          auth.signoutRedirect()
+        },
       },
       text: 'Se déconnecter',
     },
   ]
 
-  return quickAccessItemsProps
+  return auth.isAuthenticated ? quickAccessItemsProps : []
 }

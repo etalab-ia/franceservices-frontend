@@ -42,8 +42,7 @@
     "react-to-print": "^2.15.1",
     "react-tooltip": "^5.27.1",
     "redux": "^5.0.1",
-    "valibot": "^0.36.0",
-    "vite-plugin-html": "^3.2.2"
+    "valibot": "^0.36.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
