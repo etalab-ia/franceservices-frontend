@@ -1,24 +1,23 @@
 import { institutionsUrl } from '@api'
 import { useQuery } from '@tanstack/react-query'
+import getHeader from './utils/getHeader'
 
-export function useGetInstitutions() {
+export function useGetInstitutions(accessToken: string, refreshToken: string) {
   return useQuery({
     queryKey: ['getInstitutions'],
-    queryFn: () => fetchInstitutions(),
+    queryFn: () => fetchInstitutions(accessToken, refreshToken),
     enabled: true,
   })
 }
 
-const fetchInstitutions = async (): Promise<string[]> => {
-  const authToken = localStorage.getItem('authToken')
-
+const fetchInstitutions = async (
+  accessToken: string,
+  refreshToken: string,
+): Promise<string[]> => {
   const res = await fetch(`${institutionsUrl}`, {
     method: 'GET',
     credentials: 'include',
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-      'Content-Type': 'application/json',
-    },
+    headers: getHeader(accessToken, refreshToken),
   })
 
   if (!res.ok) {

@@ -3,12 +3,13 @@ import Button from '@codegouvfr/react-dsfr/Button'
 import type { MeetingInputContext, RootState } from '@types'
 import { emitCloseStream } from '@utils/eventsEmitter'
 import { generateStream, useFetch } from '@utils/hooks'
-import { addContextToQuestion, setHeaders } from '@utils/setData'
+import { addContextToQuestion } from '@utils/setData'
+import getHeader from 'api/utils/getHeader'
 import { useEffect, useState } from 'react'
+import { useAuth } from 'react-oidc-context'
 import { useDispatch, useSelector } from 'react-redux'
-import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
 import { MeetingTags } from './MeetingTags'
-import { FirstQuestionExample } from './MeetingFirstQuestionSidePanel'
+import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
 
 export function MeetingQuestionInput({
   questionInput,
@@ -17,6 +18,7 @@ export function MeetingQuestionInput({
   questionInput: string
   setQuestionInput: React.Dispatch<React.SetStateAction<string>>
 }) {
+  const auth = useAuth()
   const stream = useSelector((state: RootState) => state.stream)
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
@@ -41,7 +43,7 @@ export function MeetingQuestionInput({
     dispatch({ type: 'SET_IS_STREAMING', nextIsStreaming: true })
 
     if (!chatId) {
-      const headers = setHeaders(false)
+      const headers = getHeader(auth.user.access_token, auth.user.refresh_token)
       const chat = await useFetch(chatUrl, 'POST', {
         data: JSON.stringify({ chat_type: 'meeting' }),
         headers,

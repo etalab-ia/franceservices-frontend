@@ -49,11 +49,13 @@ function HomeHeader() {
 }
 
 function ChatList() {
-  const authToken = useAuth().user?.access_token
+  const auth = useAuth()
   const { ref, inView } = useInView()
   const [selectedChatId, setSelectedChatId] = useState<number | null>(null)
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, error } =
-    useGetChats(authToken)
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, error } = useGetChats(
+    auth.user.access_token,
+    auth.user.refresh_token,
+  )
 
   useEffect(() => {
     if (inView && hasNextPage) {

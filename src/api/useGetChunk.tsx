@@ -1,25 +1,28 @@
 import { getChunkUrl } from '@api'
 import { useQuery } from '@tanstack/react-query'
-import type { Chat, Sheet } from '@types'
+import type { Sheet } from '@types'
 
-export function useGetChunk(chunkHash: string) {
+export function useGetChunk(
+  chunkHash: string,
+  accessToken: string,
+  refreshToken: string,
+) {
   return useQuery({
     queryKey: ['getChunk', chunkHash],
-    queryFn: (c) => fetchChunk(chunkHash),
+    queryFn: (c) => fetchChunk(chunkHash, accessToken, refreshToken),
     enabled: true,
   })
 }
 
-const fetchChunk = async (chunkHash: string): Promise<Sheet> => {
-  const authToken = localStorage.getItem('authToken')
-
+const fetchChunk = async (
+  chunkHash: string,
+  accessToken: string,
+  refreshToken: string,
+): Promise<Sheet> => {
   const res = await fetch(`${getChunkUrl}/${chunkHash}`, {
     method: 'GET',
     credentials: 'include',
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-      'Content-Type': 'application/json',
-    },
+    headers: getHeader(accessToken, refreshToken),
   })
 
   if (!res.ok) {

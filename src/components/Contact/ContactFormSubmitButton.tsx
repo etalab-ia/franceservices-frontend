@@ -1,8 +1,10 @@
 import { contactUrl } from '@api'
 import Button from '@codegouvfr/react-dsfr/Button'
 import { useFetch } from '@utils/hooks'
-import { setContactData, setHeaders } from '@utils/setData'
+import { setContactData } from '@utils/setData'
+import getHeader from 'api/utils/getHeader'
 import { useState } from 'react'
+import { useAuth } from 'react-oidc-context'
 import { ButtonInformation } from '../Global/ButtonInformation'
 
 interface ContactButtonProps {
@@ -17,6 +19,7 @@ interface ContactButtonProps {
 
 export function ContactFormSubmitButton({ formData, clearForm }: ContactButtonProps) {
   const [isSent, setIsSent] = useState(false)
+  const auth = useAuth()
   const handleClick = async () => {
     await useFetch(contactUrl, 'POST', {
       data: setContactData(
@@ -24,7 +27,7 @@ export function ContactFormSubmitButton({ formData, clearForm }: ContactButtonPr
         formData.message,
         formData.administration,
       ),
-      headers: setHeaders(false),
+      headers: getHeader(auth.user.access_token, auth.user.refresh_token),
     })
     clearForm()
     setIsSent(true)

@@ -1,9 +1,11 @@
 import { streamUrl } from '@api'
+import getHeader from 'api/utils/getHeader'
 import { EventSourcePolyfill } from 'event-source-polyfill'
+import { useAuth } from 'react-oidc-context'
 import { useDispatch } from 'react-redux'
 import type { AppDispatch, Question } from '../types'
 import { onCloseStream } from './eventsEmitter'
-import { setHeaders, setUserQuestion } from './setData'
+import { setUserQuestion } from './setData'
 
 export const useAppDispatch: () => AppDispatch = useDispatch
 
@@ -58,8 +60,12 @@ function handleStreamError(e, stream_chat) {
  **	Manage stream
  */
 const useStream = async (dispatch, id: number, isChat: boolean) => {
+  const auth = useAuth()
   const stream_chat = new EventSourcePolyfill(`${streamUrl}/${id}/start`, {
-    headers: setHeaders(true),
+    headers: {
+      access_token: `Bearer ${auth.user.access_token}`,
+      refresh_token: `Bearer ${auth.user.refresh_token}`,
+    },
     withCredentials: true,
   })
 
@@ -87,7 +93,8 @@ export async function generateStream(
   chatId: number,
   isChat: boolean,
 ) {
-  const headers = setHeaders(false)
+  const auth = useAuth()
+  const headers = getHeader(auth.user.access_token, auth.user.refresh_token)
   const stream_data = setUserQuestion(question)
   const stream = await useFetch(`${streamUrl}/chat/${chatId}`, 'POST', {
     data: JSON.stringify(stream_data),

@@ -1,22 +1,23 @@
+import { getArchiveUrl, getChunksUrl } from '@api'
 import { useQuery } from '@tanstack/react-query'
-import { getChunksUrl, getArchiveUrl } from '@api'
 import type { UserHistory } from '@types'
+import getHeader from './utils/getHeader'
 
-export function useGetArchive(chatId: number) {
+export function useGetArchive(chatId: number, accessToken: string, refreshToken: string) {
   return useQuery({
     queryKey: ['getArchive', chatId],
-    queryFn: () => fetchArchive(chatId),
+    queryFn: () => fetchArchive(chatId, accessToken, refreshToken),
     enabled: !!chatId,
   })
 }
 
-const fetchArchive = async (chatId: number) => {
-  const authToken = localStorage.getItem('authToken')
+const fetchArchive = async (
+  chatId: number,
+  accessToken: string,
+  refreshToken: string,
+) => {
   const response = await fetch(`${getArchiveUrl}/${chatId}`, {
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-      'Content-Type': 'application/json',
-    },
+    headers: getHeader(accessToken, refreshToken),
   })
   if (!response.ok) {
     console.error('error: response not ok', response)
@@ -28,10 +29,7 @@ const fetchArchive = async (chatId: number) => {
       const chunksResponse = stream.rag_sources
         ? await fetch(getChunksUrl, {
             method: 'POST',
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-              'Content-Type': 'application/json',
-            },
+            headers: getHeader(accessToken, refreshToken),
             body: JSON.stringify({ uids: stream.rag_sources }),
           }).then((res) => res.json())
         : []

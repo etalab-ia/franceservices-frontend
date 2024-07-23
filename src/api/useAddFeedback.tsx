@@ -1,11 +1,13 @@
 import { feedbackUrl } from '@api'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import type { Feedback } from '@types'
+import getHeader from './utils/getHeader'
 
-export function useAddFeedback() {
+export function useAddFeedback(accessToken: string, refreshToken: string) {
   return useMutation({
     mutationKey: ['addFeedback'],
-    mutationFn: (params: AddFeedbackParams) => addFeedback(params),
+    mutationFn: (params: AddFeedbackParams) =>
+      addFeedback({ ...params, refreshToken, accessToken }),
   })
 }
 
@@ -13,10 +15,17 @@ interface AddFeedbackParams {
   feedback: Feedback
   streamId: number
   reasons: string[]
+  refreshToken: string
+  accessToken: string
 }
 
-const addFeedback = async ({ feedback, streamId, reasons }: AddFeedbackParams) => {
-  const authToken = localStorage.getItem('authToken')
+const addFeedback = async ({
+  feedback,
+  streamId,
+  reasons,
+  accessToken,
+  refreshToken,
+}: AddFeedbackParams) => {
   const data = {
     is_good: !feedback.isGood,
     message: feedback.message,
@@ -26,10 +35,7 @@ const addFeedback = async ({ feedback, streamId, reasons }: AddFeedbackParams) =
   const res = await fetch(`${feedbackUrl}/${streamId}`, {
     method: 'POST',
     credentials: 'include',
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-      'Content-Type': 'application/json',
-    },
+    headers: getHeader(accessToken, refreshToken),
     body: JSON.stringify(data),
   })
 

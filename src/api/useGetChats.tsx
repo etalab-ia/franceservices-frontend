@@ -1,26 +1,25 @@
 import { getChatsUrl } from '@api'
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import type { Chat } from '@types'
+import getHeader from './utils/getHeader'
 
 // Get all user chats
-export function useGetAllChats() {
+export function useGetAllChats(accessToken: string, refreshToken: string) {
   return useQuery({
     queryKey: ['getAllChats'],
-    queryFn: () => fetchAllChats(),
+    queryFn: () => fetchAllChats(accessToken, refreshToken),
     enabled: true,
   })
 }
 
-const fetchAllChats = async (): Promise<Chat[]> => {
-  const authToken = localStorage.getItem('authToken')
-
+const fetchAllChats = async (
+  accessToken: string,
+  refreshToken: string,
+): Promise<Chat[]> => {
   const res = await fetch(`${getChatsUrl}?desc=true`, {
     method: 'GET',
     credentials: 'include',
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-      'Content-Type': 'application/json',
-    },
+    headers: getHeader(accessToken, refreshToken),
   })
 
   if (!res.ok) {
@@ -38,21 +37,25 @@ const fetchAllChats = async (): Promise<Chat[]> => {
   }))
 }
 
-const fetchChats = async ({
-  pageParam = 0,
-  queryKey,
-}): Promise<{ chats: Chat[]; nextPage: number | null }> => {
-  const [_, authToken] = queryKey
-  console.log('fetchChats', authToken)
+// Get user chats 10 by 10
+export function useGetChats(accessToken: string, refreshToken: string) {
+  console.log('useGetChats', accessToken)
+  return useInfiniteQuery({
+    queryKey: ['getChats'],
+    queryFn: () => fetchChats({ accessToken, refreshToken }),
+    getNextPageParam: (lastPage) => lastPage.nextPage ?? null,
+    initialPageParam: 0,
+  })
+}
+
+const fetchChats = async ({ pageParam = 0, accessToken, refreshToken }) => {
+  console.log('fetchChats', accessToken)
   const res = await fetch(
     `${getChatsUrl}?desc=true&skip=${pageParam}&limit=10&desc=true`,
     {
       method: 'GET',
       credentials: 'include',
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-        'Content-Type': 'application/json',
-      },
+      headers: getHeader(accessToken, refreshToken),
     },
   )
 
@@ -63,7 +66,7 @@ const fetchChats = async ({
 
   const chats = await res.json()
   return {
-    chats: chats.map((item: ChatInfos) => ({
+    chats: chats.map((item) => ({
       name: item.chat_name,
       type: item.chat_type,
       creationDate: item.created_at,
@@ -82,14 +85,4 @@ type ChatInfos = {
   created_at: string
   updated_at: string
   user_id: number
-}
-
-export function useGetChats(authToken) {
-  console.log('useGetChats', authToken)
-  return useInfiniteQuery({
-    queryKey: ['getChats', authToken],
-    queryFn: fetchChats,
-    getNextPageParam: (lastPage) => lastPage.nextPage ?? null,
-    initialPageParam: 0,
-  })
 }

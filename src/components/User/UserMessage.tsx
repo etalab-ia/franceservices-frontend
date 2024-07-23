@@ -3,8 +3,10 @@ import Button from '@codegouvfr/react-dsfr/Button'
 import type { RootState } from '@types'
 import { CurrQuestionContext } from '@utils/context/questionContext'
 import { generateStream, useFetch } from '@utils/hooks'
-import { getIndexes, setHeaders } from '@utils/setData'
+import { getIndexes } from '@utils/setData'
+import getHeader from 'api/utils/getHeader'
 import { useContext, useEffect } from 'react'
+import { useAuth } from 'react-oidc-context'
 import { useDispatch, useSelector } from 'react-redux'
 
 /*
@@ -15,6 +17,7 @@ export function UserMessage({ questionInput, setQuestionInput }) {
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
   const { currQuestion, updateCurrQuestion } = useContext(CurrQuestionContext)
+  const auth = useAuth()
 
   const handleChange = (e) => {
     e.preventDefault()
@@ -42,7 +45,7 @@ export function UserMessage({ questionInput, setQuestionInput }) {
     let chatId = user.chatId
 
     if (user.chatId === 0) {
-      const headers = setHeaders(false)
+      const headers = getHeader(auth.user.access_token, auth.user.refresh_token)
       const chat_data = { chat_type: 'qa' }
       const chat = await useFetch(chatUrl, 'POST', {
         data: JSON.stringify(chat_data),

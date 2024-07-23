@@ -1,23 +1,7 @@
 import type { Question, Sheet, Tile } from '@types'
 import { useFetch } from './hooks'
-
-/*
- * isEventSource is true when fetching for a stream
- */
-export const setHeaders = (isEventSource: boolean) => {
-  const token = localStorage.getItem('authToken')
-
-  const headers = isEventSource
-    ? {
-        Authorization: `Bearer ${token}`,
-      }
-    : {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      }
-
-  return headers
-}
+import { useAuth } from 'react-oidc-context'
+import getHeader from 'api/utils/getHeader'
 
 /***************************
 		USER QUESTION
@@ -67,50 +51,6 @@ export const addContextToQuestion = (question: string, context) => {
   return questionWithContext
 }
 
-export const rmContextFromQuestion = (
-  str: string,
-  setQuery: React.Dispatch<React.SetStateAction<string>> | undefined,
-) => {
-  const context = [
-    'Les administrations concernées par cette question sont : ',
-    'La question porte sur les thèmes suivants : ',
-  ]
-
-  let newStr = str
-
-  for (const c of context) {
-    const start = newStr.indexOf(c)
-
-    if (start !== -1) {
-      newStr = newStr.substring(0, start).trim()
-    }
-  }
-
-  setQuery(newStr)
-}
-
-export const updateQuestion = (currQuestion: Question, updateCurrQuestion) => {
-  const context = [
-    'Les administrations concernées par cette question sont : ',
-    'La question porte sur les thèmes suivants : ',
-  ]
-
-  let newStr = currQuestion.query
-
-  for (const c of context) {
-    const start = newStr.indexOf(c)
-
-    if (start !== -1) {
-      newStr = newStr.substring(0, start).trim()
-    }
-  }
-
-  updateCurrQuestion({
-    ...currQuestion,
-    query: newStr,
-  })
-}
-
 /***************************
 		SP SHEETS
  **************************/
@@ -139,11 +79,12 @@ export const getIndexes = async (
   indexesUrl: string,
 ) => {
   const actionType = indexType === 'sheets' ? 'SET_SHEETS' : 'SET_CHUNKS'
+  const auth = useAuth()
   if (indexType === 'sheets' && data.must_not_sids.length !== 0) return
   try {
     const res = await useFetch(indexesUrl, 'POST', {
       data: setIndexesBody(data, indexType, chunkSize, streamId),
-      headers: setHeaders(false),
+      headers: getHeader(auth.user.access_token, auth.user.refresh_token),
     })
     dispatch({ type: actionType, [indexType]: res })
   } catch (error) {
