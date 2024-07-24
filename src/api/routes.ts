@@ -1,6 +1,6 @@
 // API routes
 
-const apiBase = `${import.meta.env.VITE_API_URL}/api/v2`
+const apiBase = `${import.meta.env.VITE_API_URL}`
 export const streamUrl = `${apiBase}/stream`
 export const chatUrl = `${apiBase}/chat`
 export const getChatsUrl = `${apiBase}/chats`
