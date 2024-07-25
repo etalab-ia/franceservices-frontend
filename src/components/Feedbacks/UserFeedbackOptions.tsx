@@ -6,6 +6,7 @@ import {
 } from '@constants/feedback'
 import type { Feedback as FeedbackType, RootState } from '@types'
 import { useEffect, useState } from 'react'
+import { useAuth } from 'react-oidc-context'
 import { useSelector } from 'react-redux'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { ButtonsOptions } from './ButtonsOptions'
@@ -55,6 +56,7 @@ export function UserFeedbackOptions({
 }
 
 const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) => {
+  const auth = useAuth()
   const streamId = useSelector((state: RootState) => state.user.lastStreamId)
   const addFeedback = useAddFeedback()
 
@@ -65,7 +67,13 @@ const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) => 
         ...feedback,
         message: otherReason,
       })
-    addFeedback.mutate({ feedback, streamId, reasons })
+    addFeedback.mutate({
+      feedback,
+      streamId,
+      reasons,
+      accessToken: auth.user.access_token,
+      refreshToken: auth.user.refresh_token,
+    })
     setFeedback({
       ...feedback,
       isConfirmed: true,
@@ -78,7 +86,7 @@ const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) => 
       onClick={handleConfirm}
       className={'border fr-text-action-high--blue-france'}
     >
-      <p className="fr-text-action-high--blue-france fr-p-1w">Confirmer </p>
+      <p className="fr-text-action-high--blue-france fr-p-1w">Confirmer</p>
     </button>
   )
 }

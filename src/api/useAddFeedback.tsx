@@ -3,11 +3,10 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import type { Feedback } from '@types'
 import getHeader from './utils/getHeader'
 
-export function useAddFeedback(accessToken: string, refreshToken: string) {
+export function useAddFeedback() {
   return useMutation({
     mutationKey: ['addFeedback'],
-    mutationFn: (params: AddFeedbackParams) =>
-      addFeedback({ ...params, refreshToken, accessToken }),
+    mutationFn: (params: AddFeedbackParams) => addFeedback({ ...params }),
   })
 }
 

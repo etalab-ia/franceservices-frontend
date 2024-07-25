@@ -1,4 +1,3 @@
-import { signoutUrl } from '@api'
 import { Badge } from '@codegouvfr/react-dsfr/Badge'
 import { headerFooterDisplayItem } from '@codegouvfr/react-dsfr/Display'
 import { Footer } from '@codegouvfr/react-dsfr/Footer'
@@ -7,7 +6,9 @@ import { quickAccessItemsFunc } from '@constants/header'
 import { navFunc } from '@constants/router'
 import { InitialUserAuth, type UserAuth } from '@utils/auth'
 import { isMFSContext } from '@utils/context/isMFSContext'
+import { Login } from 'pages/Login'
 import { useContext, useState } from 'react'
+import { useAuth } from 'react-oidc-context'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Error404 from '../pages/404'
 import { Chatbot } from '../pages/Chatbot'
@@ -19,7 +20,6 @@ import { NewPassword } from '../pages/NewPassword'
 import { ResetPassword } from '../pages/ResetPassword'
 import { Signup } from '../pages/Signup'
 import { Tools } from '../pages/Tools'
-import { useAuth, withAuthenticationRequired } from 'react-oidc-context'
 
 export const Root = () => {
   const location = useLocation()
@@ -28,7 +28,6 @@ export const Root = () => {
   const [authFailed, setAuthFailed] = useState(false)
   const isMFS = useContext(isMFSContext)
   const auth = useAuth()
-
   return (
     <div className="h-screen w-screen flex-col justify-between" id="screen">
       <Header
@@ -52,6 +51,11 @@ export const Root = () => {
         quickAccessItems={quickAccessItemsFunc()}
       />
       <Routes>
+        <Route
+          path="/login"
+          element={auth.isAuthenticated ? <Navigate to="/home" /> : <Login />}
+        />
+
         {isMFS ? (
           <Route path="/FAQ" element={<FAQ />} />
         ) : (
@@ -72,10 +76,7 @@ export const Root = () => {
         ) : (
           <Route path="/chat" element={<Navigate to="/404" />} />
         )}
-        <Route
-          path="/contact"
-          element={<ProtectedRoute component={<Contact setUserAuth={setUserAuth} />} />}
-        />
+        <Route path="/contact" element={<ProtectedRoute component={Contact} />} />
         <Route
           path="/signup"
           element={
@@ -118,8 +119,12 @@ export const Root = () => {
 }
 
 const ProtectedRoute = ({ component: Component, ...props }) => {
-  const ProtectedComponent = withAuthenticationRequired(Component, {
-    OnRedirecting: () => <div>Redirecting to the login page...</div>,
-  })
-  return <ProtectedComponent {...props} />
+  const auth = useAuth()
+  const location = useLocation()
+
+  if (!auth.isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} />
+  }
+
+  return <Component {...props} />
 }

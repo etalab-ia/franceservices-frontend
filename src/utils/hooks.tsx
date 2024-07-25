@@ -14,8 +14,8 @@ export const useFetch = async (url: string, method: string, props): Promise<any>
   try {
     const response = await fetch(url, {
       method: method,
-      credentials: 'include',
       headers,
+      credentials: 'include',
       body: data === undefined ? '' : data,
     })
 

@@ -10,11 +10,10 @@ import { MFSProvider } from './utils/context/isMFSContext'
 import { store } from './utils/reducer/reducer'
 
 import { onSigninCallback, userManager } from '@utils/keycloak'
-import ProtectedApp from 'components/Auth/keycloak/ProtectedApp'
 
 function App() {
   useEffect(() => {
-    var _mtm = (window._mtm = window._mtm || [])
+    const _mtm = (window._mtm = window._mtm || [])
     _mtm.push({ 'mtm.startTime': new Date().getTime(), event: 'mtm.Start' })
     const d = document
     const g = d.createElement('script')
@@ -30,9 +29,7 @@ function App() {
         <MFSProvider>
           <Provider store={store}>
             <QueryClientProvider client={queryClient}>
-              <ProtectedApp>
-                <Root />
-              </ProtectedApp>
+              <Root />
             </QueryClientProvider>
           </Provider>
         </MFSProvider>
