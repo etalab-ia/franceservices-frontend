@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 export default function Footer() {
   const location = useLocation()
@@ -8,12 +8,9 @@ export default function Footer() {
       <div className="fr-container">
         <div className="fr-footer__body">
           <div className="fr-footer__brand fr-enlarge-link">
-            <a
-              href="/"
-              title="Retour à l'accueil du site - Nom de l'entité (ministère, secrétariat d'état, gouvernement)"
-            >
-              <p className="fr-logo">Intitulé officiel</p>
-            </a>
+            <Link to="/" title="Retour à l'accueil du site - Albert">
+              <p className="fr-logo">DINUM / ETALAB</p>
+            </Link>
           </div>
           <div className="fr-footer__content">
             <ul className="fr-footer__content-list">
@@ -21,7 +18,7 @@ export default function Footer() {
                 <a
                   className="fr-footer__content-link"
                   target="_blank"
-                  rel="noopener external"
+                  rel="noreferrer"
                   title="info.gouv.fr - nouvelle fenêtre"
                   href="https://info.gouv.fr"
                 >
@@ -32,7 +29,7 @@ export default function Footer() {
                 <a
                   className="fr-footer__content-link"
                   target="_blank"
-                  rel="noopener external"
+                  rel="noreferrer"
                   title="service-public.fr - nouvelle fenêtre"
                   href="https://service-public.fr"
                 >
@@ -43,7 +40,7 @@ export default function Footer() {
                 <a
                   className="fr-footer__content-link"
                   target="_blank"
-                  rel="noopener external"
+                  rel="noreferrer"
                   title="legifrance.gouv.fr - nouvelle fenêtre"
                   href="https://legifrance.gouv.fr"
                 >
@@ -54,7 +51,7 @@ export default function Footer() {
                 <a
                   className="fr-footer__content-link"
                   target="_blank"
-                  rel="noopener external"
+                  rel="noreferrer"
                   title="data.gouv.fr - nouvelle fenêtre"
                   href="https://data.gouv.fr"
                 >
@@ -73,7 +70,8 @@ export default function Footer() {
             </li>
             <li className="fr-footer__bottom-item">
               <button
-                class="fr-footer__bottom-link fr-icon-theme-fill fr-btn--icon-left"
+                type="button"
+                className="fr-footer__bottom-link fr-icon-theme-fill fr-btn--icon-left"
                 aria-controls="fr-theme-modal"
                 data-fr-opened="false"
               >

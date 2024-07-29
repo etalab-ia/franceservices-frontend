@@ -15,8 +15,8 @@ import { NewPassword } from '../../pages/NewPassword'
 import { ResetPassword } from '../../pages/ResetPassword'
 import { Signup } from '../../pages/Signup'
 import { Tools } from '../../pages/Tools'
-import Header from './Header'
 import Footer from './Footer'
+import Header from './Header'
 
 export const Root = () => {
   const [userAuth, setUserAuth] = useState<UserAuth>(InitialUserAuth)
