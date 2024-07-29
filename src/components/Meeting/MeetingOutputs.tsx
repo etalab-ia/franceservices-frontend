@@ -1,5 +1,6 @@
 import { useGetArchive } from '@api'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { Skeleton } from '@mui/material'
 import Accordion from '@mui/material/Accordion'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import AccordionSummary from '@mui/material/AccordionSummary'
@@ -18,10 +19,8 @@ import Separator from 'components/Global/Separator'
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
-import { FirstQuestionExample } from './MeetingFirstQuestionSidePanel'
 import { MeetingQuestionInput } from './MeetingQuestionInput'
 import { UsefulLinks } from './UsefulLinks'
-import { Skeleton } from '@mui/material'
 
 export function MeetingOutputs({ chatId }: { chatId?: number }) {
   const user = useSelector((state: RootState) => state.user)
@@ -31,7 +30,6 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
   const stream = useSelector((state: RootState) => state.stream)
 
   const { data: archiveData, isLoading } = useGetArchive(chatId)
-  console.log('outputs')
   useEffect(() => {
     if (chatId !== undefined && archiveData) {
       if (Array.isArray(archiveData)) {
@@ -96,7 +94,6 @@ export function History({
   history,
   unfoldLast,
 }: { history: UserHistory[]; unfoldLast: boolean }) {
-  console.log('history', history)
   return (
     <div className="fr-mt-5w">
       {history.map((h, index) => (
@@ -140,7 +137,6 @@ export function History({
 function getWebservices(history) {
   const webservices = []
 
-  console.log('lenght', webservices.length)
   history.chunks.map((chunk) => {
     chunk.web_services.map((webservice) => {
       if (webservices.length >= 3) return webservices

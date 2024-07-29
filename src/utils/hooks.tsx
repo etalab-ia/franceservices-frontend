@@ -38,7 +38,6 @@ function handleStreamMessage(e, dispatch, stream_chat, id: number) {
       dispatch({ type: 'SET_STREAM_ID', nextStreamId: 0 })
       return dispatch({ type: 'STOP_AGENT_STREAM' })
     }
-    console.log('content', jsonData)
     return dispatch({
       type: 'GET_AGENT_STREAM',
       nextResponse: jsonData,
@@ -93,7 +92,6 @@ export async function generateStream(
 ) {
   const headers = setHeaders(false)
   const stream_data = setUserQuestion(question)
-  console.log('stream_data', stream_data, ' chatId', chatId)
   const stream = await useFetch(`${streamUrl}/chat/${chatId}`, 'POST', {
     data: JSON.stringify(stream_data),
     headers,
