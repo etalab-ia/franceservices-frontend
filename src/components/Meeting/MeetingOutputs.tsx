@@ -123,7 +123,10 @@ export function History({
                 zIndex: 1,
               }}
             >
-              <DisplayResponse response={h.response} webservices={h.webservices} />
+              <DisplayResponse
+                response={h.response ? extractContent(h.response) : ''}
+                webservices={h.webservices}
+              />
             </AccordionDetails>
           </Accordion>
         </div>
@@ -207,4 +210,21 @@ export function DisplayResponse({
       <Separator extraClass="fr-mt-5w" />
     </GlobalRowContainer>
   )
+}
+function extractContent(inputString) {
+  const dataBlocks = inputString.split('\n\n')
+
+  let result = ''
+  for (const block of dataBlocks) {
+    if (block.startsWith('data: ')) {
+      try {
+        const jsonData = JSON.parse(block.substring(6))
+
+        if (jsonData.choices?.[0]?.delta?.content) {
+          result += jsonData.choices[0].delta.content
+        }
+      } catch (error) {}
+    }
+  }
+  return result
 }

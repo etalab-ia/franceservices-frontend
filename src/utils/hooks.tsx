@@ -42,7 +42,9 @@ function handleStreamMessage(e, dispatch, stream_chat, id: number) {
     console.log('content', jsonData)
     return dispatch({
       type: 'GET_AGENT_STREAM',
-      nextResponse: jsonData.choices[0].delta.content,
+      nextResponse: jsonData.choices[0].delta.content
+        ? jsonData.choices[0].delta.content
+        : '',
     })
   } catch (error) {
     console.error('An error occurred: ', error)
@@ -94,6 +96,7 @@ export async function generateStream(
 ) {
   const headers = setHeaders(false)
   const stream_data = setUserQuestion(question)
+  console.log('stream_data', stream_data, ' chatId', chatId)
   const stream = await useFetch(`${streamUrl}/chat/${chatId}`, 'POST', {
     data: JSON.stringify(stream_data),
     headers,
