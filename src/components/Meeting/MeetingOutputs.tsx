@@ -139,13 +139,15 @@ export function History({
 
 function getWebservices(history) {
   const webservices = []
-  while (webservices.length < 3) {
-    history.chunks.map((chunk) => {
-      chunk.web_services.map((webservice) => {
-        webservices.push(webservice)
-      })
+
+  console.log('lenght', webservices.length)
+  history.chunks.map((chunk) => {
+    chunk.web_services.map((webservice) => {
+      if (webservices.length >= 3) return webservices
+      webservices.push(webservice)
     })
-  }
+  })
+
   return webservices
 }
 
