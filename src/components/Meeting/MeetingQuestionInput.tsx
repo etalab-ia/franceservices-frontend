@@ -95,9 +95,9 @@ export function MeetingQuestionInput({
   }
 
   return (
-    <div className="">
-      <div className=" flex fr-background-default--grey  ">
-        <div className="fr-col fr-pr-2v">
+    <div>
+      <div className=" flex fr-background-default--grey fr-mr-2v ">
+        <div className="fr-col ">
           <textarea
             style={{ minHeight: '40px', maxHeight: '168px', overflow: 'hidden' }}
             placeholder="Poser une nouvelle question"

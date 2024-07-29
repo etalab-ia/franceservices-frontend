@@ -96,6 +96,7 @@ export function History({
   history,
   unfoldLast,
 }: { history: UserHistory[]; unfoldLast: boolean }) {
+  console.log('history', history)
   return (
     <div className="fr-mt-5w">
       {history.map((h, index) => (
@@ -124,13 +125,28 @@ export function History({
                 zIndex: 1,
               }}
             >
-              <DisplayResponse response={h.response} webservices={h.webservices} />
+              <DisplayResponse
+                response={h.response}
+                webservices={h.webservices?.length ? h.webservices : getWebservices(h)}
+              />
             </AccordionDetails>
           </Accordion>
         </div>
       ))}
     </div>
   )
+}
+
+function getWebservices(history) {
+  const webservices = []
+  while (webservices.length < 3) {
+    history.chunks.map((chunk) => {
+      chunk.web_services.map((webservice) => {
+        webservices.push(webservice)
+      })
+    })
+  }
+  return webservices
 }
 
 /*
