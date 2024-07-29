@@ -14,7 +14,7 @@ import Error404 from '../pages/404'
 import { Chatbot } from '../pages/Chatbot'
 import { Contact } from '../pages/Contact'
 import { FAQ } from '../pages/FAQ'
-import { NewHome } from '../pages/Home'
+import { History } from '../pages/History'
 import { Login } from '../pages/Login'
 import { Meeting } from '../pages/Meeting'
 import { NewPassword } from '../pages/NewPassword'
@@ -41,7 +41,7 @@ export const Root = () => {
       <Header
         brandTop="DINUM / Etalab"
         homeLinkProps={{
-          href: '/home',
+          href: '/meeting',
           title: 'Accueil - Albert',
         }}
         serviceTitle={
@@ -71,7 +71,7 @@ export const Root = () => {
                 setUserAuth={setUserAuth}
               />
             ) : (
-              <Navigate to="/home" />
+              <Navigate to="/meeting" />
             )
           }
         />
@@ -102,12 +102,18 @@ export const Root = () => {
           </>
         )}
         <Route
-          path="/home"
-          element={!userAuth.isLogin ? <Navigate to="/login" /> : <NewHome />}
+          path="/meeting"
+          element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
+        />
+        <Route
+          path="/history"
+          element={!userAuth.isLogin ? <Navigate to="/login" /> : <History />}
         />
         <Route
           path="/"
-          element={!userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/home" />}
+          element={
+            !userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/meeting" />
+          }
         />
         <Route path="/404" element={<Error404 />} />
         {!isMFS ? (

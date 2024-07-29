@@ -28,7 +28,7 @@ export function MeetingFirstQuestionHelper(setQuestionInput) {
   return (
     <OneThirdScreenWidth>
       <GlobalColContainer>
-        <h5 className="fr-mb-2w ">Conseils pour poser une question</h5>
+        <h5 className="fr-mb-2w ">Conseils pour échanger avec Albert</h5>
         <p className=" font-bold fr-text-md fr-mb-3v">À faire:</p>
         {goodGuidelines.map((badge, index) => (
           <div
@@ -92,7 +92,8 @@ const goodGuidelines = [
     good: true,
   },
   {
-    title: 'Poser des questions seulements sur des thèmes traités en France Services',
+    title:
+      'Poser des questions relevant uniquement des démarches incluses dans le bouquet de services national de France services',
     good: true,
   },
 ]

@@ -10,18 +10,18 @@ export function navFunc() {
   const navDefs: any[] = isMFS
     ? [
         {
-          text: 'Mes échanges',
-          linkProps: {
-            to: '/home',
-          },
-          isActive: currentPath === '/home',
-        },
-        {
           text: 'Poser une nouvelle question',
           linkProps: {
             to: '/meeting',
           },
           isActive: currentPath === '/meeting',
+        },
+        {
+          text: 'Mes échanges',
+          linkProps: {
+            to: '/history',
+          },
+          isActive: currentPath === '/history',
         },
         {
           text: 'Vos outils numériques',
@@ -49,9 +49,9 @@ export function navFunc() {
         {
           text: 'Accueil',
           linkProps: {
-            to: '/home',
+            to: '/meeting',
           },
-          isActive: currentPath === '/home',
+          isActive: currentPath === '/meeting',
         },
         {
           text: 'Mes outils',
