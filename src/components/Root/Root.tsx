@@ -1,65 +1,41 @@
-import { signoutUrl, userUrl } from '@api'
-import { Badge } from '@codegouvfr/react-dsfr/Badge'
-import { headerFooterDisplayItem } from '@codegouvfr/react-dsfr/Display'
-import { Footer } from '@codegouvfr/react-dsfr/Footer'
-import { Header } from '@codegouvfr/react-dsfr/Header'
-import { quickAccessItemsFunc } from '@constants/header'
-import { navFunc } from '@constants/router'
+import { userUrl } from '@api'
 import { InitialUserAuth, type UserAuth } from '@utils/auth'
 import { isMFSContext } from '@utils/context/isMFSContext'
 import { checkConnexion } from '@utils/localStorage'
 import { useContext, useEffect, useState } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
-import Error404 from '../pages/404'
-import { Chatbot } from '../pages/Chatbot'
-import { Contact } from '../pages/Contact'
-import { FAQ } from '../pages/FAQ'
-import { History } from '../pages/History'
-import { Login } from '../pages/Login'
-import { Meeting } from '../pages/Meeting'
-import { NewPassword } from '../pages/NewPassword'
-import { ResetPassword } from '../pages/ResetPassword'
-import { Signup } from '../pages/Signup'
-import { Tools } from '../pages/Tools'
+import Error404 from '../../pages/404'
+import { Chatbot } from '../../pages/Chatbot'
+import { Contact } from '../../pages/Contact'
+import { FAQ } from '../../pages/FAQ'
+import { History } from '../../pages/History'
+import { Login } from '../../pages/Login'
+import { Meeting } from '../../pages/Meeting'
+import { NewPassword } from '../../pages/NewPassword'
+import { ResetPassword } from '../../pages/ResetPassword'
+import { Signup } from '../../pages/Signup'
+import { Tools } from '../../pages/Tools'
+import Header from './Header'
+import Footer from './Footer'
 
 export const Root = () => {
-  const location = useLocation()
-  const navigationData = navFunc()
   const [userAuth, setUserAuth] = useState<UserAuth>(InitialUserAuth)
   const [authFailed, setAuthFailed] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const isMFS = useContext(isMFSContext)
+  const location = useLocation()
+  const meetingPathRegex = /^\/meeting(\/.*)?$/
   useEffect(() => {
     checkConnexion(setUserAuth, userUrl).finally(() => setIsLoading(false))
   }, [])
+
   if (isLoading) {
     return null
   }
 
   return (
     <div className="h-screen w-screen flex-col justify-between" id="screen">
-      <Header
-        brandTop="DINUM / Etalab"
-        homeLinkProps={{
-          href: '/meeting',
-          title: 'Accueil - Albert',
-        }}
-        serviceTitle={
-          <>
-            ALBERT {isMFS ? 'France services' : 'Chat'}{' '}
-            <Badge as="span" noIcon severity="success">
-              Beta
-            </Badge>
-          </>
-        }
-        serviceTagline={
-          isMFS ? 'Aide à l’accompagnement des usagers France services' : ''
-        }
-        navigation={userAuth.isLogin && navigationData}
-        quickAccessItems={
-          userAuth.isLogin ? quickAccessItemsFunc(userAuth, setUserAuth, signoutUrl) : []
-        }
-      />
+      <Header username={userAuth.username} setUserAuth={setUserAuth} />
       <Routes>
         <Route
           path="/login"
@@ -76,7 +52,7 @@ export const Root = () => {
           }
         />
         {isMFS ? (
-          <Route path="/FAQ" element=<FAQ /> />
+          <Route path="/FAQ" element={<FAQ />} />
         ) : (
           <Route
             path={'/FAQ'}
@@ -166,16 +142,9 @@ export const Root = () => {
         />
         <Route path="*" element={<Error404 />} />
       </Routes>
-
-      {!location.pathname.includes('meeting') && location.pathname !== '/chat' && (
-        <Footer
-          bottomItems={[headerFooterDisplayItem]}
-          accessibility="partially compliant"
-          termsLinkProps={{
-            href: '#',
-          }}
-        />
-      )}
+      {!meetingPathRegex.test(location.pathname) &&
+        location.pathname !== '/chat' &&
+        location.pathname !== '/' && <Footer />}{' '}
     </div>
   )
 }
