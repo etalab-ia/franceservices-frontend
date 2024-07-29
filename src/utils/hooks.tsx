@@ -32,19 +32,16 @@ export const useFetch = async (url: string, method: string, props): Promise<any>
 
 function handleStreamMessage(e, dispatch, stream_chat, id: number) {
   try {
-    const jsonData: ChatCompletion = JSON.parse(e.data)
-    if (jsonData.choices[0].finish_reason === 'stop') {
+    const jsonData = JSON.parse(e.data)
+    if (jsonData === '[DONE]') {
       stream_chat.close()
-      console.log('Stream closed')
       dispatch({ type: 'SET_STREAM_ID', nextStreamId: 0 })
       return dispatch({ type: 'STOP_AGENT_STREAM' })
     }
     console.log('content', jsonData)
     return dispatch({
       type: 'GET_AGENT_STREAM',
-      nextResponse: jsonData.choices[0].delta.content
-        ? jsonData.choices[0].delta.content
-        : '',
+      nextResponse: jsonData,
     })
   } catch (error) {
     console.error('An error occurred: ', error)

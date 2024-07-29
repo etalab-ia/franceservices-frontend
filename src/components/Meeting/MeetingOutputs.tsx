@@ -124,10 +124,7 @@ export function History({
                 zIndex: 1,
               }}
             >
-              <DisplayResponse
-                response={h.response ? extractContent(h.response) : ''}
-                webservices={h.webservices}
-              />
+              <DisplayResponse response={h.response} webservices={h.webservices} />
             </AccordionDetails>
           </Accordion>
         </div>
