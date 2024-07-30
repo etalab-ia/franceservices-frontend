@@ -1,4 +1,8 @@
-.env.development
+.env.staging
+.env.production
+.env.dev
+.env.local
+
 ..bfg-report
 
 # Logs
