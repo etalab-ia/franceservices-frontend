@@ -34,114 +34,122 @@ export const Root = () => {
   }
 
   return (
-    <div className="h-screen w-screen flex-col justify-between" id="screen">
-      <Header username={userAuth.username} setUserAuth={setUserAuth} />
-      <Routes>
-        <Route
-          path="/login"
-          element={
-            !userAuth.isLogin ? (
-              <Login
+    <div className="min-h-screen flex flex-col" id="screen">
+      <Header
+        username={userAuth.username}
+        setUserAuth={setUserAuth}
+        userAuth={userAuth}
+      />
+      <div className="flex-grow">
+        <Routes>
+          <Route
+            path="/login"
+            element={
+              !userAuth.isLogin ? (
+                <Login
+                  authFailed={authFailed}
+                  setAuthFailed={setAuthFailed}
+                  setUserAuth={setUserAuth}
+                />
+              ) : (
+                <Navigate to="/meeting" />
+              )
+            }
+          />
+          {isMFS ? (
+            <Route path="/FAQ" element={<FAQ />} />
+          ) : (
+            <Route
+              path={'/FAQ'}
+              element={
+                !userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />
+              }
+            />
+          )}
+          {isMFS && (
+            <>
+              <Route
+                path="/meeting"
+                element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
+              />
+              <Route
+                path="/meeting/:id"
+                element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
+              />
+              <Route
+                path="/outils"
+                element={!userAuth.isLogin ? <Navigate to="/login" /> : <Tools />}
+              />
+            </>
+          )}
+          <Route
+            path="/meeting"
+            element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
+          />
+          <Route
+            path="/history"
+            element={!userAuth.isLogin ? <Navigate to="/login" /> : <History />}
+          />
+          <Route
+            path="/"
+            element={
+              !userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/meeting" />
+            }
+          />
+          <Route path="/404" element={<Error404 />} />
+          {!isMFS ? (
+            <Route
+              path="/chat"
+              element={!userAuth.isLogin ? <Navigate to="/login" /> : <Chatbot />}
+            />
+          ) : (
+            <Route
+              path={'/chat'}
+              element={
+                !userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />
+              }
+            />
+          )}
+          <Route
+            path="/contact"
+            element={
+              !userAuth.isLogin ? (
+                <Navigate to="/login" />
+              ) : (
+                <Contact setUserAuth={setUserAuth} />
+              )
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <Signup
                 authFailed={authFailed}
                 setAuthFailed={setAuthFailed}
+                userAuth={userAuth}
                 setUserAuth={setUserAuth}
               />
-            ) : (
-              <Navigate to="/meeting" />
-            )
-          }
-        />
-        {isMFS ? (
-          <Route path="/FAQ" element={<FAQ />} />
-        ) : (
-          <Route
-            path={'/FAQ'}
-            element={
-              !userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />
             }
           />
-        )}
-        {isMFS && (
-          <>
-            <Route
-              path="/meeting"
-              element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
-            />
-            <Route
-              path="/meeting/:id"
-              element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
-            />
-            <Route
-              path="/outils"
-              element={!userAuth.isLogin ? <Navigate to="/login" /> : <Tools />}
-            />
-          </>
-        )}
-        <Route
-          path="/meeting"
-          element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
-        />
-        <Route
-          path="/history"
-          element={!userAuth.isLogin ? <Navigate to="/login" /> : <History />}
-        />
-        <Route
-          path="/"
-          element={
-            !userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/meeting" />
-          }
-        />
-        <Route path="/404" element={<Error404 />} />
-        {!isMFS ? (
           <Route
-            path="/chat"
-            element={!userAuth.isLogin ? <Navigate to="/login" /> : <Chatbot />}
-          />
-        ) : (
-          <Route
-            path={'/chat'}
+            path="/reset-password"
             element={
-              !userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />
+              <ResetPassword
+                setAuthFailed={setAuthFailed}
+                userAuth={userAuth}
+                setUserAuth={setUserAuth}
+              />
             }
           />
-        )}
-        <Route
-          path="/contact"
-          element={
-            !userAuth.isLogin ? (
-              <Navigate to="/login" />
-            ) : (
-              <Contact setUserAuth={setUserAuth} />
-            )
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <Signup
-              authFailed={authFailed}
-              setAuthFailed={setAuthFailed}
-              userAuth={userAuth}
-              setUserAuth={setUserAuth}
-            />
-          }
-        />
-        <Route
-          path="/reset-password"
-          element={
-            <ResetPassword
-              setAuthFailed={setAuthFailed}
-              userAuth={userAuth}
-              setUserAuth={setUserAuth}
-            />
-          }
-        />
-        <Route
-          path="/new-password"
-          element={<NewPassword authFailed={authFailed} setAuthFailed={setAuthFailed} />}
-        />
-        <Route path="*" element={<Error404 />} />
-      </Routes>
+          <Route
+            path="/new-password"
+            element={
+              <NewPassword authFailed={authFailed} setAuthFailed={setAuthFailed} />
+            }
+          />
+          <Route path="*" element={<Error404 />} />
+        </Routes>
+      </div>
       {!meetingPathRegex.test(location.pathname) &&
         location.pathname !== '/chat' &&
         location.pathname !== '/' && <Footer />}{' '}
