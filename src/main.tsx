@@ -3,10 +3,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Link } from 'react-router-dom'
-import { Root } from './components/Root'
 import { MFSProvider } from './utils/context/isMFSContext'
 import { store } from './utils/reducer/reducer'
 import React, { useEffect } from 'react'
+import { Root } from './components/Root/Root'
 
 function App() {
   useEffect(() => {

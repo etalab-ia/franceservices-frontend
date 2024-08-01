@@ -1,5 +1,6 @@
 import { useGetArchive } from '@api'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { Skeleton } from '@mui/material'
 import Accordion from '@mui/material/Accordion'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import AccordionSummary from '@mui/material/AccordionSummary'
@@ -18,10 +19,8 @@ import Separator from 'components/Global/Separator'
 import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
-import { FirstQuestionExample } from './MeetingFirstQuestionSidePanel'
 import { MeetingQuestionInput } from './MeetingQuestionInput'
 import { UsefulLinks } from './UsefulLinks'
-import { Skeleton } from '@mui/material'
 
 export function MeetingOutputs({ chatId }: { chatId?: number }) {
   const user = useSelector((state: RootState) => state.user)
@@ -123,13 +122,29 @@ export function History({
                 zIndex: 1,
               }}
             >
-              <DisplayResponse response={h.response} webservices={h.webservices} />
+              <DisplayResponse
+                response={h.response ? extractContent(h.response) : ''}
+                webservices={h.webservices?.length ? h.webservices : getWebservices(h)}
+              />
             </AccordionDetails>
           </Accordion>
         </div>
       ))}
     </div>
   )
+}
+
+function getWebservices(history) {
+  const webservices = []
+
+  history.chunks.map((chunk) => {
+    chunk.web_services.map((webservice) => {
+      if (webservices.length >= 3) return webservices
+      webservices.push(webservice)
+    })
+  })
+
+  return webservices
 }
 
 /*
@@ -207,4 +222,21 @@ export function DisplayResponse({
       <Separator extraClass="fr-mt-5w" />
     </GlobalRowContainer>
   )
+}
+function extractContent(inputString) {
+  const dataBlocks = inputString.split('\n\n')
+
+  let result = ''
+  for (const block of dataBlocks) {
+    if (block.startsWith('data: ')) {
+      try {
+        const jsonData = JSON.parse(block.substring(6))
+
+        if (jsonData.choices?.[0]?.delta?.content) {
+          result += jsonData.choices[0].delta.content
+        }
+      } catch (error) {}
+    }
+  }
+  return result
 }

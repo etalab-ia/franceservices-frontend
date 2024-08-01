@@ -36,6 +36,8 @@ function SmallHorizontalTile({ tileProps }: { tileProps: TileType }) {
           <h3 className="fr-tile__title">
             <a
               href={tileProps.linkProps.href}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{ backgroundImage: 'none', textDecoration: 'none' }}
             >
               {tileProps.title}
@@ -63,7 +65,7 @@ const setUsefulLinksTilesProps = (webservices: WebService[]) => {
     domain = domain.replace(/^entreprendre\./, '')
 
     const newTile = {
-      linkProps: { href: webservice.url },
+      linkProps: { href: webservice.url, target: '_blank' },
       title: (
         <>
           <p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">

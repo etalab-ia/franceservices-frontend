@@ -1,7 +1,7 @@
 import { streamUrl } from '@api'
 import { EventSourcePolyfill } from 'event-source-polyfill'
 import { useDispatch } from 'react-redux'
-import type { AppDispatch, Question } from '../types'
+import type { AppDispatch, ChatCompletion, Question } from '../types'
 import { onCloseStream } from './eventsEmitter'
 import { setHeaders, setUserQuestion } from './setData'
 
@@ -32,13 +32,20 @@ export const useFetch = async (url: string, method: string, props): Promise<any>
 
 function handleStreamMessage(e, dispatch, stream_chat, id: number) {
   try {
-    const jsonData = JSON.parse(e.data)
-    if (jsonData === '[DONE]') {
+    const jsonData: ChatCompletion = JSON.parse(e.data)
+    if (jsonData.choices[0].finish_reason === 'stop') {
       stream_chat.close()
+      console.log('Stream closed')
       dispatch({ type: 'SET_STREAM_ID', nextStreamId: 0 })
       return dispatch({ type: 'STOP_AGENT_STREAM' })
     }
-    return dispatch({ type: 'GET_AGENT_STREAM', nextResponse: jsonData })
+    console.log('content', jsonData)
+    return dispatch({
+      type: 'GET_AGENT_STREAM',
+      nextResponse: jsonData.choices[0].delta.content
+        ? jsonData.choices[0].delta.content
+        : '',
+    })
   } catch (error) {
     console.error('An error occurred: ', error)
 
@@ -89,6 +96,7 @@ export async function generateStream(
 ) {
   const headers = setHeaders(false)
   const stream_data = setUserQuestion(question)
+  console.log('stream_data', stream_data, ' chatId', chatId)
   const stream = await useFetch(`${streamUrl}/chat/${chatId}`, 'POST', {
     data: JSON.stringify(stream_data),
     headers,
