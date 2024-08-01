@@ -47,7 +47,7 @@ export function MeetingAdditionalInput({
   )
 }
 
-export const inputFields = [
+const inputFields = [
   {
     label: 'Thèmes associés',
     name: 'themes',

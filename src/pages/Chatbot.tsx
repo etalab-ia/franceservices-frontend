@@ -6,15 +6,10 @@ import { DisplayChatTab } from '../components/Chat/DisplayChatTab'
 import { InitialQuestion } from '../types'
 
 // TODO WHEN BACK IS READY: change archive type
-export function Chatbot({ archive }: { archive: boolean }) {
+export function Chatbot() {
   const dispatch = useDispatch()
   const [currQuestion, setCurrQuestion] = useState(InitialQuestion)
-  const [generate, setGenerate] = useState(false)
 
-  /*   if (!generate) {
-    emitCloseStream()
-  }
- */
   const updateCurrQuestion = (newQuestion) => {
     setCurrQuestion(newQuestion)
   }
@@ -31,7 +26,7 @@ export function Chatbot({ archive }: { archive: boolean }) {
 
   return (
     <CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>
-      <DisplayChatTab archive={archive} setGenerate={setGenerate} />
+      <DisplayChatTab />
     </CurrQuestionContext.Provider>
   )
 }

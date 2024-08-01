@@ -2,13 +2,12 @@ import EventEmitter from 'events'
 
 const eventEmitter = new EventEmitter()
 
-// Call when wwe want to stop the stream
+// Call when we want to stop the stream
 export const emitCloseStream = () => {
   eventEmitter.emit('closeStream')
 }
 
-// Listener
-// for closeStream event and closes stream
+// Listens for closeStream event and closes stream
 export const onCloseStream = (listener) => {
   eventEmitter.on('closeStream', listener)
 }

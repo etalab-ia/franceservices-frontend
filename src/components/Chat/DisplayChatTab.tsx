@@ -15,10 +15,7 @@ import { ChatMainContainer } from './ChatMainContainer'
 
  **********************************************************************************************/
 
-export function DisplayChatTab({
-  archive,
-  setGenerate,
-}: { archive: boolean; setGenerate: any }) {
+export function DisplayChatTab() {
   const user = useSelector((state: RootState) => state.user)
   const [questionInput, setQuestionInput] = useState('')
 
@@ -28,13 +25,9 @@ export function DisplayChatTab({
         {user.messages.length <= 0 && (
           <NewChatHeader setQuestionInput={setQuestionInput} />
         )}
-        <ChatMainContainer archive={archive} setQuestionInput={setQuestionInput} />
+        <ChatMainContainer />
       </div>
-      <UserMessage
-        setGenerate={setGenerate}
-        questionInput={questionInput}
-        setQuestionInput={setQuestionInput}
-      />
+      <UserMessage questionInput={questionInput} setQuestionInput={setQuestionInput} />
     </div>
   )
 }
@@ -52,7 +45,7 @@ function NewChatHeader({ setQuestionInput }) {
           <span
             className="fr-col-1 fr-icon-info-fill fr-text-action-high--blue-france fr-mr-2w fr-mr-md-1v"
             aria-hidden="true"
-          ></span>
+          />
           <p className="fr-col-10">
             Je suis toujours en plein développement, et ne demande qu'à m'améliorer !
             N’hésitez pas à faire des retours sur les résultats que je vous propose pour
@@ -64,14 +57,17 @@ function NewChatHeader({ setQuestionInput }) {
         </div>
         <QuestionsSuggestionList
           setQuestionInput={setQuestionInput}
-          questions={['test', 'test2', 'test3']}
+          questions={[
+            "Qu'est-ce que la CAF ?",
+            "Comment renouveler une carte d'identité ?",
+          ]}
         />
       </div>
     </div>
   )
 }
 
-function QuestionsSuggestionList({
+export function QuestionsSuggestionList({
   questions,
   setQuestionInput,
 }: {
@@ -85,7 +81,7 @@ function QuestionsSuggestionList({
           <div
             onClick={() => setQuestionInput(q)}
             key={index}
-            className=" fr-background-alt--blue-france rounded bg-contain fr-p-2w fr-text--lg cursor-pointer"
+            className="fr-background-alt--blue-france fr-p-2w fr-text--md cursor-pointer rounded bg-contain"
           >
             {q}
           </div>

@@ -1,6 +1,5 @@
-import { type Feedback as FeedbackType, InitialFeedback, type RootState } from '@types'
-import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { InitialFeedback, type Feedback as FeedbackType } from '@types'
+import { useEffect, useState } from 'react'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { UserFeedbackInput } from './UserFeedbackInput'
 import { UserSatisfactionButtons } from './UserSatisfactionButtons'
@@ -11,11 +10,9 @@ import { UserSatisfactionButtons } from './UserSatisfactionButtons'
  * true when giving feedback on a regular response and
  * false when giving feedback on a question that has been regenerated
  */
-export function Feedback({
-  feedback,
-  setFeedback,
-}: { feedback: FeedbackType; setFeedback: (feedback: FeedbackType) => void }) {
-  const user = useSelector((state: RootState) => state.user)
+export function Feedback() {
+  const [feedback, setFeedback] = useState<FeedbackType>(InitialFeedback)
+
   useEffect(() => {
     setFeedback(InitialFeedback)
   }, [])

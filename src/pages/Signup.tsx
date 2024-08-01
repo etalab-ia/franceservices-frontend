@@ -2,45 +2,92 @@ import { userUrl } from '@api'
 import { ButtonsGroup } from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { initButtonsSignup } from '@constants/connexion'
 import { signupFields } from '@constants/inputFields'
-import { useState } from 'react'
-import { custom, email, object, parse, regex, string } from 'valibot'
-import { LoginContainer } from '../components/Auth/LoginContainer'
+import { useContext, useState } from 'react'
+import {
+  custom,
+  email,
+  maxLength,
+  minLength,
+  object,
+  parse,
+  regex,
+  string,
+} from 'valibot'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
-
-const passwordRegex = /^[A-Za-z\d$!%*+-?&#_=.,:;@,]{8,20}$/
+import { useNavigate } from 'react-router-dom'
+import { isMFSContext } from '@utils/context/isMFSContext'
 
 const SignupSchema = object(
   {
     username: string("Le nom d'utilisateur est invalide.", [
       custom(
         (username) => !username.includes('@'),
-        "Le nom d'utilisateur ne doit pas contenir '@'."
+        "Le nom d'utilisateur ne doit pas contenir '@'.",
       ),
     ]),
     email: string('Adresse email valide', [email('Adresse email invalide.')]),
     password: string('Le mot de passe est invalide.', [
+      minLength(8, 'Le mot de passe doit contenir au moins 8 charactères.'),
+      maxLength(128, 'Le mot de passe doit contenir au plus 128 charactères.'),
+      regex(/[0-9]/, 'Le mot de passe doit contenir un chiffre.'),
+      regex(/[^A-Za-z0-9]/, 'Le mot de passe doit contenir un charactère spécial.'),
       regex(
-        passwordRegex,
-        'Le mot de passe doit contenir entre 8 et 20 caractères et peut inclure des lettres, des chiffres et des caractères spéciaux ($!%*+?&#_-).'
+        /[^A-Za-z0-9$!%*+-?&#_=.,:;@]{8,128}/,
+        'Les charactères spéciaux autorisés sont $!%*+-?&#_=.,:;@',
       ),
     ]),
     confirmationPassword: string(
-      'La confirmation du mot de passe doit être une chaîne valide.'
+      'La confirmation du mot de passe doit être une chaîne valide.',
     ),
   },
   [
     custom(
       (data) => data.password === data.confirmationPassword,
-      'Les deux mots de passe doivent etre identiques'
+      'Les deux mots de passe doivent etre identiques',
     ),
-  ]
+  ],
+)
+const SignupSchemaMFS = object(
+  {
+    username: string("Le nom d'utilisateur est invalide.", [
+      custom(
+        (username) => !username.includes('@'),
+        "Le nom d'utilisateur ne doit pas contenir '@'.",
+      ),
+    ]),
+    email: string('Adresse email valide', [email('Adresse email invalide.')]),
+    password: string('Le mot de passe est invalide.', [
+      minLength(8, 'Le mot de passe doit contenir au moins 8 charactères.'),
+      maxLength(128, 'Le mot de passe doit contenir au plus 128 charactères.'),
+      regex(/[0-9]/, 'Le mot de passe doit contenir un chiffre.'),
+      regex(/[^A-Za-z0-9]/, 'Le mot de passe doit contenir un charactère spécial.'),
+      regex(
+        /[^A-Za-z0-9$!%*+-?&#_=.,:;@]{8,128}/,
+        'Les charactères spéciaux autorisés sont $!%*+-?&#_=.,:;@',
+      ),
+    ]),
+    confirmationPassword: string(
+      'La confirmation du mot de passe doit être une chaîne valide.',
+    ),
+  },
+  [
+    custom(
+      (data) => data.password === data.confirmationPassword,
+      'Les deux mots de passe doivent etre identiques',
+    ),
+  ],
 )
 export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
   const [password, setPassword] = useState('')
   const [confPassword, setConfPassword] = useState('')
   const [errorMesage, setErrorMessage] = useState('')
+  const [selectedMFS, setSelectedMFS] = useState('')
+  const [selectedMatricule, setSelectedMatricule] = useState('')
+  const [sent, setSent] = useState(false)
+  const isMFS = useContext(isMFSContext)
 
+  const navigate = useNavigate()
   const handleChange = (e) => {
     e.preventDefault()
 
@@ -49,7 +96,7 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
         ...userAuth,
         username: e.target.value,
       })
-    else if (e.target.name === 'password') setPassword(e.target.value)
+    else if (e.target.name === 'passwordSignup') setPassword(e.target.value)
     else if (e.target.name === 'confirmationPassword') setConfPassword(e.target.value)
     else if (e.target.name === 'email')
       setUserAuth({
@@ -70,14 +117,24 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
   }
 
   const handleClick = async () => {
-    const data = {
-      username: userAuth.username,
-      email: userAuth.email,
-      password: password,
-    }
-
+    const data = isMFS
+      ? {
+          username: userAuth.username,
+          email: userAuth.email,
+          password: password,
+          organization: selectedMFS,
+          matricule: selectedMatricule,
+        }
+      : {
+          username: userAuth.username,
+          email: userAuth.email,
+          password: password,
+        }
     try {
-      parse(SignupSchema, { ...data, confirmationPassword: confPassword })
+      parse(isMFS ? SignupSchemaMFS : SignupSchema, {
+        ...data,
+        confirmationPassword: confPassword,
+      })
     } catch (error) {
       console.error('Validation error:', error)
       setErrorMessage(error.message)
@@ -105,7 +162,7 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
         }
         setAuthFailed(true)
       } else {
-        window.location.href = '/login'
+        setSent(true)
       }
     } catch (error) {
       console.error('Fetch error:', error)
@@ -114,21 +171,60 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
   }
 
   return (
-    <LoginContainer>
-      <LoginFields fields={signupFields} handleChange={handleChange} />
-      {authFailed && <ButtonInformation>{errorMesage}</ButtonInformation>}
-      <ButtonsGroup
-        buttons={initButtonsSignup(
-          handleValidatePassword,
-          handleClick,
-          'Créer un compte'
-        )}
-      />
-    </LoginContainer>
+    <div className="fr-container">
+      <div className="fr-grid-row fr-mt-4w cursor-pointer" onClick={() => navigate(-1)}>
+        <span className="fr-icon-arrow-go-back-fill fr-text-title--blue-france fr-mr-2v" />
+        <p>Retour</p>
+      </div>
+      <div className="fr-grid-row">
+        <div className="fr-col fr-col-md-6 fr-mt-1w">
+          <h1 className="fr-text-title--blue-france fr-mt-5w fr-mb-2w">
+            Créer votre compte
+          </h1>
+          <p className="fr-mb-4w">
+            Créer votre compte en quelques instant pour utiliser Albert
+            {isMFS ? ' France services' : ''}.
+          </p>
+          {!sent && (
+            <div>
+              <LoginFields
+                fields={signupFields}
+                handleChange={handleChange}
+                selectedValue={selectedMFS}
+                setSelectedValue={setSelectedMFS}
+                matricule={selectedMatricule}
+                setMatricule={setSelectedMatricule}
+                handleSubmit={handleClick}
+              />
+              {authFailed && <ButtonInformation>{errorMesage}</ButtonInformation>}
+              <ButtonsGroup
+                buttons={initButtonsSignup(
+                  handleValidatePassword,
+                  handleClick,
+                  'Créer un compte',
+                )}
+              />
+            </div>
+          )}
+          {sent && (
+            <div className="fr-container fr-grid-row fr-pb-5w">
+              <span
+                className="fr-icon-success-line fr-text-default--success flex flex-row gap-2"
+                aria-hidden="true"
+              >
+                Votre compte a bien été créé. Il va être activé par un administrateur dans
+                les plus brefs délais. Vous recevrez une confirmation de l’activation à
+                l’adresse email que vous avez renseignée.
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   )
 }
 
-export const useFetch = async (url, method, props) => {
+const useFetch = async (url, method, props) => {
   const { data, headers } = props
   try {
     const response = await fetch(url, {

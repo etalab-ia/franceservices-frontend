@@ -1,9 +1,8 @@
-import { type Dispatch, type SetStateAction, useState } from 'react'
-import { ContactButton } from './ContactButton'
+import { useState } from 'react'
 import { ContactFormInput } from './ContactFormInput'
+import { ContactFormSubmitButton } from './ContactFormSubmitButton'
 import { UserInformation } from './UserInformation'
 
-import type { UserAuth } from 'utils/auth'
 export type formDataTypes = {
   title: string
   administration: string
@@ -11,9 +10,7 @@ export type formDataTypes = {
   name: string
 }
 
-export function ContactForm({
-  setUserAuth,
-}: { setUserAuth: Dispatch<SetStateAction<UserAuth>> }) {
+export function ContactForm() {
   const [formData, setFormData] = useState<formDataTypes>({
     title: '',
     administration: '',
@@ -24,14 +21,10 @@ export function ContactForm({
     setFormData({ title: '', administration: '', message: '', name: '' })
   }
   return (
-    <div className=" fr-container fr-my-3w ">
+    <div className="fr-container fr-my-3w">
       <UserInformation formData={formData} setFormData={setFormData} />
       <ContactFormInput message={formData.message} setFormData={setFormData} />
-      <ContactButton
-        setUserAuth={setUserAuth}
-        formData={formData}
-        clearForm={clearForm}
-      />
+      <ContactFormSubmitButton formData={formData} clearForm={clearForm} />
     </div>
   )
 }

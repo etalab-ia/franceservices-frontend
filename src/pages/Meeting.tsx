@@ -1,40 +1,24 @@
-import { CurrQuestionContext } from '@utils/context/questionContext'
-import { emitCloseStream } from '@utils/eventsEmitter'
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { MeetingInputs } from '../components/Meeting/MeetingInputs'
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { MeetingOutputs } from '../components/Meeting/MeetingOutputs'
-import { InitialQuestion, MeetingInputContext, type RootState } from '../types'
-
-/*****************************************************************************************************
-	
-	VARIABLES:
-	
-	**	generate: to determine whether the user is in the description or stream phase
-			true: user entered prompt informations & click on generate button
-			false:
-				- user has just arrived on the meeting page
-				- OR clicked on the modify button. If so, emitCloseStream is called
-	
-	**	currQuestion: description provided by the user
-	**	context: additional informations provided by the user: administrations and themes tags
-
- *****************************************************************************************************/
 
 export function Meeting() {
-  const [generate, setGenerate] = useState(false)
-  const [currQuestion, setCurrQuestion] = useState(InitialQuestion)
-  const stream = useSelector((state: RootState) => state.stream)
+  const { id } = useParams<{ id: string }>()
+  const dispatch = useDispatch()
 
-  const updateCurrQuestion = (newQuestion) => {
-    setCurrQuestion(newQuestion)
-  }
+  useEffect(() => {
+    if (id) {
+      dispatch({
+        type: 'SET_CHAT_ID',
+        nextChatId: Number(id),
+      })
+    }
+  }, [id, dispatch])
 
   return (
-    <CurrQuestionContext.Provider value={{ currQuestion, updateCurrQuestion }}>
-      <div className="fr-container fr-my-3w">
-        {generate ? <MeetingOutputs /> : <MeetingInputs setGenerate={setGenerate} />}
-      </div>
-    </CurrQuestionContext.Provider>
+    <div className="fr-container fr-mt-3w">
+      <MeetingOutputs chatId={id ? Number(id) : undefined} />
+    </div>
   )
 }

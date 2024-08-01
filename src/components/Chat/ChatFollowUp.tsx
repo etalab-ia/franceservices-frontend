@@ -1,18 +1,16 @@
-import { InitialFeedback, type Feedback, type RootState } from '@types'
-import { useRef, useState } from 'react'
+import type { RootState } from '@types'
+import { GlobalParagraph } from 'components/Global/GlobalParagraph'
+import { TextWithSources } from 'components/Sources/TextWithSources'
+import { useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { UserExperience } from '../Feedbacks/UserExperience'
-import { DisplayStream } from '../Stream/DisplayStream'
 import { AvatarToolsContainer } from './AvatarToolsContainer'
-import { SourcesAccordion } from './DisplayArrayMessages'
 
-// Last message of the chat
+// Last message of the chat with feedback
 export function ChatFollowUp() {
-  const [feedback, setFeedback] = useState<Feedback>(InitialFeedback)
   const stream = useSelector((state: RootState) => state.stream)
   const conditionDiv = stream.response.length !== 0 || stream.historyStream.length !== 0
   const followUpRef = useRef(null)
-  const user = useSelector((state: RootState) => state.user)
 
   return (
     <>
@@ -23,20 +21,16 @@ export function ChatFollowUp() {
               <AvatarToolsContainer />
             </div>
             <div className="fr-col-10">
-              <DisplayStream stream={stream} />
+              {stream.isStreaming ? (
+                <TextWithSources text={stream.response} />
+              ) : (
+                <GlobalParagraph>{stream.historyStream[0] ?? ''}</GlobalParagraph>
+              )}
             </div>
             <div className="fr-col-1 hide-on-smallscreen" />
           </div>
 
-          <div className="fr-grid-row fr-col">
-            <div className="fr-col-1" />
-            <div className="fr-col-11">
-              <SourcesAccordion sheets={user.sheets} />
-            </div>
-          </div>
-          {!stream.isStreaming && (
-            <UserExperience feedback={feedback} setFeedback={setFeedback} />
-          )}
+          {!stream.isStreaming && <UserExperience />}
         </div>
       )}
     </>

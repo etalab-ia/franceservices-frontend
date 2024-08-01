@@ -9,7 +9,8 @@ export type AppDispatch = typeof store.dispatch
 
 const modelName: string = import.meta.env.VITE_MODEL_NAME as string
 const modelMode: string = import.meta.env.VITE_MODEL_MODE as string
-/****************************************************************
+const modelTemperature: number = import.meta.env.VITE_MODEL_TEMPERATURE as number
+/****************************************************************;
  *                             USER                             *
  *            All the types used in the redux store             *
  *                 to track the user's question                 *
@@ -21,9 +22,9 @@ export interface User {
   messages: Message[] // Message exchanged between user & agent
   sheets: Sheet[] // Sheets associated to the reponse from 0 to 2
   additionalSheets: Sheet[] // suggested sheets to from 3 to 9
-  chunks: Chunk[] // Chunks associes a la reponse
+  chunks: Chunk[] // Chunks for the current response
   webservices: any[] // Dans sheets webservices: liens utiles lies aux sheets
-  chatId: number // current chat id
+  chatId: number // current chat id+
   streamId: number // current stream id
   history: UserHistory[] // history of the user's questions and the bot's responses
   lastStreamId: number // Keeps track of the last stream id, used to send feedback with the right stream id
@@ -66,7 +67,7 @@ export const InitialQuestion: Question = {
   context: undefined,
   institution: undefined,
   links: undefined,
-  temperature: 20,
+  temperature: modelTemperature,
   sources: ['service-public', 'travail-emploi'],
   should_sids: [],
   must_not_sids: [],
@@ -123,15 +124,6 @@ export type Chat = {
   userId: number | undefined
 }
 
-/* export const InitialChat: Chat = {
-  name: undefined,
-  type: undefined,
-  creationDate: undefined,
-  updatedDate: undefined,
-  id: undefined,
-  userId: undefined,
-} */
-
 export type ArchiveType = {
   chat_id: number
   context: string
@@ -162,10 +154,33 @@ export type ArchiveType = {
  * it is used to track the state of the response
  */
 export type Stream = {
-  response: string[]
+  response: string
   historyStream: string[]
   isStreaming: boolean
   activeTab: number // deprecated
+}
+
+/****************************************************************
+ *                            STREAM                            *
+ ****************************************************************/
+export type ChatCompletion = {
+  choices: Array<{
+    finish_reason: string
+    index: number
+    delta: {
+      content: string
+    }
+    logprobs: null | unknown // If logprobs is expected to be an object or null, replace `unknown` with the appropriate type
+  }>
+  created: number
+  id: string
+  model: string
+  object: string
+  usage: {
+    completion_tokens: number
+    prompt_tokens: number
+    total_tokens: number
+  }
 }
 
 /****************************************************************

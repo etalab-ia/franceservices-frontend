@@ -28,11 +28,8 @@ export function ButtonsOptions({
     if (!reasonValue.includes('tag-')) {
       if (reasons.includes(reasonValue)) {
         setReasons(reasons.filter((reason) => reason !== reasonValue))
-        if (reasonValue === 'other') {
-          setOtherReason('')
-        }
       } else {
-        setReasons([...reasons, reasonValue])
+        setReasons([reasonValue])
       }
     }
   }
@@ -46,11 +43,12 @@ export function ButtonsOptions({
             reasons.includes(reasonValue) ||
             (isOtherReasonButton(button) && reasons.includes('other'))
               ? 'fr-background-action-high--blue-france'
-              : 'bg-[white]'
+              : 'fr-background-default--grey'
 
           return (
             <div key={index}>
               <button
+                type="button"
                 role={feedbackButtonsChoice(button)}
                 className={`user-feedback-buttons fr-text-action-high--blue-france ${classNames}`}
                 onClick={() => handleClick(index)}

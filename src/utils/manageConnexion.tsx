@@ -10,7 +10,7 @@ const storeAuth = async (token: string) => {
 export const setUserInfos = async (
   token: string,
   setUserAuth: Dispatch<SetStateAction<UserAuth>>,
-  userUrl: string
+  userUrl: string,
 ) => {
   const userInfos = await useFetch(userUrl, 'GET', {
     headers: {

@@ -1,7 +1,7 @@
 import type { Stream } from '@types'
 
 const initialStream = {
-  response: [],
+  response: '',
   historyStream: [],
   isStreaming: false,
   activeTab: 1,
@@ -17,24 +17,24 @@ export const streamReducer = (state: Stream = initialStream, action: StreamActio
       return {
         ...state,
         isStreaming: true,
-        response: [...state.response, action.nextResponse],
+        response: state.response.concat(action.nextResponse),
       }
     case 'STOP_AGENT_STREAM':
       return {
         ...state,
-        historyStream: [...state.historyStream, state.response.join('')],
+        historyStream: [...state.historyStream, state.response],
         isStreaming: false,
-        response: [],
+        response: '',
       }
     case 'SET_ARCHIVE_LIMIT':
       return {
         ...state,
-        response: [],
+        response: '',
       }
     case 'RESET_AGENT_STREAM':
       return {
         ...state,
-        response: [],
+        response: '',
       }
     case 'SET_STREAM_HISTORY':
       return {
@@ -53,6 +53,11 @@ export const streamReducer = (state: Stream = initialStream, action: StreamActio
         ...state,
         activeTab: action.nextTab,
       }
+    case 'SET_IS_STREAMING':
+      return {
+        ...state,
+        isStreaming: action.nextIsStreaming,
+      }
     default: {
       return state
     }
@@ -69,3 +74,4 @@ type StreamAction =
   | { type: 'SET_STREAM_HISTORY'; nextStream: string }
   | { type: 'RESET_STREAM_HISTORY' }
   | { type: 'SWITCH_TAB'; nextTab: number }
+  | { type: 'SET_IS_STREAMING'; nextIsStreaming: boolean }

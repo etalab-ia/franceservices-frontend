@@ -1,13 +1,4 @@
-
-
-/*
-! tailwindcss v3.4.0 | MIT License | https://tailwindcss.com
-*/
-
-/*
-1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
-2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
-*/
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 @layer utilities {
@@ -21,6 +12,8 @@
           scrollbar-width: none;  /* Firefox */
     }
   }
+
+
 @media(max-width: 992px) {
 .hide-on-smallscreen {display: none;}
 }
@@ -49,148 +42,15 @@ html, body {
   --tw-content: '';
 }
 
-/*
-1. Use a consistent sensible line-height in all browsers.
-2. Prevent adjustments of font size after orientation changes in iOS.
-3. Use a more readable tab size.
-4. Use the user's configured `sans` font-family by default.
-5. Use the user's configured `sans` font-feature-settings by default.
-6. Use the user's configured `sans` font-variation-settings by default.
-7. Disable tap highlights on iOS
-*/
-
-html,
-:host {
-  line-height: 1.5;
-  /* 1 */
-  -webkit-text-size-adjust: 100%;
-  /* 2 */
-  -moz-tab-size: 4;
-  /* 3 */
-  -o-tab-size: 4;
-     tab-size: 4;
-  /* 3 */
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  /* 4 */
-  font-feature-settings: normal;
-  /* 5 */
-  font-variation-settings: normal;
-  /* 6 */
-  -webkit-tap-highlight-color: transparent;
-  /* 7 */
-}
-
-/*
-1. Remove the margin in all browsers.
-2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
-*/
-
-body {
-  margin: 0;
-  /* 1 */
-  line-height: inherit;
-  /* 2 */
-}
-
-/*
-1. Add the correct height in Firefox.
-2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
-3. Ensure horizontal rules are visible by default.
-*/
-
-hr {
-  height: 0;
-  /* 1 */
-  color: inherit;
-  /* 2 */
-  border-top-width: 1px;
-  /* 3 */
-}
-
-/*
-Add the correct text decoration in Chrome, Edge, and Safari.
-*/
-
-abbr:where([title]) {
-  -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted;
-}
-
-/*
-Remove the default font size and weight for headings.
-*/
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-
-}
-
-/*
-Reset links to optimize for opt-in styling instead of opt-out.
-*/
-
-a {
-  color: inherit;
-  text-decoration: inherit;
-}
-
-/*
-Add the correct font weight in Edge and Safari.
-*/
 
 b,
 strong {
   font-weight: bolder;
 }
 
-/*
-1. Use the user's configured `mono` font-family by default.
-2. Use the user's configured `mono` font-feature-settings by default.
-3. Use the user's configured `mono` font-variation-settings by default.
-4. Correct the odd `em` font sizing in all browsers.
-*/
 
-code,
-kbd,
-samp,
-pre {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  /* 1 */
-  font-feature-settings: normal;
-  /* 2 */
-  font-variation-settings: normal;
-  /* 3 */
-  font-size: 1em;
-  /* 4 */
-}
 
-/*
-Add the correct font size in all browsers.
-*/
 
-small {
-  font-size: 80%;
-}
-
-/*
-Prevent `sub` and `sup` elements from affecting the line height in all browsers.
-*/
-
-sub,
-sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-
-sub {
-  bottom: -0.25em;
-}
 
 sup {
   top: -0.5em;
@@ -508,9 +368,6 @@ video {
   background-color: rgb(238 238 238 / var(--tw-bg-opacity));
 }
 
-/* Normal grey */
-
-/* Dark grey */
 
 /* GLOBAL */
 
@@ -564,20 +421,9 @@ video {
   margin-bottom: 0.5rem;
 }
 
-/* TODO: change margin/padding/colors/height to dsfr one */
-
-.user-feedback-confirmation-button {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  margin-top: 0.5rem;
-  font-weight: 700;
-  width: -moz-fit-content;
-  width: fit-content;
-  border-style: solid;
-  border-width: 1px;
-  --tw-border-opacity: 1;
+.user-feedback-buttons:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 /* AGENT */
@@ -978,25 +824,7 @@ video {
     /* Optional: add other styles like padding or margin as needed */
 }
 
-.accordion {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* This aligns all children (including h6 and accordions) to the start */
-}
 
-.h6-container {
-    width: 100%; /* Ensures h6 takes full width of its parent */
-    /* Optional: Add margin or padding as needed */
-}
-
-/* Adjust the size of h6 to ensure they take the same space if needed */
-.h6-container h6 {
-    min-height: Xpx; /* Replace X with a fixed height that fits the largest h6 */
-    /* Optional: Add other styling as needed */
-}
-    .accordion-custom-button {
-      --text-spacing:0;--title-spacing:0;display:inline-flex;flex-direction:row;align-items:center;width:-moz-fit-content;width:fit-content;font-weight:500;font-size:1rem;line-height:1.5rem;min-height:3rem;padding:0.75rem 1rem;overflow:initial;max-width:100%;max-height:none;width:100%;text-align:left;margin:0;color:var(--text-disabled-grey);
-    }
 /* Styles for larger screens */
 @media (min-width: 1186px) {
     .accordion-container {
@@ -1035,4 +863,36 @@ video {
     display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.tooltip {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border-bottom: 0px solid !important;
+}
+.tooltip a {
+  text-decoration: none !important;
+  border-bottom: 0px solid !important;
+}
+
+.no-underline-link {
+  text-decoration: none !important;
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-left {
+  opacity: 0;
+  animation: fadeInLeft 0.5s forwards;
 }

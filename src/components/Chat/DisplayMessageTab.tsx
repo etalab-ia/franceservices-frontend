@@ -1,4 +1,4 @@
-import { nextImgDescription, previousImgDescription } from '@constants/chatbotProps'
+import { nextImgDescription } from '@constants/chatbotProps'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import next from '../../../icons/usertools/next.svg'
@@ -21,7 +21,7 @@ export function DisplayMessageTab({
   const handleClick = (
     activeTab: number,
     setActiveTab: React.Dispatch<React.SetStateAction<number>>,
-    step: number
+    step: number,
   ) => {
     setActiveTab(activeTab + step)
   }
@@ -32,10 +32,14 @@ export function DisplayMessageTab({
         <div className={`${extraClass} flex flex-row fr-mb-4w`}>
           {activeTab > 1 && (
             <button
+              type="button"
               className="fr-mr-1w"
               onClick={() => handleClick(activeTab, setActiveTab, -1)}
             >
-              <img src={previous} alt={previousImgDescription} />
+              <img
+                src={previous}
+                alt="Bouton d'accès au message précédent généré par le robot."
+              />
             </button>
           )}
           <p className="streaming-tabs">
@@ -43,10 +47,14 @@ export function DisplayMessageTab({
           </p>
           {activeTab < tabsLen && (
             <button
+              type="button"
               className="fr-ml-1w"
               onClick={() => handleClick(activeTab, setActiveTab, 1)}
             >
-              <img src={next} alt={nextImgDescription} />
+              <img
+                src={next}
+                alt="Bouton d'accès au message suivant généré par le robot."
+              />
             </button>
           )}
         </div>

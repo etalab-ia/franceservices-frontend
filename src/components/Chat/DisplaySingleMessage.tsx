@@ -1,9 +1,6 @@
-import type { Chunk, RootState } from '@types'
-import { useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Avatar } from './Avatar'
 
-//User's message
+// User's message
 export const DisplaySingleMessage = ({
   sender,
   text,
@@ -27,9 +24,9 @@ export const DisplaySingleMessage = ({
               : 'agent-chat fr-mb-4w fr-p-2w text-wrap'
           }
           style={{
-            wordWrap: 'break-word', // Ensures words break to prevent overflow
-            overflowWrap: 'break-word', // Breaks the word to prevent overflow
-            whiteSpace: 'pre-wrap', // Maintains whitespace formatting and allows normal word wrap within the content
+            wordWrap: 'break-word',
+            overflowWrap: 'break-word',
+            whiteSpace: 'pre-wrap',
           }}
         >
           {text}

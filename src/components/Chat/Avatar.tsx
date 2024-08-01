@@ -1,31 +1,29 @@
-import { robotAvatarDescription, userAvatarDescription } from '@constants/chatbotProps'
 import agentAvatar from '../../../icons/chat/Bulle-Albert.svg'
 import userAvatar from '../../../icons/chat/Bulle-Utilisateur.svg'
-import { AvatarContainer } from './AvatarContainer'
 
 export function Avatar({ user }) {
   const theme = localStorage.getItem('scheme')
   return (
-    <AvatarContainer>
+    <div className="avatar">
       {user === 'agent' ? (
         theme === 'dark' ? (
           <div>
-            <img src={agentAvatar} alt={robotAvatarDescription} />
+            <img src={agentAvatar} alt="Avatar de Albert" />
           </div>
         ) : (
           <div>
-            <img src={agentAvatar} alt={robotAvatarDescription} />
+            <img src={agentAvatar} alt="Avatar de Albert" />
           </div>
         )
       ) : theme === 'dark' ? (
         <div>
-          <img src={userAvatar} alt={userAvatarDescription} />
+          <img src={userAvatar} alt="Avatar de l'utilisateur" />
         </div>
       ) : (
         <div>
-          <img src={userAvatar} alt={userAvatarDescription} />
+          <img src={userAvatar} alt="Avatar de l'utilisateur" />
         </div>
       )}
-    </AvatarContainer>
+    </div>
   )
 }

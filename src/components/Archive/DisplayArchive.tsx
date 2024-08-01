@@ -1,9 +1,5 @@
 import { useGetArchive } from '@api'
 import { Button } from '@codegouvfr/react-dsfr/Button'
-import {
-  meetingAppointmentInformations,
-  meetingAppointmentTitle,
-} from '@constants/meeting'
 import type { Chat, UserHistory } from '@types'
 import React from 'react'
 import ReactToPrint from 'react-to-print'
@@ -31,7 +27,7 @@ export const DisplayArchive = React.forwardRef<HTMLDivElement, DisplayArchivePro
     window.addEventListener('popstate', () => {})
 
     const { data: archive, error, isLoading, isError } = useGetArchive(selectedChat.id)
-    if (isLoading) return <div></div>
+    if (isLoading) return null
     if (isError || !archive || !archive.length) {
       return (
         <ShowError
@@ -69,14 +65,14 @@ export const DisplayArchive = React.forwardRef<HTMLDivElement, DisplayArchivePro
         </div>
       </>
     )
-  }
+  },
 )
 
 function DisplayMeetingArchive({ streams }: { streams: UserHistory[] }) {
   return (
     <>
-      <GlobalTitle>{meetingAppointmentTitle}</GlobalTitle>
-      <h5>{meetingAppointmentInformations}</h5>
+      <GlobalTitle>Poser une question à Albert</GlobalTitle>
+      <h5> Votre question sur la situation de l’usager</h5>
       <GlobalParagraph>{streams[0].query}</GlobalParagraph>
 
       <div className="ft-container h-full w-full">

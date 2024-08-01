@@ -1,12 +1,4 @@
-import type {
-  Chunk,
-  Message,
-  Question,
-  Sheet,
-  User,
-  UserHistory,
-  WebService,
-} from '@types'
+import type { Chunk, Message, Question, Sheet, User, UserHistory } from '@types'
 
 /*****************************************************************************************************
 	
@@ -26,12 +18,9 @@ import type {
 
  *****************************************************************************************************/
 
-// TODO:
-// - question: local state
-// - messages: check w/ backend /streams
-
 const modelName: string = import.meta.env.VITE_MODEL_NAME as string
 const modelMode: string = import.meta.env.VITE_MODEL_MODE as string
+const modelTemperature: number = import.meta.env.VITE_MODEL_TEMPERATURE as number
 
 const InitialQuestion: Question = {
   model_name: modelName,
@@ -41,7 +30,7 @@ const InitialQuestion: Question = {
   context: undefined,
   institution: undefined, //TODO: remove
   links: undefined,
-  temperature: 20,
+  temperature: modelTemperature,
   sources: ['service-public', 'travail-emploi'],
   should_sids: [],
   must_not_sids: [],
@@ -63,14 +52,6 @@ const InitialUser: User = {
 type UserAction =
   | { type: 'SET_SHEETS'; sheets: Sheet[] }
   | { type: 'SET_CHUNKS'; chunks: Chunk[] }
-  | {
-      type: 'SET_SHEETS_FROM_ARCHIVE'
-      sheets: Sheet[]
-      additionalSheets: Sheet[]
-      webservices: WebService[]
-    }
-  | { type: 'REMOVE_SHEETS'; indexToRemove: number }
-  | { type: 'ADD_SHEETS'; indexToAdd: number }
   | { type: 'SET_USER_QUERY'; nextUserQuery: string; nextChatId: number }
   | { type: 'RESET_QUESTION_FIELDS' }
   | { type: 'RESET_USER' }
@@ -92,86 +73,28 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
         ...state,
         history: [...state.history, action.newItem],
       }
-    case 'SET_SHEETS':
+    case 'SET_SHEETS': {
+      let webServices = []
+      for (let i = 0; i < action.sheets.length && webServices.length < 3; i++) {
+        if (action.sheets[i].web_services) {
+          webServices = webServices.concat(
+            action.sheets[i].web_services.slice(0, 3 - webServices.length),
+          )
+        }
+      }
       return {
         ...state,
         sheets: action.sheets.slice(0, 3),
         additionalSheets: action.sheets.slice(3, 10),
-        webservices: action.sheets[0].web_services?.slice(0, 3),
+        webservices: webServices,
       }
+    }
     case 'SET_CHUNKS':
       return {
         ...state,
         chunks: action.chunks,
       }
-    case 'SET_SHEETS_FROM_ARCHIVE':
-      return {
-        ...state,
-        sheets: action.sheets,
-        additionalSheets: action.additionalSheets,
-        webservices: action.webservices,
-      }
-    case 'REMOVE_SHEETS': {
-      if (!state.sheets) return state
 
-      const sheets = state.sheets.filter((_, index) => action.indexToRemove !== index)
-      const additionalSheets = state.sheets.filter(
-        (_, index) => action.indexToRemove === index
-      )
-      const nextMustNotSids = [...state.question.must_not_sids, additionalSheets[0].sid]
-
-      if (
-        JSON.stringify(nextMustNotSids) === JSON.stringify(state.question.must_not_sids)
-      )
-        return {
-          ...state,
-          sheets: [...state.sheets, ...sheets],
-          additionalSheets: additionalSheets,
-        }
-
-      return {
-        ...state,
-        sheets: sheets,
-        additionalSheets: [...state.additionalSheets, ...additionalSheets],
-        question: {
-          ...state.question,
-          must_not_sids: nextMustNotSids,
-        },
-      }
-    }
-    case 'ADD_SHEETS': {
-      if (!state.sheets) return state
-
-      const sheets = state.additionalSheets.filter(
-        (_, index) => action.indexToAdd === index
-      )
-      const additionalSheets = state.additionalSheets.filter(
-        (_, index) => action.indexToAdd !== index
-      )
-      const nextShouldSids = [...state.sheets.map((sheet) => sheet.sid), sheets[0].sid]
-      const nextMustNotSids = state.question.must_not_sids.filter(
-        (sid) => !nextShouldSids.includes(sid)
-      )
-
-      if (
-        JSON.stringify(nextMustNotSids) === JSON.stringify(state.question.must_not_sids)
-      )
-        return {
-          ...state,
-          sheets: [...state.sheets, ...sheets],
-          additionalSheets: additionalSheets,
-        }
-
-      return {
-        ...state,
-        sheets: [...state.sheets, ...sheets],
-        additionalSheets: additionalSheets,
-        question: {
-          ...state.question,
-          must_not_sids: nextMustNotSids,
-        },
-      }
-    }
     case 'SET_CHAT_ID':
       return {
         ...state,

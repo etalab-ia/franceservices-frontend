@@ -1,4 +1,9 @@
-.env.development
+.env.staging
+.env.production
+.env.dev
+.env.local
+
+..bfg-report
 
 # Logs
 logs
@@ -24,6 +29,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+*.min.js
 
 coverage-ts
 coverage-ts/**

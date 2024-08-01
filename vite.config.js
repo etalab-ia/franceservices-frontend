@@ -1,12 +1,13 @@
+import react from '@vitejs/plugin-react-swc'
 import path from 'node:path'
-import react from '@vitejs/plugin-react'
 import url from 'rollup-plugin-url'
-import tailwindcss from 'tailwindcss'
-import { defineConfig } from 'vite'
-import tsconfigPaths from 'vite-tsconfig-paths'
-export default ({ mode }) => {
-  const isProduction = mode === 'production'
 
+import { defineConfig } from 'vite'
+
+import tailwindcss from 'tailwindcss'
+import tsconfigPaths from 'vite-tsconfig-paths'
+
+export default () => {
   return defineConfig({
     plugins: [react(), tailwindcss(), url(), tsconfigPaths()],
     build: {
@@ -27,6 +28,6 @@ export default ({ mode }) => {
       strictPort: true,
       port: 4173,
     },
-    base: '',
+    base: '/',
   })
 }

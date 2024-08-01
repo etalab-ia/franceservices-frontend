@@ -13,11 +13,7 @@ import { UsefulLinks } from './UsefulLinks'
 
 		** The right pan of meeting, sheets and webservices
 		
-		**	DisplaySheets: set & display sheets cards from GET /indexes sheets
-
 		**	UsefulLinks: set first webservices from GET /indexes sheets
-
-		**	archive is undefined if the user is on editing meeting page	
 
  *****************************************************************************************/
 
@@ -38,7 +34,7 @@ export function MeetingAdditionalResponse() {
       'chunks',
       user.question.limit,
       JSON.stringify(user.streamId),
-      indexesUrl
+      indexesUrl,
     )
     getIndexes(
       data,
@@ -46,14 +42,13 @@ export function MeetingAdditionalResponse() {
       'sheets',
       user.question.limit,
       JSON.stringify(user.streamId),
-      indexesUrl
+      indexesUrl,
     )
   }, [user.streamId, user.question])
   return (
-    <OneThirdScreenWidth extraClass="fr-mt-5w">
-      {/* <DisplaySheets archive={archive ?? undefined} /> */}
+    <OneThirdScreenWidth>
       <GlobalColContainer>
-        <UsefulLinks webservices={user.webservices} />
+        {user.webservices?.length && <UsefulLinks webservices={user.webservices} />}
       </GlobalColContainer>
     </OneThirdScreenWidth>
   )

@@ -11,8 +11,8 @@ export const UsefulLinks = ({
     !webservices || !webservices.length ? [] : setUsefulLinksTilesProps(webservices)
 
   return (
-    <div className={`${extraClass} h-full`}>
-      <h6 className={' fr-pb-2w '}>Liens pratiques</h6>
+    <div className={`${extraClass} `}>
+      <h6 className={'fr-pb-2w '}>Liens pratiques</h6>
 
       {tiles.map((tile, key) => {
         return (
@@ -28,7 +28,7 @@ export const UsefulLinks = ({
 function SmallHorizontalTile({ tileProps }: { tileProps: TileType }) {
   return (
     <div
-      className="fr-tile fr-tile--sm fr-tile--horizontal fr-enlarge-link  hover:bg-[#f6f6f6]"
+      className="fr-tile fr-tile--sm fr-tile--horizontal fr-enlarge-link  "
       id="tile-6661"
     >
       <div className="fr-tile__body">
@@ -36,13 +36,15 @@ function SmallHorizontalTile({ tileProps }: { tileProps: TileType }) {
           <h3 className="fr-tile__title">
             <a
               href={tileProps.linkProps.href}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{ backgroundImage: 'none', textDecoration: 'none' }}
             >
               {tileProps.title}
             </a>
           </h3>
           <p className="fr-tile__detail">{tileProps.desc.key}</p>
-          <div className="fr-tile__start"></div>
+          <div className="fr-tile__start" />
         </div>
       </div>
     </div>
@@ -52,7 +54,7 @@ function SmallHorizontalTile({ tileProps }: { tileProps: TileType }) {
 /**
  * Helper function to generate tiles props from webservices
  */
-export const setUsefulLinksTilesProps = (webservices: WebService[]) => {
+const setUsefulLinksTilesProps = (webservices: WebService[]) => {
   const tiles: TileType[] = []
   webservices.map((webservice) => {
     const url = webservice.url
@@ -63,7 +65,7 @@ export const setUsefulLinksTilesProps = (webservices: WebService[]) => {
     domain = domain.replace(/^entreprendre\./, '')
 
     const newTile = {
-      linkProps: { href: webservice.url },
+      linkProps: { href: webservice.url, target: '_blank' },
       title: (
         <>
           <p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">

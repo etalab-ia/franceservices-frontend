@@ -1,12 +1,11 @@
-import { getChunksUrl, streamUrl } from '@api'
+import { streamUrl } from '@api'
 import { EventSourcePolyfill } from 'event-source-polyfill'
-import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import type { AppDispatch, Question, RootState } from '../types'
+import { useDispatch } from 'react-redux'
+import type { AppDispatch, ChatCompletion, Question } from '../types'
 import { onCloseStream } from './eventsEmitter'
 import { setHeaders, setUserQuestion } from './setData'
 
 export const useAppDispatch: () => AppDispatch = useDispatch
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 export const useFetch = async (url: string, method: string, props): Promise<any> => {
   const { data, headers } = props
@@ -33,13 +32,20 @@ export const useFetch = async (url: string, method: string, props): Promise<any>
 
 function handleStreamMessage(e, dispatch, stream_chat, id: number) {
   try {
-    const jsonData = JSON.parse(e.data)
-    if (jsonData == '[DONE]') {
+    const jsonData: ChatCompletion = JSON.parse(e.data)
+    if (jsonData.choices[0].finish_reason === 'stop') {
       stream_chat.close()
+      console.log('Stream closed')
       dispatch({ type: 'SET_STREAM_ID', nextStreamId: 0 })
       return dispatch({ type: 'STOP_AGENT_STREAM' })
     }
-    return dispatch({ type: 'GET_AGENT_STREAM', nextResponse: jsonData })
+    console.log('content', jsonData)
+    return dispatch({
+      type: 'GET_AGENT_STREAM',
+      nextResponse: jsonData.choices[0].delta.content
+        ? jsonData.choices[0].delta.content
+        : '',
+    })
   } catch (error) {
     console.error('An error occurred: ', error)
 
@@ -58,7 +64,7 @@ function handleStreamError(e, stream_chat) {
 /*
  **	Manage stream
  */
-export const useStream = async (dispatch, id: number, isChat: boolean) => {
+const useStream = async (dispatch, id: number, isChat: boolean) => {
   const stream_chat = new EventSourcePolyfill(`${streamUrl}/${id}/start`, {
     headers: setHeaders(true),
     withCredentials: true,
@@ -86,11 +92,12 @@ export async function generateStream(
   question: Question,
   dispatch,
   chatId: number,
-  isChat: boolean
+  isChat: boolean,
 ) {
   const headers = setHeaders(false)
   const stream_data = setUserQuestion(question)
-  const stream = await useFetch(streamUrl + `/chat/${chatId}`, 'POST', {
+  console.log('stream_data', stream_data, ' chatId', chatId)
+  const stream = await useFetch(`${streamUrl}/chat/${chatId}`, 'POST', {
     data: JSON.stringify(stream_data),
     headers,
   })

@@ -6,7 +6,7 @@ type ShowError = {
   errorNumber?: string
 }
 
-export function ShowError({ message, errorNumber }: ShowError) {
+function ShowError({ message, errorNumber }: ShowError) {
   return (
     <div className="fr-my-7w fr-mt-md-12w fr-mb-md-10w fr-grid-row fr-grid-row--gutters fr-grid-row--middle fr-grid-row--center">
       <div className="fr-py-0 fr-col-12 fr-col-md-6">
@@ -26,7 +26,7 @@ export function ShowError({ message, errorNumber }: ShowError) {
           </li>
         </ul>
       </div>
-      <div className="fr-col-12 fr-col-md-3 fr-col-offset-md-1 fr-px-6w fr-px-md-0 fr-py-0"></div>
+      <div className="fr-col-12 fr-col-md-3 fr-col-offset-md-1 fr-px-6w fr-px-md-0 fr-py-0" />
     </div>
   )
 }
