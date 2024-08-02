@@ -1,10 +1,5 @@
-# Albert Frontend
+# Albert France services
 *[English version below](#english-version)*
-> ⚠️ DISCLAIMER :
-> Ce projet est devenu open source très récemment, voici quelques mises en garde :
-> - Le code peut contenir des composants et du code qui ne vous sont pas utiles et qui sont utilisés spécifiquement pour France Services, le projet sera scindé dans le futur.
-> - L'accessibilité du projet n'est pas totale selon les [critères du RGAA](https://accessibilite.numerique.gouv.fr/)
-> - La documentation n'est pas complète
 
 ## 🎯 Objectif général
 
@@ -91,11 +86,6 @@ Tous les points d'entrée de l'api sont référencés dans [src/api/routes.ts](s
 <details>
   <summary>English version</summary>
 
-> ⚠️ DISCLAIMER:
-> This project went open source very recently, here are some caveats:
-> - The code might contain components and code that are of no use to you and that are used specifically for France Services, the project will be splitted in the future.
-> - The Accessibility of the project is not total according to the [RGAA criterias](https://accessibilite.numerique.gouv.fr/)
-> - The documentation is not complete
 
 ## 🎯 General objective
 
