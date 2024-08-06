@@ -14,7 +14,7 @@ export function MeetingMainResponse({
       <div>
         {!user.chatId && (
           <>
-            <h2 className="fr-mb-2w">Poser une question à Albert</h2>
+            <h2 className="fr-mb-2w">Poser une question à Albert: </h2>
             <p>
               Albert France services a pour objectif de faciliter les missions
               quotidiennes des conseillers France services en proposant des réponses
