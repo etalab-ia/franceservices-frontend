@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { handleSignout } from '@utils/manageConnexion'
 import { signoutUrl } from '@api'
 
-function Header({ username, setUserAuth }) {
+function Header({ username, setUserAuth, userAuth }) {
   return (
     <header role="banner" className="fr-header">
       <div className="fr-header__body">
@@ -14,11 +14,13 @@ function Header({ username, setUserAuth }) {
               <Logo />
               <TitleAndDescription />
             </div>
-            <EasyAccess username={username} setUserAuth={setUserAuth} />
+            {userAuth.isLogin && (
+              <EasyAccess username={username} setUserAuth={setUserAuth} />
+            )}
           </div>
         </div>
       </div>
-      <NavigationMenu />
+      {userAuth.isLogin && <NavigationMenu />}
     </header>
   )
 }
@@ -36,14 +38,11 @@ function Logo() {
 function TitleAndDescription() {
   return (
     <div className="fr-header__service">
-      <a
-        href="/"
-        title="Accueil - [À MODIFIER - Nom du site / service] - Nom de l’entité (ministère, secrétariat d‘état, gouvernement)"
-      >
+      <a href="/" title="Accueil - [Albert - France services] - DINUM / ETALAB">
         <p className="fr-header__service-title">ALBERT / France services</p>
       </a>
       <p className="fr-header__service-tagline">
-        Aide à l'accompagnement des usages France services
+        Aide à l’accompagnement des usagers France services
       </p>
     </div>
   )

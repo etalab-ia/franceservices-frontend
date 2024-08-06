@@ -3,7 +3,6 @@ import { ButtonsGroup } from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { initButtonsLogin } from '@constants/connexion'
 import { usernameOrPasswordError } from '@constants/errorMessages'
 import { loginFields } from '@constants/inputFields'
-import { isMFSContext } from '@utils/context/isMFSContext'
 import { useFetch } from '@utils/hooks'
 import { setUserInfos } from '@utils/manageConnexion'
 import {
@@ -28,9 +27,7 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
   const [isDisable, setIsDisable] = useState(true)
   const [password, setPassword] = useState('')
   const [id, setId] = useState('')
-  const isMFS = useContext(isMFSContext)
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     checkIfCompletedFields()
   }, [password, id])
@@ -80,12 +77,12 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
       <div className="fr-grid-row">
         <div className="fr-col fr-col-md-6">
           <h1 className="fr-text-title--blue-france fr-mt-5w fr-mb-2w">Se connecter</h1>
-          {isMFS && (
-            <p className="fr-mb-4w">
-              Ce service est à destination des France services participant à
-              l’expérimentation Albert France services.
-            </p>
-          )}
+
+          <p className="fr-mb-4w">
+            Ce service est à destination des France services participant à
+            l’expérimentation Albert France services.
+          </p>
+
           <LoginFields
             fields={loginFields}
             handleChange={handleChange}

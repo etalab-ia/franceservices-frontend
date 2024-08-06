@@ -2,7 +2,8 @@ import { userUrl } from '@api'
 import { ButtonsGroup } from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { initButtonsSignup } from '@constants/connexion'
 import { signupFields } from '@constants/inputFields'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   custom,
   email,
@@ -15,39 +16,7 @@ import {
 } from 'valibot'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
-import { useNavigate } from 'react-router-dom'
-import { isMFSContext } from '@utils/context/isMFSContext'
 
-const SignupSchema = object(
-  {
-    username: string("Le nom d'utilisateur est invalide.", [
-      custom(
-        (username) => !username.includes('@'),
-        "Le nom d'utilisateur ne doit pas contenir '@'.",
-      ),
-    ]),
-    email: string('Adresse email valide', [email('Adresse email invalide.')]),
-    password: string('Le mot de passe est invalide.', [
-      minLength(8, 'Le mot de passe doit contenir au moins 8 charactères.'),
-      maxLength(128, 'Le mot de passe doit contenir au plus 128 charactères.'),
-      regex(/[0-9]/, 'Le mot de passe doit contenir un chiffre.'),
-      regex(/[^A-Za-z0-9]/, 'Le mot de passe doit contenir un charactère spécial.'),
-      regex(
-        /[^A-Za-z0-9$!%*+-?&#_=.,:;@]{8,128}/,
-        'Les charactères spéciaux autorisés sont $!%*+-?&#_=.,:;@',
-      ),
-    ]),
-    confirmationPassword: string(
-      'La confirmation du mot de passe doit être une chaîne valide.',
-    ),
-  },
-  [
-    custom(
-      (data) => data.password === data.confirmationPassword,
-      'Les deux mots de passe doivent etre identiques',
-    ),
-  ],
-)
 const SignupSchemaMFS = object(
   {
     username: string("Le nom d'utilisateur est invalide.", [
@@ -85,7 +54,6 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
   const [selectedMFS, setSelectedMFS] = useState('')
   const [selectedMatricule, setSelectedMatricule] = useState('')
   const [sent, setSent] = useState(false)
-  const isMFS = useContext(isMFSContext)
 
   const navigate = useNavigate()
   const handleChange = (e) => {
@@ -117,21 +85,16 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
   }
 
   const handleClick = async () => {
-    const data = isMFS
-      ? {
-          username: userAuth.username,
-          email: userAuth.email,
-          password: password,
-          organization: selectedMFS,
-          matricule: selectedMatricule,
-        }
-      : {
-          username: userAuth.username,
-          email: userAuth.email,
-          password: password,
-        }
+    const data = {
+      username: userAuth.username,
+      email: userAuth.email,
+      password: password,
+      organization: selectedMFS,
+      matricule: selectedMatricule,
+    }
+
     try {
-      parse(isMFS ? SignupSchemaMFS : SignupSchema, {
+      parse(SignupSchemaMFS, {
         ...data,
         confirmationPassword: confPassword,
       })
@@ -182,8 +145,7 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
             Créer votre compte
           </h1>
           <p className="fr-mb-4w">
-            Créer votre compte en quelques instant pour utiliser Albert
-            {isMFS ? ' France services' : ''}.
+            Créer votre compte en quelques instant pour utiliser Albert France services.
           </p>
           {!sent && (
             <div>

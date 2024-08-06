@@ -123,7 +123,7 @@ export function History({
               }}
             >
               <DisplayResponse
-                response={h.response ? extractContent(h.response) : ''}
+                response={h.response ? h.response : ''}
                 webservices={h.webservices?.length ? h.webservices : getWebservices(h)}
               />
             </AccordionDetails>
@@ -225,6 +225,7 @@ export function DisplayResponse({
 }
 function extractContent(inputString) {
   const dataBlocks = inputString.split('\n\n')
+  console.log('extract', inputString)
 
   let result = ''
   for (const block of dataBlocks) {

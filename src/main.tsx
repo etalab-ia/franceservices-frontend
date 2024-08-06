@@ -1,12 +1,11 @@
 import { startReactDsfr } from '@codegouvfr/react-dsfr/spa'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Link } from 'react-router-dom'
-import { MFSProvider } from './utils/context/isMFSContext'
-import { store } from './utils/reducer/reducer'
-import React, { useEffect } from 'react'
 import { Root } from './components/Root/Root'
+import { store } from './utils/reducer/reducer'
 
 function App() {
   useEffect(() => {
@@ -22,13 +21,11 @@ function App() {
 
   return (
     <BrowserRouter basename="/">
-      <MFSProvider>
-        <Provider store={store}>
-          <QueryClientProvider client={queryClient}>
-            <Root />
-          </QueryClientProvider>
-        </Provider>
-      </MFSProvider>
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <Root />
+        </QueryClientProvider>
+      </Provider>
     </BrowserRouter>
   )
 }
