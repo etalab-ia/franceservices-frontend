@@ -7,6 +7,7 @@ import imagee from '../logo/LogoA+.png'
 export function Meeting() {
   const { id } = useParams<{ id: string }>()
   const dispatch = useDispatch()
+  console.log('image')
 
   useEffect(() => {
     if (id) {
