@@ -1,11 +1,9 @@
 import { userUrl } from '@api'
 import { InitialUserAuth, type UserAuth } from '@utils/auth'
-import { isMFSContext } from '@utils/context/isMFSContext'
 import { checkConnexion } from '@utils/localStorage'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Error404 from '../../pages/404'
-import { Chatbot } from '../../pages/Chatbot'
 import { Contact } from '../../pages/Contact'
 import { FAQ } from '../../pages/FAQ'
 import { History } from '../../pages/History'
@@ -22,7 +20,6 @@ export const Root = () => {
   const [userAuth, setUserAuth] = useState<UserAuth>(InitialUserAuth)
   const [authFailed, setAuthFailed] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  const isMFS = useContext(isMFSContext)
   const location = useLocation()
   const meetingPathRegex = /^\/meeting(\/.*)?$/
   useEffect(() => {
@@ -56,32 +53,24 @@ export const Root = () => {
               )
             }
           />
-          {isMFS ? (
-            <Route path="/FAQ" element={<FAQ />} />
-          ) : (
+
+          <Route path="/FAQ" element={<FAQ />} />
+
+          <>
             <Route
-              path={'/FAQ'}
-              element={
-                !userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />
-              }
+              path="/meeting"
+              element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
             />
-          )}
-          {isMFS && (
-            <>
-              <Route
-                path="/meeting"
-                element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
-              />
-              <Route
-                path="/meeting/:id"
-                element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
-              />
-              <Route
-                path="/outils"
-                element={!userAuth.isLogin ? <Navigate to="/login" /> : <Tools />}
-              />
-            </>
-          )}
+            <Route
+              path="/meeting/:id"
+              element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
+            />
+            <Route
+              path="/outils"
+              element={!userAuth.isLogin ? <Navigate to="/login" /> : <Tools />}
+            />
+          </>
+
           <Route
             path="/meeting"
             element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
@@ -97,19 +86,7 @@ export const Root = () => {
             }
           />
           <Route path="/404" element={<Error404 />} />
-          {!isMFS ? (
-            <Route
-              path="/chat"
-              element={!userAuth.isLogin ? <Navigate to="/login" /> : <Chatbot />}
-            />
-          ) : (
-            <Route
-              path={'/chat'}
-              element={
-                !userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/404" />
-              }
-            />
-          )}
+
           <Route
             path="/contact"
             element={
