@@ -19,7 +19,7 @@ export function Meeting() {
 
   return (
     <div className="fr-container fr-mt-3w">
-      <img src={imagee} alt="Logo" />
+      <img src={'../../artwork/logo/LogoA+.png'} alt="Logo" />
       <MeetingOutputs chatId={id ? Number(id) : undefined} />
     </div>
   )
