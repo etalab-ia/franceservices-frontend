@@ -71,7 +71,7 @@ const setUsefulLinksTilesProps = (webservices: WebService[]) => {
           <p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">
             {webservice.type}
           </p>
-          <p>{webservice.institution}</p>
+          <p>{webservice.title}</p>
         </>
       ),
       desc: <>{domain}</>,
