@@ -6,7 +6,7 @@ import { MeetingOutputs } from '../components/Meeting/MeetingOutputs'
 export function Meeting() {
   const { id } = useParams<{ id: string }>()
   const dispatch = useDispatch()
-  console.log('image')
+  console.log('TEST DEPLOYMENT')
 
   useEffect(() => {
     if (id) {
