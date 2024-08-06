@@ -74,6 +74,17 @@ export const LoginFields = ({
             matricule={matricule}
             setMatricule={setMatricule}
           />
+        ) : field.nativeInputProps.type !== 'mfs' ? (
+          <Input
+            label={field.label}
+            key={fieldKey}
+            hintText={field.hintText}
+            nativeInputProps={{
+              ...field.nativeInputProps,
+              onChange: handleChange,
+              onKeyDown: handleKeyDown,
+            }}
+          />
         ) : null
       })}
     </>
