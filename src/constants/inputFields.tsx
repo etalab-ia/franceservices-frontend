@@ -1,9 +1,9 @@
 import meeting from '@artwork/pictograms/albert/meeting.png'
 import question from '@artwork/pictograms/albert/question.png'
-import aplus from '../../artwork/logo/LogoA+.png'
-import franceservices from '../../artwork/logo/LogoFranceServices.png'
-import osmose from '../../artwork/logo/LogoOsmose.png'
-import servicepublic from '../../artwork/logo/LogoServicePublicMinimised.png'
+import aplus from '/logo/LogoA+.png'
+import franceservices from '/logo/LogoFranceServices.png'
+import osmose from '/logo/LogoOsmose.png'
+import servicepublic from '/logo/LogoServicePublicMinimised.png'
 
 export const signupFields = [
   {
