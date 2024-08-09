@@ -92,7 +92,7 @@ export const generalistRessourcesTiles = [
     className: 'fr-tile fr-tile--no-icon fr-enlarge-link',
     desc: 'Accéder',
     linkProps: { href: 'https://www.service-public.fr/' },
-    imageUrl: servicepublic,
+    imageUrl: '/logo/LogoServicePublicMinimised.png',
     title: (
       <>
         <p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">
@@ -108,7 +108,7 @@ export const MFSressourcesTiles = [
     className: 'fr-tile fr-tile--no-icon fr-enlarge-link',
     desc: 'Accéder',
     linkProps: { href: 'https://aplus.beta.gouv.fr/' },
-    imageUrl: aplus,
+    imageUrl: '/logo/LogoA+.png',
     title: (
       <>
         <p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">Réseau</p>
@@ -120,7 +120,7 @@ export const MFSressourcesTiles = [
     className: 'fr-tile fr-tile--no-icon fr-enlarge-link',
     desc: 'Accéder',
     linkProps: { href: 'https://osmose.numerique.gouv.fr/' },
-    imageUrl: osmose,
+    imageUrl: '/logo/LogoOsmose.png',
     title: (
       <>
         <p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">Réseau</p>
@@ -132,7 +132,7 @@ export const MFSressourcesTiles = [
     className: 'fr-tile fr-tile--no-icon fr-enlarge-link',
     desc: 'Accéder',
     linkProps: { href: 'https://extranet.france-services.gouv.fr/' },
-    imageUrl: franceservices,
+    imageUrl: '/logo/LogoFranceServices.png',
     title: (
       <>
         <p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">
