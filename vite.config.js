@@ -9,7 +9,7 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default () => {
   return defineConfig({
-    plugins: [react(), tailwindcss(), url(), tsconfigPaths()],
+    plugins: [react(), tailwindcss(), tsconfigPaths()],
     build: {
       outDir: 'dist',
       cssCodeSplit: false,

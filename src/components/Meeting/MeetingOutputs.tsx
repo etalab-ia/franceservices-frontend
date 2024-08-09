@@ -123,7 +123,7 @@ export function History({
               }}
             >
               <DisplayResponse
-                response={h.response ? extractContent(h.response) : ''}
+                response={h.response ? h.response : ''}
                 webservices={h.webservices?.length ? h.webservices : getWebservices(h)}
               />
             </AccordionDetails>
@@ -222,21 +222,4 @@ export function DisplayResponse({
       <Separator extraClass="fr-mt-5w" />
     </GlobalRowContainer>
   )
-}
-function extractContent(inputString) {
-  const dataBlocks = inputString.split('\n\n')
-
-  let result = ''
-  for (const block of dataBlocks) {
-    if (block.startsWith('data: ')) {
-      try {
-        const jsonData = JSON.parse(block.substring(6))
-
-        if (jsonData.choices?.[0]?.delta?.content) {
-          result += jsonData.choices[0].delta.content
-        }
-      } catch (error) {}
-    }
-  }
-  return result
 }

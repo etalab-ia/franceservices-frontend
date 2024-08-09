@@ -1,5 +1,5 @@
-import { Tile } from '@codegouvfr/react-dsfr/Tile'
 import type { Tile as TTile } from '@types'
+import { MFSressourcesTiles } from '@constants/inputFields'
 
 const TileContainer = ({ children }) => {
   return (
@@ -9,10 +9,10 @@ const TileContainer = ({ children }) => {
   )
 }
 
-export const HomeTiles = ({ tiles }) => {
+export const HomeTiles = () => {
   return (
     <div className="fr-grid-row">
-      {tiles.map((tile: TTile, index: number) => {
+      {MFSressourcesTiles.map((tile: TTile, index: number) => {
         return (
           <TileContainer key={index}>
             <Tile
@@ -26,6 +26,28 @@ export const HomeTiles = ({ tiles }) => {
           </TileContainer>
         )
       })}
+    </div>
+  )
+}
+
+function Tile({ className, desc, enlargeLink, linkProps, imageUrl, title }) {
+  return (
+    <div
+      className="fr-tile fr-tile--horizontal fr-tile--vertical@md fr-enlarge-link"
+      id="tile-6664"
+    >
+      <div className="fr-tile__body">
+        <div className="fr-tile__content">
+          <h3 className="fr-tile__title">
+            <a href={linkProps.href}>{title}</a>
+          </h3>
+        </div>
+      </div>
+      <div className="fr-tile__header">
+        <div className="fr-tile__pictogram">
+          <img src={imageUrl} alt="" />
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,6 +1,5 @@
 import { getArchiveUrl, useGetChatArchiveById, useGetChats } from '@api'
 import Button from '@codegouvfr/react-dsfr/Button'
-import { isMFSContext } from '@utils/context/isMFSContext'
 import Separator from 'components/Global/Separator'
 
 import ShowError from 'components/Error/ShowError'
@@ -27,12 +26,9 @@ export function History() {
 
 function HomeHeader() {
   const navigate = useNavigate()
-  const isMFS = useContext(isMFSContext)
 
   const handleNewQuestion = () => {
-    if (isMFS) {
-      navigate('/meeting')
-    } else navigate('/chat')
+    navigate('/meeting')
   }
   return (
     <div className="fr-mt-5w ">

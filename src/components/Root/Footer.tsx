@@ -2,7 +2,6 @@ import { Link, useLocation } from 'react-router-dom'
 
 export default function Footer() {
   const location = useLocation()
-  console.log(location)
   return (
     <footer className="fr-footer" role="contentinfo" id="footer-7361">
       <div className="fr-container">
