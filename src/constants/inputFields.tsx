@@ -1,9 +1,9 @@
 import meeting from '@artwork/pictograms/albert/meeting.png'
 import question from '@artwork/pictograms/albert/question.png'
-import aplus from '../../artwork/logo/LogoA+.png'
-import franceservices from '../../artwork/logo/LogoFranceServices.png'
-import osmose from '../../artwork/logo/LogoOsmose.png'
-import servicepublic from '../../artwork/logo/LogoServicePublicMinimised.png'
+import aplus from '/logo/LogoA+.png'
+import franceservices from '/logo/LogoFranceServices.png'
+import osmose from '/logo/LogoOsmose.png'
+import servicepublic from '/logo/LogoServicePublicMinimised.png'
 
 export const signupFields = [
   {
@@ -92,7 +92,7 @@ export const generalistRessourcesTiles = [
     className: 'fr-tile fr-tile--no-icon fr-enlarge-link',
     desc: 'Accéder',
     linkProps: { href: 'https://www.service-public.fr/' },
-    imageUrl: servicepublic,
+    imageUrl: '/logo/LogoServicePublicMinimised.png',
     title: (
       <>
         <p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">
@@ -108,7 +108,7 @@ export const MFSressourcesTiles = [
     className: 'fr-tile fr-tile--no-icon fr-enlarge-link',
     desc: 'Accéder',
     linkProps: { href: 'https://aplus.beta.gouv.fr/' },
-    imageUrl: aplus,
+    imageUrl: '/logo/LogoA+.png',
     title: (
       <>
         <p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">Réseau</p>
@@ -120,7 +120,7 @@ export const MFSressourcesTiles = [
     className: 'fr-tile fr-tile--no-icon fr-enlarge-link',
     desc: 'Accéder',
     linkProps: { href: 'https://osmose.numerique.gouv.fr/' },
-    imageUrl: osmose,
+    imageUrl: '/logo/LogoOsmose.png',
     title: (
       <>
         <p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">Réseau</p>
@@ -132,7 +132,7 @@ export const MFSressourcesTiles = [
     className: 'fr-tile fr-tile--no-icon fr-enlarge-link',
     desc: 'Accéder',
     linkProps: { href: 'https://extranet.france-services.gouv.fr/' },
-    imageUrl: franceservices,
+    imageUrl: '/logo/LogoFranceServices.png',
     title: (
       <>
         <p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">

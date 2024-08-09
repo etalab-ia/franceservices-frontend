@@ -2,12 +2,10 @@ import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { MeetingOutputs } from '../components/Meeting/MeetingOutputs'
-import imagee from '../logo/LogoA+.png'
 
 export function Meeting() {
   const { id } = useParams<{ id: string }>()
   const dispatch = useDispatch()
-  console.log('image')
 
   useEffect(() => {
     if (id) {
@@ -20,7 +18,6 @@ export function Meeting() {
 
   return (
     <div className="fr-container fr-mt-3w">
-      <img src={'../../artwork/logo/LogoA+.png'} alt="Logo" />
       <MeetingOutputs chatId={id ? Number(id) : undefined} />
     </div>
   )

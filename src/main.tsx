@@ -11,11 +11,11 @@ function App() {
   useEffect(() => {
     var _mtm = (window._mtm = window._mtm || [])
     _mtm.push({ 'mtm.startTime': new Date().getTime(), event: 'mtm.Start' })
-    const d = document
-    const g = d.createElement('script')
-    const s = d.getElementsByTagName('script')[0]
+    var d = document,
+      g = d.createElement('script'),
+      s = d.getElementsByTagName('script')[0]
     g.async = true
-    g.src = import.meta.env.VITE_MATOMO_URL
+    g.src = 'https://stats.data.gouv.fr/js/container_DXD5Rm0J.js'
     s.parentNode.insertBefore(g, s)
   }, [])
 

@@ -223,21 +223,3 @@ export function DisplayResponse({
     </GlobalRowContainer>
   )
 }
-function extractContent(inputString) {
-  const dataBlocks = inputString.split('\n\n')
-  console.log('extract', inputString)
-
-  let result = ''
-  for (const block of dataBlocks) {
-    if (block.startsWith('data: ')) {
-      try {
-        const jsonData = JSON.parse(block.substring(6))
-
-        if (jsonData.choices?.[0]?.delta?.content) {
-          result += jsonData.choices[0].delta.content
-        }
-      } catch (error) {}
-    }
-  }
-  return result
-}
