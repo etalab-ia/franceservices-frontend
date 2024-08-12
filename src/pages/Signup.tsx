@@ -13,40 +13,30 @@ import {
   parse,
   regex,
   string,
+  pipe,
+  excludes,
 } from 'valibot'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
 
-const SignupSchemaMFS = object(
-  {
-    username: string("Le nom d'utilisateur est invalide.", [
-      custom(
-        (username) => !username.includes('@'),
-        "Le nom d'utilisateur ne doit pas contenir '@'.",
-      ),
-    ]),
-    email: string('Adresse email valide', [email('Adresse email invalide.')]),
-    password: string('Le mot de passe est invalide.', [
-      minLength(8, 'Le mot de passe doit contenir au moins 8 charactères.'),
-      maxLength(128, 'Le mot de passe doit contenir au plus 128 charactères.'),
-      regex(/[0-9]/, 'Le mot de passe doit contenir un chiffre.'),
-      regex(/[^A-Za-z0-9]/, 'Le mot de passe doit contenir un charactère spécial.'),
-      regex(
-        /[^A-Za-z0-9$!%*+-?&#_=.,:;@]{8,128}/,
-        'Les charactères spéciaux autorisés sont $!%*+-?&#_=.,:;@',
-      ),
-    ]),
-    confirmationPassword: string(
-      'La confirmation du mot de passe doit être une chaîne valide.',
+const SignupSchemaMFS = object({
+  username: pipe(
+    string(),
+    excludes('@', "Le nom d'utilisateur ne doit pas contenir le caractère @"),
+  ),
+  email: pipe(string(), email("L'adresse email est invalide.")),
+  password: pipe(
+    string('Le mot de passe est invalide.'),
+    minLength(8, 'Le mot de passe doit contenir au moins 8 caractères.'),
+    maxLength(128, 'Le mot de passe doit contenir au plus 128 caractères.'),
+    regex(/[0-9]/, 'Le mot de passe doit contenir un chiffre.'),
+    regex(/[^A-Za-z0-9]/, 'Le mot de passe doit contenir un caractère spécial.'),
+    regex(
+      /^[A-Za-z0-9$!%*+-?&#_=.,:;@]+$/,
+      'Les caractères spéciaux autorisés sont $!%*+-?&#_=.,:;@',
     ),
-  },
-  [
-    custom(
-      (data) => data.password === data.confirmationPassword,
-      'Les deux mots de passe doivent etre identiques',
-    ),
-  ],
-)
+  ),
+})
 export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
   const [password, setPassword] = useState('')
   const [confPassword, setConfPassword] = useState('')
@@ -89,8 +79,8 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
       username: userAuth.username,
       email: userAuth.email,
       password: password,
-      organization: selectedMFS,
-      matricule: selectedMatricule,
+      organization_name: selectedMFS,
+      organization_id: selectedMatricule,
     }
 
     try {

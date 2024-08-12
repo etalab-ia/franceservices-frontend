@@ -1,4 +1,4 @@
-import type { Chunk, Message, Question, Sheet, User, UserHistory } from '@types'
+import type { Chunk, Message, Question, User, UserHistory } from '@types'
 
 /*****************************************************************************************************
 	
@@ -39,8 +39,6 @@ const InitialQuestion: Question = {
 const InitialUser: User = {
   question: InitialQuestion,
   messages: [],
-  sheets: [],
-  additionalSheets: [],
   chunks: [],
   webservices: [],
   chatId: 0,
@@ -50,7 +48,6 @@ const InitialUser: User = {
 }
 
 type UserAction =
-  | { type: 'SET_SHEETS'; sheets: Sheet[] }
   | { type: 'SET_CHUNKS'; chunks: Chunk[] }
   | { type: 'SET_USER_QUERY'; nextUserQuery: string; nextChatId: number }
   | { type: 'RESET_QUESTION_FIELDS' }
@@ -73,28 +70,21 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
         ...state,
         history: [...state.history, action.newItem],
       }
-    case 'SET_SHEETS': {
+    case 'SET_CHUNKS': {
       let webServices = []
-      for (let i = 0; i < action.sheets.length && webServices.length < 3; i++) {
-        if (action.sheets[i].web_services) {
+      for (let i = 0; i < action.chunks.length && webServices.length < 3; i++) {
+        if (action.chunks[i].web_services) {
           webServices = webServices.concat(
-            action.sheets[i].web_services.slice(0, 3 - webServices.length),
+            action.chunks[i].web_services.slice(0, 3 - webServices.length),
           )
         }
       }
       return {
         ...state,
-        sheets: action.sheets.slice(0, 3),
-        additionalSheets: action.sheets.slice(3, 10),
+        chunks: action.chunks,
         webservices: webServices,
       }
     }
-    case 'SET_CHUNKS':
-      return {
-        ...state,
-        chunks: action.chunks,
-      }
-
     case 'SET_CHAT_ID':
       return {
         ...state,

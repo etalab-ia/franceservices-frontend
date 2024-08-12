@@ -38,6 +38,7 @@ function handleStreamMessage(e, dispatch, stream_chat, id: number) {
       dispatch({ type: 'SET_STREAM_ID', nextStreamId: 0 })
       return dispatch({ type: 'STOP_AGENT_STREAM' })
     }
+    //console.log(jsonData.choices[0].delta.content)
     return dispatch({
       type: 'GET_AGENT_STREAM',
       nextResponse: jsonData.choices[0].delta.content

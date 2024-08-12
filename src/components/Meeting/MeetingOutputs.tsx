@@ -21,6 +21,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { MeetingQuestionInput } from './MeetingQuestionInput'
 import { UsefulLinks } from './UsefulLinks'
+import { TextWithSources } from 'components/Sources/TextWithSources'
+
+const str = `La saisie sur le RSA est un sujet complexe et nécessite une compréhension précise des règles et des conditions. 
+<ref text="Seul un commissaire de justice peut saisir un véhicule. Il peut le faire à la demande d'un créancier. Le créancier doit avoir un titre exécutoire." title="Saisie du véhicule">https://www.service-public.fr/particuliers/vosdroits/F1752</ref>. 
+De plus, la saisie ne peut pas être effectuée directement par le créancier, mais uniquement par le commissaire de justice
+<ref text="En aucun cas, le créancier ne peut s'adresser directement à l'employeur pour demander une saisie." title="Saisie sur salaire (ou "saisie des rémunérations")">https://www.service-public.fr/particuliers/vosdroits/F115</ref>. 
+Cependant, il est important de noter que la nature et le montant de la somme saisie doivent être mentionnés sur la fiche de paie, sous peine de sanctions à l'encontre de l'employeur
+<ref text="La nature et le montant de la somme saisie doivent être mentionnés sur la fiche de paie, sous peine de sanctions à l'encontre de l'employeur." title="Saisie sur salaire (ou "saisie des rémunérations")">https://www.service-public.fr/particuliers/vosdroits/F115</ref>. 
+Enfin, il est important de noter que la saisie sur le RSA peut être effectuée uniquement dans certaines conditions et que les règles varient selon le type de RSA concerné. 
+<ref text="Vous pouvez faire la demande auprès de votre Caf, des services du département, du CCAS de votre domicile (dans certains cas) ou d’une association habilitée par le département." title="RSA jeunes parents">https://www.service-public.fr/particuliers/vosdroits/F33692</ref>`
 
 export function MeetingOutputs({ chatId }: { chatId?: number }) {
   const user = useSelector((state: RootState) => state.user)
@@ -64,9 +74,8 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
               <Skeleton height={'50px'} variant="rectangular" className="fr-mb-1w" />
             </>
           )}
-          {user.history.length > 0 && (
-            <History history={user.history} unfoldLast={chatId !== undefined} />
-          )}
+          <TextWithSources text={str} />
+          {user.history.length > 0 && <History history={user.history} />}
           <MeetingCurrentResponse setQuestion={setQuestion} />
           <div ref={ref} />
         </div>
@@ -78,22 +87,13 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
                 setQuestionInput={setQuestion}
               />
             </div>
-            {/*            {!user.chatId && (
-              <div className="">
-                {' '}
-                <FirstQuestionExample setQuestionInput={setQuestion} />
-              </div>
-            )} */}
           </div>
         </div>
       </div>
     </CurrQuestionContext.Provider>
   )
 }
-export function History({
-  history,
-  unfoldLast,
-}: { history: UserHistory[]; unfoldLast: boolean }) {
+export function History({ history }: { history: UserHistory[] }) {
   return (
     <div className="fr-mt-5w">
       {history.map((h, index) => (

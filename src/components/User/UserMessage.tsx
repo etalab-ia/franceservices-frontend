@@ -30,7 +30,6 @@ export function UserMessage({ questionInput, setQuestionInput }) {
           text: stream.historyStream,
           sender: 'agent',
           chunks: user.chunks,
-          sheets: user.sheets,
         },
       })
     }
@@ -77,18 +76,12 @@ export function UserMessage({ questionInput, setQuestionInput }) {
     getIndexes(
       data,
       dispatch,
-      'sheets',
       user.question.limit,
       JSON.stringify(user.streamId),
       indexesUrl,
     )
   }, [user.streamId])
-  const handleRenderInput = (params) => {
-    const newParams = { maxLength: 800 }
-    const updatedParams = { ...params, ...newParams }
 
-    return <input {...updatedParams} disabled={stream.isStreaming} />
-  }
   function handleKeyDown(e: any) {
     if (e.key === 'Enter' && questionInput !== '' && !stream.isStreaming) {
       e.preventDefault()

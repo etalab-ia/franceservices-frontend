@@ -1,6 +1,6 @@
 import { getChunkUrl } from '@api'
 import { useQuery } from '@tanstack/react-query'
-import type { Chat, Sheet } from '@types'
+import type { Chat, Chunk } from '@types'
 
 export function useGetChunk(chunkHash: string) {
   return useQuery({
@@ -10,7 +10,7 @@ export function useGetChunk(chunkHash: string) {
   })
 }
 
-const fetchChunk = async (chunkHash: string): Promise<Sheet> => {
+const fetchChunk = async (chunkHash: string): Promise<Chunk> => {
   const authToken = localStorage.getItem('authToken')
 
   const res = await fetch(`${getChunkUrl}/${chunkHash}`, {
@@ -27,5 +27,5 @@ const fetchChunk = async (chunkHash: string): Promise<Sheet> => {
     throw new Error('Impossible de récupérer les archives', { cause: res })
   }
   const chunk = await res.json()
-  return chunk as Sheet
+  return chunk as Chunk
 }

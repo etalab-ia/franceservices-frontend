@@ -16,9 +16,6 @@ export const HomeTiles = () => {
         return (
           <TileContainer key={index}>
             <Tile
-              className={tile.className}
-              desc={tile.desc}
-              enlargeLink
               linkProps={tile.linkProps}
               imageUrl={tile.imageUrl}
               title={tile.title}
@@ -30,7 +27,7 @@ export const HomeTiles = () => {
   )
 }
 
-function Tile({ className, desc, enlargeLink, linkProps, imageUrl, title }) {
+function Tile({ linkProps, imageUrl, title }: TTile) {
   return (
     <div
       className="fr-tile fr-tile--horizontal fr-tile--vertical@md fr-enlarge-link"

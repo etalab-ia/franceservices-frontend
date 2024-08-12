@@ -14,18 +14,19 @@ export function MeetingRelatedQuestions({
 }: {
   setQuestion: (question: string) => void
 }) {
-  const sheets = useSelector((state: RootState) => state.user.sheets)
+  const chunks = useSelector((state: RootState) => state.user.chunks)
+  const isStreaming = useSelector((state: RootState) => state.stream.isStreaming)
   const [relatedQuestions, setRelatedQuestions] = useState([])
 
   useEffect(() => {
-    if (!sheets || !sheets.length) return
+    if (!chunks || !chunks.length) return
 
     let updatedQuestions = []
     setRelatedQuestions([])
 
-    for (const sheet of sheets) {
-      if (sheet.related_questions) {
-        for (const qr of sheet.related_questions) {
+    for (const chunk of chunks) {
+      if (chunk.related_questions) {
+        for (const qr of chunk.related_questions) {
           const objectExists = updatedQuestions.some((obj) => obj.sid === qr.sid)
 
           if (!objectExists) {
@@ -39,7 +40,9 @@ export function MeetingRelatedQuestions({
     }
 
     setRelatedQuestions(updatedQuestions)
-  }, [sheets])
+  }, [chunks])
+
+  if (isStreaming) return null
 
   return (
     <div className="fr-mb-w fr-mb-4w mt-auto">

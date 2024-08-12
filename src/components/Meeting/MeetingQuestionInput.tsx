@@ -39,6 +39,15 @@ export function MeetingQuestionInput({
   const handleSubmit = async () => {
     let chatId = user.chatId
     dispatch({ type: 'SET_IS_STREAMING', nextIsStreaming: true })
+    trackChatEvent(
+      true,
+      'meeting',
+      'search',
+      context.administrations,
+      context.themes,
+      chatId,
+      user.streamId,
+    )
 
     if (!chatId) {
       const headers = setHeaders(false)
@@ -58,7 +67,6 @@ export function MeetingQuestionInput({
         newItem: {
           query: user.question.query,
           response: stream.historyStream[0],
-          sheets: user.sheets,
           chunks: user.chunks,
           webservices: user.webservices,
         },
@@ -181,3 +189,17 @@ const inputFields = [
   { label: 'Thèmes associés', name: 'themes', className: 'fr-mr-1w' },
   { label: 'Opérateurs concernés', name: 'administrations', className: 'fr-mr-1w' },
 ]
+
+export function trackChatEvent(
+  new_chat,
+  type,
+  step,
+  operateur_field,
+  theme_field,
+  id_chat,
+  id_stream,
+) {
+  if (window._paq) {
+    window._paq.push(['trackEvent', 'etst', 'test'])
+  }
+}
