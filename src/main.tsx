@@ -19,7 +19,7 @@ function App() {
     g.src = matomoUrl
     s.parentNode.insertBefore(g, s)
   }, [])
-
+  console.log('matomoUrl', import.meta.env.VITE_MATOMO_URL)
   return (
     <BrowserRouter basename="/">
       <Provider store={store}>
