@@ -5,16 +5,15 @@ import { signupFields } from '@constants/inputFields'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
-  custom,
   email,
+  excludes,
   maxLength,
   minLength,
   object,
   parse,
+  pipe,
   regex,
   string,
-  pipe,
-  excludes,
 } from 'valibot'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
