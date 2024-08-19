@@ -23,8 +23,10 @@ export function MeetingRelatedQuestions({
 
     let updatedQuestions = []
     setRelatedQuestions([])
-
+    let count = 0
     for (const chunk of chunks) {
+      if (count >= 3) break
+
       if (chunk.related_questions) {
         for (const qr of chunk.related_questions) {
           const objectExists = updatedQuestions.some((obj) => obj.sid === qr.sid)
@@ -37,8 +39,9 @@ export function MeetingRelatedQuestions({
           }
         }
       }
+      count++
     }
-
+    console.log('updatedQuestions', updatedQuestions)
     setRelatedQuestions(updatedQuestions)
   }, [chunks])
 
