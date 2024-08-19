@@ -31,15 +31,6 @@ export function MeetingAdditionalResponse() {
     getIndexes(
       data,
       dispatch,
-      'chunks',
-      user.question.limit,
-      JSON.stringify(user.streamId),
-      indexesUrl,
-    )
-    getIndexes(
-      data,
-      dispatch,
-      'sheets',
       user.question.limit,
       JSON.stringify(user.streamId),
       indexesUrl,

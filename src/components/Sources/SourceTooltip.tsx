@@ -2,6 +2,7 @@ import { Tooltip } from 'react-tooltip'
 import useWindowDimensions from '../../utils/hooks/useWindowDimensions'
 import { useState } from 'react'
 import { createPortal } from 'react-dom'
+import { light } from '@mui/material/styles/createPalette'
 
 // This is needed to display the tooltip on top of every other element
 const domNode = document.createElement('div')
@@ -108,17 +109,21 @@ export function Source({
       <p className="fr-mb-1w fr-text--sm fr-text-mention--grey">
         Passage utilisé pour générer cette phrase
       </p>
-      <p className="fr-text--lg">{text}</p>
+      {text.split('\n').map((line, index) => (
+        <p key={index} className="fr-text--lg">
+          {line}
+        </p>
+      ))}
       <p className="fr-mb-1w">Extrait de: {title}</p>
       <div className="fr-grid-row fr-mt-3w w-full">
-        {domainName?.origin.length && (
+        {domainName?.origin && (
           <a
             target="_blank"
             rel="noreferrer"
             href={domainName.origin}
             className="fr-badge fr-badge--sm fr-badge--info fr-badge--no-icon"
           >
-            {domainName.hostname.slice(4, sourceUrl.length - 3)}
+            {domainName.hostname.slice(4)}
           </a>
         )}
         <a

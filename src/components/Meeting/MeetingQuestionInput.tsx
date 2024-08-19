@@ -1,19 +1,20 @@
 import { chatUrl } from '@api'
 import Button from '@codegouvfr/react-dsfr/Button'
-import type { MeetingInputContext, RootState } from '@types'
+import type { Chunk, MeetingInputContext, RootState } from '@types'
 import { emitCloseStream } from '@utils/eventsEmitter'
 import { generateStream, useFetch } from '@utils/hooks'
 import { addContextToQuestion, setHeaders } from '@utils/setData'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
 import { MeetingTags } from './MeetingTags'
-import { FirstQuestionExample } from './MeetingFirstQuestionSidePanel'
+import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
 
 export function MeetingQuestionInput({
+  isNewChat,
   questionInput,
   setQuestionInput,
 }: {
+  isNewChat: boolean
   questionInput: string
   setQuestionInput: React.Dispatch<React.SetStateAction<string>>
 }) {
@@ -58,7 +59,6 @@ export function MeetingQuestionInput({
         newItem: {
           query: user.question.query,
           response: stream.historyStream[0],
-          sheets: user.sheets,
           chunks: user.chunks,
           webservices: user.webservices,
         },
@@ -83,7 +83,15 @@ export function MeetingQuestionInput({
       type: 'SET_MESSAGES',
       nextMessage: { text: questionInput, sender: 'user' },
     })
-
+    trackChatEvent(
+      isNewChat,
+      questionType(questionInput, user.chunks),
+      user.history.length + 1,
+      context.administrations.length > 0,
+      context.themes.length > 0,
+      chatId,
+      user.lastStreamId,
+    )
     setQuestionInput('')
   }
 
@@ -181,3 +189,56 @@ const inputFields = [
   { label: 'Thèmes associés', name: 'themes', className: 'fr-mr-1w' },
   { label: 'Opérateurs concernés', name: 'administrations', className: 'fr-mr-1w' },
 ]
+
+function questionType(question: string, chunks: Chunk[]) {
+  let updatedQuestions = []
+
+  let count = 0
+
+  for (const chunk of chunks) {
+    if (count >= 3) break
+
+    if (chunk.related_questions) {
+      for (const qr of chunk.related_questions) {
+        const objectExists = updatedQuestions.some((obj) => obj.sid === qr.sid)
+
+        if (!objectExists) {
+          updatedQuestions = [
+            ...updatedQuestions,
+            { question: qr.question, sid: qr.sid, url: qr.url },
+          ]
+        }
+      }
+    }
+    count++
+  }
+
+  if (question === 'Peut-on faire une saisie sur le RSA ?') return 'first_question'
+  if (updatedQuestions.some((item) => item.question.includes(question)))
+    return 'suggested_question'
+  return 'auto'
+}
+
+export function trackChatEvent(
+  isNewChat: boolean,
+  type: 'auto' | 'first_question' | 'suggested_question',
+  step: number,
+  isOperatorsFilled: boolean,
+  isThemesFilled: boolean,
+  chat_id: number,
+  id_stream: number,
+) {
+  const chatData = {
+    is_new_chat: isNewChat,
+    type,
+    step,
+    operateur_field: isOperatorsFilled,
+    theme_field: isThemesFilled,
+    chat_id,
+    id_stream,
+  }
+  console.log('trackChatEvent', chatData)
+  const eventData = JSON.stringify(chatData)
+
+  window._paq.push(['trackEvent', 'Chat', 'NewMessage', eventData])
+}

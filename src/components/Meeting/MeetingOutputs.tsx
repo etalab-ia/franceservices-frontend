@@ -21,6 +21,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { MeetingQuestionInput } from './MeetingQuestionInput'
 import { UsefulLinks } from './UsefulLinks'
+import { TextWithSources } from 'components/Sources/TextWithSources'
+
+const str = `TEST<ref text="La scolarisation est obligatoire pour un enfant âgé entre 6 ans et 16 ans. Dans cette tranche d'âge, les allocations familiales de la Caf ou de la CMSA sont versées si l'enfant est dans l'une des situations suivantes :
+- Il est inscrit dans un établissement scolaire
+- Il est instruit à domicile (par exemple, dans le cadre du Centre national d'enseignement à distance - Cned)
+- Son état de santé l'empêche de fréquenter régulièrement un établissement scolaire" 
+title="Dans quels cas un enfant peut-il être considéré à charge pour le RSA ?">https://www.service-public.fr/particuliers/vosdroits/F20199</ref>. TEST
+
+<ref text="Pour saisir le juge, il faut déposer ou envoyer par courrier au secrétariat-greffe du tribunal une requête, accompagnée d'une copie du titre exécutoire. La requête doit obligatoirement mentionner les informations suivantes : - Nom, prénoms, profession, domicile, nationalité, date et lieu de naissance du créancier" 
+title="Saisie sur salaire (ou)">https://www.service-public.fr/particuliers/vosdroits/F115</ref>`
 
 export function MeetingOutputs({ chatId }: { chatId?: number }) {
   const user = useSelector((state: RootState) => state.user)
@@ -39,7 +49,6 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
       }
     }
   }, [chatId, archiveData, dispatch])
-
   useEffect(() => {
     return () => {
       dispatch({ type: 'RESET_USER' })
@@ -64,9 +73,8 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
               <Skeleton height={'50px'} variant="rectangular" className="fr-mb-1w" />
             </>
           )}
-          {user.history.length > 0 && (
-            <History history={user.history} unfoldLast={chatId !== undefined} />
-          )}
+          {/*            <TextWithSources text={str} /> */}
+          {user.history.length > 0 && <History history={user.history} />}
           <MeetingCurrentResponse setQuestion={setQuestion} />
           <div ref={ref} />
         </div>
@@ -74,26 +82,18 @@ export function MeetingOutputs({ chatId }: { chatId?: number }) {
           <div className="w-full fr-grid-row">
             <div className="mt-auto fr-col-8 w-full">
               <MeetingQuestionInput
+                isNewChat={chatId === undefined}
                 questionInput={question}
                 setQuestionInput={setQuestion}
               />
             </div>
-            {/*            {!user.chatId && (
-              <div className="">
-                {' '}
-                <FirstQuestionExample setQuestionInput={setQuestion} />
-              </div>
-            )} */}
           </div>
         </div>
       </div>
     </CurrQuestionContext.Provider>
   )
 }
-export function History({
-  history,
-  unfoldLast,
-}: { history: UserHistory[]; unfoldLast: boolean }) {
+export function History({ history }: { history: UserHistory[] }) {
   return (
     <div className="fr-mt-5w">
       {history.map((h, index) => (
