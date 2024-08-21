@@ -1,8 +1,7 @@
-import { Tooltip } from 'react-tooltip'
-import useWindowDimensions from '../../utils/hooks/useWindowDimensions'
 import { useState } from 'react'
 import { createPortal } from 'react-dom'
-import { light } from '@mui/material/styles/createPalette'
+import { Tooltip } from 'react-tooltip'
+import useWindowDimensions from '../../utils/hooks/useWindowDimensions'
 
 // This is needed to display the tooltip on top of every other element
 const domNode = document.createElement('div')
