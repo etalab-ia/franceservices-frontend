@@ -41,7 +41,6 @@ export function MeetingRelatedQuestions({
       }
       count++
     }
-    console.log('updatedQuestions', updatedQuestions)
     setRelatedQuestions(updatedQuestions)
   }, [chunks])
 
