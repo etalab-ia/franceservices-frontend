@@ -1,19 +1,16 @@
 import react from '@vitejs/plugin-react-swc'
 import path from 'node:path'
-import url from 'rollup-plugin-url'
 
 import { defineConfig } from 'vite'
 
-import tailwindcss from 'tailwindcss'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default () => {
   return defineConfig({
-    plugins: [react(), tailwindcss(), tsconfigPaths()],
+    plugins: [react(), tsconfigPaths()],
     build: {
       outDir: 'dist',
       cssCodeSplit: false,
-      assetsInclude: ['artwork/**'],
     },
     resolve: {
       alias: {
