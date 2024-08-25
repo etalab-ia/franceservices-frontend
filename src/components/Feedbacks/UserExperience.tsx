@@ -1,10 +1,9 @@
 import { askingQuality, redoAskingQuality } from '@constants/feedback'
-import { InitialFeedback, type Feedback as FeedbackType, type RootState } from '@types'
+import type { RootState } from '@types'
 import { useSelector } from 'react-redux'
 import { Avatar } from '../Chat/Avatar'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { Feedback } from './Feedback'
-import { useState } from 'react'
 const AskingResponseQuality = ({ tabsLen }) => {
   return (
     <div className="streaming fr-p-3v fr-ml-3v">

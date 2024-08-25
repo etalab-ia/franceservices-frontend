@@ -56,6 +56,7 @@ type UserAction =
   | { type: 'SET_STREAM_ID'; nextStreamId: number }
   | { type: 'SET_CHAT_ID'; nextChatId: number }
   | { type: 'ADD_HISTORY'; newItem: UserHistory }
+  | { type: 'ADD_HISTORY_BATCH'; items: UserHistory[] }
   | { type: 'SET_LAST_STREAM_ID'; nextLastStreamId: number }
 
 export const userReducer = (state: User = InitialUser, action: UserAction): User => {
@@ -64,6 +65,11 @@ export const userReducer = (state: User = InitialUser, action: UserAction): User
       return {
         ...state,
         lastStreamId: action.nextLastStreamId,
+      }
+    case 'ADD_HISTORY_BATCH':
+      return {
+        ...state,
+        history: [...state.history, ...action.items],
       }
     case 'ADD_HISTORY':
       return {

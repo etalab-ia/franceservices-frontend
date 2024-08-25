@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 	COMPONENTS:
 
 		Frequently asked question suggestions
-		We get the related questions from the sheets
+		We get the related questions from the chunks
  *****************************************************************************************/
 export function MeetingRelatedQuestions({
   setQuestion,
@@ -41,7 +41,6 @@ export function MeetingRelatedQuestions({
       }
       count++
     }
-    console.log('updatedQuestions', updatedQuestions)
     setRelatedQuestions(updatedQuestions)
   }, [chunks])
 

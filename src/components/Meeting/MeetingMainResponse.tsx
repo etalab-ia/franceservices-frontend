@@ -3,6 +3,7 @@ import type { RootState } from 'types'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { MeetingRelatedQuestions } from './MeetingRelatedQuestions'
 import { MeetingStream } from './MeetingStream'
+import { fr } from '@codegouvfr/react-dsfr'
 
 export function MeetingMainResponse({
   setQuestion,
@@ -32,6 +33,9 @@ export function MeetingMainResponse({
               </div>
               <div
                 onClick={() => setQuestion('Peut-on faire une saisie sur le RSA ?')}
+                style={{
+                  backgroundColor: fr.colors.decisions.background.alt.blueFrance.default,
+                }}
                 className="fr-background-alt--blue-france fr-p-2w fr-text--md cursor-pointer rounded bg-contain  fr-mt-2w ml-auto fr-mr-6w"
               >
                 Peut-on faire une saisie sur le RSA ?

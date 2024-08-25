@@ -237,7 +237,6 @@ export function trackChatEvent(
     chat_id,
     id_stream,
   }
-  console.log('trackChatEvent', chatData)
   const eventData = JSON.stringify(chatData)
 
   window._paq.push(['trackEvent', 'Chat', 'NewMessage', eventData])

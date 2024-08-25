@@ -1,8 +1,3 @@
-import meeting from '@artwork/pictograms/albert/meeting.png'
-import question from '@artwork/pictograms/albert/question.png'
-import aplus from '/logo/LogoA+.png'
-import franceservices from '/logo/LogoFranceServices.png'
-import osmose from '/logo/LogoOsmose.png'
 import servicepublic from '/logo/LogoServicePublicMinimised.png'
 
 export const signupFields = [
@@ -57,33 +52,6 @@ export const loginFields = [
       name: 'password',
       type: 'password',
     },
-  },
-]
-
-export const toolsTiles = [
-  {
-    className: 'fr-tile fr-tile--no-icon fr-enlarge-link',
-    desc: 'Accéder',
-    linkProps: { to: '/chat' },
-    imageUrl: question,
-    title: 'Poser une question',
-  },
-]
-
-export const MFStoolsTiles = [
-  {
-    className: 'fr-tile fr-tile--no-icon fr-enlarge-link',
-    desc: 'Accéder',
-    linkProps: { to: '/meeting' },
-    imageUrl: meeting,
-    title: 'Échanger avec Albert',
-  },
-  {
-    className: 'fr-tile fr-tile--no-icon fr-enlarge-link',
-    desc: 'Accéder',
-    linkProps: { to: '/history' },
-    imageUrl: question,
-    title: 'Mon historique',
   },
 ]
 

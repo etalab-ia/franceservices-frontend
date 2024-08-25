@@ -8,4 +8,11 @@ const reducer = combineReducers({
   user: userReducer,
 })
 
-export const store = configureStore({ reducer: reducer })
+export const store = configureStore({
+  reducer: reducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      immutableCheck: false, // Disables the immutable check for faster development
+      serializableCheck: false, // Optional: Disables serializable check if not needed
+    }),
+})
