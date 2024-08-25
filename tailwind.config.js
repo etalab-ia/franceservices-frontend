@@ -1,15 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./src/**/*.{html,tsx}', './src/components/**/*.{html,tsx}'],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   corePlugins: {
-    preflight: false,
+    preflight: false, // Disable Tailwind's base styles if using other CSS frameworks like DSFR
   },
-  plugins: [],
   theme: {
-    screens: {
-      sm: '576px',
-      md: '960px',
-      lg: '1440px',
+    extend: {
+      screens: {
+        sm: '576px',
+        md: '960px',
+        lg: '1440px',
+      },
     },
   },
+  plugins: [],
 }

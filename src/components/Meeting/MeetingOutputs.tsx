@@ -102,7 +102,7 @@ export const History = memo(
               <AccordionSummary
                 aria-controls="panel1-content"
                 id="panel1-header"
-                expandIcon={<ExpandMoreIcon />}
+                expandIcon={<ExpandMoreIcon sx={{ color: 'var(--text-default-grey)' }} />}
                 sx={{
                   backgroundColor: 'var(--background-action-low-blue-france)',
                   color: 'var(--text-default-grey)',

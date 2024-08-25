@@ -120,7 +120,7 @@ export function Source({
             target="_blank"
             rel="noreferrer"
             href={domainName.origin}
-            className="fr-badge fr-badge--sm fr-badge--info fr-badge--no-icon"
+            className="fr-badge fr-badge--sm fr-badge--info fr-badge--no-icon external-link-icon"
           >
             {domainName.hostname.slice(4)}
           </a>

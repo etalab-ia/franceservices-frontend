@@ -1,8 +1,3 @@
-import {
-  askingQualityPrecisions,
-  primaryButtons,
-  secondaryButtons,
-} from '@constants/feedback'
 import type { Feedback } from '@types'
 import { useEffect, useState } from 'react'
 import { FeedbackThanksMessage } from './FeedbackThanksMessage'
@@ -18,8 +13,6 @@ export function UserFeedbackInput({
   feedback,
   setFeedback,
 }: { isFirst: boolean; feedback: Feedback; setFeedback: (feedback: Feedback) => void }) {
-  const buttons = isFirst ? primaryButtons : secondaryButtons
-  const activeTab = feedback.isGood
   const [showThanks, setShowThanks] = useState(false)
   useEffect(() => {
     if (feedback.isConfirmed) {
@@ -35,9 +28,12 @@ export function UserFeedbackInput({
     <>
       {!feedback.isConfirmed ? (
         <>
-          <p className="mt-4">{askingQualityPrecisions(buttons[activeTab].type)}</p>
+          <p className="mt-4">
+            Pour quelles raisons trouvez-vous ce résultat{' '}
+            {feedback.isGood ? 'insatisfaisant' : 'satisfaisant'} ?
+          </p>
           <UserFeedbackOptions
-            activeTab={activeTab}
+            activeTab={feedback.isGood}
             isFirst={isFirst}
             feedback={feedback}
             setFeedback={setFeedback}
