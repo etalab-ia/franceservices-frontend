@@ -8,6 +8,7 @@ import { Root } from './components/Root/Root'
 import { store } from './utils/reducer/reducer'
 
 function App() {
+  console.log('App')
   useEffect(() => {
     const matomoUrl: string = import.meta.env.VITE_MATOMO_URL
     const _mtm = (window._mtm = window._mtm || [])
