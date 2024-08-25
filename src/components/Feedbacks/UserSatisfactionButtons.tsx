@@ -1,6 +1,6 @@
-import { primaryButtons, secondaryButtons } from '@constants/feedback'
 import { InitialFeedback, type Feedback as FeedbackType } from '@types'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
+import { fr } from '@codegouvfr/react-dsfr'
 
 /**
  * These are the good or bad buttons that the user can click to give feedback
@@ -14,8 +14,6 @@ export function UserSatisfactionButtons({
   feedback: FeedbackType
   setFeedback: (feedback: FeedbackType) => void
 }) {
-  const buttons = isFirst ? primaryButtons : secondaryButtons
-
   const handleClick = (isGood: number) => {
     if (isGood === feedback.isGood) setFeedback(InitialFeedback)
     else {

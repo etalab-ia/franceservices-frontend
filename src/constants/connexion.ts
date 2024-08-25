@@ -1,6 +1,6 @@
 import type { ButtonProps } from '@codegouvfr/react-dsfr/Button'
 
-export const initButtonsLogin = (onSubmit, isDisable) => {
+export const initButtonsLogin = (onSubmit, isDisable: boolean) => {
   const buttonsLogin = [
     {
       children: 'Connexion',

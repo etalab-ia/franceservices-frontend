@@ -35,11 +35,10 @@ function handleStreamMessage(e, dispatch, stream_chat, id: number) {
     const jsonData: ChatCompletion = JSON.parse(e.data)
     if (jsonData.choices[0].finish_reason === 'stop') {
       stream_chat.close()
-      console.log('Stream closed')
       dispatch({ type: 'SET_STREAM_ID', nextStreamId: 0 })
       return dispatch({ type: 'STOP_AGENT_STREAM' })
     }
-    console.log('content', jsonData)
+    //console.log(jsonData.choices[0].delta.content)
     return dispatch({
       type: 'GET_AGENT_STREAM',
       nextResponse: jsonData.choices[0].delta.content
@@ -96,7 +95,6 @@ export async function generateStream(
 ) {
   const headers = setHeaders(false)
   const stream_data = setUserQuestion(question)
-  console.log('stream_data', stream_data, ' chatId', chatId)
   const stream = await useFetch(`${streamUrl}/chat/${chatId}`, 'POST', {
     data: JSON.stringify(stream_data),
     headers,

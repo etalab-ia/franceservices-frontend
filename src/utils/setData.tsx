@@ -1,4 +1,4 @@
-import type { Question, Sheet, Tile } from '@types'
+import type { Question } from '@types'
 import { useFetch } from './hooks'
 
 /*
@@ -67,57 +67,13 @@ export const addContextToQuestion = (question: string, context) => {
   return questionWithContext
 }
 
-export const rmContextFromQuestion = (
-  str: string,
-  setQuery: React.Dispatch<React.SetStateAction<string>> | undefined,
-) => {
-  const context = [
-    'Les administrations concernées par cette question sont : ',
-    'La question porte sur les thèmes suivants : ',
-  ]
-
-  let newStr = str
-
-  for (const c of context) {
-    const start = newStr.indexOf(c)
-
-    if (start !== -1) {
-      newStr = newStr.substring(0, start).trim()
-    }
-  }
-
-  setQuery(newStr)
-}
-
-export const updateQuestion = (currQuestion: Question, updateCurrQuestion) => {
-  const context = [
-    'Les administrations concernées par cette question sont : ',
-    'La question porte sur les thèmes suivants : ',
-  ]
-
-  let newStr = currQuestion.query
-
-  for (const c of context) {
-    const start = newStr.indexOf(c)
-
-    if (start !== -1) {
-      newStr = newStr.substring(0, start).trim()
-    }
-  }
-
-  updateCurrQuestion({
-    ...currQuestion,
-    query: newStr,
-  })
-}
-
 /***************************
 		SP SHEETS
  **************************/
 
-const setIndexesBody = (data, name, limit: number, streamId: string) => {
+const setIndexesBody = (data, limit: number, streamId: string) => {
   const body = JSON.stringify({
-    name: name,
+    name: 'chunks',
     query: data.question,
     limit: limit,
     similarity: 'e5',
@@ -133,19 +89,16 @@ const setIndexesBody = (data, name, limit: number, streamId: string) => {
 export const getIndexes = async (
   data,
   dispatch,
-  indexType: 'sheets' | 'chunks',
   chunkSize: number,
   streamId: string,
   indexesUrl: string,
 ) => {
-  const actionType = indexType === 'sheets' ? 'SET_SHEETS' : 'SET_CHUNKS'
-  if (indexType === 'sheets' && data.must_not_sids.length !== 0) return
   try {
     const res = await useFetch(indexesUrl, 'POST', {
-      data: setIndexesBody(data, indexType, chunkSize, streamId),
+      data: setIndexesBody(data, chunkSize, streamId),
       headers: setHeaders(false),
     })
-    dispatch({ type: actionType, [indexType]: res })
+    dispatch({ type: 'SET_CHUNKS', chunks: res })
   } catch (error) {
     console.error('An error occurred: ', error)
   }

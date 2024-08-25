@@ -3,6 +3,8 @@
 .env.dev
 .env.local
 
+src/**/*.js
+
 ..bfg-report
 
 # Logs

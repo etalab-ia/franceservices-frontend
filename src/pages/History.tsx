@@ -1,20 +1,13 @@
-import { getArchiveUrl, useGetChatArchiveById, useGetChats } from '@api'
+import { useGetChatArchiveById, useGetChats } from '@api'
 import Button from '@codegouvfr/react-dsfr/Button'
-import { isMFSContext } from '@utils/context/isMFSContext'
 import Separator from 'components/Global/Separator'
 
+import { fr } from '@codegouvfr/react-dsfr'
 import ShowError from 'components/Error/ShowError'
-import {
-  useContext,
-  useEffect,
-  useState,
-  type Dispatch,
-  type SetStateAction,
-} from 'react'
-import { useInView } from 'react-intersection-observer'
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import { LoadingSpinner } from 'components/LoadingSpinner'
+import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
+import { useNavigate } from 'react-router-dom'
 
 export function History() {
   return (
@@ -27,12 +20,9 @@ export function History() {
 
 function HomeHeader() {
   const navigate = useNavigate()
-  const isMFS = useContext(isMFSContext)
 
   const handleNewQuestion = () => {
-    if (isMFS) {
-      navigate('/meeting')
-    } else navigate('/chat')
+    navigate('/meeting')
   }
   return (
     <div className="fr-mt-5w ">
@@ -63,37 +53,6 @@ function ChatList() {
   }
 
   const chats = data?.pages.flatMap((page) => page.chats) ?? []
-  /*   const chats = [
-    {
-      name: 'Allocations sociales: la CAD peut-elle faire une saisie sur le RSA ?',
-      numberOfMessages: 3,
-      themes: ['Allocation sociale', 'RSA', 'CAF', 'Aides financieres'],
-      updatedDate: '2024-06-04T09:41:16.446431',
-      id: 2736,
-    },
-    {
-      name: 'Allocations sociales: la CAD peut-elle faire une saisie sur le RSA ?',
-      numberOfMessages: 3,
-      themes: ['Allocation sociale', 'RSA', 'CAF', 'Aides financieres'],
-      updatedDate: '2024-08-04T09:41:16.446431',
-      id: 1256,
-    },
-    {
-      name: 'Allocations sociales: la CAD peut-elle faire une saisie sur le RSA ?',
-      numberOfMessages: 3,
-      themes: ['Allocation sociale', 'RSA', 'CAF', 'Aides financieres'],
-      updatedDate: '2024-08-04T09:41:16.446431',
-      id: 1253,
-    },
-    {
-      name: 'Allocations sociales: la CAD peut-elle faire une saisie sur le RSA ?',
-      numberOfMessages: 3,
-      themes: ['Allocation sociale', 'RSA', 'CAF', 'Aides financieres'],
-      updatedDate: '2024-08-04T09:41:16.446431',
-      id: 1254,
-    },
-  ]
- */
   type TestChatType = {
     name: string
     numberOfMessages?: number
@@ -165,7 +124,12 @@ function QuestionList({ selectedChatId }) {
           style={{ animationDelay: `${index * 0.1}s` }}
         >
           <div className="fr-mb-1w w-full">
-            <div className="fr-px-2w fr-py-3v inline-flex h-full w-full rounded fr-background-alt--blue-france">
+            <div
+              style={{
+                backgroundColor: fr.colors.decisions.background.alt.blueFrance.default,
+              }}
+              className="fr-px-2w fr-py-3v inline-flex h-full w-full rounded"
+            >
               <p className="block overflow-hidden text-ellipsis whitespace-nowrap">
                 {stream.query}
               </p>

@@ -31,15 +31,6 @@ export function MeetingAdditionalResponse() {
     getIndexes(
       data,
       dispatch,
-      'chunks',
-      user.question.limit,
-      JSON.stringify(user.streamId),
-      indexesUrl,
-    )
-    getIndexes(
-      data,
-      dispatch,
-      'sheets',
       user.question.limit,
       JSON.stringify(user.streamId),
       indexesUrl,
@@ -48,7 +39,7 @@ export function MeetingAdditionalResponse() {
   return (
     <OneThirdScreenWidth>
       <GlobalColContainer>
-        {user.webservices?.length && <UsefulLinks webservices={user.webservices} />}
+        {user.webservices?.length > 0 && <UsefulLinks webservices={user.webservices} />}
       </GlobalColContainer>
     </OneThirdScreenWidth>
   )

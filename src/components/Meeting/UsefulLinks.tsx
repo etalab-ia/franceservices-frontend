@@ -29,22 +29,13 @@ function SmallHorizontalTile({ tileProps }: { tileProps: TileType }) {
   return (
     <div
       className="fr-tile fr-tile--sm fr-tile--horizontal fr-enlarge-link  "
-      id="tile-6661"
+      id="tile-6609"
     >
       <div className="fr-tile__body">
         <div className="fr-tile__content">
           <h3 className="fr-tile__title">
-            <a
-              href={tileProps.linkProps.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ backgroundImage: 'none', textDecoration: 'none' }}
-            >
-              {tileProps.title}
-            </a>
+            <a href={tileProps.linkProps.href}>{tileProps.title}</a>
           </h3>
-          <p className="fr-tile__detail">{tileProps.desc.key}</p>
-          <div className="fr-tile__start" />
         </div>
       </div>
     </div>
@@ -71,7 +62,7 @@ const setUsefulLinksTilesProps = (webservices: WebService[]) => {
           <p className="fr-badge fr-badge--sm fr-badge--purple-glycine fr-mb-1v">
             {webservice.type}
           </p>
-          <p>{webservice.institution}</p>
+          <p>{webservice.title}</p>
         </>
       ),
       desc: <>{domain}</>,
