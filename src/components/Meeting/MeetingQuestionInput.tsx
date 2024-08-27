@@ -26,6 +26,8 @@ export function MeetingQuestionInput({
     administrations: [],
     themes: [],
   })
+  const [messageCount, setMessageCount] = useState(0)
+
   const handleChange = (e) => {
     setQuestionInput(e.target.value)
   }
@@ -83,10 +85,14 @@ export function MeetingQuestionInput({
       type: 'SET_MESSAGES',
       nextMessage: { text: questionInput, sender: 'user' },
     })
+
+    // Increment message count
+    setMessageCount((prevCount) => prevCount + 1)
+
     trackChatEvent(
       isNewChat,
       questionType(questionInput, user.chunks),
-      user.history.length + 1,
+      messageCount + 1, // Use messageCount + 1 to track the correct step
       context.administrations.length > 0,
       context.themes.length > 0,
       chatId,
