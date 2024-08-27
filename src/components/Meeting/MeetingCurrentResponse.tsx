@@ -5,6 +5,7 @@ import { GlobalRowContainer } from '../Global/GlobalRowContainer'
 import { MeetingAdditionalResponse } from './MeetingAdditionalResponse'
 import { MeetingFirstQuestionHelper } from './MeetingFirstQuestionSidePanel'
 import { MeetingMainResponse } from './MeetingMainResponse'
+import { rmContextFromQuestion } from '@utils/setData'
 
 /*
  *	Contains text response from the bot and additional informations like sheets, chunks anduseful links
@@ -39,7 +40,7 @@ export const MeetingCurrentResponse = memo(
             </h5>
             <div className=" fr-mb-2w fr-background-alt--blue-france fr-p-2w flex min-h-12 items-center">
               <p className="block overflow-hidden text-ellipsis whitespace-nowrap">
-                {user.question.query}
+                {rmContextFromQuestion(user.question.query)}
               </p>
             </div>
           </>
