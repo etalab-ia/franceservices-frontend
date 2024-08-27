@@ -42,7 +42,7 @@ function Tile({ linkProps, imageUrl, title }: TTile) {
       </div>
       <div className="fr-tile__header">
         <div className="fr-tile__pictogram">
-          <img src={imageUrl} alt="" />
+          <img width={'100%'} src={imageUrl} alt="" />
         </div>
       </div>
     </div>
