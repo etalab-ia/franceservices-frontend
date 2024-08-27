@@ -21,7 +21,9 @@ export function MeetingQuestionInput({
   const stream = useSelector((state: RootState) => state.stream)
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
-  const [isAdditionalInputOpened, setIsAdditionalInputOpened] = useState(false)
+  const [isAdditionalInputOpened, setIsAdditionalInputOpened] = useState(
+    !stream.historyStream.length,
+  )
   const [context, setContext] = useState<MeetingInputContext>({
     administrations: [],
     themes: [],
@@ -192,8 +194,8 @@ function NewQuestionMeetingAdditionalInput({
 }
 
 const inputFields = [
-  { label: 'Thèmes associés', name: 'themes', className: 'fr-mr-1w' },
   { label: 'Opérateurs concernés', name: 'administrations', className: 'fr-mr-1w' },
+  { label: 'Thèmes associés', name: 'themes', className: 'fr-mr-1w' },
 ]
 
 function questionType(question: string, chunks: Chunk[]) {
