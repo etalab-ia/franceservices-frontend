@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { MeetingQuestionInput } from './MeetingQuestionInput'
 import { UsefulLinks } from './UsefulLinks'
+import { rmContextFromQuestion } from '@utils/setData'
 
 export const MeetingOutputs = memo(function MeetingOutputs({
   chatId,
@@ -104,7 +105,7 @@ export const History = memo(
                   zIndex: 1,
                 }}
               >
-                {h.query}
+                {rmContextFromQuestion(h.query)}
               </AccordionSummary>
               <AccordionDetails
                 sx={{

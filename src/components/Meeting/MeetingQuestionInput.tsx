@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { MeetingTags } from './MeetingTags'
 import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
+import { useLocation } from 'react-router-dom'
 
 export function MeetingQuestionInput({
   isNewChat,
@@ -21,13 +22,15 @@ export function MeetingQuestionInput({
   const stream = useSelector((state: RootState) => state.stream)
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
-  const [isAdditionalInputOpened, setIsAdditionalInputOpened] = useState(false)
+  const location = useLocation()
+  const [isAdditionalInputOpened, setIsAdditionalInputOpened] = useState(
+    !stream.historyStream.length && location.pathname === '/meeting',
+  )
   const [context, setContext] = useState<MeetingInputContext>({
     administrations: [],
     themes: [],
   })
   const [messageCount, setMessageCount] = useState(0)
-
   const handleChange = (e) => {
     setQuestionInput(e.target.value)
   }
@@ -192,8 +195,8 @@ function NewQuestionMeetingAdditionalInput({
 }
 
 const inputFields = [
-  { label: 'Thèmes associés', name: 'themes', className: 'fr-mr-1w' },
   { label: 'Opérateurs concernés', name: 'administrations', className: 'fr-mr-1w' },
+  { label: 'Thèmes associés', name: 'themes', className: 'fr-mr-1w' },
 ]
 
 function questionType(question: string, chunks: Chunk[]) {

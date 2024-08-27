@@ -66,7 +66,24 @@ export const addContextToQuestion = (question: string, context) => {
 
   return questionWithContext
 }
+export const rmContextFromQuestion = (str: string) => {
+  const context = [
+    'Les administrations concernées par cette question sont : ',
+    'La question porte sur les thèmes suivants : ',
+  ]
 
+  let newStr = str
+
+  for (const c of context) {
+    const start = newStr.indexOf(c)
+
+    if (start !== -1) {
+      newStr = newStr.substring(0, start).trim()
+    }
+  }
+
+  return newStr
+}
 /***************************
 		SP SHEETS
  **************************/
