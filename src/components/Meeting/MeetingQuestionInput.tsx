@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { MeetingTags } from './MeetingTags'
 import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
 import { useLocation } from 'react-router-dom'
+import { useAuth } from '@utils/context/authContext'
+import { getLocalStorageUserAuth } from '@utils/auth'
 
 export function MeetingQuestionInput({
   isNewChat,
@@ -41,16 +43,16 @@ export function MeetingQuestionInput({
       generateStream(user.question, dispatch, user.chatId, false)
     }
   }, [user.question, user.chatId])
+  const auth = getLocalStorageUserAuth()
 
   const handleSubmit = async () => {
     let chatId = user.chatId
     dispatch({ type: 'SET_IS_STREAMING', nextIsStreaming: true })
 
     if (!chatId) {
-      const headers = setHeaders(false)
       const chat = await useFetch(chatUrl, 'POST', {
         data: JSON.stringify({ chat_type: 'meeting' }),
-        headers,
+        headers: setHeaders(true, auth.access_token, auth.refresh_token),
       })
       chatId = chat.id
       dispatch({ type: 'SET_CHAT_ID', nextChatId: chatId })

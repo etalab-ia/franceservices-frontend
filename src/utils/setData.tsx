@@ -1,19 +1,24 @@
 import type { Question } from '@types'
+import { useAuth } from './context/authContext'
 import { useFetch } from './hooks'
 
 /*
  * isEventSource is true when fetching for a stream
  */
-export const setHeaders = (isEventSource: boolean) => {
-  const token = localStorage.getItem('authToken')
-
+export const setHeaders = (
+  isEventSource: boolean,
+  accessToken: string,
+  refreshToken: string,
+) => {
   const headers = isEventSource
     ? {
-        Authorization: `Bearer ${token}`,
+        access_token: `Bearer ${accessToken}`,
+        refresh_token: `Bearer ${refreshToken}`,
       }
     : {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        access_token: `Bearer ${accessToken}`,
+        refresh_token: `Bearer ${refreshToken}`,
       }
 
   return headers
@@ -111,9 +116,10 @@ export const getIndexes = async (
   indexesUrl: string,
 ) => {
   try {
+    const auth = useAuth()
     const res = await useFetch(indexesUrl, 'POST', {
       data: setIndexesBody(data, chunkSize, streamId),
-      headers: setHeaders(false),
+      headers: setHeaders(false, auth.tokens.accessToken, auth.tokens.refreshToken),
     })
     dispatch({ type: 'SET_CHUNKS', chunks: res })
   } catch (error) {

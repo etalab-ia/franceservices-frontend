@@ -4,6 +4,7 @@ import { useFetch } from '@utils/hooks'
 import { setContactData, setHeaders } from '@utils/setData'
 import { useState } from 'react'
 import { ButtonInformation } from '../Global/ButtonInformation'
+import { useAuth } from '@utils/context/authContext'
 
 interface ContactButtonProps {
   formData: {
@@ -17,6 +18,7 @@ interface ContactButtonProps {
 
 export function ContactFormSubmitButton({ formData, clearForm }: ContactButtonProps) {
   const [isSent, setIsSent] = useState(false)
+  const auth = useAuth()
   const handleClick = async () => {
     await useFetch(contactUrl, 'POST', {
       data: setContactData(
@@ -24,7 +26,7 @@ export function ContactFormSubmitButton({ formData, clearForm }: ContactButtonPr
         formData.message,
         formData.administration,
       ),
-      headers: setHeaders(false),
+      headers: setHeaders(false, auth.tokens.accessToken, auth.tokens.refreshToken),
     })
     clearForm()
     setIsSent(true)

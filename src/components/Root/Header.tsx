@@ -1,12 +1,11 @@
-import React from 'react'
+import { useAuth } from '@utils/context/authContext'
+import { useGetUser } from 'api/useGetUser'
 import { useDispatch } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
-import { handleSignout } from '@utils/manageConnexion'
-import { signoutUrl } from '@api'
 
-function Header({ username, setUserAuth, userAuth }) {
+function Header({ auth }) {
   return (
-    <header role="banner" className="fr-header">
+    <header className="fr-header">
       <div className="fr-header__body">
         <div className="fr-container">
           <div className="fr-header__body-row">
@@ -14,13 +13,11 @@ function Header({ username, setUserAuth, userAuth }) {
               <Logo />
               <TitleAndDescription />
             </div>
-            {userAuth.isLogin && (
-              <EasyAccess username={username} setUserAuth={setUserAuth} />
-            )}
+            {auth.isAuthenticated && <EasyAccess />}
           </div>
         </div>
       </div>
-      {userAuth.isLogin && <NavigationMenu />}
+      {auth.isAuthenticated && <NavigationMenu />}
     </header>
   )
 }
@@ -48,18 +45,23 @@ function TitleAndDescription() {
   )
 }
 
-function EasyAccess({ username, setUserAuth }) {
+function EasyAccess() {
+  const auth = useAuth()
+  const { data: username, error } = useGetUser()
+  console.log('username', username)
   return (
     <div className="fr-header__tools">
       <div className="fr-header__tools-links">
         <ul className="fr-btns-group">
           <li>
-            <div className="fr-btn fr-icon-user-line hover:cursor-text">{username}</div>
+            <div className="fr-btn fr-icon-user-line hover:cursor-text">
+              {username?.username ?? ''}
+            </div>
           </li>
           <li>
             <button
               type="button"
-              onClick={() => handleSignout(setUserAuth, signoutUrl)}
+              onClick={auth.logout}
               className="fr-btn fr-icon-lock-line"
             >
               Se déconnecter

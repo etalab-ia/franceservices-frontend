@@ -1,6 +1,8 @@
 import { getChunkUrl } from '@api'
 import { useQuery } from '@tanstack/react-query'
 import type { Chat, Chunk } from '@types'
+import { getLocalStorageUserAuth } from '@utils/auth'
+import { setHeaders } from '@utils/setData'
 
 export function useGetChunk(chunkHash: string) {
   return useQuery({
@@ -11,15 +13,12 @@ export function useGetChunk(chunkHash: string) {
 }
 
 const fetchChunk = async (chunkHash: string): Promise<Chunk> => {
-  const authToken = localStorage.getItem('authToken')
+  const auth = getLocalStorageUserAuth()
 
   const res = await fetch(`${getChunkUrl}/${chunkHash}`, {
     method: 'GET',
     credentials: 'include',
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-      'Content-Type': 'application/json',
-    },
+    headers: setHeaders(false, auth.access_token, auth.refresh_token),
   })
 
   if (!res.ok) {

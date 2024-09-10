@@ -1,6 +1,5 @@
-import { userUrl } from '@api'
 import { InitialUserAuth, type UserAuth } from '@utils/auth'
-import { checkConnexion } from '@utils/localStorage'
+import { useAuth } from '@utils/context/authContext'
 import { useEffect, useState } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Error404 from '../../pages/404'
@@ -17,37 +16,27 @@ import Footer from './Footer'
 import Header from './Header'
 
 export const Root = () => {
+  const auth = useAuth()
   const [userAuth, setUserAuth] = useState<UserAuth>(InitialUserAuth)
   const [authFailed, setAuthFailed] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
   const location = useLocation()
   const meetingPathRegex = /^\/meeting(\/.*)?$/
   useEffect(() => {
-    checkConnexion(setUserAuth, userUrl).finally(() => setIsLoading(false))
-  }, [])
+    console.log(auth)
+  }, [auth])
 
-  if (isLoading) {
-    return null
-  }
+  console.log('location', location)
 
   return (
     <div className="min-h-screen flex flex-col" id="screen">
-      <Header
-        username={userAuth.username}
-        setUserAuth={setUserAuth}
-        userAuth={userAuth}
-      />
+      <Header auth={auth} />
       <div className="flex-grow">
         <Routes>
           <Route
             path="/login"
             element={
-              !userAuth.isLogin ? (
-                <Login
-                  authFailed={authFailed}
-                  setAuthFailed={setAuthFailed}
-                  setUserAuth={setUserAuth}
-                />
+              !auth.tokens?.accessToken ? (
+                <Login authFailed={authFailed} setAuthFailed={setAuthFailed} />
               ) : (
                 <Navigate to="/meeting" />
               )
@@ -59,30 +48,34 @@ export const Root = () => {
           <>
             <Route
               path="/meeting"
-              element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
+              element={!auth.isAuthenticated ? <Navigate to="/login" /> : <Meeting />}
             />
             <Route
               path="/meeting/:id"
-              element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
+              element={!auth.isAuthenticated ? <Navigate to="/login" /> : <Meeting />}
             />
             <Route
               path="/outils"
-              element={!userAuth.isLogin ? <Navigate to="/login" /> : <Tools />}
+              element={!auth.isAuthenticated ? <Navigate to="/login" /> : <Tools />}
             />
           </>
 
           <Route
             path="/meeting"
-            element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
+            element={!auth.isAuthenticated ? <Navigate to="/login" /> : <Meeting />}
           />
           <Route
             path="/history"
-            element={!userAuth.isLogin ? <Navigate to="/login" /> : <History />}
+            element={!auth.isAuthenticated ? <Navigate to="/login" /> : <History />}
           />
           <Route
             path="/"
             element={
-              !userAuth.isLogin ? <Navigate to="/login" /> : <Navigate to="/meeting" />
+              !auth.isAuthenticated ? (
+                <Navigate to="/login" />
+              ) : (
+                <Navigate to="/meeting" />
+              )
             }
           />
           <Route path="/404" element={<Error404 />} />
@@ -90,7 +83,7 @@ export const Root = () => {
           <Route
             path="/contact"
             element={
-              !userAuth.isLogin ? (
+              !auth.isAuthenticated ? (
                 <Navigate to="/login" />
               ) : (
                 <Contact setUserAuth={setUserAuth} />
