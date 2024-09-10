@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { getChunksUrl, getArchiveUrl } from '@api'
 import type { UserHistory } from '@types'
+import { getLocalStorageUserAuth } from '@utils/auth'
+import { setHeaders } from '@utils/setData'
 
 export function useGetArchive(chatId: number) {
   return useQuery({
@@ -11,12 +13,9 @@ export function useGetArchive(chatId: number) {
 }
 
 const fetchArchive = async (chatId: number) => {
-  const authToken = localStorage.getItem('authToken')
+  const auth = getLocalStorageUserAuth()
   const response = await fetch(`${getArchiveUrl}/${chatId}`, {
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-      'Content-Type': 'application/json',
-    },
+    headers: setHeaders(false, auth.access_token, auth.refresh_token),
   })
   if (!response.ok) {
     console.error('error: response not ok', response)
@@ -28,10 +27,8 @@ const fetchArchive = async (chatId: number) => {
       const chunksResponse = stream.rag_sources
         ? await fetch(getChunksUrl, {
             method: 'POST',
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-              'Content-Type': 'application/json',
-            },
+            headers: setHeaders(false, auth.access_token, auth.refresh_token),
+
             body: JSON.stringify({ uids: stream.rag_sources }),
           }).then((res) => res.json())
         : []

@@ -11,3 +11,11 @@ export const InitialUserAuth: UserAuth = {
   authToken: '',
   isLogin: false,
 }
+
+export function getLocalStorageUserAuth() {
+  const userAuth = localStorage.getItem('auth_tokens')
+  if (userAuth) {
+    return JSON.parse(userAuth)
+  }
+  return null
+}

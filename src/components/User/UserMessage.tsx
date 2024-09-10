@@ -1,6 +1,7 @@
 import { chatUrl, indexesUrl } from '@api'
 import Button from '@codegouvfr/react-dsfr/Button'
 import type { RootState } from '@types'
+import { useAuth } from '@utils/context/authContext'
 import { CurrQuestionContext } from '@utils/context/questionContext'
 import { generateStream, useFetch } from '@utils/hooks'
 import { getIndexes, setHeaders } from '@utils/setData'
@@ -39,13 +40,12 @@ export function UserMessage({ questionInput, setQuestionInput }) {
       nextMessage: { text: questionInput, sender: 'user' },
     })
     let chatId = user.chatId
-
+    const auth = useAuth()
     if (user.chatId === 0) {
-      const headers = setHeaders(false)
       const chat_data = { chat_type: 'qa' }
       const chat = await useFetch(chatUrl, 'POST', {
         data: JSON.stringify(chat_data),
-        headers,
+        headers: setHeaders(true, auth.tokens.accessToken, auth.tokens.refreshToken),
       })
       chatId = chat.id
       dispatch({ type: 'SET_CHAT_ID', nextChatId: chatId })

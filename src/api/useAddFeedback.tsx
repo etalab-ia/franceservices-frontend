@@ -1,6 +1,8 @@
 import { feedbackUrl } from '@api'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import type { Feedback } from '@types'
+import { getLocalStorageUserAuth } from '@utils/auth'
+import { setHeaders } from '@utils/setData'
 
 export function useAddFeedback() {
   return useMutation({
@@ -16,7 +18,7 @@ interface AddFeedbackParams {
 }
 
 const addFeedback = async ({ feedback, streamId, reasons }: AddFeedbackParams) => {
-  const authToken = localStorage.getItem('authToken')
+  const auth = getLocalStorageUserAuth()
   const data = {
     is_good: !feedback.isGood,
     message: feedback.message,
@@ -26,10 +28,8 @@ const addFeedback = async ({ feedback, streamId, reasons }: AddFeedbackParams) =
   const res = await fetch(`${feedbackUrl}/${streamId}`, {
     method: 'POST',
     credentials: 'include',
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-      'Content-Type': 'application/json',
-    },
+    headers: setHeaders(false, auth.access_token, auth.refresh_token),
+
     body: JSON.stringify(data),
   })
 

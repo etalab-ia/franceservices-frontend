@@ -1,5 +1,7 @@
 import { getArchiveUrl } from '@api'
 import { useQuery } from '@tanstack/react-query'
+import { getLocalStorageUserAuth } from '@utils/auth'
+import { setHeaders } from '@utils/setData'
 
 type ChatArchive = {
   chat_type: string
@@ -54,12 +56,9 @@ export function useGetChatArchiveById(chatId: number) {
 }
 
 const fetchChatArchiveById = async (chatId: number) => {
-  const authToken = localStorage.getItem('authToken')
+  const auth = getLocalStorageUserAuth()
   const response = await fetch(`${getArchiveUrl}/${chatId}`, {
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-      'Content-Type': 'application/json',
-    },
+    headers: setHeaders(false, auth.access_token, auth.refresh_token),
   })
 
   if (!response.ok) {

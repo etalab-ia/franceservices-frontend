@@ -6,11 +6,18 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Link } from 'react-router-dom'
 import { Root } from './components/Root/Root'
 import { store } from './utils/reducer/reducer'
-
+import { AuthProvider } from '@utils/context/authContext'
+declare global {
+  interface Window {
+    _mtm: any[]
+    _paq: any[]
+  }
+}
 function App() {
   useEffect(() => {
     const matomoUrl: string = import.meta.env.VITE_MATOMO_URL
-    const _mtm = (window._mtm = window._mtm || [])
+    window._mtm = window._mtm || []
+    const _mtm = window._mtm
     _mtm.push({ 'mtm.startTime': new Date().getTime(), event: 'mtm.Start' })
     const d = document
     const g = d.createElement('script')
@@ -18,8 +25,8 @@ function App() {
     g.async = true
     g.src = matomoUrl
     s.parentNode.insertBefore(g, s)
-
-    const _paq = (window._paq = window._paq || [])
+    window._paq = window._paq || []
+    const _paq = window._paq
     /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
     _paq.push(['setExcludedQueryParams', ['simulationId', '_csrf']])
     _paq.push(['trackPageView'])
@@ -39,9 +46,11 @@ function App() {
   return (
     <BrowserRouter basename="/">
       <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
-          <Root />
-        </QueryClientProvider>
+        <AuthProvider>
+          <QueryClientProvider client={queryClient}>
+            <Root />
+          </QueryClientProvider>
+        </AuthProvider>
       </Provider>
     </BrowserRouter>
   )

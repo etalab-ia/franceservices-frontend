@@ -1,5 +1,8 @@
 import { institutionsUrl } from '@api'
 import { useQuery } from '@tanstack/react-query'
+import { getLocalStorageUserAuth } from '@utils/auth'
+import { useAuth } from '@utils/context/authContext'
+import { setHeaders } from '@utils/setData'
 
 export function useGetInstitutions() {
   return useQuery({
@@ -10,21 +13,38 @@ export function useGetInstitutions() {
 }
 
 const fetchInstitutions = async (): Promise<string[]> => {
-  const authToken = localStorage.getItem('authToken')
+  console.log('useGetInstitutions')
 
-  const res = await fetch(`${institutionsUrl}`, {
-    method: 'GET',
-    credentials: 'include',
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-      'Content-Type': 'application/json',
-    },
-  })
+  const auth = getLocalStorageUserAuth()
 
-  if (!res.ok) {
-    console.error('error: response not ok', res)
-    throw new Error('Impossible de récupérer les archives', { cause: res })
+  // Log to ensure the tokens are present
+  if (!auth.tokens.accessToken || !auth.tokens.refreshToken) {
+    console.error('Tokens missing:', {
+      accessToken: auth.tokens.accessToken,
+      refreshToken: auth.tokens.refreshToken,
+    })
+    throw new Error('Authentication tokens missing')
   }
-  const institutions = await res.json()
-  return institutions as string[]
+
+  try {
+    const res = await fetch(`${institutionsUrl}`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: setHeaders(false, auth.tokens.accessToken, auth.tokens.refreshToken),
+    })
+
+    console.log('res', res) // Log the raw response to debug
+
+    if (!res.ok) {
+      console.error('error: response not ok', res)
+      throw new Error('Impossible de récupérer les archives', { cause: res })
+    }
+
+    const institutions = await res.json()
+    console.log('institutions', institutions) // Log the parsed JSON response
+    return institutions as string[]
+  } catch (error) {
+    console.error('fetchInstitutions error:', error) // Log any errors during fetch
+    throw error
+  }
 }

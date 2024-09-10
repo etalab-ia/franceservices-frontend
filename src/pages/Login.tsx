@@ -1,33 +1,34 @@
-import { signinUrl, userUrl } from '@api'
 import { ButtonsGroup } from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { initButtonsLogin } from '@constants/connexion'
-import { usernameOrPasswordError } from '@constants/errorMessages'
 import { loginFields } from '@constants/inputFields'
-import { useFetch } from '@utils/hooks'
-import { setUserInfos } from '@utils/manageConnexion'
+import { useAuth } from '@utils/context/authContext'
 import {
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
   type Dispatch,
   type SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
 } from 'react'
-import type { UserAuth } from 'utils/auth'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
+import { useNavigate } from 'react-router-dom'
 
 interface LoginProps {
   authFailed: boolean
   setAuthFailed: Dispatch<SetStateAction<boolean>>
-  setUserAuth: Dispatch<SetStateAction<UserAuth>>
 }
 
-export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
+export function Login({ authFailed, setAuthFailed }: LoginProps) {
   const [isDisable, setIsDisable] = useState(true)
   const [password, setPassword] = useState('')
   const [id, setId] = useState('')
-
+  const { login, isAuthenticated } = useAuth()
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/meeting', { replace: true })
+    }
+  }, [isAuthenticated, navigate])
   useEffect(() => {
     checkIfCompletedFields()
   }, [password, id])
@@ -38,7 +39,6 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
 
   const handleChange = (e) => {
     e.preventDefault()
-
     if (e.target.name === 'username') {
       setId(e.target.value)
     }
@@ -48,24 +48,11 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
   }
 
   const handleSubmit = async () => {
-    const data = id.includes('@')
-      ? { email: id, password: password }
-      : { username: id, password: password }
-
     setAuthFailed(false)
-
     try {
-      const res = await useFetch(signinUrl, 'POST', {
-        data: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' },
-      })
-
-      if ((res.status && res.success !== true) || !res.token) {
-        // Set authFailed to true if the response status is not 200 or token is not received
+      const success = await login(id, password)
+      if (!success) {
         setAuthFailed(true)
-      } else {
-        // On successful authentication, set user info
-        setUserInfos(res.token, setUserAuth, userUrl)
       }
     } catch (error) {
       setAuthFailed(true)
@@ -77,18 +64,24 @@ export function Login({ authFailed, setAuthFailed, setUserAuth }: LoginProps) {
       <div className="fr-grid-row">
         <div className="fr-col fr-col-md-6">
           <h1 className="fr-text-title--blue-france fr-mt-5w fr-mb-2w">Se connecter</h1>
-
           <p className="fr-mb-4w">
             Ce service est à destination des France services participant à
-            l’expérimentation Albert France services.
+            l'expérimentation Albert France services.
           </p>
-
           <LoginFields
             fields={loginFields}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
+            selectedValue={undefined}
+            setSelectedValue={undefined}
+            matricule={undefined}
+            setMatricule={undefined}
           />
-          {authFailed && <ButtonInformation>{usernameOrPasswordError}</ButtonInformation>}
+          {authFailed && (
+            <ButtonInformation>
+              Nom d'utilisateur ou mot de passe invalide.
+            </ButtonInformation>
+          )}
           <ButtonsGroup buttons={initButtonsLogin(handleSubmit, isDisable)} />
         </div>
       </div>
