@@ -16,7 +16,9 @@ export function getLocalStorageUserAuth() {
   const userAuth = localStorage.getItem('auth_tokens')
   if (userAuth) {
     console.log('userAuth', userAuth)
-    return JSON.parse(userAuth)
+    const parsed = JSON.parse(userAuth)
+    console.log('parsed', parsed)
+    return parsed
   }
   return null
 }
