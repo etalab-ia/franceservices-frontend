@@ -47,7 +47,8 @@ function TitleAndDescription() {
 
 function EasyAccess() {
   const auth = useAuth()
-  const { data: username, error } = useGetUser()
+  const { data: username, error, isLoading } = useGetUser()
+  if (isLoading) return null
   console.log('username', username)
   return (
     <div className="fr-header__tools">
