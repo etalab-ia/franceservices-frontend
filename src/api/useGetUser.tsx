@@ -10,7 +10,7 @@ export function useGetUser() {
   })
 }
 
-const fetchUser = async (): Promise<string[]> => {
+const fetchUser = async () => {
   const auth = getLocalStorageUserAuth()
   console.log('fetchuser', auth)
   if (!auth.access_token || !auth.refresh_token) {

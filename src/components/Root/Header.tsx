@@ -47,18 +47,12 @@ function TitleAndDescription() {
 
 function EasyAccess() {
   const auth = useAuth()
-  const { data: username, error, isLoading } = useGetUser()
-  if (isLoading) return null
-  console.log('username', username)
+
   return (
     <div className="fr-header__tools">
       <div className="fr-header__tools-links">
         <ul className="fr-btns-group">
-          <li>
-            <div className="fr-btn fr-icon-user-line hover:cursor-text">
-              {username?.username ?? ''}
-            </div>
-          </li>
+          <li>{<Username />}</li>
           <li>
             <button
               type="button"
@@ -70,6 +64,18 @@ function EasyAccess() {
           </li>
         </ul>
       </div>
+    </div>
+  )
+}
+
+function Username() {
+  const { data: username, error, isLoading } = useGetUser()
+  console.log('username', username)
+
+  if (isLoading) return null
+  return (
+    <div className="fr-btn fr-icon-user-line hover:cursor-text">
+      {username?.username ?? ''}
     </div>
   )
 }
