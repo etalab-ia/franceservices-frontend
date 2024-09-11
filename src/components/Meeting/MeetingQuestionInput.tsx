@@ -11,9 +11,6 @@ import { useLocation } from 'react-router-dom'
 import { MeetingTags } from './MeetingTags'
 import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
 
-/*
-
-*/
 export function MeetingQuestionInput({
   isNewChat,
   questionInput,
@@ -236,7 +233,7 @@ function questionType(question: string, chunks: Chunk[]) {
   return 'auto'
 }
 
-export function trackChatEvent(
+function trackChatEvent(
   isNewChat: boolean,
   type: 'auto' | 'first_question' | 'suggested_question',
   step: number,

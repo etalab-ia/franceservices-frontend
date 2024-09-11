@@ -1,9 +1,16 @@
 {
+  "entry": ["src/main.ts", "src/main.tsx"],
+  "project": ["src/**/*.ts", "src/**/*.tsx"],
+  "ignore": ["**/*.d.ts"],
+  "ignoreDependencies": ["npm"],
   "paths": {
-    "@types": ["./types.ts"],
-    "@api": ["./api/*"],
-    "@utils/*": ["./utils/*"],
-    "@constants/*": ["./constants/*"],
-    "@hooks/*": ["./utils/hooks/*"]
-  }
+    "@types": ["src/types.ts"],
+    "@api": ["src/api/index.ts"],
+    "@api/*": ["src/api/*"],
+    "@utils": ["src/utils"],
+    "@constants": ["src/constants"],
+    "@hooks": ["src/utils/hooks"]
+  },
+  "ignoreExportsUsedInFile": true,
+  "strict": true
 }

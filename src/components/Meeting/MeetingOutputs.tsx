@@ -11,6 +11,7 @@ import {
   type WebService,
 } from '@types'
 import { CurrQuestionContext } from '@utils/context/questionContext'
+import { rmContextFromQuestion } from '@utils/setData'
 import { GlobalColContainer } from 'components/Global/GlobalColContainer'
 import { GlobalParagraph } from 'components/Global/GlobalParagraph'
 import { GlobalRowContainer } from 'components/Global/GlobalRowContainer'
@@ -21,7 +22,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { MeetingQuestionInput } from './MeetingQuestionInput'
 import { UsefulLinks } from './UsefulLinks'
-import { rmContextFromQuestion } from '@utils/setData'
 
 export const MeetingOutputs = memo(function MeetingOutputs({
   chatId,

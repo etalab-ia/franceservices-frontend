@@ -13,16 +13,11 @@ export const unsatisfiedButtons = [
   { text: 'Fautes de grammaire', type: 'grammar_errors' },
 ] as const
 
-export const askingQuality = 'Quelle est la qualité de ce message ?'
-export const redoAskingQuality = 'Cette réponse est-elle mieux ou moins bien ?'
-
-export const askingReasons = 'Donnez-nous d’autres raisons, autant que vous le souhaitez.'
 export const thankFeedback =
   'Merci pour votre retour ! Il permettra d’améliorer les futurs résultats.'
 export const feedbackButtonsChoice = (button) =>
   `Bouton permettant de sélectionner le retour d'expérience "${button}".`
 export const feedbackConfirmationButton = `Bouton de confirmation des retours d'expérience de la conversation.`
-export const feedbackAdditionalInput = `Champ de saisie permettant de rajouter des retours d'expérience non proposés.`
 export const feedbackResume = `Résumé des retours d'expérience.`
 const satisfactionButton = (type) =>
   `Bouton pour indiquer que la réponse générée est ${type}`

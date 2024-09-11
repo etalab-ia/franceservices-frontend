@@ -1,5 +1,4 @@
 import type { store } from './utils/reducer/reducer'
-import question from '@artwork/pictograms/albert/question.png'
 
 /**
  * The type of the Redux store
