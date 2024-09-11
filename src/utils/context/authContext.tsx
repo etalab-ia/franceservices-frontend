@@ -1,3 +1,4 @@
+import { signinUrl } from '@api'
 import { getLocalStorageUserAuth } from '@utils/auth'
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -53,7 +54,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   // Login function with async/await
   const login = async (username: string, password: string): Promise<boolean> => {
     try {
-      const response = await fetch('http://localhost:8000/sign_in', {
+      const response = await fetch(signinUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),

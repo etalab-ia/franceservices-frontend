@@ -46,10 +46,7 @@ export const Root = () => {
           <Route path="/FAQ" element={<FAQ />} />
 
           <>
-            <Route
-              path="/meeting"
-              element={!auth.isAuthenticated ? <Navigate to="/login" /> : <Meeting />}
-            />
+            <Route path="/meeting" element={<Meeting />} />
             <Route
               path="/meeting/:id"
               element={!auth.isAuthenticated ? <Navigate to="/login" /> : <Meeting />}

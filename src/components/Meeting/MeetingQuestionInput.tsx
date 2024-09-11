@@ -1,17 +1,19 @@
 import { chatUrl } from '@api'
 import Button from '@codegouvfr/react-dsfr/Button'
 import type { Chunk, MeetingInputContext, RootState } from '@types'
+import { getLocalStorageUserAuth } from '@utils/auth'
 import { emitCloseStream } from '@utils/eventsEmitter'
 import { generateStream, useFetch } from '@utils/hooks'
 import { addContextToQuestion, setHeaders } from '@utils/setData'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import { MeetingTags } from './MeetingTags'
 import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
-import { useLocation } from 'react-router-dom'
-import { useAuth } from '@utils/context/authContext'
-import { getLocalStorageUserAuth } from '@utils/auth'
 
+/*
+
+*/
 export function MeetingQuestionInput({
   isNewChat,
   questionInput,
@@ -49,20 +51,19 @@ export function MeetingQuestionInput({
   const handleSubmit = async () => {
     if (context.themes.length === 0 || context.administrations.length === 0) {
       setShowError(true)
-      setIsAdditionalInputOpened(true)
     } else {
       setShowError(false)
       let chatId = user.chatId
       dispatch({ type: 'SET_IS_STREAMING', nextIsStreaming: true })
 
-    if (!chatId) {
-      const chat = await useFetch(chatUrl, 'POST', {
-        data: JSON.stringify({ chat_type: 'meeting' }),
-        headers: setHeaders(true, auth.access_token, auth.refresh_token),
-      })
-      chatId = chat.id
-      dispatch({ type: 'SET_CHAT_ID', nextChatId: chatId })
-    }
+      if (!chatId) {
+        const chat = await useFetch(chatUrl, 'POST', {
+          data: JSON.stringify({ chat_type: 'meeting' }),
+          headers: setHeaders(true, auth.access_token, auth.refresh_token),
+        })
+        chatId = chat.id
+        dispatch({ type: 'SET_CHAT_ID', nextChatId: chatId })
+      }
 
       setIsAdditionalInputOpened(false)
 
@@ -97,7 +98,6 @@ export function MeetingQuestionInput({
         nextMessage: { text: questionInput, sender: 'user' },
       })
 
-      // Increment message count
       setMessageCount((prevCount) => prevCount + 1)
 
       trackChatEvent(

@@ -1,7 +1,7 @@
+import React, { useMemo, useState } from 'react'
 import { useGetInstitutions } from '@api'
-import Input from '@codegouvfr/react-dsfr/Input'
+import { Input } from '@codegouvfr/react-dsfr/Input'
 import Fuse from 'fuse.js'
-import { useMemo, useState } from 'react'
 
 const options = {
   includeScore: true,
@@ -10,9 +10,6 @@ const options = {
   keys: ['name'],
 }
 
-/*
- * Additional inputs used to search for administrations or themes tags
- */
 export function ThemesAndAdminsInput({
   field,
   onTagSelect,
@@ -23,6 +20,7 @@ export function ThemesAndAdminsInput({
   const [searchResults, setSearchResults] = useState([])
   const [selectedValue, setSelectedValue] = useState('')
   const [selectedIndex, setSelectedIndex] = useState(-1)
+
   const { data: institutions, error: institutionsError } = useGetInstitutions()
 
   const fuse = useMemo(() => {
@@ -87,8 +85,10 @@ export function ThemesAndAdminsInput({
       (field.name === 'administrations' && administrations.includes(tag))
     )
   }
+
   const isFieldEmpty =
     field.name === 'themes' ? themes.length === 0 : administrations.length === 0
+
   return (
     <div>
       <Input
