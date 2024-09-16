@@ -46,6 +46,7 @@ export function MeetingQuestionInput({
   const handleSubmit = async () => {
     if (context.themes.length === 0 || context.administrations.length === 0) {
       setShowError(true)
+      setIsAdditionalInputOpened(true)
     } else {
       setShowError(false)
       let chatId = user.chatId
