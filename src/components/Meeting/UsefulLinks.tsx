@@ -34,7 +34,9 @@ function SmallHorizontalTile({ tileProps }: { tileProps: TileType }) {
       <div className="fr-tile__body">
         <div className="fr-tile__content">
           <h3 className="fr-tile__title">
-            <a href={tileProps.linkProps.href}>{tileProps.title}</a>
+            <a target="_blank" href={tileProps.linkProps.href}>
+              {tileProps.title}
+            </a>
           </h3>
         </div>
       </div>

@@ -13,7 +13,13 @@ const options = {
 /*
  * Additional inputs used to search for administrations or themes tags
  */
-export function ThemesAndAdminsInput({ field, onTagSelect, themes, administrations }) {
+export function ThemesAndAdminsInput({
+  field,
+  onTagSelect,
+  themes,
+  administrations,
+  showError,
+}) {
   const [searchResults, setSearchResults] = useState([])
   const [selectedValue, setSelectedValue] = useState('')
   const [selectedIndex, setSelectedIndex] = useState(-1)
@@ -81,7 +87,8 @@ export function ThemesAndAdminsInput({ field, onTagSelect, themes, administratio
       (field.name === 'administrations' && administrations.includes(tag))
     )
   }
-
+  const isFieldEmpty =
+    field.name === 'themes' ? themes.length === 0 : administrations.length === 0
   return (
     <div>
       <Input
@@ -94,6 +101,10 @@ export function ThemesAndAdminsInput({ field, onTagSelect, themes, administratio
           name: field.name,
           tabIndex: 0,
         }}
+        state={showError && isFieldEmpty ? 'error' : 'default'}
+        stateRelatedMessage={
+          showError && isFieldEmpty ? `Le champ ${field.label} est obligatoire` : ''
+        }
       />
       {field.name === 'administrations' && (
         <div tabIndex={-1} className="fr-mb-2v">

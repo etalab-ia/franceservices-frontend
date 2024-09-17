@@ -23,6 +23,7 @@ export function MeetingQuestionInput({
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
   const location = useLocation()
+  const [showError, setShowError] = useState(false)
   const [isAdditionalInputOpened, setIsAdditionalInputOpened] = useState(
     !stream.historyStream.length && location.pathname === '/meeting',
   )
@@ -43,65 +44,71 @@ export function MeetingQuestionInput({
   }, [user.question, user.chatId])
 
   const handleSubmit = async () => {
-    let chatId = user.chatId
-    dispatch({ type: 'SET_IS_STREAMING', nextIsStreaming: true })
+    if (context.themes.length === 0 || context.administrations.length === 0) {
+      setShowError(true)
+      setIsAdditionalInputOpened(true)
+    } else {
+      setShowError(false)
+      let chatId = user.chatId
+      dispatch({ type: 'SET_IS_STREAMING', nextIsStreaming: true })
 
-    if (!chatId) {
-      const headers = setHeaders(false)
-      const chat = await useFetch(chatUrl, 'POST', {
-        data: JSON.stringify({ chat_type: 'meeting' }),
-        headers,
-      })
-      chatId = chat.id
-      dispatch({ type: 'SET_CHAT_ID', nextChatId: chatId })
-    }
+      if (!chatId) {
+        const headers = setHeaders(false)
+        const chat = await useFetch(chatUrl, 'POST', {
+          data: JSON.stringify({ chat_type: 'meeting' }),
+          headers,
+        })
+        chatId = chat.id
+        dispatch({ type: 'SET_CHAT_ID', nextChatId: chatId })
+      }
 
-    setIsAdditionalInputOpened(false)
+      setIsAdditionalInputOpened(false)
 
-    if (stream.historyStream.length) {
+      if (stream.historyStream.length) {
+        dispatch({
+          type: 'ADD_HISTORY',
+          newItem: {
+            query: user.question.query,
+            response: stream.historyStream[0],
+            chunks: user.chunks,
+            webservices: user.webservices,
+          },
+        })
+      }
+
       dispatch({
-        type: 'ADD_HISTORY',
-        newItem: {
-          query: user.question.query,
-          response: stream.historyStream[0],
-          chunks: user.chunks,
-          webservices: user.webservices,
-        },
+        type: 'SET_USER_QUERY',
+        nextUserQuery: addContextToQuestion(questionInput, context),
+        nextChatId: chatId,
       })
-    }
 
-    dispatch({
-      type: 'SET_USER_QUERY',
-      nextUserQuery: addContextToQuestion(questionInput, context),
-      nextChatId: chatId,
-    })
+      if (stream.historyStream.length) {
+        dispatch({
+          type: 'SET_MESSAGES',
+          nextMessage: { text: stream.historyStream, sender: 'agent' },
+        })
+      }
 
-    if (stream.historyStream.length) {
+      dispatch({ type: 'RESET_STREAM_HISTORY' })
       dispatch({
         type: 'SET_MESSAGES',
-        nextMessage: { text: stream.historyStream, sender: 'agent' },
+        nextMessage: { text: questionInput, sender: 'user' },
       })
+
+      // Increment message count
+      setMessageCount((prevCount) => prevCount + 1)
+
+      trackChatEvent(
+        isNewChat,
+        questionType(questionInput, user.chunks),
+        messageCount + 1, // Use messageCount + 1 to track the correct step
+        context.administrations.length > 0,
+        context.themes.length > 0,
+        chatId,
+        user.lastStreamId,
+      )
+      setQuestionInput('')
     }
-
-    dispatch({ type: 'RESET_STREAM_HISTORY' })
-    dispatch({
-      type: 'SET_MESSAGES',
-      nextMessage: { text: questionInput, sender: 'user' },
-    })
-
-    // Increment message count
-    setMessageCount((prevCount) => prevCount + 1)
-
-    trackChatEvent(
-      isNewChat,
-      questionType(questionInput, user.chunks),
-      messageCount + 1, // Use messageCount + 1 to track the correct step
-      context.administrations.length > 0,
-      context.themes.length > 0,
-      chatId,
-      user.lastStreamId,
-    )
-    setQuestionInput('')
   }
 
   const handleKeyDown = (e: any) => {
@@ -130,6 +137,7 @@ export function MeetingQuestionInput({
             <NewQuestionMeetingAdditionalInput
               context={context}
               setContext={setContext}
+              showError={showError}
             />
           )}
           <div className="flex justify-between">
@@ -161,9 +169,11 @@ export function MeetingQuestionInput({
 function NewQuestionMeetingAdditionalInput({
   context,
   setContext,
+  showError,
 }: {
   context: MeetingInputContext
   setContext: React.Dispatch<React.SetStateAction<MeetingInputContext>>
+  showError: boolean
 }) {
   const handleSetTag = (tag, fieldName) => {
     setContext((prevContext) => ({
@@ -181,13 +191,9 @@ function NewQuestionMeetingAdditionalInput({
             onTagSelect={(tag) => handleSetTag(tag, field.name)}
             themes={context.themes}
             administrations={context.administrations}
+            showError={showError}
           />
-          <MeetingTags
-            setContext={setContext}
-            context={context}
-            field={field}
-            tags={context[field.name]}
-          />
+          <MeetingTags setContext={setContext} field={field} tags={context[field.name]} />
         </div>
       ))}
     </div>
