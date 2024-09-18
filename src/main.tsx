@@ -1,12 +1,12 @@
 import { startReactDsfr } from '@codegouvfr/react-dsfr/spa'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { QueryCache, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Link } from 'react-router-dom'
 import { Root } from './components/Root/Root'
 import { store } from './utils/reducer/reducer'
-import { AuthProvider } from '@utils/context/authContext'
+import { AuthProvider, useAuth } from '@utils/context/authContext'
 declare global {
   interface Window {
     _mtm: any[]
@@ -57,7 +57,17 @@ function App() {
 }
 
 startReactDsfr({ defaultColorScheme: 'system', Link })
+const { logout } = useAuth()
+
 const queryClient = new QueryClient({
+  queryCache: new QueryCache({
+    onError: (error) => {
+      console.log('error', error)
+      if (error.response?.status === 401) {
+        logout()
+      }
+    },
+  }),
   defaultOptions: { queries: { refetchOnWindowFocus: false } },
 })
 
