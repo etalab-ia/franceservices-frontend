@@ -35,7 +35,7 @@ export const Root = () => {
           <Route
             path="/login"
             element={
-              !auth.tokens?.accessToken ? (
+              !auth.isAuthenticated ? (
                 <Login authFailed={authFailed} setAuthFailed={setAuthFailed} />
               ) : (
                 <Navigate to="/meeting" />
@@ -46,24 +46,47 @@ export const Root = () => {
           <Route path="/FAQ" element={<FAQ />} />
 
           <>
-            <Route path="/meeting" element={<Meeting />} />
+            <Route
+              path="/meeting"
+              element={
+                <PrivateRoute>
+                  <Meeting />
+                </PrivateRoute>
+              }
+            />
             <Route
               path="/meeting/:id"
-              element={!auth.isAuthenticated ? <Navigate to="/login" /> : <Meeting />}
+              element={
+                <PrivateRoute>
+                  <Meeting />
+                </PrivateRoute>
+              }
             />
             <Route
               path="/outils"
-              element={!auth.isAuthenticated ? <Navigate to="/login" /> : <Tools />}
+              element={
+                <PrivateRoute>
+                  <Tools />
+                </PrivateRoute>
+              }
             />
           </>
 
           <Route
             path="/meeting"
-            element={!auth.isAuthenticated ? <Navigate to="/login" /> : <Meeting />}
+            element={
+              <PrivateRoute>
+                <Meeting />
+              </PrivateRoute>
+            }
           />
           <Route
             path="/history"
-            element={!auth.isAuthenticated ? <Navigate to="/login" /> : <History />}
+            element={
+              <PrivateRoute>
+                <History />
+              </PrivateRoute>
+            }
           />
           <Route
             path="/"
@@ -80,11 +103,9 @@ export const Root = () => {
           <Route
             path="/contact"
             element={
-              !auth.isAuthenticated ? (
-                <Navigate to="/login" />
-              ) : (
+              <PrivateRoute>
                 <Contact setUserAuth={setUserAuth} />
-              )
+              </PrivateRoute>
             }
           />
           <Route
@@ -122,4 +143,9 @@ export const Root = () => {
         location.pathname !== '/' && <Footer />}{' '}
     </div>
   )
+}
+
+const PrivateRoute = ({ children }: { children: JSX.Element }) => {
+  const auth = useAuth()
+  return auth.isAuthenticated ? children : <Navigate to="/login" />
 }
