@@ -57,15 +57,11 @@ function App() {
 }
 
 startReactDsfr({ defaultColorScheme: 'system', Link })
-const { logout } = useAuth()
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
     onError: (error) => {
       console.log('error', error)
-      if (error.response?.status === 401) {
-        logout()
-      }
     },
   }),
   defaultOptions: { queries: { refetchOnWindowFocus: false } },
