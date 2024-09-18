@@ -16,20 +16,12 @@ import { GlobalParagraph } from 'components/Global/GlobalParagraph'
 import { GlobalRowContainer } from 'components/Global/GlobalRowContainer'
 import { OneThirdScreenWidth } from 'components/Global/OneThirdScreenWidth'
 import Separator from 'components/Global/Separator'
-import { useEffect, useRef, useState, memo, useMemo } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { MeetingCurrentResponse } from './MeetingCurrentResponse'
 import { MeetingQuestionInput } from './MeetingQuestionInput'
 import { UsefulLinks } from './UsefulLinks'
-
-const str = `TEST<ref text="La scolarisation est obligatoire pour un enfant âgé entre 6 ans et 16 ans. Dans cette tranche d'âge, les allocations familiales de la Caf ou de la CMSA sont versées si l'enfant est dans l'une des situations suivantes :
-- Il est inscrit dans un établissement scolaire
-- Il est instruit à domicile (par exemple, dans le cadre du Centre national d'enseignement à distance - Cned)
-- Son état de santé l'empêche de fréquenter régulièrement un établissement scolaire" 
-title="Dans quels cas un enfant peut-il être considéré à charge pour le RSA ?">https://www.service-public.fr/particuliers/vosdroits/F20199</ref>. TEST
-
-<ref text="Pour saisir le juge, il faut déposer ou envoyer par courrier au secrétariat-greffe du tribunal une requête, accompagnée d'une copie du titre exécutoire. La requête doit obligatoirement mentionner les informations suivantes : - Nom, prénoms, profession, domicile, nationalité, date et lieu de naissance du créancier" 
-title="Saisie sur salaire (ou)">https://www.service-public.fr/particuliers/vosdroits/F115</ref>`
+import { rmContextFromQuestion } from '@utils/setData'
 
 export const MeetingOutputs = memo(function MeetingOutputs({
   chatId,
@@ -113,7 +105,7 @@ export const History = memo(
                   zIndex: 1,
                 }}
               >
-                {h.query}
+                {rmContextFromQuestion(h.query)}
               </AccordionSummary>
               <AccordionDetails
                 sx={{
@@ -165,7 +157,7 @@ export const DisplayResponse = memo(
             </GlobalParagraph>
           </div>
         </GlobalColContainer>
-        {webservices?.length !== 0 && (
+        {webservices?.length > 0 && (
           <OneThirdScreenWidth>
             <GlobalColContainer>
               <UsefulLinks webservices={webservices} />
