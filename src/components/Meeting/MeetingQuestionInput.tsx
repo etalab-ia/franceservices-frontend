@@ -53,9 +53,14 @@ export function MeetingQuestionInput({
       let chatId = user.chatId
       dispatch({ type: 'SET_IS_STREAMING', nextIsStreaming: true })
 
+      //TODO: Make it possible to send multiple administrations
       if (!chatId) {
         const chat = await useFetch(chatUrl, 'POST', {
-          data: JSON.stringify({ chat_type: 'meeting' }),
+          data: JSON.stringify({
+            chat_type: 'meeting',
+            themes: context.themes, // Wrapping the string in an array
+            operator: context.administrations[0], // Assuming the first administration is the correct one
+          }),
           headers: setHeaders(true, auth.access_token, auth.refresh_token),
         })
         chatId = chat.id

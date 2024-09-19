@@ -48,7 +48,7 @@ function ChatList() {
   }, [inView, hasNextPage, fetchNextPage])
 
   if (error) {
-    console.log(error)
+    console.error(error)
     return <ShowError message={error.message} errorNumber={error.status} />
   }
 
@@ -108,7 +108,7 @@ function QuestionsSidePanel({ selectedChatId }: { selectedChatId: number }) {
 function QuestionList({ selectedChatId }) {
   const { data: archive, error } = useGetChatArchiveById(selectedChatId)
   if (error) {
-    console.log(error)
+    console.error(error)
   }
 
   if (!archive || !archive.streams) {

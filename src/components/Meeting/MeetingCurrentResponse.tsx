@@ -24,7 +24,6 @@ export const MeetingCurrentResponse = memo(
     const refBottom = useRef<HTMLDivElement>(null)
     /*   useEffect(() => {
     if (refBottom.current) {
-      console.log('REEEEEF', refBottom.current)
       refBottom.current.scrollIntoView({
         behavior: 'smooth',
         block: 'end',

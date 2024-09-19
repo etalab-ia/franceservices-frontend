@@ -61,7 +61,7 @@ startReactDsfr({ defaultColorScheme: 'system', Link })
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
     onError: (error) => {
-      console.log('error', error)
+      console.error('error', error)
     },
   }),
   defaultOptions: { queries: { refetchOnWindowFocus: false } },

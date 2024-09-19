@@ -21,11 +21,6 @@ export const Root = () => {
   const [authFailed, setAuthFailed] = useState(false)
   const location = useLocation()
   const meetingPathRegex = /^\/meeting(\/.*)?$/
-  useEffect(() => {
-    console.log(auth)
-  }, [auth])
-
-  console.log('location', location)
 
   return (
     <div className="min-h-screen flex flex-col" id="screen">

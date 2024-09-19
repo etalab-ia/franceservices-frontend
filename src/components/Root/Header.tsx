@@ -70,7 +70,6 @@ function EasyAccess() {
 
 function Username() {
   const { data: username, error, isLoading } = useGetUser()
-  console.log('username', username)
 
   if (isLoading) return null
   return (

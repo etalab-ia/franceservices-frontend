@@ -39,7 +39,6 @@ function handleStreamMessage(e, dispatch, stream_chat, id: number) {
       dispatch({ type: 'SET_STREAM_ID', nextStreamId: 0 })
       return dispatch({ type: 'STOP_AGENT_STREAM' })
     }
-    //console.log(jsonData.choices[0].delta.content)
     return dispatch({
       type: 'GET_AGENT_STREAM',
       nextResponse: jsonData.choices[0].delta.content
@@ -67,7 +66,7 @@ function handleStreamError(e, stream_chat) {
 const useStream = async (dispatch, id: number, isChat: boolean) => {
   const auth = useAuth()
   const stream_chat = new EventSourcePolyfill(`${streamUrl}/${id}/start`, {
-    headers: setHeaders(true, auth.tokens.accessToken, auth.tokens.refreshToken),
+    headers: setHeaders(true, auth.access_token, auth.refresh_token),
     withCredentials: true,
   })
 
@@ -99,7 +98,7 @@ export async function generateStream(
   const stream_data = setUserQuestion(question)
   const stream = await useFetch(`${streamUrl}/chat/${chatId}`, 'POST', {
     data: JSON.stringify(stream_data),
-    headers: setHeaders(false, auth.tokens.accessToken, auth.tokens.refreshToken),
+    headers: setHeaders(false, auth.access_token, auth.refresh_token),
   })
   dispatch({ type: 'SET_STREAM_ID', nextStreamId: stream.id })
   dispatch({ type: 'SET_LAST_STREAM_ID', nextLastStreamId: stream.id })

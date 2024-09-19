@@ -15,9 +15,9 @@ export const InitialUserAuth: UserAuth = {
 export function getLocalStorageUserAuth() {
   const userAuth = localStorage.getItem('auth_tokens')
   if (userAuth) {
-    console.log('userAuth', userAuth)
+    // console.log('userAuth', userAuth)
     const parsed = JSON.parse(userAuth)
-    console.log('parsed', parsed)
+    // console.log('parsed', parsed)
     return parsed
   }
   return null

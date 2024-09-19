@@ -12,7 +12,6 @@ export function useGetUser() {
 
 const fetchUser = async () => {
   const auth = getLocalStorageUserAuth()
-  console.log('fetchuser', auth)
   if (!auth.access_token || !auth.refresh_token) {
     console.error('Tokens missing:', {
       accessToken: auth.access_token,
@@ -26,8 +25,6 @@ const fetchUser = async () => {
       credentials: 'include',
       headers: setHeaders(false, auth.access_token, auth.refresh_token),
     })
-
-    console.log('res', res)
 
     if (!res.ok) {
       console.error('error: response not ok', res)
