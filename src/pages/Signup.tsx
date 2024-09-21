@@ -64,8 +64,7 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
 
   const handleValidatePassword = (auth) => {
     return (
-      userAuth.username &&
-      userAuth.username.length &&
+      userAuth.username?.length &&
       userAuth.email.length &&
       userAuth.email.includes('@') &&
       password.length &&
@@ -99,14 +98,17 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
         data: JSON.stringify(data),
         headers: { 'Content-Type': 'application/json' },
       })
-
+      console.log('res', res)
       if (!res.success) {
-        switch (res.error.details.detail) {
+        switch (res.error.details.detail[0].msg) {
           case 'Username already exists':
             setErrorMessage("Nom d'utilisateur déjà utilisé")
             break
           case 'Email already exists':
             setErrorMessage('Email déjà utilisé')
+            break
+          case 'Value error, unknown organization_id':
+            setErrorMessage('Veuillez renseigner une maison France Services valide')
             break
           default:
             setErrorMessage('Une erreur est survenue')

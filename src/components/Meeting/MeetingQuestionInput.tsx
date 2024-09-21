@@ -61,7 +61,7 @@ export function MeetingQuestionInput({
             themes: context.themes, // Wrapping the string in an array
             operator: context.administrations[0], // Assuming the first administration is the correct one
           }),
-          headers: setHeaders(true, auth.access_token, auth.refresh_token),
+          headers: setHeaders(false, auth.access_token, auth.refresh_token),
         })
         chatId = chat.id
         dispatch({ type: 'SET_CHAT_ID', nextChatId: chatId })
