@@ -14,6 +14,7 @@ import { Signup } from '../../pages/Signup'
 import { Tools } from '../../pages/Tools'
 import Footer from './Footer'
 import Header from './Header'
+import { useOidc } from '@axa-fr/react-oidc'
 
 export const Root = () => {
   const auth = useAuth()
@@ -27,7 +28,7 @@ export const Root = () => {
       <Header auth={auth} />
       <div className="flex-grow">
         <Routes>
-          <Route
+          {/*           <Route
             path="/login"
             element={
               !auth.isAuthenticated ? (
@@ -36,7 +37,7 @@ export const Root = () => {
                 <Navigate to="/meeting" />
               )
             }
-          />
+          /> */}
 
           <Route path="/FAQ" element={<FAQ />} />
 
@@ -44,25 +45,25 @@ export const Root = () => {
             <Route
               path="/meeting"
               element={
-                <PrivateRoute>
+                <OidcSecure>
                   <Meeting />
-                </PrivateRoute>
+                </OidcSecure>
               }
             />
             <Route
               path="/meeting/:id"
               element={
-                <PrivateRoute>
+                <OidcSecure>
                   <Meeting />
-                </PrivateRoute>
+                </OidcSecure>
               }
             />
             <Route
               path="/outils"
               element={
-                <PrivateRoute>
+                <OidcSecure>
                   <Tools />
-                </PrivateRoute>
+                </OidcSecure>
               }
             />
           </>
@@ -70,27 +71,25 @@ export const Root = () => {
           <Route
             path="/meeting"
             element={
-              <PrivateRoute>
+              <OidcSecure>
                 <Meeting />
-              </PrivateRoute>
+              </OidcSecure>
             }
           />
           <Route
             path="/history"
             element={
-              <PrivateRoute>
+              <OidcSecure>
                 <History />
-              </PrivateRoute>
+              </OidcSecure>
             }
           />
           <Route
             path="/"
             element={
-              !auth.isAuthenticated ? (
-                <Navigate to="/login" />
-              ) : (
+              <OidcSecure>
                 <Navigate to="/meeting" />
-              )
+              </OidcSecure>
             }
           />
           <Route path="/404" element={<Error404 />} />
@@ -98,9 +97,9 @@ export const Root = () => {
           <Route
             path="/contact"
             element={
-              <PrivateRoute>
+              <OidcSecure>
                 <Contact setUserAuth={setUserAuth} />
-              </PrivateRoute>
+              </OidcSecure>
             }
           />
           <Route
@@ -140,7 +139,14 @@ export const Root = () => {
   )
 }
 
-const PrivateRoute = ({ children }: { children: JSX.Element }) => {
-  const auth = useAuth()
-  return auth.isAuthenticated ? children : <Navigate to="/login" />
+const OidcSecure = ({ children }: { children: JSX.Element }) => {
+  const { isAuthenticated, login } = useOidc()
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      login()
+    }
+  }, [isAuthenticated, login])
+
+  return isAuthenticated ? children : null
 }

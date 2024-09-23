@@ -5,23 +5,23 @@
 // Domains used by OIDC server must be also declared here
 
 const trustedDomains = {
-  default: ['https://demo.duendesoftware.com', 'https://kdhttps.auth0.com'],
-  config_classic: ['https://demo.duendesoftware.com'],
-  config_without_silent_login: ['https://demo.duendesoftware.com'],
-  config_without_refresh_token: ['https://demo.duendesoftware.com'],
-  config_without_refresh_token_silent_login: ['https://demo.duendesoftware.com'],
+  default: ['https://auth.staging.etalab.gouv.fr', 'https://kdhttps.auth0.com'],
+  config_classic: ['https://auth.staging.etalab.gouv.fr'],
+  config_without_silent_login: ['https://auth.staging.etalab.gouv.fr'],
+  config_without_refresh_token: ['https://auth.staging.etalab.gouv.fr'],
+  config_without_refresh_token_silent_login: ['https://auth.staging.etalab.gouv.fr'],
   config_google: [
     'https://oauth2.googleapis.com',
     'https://openidconnect.googleapis.com',
   ],
-  config_with_hash: ['https://demo.duendesoftware.com'],
+  config_with_hash: ['https://auth.staging.etalab.gouv.fr'],
 }
 
 // Service worker will continue to give access token to the JavaScript client
 // Ideal to hide refresh token from client JavaScript, but to retrieve access_token for some
 // scenarios which require it. For example, to send it via websocket connection.
 trustedDomains.config_show_access_token = {
-  domains: ['https://demo.duendesoftware.com'],
+  domains: ['https://auth.staging.etalab.gouv.fr'],
   showAccessToken: true,
   // convertAllRequestsToCorsExceptNavigate: false,
   // setAccessTokenToNavigateRequests: true,
@@ -29,6 +29,6 @@ trustedDomains.config_show_access_token = {
 
 // This example defines domains used by OIDC server separately from domains to which access tokens will be injected.
 trustedDomains.config_separate_oidc_access_token_domains = {
-  oidcDomains: ['https://demo.duendesoftware.com'],
-  accessTokenDomains: ['https://myapi'],
+  oidcDomains: ['https://auth.staging.etalab.gouv.fr'],
+  accessTokenDomains: [`https://auth.staging.etalab.gouv.fr`],
 }
