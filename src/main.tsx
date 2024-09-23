@@ -7,12 +7,25 @@ import { BrowserRouter, Link } from 'react-router-dom'
 import { Root } from './components/Root/Root'
 import { store } from './utils/reducer/reducer'
 import { AuthProvider, useAuth } from '@utils/context/authContext'
+import { OidcProvider } from '@axa-fr/react-oidc'
 declare global {
   interface Window {
     _mtm: any[]
     _paq: any[]
   }
 }
+
+const configuration = {
+  client_id: import.meta.env.VITE_KEYCLOAK_CLIENT_ID,
+  redirect_uri: `${window.location.origin}/authentication/callback`,
+  silent_redirect_uri: `${window.location.origin}/authentication/silent-callback`,
+  scope: 'openid profile email api offline_access', // offline_access scope allow your client to retrieve the refresh_token
+  authority: import.meta.env.VITE_KEYCLOAK_AUTHORITY,
+  service_worker_relative_url: '/OidcServiceWorker.js', // just comment that line to disable service worker mode
+  service_worker_only: false,
+  demonstrating_proof_of_possession: false,
+}
+
 function App() {
   useEffect(() => {
     const matomoUrl: string = import.meta.env.VITE_MATOMO_URL
@@ -46,11 +59,13 @@ function App() {
   return (
     <BrowserRouter basename="/">
       <Provider store={store}>
-        <AuthProvider>
-          <QueryClientProvider client={queryClient}>
-            <Root />
-          </QueryClientProvider>
-        </AuthProvider>
+        <OidcProvider configuration={configuration}>
+          <AuthProvider>
+            <QueryClientProvider client={queryClient}>
+              <Root />
+            </QueryClientProvider>
+          </AuthProvider>
+        </OidcProvider>
       </Provider>
     </BrowserRouter>
   )
