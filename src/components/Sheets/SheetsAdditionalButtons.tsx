@@ -74,7 +74,7 @@ export const SheetsAdditionalButtons = ({
       'chunks',
       currQuestion.limit,
       JSON.stringify(user.streamId),
-      indexesUrl
+      indexesUrl,
     )
     getIndexes(
       data,
@@ -82,7 +82,7 @@ export const SheetsAdditionalButtons = ({
       'sheets',
       currQuestion.limit,
       JSON.stringify(user.streamId),
-      indexesUrl
+      indexesUrl,
     )
   }, [user.streamId, currQuestion])
 

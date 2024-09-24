@@ -3,7 +3,7 @@ export const handleRemoveSheet = (
   setRemovedSheets,
   selectedSheets,
   setSelectedSheets,
-  setIsModifiable
+  setIsModifiable,
 ) => {
   setRemovedSheets(removedSheets.concat(selectedSheets))
   setSelectedSheets([])

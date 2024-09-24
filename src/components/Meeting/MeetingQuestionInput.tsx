@@ -6,9 +6,9 @@ import { generateStream, useFetch } from '@utils/hooks'
 import { addContextToQuestion, setHeaders } from '@utils/setData'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import { MeetingTags } from './MeetingTags'
 import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
-import { useLocation } from 'react-router-dom'
 
 export function MeetingQuestionInput({
   isNewChat,
@@ -46,7 +46,6 @@ export function MeetingQuestionInput({
   const handleSubmit = async () => {
     if (context.themes.length === 0 || context.administrations.length === 0) {
       setShowError(true)
-      setIsAdditionalInputOpened(true)
     } else {
       setShowError(false)
       let chatId = user.chatId
@@ -95,7 +94,6 @@ export function MeetingQuestionInput({
         nextMessage: { text: questionInput, sender: 'user' },
       })
 
-      // Increment message count
       setMessageCount((prevCount) => prevCount + 1)
 
       trackChatEvent(

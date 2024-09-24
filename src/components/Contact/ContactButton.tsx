@@ -25,7 +25,7 @@ export function ContactButton({ formData, clearForm, setUserAuth }: ContactButto
       data: setContactData(
         formData.title + ' from: ' + formData.name,
         formData.message,
-        formData.administration
+        formData.administration,
       ),
       headers: setHeaders(false),
     })

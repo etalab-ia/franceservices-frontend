@@ -21,7 +21,7 @@ export const DisplayChunks = ({ chunks }) => {
                   </a>
                 </GlobalColContainer>
               </HalfScreenWidth>
-            )
+            ),
         ),
       ]}
     </GlobalRowContainer>
