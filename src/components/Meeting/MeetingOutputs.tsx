@@ -32,7 +32,7 @@ export const MeetingOutputs = memo(function MeetingOutputs({
   const [question, setQuestion] = useState('')
   const stream = useSelector((state: RootState) => state.stream)
 
-  const { data: archiveData, isLoading } = useGetArchive(chatId)
+  const { data: archiveData, isLoading, error } = useGetArchive(chatId)
   useEffect(() => {
     if (chatId !== undefined && archiveData) {
       if (Array.isArray(archiveData)) {
@@ -133,10 +133,12 @@ function getWebservices(history) {
   const webservices = []
 
   history.chunks.map((chunk) => {
-    chunk.web_services.map((webservice) => {
-      if (webservices.length >= 3) return webservices
-      webservices.push(webservice)
-    })
+    if (chunk.web_services) {
+      chunk.web_services.map((webservice) => {
+        if (webservices.length >= 3) return webservices
+        webservices.push(webservice)
+      })
+    }
   })
 
   return webservices
