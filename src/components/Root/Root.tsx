@@ -14,7 +14,7 @@ import { Signup } from '../../pages/Signup'
 import { Tools } from '../../pages/Tools'
 import Footer from './Footer'
 import Header from './Header'
-import { useOidc } from '@axa-fr/react-oidc'
+import { OidcSecure, useOidc } from '@axa-fr/react-oidc'
 
 export const Root = () => {
   const auth = useAuth()
@@ -25,7 +25,7 @@ export const Root = () => {
 
   return (
     <div className="min-h-screen flex flex-col" id="screen">
-      <Header auth={auth} />
+      <Header />
       <div className="flex-grow">
         <Routes>
           {/*           <Route
@@ -139,7 +139,7 @@ export const Root = () => {
   )
 }
 
-const OidcSecure = ({ children }: { children: JSX.Element }) => {
+/* const OidcSecure = ({ children }: { children: JSX.Element }) => {
   const { isAuthenticated, login } = useOidc()
 
   useEffect(() => {
@@ -150,3 +150,4 @@ const OidcSecure = ({ children }: { children: JSX.Element }) => {
 
   return isAuthenticated ? children : null
 }
+ */

@@ -1,9 +1,17 @@
+import {
+  OidcUserStatus,
+  useOidc,
+  useOidcUser,
+  type OidcUserInfo,
+} from '@axa-fr/react-oidc'
 import { useAuth } from '@utils/context/authContext'
 import { useGetUser } from 'api/useGetUser'
 import { useDispatch } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 
-function Header({ auth }) {
+function Header() {
+  const auth = useOidc()
+  console.log(auth)
   return (
     <header className="fr-header">
       <div className="fr-header__body">
@@ -46,7 +54,7 @@ function TitleAndDescription() {
 }
 
 function EasyAccess() {
-  const auth = useAuth()
+  const auth = useOidc()
 
   return (
     <div className="fr-header__tools">
@@ -56,7 +64,7 @@ function EasyAccess() {
           <li>
             <button
               type="button"
-              onClick={auth.logout}
+              onClick={() => auth.logout()}
               className="fr-btn fr-icon-lock-line"
             >
               Se déconnecter
@@ -69,12 +77,12 @@ function EasyAccess() {
 }
 
 function Username() {
-  const { data: username, error, isLoading } = useGetUser()
+  const { oidcUser, oidcUserLoadingState, reloadOidcUser } = useOidcUser<OidcUserInfo>()
 
-  if (isLoading) return null
+  if (oidcUserLoadingState === OidcUserStatus.Loading || !oidcUser) return null
   return (
     <div className="fr-btn fr-icon-user-line hover:cursor-text">
-      {username?.username ?? ''}
+      {oidcUser.preferred_username ?? ''}
     </div>
   )
 }

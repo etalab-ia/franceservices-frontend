@@ -5,8 +5,17 @@
 // Domains used by OIDC server must be also declared here
 
 const trustedDomains = {
-  default: ['https://auth.staging.etalab.gouv.fr', 'https://kdhttps.auth0.com'],
-  config_classic: ['https://auth.staging.etalab.gouv.fr'],
+  default: [
+    'https://auth.staging.etalab.gouv.fr',
+    'https://kdhttps.auth0.com',
+    'https://franceservices.staging.etalab.gouv.fr',
+    'localhost:4173',
+  ],
+  config_classic: [
+    'https://auth.staging.etalab.gouv.fr',
+    'https://franceservices.staging.etalab.gouv.fr',
+    'localhost:4173',
+  ],
   config_without_silent_login: ['https://auth.staging.etalab.gouv.fr'],
   config_without_refresh_token: ['https://auth.staging.etalab.gouv.fr'],
   config_without_refresh_token_silent_login: ['https://auth.staging.etalab.gouv.fr'],

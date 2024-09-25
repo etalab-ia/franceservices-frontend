@@ -5,20 +5,11 @@ import { useFetch } from './hooks'
 /*
  * isEventSource is true when fetching for a stream
  */
-export const setHeaders = (
-  isEventSource: boolean,
-  accessToken: string,
-  refreshToken: string,
-) => {
+export const setHeaders = (isEventSource: boolean) => {
   const headers = isEventSource
-    ? {
-        access_token: `Bearer ${accessToken}`,
-        refresh_token: `Bearer ${refreshToken}`,
-      }
+    ? {}
     : {
         'Content-Type': 'application/json',
-        access_token: `Bearer ${accessToken}`,
-        refresh_token: `Bearer ${refreshToken}`,
       }
 
   return headers

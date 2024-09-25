@@ -16,8 +16,7 @@
     "knip": "knip",
     "push-patch": "npm version patch && git push",
     "push-minor": "npm version minor && git push",
-    "push-major": "npm version major && git push",
-    "postinstall": "node ./node_modules/@axa-fr/react-oidc/bin/copy-service-worker-files.mjs public"
+    "push-major": "npm version major && git push"
   },
   "dependencies": {
     "@axa-fr/react-oidc": "^7.22.25-beta.1555",

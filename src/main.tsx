@@ -18,12 +18,12 @@ declare global {
 const configuration = {
   client_id: import.meta.env.VITE_KEYCLOAK_CLIENT_ID,
 
-  redirect_uri: `${window.location.origin}/authentication/callback`,
+  redirect_uri: `${window.location.origin}`,
   silent_redirect_uri: `${window.location.origin}/authentication/silent-callback`,
-  scope: 'offline_access', // offline_access scope allow your client to retrieve the refresh_token
+  scope: 'offline_access profile microprofile-jwt email phone basic openid', // offline_access scope allow your client to retrieve the refresh_token
   authority: `${import.meta.env.VITE_KEYCLOAK_AUTHORITY}`,
-  service_worker_relative_url: '/OidcServiceWorker.js', // just comment that line to disable service worker mode
-  service_worker_only: false,
+  // service_worker_relative_url: '/OidcServiceWorker.js', // just comment that line to disable service worker mode
+  // service_worker_only: false,
   demonstrating_proof_of_possession: false,
 }
 
