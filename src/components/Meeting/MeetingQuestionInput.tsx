@@ -14,10 +14,14 @@ export function MeetingQuestionInput({
   isNewChat,
   questionInput,
   setQuestionInput,
+  context,
+  setContext,
 }: {
   isNewChat: boolean
   questionInput: string
   setQuestionInput: React.Dispatch<React.SetStateAction<string>>
+  context: MeetingInputContext
+  setContext: React.Dispatch<React.SetStateAction<MeetingInputContext>>
 }) {
   const stream = useSelector((state: RootState) => state.stream)
   const user = useSelector((state: RootState) => state.user)
@@ -27,10 +31,7 @@ export function MeetingQuestionInput({
   const [isAdditionalInputOpened, setIsAdditionalInputOpened] = useState(
     !stream.historyStream.length && location.pathname === '/meeting',
   )
-  const [context, setContext] = useState<MeetingInputContext>({
-    administrations: [],
-    themes: [],
-  })
+
   const [messageCount, setMessageCount] = useState(0)
   const handleChange = (e) => {
     setQuestionInput(e.target.value)
@@ -115,7 +116,7 @@ export function MeetingQuestionInput({
       handleSubmit()
     }
   }
-
+  console.log('questionInput', questionInput)
   return (
     <div>
       <div className=" flex fr-background-default--grey fr-mr-2v ">

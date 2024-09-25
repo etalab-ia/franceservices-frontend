@@ -1,4 +1,4 @@
-import type { RootState } from '@types'
+import type { MeetingInputContext, RootState } from '@types'
 import { memo, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
@@ -13,7 +13,13 @@ import { rmContextFromQuestion } from '@utils/setData'
 export const MeetingCurrentResponse = memo(
   function MeetingCurrentResponse({
     setQuestion,
-  }: { setQuestion: (question: string) => void }) {
+    context,
+    setContext,
+  }: {
+    setQuestion: (question: string) => void
+    context: MeetingInputContext
+    setContext: React.Dispatch<React.SetStateAction<MeetingInputContext>>
+  }) {
     const user = useSelector((state: RootState) => state.user)
 
     const ref = useRef<HTMLDivElement>(null)
@@ -47,7 +53,7 @@ export const MeetingCurrentResponse = memo(
         )}
 
         <GlobalRowContainer extraClass="fr-grid-row fr-mt-5w">
-          <MeetingMainResponse setQuestion={setQuestion} />
+          <MeetingMainResponse setQuestion={setQuestion} setContext={setContext} />{' '}
           {user.chatId !== 0 && user.lastStreamId !== 0 && <MeetingAdditionalResponse />}
           {!user.chatId && <MeetingFirstQuestionHelper />}
         </GlobalRowContainer>
