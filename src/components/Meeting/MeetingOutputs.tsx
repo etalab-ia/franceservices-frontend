@@ -33,6 +33,10 @@ export const MeetingOutputs = memo(function MeetingOutputs({
   const stream = useSelector((state: RootState) => state.stream)
 
   const { data: archiveData, isLoading, error } = useGetArchive(chatId)
+  const [context, setContext] = useState({
+    administrations: [],
+    themes: [],
+  })
   useEffect(() => {
     if (chatId !== undefined && archiveData) {
       if (Array.isArray(archiveData)) {
@@ -66,7 +70,11 @@ export const MeetingOutputs = memo(function MeetingOutputs({
             </>
           )}
           {user.history.length > 0 && <History history={user.history} />}
-          <MeetingCurrentResponse setQuestion={setQuestion} />
+          <MeetingCurrentResponse
+            setQuestion={setQuestion}
+            context={context}
+            setContext={setContext}
+          />
           <div ref={ref} />
         </div>
         <div className="sticky mt-auto p-0 right-0 bottom-0 left-0 z-10 fr-grid-row">
@@ -76,6 +84,8 @@ export const MeetingOutputs = memo(function MeetingOutputs({
                 isNewChat={chatId === undefined}
                 questionInput={question}
                 setQuestionInput={setQuestion}
+                context={context}
+                setContext={setContext}
               />
             </div>
           </div>
