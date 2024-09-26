@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import type { RootState } from 'types'
+import type { MeetingInputContext, RootState } from 'types'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { MeetingRelatedQuestions } from './MeetingRelatedQuestions'
 import { MeetingStream } from './MeetingStream'
@@ -7,8 +7,28 @@ import { fr } from '@codegouvfr/react-dsfr'
 
 export function MeetingMainResponse({
   setQuestion,
-}: { setQuestion: (question: string) => void }) {
+  setContext,
+}: {
+  setQuestion: (question: string) => void
+  setContext: React.Dispatch<React.SetStateAction<MeetingInputContext>>
+}) {
   const user = useSelector((state: RootState) => state.user)
+  const handleSelectSuggestedQuestion = (question) => {
+    setQuestion(question)
+
+    if (question === 'Peut-on faire une saisie sur le RSA ?') {
+      setContext({
+        administrations: ['CAF'],
+        themes: ['RSA'],
+      })
+    } else {
+      // Reset or set context for other questions if needed
+      setContext({
+        administrations: [],
+        themes: [],
+      })
+    }
+  }
 
   return (
     <GlobalColContainer extraClass=" h-[100%]">
@@ -32,7 +52,9 @@ export function MeetingMainResponse({
                 <p className="fr-mb-3v">Cliquez sur la question pour tester Albert</p>
               </div>
               <div
-                onClick={() => setQuestion('Peut-on faire une saisie sur le RSA ?')}
+                onClick={() =>
+                  handleSelectSuggestedQuestion('Peut-on faire une saisie sur le RSA ?')
+                }
                 style={{
                   backgroundColor: fr.colors.decisions.background.alt.blueFrance.default,
                 }}
