@@ -1,5 +1,4 @@
 import { useAuth } from 'react-oidc-context'
-import { useGetUser } from 'api/useGetUser'
 import { useDispatch } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 

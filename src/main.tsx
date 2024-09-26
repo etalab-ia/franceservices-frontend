@@ -19,7 +19,7 @@ const oidcConfig = {
   authority: import.meta.env.VITE_KEYCLOAK_AUTHORITY,
   client_id: import.meta.env.VITE_KEYCLOAK_CLIENT_ID,
   userStore: new WebStorageStateStore({ store: window.localStorage }),
-  redirect_uri: 'http://localhost:4173/meeting', // Ensure this is HTTP, not HTTPS
+  redirect_uri: import.meta.env.VITE_KEYCLOAK_REDIRECT_URL,
 }
 
 function App() {
