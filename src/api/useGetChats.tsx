@@ -19,7 +19,7 @@ const fetchAllChats = async (): Promise<Chat[]> => {
   const res = await fetch(`${getChatsUrl}?desc=true`, {
     method: 'GET',
     credentials: 'include',
-    headers: setHeaders(false, auth.access_token, auth.refresh_token),
+    headers: setHeaders(false, auth.user?.access_token, auth.user.refresh_token),
   })
 
   if (!res.ok) {
@@ -46,7 +46,7 @@ const fetchChats = async ({
     {
       method: 'GET',
       credentials: 'include',
-      headers: setHeaders(false, auth.access_token, auth.refresh_token),
+      headers: setHeaders(false, auth.user?.access_token, auth.user.refresh_token),
     },
   )
 

@@ -12,10 +12,10 @@ export function useGetUser() {
 
 const fetchUser = async () => {
   const auth = getLocalStorageUserAuth()
-  if (!auth.access_token || !auth.refresh_token) {
+  if (!auth.user?.access_token || !auth.user.refresh_token) {
     console.error('Tokens missing:', {
-      accessToken: auth.access_token,
-      refreshToken: auth.refresh_token,
+      accessToken: auth.user?.access_token,
+      refreshToken: auth.user.refresh_token,
     })
     throw new Error('Authentication tokens missing')
   }
@@ -23,7 +23,7 @@ const fetchUser = async () => {
     const res = await fetch(getUserUrl, {
       method: 'GET',
       credentials: 'include',
-      headers: setHeaders(false, auth.access_token, auth.refresh_token),
+      headers: setHeaders(false, auth.user?.access_token, auth.user.refresh_token),
     })
 
     if (!res.ok) {

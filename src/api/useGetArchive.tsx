@@ -15,7 +15,7 @@ export function useGetArchive(chatId: number) {
 const fetchArchive = async (chatId: number) => {
   const auth = getLocalStorageUserAuth()
   const response = await fetch(`${getArchiveUrl}/${chatId}`, {
-    headers: setHeaders(false, auth.access_token, auth.refresh_token),
+    headers: setHeaders(false, auth.user?.access_token, auth.user.refresh_token),
   })
   if (!response.ok) {
     console.error('error: response not ok', response)
@@ -27,7 +27,7 @@ const fetchArchive = async (chatId: number) => {
       const chunksResponse = stream.rag_sources
         ? await fetch(getChunksUrl, {
             method: 'POST',
-            headers: setHeaders(false, auth.access_token, auth.refresh_token),
+            headers: setHeaders(false, auth.user?.access_token, auth.user.refresh_token),
 
             body: JSON.stringify({ uids: stream.rag_sources }),
           }).then((res) => res.json())

@@ -1,6 +1,5 @@
 import { institutionsUrl } from '@api'
 import { useQuery } from '@tanstack/react-query'
-import { getLocalStorageUserAuth } from '@utils/auth'
 import { setHeaders } from '@utils/setData'
 
 export function useGetInstitutions() {
@@ -12,22 +11,11 @@ export function useGetInstitutions() {
 }
 
 const fetchInstitutions = async (): Promise<string[]> => {
-  const auth = getLocalStorageUserAuth()
-
-  // Log to ensure the tokens are present
-  if (!auth.access_token || !auth.refresh_token) {
-    console.error('Tokens missing:', {
-      accessToken: auth.access_token,
-      refreshToken: auth.refresh_token,
-    })
-    throw new Error('Authentication tokens missing')
-  }
-
   try {
     const res = await fetch(`${institutionsUrl}`, {
       method: 'GET',
       credentials: 'include',
-      headers: setHeaders(false, auth.access_token, auth.refresh_token),
+      headers: setHeaders(false),
     })
 
     if (!res.ok) {
@@ -38,7 +26,7 @@ const fetchInstitutions = async (): Promise<string[]> => {
     const institutions = await res.json()
     return institutions as string[]
   } catch (error) {
-    console.error('fetchInstitutions error:', error) // Log any errors during fetch
+    console.error('fetchInstitutions error:', error)
     throw error
   }
 }

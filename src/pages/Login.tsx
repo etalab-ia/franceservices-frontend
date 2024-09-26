@@ -1,7 +1,7 @@
 import { ButtonsGroup } from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { initButtonsLogin } from '@constants/connexion'
 import { loginFields } from '@constants/inputFields'
-import { useAuth } from '@utils/context/authContext'
+import { useAuth } from 'react-oidc-context'
 import {
   type Dispatch,
   type SetStateAction,

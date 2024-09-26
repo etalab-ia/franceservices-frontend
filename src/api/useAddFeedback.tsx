@@ -28,7 +28,7 @@ const addFeedback = async ({ feedback, streamId, reasons }: AddFeedbackParams) =
   const res = await fetch(`${feedbackUrl}/${streamId}`, {
     method: 'POST',
     credentials: 'include',
-    headers: setHeaders(false, auth.access_token, auth.refresh_token),
+    headers: setHeaders(false, auth.user?.access_token, auth.user.refresh_token),
 
     body: JSON.stringify(data),
   })

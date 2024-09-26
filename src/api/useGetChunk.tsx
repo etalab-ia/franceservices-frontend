@@ -18,7 +18,7 @@ const fetchChunk = async (chunkHash: string): Promise<Chunk> => {
   const res = await fetch(`${getChunkUrl}/${chunkHash}`, {
     method: 'GET',
     credentials: 'include',
-    headers: setHeaders(false, auth.access_token, auth.refresh_token),
+    headers: setHeaders(false, auth.user?.access_token, auth.user.refresh_token),
   })
 
   if (!res.ok) {

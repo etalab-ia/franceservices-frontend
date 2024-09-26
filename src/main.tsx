@@ -6,13 +6,22 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Link } from 'react-router-dom'
 import { Root } from './components/Root/Root'
 import { store } from './utils/reducer/reducer'
-import { AuthProvider, useAuth } from '@utils/context/authContext'
+import { WebStorageStateStore } from 'oidc-client-ts'
+import { AuthProvider } from 'react-oidc-context'
 declare global {
   interface Window {
     _mtm: any[]
     _paq: any[]
   }
 }
+
+const oidcConfig = {
+  authority: import.meta.env.VITE_KEYCLOAK_AUTHORITY,
+  client_id: import.meta.env.VITE_KEYCLOAK_CLIENT_ID,
+  userStore: new WebStorageStateStore({ store: window.localStorage }),
+  redirect_uri: 'http://localhost:4173/meeting', // Ensure this is HTTP, not HTTPS
+}
+
 function App() {
   useEffect(() => {
     const matomoUrl: string = import.meta.env.VITE_MATOMO_URL
@@ -46,7 +55,7 @@ function App() {
   return (
     <BrowserRouter basename="/">
       <Provider store={store}>
-        <AuthProvider>
+        <AuthProvider {...oidcConfig}>
           <QueryClientProvider client={queryClient}>
             <Root />
           </QueryClientProvider>

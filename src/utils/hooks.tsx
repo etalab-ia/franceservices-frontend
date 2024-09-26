@@ -66,7 +66,7 @@ function handleStreamError(e, stream_chat) {
 const useStream = async (dispatch, id: number, isChat: boolean) => {
   const auth = useAuth()
   const stream_chat = new EventSourcePolyfill(`${streamUrl}/${id}/start`, {
-    headers: setHeaders(true, auth.access_token, auth.refresh_token),
+    headers: setHeaders(true, auth.user?.access_token, auth.user.refresh_token),
     withCredentials: true,
   })
 
@@ -98,7 +98,7 @@ export async function generateStream(
   const stream_data = setUserQuestion(question)
   const stream = await useFetch(`${streamUrl}/chat/${chatId}`, 'POST', {
     data: JSON.stringify(stream_data),
-    headers: setHeaders(false, auth.access_token, auth.refresh_token),
+    headers: setHeaders(false, auth.user?.access_token, auth.user.refresh_token),
   })
   dispatch({ type: 'SET_STREAM_ID', nextStreamId: stream.id })
   dispatch({ type: 'SET_LAST_STREAM_ID', nextLastStreamId: stream.id })
