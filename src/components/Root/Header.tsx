@@ -56,7 +56,7 @@ function EasyAccess() {
           <li>
             <button
               type="button"
-              onClick={() => auth.removeUser()}
+              onClick={() => auth.signoutRedirect()}
               className="fr-btn fr-icon-lock-line"
             >
               Se déconnecter

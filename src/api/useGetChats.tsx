@@ -1,9 +1,7 @@
 import { getChatsUrl } from '@api'
-import { useQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 import type { Chat } from '@types'
-import { useInfiniteQuery } from '@tanstack/react-query'
 import { setHeaders } from '@utils/setData'
-import { getLocalStorageUserAuth } from '@utils/auth'
 
 // Get all user chats
 export function useGetAllChats() {
@@ -15,11 +13,10 @@ export function useGetAllChats() {
 }
 
 const fetchAllChats = async (): Promise<Chat[]> => {
-  const auth = getLocalStorageUserAuth()
   const res = await fetch(`${getChatsUrl}?desc=true`, {
     method: 'GET',
     credentials: 'include',
-    headers: setHeaders(false, auth.user?.access_token, auth.user.refresh_token),
+    headers: setHeaders(false),
   })
 
   if (!res.ok) {
@@ -40,13 +37,12 @@ const fetchAllChats = async (): Promise<Chat[]> => {
 const fetchChats = async ({
   pageParam = 0,
 }): Promise<{ chats: Chat[]; nextPage: number | null }> => {
-  const auth = getLocalStorageUserAuth()
   const res = await fetch(
     `${getChatsUrl}?desc=true&skip=${pageParam}&limit=10&desc=true`,
     {
       method: 'GET',
       credentials: 'include',
-      headers: setHeaders(false, auth.user?.access_token, auth.user.refresh_token),
+      headers: setHeaders(false),
     },
   )
 

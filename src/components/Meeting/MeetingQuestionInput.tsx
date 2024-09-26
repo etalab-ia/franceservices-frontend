@@ -1,7 +1,6 @@
 import { chatUrl } from '@api'
 import Button from '@codegouvfr/react-dsfr/Button'
 import type { Chunk, MeetingInputContext, RootState } from '@types'
-import { getLocalStorageUserAuth } from '@utils/auth'
 import { emitCloseStream } from '@utils/eventsEmitter'
 import { generateStream, useFetch } from '@utils/hooks'
 import { addContextToQuestion, setHeaders } from '@utils/setData'
@@ -44,7 +43,6 @@ export function MeetingQuestionInput({
       generateStream(user.question, dispatch, user.chatId, false)
     }
   }, [user.question, user.chatId])
-  const auth = getLocalStorageUserAuth()
 
   const handleSubmit = async () => {
     if (context.themes.length === 0 || context.administrations.length === 0) {
@@ -59,10 +57,10 @@ export function MeetingQuestionInput({
         const chat = await useFetch(chatUrl, 'POST', {
           data: JSON.stringify({
             chat_type: 'meeting',
-            themes: context.themes, // Wrapping the string in an array
-            operator: context.administrations[0], // Assuming the first administration is the correct one
+            themes: context.themes,
+            operator: context.administrations[0],
           }),
-          headers: setHeaders(false, auth.user?.access_token, auth.user.refresh_token),
+          headers: setHeaders(false),
         })
         chatId = chat.id
         dispatch({ type: 'SET_CHAT_ID', nextChatId: chatId })

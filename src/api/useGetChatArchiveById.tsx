@@ -56,9 +56,8 @@ export function useGetChatArchiveById(chatId: number) {
 }
 
 const fetchChatArchiveById = async (chatId: number) => {
-  const auth = getLocalStorageUserAuth()
   const response = await fetch(`${getArchiveUrl}/${chatId}`, {
-    headers: setHeaders(false, auth.user?.access_token, auth.user.refresh_token),
+    headers: setHeaders(false),
   })
 
   if (!response.ok) {

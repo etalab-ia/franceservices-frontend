@@ -122,10 +122,9 @@ export const getIndexes = async (
   indexesUrl: string,
 ) => {
   try {
-    const auth = useAuth()
     const res = await useFetch(indexesUrl, 'POST', {
       data: setIndexesBody(data, chunkSize, streamId),
-      headers: setHeaders(false, auth.user?.access_token, auth.user.refresh_token),
+      headers: setHeaders(false),
     })
     dispatch({ type: 'SET_CHUNKS', chunks: res })
   } catch (error) {

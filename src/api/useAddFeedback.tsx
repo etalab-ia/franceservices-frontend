@@ -18,7 +18,6 @@ interface AddFeedbackParams {
 }
 
 const addFeedback = async ({ feedback, streamId, reasons }: AddFeedbackParams) => {
-  const auth = getLocalStorageUserAuth()
   const data = {
     is_good: !feedback.isGood,
     message: feedback.message,
@@ -28,7 +27,7 @@ const addFeedback = async ({ feedback, streamId, reasons }: AddFeedbackParams) =
   const res = await fetch(`${feedbackUrl}/${streamId}`, {
     method: 'POST',
     credentials: 'include',
-    headers: setHeaders(false, auth.user?.access_token, auth.user.refresh_token),
+    headers: setHeaders(false),
 
     body: JSON.stringify(data),
   })

@@ -26,7 +26,7 @@ export function ContactFormSubmitButton({ formData, clearForm }: ContactButtonPr
         formData.message,
         formData.administration,
       ),
-      headers: setHeaders(false, auth.user?.access_token, auth.user.refresh_token),
+      headers: setHeaders(false),
     })
     clearForm()
     setIsSent(true)

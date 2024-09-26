@@ -13,12 +13,10 @@ export function useGetChunk(chunkHash: string) {
 }
 
 const fetchChunk = async (chunkHash: string): Promise<Chunk> => {
-  const auth = getLocalStorageUserAuth()
-
   const res = await fetch(`${getChunkUrl}/${chunkHash}`, {
     method: 'GET',
     credentials: 'include',
-    headers: setHeaders(false, auth.user?.access_token, auth.user.refresh_token),
+    headers: setHeaders(false),
   })
 
   if (!res.ok) {
