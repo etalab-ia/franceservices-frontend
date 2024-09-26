@@ -143,10 +143,12 @@ function getWebservices(history) {
   const webservices = []
 
   history.chunks.map((chunk) => {
-    chunk.web_services.map((webservice) => {
-      if (webservices.length >= 3) return webservices
-      webservices.push(webservice)
-    })
+    if (chunk.web_services) {
+      chunk.web_services.map((webservice) => {
+        if (webservices.length >= 3) return webservices
+        webservices.push(webservice)
+      })
+    }
   })
 
   return webservices
