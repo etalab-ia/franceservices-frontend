@@ -110,7 +110,12 @@ export function MeetingQuestionInput({
         chatId,
         user.lastStreamId,
       )
+
       setQuestionInput('')
+      setContext({
+        administrations: [],
+        themes: [],
+      })
     }
   }
 
