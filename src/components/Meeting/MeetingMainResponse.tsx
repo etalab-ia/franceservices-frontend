@@ -12,7 +12,10 @@ export function MeetingMainResponse({
   setQuestion: (question: string) => void
   setContext: React.Dispatch<React.SetStateAction<MeetingInputContext>>
 }) {
-  const user = useSelector((state: RootState) => state.user)
+  const { chatId, lastStreamId } = useSelector((state: RootState) => ({
+    chatId: state.user.chatId,
+    lastStreamId: state.user.lastStreamId,
+  }))
   const handleSelectSuggestedQuestion = (question) => {
     setQuestion(question)
 
@@ -22,7 +25,6 @@ export function MeetingMainResponse({
         themes: ['RSA'],
       })
     } else {
-      // Reset or set context for other questions if needed
       setContext({
         administrations: [],
         themes: [],
@@ -33,7 +35,7 @@ export function MeetingMainResponse({
   return (
     <GlobalColContainer extraClass=" h-[100%]">
       <div>
-        {!user.chatId && (
+        {!chatId && (
           <>
             <h2 className="fr-mb-2w">Poser une question à Albert: </h2>
             <p>
@@ -65,7 +67,7 @@ export function MeetingMainResponse({
             </div>
           </>
         )}
-        {user.chatId !== 0 && user.lastStreamId !== 0 && (
+        {chatId !== 0 && lastStreamId !== 0 && (
           <div className="flex flex-col space-between flex-grow">
             <MeetingStream />
             <MeetingRelatedQuestions setQuestion={setQuestion} />

@@ -4,12 +4,7 @@ import { Skeleton } from '@mui/material'
 import Accordion from '@mui/material/Accordion'
 import AccordionDetails from '@mui/material/AccordionDetails'
 import AccordionSummary from '@mui/material/AccordionSummary'
-import {
-  InitialQuestion,
-  type RootState,
-  type UserHistory,
-  type WebService,
-} from '@types'
+import { InitialQuestion, type RootState, type WebService } from '@types'
 import { CurrQuestionContext } from '@utils/context/questionContext'
 import { rmContextFromQuestion } from '@utils/setData'
 import { GlobalColContainer } from 'components/Global/GlobalColContainer'
@@ -26,7 +21,6 @@ import { UsefulLinks } from './UsefulLinks'
 export const MeetingOutputs = memo(function MeetingOutputs({
   chatId,
 }: { chatId?: number }) {
-  const user = useSelector((state: RootState) => state.user)
   const [currQuestion, setCurrQuestion] = useState(InitialQuestion)
   const dispatch = useDispatch()
   const [question, setQuestion] = useState('')
@@ -69,12 +63,8 @@ export const MeetingOutputs = memo(function MeetingOutputs({
               <Skeleton height={'50px'} variant="rectangular" className="fr-mb-1w" />
             </>
           )}
-          {user.history.length > 0 && <History history={user.history} />}
-          <MeetingCurrentResponse
-            setQuestion={setQuestion}
-            context={context}
-            setContext={setContext}
-          />
+          <History />
+          <MeetingCurrentResponse setQuestion={setQuestion} setContext={setContext} />
           <div ref={ref} />
         </div>
         <div className="sticky mt-auto p-0 right-0 bottom-0 left-0 z-10 fr-grid-row">
@@ -95,7 +85,9 @@ export const MeetingOutputs = memo(function MeetingOutputs({
   )
 })
 export const History = memo(
-  function History({ history }: { history: UserHistory[] }) {
+  function History() {
+    const history = useSelector((state: RootState) => state.user.history)
+    if (!history || history.length === 0) return null
     return (
       <div className="fr-mt-5w">
         {history.map((h, index) => (

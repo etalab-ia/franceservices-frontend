@@ -23,13 +23,16 @@ export function MeetingQuestionInput({
   context: MeetingInputContext
   setContext: React.Dispatch<React.SetStateAction<MeetingInputContext>>
 }) {
-  const stream = useSelector((state: RootState) => state.stream)
+  const { historyStream, isStreaming } = useSelector((state: RootState) => ({
+    historyStream: state.stream.historyStream,
+    isStreaming: state.stream.isStreaming,
+  }))
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
   const location = useLocation()
   const [showError, setShowError] = useState(false)
   const [isAdditionalInputOpened, setIsAdditionalInputOpened] = useState(
-    !stream.historyStream.length && location.pathname === '/meeting',
+    !historyStream.length && location.pathname === '/meeting',
   )
   useEffect(() => {
     return () => {
@@ -75,12 +78,12 @@ export function MeetingQuestionInput({
 
       setIsAdditionalInputOpened(false)
 
-      if (stream.historyStream.length) {
+      if (historyStream.length) {
         dispatch({
           type: 'ADD_HISTORY',
           newItem: {
             query: user.question.query,
-            response: stream.historyStream[0],
+            response: historyStream[0],
             chunks: user.chunks,
             webservices: user.webservices,
           },
@@ -93,10 +96,10 @@ export function MeetingQuestionInput({
         nextChatId: chatId,
       })
 
-      if (stream.historyStream.length) {
+      if (historyStream.length) {
         dispatch({
           type: 'SET_MESSAGES',
-          nextMessage: { text: stream.historyStream, sender: 'agent' },
+          nextMessage: { text: historyStream, sender: 'agent' },
         })
       }
 
@@ -123,7 +126,7 @@ export function MeetingQuestionInput({
   }
 
   const handleKeyDown = (e: any) => {
-    if (e.key === 'Enter' && questionInput && !stream.isStreaming) {
+    if (e.key === 'Enter' && questionInput && !isStreaming) {
       e.preventDefault()
       handleSubmit()
     }
@@ -154,7 +157,7 @@ export function MeetingQuestionInput({
           <div className="flex justify-between">
             <Button
               onClick={() => setIsAdditionalInputOpened(!isAdditionalInputOpened)}
-              disabled={stream.isStreaming}
+              disabled={isStreaming}
               className="fr-btn"
               title="Recherche avancée"
               iconId={
@@ -163,7 +166,7 @@ export function MeetingQuestionInput({
             />
             <Button
               onClick={handleSubmit}
-              disabled={!questionInput || stream.isStreaming}
+              disabled={!questionInput || isStreaming}
               className="fr-btn"
               title="Rechercher"
               iconId="fr-icon-search-line"

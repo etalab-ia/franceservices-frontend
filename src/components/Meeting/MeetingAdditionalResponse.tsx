@@ -18,28 +18,26 @@ import { UsefulLinks } from './UsefulLinks'
  *****************************************************************************************/
 
 export function MeetingAdditionalResponse() {
-  const user = useSelector((state: RootState) => state.user)
+  const { webservices, streamId, question } = useSelector((state: RootState) => ({
+    webservices: state.user.webservices,
+    streamId: state.user.streamId,
+    question: state.user.question,
+  }))
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (!user.streamId) return
+    if (!streamId) return
 
     const data = {
-      question: user.question.query,
-      must_not_sids: user.question.must_not_sids,
+      question: question.query,
+      must_not_sids: question.must_not_sids,
     }
-    getIndexes(
-      data,
-      dispatch,
-      user.question.limit,
-      JSON.stringify(user.streamId),
-      indexesUrl,
-    )
-  }, [user.streamId, user.question])
+    getIndexes(data, dispatch, question.limit, JSON.stringify(streamId), indexesUrl)
+  }, [streamId, question])
   return (
     <OneThirdScreenWidth>
       <GlobalColContainer>
-        {user.webservices?.length > 0 && <UsefulLinks webservices={user.webservices} />}
+        {webservices?.length > 0 && <UsefulLinks webservices={webservices} />}
       </GlobalColContainer>
     </OneThirdScreenWidth>
   )
