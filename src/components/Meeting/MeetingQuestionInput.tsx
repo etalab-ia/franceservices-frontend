@@ -31,7 +31,14 @@ export function MeetingQuestionInput({
   const [isAdditionalInputOpened, setIsAdditionalInputOpened] = useState(
     !stream.historyStream.length && location.pathname === '/meeting',
   )
-
+  useEffect(() => {
+    return () => {
+      setContext({
+        administrations: [],
+        themes: [],
+      })
+    }
+  }, [])
   const [messageCount, setMessageCount] = useState(0)
   const handleChange = (e) => {
     setQuestionInput(e.target.value)
@@ -112,10 +119,6 @@ export function MeetingQuestionInput({
       )
 
       setQuestionInput('')
-      setContext({
-        administrations: [],
-        themes: [],
-      })
     }
   }
 

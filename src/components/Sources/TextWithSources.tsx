@@ -15,7 +15,6 @@ function parseRef(refString: string) {
   const getText = (attr: string) => {
     const match = attributes.match(new RegExp(`${attr}="(.*?)"`))
     if (match) {
-      // Remove escaped quotes and unescape other characters
       return match[1].replace(/\\"/g, '"').replace(/\\(.)/g, '$1')
     }
     return ''
