@@ -8,6 +8,7 @@ import { Meeting } from '../../pages/Meeting'
 import { Tools } from '../../pages/Tools'
 import Footer from './Footer'
 import Header from './Header'
+import { LoadingSpinner } from 'components/LoadingSpinner'
 
 export const Root = () => {
   const auth = useAuth()
@@ -38,7 +39,7 @@ export const Root = () => {
 
 const PrivateRoute = ({ component: Component, ...props }) => {
   const ComponentWithAuth = withAuthenticationRequired(Component, {
-    OnRedirecting: () => <div>Redirecting to the login page...</div>,
+    OnRedirecting: () => <LoadingSpinner />,
   })
 
   return <ComponentWithAuth {...props} />
