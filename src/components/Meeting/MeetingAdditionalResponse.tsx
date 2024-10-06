@@ -6,6 +6,7 @@ import { getIndexes } from 'utils/setData'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { OneThirdScreenWidth } from '../Global/OneThirdScreenWidth'
 import { UsefulLinks } from './UsefulLinks'
+import { createSelector } from 'reselect'
 
 /*****************************************************************************************
 	
@@ -17,27 +18,38 @@ import { UsefulLinks } from './UsefulLinks'
 
  *****************************************************************************************/
 
+const AdditionnalResponseSelector = createSelector(
+  (state: RootState) => state.user.webservices,
+  (webservices) => webservices,
+  (state: RootState) => state.user.streamId,
+  (streamId) => streamId,
+  (state: RootState) => state.user.question,
+  (question) => question,
+)
+
 export function MeetingAdditionalResponse() {
-  const { webservices, streamId, question } = useSelector((state: RootState) => ({
-    webservices: state.user.webservices,
-    streamId: state.user.streamId,
-    question: state.user.question,
-  }))
+  const user = useSelector(AdditionnalResponseSelector)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (!streamId) return
+    if (!user.streamId) return
 
     const data = {
-      question: question.query,
-      must_not_sids: question.must_not_sids,
+      question: user.question.query,
+      must_not_sids: user.question.must_not_sids,
     }
-    getIndexes(data, dispatch, question.limit, JSON.stringify(streamId), indexesUrl)
-  }, [streamId, question])
+    getIndexes(
+      data,
+      dispatch,
+      user.question.limit,
+      JSON.stringify(user.streamId),
+      indexesUrl,
+    )
+  }, [user.streamId, user.question])
   return (
     <OneThirdScreenWidth>
       <GlobalColContainer>
-        {webservices?.length > 0 && <UsefulLinks webservices={webservices} />}
+        {user.webservices?.length > 0 && <UsefulLinks webservices={user.webservices} />}
       </GlobalColContainer>
     </OneThirdScreenWidth>
   )

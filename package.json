@@ -19,7 +19,10 @@
     "push-major": "npm version major && git push"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": ["npm run format", "git add"]
+    "*.{js,jsx,ts,tsx}": [
+      "npm run format",
+      "git add"
+    ]
   },
   "dependencies": {
     "@codegouvfr/react-dsfr": "^1.11.4",
@@ -46,6 +49,7 @@
     "react-string-replace": "^1.1.1",
     "react-tooltip": "^5.27.1",
     "redux": "^5.0.1",
+    "reselect": "^5.1.1",
     "valibot": "^0.36.0"
   },
   "devDependencies": {

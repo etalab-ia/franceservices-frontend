@@ -92,7 +92,7 @@ export function ThemesAndAdminsInput({
   return (
     <div>
       <Input
-        label={field.label}
+        label={`${field.label} *`}
         className="fr-mb-1w"
         nativeInputProps={{
           onChange: handleSearch,

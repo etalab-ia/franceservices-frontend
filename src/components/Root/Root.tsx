@@ -20,6 +20,7 @@ export const Root = () => {
       <Header auth={auth} />
       <div className="flex-grow">
         <Routes>
+          <Route path="/home" element={<Navigate to="/meeting" />} />
           <Route path="/" element={<Navigate to="/meeting" />} />
           <Route path="/meeting" element={<PrivateRoute component={Meeting} />} />
           <Route path="/meeting/:id" element={<PrivateRoute component={Meeting} />} />
