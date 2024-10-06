@@ -4,6 +4,7 @@ import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { MeetingRelatedQuestions } from './MeetingRelatedQuestions'
 import { MeetingStream } from './MeetingStream'
 import { fr } from '@codegouvfr/react-dsfr'
+import { createSelector } from 'reselect'
 
 export function MeetingMainResponse({
   setQuestion,
@@ -12,10 +13,7 @@ export function MeetingMainResponse({
   setQuestion: (question: string) => void
   setContext: React.Dispatch<React.SetStateAction<MeetingInputContext>>
 }) {
-  const { chatId, lastStreamId } = useSelector((state: RootState) => ({
-    chatId: state.user.chatId,
-    lastStreamId: state.user.lastStreamId,
-  }))
+  const { chatId, lastStreamId } = useSelector(selectMeetingMainResponse)
   const handleSelectSuggestedQuestion = (question) => {
     setQuestion(question)
 
@@ -77,3 +75,10 @@ export function MeetingMainResponse({
     </GlobalColContainer>
   )
 }
+
+const selectUserData = (state: RootState) => state.user
+
+export const selectMeetingMainResponse = createSelector([selectUserData], (user) => ({
+  chatId: user.chatId,
+  lastStreamId: user.lastStreamId,
+}))

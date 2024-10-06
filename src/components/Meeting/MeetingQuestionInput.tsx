@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { MeetingTags } from './MeetingTags'
 import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
+import { createSelector } from 'reselect'
 
 export function MeetingQuestionInput({
   isNewChat,
@@ -23,10 +24,7 @@ export function MeetingQuestionInput({
   context: MeetingInputContext
   setContext: React.Dispatch<React.SetStateAction<MeetingInputContext>>
 }) {
-  const { historyStream, isStreaming } = useSelector((state: RootState) => ({
-    historyStream: state.stream.historyStream,
-    isStreaming: state.stream.isStreaming,
-  }))
+  const { historyStream, isStreaming } = useSelector(selectMeetingQuestionInput)
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
   const location = useLocation()
@@ -270,3 +268,13 @@ function trackChatEvent(
 
   window._paq.push(['trackEvent', 'Chat', 'NewMessage', eventData])
 }
+
+const selectStreamData = (state: RootState) => state.stream
+
+export const selectMeetingQuestionInput = createSelector(
+  [selectStreamData],
+  (stream) => ({
+    historyStream: stream.historyStream,
+    isStreaming: stream.isStreaming,
+  }),
+)

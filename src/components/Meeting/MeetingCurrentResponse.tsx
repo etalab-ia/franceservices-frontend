@@ -6,6 +6,7 @@ import { MeetingAdditionalResponse } from './MeetingAdditionalResponse'
 import { MeetingFirstQuestionHelper } from './MeetingFirstQuestionSidePanel'
 import { MeetingMainResponse } from './MeetingMainResponse'
 import { rmContextFromQuestion } from '@utils/setData'
+import { createSelector } from 'reselect'
 
 /*
  *	Contains text response from the bot and additional informations like sheets, chunks and useful links
@@ -19,13 +20,7 @@ export const MeetingCurrentResponse = function MeetingCurrentResponse({
 }) {
   // Select all the necessary state in a single useSelector call
   const { history, chatId, lastStreamId, messages, question } = useSelector(
-    (state: RootState) => ({
-      history: state.user.history,
-      chatId: state.user.chatId,
-      lastStreamId: state.user.lastStreamId,
-      messages: state.user.messages,
-      question: state.user.question,
-    }),
+    selectMeetingCurrentResponse,
   )
 
   const ref = useRef<HTMLDivElement>(null)
@@ -61,3 +56,13 @@ export const MeetingCurrentResponse = function MeetingCurrentResponse({
     </div>
   )
 }
+
+const selectUserData = (state: RootState) => state.user
+
+export const selectMeetingCurrentResponse = createSelector([selectUserData], (user) => ({
+  history: user.history,
+  chatId: user.chatId,
+  lastStreamId: user.lastStreamId,
+  messages: user.messages,
+  question: user.question,
+}))
