@@ -1,9 +1,12 @@
 import { Tag } from '@codegouvfr/react-dsfr/Tag'
+import { RootState } from '@types'
+import { useSelector } from 'react-redux'
 
 export function MeetingTags({ setContext, field, tags }) {
+  const messages = useSelector((state: RootState) => state.user.messages)
   const handleClick = (e) => {
     e.preventDefault()
-
+    if (messages.length > 0) return
     const tagName = e.currentTarget.textContent.trim()
 
     if (e.currentTarget.name === 'administrations') {
@@ -28,7 +31,7 @@ export function MeetingTags({ setContext, field, tags }) {
             key={index}
             //@ts-expect-error for some reason name isn't recognized as a valid prop but is needed to delete tag
             name={field.name}
-            dismissible
+            dismissible={messages.length === 0}
             nativeButtonProps={{
               onClick: handleClick,
             }}
