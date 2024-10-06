@@ -32,10 +32,14 @@ export const MeetingOutputs = memo(function MeetingOutputs({
     themes: [],
   })
   useEffect(() => {
-    if (chatId !== undefined && archiveData) {
+    if (chatId !== undefined && archiveData && archiveData.length > 0) {
       if (Array.isArray(archiveData)) {
         dispatch({ type: 'ADD_HISTORY_BATCH', items: archiveData })
       }
+      setContext({
+        themes: archiveData[0].themes,
+        administrations: [archiveData[0]?.operator],
+      })
     }
   }, [chatId, archiveData, dispatch])
   useEffect(() => {

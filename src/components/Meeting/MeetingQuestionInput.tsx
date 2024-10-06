@@ -199,7 +199,7 @@ function NewQuestionMeetingAdditionalInput({
   return (
     <div className="fr-mt-2w fr-grid-row gap-8">
       {inputFields.map((field, index) => (
-        <div className="fr-col-5" key={index}>
+        <div className="fr-col-5 fr-mb-2w" key={index}>
           <ThemesAndAdminsInput
             field={field}
             onTagSelect={(tag) => handleSetTag(tag, field.name)}
