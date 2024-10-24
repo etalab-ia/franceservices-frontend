@@ -1,7 +1,6 @@
 import { feedbackUrl } from '@api'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 import type { Feedback } from '@types'
-import { getLocalStorageUserAuth } from '@utils/auth'
 import { setHeaders } from '@utils/setData'
 
 export function useAddFeedback() {

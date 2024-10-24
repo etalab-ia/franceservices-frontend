@@ -98,7 +98,6 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
         data: JSON.stringify(data),
         headers: { 'Content-Type': 'application/json' },
       })
-      console.log('res', res)
       if (!res.success) {
         switch (res.error.details.detail[0].msg) {
           case 'Username already exists':

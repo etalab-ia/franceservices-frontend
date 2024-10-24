@@ -1,7 +1,5 @@
+import { getArchiveUrl, getChunksUrl } from '@api'
 import { useQuery } from '@tanstack/react-query'
-import { getChunksUrl, getArchiveUrl } from '@api'
-import type { UserHistory } from '@types'
-import { getLocalStorageUserAuth } from '@utils/auth'
 import { setHeaders } from '@utils/setData'
 
 export function useGetArchive(chatId: number) {

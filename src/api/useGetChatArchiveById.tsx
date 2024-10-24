@@ -1,6 +1,5 @@
 import { getArchiveUrl } from '@api'
 import { useQuery } from '@tanstack/react-query'
-import { getLocalStorageUserAuth } from '@utils/auth'
 import { setHeaders } from '@utils/setData'
 
 type ChatArchive = {

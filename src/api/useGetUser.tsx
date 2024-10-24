@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { setHeaders } from '@utils/setData'
 import { getUserUrl } from './routes'
-import { getLocalStorageUserAuth } from '@utils/auth'
+import { useAuth } from 'react-oidc-context'
 
 export function useGetUser() {
   return useQuery({
@@ -11,6 +11,7 @@ export function useGetUser() {
 }
 
 const fetchUser = async () => {
+  const auth = useAuth()
   if (!auth.user?.access_token || !auth.user.refresh_token) {
     console.error('Tokens missing:', {
       accessToken: auth.user?.access_token,

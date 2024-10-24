@@ -1,14 +1,9 @@
 # Albert Frontend
 *[English version below](#english-version)*
-> ⚠️ DISCLAIMER :
-> Ce projet est devenu open source très récemment, voici quelques mises en garde :
-> - Le code peut contenir des composants et du code qui ne vous sont pas utiles et qui sont utilisés spécifiquement pour France Services, le projet sera scindé dans le futur.
-> - L'accessibilité du projet n'est pas totale selon les [critères du RGAA](https://accessibilite.numerique.gouv.fr/)
-> - La documentation n'est pas complète
 
 ## 🎯 Objectif général
 
-Ce repo a pour but de fournir une interface visuelle pour interagir avec l'API d'Albert (le projet de chatbot LLM du gouvernement français).
+Ce repo a pour but de fournir une interface visuelle aux agents des maisons France Services pour interagir avec l'API d'Albert (le projet de chatbot LLM du gouvernement français).
 ## 🛠️ Configuration
 
 ### Pile technologique
@@ -16,6 +11,7 @@ Ce repo a pour but de fournir une interface visuelle pour interagir avec l'API d
 [ViteJS](https://vitejs.dev/)  
 [React](https://react.dev/)  
 [Tailwind](https://tailwindcss.com/)
+
 #### DSFR
 
 DSFR est déjà installé, voici quelques ressources utiles :
@@ -67,8 +63,7 @@ Nous utilisons [ViteJS](https://vitejs.dev/) pour construire le projet donc chaq
 
  ## API 
 
-[Voici tous les points d'accès utilisés par Albert](https://albert.etalab.gouv.fr/api/v2/docs#/)  
-Note : La documentation des endpoints n'est pas encore complète.
+[Voici tous les points d'accès utilisés par Albert](https://franceservices.etalab.gouv.fr/api/docshttps://franceservices.etalab.gouv.fr/api/docs)  
 
 Albert front utilise [tanstack-query](https://tanstack.com/query/latest/docs/framework/react/overview) (react-query) pour interagir avec le backend.  
 Les fonctions sont situées dans le dossier `src/api` et peuvent être importées via @api.
@@ -89,15 +84,9 @@ Tous les points d'entrée de l'api sont référencés dans [src/api/routes.ts](s
 <details>
   <summary>English version</summary>
 
-> ⚠️ DISCLAIMER:
-> This project went open source very recently, here are some caveats:
-> - The code might contain components and code that are of no use to you and that are used specifically for France Services, the project will be splitted in the future.
-> - The Accessibility of the project is not total according to the [RGAA criterias](https://accessibilite.numerique.gouv.fr/)
-> - The documentation is not complete
-
 ## 🎯 General objective
 
-This repo aims to provide a visual interface to interact with Albert's (the French governement's LLM chatbot project) API
+This repo aims to provide a visual interface to France services agentsto interact with Albert's (the French governement's LLM chatbot project) API
 ## 🛠️ Configuration
 
 ### Tech stack
@@ -157,8 +146,7 @@ We are using [ViteJS](https://vitejs.dev/) to build the project so every env var
 
 ## API 
 
-[Here are all the endpoints used by Albert.](https://albert.etalab.gouv.fr/api/v2/docs#/)
-Note: The endpoints documentation is not complete yet
+[Here are all the endpoints used by Albert.](https://franceservices.etalab.gouv.fr/api/docshttps://franceservices.etalab.gouv.fr/api/docs)
 
 Albert front uses [tanstack-query](https://tanstack.com/query/latest/docs/framework/react/overview) (react-query) to interact with the backend.  
 Functions are located in the `src/api` folder and can be importe via @api.

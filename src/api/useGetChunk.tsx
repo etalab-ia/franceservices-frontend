@@ -1,7 +1,6 @@
 import { getChunkUrl } from '@api'
 import { useQuery } from '@tanstack/react-query'
-import type { Chat, Chunk } from '@types'
-import { getLocalStorageUserAuth } from '@utils/auth'
+import type { Chunk } from '@types'
 import { setHeaders } from '@utils/setData'
 
 export function useGetChunk(chunkHash: string) {

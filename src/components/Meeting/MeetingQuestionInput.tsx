@@ -129,7 +129,6 @@ export function MeetingQuestionInput({
       handleSubmit()
     }
   }
-  console.log('questionInput', questionInput)
   return (
     <div>
       <div className=" flex fr-background-default--grey fr-mr-2v ">
