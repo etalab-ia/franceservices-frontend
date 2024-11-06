@@ -4,8 +4,6 @@ import { useDispatch } from 'react-redux'
 import type { AppDispatch, ChatCompletion, Question } from '../types'
 import { onCloseStream } from './eventsEmitter'
 import { setHeaders, setUserQuestion } from './setData'
-import { useAuth } from './context/authContext'
-import { getUser } from './getUser'
 
 export const useAppDispatch: () => AppDispatch = useDispatch
 

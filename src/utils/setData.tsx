@@ -1,30 +1,17 @@
 import type { Question } from '@types'
-import { useAuth } from './context/authContext'
 import { useFetch } from './hooks'
-import { getUser } from './getUser'
 
 /*
  * isEventSource is true when fetching for a stream
  */
 export const setHeaders = (isEventSource: boolean) => {
-  const auth = getUser()
-
-  if (!auth?.access_token || !auth.refresh_token) {
-    console.error('Tokens missing :', {
-      accessToken: auth?.access_token,
-      refreshToken: auth.refresh_token,
-    })
-    throw new Error('Authentication tokens missing')
-  }
   const headers = isEventSource
     ? {
-        access_token: `Bearer ${auth.access_token}`,
-        refresh_token: `Bearer ${auth.refresh_token}`,
+        credentials: 'include',
       }
     : {
         'Content-Type': 'application/json',
-        access_token: `Bearer ${auth.access_token}`,
-        refresh_token: `Bearer ${auth.refresh_token}`,
+        credentials: 'include',
       }
 
   return headers

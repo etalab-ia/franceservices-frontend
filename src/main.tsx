@@ -6,20 +6,12 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Link } from 'react-router-dom'
 import { Root } from './components/Root/Root'
 import { store } from './utils/reducer/reducer'
-import { WebStorageStateStore } from 'oidc-client-ts'
-import { AuthProvider } from 'react-oidc-context'
+import { AuthProvider } from '@utils/context/authContext'
 declare global {
   interface Window {
     _mtm: any[]
     _paq: any[]
   }
-}
-
-const oidcConfig = {
-  authority: import.meta.env.VITE_KEYCLOAK_AUTHORITY,
-  client_id: import.meta.env.VITE_KEYCLOAK_CLIENT_ID,
-  userStore: new WebStorageStateStore({ store: window.localStorage }),
-  redirect_uri: import.meta.env.VITE_KEYCLOAK_REDIRECT_URL,
 }
 
 function App() {
@@ -55,7 +47,7 @@ function App() {
   return (
     <BrowserRouter basename="/">
       <Provider store={store}>
-        <AuthProvider {...oidcConfig}>
+        <AuthProvider>
           <QueryClientProvider client={queryClient}>
             <Root />
           </QueryClientProvider>
