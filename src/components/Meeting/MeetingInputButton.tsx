@@ -40,7 +40,7 @@ export function MeetingInputButton({
       data: JSON.stringify({ chat_type: 'meeting' }),
       headers,
     })
-    if (chat && chat.id && !stream.isStreaming) {
+    if (chat?.id && !stream.isStreaming) {
       dispatch({ type: 'SET_USER_QUERY', nextUserQuery: currQuestion.query })
       updateCurrQuestion({
         ...currQuestion,

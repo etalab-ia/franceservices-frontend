@@ -2,6 +2,8 @@ import React, { useMemo, useState } from 'react'
 import { useGetInstitutions } from '@api'
 import { Input } from '@codegouvfr/react-dsfr/Input'
 import Fuse from 'fuse.js'
+import { useSelector } from 'react-redux'
+import type { RootState } from '@types'
 
 const options = {
   includeScore: true,
@@ -20,6 +22,7 @@ export function ThemesAndAdminsInput({
   const [searchResults, setSearchResults] = useState([])
   const [selectedValue, setSelectedValue] = useState('')
   const [selectedIndex, setSelectedIndex] = useState(-1)
+  const messages = useSelector((state: RootState) => state.user.messages)
 
   const { data: institutions, error: institutionsError } = useGetInstitutions()
 
@@ -92,7 +95,8 @@ export function ThemesAndAdminsInput({
   return (
     <div>
       <Input
-        label={field.label}
+        disabled={messages.length > 0}
+        label={`${field.label} *`}
         className="fr-mb-1w"
         nativeInputProps={{
           onChange: handleSearch,
@@ -120,6 +124,7 @@ export function ThemesAndAdminsInput({
                 onClick={() => handleSelect(result)}
                 onKeyUp={(e) => handleKeyUp(e, result)}
                 tabIndex={0}
+                role="button"
               >
                 <p className="fr-ml-3w fr-mt-1w fr-mb-1w">{result}</p>
               </div>

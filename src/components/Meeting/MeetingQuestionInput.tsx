@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { MeetingTags } from './MeetingTags'
 import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
+import { createSelector } from 'reselect'
 
 export function MeetingQuestionInput({
   isNewChat,
@@ -23,15 +24,22 @@ export function MeetingQuestionInput({
   context: MeetingInputContext
   setContext: React.Dispatch<React.SetStateAction<MeetingInputContext>>
 }) {
-  const stream = useSelector((state: RootState) => state.stream)
+  const { historyStream, isStreaming } = useSelector(selectMeetingQuestionInput)
   const user = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
   const location = useLocation()
   const [showError, setShowError] = useState(false)
   const [isAdditionalInputOpened, setIsAdditionalInputOpened] = useState(
-    !stream.historyStream.length && location.pathname === '/meeting',
+    !historyStream.length && location.pathname === '/meeting',
   )
-
+  useEffect(() => {
+    return () => {
+      setContext({
+        administrations: [],
+        themes: [],
+      })
+    }
+  }, [])
   const [messageCount, setMessageCount] = useState(0)
   const handleChange = (e) => {
     setQuestionInput(e.target.value)
@@ -47,16 +55,21 @@ export function MeetingQuestionInput({
   const handleSubmit = async () => {
     if (context.themes.length === 0 || context.administrations.length === 0) {
       setShowError(true)
+      setIsAdditionalInputOpened(true)
     } else {
       setShowError(false)
       let chatId = user.chatId
       dispatch({ type: 'SET_IS_STREAMING', nextIsStreaming: true })
 
+      //TODO: Make it possible to send multiple administrations
       if (!chatId) {
-        const headers = setHeaders(false)
         const chat = await useFetch(chatUrl, 'POST', {
-          data: JSON.stringify({ chat_type: 'meeting' }),
-          headers,
+          data: JSON.stringify({
+            chat_type: 'meeting',
+            themes: context.themes,
+            operator: context.administrations[0],
+          }),
+          headers: setHeaders(false),
         })
         chatId = chat.id
         dispatch({ type: 'SET_CHAT_ID', nextChatId: chatId })
@@ -64,12 +77,12 @@ export function MeetingQuestionInput({
 
       setIsAdditionalInputOpened(false)
 
-      if (stream.historyStream.length) {
+      if (historyStream.length) {
         dispatch({
           type: 'ADD_HISTORY',
           newItem: {
             query: user.question.query,
-            response: stream.historyStream[0],
+            response: historyStream[0],
             chunks: user.chunks,
             webservices: user.webservices,
           },
@@ -82,10 +95,10 @@ export function MeetingQuestionInput({
         nextChatId: chatId,
       })
 
-      if (stream.historyStream.length) {
+      if (historyStream.length) {
         dispatch({
           type: 'SET_MESSAGES',
-          nextMessage: { text: stream.historyStream, sender: 'agent' },
+          nextMessage: { text: historyStream, sender: 'agent' },
         })
       }
 
@@ -108,20 +121,15 @@ export function MeetingQuestionInput({
       )
 
       setQuestionInput('')
-      setContext({
-        administrations: [],
-        themes: [],
-      })
     }
   }
 
   const handleKeyDown = (e: any) => {
-    if (e.key === 'Enter' && questionInput && !stream.isStreaming) {
+    if (e.key === 'Enter' && questionInput && !isStreaming) {
       e.preventDefault()
       handleSubmit()
     }
   }
-  console.log('questionInput', questionInput)
   return (
     <div>
       <div className=" flex fr-background-default--grey fr-mr-2v ">
@@ -147,7 +155,7 @@ export function MeetingQuestionInput({
           <div className="flex justify-between">
             <Button
               onClick={() => setIsAdditionalInputOpened(!isAdditionalInputOpened)}
-              disabled={stream.isStreaming}
+              disabled={isStreaming}
               className="fr-btn"
               title="Recherche avancée"
               iconId={
@@ -156,7 +164,7 @@ export function MeetingQuestionInput({
             />
             <Button
               onClick={handleSubmit}
-              disabled={!questionInput || stream.isStreaming}
+              disabled={!questionInput || isStreaming}
               className="fr-btn"
               title="Rechercher"
               iconId="fr-icon-search-line"
@@ -189,7 +197,7 @@ function NewQuestionMeetingAdditionalInput({
   return (
     <div className="fr-mt-2w fr-grid-row gap-8">
       {inputFields.map((field, index) => (
-        <div className="fr-col-5" key={index}>
+        <div className="fr-col-5 fr-mb-2w" key={index}>
           <ThemesAndAdminsInput
             field={field}
             onTagSelect={(tag) => handleSetTag(tag, field.name)}
@@ -238,7 +246,7 @@ function questionType(question: string, chunks: Chunk[]) {
   return 'auto'
 }
 
-export function trackChatEvent(
+function trackChatEvent(
   isNewChat: boolean,
   type: 'auto' | 'first_question' | 'suggested_question',
   step: number,
@@ -260,3 +268,13 @@ export function trackChatEvent(
 
   window._paq.push(['trackEvent', 'Chat', 'NewMessage', eventData])
 }
+
+const selectStreamData = (state: RootState) => state.stream
+
+export const selectMeetingQuestionInput = createSelector(
+  [selectStreamData],
+  (stream) => ({
+    historyStream: stream.historyStream,
+    isStreaming: stream.isStreaming,
+  }),
+)

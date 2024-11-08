@@ -39,6 +39,7 @@ export const Root = () => {
       />
       <div className="flex-grow">
         <Routes>
+          <Route path="/home" element={<Navigate to="/meeting" />} />
           <Route
             path="/login"
             element={

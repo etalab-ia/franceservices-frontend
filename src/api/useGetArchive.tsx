@@ -1,6 +1,6 @@
+import { getArchiveUrl, getChunksUrl } from '@api'
 import { useQuery } from '@tanstack/react-query'
-import { getChunksUrl, getArchiveUrl } from '@api'
-import type { UserHistory } from '@types'
+import { setHeaders } from '@utils/setData'
 
 export function useGetArchive(chatId: number) {
   return useQuery({
@@ -11,27 +11,21 @@ export function useGetArchive(chatId: number) {
 }
 
 const fetchArchive = async (chatId: number) => {
-  const authToken = localStorage.getItem('authToken')
   const response = await fetch(`${getArchiveUrl}/${chatId}`, {
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-      'Content-Type': 'application/json',
-    },
+    headers: setHeaders(false),
   })
   if (!response.ok) {
     console.error('error: response not ok', response)
     throw new Error('Network response was not ok', { cause: response })
   }
-  const responseData = await response.json()
-  const streamsHistory: UserHistory[] = await Promise.all(
+  const responseData: ArchiveType = await response.json()
+  const streamsHistory = await Promise.all(
     responseData.streams.map(async (stream) => {
       const chunksResponse = stream.rag_sources
         ? await fetch(getChunksUrl, {
             method: 'POST',
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-              'Content-Type': 'application/json',
-            },
+            headers: setHeaders(false),
+
             body: JSON.stringify({ uids: stream.rag_sources }),
           }).then((res) => res.json())
         : []
@@ -39,6 +33,8 @@ const fetchArchive = async (chatId: number) => {
         query: stream.query,
         chunks: chunksResponse,
         response: stream.response,
+        operator: responseData.operator,
+        themes: responseData.themes,
         webservices: chunksResponse[0]?.web_services
           ? chunksResponse[0]?.web_services.slice(0, 3)
           : [],
@@ -46,4 +42,17 @@ const fetchArchive = async (chatId: number) => {
     }),
   )
   return streamsHistory
+}
+
+type ArchiveType = {
+  chat_type: string
+  operator: string
+  themes: string[]
+  id: number
+  created_at: string
+  updated_at: string
+  user_id: string
+  chat_name: string
+  stream_count: number
+  streams: any[]
 }
