@@ -1,7 +1,19 @@
+import type { MeetingInputContext } from '@types'
 import { GlobalColContainer } from 'components/Global/GlobalColContainer'
 import { OneThirdScreenWidth } from 'components/Global/OneThirdScreenWidth'
+import { useEffect } from 'react'
 
-export function MeetingFirstQuestionHelper(setQuestionInput) {
+export function MeetingFirstQuestionHelper({
+  setContext,
+}: {
+  setContext: React.Dispatch<React.SetStateAction<MeetingInputContext>>
+}) {
+  useEffect(() => {
+    setContext({
+      administrations: [],
+      themes: [],
+    })
+  }, [])
   return (
     <OneThirdScreenWidth>
       <GlobalColContainer>

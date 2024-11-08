@@ -50,7 +50,7 @@ export const MeetingCurrentResponse = function MeetingCurrentResponse({
       <GlobalRowContainer extraClass="fr-grid-row fr-mt-5w">
         <MeetingMainResponse setQuestion={setQuestion} setContext={setContext} />
         {chatId !== 0 && lastStreamId !== 0 && <MeetingAdditionalResponse />}
-        {!chatId && <MeetingFirstQuestionHelper />}
+        {!chatId && <MeetingFirstQuestionHelper setContext={setContext} />}
       </GlobalRowContainer>
       <div ref={refBottom} />
     </div>
