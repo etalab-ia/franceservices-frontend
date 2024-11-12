@@ -3,6 +3,7 @@ import type { RootState } from '@types'
 import { useSelector } from 'react-redux'
 
 export function MeetingTags({ setContext, field, tags }) {
+  const chatId = useSelector((state: RootState) => state.user.chatId)
   const messages = useSelector((state: RootState) => state.user.messages)
   const handleClick = (e) => {
     e.preventDefault()
@@ -31,7 +32,7 @@ export function MeetingTags({ setContext, field, tags }) {
             key={index}
             //@ts-expect-error for some reason name isn't recognized as a valid prop but is needed to delete tag
             name={field.name}
-            dismissible={messages.length === 0}
+            dismissible={messages.length === 0 && chatId === 0}
             nativeButtonProps={{
               onClick: handleClick,
             }}
