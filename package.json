@@ -19,10 +19,7 @@
     "push-major": "npm version major && git push"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "npm run format",
-      "git add"
-    ]
+    "*.{js,jsx,ts,tsx}": ["npm run format", "git add"]
   },
   "dependencies": {
     "@codegouvfr/react-dsfr": "^1.11.4",
