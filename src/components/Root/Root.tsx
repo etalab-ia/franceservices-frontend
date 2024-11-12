@@ -1,5 +1,4 @@
-import { useAuth, withAuthenticationRequired } from 'react-oidc-context'
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation, redirect } from 'react-router-dom'
 import Error404 from '../../pages/404'
 import { Contact } from '../../pages/Contact'
 import { FAQ } from '../../pages/FAQ'
@@ -9,24 +8,24 @@ import { Tools } from '../../pages/Tools'
 import Footer from './Footer'
 import Header from './Header'
 import { LoadingSpinner } from 'components/LoadingSpinner'
+import { useAuth } from '@utils/context/authContext'
 
 export const Root = () => {
-  const auth = useAuth()
   const location = useLocation()
   const meetingPathRegex = /^\/meeting(\/.*)?$/
 
   return (
     <div className="min-h-screen flex flex-col" id="screen">
-      <Header auth={auth} />
+      <Header />
       <div className="flex-grow">
         <Routes>
           <Route path="/home" element={<Navigate to="/meeting" />} />
           <Route path="/" element={<Navigate to="/meeting" />} />
-          <Route path="/meeting" element={<PrivateRoute component={Meeting} />} />
-          <Route path="/meeting/:id" element={<PrivateRoute component={Meeting} />} />
-          <Route path="/outils" element={<PrivateRoute component={Tools} />} />
-          <Route path="/history" element={<PrivateRoute component={History} />} />
-          <Route path="/contact" element={<PrivateRoute component={Contact} />} />
+          <Route path="/meeting" element={<Meeting />} />
+          <Route path="/meeting/:id" element={<Meeting />} />
+          <Route path="/outils" element={<Tools />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/FAQ" element={<FAQ />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
@@ -39,9 +38,12 @@ export const Root = () => {
 }
 
 const PrivateRoute = ({ component: Component, ...props }) => {
-  const ComponentWithAuth = withAuthenticationRequired(Component, {
-    OnRedirecting: () => <LoadingSpinner />,
-  })
+  const auth = useAuth()
 
-  return <ComponentWithAuth {...props} />
+  if (!auth.isAuthenticated) {
+    window.location.href = import.meta.env.VITE_PRO_CONNECT_LOGIN_URL
+    return null
+  }
+
+  return <Component {...props} />
 }

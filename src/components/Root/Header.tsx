@@ -1,8 +1,9 @@
-import { useAuth } from 'react-oidc-context'
+import { useAuth } from '@utils/context/authContext'
 import { useDispatch } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 
-function Header({ auth }) {
+function Header() {
+  const auth = useAuth()
   return (
     <header className="fr-header">
       <div className="fr-header__body">
@@ -55,7 +56,7 @@ function EasyAccess() {
           <li>
             <button
               type="button"
-              onClick={() => auth.signoutRedirect()}
+              onClick={() => auth.logout()}
               className="fr-btn fr-icon-lock-line"
             >
               Se déconnecter
@@ -70,10 +71,10 @@ function EasyAccess() {
 function Username() {
   const auth = useAuth()
 
-  if (auth.isLoading) return null
+  if (!auth.isAuthenticated) return null
   return (
     <div className="fr-btn fr-icon-user-line hover:cursor-text">
-      {auth.user?.profile.preferred_username ?? ''}
+      {auth.user?.name ?? ''}
     </div>
   )
 }

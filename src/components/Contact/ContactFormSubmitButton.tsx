@@ -4,7 +4,6 @@ import { useFetch } from '@utils/hooks'
 import { setContactData, setHeaders } from '@utils/setData'
 import { useState } from 'react'
 import { ButtonInformation } from '../Global/ButtonInformation'
-import { useAuth } from 'react-oidc-context'
 
 interface ContactButtonProps {
   formData: {
@@ -18,7 +17,6 @@ interface ContactButtonProps {
 
 export function ContactFormSubmitButton({ formData, clearForm }: ContactButtonProps) {
   const [isSent, setIsSent] = useState(false)
-  const auth = useAuth()
   const handleClick = async () => {
     await useFetch(contactUrl, 'POST', {
       data: setContactData(
