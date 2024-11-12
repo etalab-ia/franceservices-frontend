@@ -22,15 +22,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const pathname = useLocation().pathname
   const navigate = useNavigate()
 
-  const loginPage = import.meta.env.VITE_PRO_CONNECT_LOGIN_URL // A mettre à jour vers la vraie page de login
-  console.log('uisAuthenticated', isAuthenticated)
+  const loginPage = `${import.meta.env.VITE_API_URL}/login`
+
   useEffect(() => {
     checkUserInfo()
   }, [])
 
   const checkUserInfo = async (): Promise<void> => {
     try {
-      const response = await fetch('http://localhost:8000/api/v2/userinfo', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/userinfo`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const logout = () => {
     removeSession()
-    window.location.replace('http://localhost:8000/api/v2/prepare-logout')
+    window.location.replace(`${import.meta.env.VITE_API_URL}/prepare-logout`)
   }
 
   useEffect(() => {

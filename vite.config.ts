@@ -23,7 +23,7 @@ export default () => {
       },
       host: true,
       strictPort: true,
-      port: 4172,
+      port: 4173,
     },
     base: '/',
   })
