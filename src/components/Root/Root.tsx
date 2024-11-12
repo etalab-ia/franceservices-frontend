@@ -1,4 +1,5 @@
-import { Navigate, Route, Routes, useLocation, redirect } from 'react-router-dom'
+import { useAuth } from '@utils/context/authContext'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import Error404 from '../../pages/404'
 import { Contact } from '../../pages/Contact'
 import { FAQ } from '../../pages/FAQ'
@@ -7,13 +8,11 @@ import { Meeting } from '../../pages/Meeting'
 import { Tools } from '../../pages/Tools'
 import Footer from './Footer'
 import Header from './Header'
-import { LoadingSpinner } from 'components/LoadingSpinner'
-import { useAuth } from '@utils/context/authContext'
 
 export const Root = () => {
   const location = useLocation()
   const meetingPathRegex = /^\/meeting(\/.*)?$/
-
+  console.log('Benjamin')
   return (
     <div className="min-h-screen flex flex-col" id="screen">
       <Header />
