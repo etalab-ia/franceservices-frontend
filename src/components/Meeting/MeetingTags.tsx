@@ -7,7 +7,7 @@ export function MeetingTags({ setContext, field, tags }) {
   const messages = useSelector((state: RootState) => state.user.messages)
   const handleClick = (e) => {
     e.preventDefault()
-    if (messages.length > 0) return
+    if (messages.length > 0 || chatId !== 0) return
     const tagName = e.currentTarget.textContent.trim()
 
     if (e.currentTarget.name === 'administrations') {
