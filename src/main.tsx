@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import { BrowserRouter, Link } from 'react-router-dom'
 import { Root } from './components/Root/Root'
 import { store } from './utils/reducer/reducer'
+startReactDsfr({ defaultColorScheme: 'system', Link })
 
 function App() {
   useEffect(() => {
@@ -47,7 +48,6 @@ function App() {
   )
 }
 
-startReactDsfr({ defaultColorScheme: 'system', Link })
 const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false } },
 })
