@@ -14,13 +14,14 @@ function Header({ username, setUserAuth, userAuth }) {
               <Logo />
               <TitleAndDescription />
             </div>
-            {userAuth.isLogin && (
-              <EasyAccess username={username} setUserAuth={setUserAuth} />
-            )}
+            {userAuth.isLogin ||
+              (import.meta.env.DEV && (
+                <EasyAccess username={username} setUserAuth={setUserAuth} />
+              ))}
           </div>
         </div>
       </div>
-      {userAuth.isLogin && <NavigationMenu />}
+      {userAuth.isLogin || (import.meta.env.DEV && <NavigationMenu />)}
     </header>
   )
 }
@@ -110,10 +111,10 @@ function NavigationMenu() {
 const menuItems = [
   { to: '/meeting', label: 'Poser une nouvelle question' },
   { to: '/history', label: 'Mes échanges' },
+  { to: '/evaluations', label: 'Évaluer Albert' },
   { to: '/outils', label: 'Vos outils numériques' },
   { to: '/FAQ', label: 'Aide' },
   { to: '/contact', label: 'Contact' },
-  { to: '/evaluations', label: 'Évaluer Albert' },
 ]
 
 function isActiveLink(link, pathname) {

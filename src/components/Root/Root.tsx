@@ -15,6 +15,7 @@ import { Signup } from '../../pages/Signup'
 import { Tools } from '../../pages/Tools'
 import Footer from './Footer'
 import Header from './Header'
+import Evaluations from 'pages/Evaluations'
 
 export const Root = () => {
   const [userAuth, setUserAuth] = useState<UserAuth>(InitialUserAuth)
@@ -60,7 +61,23 @@ export const Root = () => {
           <>
             <Route
               path="/meeting"
-              element={!userAuth.isLogin ? <Navigate to="/login" /> : <Meeting />}
+              element={
+                !userAuth.isLogin && !import.meta.env.DEV ? (
+                  <Navigate to="/login" />
+                ) : (
+                  <Meeting />
+                )
+              }
+            />
+            <Route
+              path="/evaluations"
+              element={
+                !userAuth.isLogin && !import.meta.env.DEV ? (
+                  <Navigate to="/login" />
+                ) : (
+                  <Evaluations />
+                )
+              }
             />
             <Route
               path="/meeting/:id"
