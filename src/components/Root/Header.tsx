@@ -113,6 +113,7 @@ const menuItems = [
   { to: '/outils', label: 'Vos outils numériques' },
   { to: '/FAQ', label: 'Aide' },
   { to: '/contact', label: 'Contact' },
+  { to: '/evaluations', label: 'Évaluer Albert' },
 ]
 
 function isActiveLink(link, pathname) {
