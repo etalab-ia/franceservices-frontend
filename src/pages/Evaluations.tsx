@@ -6,6 +6,10 @@ import { EventSourcePolyfill } from 'event-source-polyfill'
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { onCloseStream } from '../utils/eventsEmitter'
 import { TextWithSources } from 'components/Sources/TextWithSources'
+import Box from '@mui/material/Box'
+import Rating from '@mui/material/Rating'
+import { Notice } from '@codegouvfr/react-dsfr/Notice'
+import StarIcon from '@mui/icons-material/Star'
 
 const questions = [
   {
@@ -225,9 +229,9 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
       <div className="flex flex-grow transition-all duration-500">
         {/* Main Content */}
         <div
-          className={`flex flex-col flex-grow transition-all duration-500 ${
-            isStreamFinished ? 'w-full md:w-1/2' : 'w-full'
-          }`}
+          className={`flex flex-col flex-grow transition-all duration-500
+          w-full md:w-1/2
+        `}
         >
           <div className="fr-text--lg fr-mb-2w">
             <h3>{title}</h3>
@@ -245,31 +249,78 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className="shadow-inner fr-mt-2w rounded-lg fr-p-2w max-h-[50vh] overflow-scroll"
+            className="shadow-inner fr-mt-2w rounded-lg fr-p-2w h-[50vh] overflow-scroll"
           >
             <p>
               <TextWithSources text={response} />
             </p>
           </div>
           <div className="flex gap-4 fr-my-2w">
-            <button onClick={onBack} className="fr-btn fr-btn--secondary fr-btn--sm ">
+            <button
+              type="button"
+              onClick={onBack}
+              className="fr-btn fr-btn--secondary fr-btn--sm "
+            >
               Retour
             </button>
           </div>
         </div>
-
+        <div className="flex items-center mx-4">
+          <div className="w-px h-40 bg-gray-500" />
+        </div>
         {/* Sliding Panel */}
         <div
-          className={`transition-all duration-500 overflow-hidden ${
-            isStreamFinished ? 'w-full md:w-1/2' : 'w-0'
-          }`}
+          className={`transition-all duration-500 overflow-hidden w-full md:w-1/2 bg-red-200
+          `}
         >
-          <div className="px-4 h-full bg-white">
+          <div className="px-4 h-full bg-red-200">
             <h3>Évaluation</h3>
-            {/* Add your panel content here */}
+            <h4>Note globale</h4>
+            <HoverRating />
           </div>
         </div>
       </div>
     </div>
+  )
+}
+
+const labels: { [index: string]: string } = {
+  0.5: 'Inutile',
+  1: 'Inutile+',
+  1.5: 'Médiocre',
+  2: 'Médiocre+',
+  2.5: 'Passable',
+  3: 'Passable+',
+  3.5: 'Bon',
+  4: 'Bon+',
+  4.5: 'Excellent',
+  5: 'Excellent+',
+}
+
+function getLabelText(value: number) {
+  return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`
+}
+
+export function HoverRating() {
+  const [value, setValue] = useState<number | null>(2)
+  const [hover, setHover] = useState(-1)
+
+  return (
+    <Box sx={{ width: 200, display: 'flex', alignItems: 'center' }}>
+      <Rating
+        name="hover-feedback"
+        value={value}
+        precision={0.5}
+        getLabelText={getLabelText}
+        onChange={(event, newValue) => {
+          setValue(newValue)
+        }}
+        onChangeActive={(event, newHover) => {
+          setHover(newHover)
+        }}
+        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+      />
+      {value !== null && <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>}
+    </Box>
   )
 }
