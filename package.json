@@ -42,6 +42,7 @@
     "react-to-print": "^2.15.1",
     "react-tooltip": "^5.27.1",
     "redux": "^5.0.1",
+    "tailwindcss-motion": "^0.4.3-beta",
     "valibot": "^0.36.0"
   },
   "devDependencies": {
