@@ -40,7 +40,7 @@
     "react-string-replace": "^1.1.1",
     "react-tooltip": "^5.27.1",
     "redux": "^5.0.1",
-    "upgrade": "^1.1.0",
+    "tailwindcss-motion": "^0.4.3-beta",
     "valibot": "^0.36.0"
   },
   "devDependencies": {
