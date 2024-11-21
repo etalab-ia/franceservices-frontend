@@ -1,4 +1,11 @@
-import { useState } from 'react'
+import { chatUrl, streamUrl } from '@api'
+import { ChatCompletion, Question } from '@types'
+import { useFetch } from '@utils/hooks'
+import { setHeaders } from '@utils/setData'
+import { EventSourcePolyfill } from 'event-source-polyfill'
+import { useEffect, useState, useRef, useCallback } from 'react'
+import { onCloseStream } from '../utils/eventsEmitter'
+import { TextWithSources } from 'components/Sources/TextWithSources'
 
 const questions = [
   {
@@ -35,7 +42,7 @@ export default function Evaluations() {
   }
 
   return (
-    <div className="flex flex-col gap-4 items-center mt-8 min-h-screen">
+    <div className="flex flex-col gap-4 items-center mt-8 min-h-screen fr-container">
       <div className="fr-text--lg fr-mb-4w">
         <h1>Évaluations</h1>
       </div>
@@ -45,7 +52,13 @@ export default function Evaluations() {
           <Questions setSelectedCardIndex={setSelectedCardIndex} />
         </>
       ) : (
-        <QuestionDetail question={questions[selectedCardIndex]} onBack={handleBack} />
+        <QuestionDetail
+          question={questions[selectedCardIndex].question}
+          operator={questions[selectedCardIndex].operator}
+          title={questions[selectedCardIndex].title}
+          theme={questions[selectedCardIndex].theme}
+          onBack={handleBack}
+        />
       )}
     </div>
   )
@@ -69,7 +82,21 @@ function Questions({ setSelectedCardIndex }) {
   )
 }
 
-function QuestionCard({ index, question, theme, operator, title, setSelectedCardIndex }) {
+function QuestionCard({
+  index,
+  question,
+  theme,
+  operator,
+  title,
+  setSelectedCardIndex,
+}: {
+  index: number
+  question: string
+  theme: string
+  operator: string
+  title: string
+  setSelectedCardIndex: (index: number) => void
+}) {
   const handleClick = () => {
     setSelectedCardIndex(index)
   }
@@ -105,25 +132,118 @@ function QuestionCard({ index, question, theme, operator, title, setSelectedCard
   )
 }
 
-function QuestionDetail({ question, onBack }) {
+const modelName: string = import.meta.env.VITE_MODEL_NAME as string
+const modelMode: string = import.meta.env.VITE_MODEL_MODE as string
+const modelTemperature: number = import.meta.env.VITE_MODEL_TEMPERATURE as number
+
+function QuestionDetail({ question, theme, operator, title, onBack }) {
+  const [response, setResponse] = useState('')
+  const [isUserScrolledUp, setIsUserScrolledUp] = useState(false)
+  const scrollRef = useRef(null)
+
+  const prompt = {
+    chat_type: 'evaluations',
+    themes: [theme],
+    operator: [operator],
+  }
+
+  async function askAlbert() {
+    const headers = setHeaders(false)
+    const stream_data = {
+      model_name: modelName,
+      mode: modelMode,
+      query: question,
+      limit: 7,
+      context: undefined,
+      institution: undefined,
+      links: undefined,
+      temperature: modelTemperature,
+      sources: ['service-public', 'travail-emploi'],
+      should_sids: [],
+      must_not_sids: [],
+    }
+    const chat = await useFetch(chatUrl, 'POST', {
+      data: JSON.stringify(prompt),
+      headers,
+    })
+    const stream = await useFetch(`${streamUrl}/chat/${chat.id}`, 'POST', {
+      data: JSON.stringify(stream_data),
+      headers,
+    })
+    const stream_chat = new EventSourcePolyfill(`${streamUrl}/${stream.id}/start`, {
+      headers: setHeaders(true),
+      withCredentials: true,
+    })
+
+    stream_chat.onmessage = (e) => {
+      const jsonData = JSON.parse(e.data)
+      setResponse((prev) => prev + jsonData.choices[0].delta.content)
+
+      if (jsonData.choices[0].finish_reason === 'stop') {
+        stream_chat.close()
+        // Reset the scroll detection when the stream ends
+        setIsUserScrolledUp(false)
+      }
+    }
+
+    onCloseStream(() => {
+      if (stream_chat) {
+        stream_chat.close()
+      }
+    })
+  }
+
+  useEffect(() => {
+    askAlbert()
+  }, [])
+
+  // Auto-scroll to bottom when new content is added
+  useEffect(() => {
+    if (!isUserScrolledUp && scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+    }
+  }, [response, isUserScrolledUp])
+
+  // Handle scroll events to detect user scrolling up
+  const handleScroll = useCallback(() => {
+    if (scrollRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = scrollRef.current
+      if (scrollTop + clientHeight < scrollHeight - 5) {
+        // User has scrolled up
+        setIsUserScrolledUp(true)
+      } else {
+        // User is at the bottom
+        setIsUserScrolledUp(false)
+      }
+    }
+  }, [])
+
   return (
-    <div className="flex flex-col gap-4  h-full flex-grow min-h-[800px] items-center ">
+    <div className="flex flex-col  h-full flex-grow min-h-[800px] w-full">
       <div className="fr-text--lg fr-mb-2w">
-        <h3>{question.title}</h3>
+        <h3>{title}</h3>
       </div>
       <div className="fr-text--lg fr-mb-2w">
-        <p>{question.question}</p>
+        <p>{question}</p>
       </div>
-      <div className="flex gap-4 fr-mb-2w">
-        <p className="fr-tag fr-background-alt--yellow-tournesol">
-          Thème : {question.theme}
-        </p>
+      <div className="flex gap-4 fr-mb-4w">
+        <p className="fr-tag fr-background-alt--yellow-tournesol">Thème: {theme}</p>
         <p className="fr-tag fr-background-contrast--blue-france">
-          Opérateur : {question.operator}
+          Opérateur: {operator}
+        </p>
+      </div>
+      <h4>Réponse</h4>
+      <div
+        ref={scrollRef}
+        onScroll={handleScroll}
+        className="shadow-inner fr-mt-2w rounded-lg fr-p-2w max-h-[50vh] overflow-scroll"
+      >
+        <p>
+          <TextWithSources text={response} />
         </p>
       </div>
       <div className="flex gap-4 fr-mb-2w">
-        <button onClick={onBack} className="fr-btn fr-btn--secondary fr-btn--sm">
+        <button onClick={onBack} className="fr-btn fr-btn--secondary fr-btn--sm ">
           Retour
         </button>
       </div>
