@@ -139,6 +139,7 @@ const modelTemperature: number = import.meta.env.VITE_MODEL_TEMPERATURE as numbe
 function QuestionDetail({ question, theme, operator, title, onBack }) {
   const [response, setResponse] = useState('')
   const [isUserScrolledUp, setIsUserScrolledUp] = useState(false)
+  const [isStreamFinished, setIsStreamFinished] = useState(false)
   const scrollRef = useRef(null)
 
   const prompt = {
@@ -181,8 +182,8 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
 
       if (jsonData.choices[0].finish_reason === 'stop') {
         stream_chat.close()
-        // Reset the scroll detection when the stream ends
         setIsUserScrolledUp(false)
+        setIsStreamFinished(true) // Set to true when stream finishes
       }
     }
 
@@ -219,33 +220,55 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
   }, [])
 
   return (
-    <div className="flex flex-col  h-full flex-grow min-h-[800px] w-full">
-      <div className="fr-text--lg fr-mb-2w">
-        <h3>{title}</h3>
-      </div>
-      <div className="fr-text--lg fr-mb-2w">
-        <p>{question}</p>
-      </div>
-      <div className="flex gap-4 fr-mb-4w">
-        <p className="fr-tag fr-background-alt--yellow-tournesol">Thème: {theme}</p>
-        <p className="fr-tag fr-background-contrast--blue-france">
-          Opérateur: {operator}
-        </p>
-      </div>
-      <h4>Réponse</h4>
-      <div
-        ref={scrollRef}
-        onScroll={handleScroll}
-        className="shadow-inner fr-mt-2w rounded-lg fr-p-2w max-h-[50vh] overflow-scroll"
-      >
-        <p>
-          <TextWithSources text={response} />
-        </p>
-      </div>
-      <div className="flex gap-4 fr-mb-2w">
-        <button onClick={onBack} className="fr-btn fr-btn--secondary fr-btn--sm ">
-          Retour
-        </button>
+    <div className="flex flex-col h-full flex-grow min-h-[800px] w-full">
+      {/* Flex container for main content and panel */}
+      <div className="flex flex-grow transition-all duration-500">
+        {/* Main Content */}
+        <div
+          className={`flex flex-col flex-grow transition-all duration-500 ${
+            isStreamFinished ? 'w-full md:w-1/2' : 'w-full'
+          }`}
+        >
+          <div className="fr-text--lg fr-mb-2w">
+            <h3>{title}</h3>
+          </div>
+          <div className="fr-text--lg fr-mb-2w">
+            <p>{question}</p>
+          </div>
+          <div className="flex gap-4 fr-mb-4w">
+            <p className="fr-tag fr-background-alt--yellow-tournesol">Thème: {theme}</p>
+            <p className="fr-tag fr-background-contrast--blue-france">
+              Opérateur: {operator}
+            </p>
+          </div>
+          <h4>Réponse</h4>
+          <div
+            ref={scrollRef}
+            onScroll={handleScroll}
+            className="shadow-inner fr-mt-2w rounded-lg fr-p-2w max-h-[50vh] overflow-scroll"
+          >
+            <p>
+              <TextWithSources text={response} />
+            </p>
+          </div>
+          <div className="flex gap-4 fr-my-2w">
+            <button onClick={onBack} className="fr-btn fr-btn--secondary fr-btn--sm ">
+              Retour
+            </button>
+          </div>
+        </div>
+
+        {/* Sliding Panel */}
+        <div
+          className={`transition-all duration-500 overflow-hidden ${
+            isStreamFinished ? 'w-full md:w-1/2' : 'w-0'
+          }`}
+        >
+          <div className="px-4 h-full bg-white">
+            <h3>Évaluation</h3>
+            {/* Add your panel content here */}
+          </div>
+        </div>
       </div>
     </div>
   )
