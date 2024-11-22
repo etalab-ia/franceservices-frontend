@@ -12,25 +12,25 @@ import { onCloseStream } from '../utils/eventsEmitter'
 
 const questions = [
   {
-    title: 'TItre de question',
+    title: 'Titre de question',
     question: 'Peut-on faire une saisie sur le RSA ?',
     theme: 'RSA',
     operator: 'CAF',
   },
   {
-    title: 'TItre de question',
+    title: 'Titre de question',
     question: 'Peut-on faire une saisie sur le RSA ?',
     theme: 'RSA',
     operator: 'CAF',
   },
   {
-    title: 'TItre de question',
+    title: 'Titre de question',
     question: 'Peut-on faire une saisie sur le RSA ?',
     theme: 'RSA',
     operator: 'CAF',
   },
   {
-    title: 'TItre de question',
+    title: 'Titre de question',
     question: 'Peut-on faire une saisie sur le RSA ?',
     theme: 'RSA',
     operator: 'CAF',
@@ -46,7 +46,9 @@ export default function Evaluations() {
 
   return (
     <div className="flex flex-col gap-4 items-center mt-8 min-h-screen fr-container">
-      <div className="fr-text--lg fr-mb-4w">
+      <div
+        className={`fr-text--lg fr-mb-4w t ${selectedCardIndex !== null ? 'place-self-start motion-preset-slide-left' : ''}`}
+      >
         <h1>Évaluations</h1>
       </div>
       {selectedCardIndex === null ? (
@@ -103,8 +105,6 @@ function QuestionCard({
   const handleClick = () => {
     setSelectedCardIndex(index)
   }
-  const lightOrDark = localStorage.getItem('scheme')
-  const border = lightOrDark === 'dark' ? 'hover:border-white' : 'hover:border-black'
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -114,12 +114,13 @@ function QuestionCard({
   }
 
   return (
-    <div
+    <button
+      type="button"
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       tabIndex={0}
-      className={`motion-preset-fade motion-duration-1000 rounded-2xl fr-border-action-high-grey border-2 fr-p-2w min-w-64 min-h-24 transform transition-transform duration-200 ease-in-out cursor-pointer
-        hover:scale-105 hover:fr-border-action--high-grey focus:scale-105 focus:fr-border-action--high-grey ${border}`}
+      className={`motion-preset-fade motion-duration-1000 rounded-2xl hover:outline hover:outline-2  fr-p-2w min-w-64 min-h-24 transform transition-transform duration-200 ease-in-out cursor-pointer
+        hover:scale-105 hover:fr-border-action--high-grey focus:scale-105 focus:fr-border-action--high-grey `}
     >
       <div className="fr-mb-2w">
         <h4>{title}</h4>
@@ -131,7 +132,7 @@ function QuestionCard({
           </p>
         </div>
       </div>
-    </div>
+    </button>
   )
 }
 
@@ -148,14 +149,17 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
   const [negativeFeedback, setNegativeFeedback] = useState<string[]>([])
   const [comments, setComments] = useState('')
   const [showNotice, setShowNotice] = useState(false)
-  const [rating, setRating] = useState<number | null>(3)
+  const [rating, setRating] = useState<number | null>(null)
   const [progress, setProgress] = useState(100)
 
   const positiveTags = ['Complet', 'Clair', 'Utile']
   const negativeTags = ['Incomplet', 'Confus', 'Non pertinent']
 
-  console.log('positiveFeedback', positiveFeedback)
-  console.log('negativeFeedback', negativeFeedback)
+  const isSubmitDisabled = !(
+    rating &&
+    positiveFeedback.length > 0 &&
+    negativeFeedback.length > 0
+  )
 
   const handlePositiveTagClick = (tag: string) => {
     setPositiveFeedback((prev) =>
@@ -169,12 +173,12 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
   }
   const handleSubmit = () => {
     // TODO: BACK END LOGIC
+    if (isSubmitDisabled) return
     setShowNotice(true)
-    setProgress(100) // Reset progress to 100%
+    setProgress(100)
 
-    // Start decreasing progress
-    const totalDuration = 3000 // 3 seconds
-    const intervalTime = 100 // Update every 100 ms
+    const totalDuration = 3000
+    const intervalTime = 100
     const decrement = 100 / (totalDuration / intervalTime)
 
     const interval = setInterval(() => {
@@ -232,7 +236,7 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
       if (jsonData.choices[0].finish_reason === 'stop') {
         stream_chat.close()
         setIsUserScrolledUp(false)
-        setIsStreamFinished(true) // Set to true when stream finishes
+        setIsStreamFinished(true)
       }
     }
 
@@ -269,17 +273,18 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
   return (
     <div className="flex flex-col h-full flex-grow min-h-[800px] w-full">
       {/* Flex container for main content and panel */}
-      <div className="flex flex-grow transition-all duration-500">
+      <div className="flex flex-grow h-full transition-all duration-500">
         {/* Main Content */}
         <div
           className={`flex flex-col flex-grow transition-all duration-500
           w-full md:w-1/2
         `}
         >
-          <div className="fr-text--lg fr-mb-2w">
-            <h3>{title}</h3>
+          <div className="fr-text--lg fr-mb-4w">
+            <h3>Question / réponse</h3>
           </div>
           <div className="fr-text--lg fr-mb-2w">
+            <h4>{question}</h4>
             <p>{question}</p>
           </div>
           <div className="flex gap-4 fr-mb-4w">
@@ -289,6 +294,7 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
             </p>
           </div>
           <h4>Réponse</h4>
+          {/* Scrollable response container */}
           <div
             ref={scrollRef}
             onScroll={handleScroll}
@@ -298,7 +304,7 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
               <TextWithSources text={response} />
             </p>
           </div>
-          <div className="flex gap-4 fr-my-2w">
+          {/* <div className="flex gap-4 fr-my-2w">
             <button
               type="button"
               onClick={onBack}
@@ -306,23 +312,22 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
             >
               Retour
             </button>
-          </div>
+          </div> */}
         </div>
         <div className="flex items-center mx-4">
           <div className="w-px h-40 bg-gray-500" />
         </div>
+        {/* Evaluation Panel */}
+        <div className="transition-all duration-500 overflow-hidden  h-full w-full md:w-1/2">
+          <div className="px-4 h-full">
+            <h3>Évaluation</h3>
 
-        {/* Panneau d'évaluation */}
-        <div className="transition-all duration-500 overflow-hidden w-full md:w-1/2 ">
-          <div className="px-4 h-full ">
-            <h3 className="">Évaluation</h3>
-
-            {/* Notation par étoiles */}
-            <h4>Note globale</h4>
+            {/* Global rating */}
+            <h4 className="fr-mt-4w">Note globale</h4>
             <HoverRating value={rating} setValue={setRating} />
 
-            {/* Tags positifs */}
-            <h4 className="mt-4">Points positifs</h4>
+            {/* Positive tags */}
+            <h4 className="fr-mt-4w">Points positifs</h4>
             <div className="flex gap-2 mt-2">
               {positiveTags.map((tag) => (
                 <button
@@ -337,8 +342,8 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
               ))}
             </div>
 
-            {/* Tags négatifs */}
-            <h4 className="mt-4">Points négatifs</h4>
+            {/* Negative tags */}
+            <h4 className="fr-mt-4w">Points négatifs</h4>
             <div className="flex gap-2 mt-2">
               {negativeTags.map((tag) => (
                 <button
@@ -353,8 +358,11 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
               ))}
             </div>
 
-            {/* Champ de commentaires */}
-            <h4 className="mt-4">Commentaires</h4>
+            {/* Comments field */}
+            <div className="flex items-center fr-mt-4w gap-2">
+              <h4 className="">Commentaires</h4>
+              <p className=" text-xs fr-text-mention--grey">(optionnel)</p>
+            </div>
             <textarea
               value={comments}
               onChange={(e) => setComments(e.target.value)}
@@ -362,18 +370,21 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
               placeholder="Entrez vos commentaires"
             />
 
-            {/* Bouton de soumission */}
+            {/* Submit button */}
             <button
               type="button"
               onClick={handleSubmit}
-              className="fr-btn fr-btn--secondary  mt-4"
+              disabled={isSubmitDisabled}
+              className={`fr-btn fr-btn--secondary fr-mt-4w ${
+                isSubmitDisabled ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
             >
               Soumettre
             </button>
 
             {/* Notification */}
             {showNotice && (
-              <div className="fixed bottom-4 right-4">
+              <div className="fixed bottom-4 right-4 motion-preset-bounce ">
                 <div className="relative">
                   <Notice title="Votre évaluation a été envoyée" />
                   {/* Progress bar over the Notice component */}
@@ -431,7 +442,12 @@ export function HoverRating({ value, setValue }) {
         onChangeActive={(event, newHover) => {
           setHover(newHover)
         }}
-        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+        emptyIcon={
+          <StarIcon
+            style={{ opacity: 0.55, border: 2, borderColor: 'white' }}
+            fontSize="inherit"
+          />
+        }
       />
       {value !== null && <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>}
     </Box>
