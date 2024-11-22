@@ -329,9 +329,8 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
                   key={tag}
                   type="button"
                   onClick={() => handlePositiveTagClick(tag)}
-                  className={`fr-tag cursor-pointer ${
-                    positiveFeedback.includes(tag) ? 'bg-blue-500 text-white' : ''
-                  }`}
+                  className={'fr-tag'}
+                  aria-pressed={positiveFeedback.includes(tag)}
                 >
                   {tag}
                 </button>
@@ -346,9 +345,8 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
                   key={tag}
                   type="button"
                   onClick={() => handleNegativeTagClick(tag)}
-                  className={`fr-tag cursor-pointer ${
-                    negativeFeedback.includes(tag) ? 'bg-red-500 text-white' : ''
-                  }`}
+                  className={'fr-tag'}
+                  aria-pressed={negativeFeedback.includes(tag)}
                 >
                   {tag}
                 </button>
