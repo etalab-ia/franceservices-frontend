@@ -1,0 +1,86 @@
+openapi: 3.0.0
+info:
+  title: Evaluation API
+  version: 1.0.0
+paths:
+  /evaluations:
+    post:
+      summary: Submit an evaluation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Evaluation'
+      responses:
+        '200':
+          description: Evaluation submitted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Evaluation submitted successfully
+components:
+  schemas:
+    Evaluation:
+      type: object
+      required:
+        - question
+        - theme
+        - operator
+        - title
+        - rating
+      properties:
+        question:
+          type: string
+          description: The question text
+          example: "Peut-on faire une saisie sur le RSA ?"
+        theme:
+          type: string
+          description: The theme of the question
+          example: "RSA"
+        operator:
+          type: string
+          description: The operator related to the question
+          example: "CAF"
+        title:
+          type: string
+          description: The title of the question
+          example: "Titre de question"
+        rating:
+          type: number
+          format: float
+          description: The overall rating given by the user (0.5 to 5 in 0.5 increments)
+          minimum: 0.5
+          maximum: 5
+          example: 3.5
+        positiveFeedback:
+          type: array
+          description: List of positive feedback tags selected by the user
+          items:
+            type: string
+            enum:
+              - "Complet"
+              - "Clair"
+              - "Utile"
+          example:
+            - "Clair"
+            - "Utile"
+        negativeFeedback:
+          type: array
+          description: List of negative feedback tags selected by the user
+          items:
+            type: string
+            enum:
+              - "Incomplet"
+              - "Confus"
+              - "Non pertinent"
+          example:
+            - "Confus"
+        comments:
+          type: string
+          description: Additional comments provided by the user
+          example: "La réponse était un peu vague et pourrait être plus détaillée."
