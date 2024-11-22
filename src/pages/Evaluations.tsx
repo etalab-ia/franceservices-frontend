@@ -1,15 +1,14 @@
 import { chatUrl, streamUrl } from '@api'
-import { ChatCompletion, Question } from '@types'
-import { useFetch } from '@utils/hooks'
-import { setHeaders } from '@utils/setData'
-import { EventSourcePolyfill } from 'event-source-polyfill'
-import { useEffect, useState, useRef, useCallback } from 'react'
-import { onCloseStream } from '../utils/eventsEmitter'
-import { TextWithSources } from 'components/Sources/TextWithSources'
-import Box from '@mui/material/Box'
-import Rating from '@mui/material/Rating'
 import { Notice } from '@codegouvfr/react-dsfr/Notice'
 import StarIcon from '@mui/icons-material/Star'
+import Box from '@mui/material/Box'
+import Rating from '@mui/material/Rating'
+import { useFetch } from '@utils/hooks'
+import { setHeaders } from '@utils/setData'
+import { TextWithSources } from 'components/Sources/TextWithSources'
+import { EventSourcePolyfill } from 'event-source-polyfill'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { onCloseStream } from '../utils/eventsEmitter'
 
 const questions = [
   {
@@ -145,6 +144,52 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
   const [isUserScrolledUp, setIsUserScrolledUp] = useState(false)
   const [isStreamFinished, setIsStreamFinished] = useState(false)
   const scrollRef = useRef(null)
+  const [positiveFeedback, setPositiveFeedback] = useState<string[]>([])
+  const [negativeFeedback, setNegativeFeedback] = useState<string[]>([])
+  const [comments, setComments] = useState('')
+  const [showNotice, setShowNotice] = useState(false)
+  const [rating, setRating] = useState<number | null>(3)
+  const [progress, setProgress] = useState(100)
+
+  const positiveTags = ['Complet', 'Clair', 'Utile']
+  const negativeTags = ['Incomplet', 'Confus', 'Non pertinent']
+
+  console.log('positiveFeedback', positiveFeedback)
+  console.log('negativeFeedback', negativeFeedback)
+
+  const handlePositiveTagClick = (tag: string) => {
+    setPositiveFeedback((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
+    )
+  }
+  const handleNegativeTagClick = (tag: string) => {
+    setNegativeFeedback((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
+    )
+  }
+  const handleSubmit = () => {
+    // TODO: BACK END LOGIC
+    setShowNotice(true)
+    setProgress(100) // Reset progress to 100%
+
+    // Start decreasing progress
+    const totalDuration = 3000 // 3 seconds
+    const intervalTime = 100 // Update every 100 ms
+    const decrement = 100 / (totalDuration / intervalTime)
+
+    const interval = setInterval(() => {
+      setProgress((prevProgress) => {
+        const newProgress = prevProgress - decrement
+        if (newProgress <= 0) {
+          clearInterval(interval)
+          setShowNotice(false)
+          onBack()
+          return 0
+        }
+        return newProgress
+      })
+    }, intervalTime)
+  }
 
   const prompt = {
     chat_type: 'evaluations',
@@ -214,10 +259,8 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
     if (scrollRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = scrollRef.current
       if (scrollTop + clientHeight < scrollHeight - 5) {
-        // User has scrolled up
         setIsUserScrolledUp(true)
       } else {
-        // User is at the bottom
         setIsUserScrolledUp(false)
       }
     }
@@ -268,15 +311,88 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
         <div className="flex items-center mx-4">
           <div className="w-px h-40 bg-gray-500" />
         </div>
-        {/* Sliding Panel */}
-        <div
-          className={`transition-all duration-500 overflow-hidden w-full md:w-1/2 bg-red-200
-          `}
-        >
-          <div className="px-4 h-full bg-red-200">
-            <h3>Évaluation</h3>
+
+        {/* Panneau d'évaluation */}
+        <div className="transition-all duration-500 overflow-hidden w-full md:w-1/2 ">
+          <div className="px-4 h-full ">
+            <h3 className="">Évaluation</h3>
+
+            {/* Notation par étoiles */}
             <h4>Note globale</h4>
-            <HoverRating />
+            <HoverRating value={rating} setValue={setRating} />
+
+            {/* Tags positifs */}
+            <h4 className="mt-4">Points positifs</h4>
+            <div className="flex gap-2 mt-2">
+              {positiveTags.map((tag) => (
+                <button
+                  key={tag}
+                  type="button"
+                  onClick={() => handlePositiveTagClick(tag)}
+                  className={`fr-tag cursor-pointer ${
+                    positiveFeedback.includes(tag) ? 'bg-blue-500 text-white' : ''
+                  }`}
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
+
+            {/* Tags négatifs */}
+            <h4 className="mt-4">Points négatifs</h4>
+            <div className="flex gap-2 mt-2">
+              {negativeTags.map((tag) => (
+                <button
+                  key={tag}
+                  type="button"
+                  onClick={() => handleNegativeTagClick(tag)}
+                  className={`fr-tag cursor-pointer ${
+                    negativeFeedback.includes(tag) ? 'bg-red-500 text-white' : ''
+                  }`}
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
+
+            {/* Champ de commentaires */}
+            <h4 className="mt-4">Commentaires</h4>
+            <textarea
+              value={comments}
+              onChange={(e) => setComments(e.target.value)}
+              className="fr-input mt-2 w-full"
+              placeholder="Entrez vos commentaires"
+            />
+
+            {/* Bouton de soumission */}
+            <button
+              type="button"
+              onClick={handleSubmit}
+              className="fr-btn fr-btn--secondary  mt-4"
+            >
+              Soumettre
+            </button>
+
+            {/* Notification */}
+            {showNotice && (
+              <div className="fixed bottom-4 right-4">
+                <div className="relative">
+                  <Notice title="Votre évaluation a été envoyée" />
+                  {/* Progress bar over the Notice component */}
+                  <div className="absolute top-0 left-0 w-full">
+                    <div className="w-full bg-gray-200 rounded-full h-1">
+                      <div
+                        className="bg-blue-600 h-1 rounded-full"
+                        style={{
+                          width: `${progress}%`,
+                          transition: 'width 100ms linear',
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -301,8 +417,7 @@ function getLabelText(value: number) {
   return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`
 }
 
-export function HoverRating() {
-  const [value, setValue] = useState<number | null>(2)
+export function HoverRating({ value, setValue }) {
   const [hover, setHover] = useState(-1)
 
   return (

@@ -6,7 +6,7 @@ import reactStringReplace from 'react-string-replace'
 import { Source, SourceTooltip } from './SourceTooltip'
 
 function parseRef(refString: string) {
-  const ref = refString.match(/<ref\s(.*?)>(.*?)<\/ref>/s)
+  const ref = refString.match(/<ref\s(.*?)>([\s\S]*?)<\/ref>/s)
   if (!ref) return null
 
   const attributes = ref[1]
@@ -15,7 +15,7 @@ function parseRef(refString: string) {
   const getText = (attr: string) => {
     const match = attributes.match(new RegExp(`${attr}="(.*?)"`))
     if (match) {
-      // Remove escaped quotes and unescape other characters
+      // Supprime les guillemets échappés et annule l'échappement des autres caractères
       return match[1].replace(/\\"/g, '"').replace(/\\(.)/g, '$1')
     }
     return ''
@@ -31,7 +31,10 @@ function parseRef(refString: string) {
 export function TextWithSources({
   text,
   extraClass,
-}: { text: string; extraClass?: string }) {
+}: {
+  text: string
+  extraClass?: string
+}) {
   const [textWithSources, setTextWithSources] = useState<any | null>(null)
   const [modal, setModal] = useState({
     isOpen: false,
@@ -42,41 +45,46 @@ export function TextWithSources({
   const windowSize = useWindowDimensions()
 
   useEffect(() => {
-    setTextWithSources(
-      reactStringReplace(text, /(<ref[\s\S]*?<\/ref>)/g, (match, i) => {
-        const parsed = parseRef(match)
-        if (parsed) {
-          const { title, text: refText, sourceUrl } = parsed
+    let replacedText = reactStringReplace(text, /(<ref[\s\S]*?<\/ref>)/g, (match, i) => {
+      const parsed = parseRef(match)
+      if (parsed) {
+        const { title, text: refText, sourceUrl } = parsed
 
-          if (windowSize.width > 992) {
-            return (
-              <SourceTooltip
-                key={i}
-                id={`tooltip-${i + refText.length}`}
-                title={title}
-                text={refText}
-                sourceUrl={sourceUrl}
-              />
-            )
-          }
+        if (windowSize.width > 992) {
           return (
-            <span
+            <SourceTooltip
               key={i}
-              className="fr-text--xs fr-icon-quote-fill fr-text-action-high--blue-cumulus fr-mr-2v focus:border focus:border-5"
-              onClick={() =>
-                setModal({
-                  isOpen: true,
-                  title: title,
-                  content: refText,
-                  sourceUrl: sourceUrl,
-                })
-              }
+              id={`tooltip-${i + refText.length}`}
+              title={title}
+              text={refText}
+              sourceUrl={sourceUrl}
             />
           )
         }
-        return <>{match}</>
-      }),
-    )
+        return (
+          <span
+            key={i}
+            className="fr-text--xs fr-icon-quote-fill fr-text-action-high--blue-cumulus fr-mr-2v focus:border focus:border-5"
+            onClick={() =>
+              setModal({
+                isOpen: true,
+                title: title,
+                content: refText,
+                sourceUrl: sourceUrl,
+              })
+            }
+          />
+        )
+      }
+      return match
+    })
+
+    // Remplace les \n par des <br />
+    replacedText = reactStringReplace(replacedText, /\n/g, (match, i) => {
+      return <br key={`br-${i}`} />
+    })
+
+    setTextWithSources(replacedText)
   }, [text, windowSize.width])
 
   return (
