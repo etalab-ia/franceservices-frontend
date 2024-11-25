@@ -95,6 +95,7 @@ function MFSInput({ selectedValue, setSelectedValue, matricule, setMatricule }) 
   const [searchResults, setSearchResults] = useState([])
   const [data, setData] = useState([])
   const [selectedIndex, setSelectedIndex] = useState(-1)
+  const mfsOrganizationsUrl = '/organizations/mfs'
 
   const handleKeyDown = (e) => {
     if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
