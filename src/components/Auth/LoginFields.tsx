@@ -1,8 +1,8 @@
+import { mfsOrganizationsUrl } from '@api'
 import Input from '@codegouvfr/react-dsfr/Input'
 import { PasswordInput } from '@codegouvfr/react-dsfr/blocks/PasswordInput'
 import Fuse from 'fuse.js'
-import Papa from 'papaparse'
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 export const LoginFields = ({
   fields,
@@ -90,12 +90,10 @@ export const LoginFields = ({
     </>
   )
 }
-
 function MFSInput({ selectedValue, setSelectedValue, matricule, setMatricule }) {
   const [searchResults, setSearchResults] = useState([])
-  const [data, setData] = useState([])
+  const [data, setData] = useState<[{ id: string; name: string }] | []>([])
   const [selectedIndex, setSelectedIndex] = useState(-1)
-  const mfsOrganizationsUrl = '/organizations/mfs'
 
   const handleKeyDown = (e) => {
     if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
@@ -106,36 +104,49 @@ function MFSInput({ selectedValue, setSelectedValue, matricule, setMatricule }) 
           : Math.max(selectedIndex - 1, 0)
       if (newIndex >= 0 && newIndex <= 4) {
         setSelectedIndex(newIndex)
-        setSelectedValue(searchResults[newIndex]?.lib_fs || '')
+        setSelectedValue(searchResults[newIndex]?.nane || '')
       }
     } else if (e.key === 'Enter') {
       e.preventDefault()
       const selectedResult = searchResults[selectedIndex]
       if (selectedResult) {
         handleSelect(selectedResult)
-      } else {
-        // resetSelection()
       }
     }
   }
+
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('/mfs.csv')
-      const reader = response.body.getReader()
-      const result = await reader.read()
-      const decoder = new TextDecoder('utf-8')
-      const csv = decoder.decode(result.value)
-      const parsedData = Papa.parse(csv, { header: true }).data
-      setData(parsedData)
+      try {
+        const response = await fetch(mfsOrganizationsUrl, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+        })
+
+        if (!response.ok) {
+          // Handle HTTP errors
+          const errorText = await response.text()
+          throw new Error(`Error ${response.status}: ${errorText}`)
+        }
+
+        const institutions: [{ id: string; name: string }] = await response.json()
+        setData(institutions)
+      } catch (error) {
+        console.error('Failed to fetch MFS organizations:', error)
+        // Optionally, set an error state here to display to the user
+      }
     }
 
     fetchData()
   }, [])
-
+  console.log('data', data)
   const fuse = useMemo(
     () =>
       new Fuse(data, {
-        keys: ['lib_fs'],
+        keys: ['name', 'id'],
         includeScore: true,
         threshold: 0.2,
       }),
@@ -152,8 +163,8 @@ function MFSInput({ selectedValue, setSelectedValue, matricule, setMatricule }) 
   }
 
   const handleSelect = (item) => {
-    setSelectedValue(item.lib_fs)
-    setMatricule(item.id_fs)
+    setSelectedValue(item.name)
+    setMatricule(item.id)
     setSearchResults([])
     setSelectedIndex(-1)
   }
@@ -178,10 +189,10 @@ function MFSInput({ selectedValue, setSelectedValue, matricule, setMatricule }) 
               className={`fr-card cursor-pointer p-0 ${
                 selectedIndex === index ? 'bg-light-grey' : ''
               }`}
-              key={item}
+              key={item.id} // Use a unique identifier here
               onClick={() => handleSelect(item)}
             >
-              <p className="fr-ml-3w fr-mt-1w fr-mb-1w">{item.lib_fs}</p>
+              <p className="fr-ml-3w fr-mt-1w fr-mb-1w">{item.name}</p>
             </div>
           ))}
         </div>

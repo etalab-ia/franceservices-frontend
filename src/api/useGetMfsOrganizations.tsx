@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { setHeaders } from '../utils/setData'
 
 export function useGetOrganizations() {
   return useQuery({
@@ -11,10 +12,7 @@ export function useGetOrganizations() {
 const fetchOrganizations = async (): Promise<string[]> => {
   const res = await fetch(`${'/organizations/mfs'}`, {
     method: 'GET',
-
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: setHeaders(false),
   })
 
   if (!res.ok) {

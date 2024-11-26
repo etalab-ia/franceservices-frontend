@@ -2,7 +2,8 @@ import { userUrl } from '@api'
 import { ButtonsGroup } from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { initButtonsSignup } from '@constants/connexion'
 import { signupFields } from '@constants/inputFields'
-import { useState } from 'react'
+import { useGetOrganizations } from 'api/useGetMfsOrganizations'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   email,
@@ -17,7 +18,6 @@ import {
 } from 'valibot'
 import { LoginFields } from '../components/Auth/LoginFields'
 import { ButtonInformation } from '../components/Global/ButtonInformation'
-import { useGetOrganizations } from 'api/useGetMfsOrganizations'
 
 const SignupSchemaMFS = object({
   username: pipe(
@@ -45,8 +45,10 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
   const [selectedMatricule, setSelectedMatricule] = useState('')
   const [sent, setSent] = useState(false)
 
-  const { data, error } = useGetOrganizations()
-  if (data) console.log(data)
+  const { data: organizations, error } = useGetOrganizations()
+  useEffect(() => {
+    if (organizations) console.log(organizations)
+  }, [organizations])
   const navigate = useNavigate()
   const handleChange = (e) => {
     e.preventDefault()
@@ -67,8 +69,7 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
 
   const handleValidatePassword = (auth) => {
     return (
-      userAuth.username &&
-      userAuth.username.length &&
+      userAuth.username?.length &&
       userAuth.email.length &&
       userAuth.email.includes('@') &&
       password.length &&

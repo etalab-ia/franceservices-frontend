@@ -17,3 +17,4 @@ export const feedbackUrl = `${apiBase}/feedback/add`
 export const getSheetsUrl = `${apiBase}/get_sheets`
 export const getChunksUrl = `${apiBase}/get_chunks`
 export const getChunkUrl = `${apiBase}/get_chunk`
+export const mfsOrganizationsUrl = `${apiBase}/organizations/mfs`
