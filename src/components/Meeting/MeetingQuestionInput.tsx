@@ -67,7 +67,7 @@ export function MeetingQuestionInput({
           data: JSON.stringify({
             chat_type: 'meeting',
             themes: context.themes,
-            operator: context.administrations[0],
+            operators: context.administrations,
           }),
           headers: setHeaders(false),
         })

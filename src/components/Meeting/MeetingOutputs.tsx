@@ -41,7 +41,7 @@ export const MeetingOutputs = memo(function MeetingOutputs({
       }
       setContext({
         themes: archiveData[0].themes,
-        administrations: [archiveData[0]?.operator],
+        administrations: [archiveData[0]?.operators],
       })
     }
   }, [chatId, archiveData, dispatch])

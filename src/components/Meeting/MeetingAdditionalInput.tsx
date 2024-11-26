@@ -34,12 +34,7 @@ export function MeetingAdditionalInput({
               themes={context.themes}
               administrations={context.administrations}
             />
-            <MeetingTags
-              setContext={setContext}
-              context={context}
-              field={field}
-              tags={tags}
-            />
+            <MeetingTags setContext={setContext} field={field} tags={tags} />
           </div>
         )
       })}

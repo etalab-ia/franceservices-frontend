@@ -33,7 +33,7 @@ const fetchArchive = async (chatId: number) => {
         query: stream.query,
         chunks: chunksResponse,
         response: stream.response,
-        operator: responseData.operator,
+        operators: responseData.operators,
         themes: responseData.themes,
         webservices: chunksResponse[0]?.web_services
           ? chunksResponse[0]?.web_services.slice(0, 3)
@@ -46,7 +46,7 @@ const fetchArchive = async (chatId: number) => {
 
 type ArchiveType = {
   chat_type: string
-  operator: string
+  operators: string
   themes: string[]
   id: number
   created_at: string
