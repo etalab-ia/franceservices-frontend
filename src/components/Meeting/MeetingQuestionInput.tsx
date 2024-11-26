@@ -3,13 +3,13 @@ import Button from '@codegouvfr/react-dsfr/Button'
 import type { Chunk, MeetingInputContext, RootState } from '@types'
 import { emitCloseStream } from '@utils/eventsEmitter'
 import { generateStream, useFetch } from '@utils/hooks'
-import { addContextToQuestion, setHeaders } from '@utils/setData'
+import { setHeaders } from '@utils/setData'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
+import { createSelector } from 'reselect'
 import { MeetingTags } from './MeetingTags'
 import { ThemesAndAdminsInput } from './ThemesAndAdminsInput'
-import { createSelector } from 'reselect'
 
 export function MeetingQuestionInput({
   isNewChat,
@@ -91,7 +91,7 @@ export function MeetingQuestionInput({
 
       dispatch({
         type: 'SET_USER_QUERY',
-        nextUserQuery: addContextToQuestion(questionInput, context),
+        nextUserQuery: questionInput,
         nextChatId: chatId,
       })
 

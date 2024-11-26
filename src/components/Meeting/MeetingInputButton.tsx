@@ -4,16 +4,13 @@ import { meetingGenerateButton } from '@constants/meeting'
 import type { MeetingInputContext, RootState } from '@types'
 import { CurrQuestionContext } from '@utils/context/questionContext'
 import { useFetch } from '@utils/hooks'
-import { addContextToQuestion, setHeaders } from '@utils/setData'
+import { setHeaders } from '@utils/setData'
 import { useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 /**
 	Button to send user query to /stream endpoint & switch to meeting stream page
     FUNCTIONS:
-
-        addContextToQuestion: improve user prompt with current question & context to send
-            more precised user_query to /stream endpoint.
 
       handleClick: setGenerate to true to switch to meeting stream page + create new chat id for meeting
       context: 
@@ -44,7 +41,7 @@ export function MeetingInputButton({
       dispatch({ type: 'SET_USER_QUERY', nextUserQuery: currQuestion.query })
       updateCurrQuestion({
         ...currQuestion,
-        query: addContextToQuestion(currQuestion.query, context),
+        query: currQuestion.query,
       })
       dispatch({ type: 'SET_CHAT_ID', nextChatId: chat.id })
 

@@ -51,21 +51,6 @@ export const setUserQuestion = (question: Question) => {
   return data
 }
 
-export const addContextToQuestion = (question: string, context) => {
-  const administrations = context.administrations.length
-    ? `Les administrations concernées par cette question sont : ${context.administrations.map(
-        (adminstration) => adminstration,
-      )}`
-    : ''
-  const themes = context.themes.length
-    ? `La question porte sur les thèmes suivants : ${context.themes.map(
-        (theme) => theme,
-      )}`
-    : ''
-  const questionWithContext = `${question}\n${administrations}\n${themes}`
-
-  return questionWithContext
-}
 export const rmContextFromQuestion = (str: string) => {
   const context = [
     'Les administrations concernées par cette question sont : ',
