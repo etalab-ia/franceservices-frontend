@@ -21,13 +21,6 @@ import { ButtonInformation } from '../components/Global/ButtonInformation'
 
 const PasswordSchema = object(
   {
-    username: string("Le nom d'utilisateur est invalide.", [
-      custom(
-        (username) => !username.includes('@'),
-        "Le nom d'utilisateur ne doit pas contenir '@'.",
-      ),
-    ]),
-    email: string('Adresse email valide', [email('Adresse email invalide.')]),
     password: string('Le mot de passe est invalide.', [
       minLength(8, 'Le mot de passe doit contenir au moins 8 caractères.'),
       maxLength(128, 'Le mot de passe doit contenir au plus 128 caractères.'),
