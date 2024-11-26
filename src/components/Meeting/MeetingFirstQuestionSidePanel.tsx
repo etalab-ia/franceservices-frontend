@@ -1,15 +1,11 @@
-import type { MeetingInputContext, RootState } from '@types'
+import type { MeetingInputContext } from '@types'
 import { GlobalColContainer } from 'components/Global/GlobalColContainer'
 import { OneThirdScreenWidth } from 'components/Global/OneThirdScreenWidth'
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
 
 export function FirstQuestionExample({
   setQuestionInput,
 }: { setQuestionInput: (question: string) => void }) {
-  // useEffect(() => {
-  //   console.log('rendered')
-  // }, [])
   return (
     <div className="fr-mb-2w">
       <h6 style={{ lineHeight: 1 }} className="fr-mb-3v">

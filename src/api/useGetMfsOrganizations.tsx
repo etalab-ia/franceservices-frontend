@@ -20,6 +20,5 @@ const fetchOrganizations = async (): Promise<string[]> => {
     throw new Error('Impossible de récupérer les maisons france service', { cause: res })
   }
   const institutions = await res.json()
-  console.log(institutions)
   return institutions as string[]
 }

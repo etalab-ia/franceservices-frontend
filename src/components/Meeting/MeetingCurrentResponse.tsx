@@ -22,9 +22,7 @@ export const MeetingCurrentResponse = function MeetingCurrentResponse({
   const { history, chatId, lastStreamId, messages, question } = useSelector(
     selectMeetingCurrentResponse,
   )
-  // useEffect(() => {
-  //   console.log('rendered')
-  // },[])
+
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {

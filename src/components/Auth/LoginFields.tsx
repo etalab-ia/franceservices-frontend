@@ -127,7 +127,6 @@ function MFSInput({ selectedValue, setSelectedValue, matricule, setMatricule }) 
         })
 
         if (!response.ok) {
-          // Handle HTTP errors
           const errorText = await response.text()
           throw new Error(`Error ${response.status}: ${errorText}`)
         }
@@ -136,13 +135,11 @@ function MFSInput({ selectedValue, setSelectedValue, matricule, setMatricule }) 
         setData(institutions)
       } catch (error) {
         console.error('Failed to fetch MFS organizations:', error)
-        // Optionally, set an error state here to display to the user
       }
     }
 
     fetchData()
   }, [])
-  console.log('data', data)
   const fuse = useMemo(
     () =>
       new Fuse(data, {

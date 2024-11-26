@@ -35,7 +35,7 @@ export const Root = () => {
     checkConnexion(setUserAuth, userUrl).finally(() => setIsLoading(false))
   }, [dispatch])
   if (isLoading) {
-    return <div></div>
+    return null
   }
 
   return (

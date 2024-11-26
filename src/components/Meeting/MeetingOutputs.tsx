@@ -31,9 +31,7 @@ export const MeetingOutputs = memo(function MeetingOutputs({
     administrations: [],
     themes: [],
   })
-  // useEffect(() => {
-  //   console.log('rendered', context)
-  // },[])
+
   useEffect(() => {
     if (chatId !== undefined && archiveData && archiveData.length > 0) {
       if (Array.isArray(archiveData)) {

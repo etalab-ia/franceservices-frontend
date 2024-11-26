@@ -2,8 +2,7 @@ import { userUrl } from '@api'
 import { ButtonsGroup } from '@codegouvfr/react-dsfr/ButtonsGroup'
 import { initButtonsSignup } from '@constants/connexion'
 import { signupFields } from '@constants/inputFields'
-import { useGetOrganizations } from 'api/useGetMfsOrganizations'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   email,
@@ -45,10 +44,6 @@ export function Signup({ authFailed, setAuthFailed, userAuth, setUserAuth }) {
   const [selectedMatricule, setSelectedMatricule] = useState('')
   const [sent, setSent] = useState(false)
 
-  const { data: organizations, error } = useGetOrganizations()
-  useEffect(() => {
-    if (organizations) console.log(organizations)
-  }, [organizations])
   const navigate = useNavigate()
   const handleChange = (e) => {
     e.preventDefault()
@@ -190,7 +185,6 @@ const useFetch = async (url, method, props) => {
     })
 
     if (!response.ok) {
-      // Parsing the response body to access detailed information
       const errorDetails = await response.json()
       return {
         success: false,
