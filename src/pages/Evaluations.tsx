@@ -158,7 +158,8 @@ function QuestionDetail({ question, theme, operator, title, onBack }) {
   const isSubmitDisabled = !(
     rating &&
     positiveFeedback.length > 0 &&
-    negativeFeedback.length > 0
+    negativeFeedback.length > 0 &&
+    isStreamFinished
   )
 
   const handlePositiveTagClick = (tag: string) => {
