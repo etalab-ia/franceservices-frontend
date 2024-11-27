@@ -5,7 +5,6 @@ import { handleSignout } from '@utils/manageConnexion'
 import { signoutUrl } from '@api'
 
 function Header({ username, setUserAuth, userAuth }) {
-  console.log('userauth', userAuth)
   return (
     <header role="banner" className="fr-header">
       <div className="fr-header__body">
