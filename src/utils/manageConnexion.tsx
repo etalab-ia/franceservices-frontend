@@ -12,25 +12,29 @@ export const setUserInfos = async (
   setUserAuth: Dispatch<SetStateAction<UserAuth>>,
   userUrl: string,
 ) => {
-  const userInfos = await useFetch(userUrl, 'GET', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    data: null,
-  })
-
-  if (userInfos.detail === 'Unauthorized') return rmAuth()
-
-  storeAuth(token)
-
-  if (token !== 'null')
-    return setUserAuth({
-      email: userInfos.email,
-      username: userInfos.username,
-      // TODO: see if we cand delete userAuth.authToken
-      authToken: token,
-      isLogin: true,
+  try {
+    const userInfos = await useFetch(userUrl, 'GET', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: null,
     })
+    if (userInfos.detail === 'Unauthorized') return rmAuth()
+
+    storeAuth(token)
+
+    if (token !== 'null')
+      return setUserAuth({
+        email: userInfos.email,
+        username: userInfos.username,
+        // TODO: see if we cand delete userAuth.authToken
+        authToken: token,
+        isLogin: true,
+      })
+  } catch (error) {
+    console.error('error', error)
+    rmAuth()
+  }
   return setUserAuth(InitialUserAuth)
 }
 
