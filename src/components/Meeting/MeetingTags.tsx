@@ -23,6 +23,7 @@ export function MeetingTags({ setContext, field, tags }) {
     }
   }
 
+  if (!tags) return null
   return (
     <>
       {tags.map((tag, index) => {

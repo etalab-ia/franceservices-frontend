@@ -3,7 +3,7 @@ import { useGetInstitutions } from '@api'
 import { Input } from '@codegouvfr/react-dsfr/Input'
 import Fuse from 'fuse.js'
 import { useSelector } from 'react-redux'
-import type { RootState } from '@types'
+import type { MeetingInputContext, RootState } from '@types'
 
 const options = {
   includeScore: true,
@@ -18,6 +18,12 @@ export function ThemesAndAdminsInput({
   themes,
   administrations,
   showError,
+}: {
+  field: any
+  themes: string[] | null
+  administrations: string[] | null
+  onTagSelect: (tag, fieldName) => void
+  showError: boolean
 }) {
   const [searchResults, setSearchResults] = useState([])
   const [selectedValue, setSelectedValue] = useState('')
@@ -84,13 +90,17 @@ export function ThemesAndAdminsInput({
 
   const isTagSelected = (tag) => {
     return (
-      (field.name === 'themes' && themes.includes(tag)) ||
-      (field.name === 'administrations' && administrations.includes(tag))
+      (field.name === 'themes' && themes && themes.includes(tag)) ||
+      (field.name === 'administrations' &&
+        administrations &&
+        administrations.includes(tag))
     )
   }
 
   const isFieldEmpty =
-    field.name === 'themes' ? themes.length === 0 : administrations.length === 0
+    field.name === 'themes'
+      ? !themes || themes.length === 0
+      : !administrations || administrations.length === 0
 
   return (
     <div>
@@ -110,7 +120,7 @@ export function ThemesAndAdminsInput({
           showError && isFieldEmpty ? `Le champ ${field.label} est obligatoire` : ''
         }
       />
-      {field.name === 'administrations' && (
+      {field.name === 'administrations' && administrations && (
         <div tabIndex={-1} className="fr-mb-2v">
           {searchResults
             .slice(0, 5)
