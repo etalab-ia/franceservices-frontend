@@ -3,27 +3,6 @@ import { GlobalColContainer } from 'components/Global/GlobalColContainer'
 import { OneThirdScreenWidth } from 'components/Global/OneThirdScreenWidth'
 import { useEffect } from 'react'
 
-export function FirstQuestionExample({
-  setQuestionInput,
-}: { setQuestionInput: (question: string) => void }) {
-  return (
-    <div className="fr-mb-2w">
-      <h6 style={{ lineHeight: 1 }} className="fr-mb-3v">
-        Première utilisation ?
-      </h6>
-      <p className="fr-mb-3v">Cliquez sur la question pour tester Albert</p>
-      <button
-        type="button"
-        className="fr-mb-1w "
-        onClick={() => setQuestionInput('Peut-on faire une saisie sur le RSA ?')}
-      >
-        <div className="fr-px-2w fr-py-3v inline-flex h-full w-full rounded fr-background-alt--blue-france">
-          Peut-on faire une saisie sur le RSA ?
-        </div>
-      </button>
-    </div>
-  )
-}
 export function MeetingFirstQuestionHelper({
   setContext,
 }: {
