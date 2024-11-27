@@ -196,7 +196,6 @@ function NewQuestionMeetingAdditionalInput({
       [fieldName]: [...prevContext[fieldName], tag],
     }))
   }
-  console.log(isNewChat, ' tchaaat')
 
   return (
     <div className="fr-mt-2w fr-grid-row gap-8">
