@@ -150,6 +150,7 @@ export function MeetingQuestionInput({
               context={context}
               setContext={setContext}
               showError={showError}
+              isNewChat={isNewChat}
             />
           )}
           <div className="flex justify-between">
@@ -182,10 +183,12 @@ function NewQuestionMeetingAdditionalInput({
   context,
   setContext,
   showError,
+  isNewChat,
 }: {
   context: MeetingInputContext
   setContext: React.Dispatch<React.SetStateAction<MeetingInputContext>>
   showError: boolean
+  isNewChat: boolean
 }) {
   const handleSetTag = (tag, fieldName) => {
     setContext((prevContext) => ({
@@ -193,12 +196,14 @@ function NewQuestionMeetingAdditionalInput({
       [fieldName]: [...prevContext[fieldName], tag],
     }))
   }
+  console.log(isNewChat, ' tchaaat')
 
   return (
     <div className="fr-mt-2w fr-grid-row gap-8">
       {inputFields.map((field, index) => (
         <div className="fr-col-5 fr-mb-2w" key={index}>
           <ThemesAndAdminsInput
+            isDisabled={!isNewChat}
             field={field}
             onTagSelect={(tag) => handleSetTag(tag, field.name)}
             themes={context.themes}
