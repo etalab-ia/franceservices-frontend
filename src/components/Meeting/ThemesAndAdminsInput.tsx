@@ -18,12 +18,14 @@ export function ThemesAndAdminsInput({
   themes,
   administrations,
   showError,
+  isDisabled,
 }: {
   field: any
   themes: string[] | null
   administrations: string[] | null
   onTagSelect: (tag, fieldName) => void
   showError: boolean
+  isDisabled: boolean
 }) {
   const [searchResults, setSearchResults] = useState([])
   const [selectedValue, setSelectedValue] = useState('')
@@ -101,11 +103,12 @@ export function ThemesAndAdminsInput({
     field.name === 'themes'
       ? !themes || themes.length === 0
       : !administrations || administrations.length === 0
+  console.log(isDisabled, ' isNewChat')
 
   return (
     <div>
       <Input
-        disabled={messages.length > 0}
+        disabled={messages.length > 0 || isDisabled}
         label={`${field.label} *`}
         className="fr-mb-1w"
         nativeInputProps={{
