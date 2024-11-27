@@ -103,7 +103,6 @@ export function ThemesAndAdminsInput({
     field.name === 'themes'
       ? !themes || themes.length === 0
       : !administrations || administrations.length === 0
-  console.log(isDisabled, ' isNewChat')
 
   return (
     <div>
