@@ -182,7 +182,7 @@ export type WebService = {
   type: string
 }
 
-export type RelatedQuestion = {
+type RelatedQuestion = {
   question: string
   sid: string
   url: string

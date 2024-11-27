@@ -186,7 +186,7 @@ function MFSInput({ selectedValue, setSelectedValue, matricule, setMatricule }) 
               className={`fr-card cursor-pointer p-0 ${
                 selectedIndex === index ? 'bg-light-grey' : ''
               }`}
-              key={item.id} // Use a unique identifier here
+              key={item.id}
               onClick={() => handleSelect(item)}
             >
               <p className="fr-ml-3w fr-mt-1w fr-mb-1w">{item.name}</p>
