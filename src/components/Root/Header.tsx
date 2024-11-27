@@ -5,6 +5,7 @@ import { handleSignout } from '@utils/manageConnexion'
 import { signoutUrl } from '@api'
 
 function Header({ username, setUserAuth, userAuth }) {
+  console.log('userauth', userAuth)
   return (
     <header role="banner" className="fr-header">
       <div className="fr-header__body">
@@ -14,14 +15,13 @@ function Header({ username, setUserAuth, userAuth }) {
               <Logo />
               <TitleAndDescription />
             </div>
-            {userAuth.isLogin ||
-              (import.meta.env.DEV && (
-                <EasyAccess username={username} setUserAuth={setUserAuth} />
-              ))}
+            {userAuth.isLogin && (
+              <EasyAccess username={username} setUserAuth={setUserAuth} />
+            )}
           </div>
         </div>
       </div>
-      {userAuth.isLogin || (import.meta.env.DEV && <NavigationMenu />)}
+      {userAuth.isLogin && <NavigationMenu />}
     </header>
   )
 }
