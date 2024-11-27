@@ -46,7 +46,7 @@ const fetchArchive = async (chatId: number) => {
 
 type ArchiveType = {
   chat_type: string
-  operators: string[]
+  operators: string
   themes: string[]
   id: number
   created_at: string

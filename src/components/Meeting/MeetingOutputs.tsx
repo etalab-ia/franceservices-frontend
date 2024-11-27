@@ -31,6 +31,7 @@ export const MeetingOutputs = memo(function MeetingOutputs({
     administrations: [],
     themes: [],
   })
+
   useEffect(() => {
     if (chatId !== undefined && archiveData && archiveData.length > 0) {
       if (Array.isArray(archiveData)) {
@@ -38,7 +39,7 @@ export const MeetingOutputs = memo(function MeetingOutputs({
       }
       setContext({
         themes: archiveData[0].themes,
-        administrations: archiveData[0]?.operators,
+        administrations: [archiveData[0]?.operators],
       })
     }
   }, [chatId, archiveData, dispatch])
