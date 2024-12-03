@@ -1,4 +1,4 @@
-import { chatUrl, streamUrl } from '@api'
+import { chatUrl, streamUrl, useGetEvaluationQuestions } from '@api'
 import { Notice } from '@codegouvfr/react-dsfr/Notice'
 import StarIcon from '@mui/icons-material/Star'
 import Box from '@mui/material/Box'
@@ -9,6 +9,8 @@ import { TextWithSources } from 'components/Sources/TextWithSources'
 import { EventSourcePolyfill } from 'event-source-polyfill'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { onCloseStream } from '../utils/eventsEmitter'
+import ShowError from 'components/Error/ShowError'
+import { Skeleton } from '@mui/material'
 
 const questions = [
   {
@@ -70,7 +72,13 @@ export default function Evaluations() {
 }
 
 function Questions({ setSelectedCardIndex }) {
-  //  const questionList =
+  // const { data: questionList, error, isLoading } = useGetEvaluationQuestions()
+  // if (error) {
+  //   console.error(error)
+  //   //@ts-expect-error
+  //   return <ShowError message={error.message} errorNumber={error.status} />
+  // }
+
   return (
     <div className="grid grid-cols-2 gap-4">
       {questions.map((question, index) => (
