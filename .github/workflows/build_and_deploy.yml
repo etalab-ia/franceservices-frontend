@@ -52,9 +52,7 @@ jobs:
             VITE_MODEL_MODE=${{ vars.VITE_MODEL_MODE }}
             VITE_MODEL_TEMPERATURE=${{ vars.VITE_MODEL_TEMPERATURE }}
             VITE_MATOMO_URL=${{ vars.VITE_MATOMO_URL }}
-            VITE_KEYCLOAK_AUTHORITY=${{ vars.VITE_KEYCLOAK_AUTHORITY }}
-            VITE_KEYCLOAK_CLIENT_ID=${{ vars.VITE_KEYCLOAK_CLIENT_ID }}
-            VITE_KEYCLOAK_REDIRECT_URL=${{ vars.VITE_KEYCLOAK_REDIRECT_URL }}
+
 
   deploy-dev:
     name: Deploy from ${{ github.ref_name }}/${{ github.sha }}

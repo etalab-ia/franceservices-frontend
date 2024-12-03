@@ -1,4 +1,4 @@
-import { chatUrl, streamUrl, useGetEvaluationQuestions } from '@api'
+import { chatUrl, streamUrl } from '@api'
 import { Notice } from '@codegouvfr/react-dsfr/Notice'
 import StarIcon from '@mui/icons-material/Star'
 import Box from '@mui/material/Box'
@@ -9,8 +9,7 @@ import { TextWithSources } from 'components/Sources/TextWithSources'
 import { EventSourcePolyfill } from 'event-source-polyfill'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { onCloseStream } from '../utils/eventsEmitter'
-import ShowError from 'components/Error/ShowError'
-import { Skeleton } from '@mui/material'
+//import ShowError from 'components/Error/ShowError'
 
 const questions = [
   {
