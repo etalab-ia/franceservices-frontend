@@ -70,6 +70,7 @@ export default function Evaluations() {
 }
 
 function Questions({ setSelectedCardIndex }) {
+  //  const questionList =
   return (
     <div className="grid grid-cols-2 gap-4">
       {questions.map((question, index) => (
