@@ -9,6 +9,7 @@ import { TextWithSources } from 'components/Sources/TextWithSources'
 import { EventSourcePolyfill } from 'event-source-polyfill'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { onCloseStream } from '../utils/eventsEmitter'
+//import ShowError from 'components/Error/ShowError'
 
 const questions = [
   {
@@ -70,6 +71,13 @@ export default function Evaluations() {
 }
 
 function Questions({ setSelectedCardIndex }) {
+  // const { data: questionList, error, isLoading } = useGetEvaluationQuestions()
+  // if (error) {
+  //   console.error(error)
+  //   //@ts-expect-error
+  //   return <ShowError message={error.message} errorNumber={error.status} />
+  // }
+
   return (
     <div className="grid grid-cols-2 gap-4">
       {questions.map((question, index) => (
