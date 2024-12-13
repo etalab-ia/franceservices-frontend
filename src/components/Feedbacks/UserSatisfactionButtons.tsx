@@ -1,6 +1,5 @@
 import { InitialChatFeedback, type Feedback as FeedbackType } from '@types'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
-import { fr } from '@codegouvfr/react-dsfr'
 
 /**
  * These are the good or bad buttons that the user can click to give feedback
