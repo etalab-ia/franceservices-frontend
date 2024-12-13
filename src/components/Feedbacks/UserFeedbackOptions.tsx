@@ -54,7 +54,17 @@ export function UserFeedbackOptions({
   )
 }
 
-const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) => {
+const ConfirmationButton = ({
+  reasons,
+  otherReason,
+  feedback,
+  setFeedback,
+}: {
+  reasons: string[]
+  otherReason: string
+  feedback: FeedbackType
+  setFeedback: (feedback: FeedbackType) => void
+}) => {
   const streamId = useSelector((state: RootState) => state.user.lastStreamId)
   const addFeedback = useAddFeedback()
 
@@ -65,7 +75,7 @@ const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) => 
         ...feedback,
         message: otherReason,
       })
-    addFeedback.mutate({ feedback, streamId, reasons })
+    addFeedback.mutate({ feedback, streamId })
     setFeedback({
       ...feedback,
       isConfirmed: true,

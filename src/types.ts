@@ -136,6 +136,49 @@ export type ChatCompletion = {
 }
 
 /****************************************************************
+ *                            FEEDBACK                          *
+ ****************************************************************/
+
+export type PositiveReason = 'clair' | 'synthetique' | 'complet' | 'sources_fiables'
+export type NegativeReason = 'incorrect' | 'incoherent' | 'manque_de_sources'
+
+export type PositiveFeedbackArray = Array<PositiveReason>
+export type NegativeFeedbackArray = Array<NegativeReason>
+
+/**œ
+ * Feedback form after a meeting response
+ */
+export interface Feedback {
+  type: 'chat' | 'evaluations'
+  note: number | undefined
+  positives: PositiveFeedbackArray
+  negatives: NegativeFeedbackArray
+  isConfirmed: boolean
+  isGood: number | undefined | null
+  message: string
+}
+
+export const InitialChatFeedback: Feedback = {
+  note: undefined,
+  positives: [],
+  negatives: [],
+  type: 'chat',
+  isConfirmed: false,
+  isGood: undefined,
+  message: '',
+}
+
+export const InitialEvaluationsFeedback: Feedback = {
+  note: 0.5,
+  positives: [],
+  negatives: [],
+  type: 'evaluations',
+  isConfirmed: false,
+  isGood: undefined,
+  message: '',
+}
+
+/****************************************************************
  *                            OTHER                             *
  ****************************************************************/
 
@@ -186,21 +229,4 @@ type RelatedQuestion = {
   question: string
   sid: string
   url: string
-}
-
-/**
- * Feedback form after a meeting response
- */
-export interface Feedback {
-  reasons: string[]
-  isConfirmed: boolean
-  isGood: number | undefined
-  message: string
-}
-
-export const InitialFeedback: Feedback = {
-  reasons: [],
-  isConfirmed: false,
-  isGood: undefined,
-  message: '',
 }

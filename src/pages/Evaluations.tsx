@@ -1,4 +1,4 @@
-import { chatUrl, streamUrl } from '@api'
+import { chatUrl, streamUrl, useAddFeedback } from '@api'
 import { Notice } from '@codegouvfr/react-dsfr/Notice'
 import StarIcon from '@mui/icons-material/Star'
 import Box from '@mui/material/Box'
@@ -9,6 +9,14 @@ import { TextWithSources } from 'components/Sources/TextWithSources'
 import { EventSourcePolyfill } from 'event-source-polyfill'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { onCloseStream } from '../utils/eventsEmitter'
+import type {
+  NegativeFeedbackArray,
+  NegativeReason,
+  PositiveFeedbackArray,
+  PositiveReason,
+} from '@types'
+import { LoadingSpinner } from 'components/LoadingSpinner'
+import { set } from 'valibot'
 //import ShowError from 'components/Error/ShowError'
 
 const questions = [
@@ -51,10 +59,10 @@ export default function Evaluations() {
   }
 
   return (
-    <div className="flex flex-col gap-4 items-center mt-8 min-h-screen fr-container">
+    <div className="flex flex-col gap-4  mt-8 min-h-screen fr-container">
       {selectedCardIndex === null ? (
         <>
-          <h3>Sélectionnez une question à évaluer</h3>
+          <h3>Sélectionnez une question</h3>
           <Questions setSelectedCardIndex={setSelectedCardIndex} />
         </>
       ) : (
@@ -174,53 +182,91 @@ function QuestionDetail({ question, theme, operator, onBack, complexity }) {
 }
 
 function EvaluationPannel({ isStreamFinished, onBack }) {
-  const [positiveFeedback, setPositiveFeedback] = useState<string[]>([])
-  const [negativeFeedback, setNegativeFeedback] = useState<string[]>([])
+  const [positiveFeedback, setPositiveFeedback] = useState<PositiveFeedbackArray>([])
+  const [negativeFeedback, setNegativeFeedback] = useState<NegativeFeedbackArray>([])
   const [comments, setComments] = useState('')
   const [showNotice, setShowNotice] = useState(false)
+  const [showErrorNotice, setShowErrorNotice] = useState(false)
   const [rating, setRating] = useState<number | null>(null)
   const [progress, setProgress] = useState(100)
+  const addFeedback = useAddFeedback()
 
-  const positiveTags = ['Clair', 'Synthétique', 'Complet', 'Sources fiables']
-  const negativeTags = ['Incorrect', 'Incohérent', 'Manque de sources']
+  const positiveTags: {
+    [index: string]: PositiveReason
+  } = {
+    Clair: 'clair',
+    Synthétique: 'synthetique',
+    Complet: 'complet',
+    'Sources fiables': 'sources_fiables',
+  }
+  const negativeTags: {
+    [index: string]: NegativeReason
+  } = {
+    Incorrect: 'incorrect',
+    Incohérent: 'incoherent',
+    'Manque de sources': 'manque_de_sources',
+  }
   const isSubmitDisabled = !(
     rating &&
     (positiveFeedback.length > 0 || negativeFeedback.length > 0) &&
     isStreamFinished
   )
 
-  const handlePositiveTagClick = (tag: string) => {
+  const handlePositiveTagClick = (tag: PositiveReason) => {
     setPositiveFeedback((prev) =>
       prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
     )
   }
-  const handleNegativeTagClick = (tag: string) => {
+  const handleNegativeTagClick = (tag: NegativeReason) => {
     setNegativeFeedback((prev) =>
       prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
     )
   }
   const handleSubmit = () => {
+    setShowErrorNotice(false)
     // TODO: BACK END LOGIC
-    if (isSubmitDisabled) return
-    setShowNotice(true)
-    setProgress(100)
+    //if (isSubmitDisabled) return
 
-    const totalDuration = 3000
-    const intervalTime = 100
-    const decrement = 100 / (totalDuration / intervalTime)
+    addFeedback.mutate(
+      {
+        feedback: {
+          isGood: null,
+          type: 'evaluations',
+          message: comments,
+          positives: positiveFeedback,
+          negatives: negativeFeedback,
+          note: rating,
+          isConfirmed: true,
+        },
+        streamId: 1,
+      },
+      {
+        onSuccess: () => {
+          setShowNotice(true)
+          setProgress(100)
 
-    const interval = setInterval(() => {
-      setProgress((prevProgress) => {
-        const newProgress = prevProgress - decrement
-        if (newProgress <= 0) {
-          clearInterval(interval)
-          setShowNotice(false)
-          onBack()
-          return 0
-        }
-        return newProgress
-      })
-    }, intervalTime)
+          const totalDuration = 3000
+          const intervalTime = 100
+          const decrement = 100 / (totalDuration / intervalTime)
+
+          const interval = setInterval(() => {
+            setProgress((prevProgress) => {
+              const newProgress = prevProgress - decrement
+              if (newProgress <= 0) {
+                clearInterval(interval)
+                setShowNotice(false)
+                onBack()
+                return 0
+              }
+              return newProgress
+            })
+          }, intervalTime)
+        },
+        onError: (error) => {
+          setShowErrorNotice(true)
+        },
+      },
+    )
   }
   return (
     <>
@@ -245,34 +291,34 @@ function EvaluationPannel({ isStreamFinished, onBack }) {
               <div className="flex flex-col gap-2">
                 {/* Positive tags */}
                 <div className="flex gap-2 items-center">
-                  <span className={`fr-icon-thumbs-up`} />
+                  <span className={'fr-icon-thumbs-up'} />
                   <div className="flex gap-2">
-                    {positiveTags.map((tag) => (
+                    {Object.entries(positiveTags).map(([tagKey, tagValue]) => (
                       <button
-                        key={tag}
+                        key={tagKey}
                         type="button"
-                        onClick={() => handlePositiveTagClick(tag)}
-                        className={'fr-tag'}
-                        aria-pressed={positiveFeedback.includes(tag)}
+                        onClick={() => handlePositiveTagClick(tagValue)}
+                        className="fr-tag"
+                        aria-pressed={positiveFeedback.includes(tagValue)}
                       >
-                        {tag}
+                        {tagKey}
                       </button>
                     ))}
                   </div>
                 </div>
                 {/* Negative tags */}
                 <div className="flex items-center gap-2">
-                  <span className={`fr-icon-thumbs-up `} />
+                  <span className={'fr-icon-thumbs-down '} />
                   <div className="flex gap-2">
-                    {negativeTags.map((tag) => (
+                    {Object.entries(negativeTags).map(([tagKey, tagValue]) => (
                       <button
-                        key={tag}
+                        key={tagKey}
                         type="button"
-                        onClick={() => handleNegativeTagClick(tag)}
-                        className={'fr-tag'}
-                        aria-pressed={negativeFeedback.includes(tag)}
+                        onClick={() => handleNegativeTagClick(tagValue)}
+                        className="fr-tag"
+                        aria-pressed={negativeFeedback.includes(tagValue)}
                       >
-                        {tag}
+                        {tagKey}
                       </button>
                     ))}
                   </div>
@@ -299,12 +345,12 @@ function EvaluationPannel({ isStreamFinished, onBack }) {
             <button
               type="button"
               onClick={handleSubmit}
-              disabled={isSubmitDisabled}
+              disabled={false}
               className={`fr-btn fr-btn--secondary fr-mt-4w ${
                 isSubmitDisabled ? 'opacity-50 cursor-not-allowed' : ''
               }`}
             >
-              Évaluer
+              {addFeedback.isPending ? <LoadingSpinner /> : 'Évaluer'}
             </button>
           </div>
         </div>
@@ -319,6 +365,25 @@ function EvaluationPannel({ isStreamFinished, onBack }) {
                 <div className="w-full bg-gray-200 rounded-full h-1">
                   <div
                     className="bg-blue-600 h-1 rounded-full"
+                    style={{
+                      width: `${progress}%`,
+                      transition: 'width 100ms linear',
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+        {showErrorNotice && (
+          <div className="fixed bottom-4 right-4 motion-preset-bounce ">
+            <div className="relative">
+              <AlertNotice setShowErrorNotice={setShowErrorNotice} />
+              {/* Progress bar over the Notice component */}
+              <div className="absolute top-0 left-0 w-full">
+                <div className="w-full bg-gray-200 rounded-full h-1">
+                  <div
+                    className="bg-red-600 h-1 rounded-full"
                     style={{
                       width: `${progress}%`,
                       transition: 'width 100ms linear',
@@ -497,7 +562,7 @@ export function HoverRating({ value, setValue }) {
       <Rating
         name="hover-feedback"
         value={value}
-        precision={0.5}
+        precision={1}
         getLabelText={getLabelText}
         onChange={(event, newValue) => {
           setValue(newValue)
@@ -514,5 +579,44 @@ export function HoverRating({ value, setValue }) {
       />
       {value !== null && <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>}
     </Box>
+  )
+}
+
+function AlertNotice({
+  setShowErrorNotice,
+}: { setShowErrorNotice: (value: boolean) => void }) {
+  return (
+    <div className="fr-notice fr-notice--warning">
+      <div className="fr-container">
+        <div className="fr-notice__body">
+          <p>
+            <span className="fr-notice__title">
+              Erreur lors de l'envoi de votre évaluation
+            </span>
+          </p>
+          <span className="fr-notice__desc">
+            Vous pouvez nous contacter pour nous signaler le problème.
+          </span>
+          <a
+            target="_blank"
+            rel="noopener external"
+            title="[À MODIFIER - Intitulé] - nouvelle fenêtre"
+            href="/contact"
+            className="fr-notice__link"
+          >
+            Formulaire de contact
+          </a>
+          <button
+            type="button"
+            title="Masquer le message"
+            onClick={() => setShowErrorNotice(false)}
+            id="button-1305"
+            className="fr-btn--close fr-btn"
+          >
+            Masquer le message
+          </button>
+        </div>
+      </div>
+    </div>
   )
 }
