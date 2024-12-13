@@ -1,3 +1,7 @@
+const modelName: string = import.meta.env.VITE_MODEL_NAME as string
+const modelMode: string = import.meta.env.VITE_MODEL_MODE as string
+const modelTemperature: number = import.meta.env.VITE_MODEL_TEMPERATURE as number
+
 import { chatUrl, streamUrl, useAddFeedback } from '@api'
 import { Notice } from '@codegouvfr/react-dsfr/Notice'
 import StarIcon from '@mui/icons-material/Star'
@@ -17,8 +21,23 @@ import type {
 } from '@types'
 import { LoadingSpinner } from 'components/LoadingSpinner'
 import { set } from 'valibot'
+import Separator from 'components/Global/Separator'
+import { fr } from '@codegouvfr/react-dsfr'
 //import ShowError from 'components/Error/ShowError'
 
+const difficultyLevels = ['Simple', 'Intermédiaire', 'Complexe']
+function difficultyLevelsToColor(difficulty: string) {
+  switch (difficulty) {
+    case 'Simple':
+      return fr.colors.decisions.background.alt.greenEmeraude.active
+    case 'Intermédiaire':
+      return fr.colors.decisions.background.actionLow.yellowTournesol.default
+    case 'Complexe':
+      return fr.colors.decisions.background.open.redMarianne.active
+    default:
+      return 'fr-tag--blue'
+  }
+}
 const questions = [
   {
     title: 'Titre de question',
@@ -26,28 +45,35 @@ const questions = [
       'Peut-on faire une saisie sur le RSA ?Peut-on faire une saisie sur le RSA ?',
     theme: 'RSA',
     operator: 'CAF',
-    complexity: 'Facile',
+    complexity: 'Simple',
   },
   {
     title: 'Titre de question',
     question: 'Peut-on faire une saisie sur le RSA ?',
     theme: 'RSA',
     operator: 'CAF',
-    complexity: 'Facile',
+    complexity: 'Complexe',
   },
   {
     title: 'Titre de question',
     question: 'Peut-on faire une saisie sur le RSA ?',
     theme: 'RSA',
     operator: 'CAF',
-    complexity: 'Facile',
+    complexity: 'Intermédiaire',
   },
   {
     title: 'Titre de question',
     question: 'Peut-on faire une saisie sur le RSA ?',
     theme: 'RSA',
     operator: 'CAF',
-    complexity: 'Facile',
+    complexity: 'Simple',
+  },
+  {
+    title: 'Titre de question',
+    question: 'Peut-on faire une saisie sur le RSA ?',
+    theme: 'RSA',
+    operator: 'CAF',
+    complexity: 'Complexe',
   },
 ]
 
@@ -63,6 +89,12 @@ export default function Evaluations() {
       {selectedCardIndex === null ? (
         <>
           <h3>Sélectionnez une question</h3>
+          <p>
+            Dans le cadre de l’expérimentation nous entamons une phase de ré-évaluation du
+            modèle proposé sur des questions pré-définies. Le travail s’effectue sur un
+            échantillon de X questions à évaluer. Nous en présentons à chaque évaluation 5
+            de manière aléatoire.
+          </p>
           <Questions setSelectedCardIndex={setSelectedCardIndex} />
         </>
       ) : (
@@ -89,9 +121,9 @@ function Questions({ setSelectedCardIndex }) {
     console.log('render')
   }, [])
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="flex flex-col">
       {questions.map((question, index) => (
-        <QuestionCard
+        <QuestionRow
           key={index}
           index={index}
           title={question.title}
@@ -99,18 +131,20 @@ function Questions({ setSelectedCardIndex }) {
           theme={question.theme}
           operator={question.operator}
           setSelectedCardIndex={setSelectedCardIndex}
+          complexity={question.complexity}
         />
       ))}
     </div>
   )
 }
 
-function QuestionCard({
+function QuestionRow({
   index,
   question,
   theme,
   operator,
   title,
+  complexity,
   setSelectedCardIndex,
 }: {
   index: number
@@ -118,13 +152,14 @@ function QuestionCard({
   theme: string
   operator: string
   title: string
+  complexity: string
   setSelectedCardIndex: (index: number) => void
 }) {
   const handleClick = () => {
     setSelectedCardIndex(index)
   }
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
       handleClick()
@@ -132,34 +167,42 @@ function QuestionCard({
   }
 
   return (
-    <button
-      type="button"
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-      tabIndex={0}
-      className={`motion-preset-fade motion-duration-1000 rounded-2xl hover:outline hover:outline-2  fr-p-2w min-w-64 min-h-24 transform transition-transform duration-200 ease-in-out cursor-pointer
-        hover:scale-105 hover:fr-border-action--high-grey focus:scale-105 focus:fr-border-action--high-grey `}
-    >
-      <div className="fr-mb-2w">
-        <p className="fr-text--lg font-bold">{title}</p>
-        <p>{question}</p>
-        <div className="flex gap-2 fr-mt-2w">
-          <p className="fr-tag fr-background-alt--yellow-tournesol">Thème : {theme}</p>
-          <p className="fr-tag fr-background-contrast--blue-france">
-            Opérateur : {operator}
-          </p>
+    <>
+      <div
+        className="min-h-[15vh] cursor-pointer p-4 hover:bg-gray-100 focus:bg-gray-200  transition flex flex-col justify-center"
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+        role="button"
+      >
+        <p className="text-gray-700">{question}</p>
+        <div className="flex gap-2 mt-2">
+          <span
+            className={`fr-tag fr-text-action-high--blue-france fr-background-action-low--blue-france`}
+          >
+            {theme}
+          </span>
+          <span
+            className={`fr-tag fr-text-action-high--blue-france fr-background-action-low--blue-france`}
+          >
+            {operator}
+          </span>
+          <span
+            className={`fr-tag `}
+            style={{ backgroundColor: difficultyLevelsToColor(complexity) }}
+          >
+            {complexity}
+          </span>
         </div>
       </div>
-    </button>
+      <Separator />
+    </>
   )
 }
 
-const modelName: string = import.meta.env.VITE_MODEL_NAME as string
-const modelMode: string = import.meta.env.VITE_MODEL_MODE as string
-const modelTemperature: number = import.meta.env.VITE_MODEL_TEMPERATURE as number
-
 function QuestionDetail({ question, theme, operator, onBack, complexity }) {
   const [isStreamFinished, setIsStreamFinished] = useState(false)
+  const [streamId, setStreamId] = useState(null)
 
   return (
     <div className="flex flex-col h-full flex-grow min-h-[800px] w-full">
@@ -171,17 +214,30 @@ function QuestionDetail({ question, theme, operator, onBack, complexity }) {
         <AnswerPannel
           question={question}
           setIsStreamFinished={setIsStreamFinished}
+          setStreamId={setStreamId}
           theme={theme}
           operator={operator}
           complexity={complexity}
         />
-        <EvaluationPannel isStreamFinished={isStreamFinished} onBack={onBack} />
+        <EvaluationPannel
+          isStreamFinished={isStreamFinished}
+          onBack={onBack}
+          streamId={streamId}
+        />
       </div>
     </div>
   )
 }
 
-function EvaluationPannel({ isStreamFinished, onBack }) {
+function EvaluationPannel({
+  isStreamFinished,
+  onBack,
+  streamId,
+}: {
+  isStreamFinished: boolean
+  onBack: () => void
+  streamId: number | null
+}) {
   const [positiveFeedback, setPositiveFeedback] = useState<PositiveFeedbackArray>([])
   const [negativeFeedback, setNegativeFeedback] = useState<NegativeFeedbackArray>([])
   const [comments, setComments] = useState('')
@@ -225,8 +281,10 @@ function EvaluationPannel({ isStreamFinished, onBack }) {
   const handleSubmit = () => {
     setShowErrorNotice(false)
     // TODO: BACK END LOGIC
-    //if (isSubmitDisabled) return
-
+    if (isSubmitDisabled) return
+    if (!streamId) {
+      setShowErrorNotice(true)
+    }
     addFeedback.mutate(
       {
         feedback: {
@@ -238,11 +296,15 @@ function EvaluationPannel({ isStreamFinished, onBack }) {
           note: rating,
           isConfirmed: true,
         },
-        streamId: 1,
+        streamId: streamId,
       },
       {
         onSuccess: () => {
           setShowNotice(true)
+          setRating(null)
+          setPositiveFeedback([])
+          setNegativeFeedback([])
+          setComments('')
           setProgress(100)
 
           const totalDuration = 3000
@@ -345,7 +407,7 @@ function EvaluationPannel({ isStreamFinished, onBack }) {
             <button
               type="button"
               onClick={handleSubmit}
-              disabled={false}
+              disabled={isSubmitDisabled}
               className={`fr-btn fr-btn--secondary fr-mt-4w ${
                 isSubmitDisabled ? 'opacity-50 cursor-not-allowed' : ''
               }`}
@@ -398,7 +460,21 @@ function EvaluationPannel({ isStreamFinished, onBack }) {
     </>
   )
 }
-function AnswerPannel({ theme, question, operator, setIsStreamFinished, complexity }) {
+function AnswerPannel({
+  theme,
+  question,
+  operator,
+  setIsStreamFinished,
+  complexity,
+  setStreamId,
+}: {
+  theme: string
+  question: string
+  operator: string
+  setIsStreamFinished: (value: boolean) => void
+  complexity: string
+  setStreamId: (value: number) => void
+}) {
   const scrollRef = useRef(null)
   const [response, setResponse] = useState('')
   const [isUserScrolledUp, setIsUserScrolledUp] = useState(false)
@@ -455,6 +531,7 @@ function AnswerPannel({ theme, question, operator, setIsStreamFinished, complexi
       data: JSON.stringify(stream_data),
       headers,
     })
+    setStreamId(stream.id)
     const stream_chat = new EventSourcePolyfill(`${streamUrl}/${stream.id}/start`, {
       headers: setHeaders(true),
       withCredentials: true,

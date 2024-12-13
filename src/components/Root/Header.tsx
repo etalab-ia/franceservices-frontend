@@ -110,7 +110,7 @@ function NavigationMenu() {
 const menuItems = [
   { to: '/meeting', label: 'Poser une nouvelle question' },
   { to: '/history', label: 'Mes échanges' },
-  // { to: '/evaluations', label: 'Évaluer Albert' },
+  { to: '/evaluations', label: 'Évaluer Albert' },
   { to: '/outils', label: 'Vos outils numériques' },
   { to: '/FAQ', label: 'Aide' },
   { to: '/contact', label: 'Contact' },
