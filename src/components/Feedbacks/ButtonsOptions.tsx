@@ -1,67 +1,76 @@
-import {
-  feedbackButtonsChoice,
-  type satisfiedButtons,
-  type unsatisfiedButtons,
-} from '@constants/feedback'
+import { feedbackButtonsChoice } from '@constants/feedback'
+import type {
+  NegativeFeedbackArray,
+  NegativeReason,
+  PositiveFeedbackArray,
+  PositiveReason,
+} from '@types'
+import type React from 'react'
 
-export function ButtonsOptions({
+type ButtonsOptionsProps<T extends PositiveReason | NegativeReason> = {
+  isFirst: boolean
+  buttonsType: Record<string, T>
+  reasons: T[]
+  setReasons: (reasons: T[]) => void
+  setOtherReason: React.Dispatch<React.SetStateAction<string>>
+  setButtonsType: React.Dispatch<React.SetStateAction<Record<string, T>>>
+}
+
+export function ButtonsOptions<T extends PositiveReason | NegativeReason>({
   isFirst,
   buttonsType,
   reasons,
   setReasons,
   setButtonsType,
   setOtherReason,
-}: {
-  isFirst: boolean
-  buttonsType: typeof satisfiedButtons | typeof unsatisfiedButtons
-  reasons: string[]
-  setReasons: (reasons: string[]) => void
-  setOtherReason: React.Dispatch<React.SetStateAction<string>>
-  setButtonsType: any
-}) {
-  const handleClick = (index: number) => {
-    if (isOtherReasonButton(buttonsType[index])) {
-      const newArray = buttonsType.filter((b) => b.type !== buttonsType[index].type)
-      setButtonsType(newArray)
-    }
-    const reasonValue = buttonsType[index].type
-    if (!reasonValue.includes('tag-')) {
-      if (reasons.includes(reasonValue)) {
-        setReasons(reasons.filter((reason) => reason !== reasonValue))
-      } else {
-        setReasons([reasonValue])
-      }
+}: ButtonsOptionsProps<T>) {
+  console.log(
+    'isFirst:',
+    isFirst,
+    'buttonsType:',
+    buttonsType,
+    'reasons:',
+    reasons,
+    'setReasons:',
+    setReasons,
+    'setButtonsType:',
+    setButtonsType,
+  )
+
+  const handleClick = (reasonValue: T) => {
+    console.log('handleclick:', 'reasonValue:', reasonValue)
+    if (reasons.includes(reasonValue)) {
+      // Remove the reason if already selected
+      setReasons(reasons.filter((reason) => reason !== reasonValue))
+    } else {
+      // Set a single reason
+      setReasons([reasonValue])
     }
   }
 
   return (
     <div className="wrap-message">
       {isFirst &&
-        buttonsType.map((button: { text: string; type: string }, index: number) => {
-          const reasonValue = buttonsType[index].type
-          const classNames =
-            reasons.includes(reasonValue) ||
-            (isOtherReasonButton(button) && reasons.includes('other'))
-              ? 'fr-background-action-high--blue-france'
-              : 'fr-background-default--grey'
+        Object.entries(buttonsType).map(([displayText, reasonValue], index) => {
+          const isSelected = reasons.includes(reasonValue)
+          const classNames = isSelected
+            ? 'fr-background-action-high--blue-france'
+            : 'fr-background-default--grey'
 
           return (
             <div key={index}>
               <button
                 type="button"
-                role={feedbackButtonsChoice(button)}
+                role={feedbackButtonsChoice(reasonValue)}
                 className={`user-feedback-buttons fr-text-action-high--blue-france ${classNames}`}
-                onClick={() => handleClick(index)}
+                onClick={() => handleClick(reasonValue)}
               >
                 <p
                   className={
-                    reasons.includes(reasonValue) ||
-                    (isOtherReasonButton(button) && reasons.includes('other'))
-                      ? 'text-white'
-                      : 'fr-text-action-high--blue-france'
+                    isSelected ? 'text-white' : 'fr-text-action-high--blue-france'
                   }
                 >
-                  {button.text}
+                  {displayText}
                 </p>
               </button>
             </div>
@@ -71,6 +80,6 @@ export function ButtonsOptions({
   )
 }
 
-function isOtherReasonButton(button) {
-  return button.type.includes('tag-')
+function isOtherReasonButton(reason: string) {
+  return reason.startsWith('tag-')
 }

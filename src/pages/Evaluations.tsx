@@ -13,11 +13,13 @@ import { TextWithSources } from 'components/Sources/TextWithSources'
 import { EventSourcePolyfill } from 'event-source-polyfill'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { onCloseStream } from '../utils/eventsEmitter'
-import type {
-  NegativeFeedbackArray,
-  NegativeReason,
-  PositiveFeedbackArray,
-  PositiveReason,
+import {
+  negativeTags,
+  positiveTags,
+  type NegativeFeedbackArray,
+  type NegativeReason,
+  type PositiveFeedbackArray,
+  type PositiveReason,
 } from '@types'
 import { LoadingSpinner } from 'components/LoadingSpinner'
 import { set } from 'valibot'
@@ -247,21 +249,6 @@ function EvaluationPannel({
   const [progress, setProgress] = useState(100)
   const addFeedback = useAddFeedback()
 
-  const positiveTags: {
-    [index: string]: PositiveReason
-  } = {
-    Clair: 'clair',
-    Synthétique: 'synthetique',
-    Complet: 'complet',
-    'Sources fiables': 'sources_fiables',
-  }
-  const negativeTags: {
-    [index: string]: NegativeReason
-  } = {
-    Incorrect: 'incorrect',
-    Incohérent: 'incoherent',
-    'Manque de sources': 'manque_de_sources',
-  }
   const isSubmitDisabled = !(
     rating &&
     (positiveFeedback.length > 0 || negativeFeedback.length > 0) &&

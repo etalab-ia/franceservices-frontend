@@ -145,6 +145,22 @@ export type NegativeReason = 'incorrect' | 'incoherent' | 'manque_de_sources'
 export type PositiveFeedbackArray = Array<PositiveReason>
 export type NegativeFeedbackArray = Array<NegativeReason>
 
+export const positiveTags: {
+  [index: string]: PositiveReason
+} = {
+  Clair: 'clair',
+  Synthétique: 'synthetique',
+  Complet: 'complet',
+  'Sources fiables': 'sources_fiables',
+}
+export const negativeTags: {
+  [index: string]: NegativeReason
+} = {
+  Incorrect: 'incorrect',
+  Incohérent: 'incoherent',
+  'Manque de sources': 'manque_de_sources',
+}
+
 /**œ
  * Feedback form after a meeting response
  */
