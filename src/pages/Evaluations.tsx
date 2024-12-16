@@ -173,7 +173,7 @@ function QuestionRow({
         tabIndex={0}
         role="button"
       >
-        <p className="text-gray-700">{question}</p>
+        <p>{question}</p>
         <div className="flex gap-2 mt-2">
           <span
             className={`fr-tag fr-text-action-high--blue-france fr-background-action-low--blue-france`}
