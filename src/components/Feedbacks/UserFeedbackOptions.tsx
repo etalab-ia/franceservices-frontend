@@ -1,10 +1,15 @@
 import { useAddFeedback } from '@api'
+import { feedbackConfirmationButton } from '@constants/feedback'
 import {
-  feedbackConfirmationButton,
-  satisfiedButtons,
-  unsatisfiedButtons,
-} from '@constants/feedback'
-import type { Feedback as FeedbackType, RootState } from '@types'
+  negativeTags,
+  positiveTags,
+  type Feedback as FeedbackType,
+  type NegativeFeedbackArray,
+  type PositiveFeedbackArray,
+  type RootState,
+  type PositiveReason,
+  type NegativeReason,
+} from '@types'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
@@ -22,30 +27,63 @@ export function UserFeedbackOptions({
   feedback: FeedbackType
   setFeedback: (feedback: FeedbackType) => void
 }) {
-  const [reasons, setReasons] = useState<string[]>([])
   const [otherReason, setOtherReason] = useState('')
-  const [buttonsType, setButtonsType] = useState(
-    activeTab === 0 ? satisfiedButtons : unsatisfiedButtons,
-  )
+
+  // Determine if we're dealing with positive or negative reasons
+  const isPositive = activeTab === 0
+
+  // Maintain separate states for positive and negative reasons
+  const [positiveReasons, setPositiveReasons] = useState<PositiveFeedbackArray>([])
+  const [negativeReasons, setNegativeReasons] = useState<NegativeFeedbackArray>([])
+
+  // Determine which tags to show based on activeTab
+  const [buttonsType, setButtonsType] = useState(isPositive ? positiveTags : negativeTags)
+
   useEffect(() => {
-    setReasons([])
-    setButtonsType(activeTab === 0 ? satisfiedButtons : unsatisfiedButtons)
+    if (isPositive) {
+      setPositiveReasons([])
+      setButtonsType(positiveTags)
+    } else {
+      setNegativeReasons([])
+      setButtonsType(negativeTags)
+    }
   }, [activeTab])
 
   return (
     <GlobalColContainer>
-      <ButtonsOptions
-        isFirst={isFirst}
-        buttonsType={buttonsType}
-        reasons={reasons}
-        setReasons={setReasons}
-        setButtonsType={setButtonsType}
-        setOtherReason={setOtherReason}
-      />
+      {isPositive ? (
+        <ButtonsOptions<PositiveReason>
+          isFirst={isFirst}
+          buttonsType={buttonsType as Record<string, PositiveReason>}
+          reasons={positiveReasons}
+          setReasons={setPositiveReasons}
+          setButtonsType={
+            setButtonsType as React.Dispatch<
+              React.SetStateAction<Record<string, PositiveReason>>
+            >
+          }
+          setOtherReason={setOtherReason}
+        />
+      ) : (
+        <ButtonsOptions<NegativeReason>
+          isFirst={isFirst}
+          buttonsType={buttonsType as Record<string, NegativeReason>}
+          reasons={negativeReasons}
+          setReasons={setNegativeReasons}
+          setButtonsType={
+            setButtonsType as React.Dispatch<
+              React.SetStateAction<Record<string, NegativeReason>>
+            >
+          }
+          setOtherReason={setOtherReason}
+        />
+      )}
 
       <UserFeedbackResume feedback={feedback} />
+
       <ConfirmationButton
-        reasons={reasons}
+        // Pass the correct reasons array based on activeTab
+        reasons={isPositive ? positiveReasons : negativeReasons}
         otherReason={otherReason}
         feedback={feedback}
         setFeedback={setFeedback}
@@ -54,31 +92,40 @@ export function UserFeedbackOptions({
   )
 }
 
-const ConfirmationButton = ({ reasons, otherReason, feedback, setFeedback }) => {
+const ConfirmationButton = ({
+  reasons,
+  otherReason,
+  feedback,
+  setFeedback,
+}: {
+  reasons: PositiveFeedbackArray | NegativeFeedbackArray
+  otherReason: string
+  feedback: FeedbackType
+  setFeedback: (feedback: FeedbackType) => void
+}) => {
   const streamId = useSelector((state: RootState) => state.user.lastStreamId)
   const addFeedback = useAddFeedback()
 
   const handleConfirm = () => {
-    otherReason &&
-      !reasons.includes(otherReason) &&
-      setFeedback({
-        ...feedback,
-        message: otherReason,
-      })
-    addFeedback.mutate({ feedback, streamId, reasons })
-    setFeedback({
+    const updatedFeedback = {
       ...feedback,
+      positives: !feedback.isGood ? ([...reasons] as PositiveFeedbackArray) : [],
+      negatives: !feedback.isGood ? [] : ([...reasons] as NegativeFeedbackArray),
       isConfirmed: true,
-    })
+    }
+
+    setFeedback(updatedFeedback)
+    addFeedback.mutate({ feedback: updatedFeedback, streamId })
   }
+
   return (
     <button
       type="button"
       role={feedbackConfirmationButton}
       onClick={handleConfirm}
-      className={'border fr-text-action-high--blue-france'}
+      className="border fr-text-action-high--blue-france"
     >
-      <p className="fr-text-action-high--blue-france fr-p-1w">Confirmer </p>
+      <p className="fr-text-action-high--blue-france fr-p-1w">Confirmer</p>
     </button>
   )
 }

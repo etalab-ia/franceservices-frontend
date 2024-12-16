@@ -1,4 +1,4 @@
-import { InitialFeedback, type Feedback as FeedbackType } from '@types'
+import { InitialChatFeedback, type Feedback as FeedbackType } from '@types'
 import { useEffect, useState } from 'react'
 import { GlobalColContainer } from '../Global/GlobalColContainer'
 import { UserFeedbackInput } from './UserFeedbackInput'
@@ -11,10 +11,10 @@ import { UserSatisfactionButtons } from './UserSatisfactionButtons'
  * false when giving feedback on a question that has been regenerated
  */
 export function Feedback() {
-  const [feedback, setFeedback] = useState<FeedbackType>(InitialFeedback)
+  const [feedback, setFeedback] = useState<FeedbackType>(InitialChatFeedback)
 
   useEffect(() => {
-    setFeedback(InitialFeedback)
+    setFeedback(InitialChatFeedback)
   }, [])
   return (
     <GlobalColContainer>

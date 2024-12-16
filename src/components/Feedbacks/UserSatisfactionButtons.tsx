@@ -1,6 +1,5 @@
-import { InitialFeedback, type Feedback as FeedbackType } from '@types'
+import { InitialChatFeedback, type Feedback as FeedbackType } from '@types'
 import { GlobalRowContainer } from '../Global/GlobalRowContainer'
-import { fr } from '@codegouvfr/react-dsfr'
 
 /**
  * These are the good or bad buttons that the user can click to give feedback
@@ -15,7 +14,7 @@ export function UserSatisfactionButtons({
   setFeedback: (feedback: FeedbackType) => void
 }) {
   const handleClick = (isGood: number) => {
-    if (isGood === feedback.isGood) setFeedback(InitialFeedback)
+    if (isGood === feedback.isGood) setFeedback(InitialChatFeedback)
     else {
       setFeedback({
         ...feedback,
