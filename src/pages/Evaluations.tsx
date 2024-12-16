@@ -42,40 +42,39 @@ function difficultyLevelsToColor(difficulty: string) {
 }
 const questions = [
   {
-    title: 'Titre de question',
     question:
-      'Peut-on faire une saisie sur le RSA ?Peut-on faire une saisie sur le RSA ?',
-    theme: 'RSA',
+      'Un usager relevant de la msa travaille maintenant dans le privé depuis 1 an. comment doit il faire pour que son dossier soit muté à la cpam ?',
+    theme: 'Retraite',
+    operator: 'CPAM',
+    complexity: 'Complexe',
+  },
+  {
+    question:
+      "Quels sont les documents nécessaires pour faire une demande de prime d'activité ?",
+    theme: 'Prime',
     operator: 'CAF',
     complexity: 'Simple',
   },
   {
-    title: 'Titre de question',
-    question: 'Peut-on faire une saisie sur le RSA ?',
-    theme: 'RSA',
-    operator: 'CAF',
-    complexity: 'Complexe',
-  },
-  {
-    title: 'Titre de question',
-    question: 'Peut-on faire une saisie sur le RSA ?',
-    theme: 'RSA',
+    question:
+      "Existe-t-il une aide sociale pour participer au coût d'un déménagement réalisé par un professionnel?",
+    theme: 'Déménagement',
     operator: 'CAF',
     complexity: 'Intermédiaire',
   },
   {
-    title: 'Titre de question',
-    question: 'Peut-on faire une saisie sur le RSA ?',
-    theme: 'RSA',
-    operator: 'CAF',
-    complexity: 'Simple',
-  },
-  {
-    title: 'Titre de question',
-    question: 'Peut-on faire une saisie sur le RSA ?',
-    theme: 'RSA',
+    question:
+      "Une personne en EHPAD souhaite faire une demande d'APL à la CAF. Quelles sont les pièces à joindre à sa demande ?",
+    theme: 'APL',
     operator: 'CAF',
     complexity: 'Complexe',
+  },
+  {
+    question:
+      "Comment signaler un changement d'adresse auprès des administrations en une seule fois ?",
+    theme: 'Démarches',
+    operator: 'ANTS',
+    complexity: 'Simple',
   },
 ]
 
@@ -128,7 +127,6 @@ function Questions({ setSelectedCardIndex }) {
         <QuestionRow
           key={index}
           index={index}
-          title={question.title}
           question={question.question}
           theme={question.theme}
           operator={question.operator}
@@ -145,7 +143,6 @@ function QuestionRow({
   question,
   theme,
   operator,
-  title,
   complexity,
   setSelectedCardIndex,
 }: {
@@ -153,7 +150,6 @@ function QuestionRow({
   question: string
   theme: string
   operator: string
-  title: string
   complexity: string
   setSelectedCardIndex: (index: number) => void
 }) {
