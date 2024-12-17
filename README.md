@@ -140,7 +140,7 @@ Check out the [Vite docs](https://vitejs.dev/guide/static-deploy.html)
 We are using [ViteJS](https://vitejs.dev/) to build the project so every env variable name is prefixed with `VITE_`.
 
 **VITE_API_URL** -- url for api queries.  
-**VITE_MATOMO_URL** -- the url to the matomo instance for analytics (optionnal)  
+**VITE_MATOMO_URL** -- the url to the matomo instance for analytics (optional)  
 **VITE_ENVIRONMENT_NAME** -- and extra variable currently used to display different features in the UI for FranceServices.  
 
 **VITE_MODEL_NAME** -- the model to use for queries, you can find a list in [here](https://huggingface.co/AgentPublic)  
