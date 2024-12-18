@@ -40,11 +40,9 @@ export function ButtonsOptions<T extends PositiveReason | NegativeReason>({
   const handleClick = (reasonValue: T) => {
     console.log('handleclick:', 'reasonValue:', reasonValue)
     if (reasons.includes(reasonValue)) {
-      // Remove the reason if already selected
       setReasons(reasons.filter((reason) => reason !== reasonValue))
     } else {
-      // Set a single reason
-      setReasons([reasonValue])
+      setReasons([...reasons, reasonValue])
     }
   }
 
@@ -78,8 +76,4 @@ export function ButtonsOptions<T extends PositiveReason | NegativeReason>({
         })}
     </div>
   )
-}
-
-function isOtherReasonButton(reason: string) {
-  return reason.startsWith('tag-')
 }
