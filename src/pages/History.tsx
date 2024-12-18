@@ -59,21 +59,24 @@ function ChatList() {
     themes?: string[]
     updatedDate: string | null
     id: number
+    type: string
   }
 
   return (
     <div className={'fr-mt-2w fr-grid-row w-full'}>
       <div className="fr-col-6 overflow-y-auto h-[66vh]">
-        {chats.map((chat: TestChatType, index) => (
-          <div key={index}>
-            <ChatListRow
-              selectedChatId={selectedChatId}
-              setSelectedChatId={setSelectedChatId}
-              {...chat}
-            />
-            <Separator />
-          </div>
-        ))}
+        {chats
+          .filter((chat: TestChatType) => chat.type !== 'evaluations') // Filter out evaluations
+          .map((chat: TestChatType, index) => (
+            <div key={index}>
+              <ChatListRow
+                selectedChatId={selectedChatId}
+                setSelectedChatId={setSelectedChatId}
+                {...chat}
+              />
+              <Separator />
+            </div>
+          ))}
         <div ref={ref} style={{ height: 1 }} />
         {isFetchingNextPage && <LoadingSpinner />}
       </div>

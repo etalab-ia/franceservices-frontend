@@ -186,8 +186,7 @@ function QuestionRow({
             {operator}
           </span>
           <span
-            className={`fr-tag `}
-            style={{ backgroundColor: difficultyLevelsToColor(complexity) }}
+            className={`fr-tag fr-text-action-high--blue-france fr-background-action-low--blue-france`}
           >
             {complexity}
           </span>
