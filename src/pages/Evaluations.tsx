@@ -43,38 +43,144 @@ function difficultyLevelsToColor(difficulty: string) {
 const questions = [
   {
     question:
-      'Un usager relevant de la msa travaille maintenant dans le privé depuis 1 an. comment doit il faire pour que son dossier soit muté à la cpam ?',
-    theme: 'Retraite',
-    operator: 'CPAM',
-    complexity: 'Complexe',
-  },
-  {
-    question:
-      "Quels sont les documents nécessaires pour faire une demande de prime d'activité ?",
-    theme: 'Prime',
-    operator: 'CAF',
+      'Comment changer le titulaire sur la carte grise suite au décès du conjoint ?',
+    theme: 'Immatriculation',
+    operators: ['ANTS / France titres'],
     complexity: 'Simple',
   },
   {
     question:
-      "Existe-t-il une aide sociale pour participer au coût d'un déménagement réalisé par un professionnel?",
-    theme: 'Déménagement',
-    operator: 'CAF',
+      "L'usager souhaite faire la carte grise d'un véhicule acquis en 2021 mais n'a plus le certificat de cession. Comment faire ?",
+    theme: 'Immatriculation',
+    operators: ['ANTS / France titres'],
     complexity: 'Intermédiaire',
   },
   {
     question:
-      "Une personne en EHPAD souhaite faire une demande d'APL à la CAF. Quelles sont les pièces à joindre à sa demande ?",
-    theme: 'APL',
-    operator: 'CAF',
+      "Une usagère, dont son frère est décédé et était titulaire de la carte grise, a hérité du véhicule. Si elle ne veut pas conserver le véhicule, peut-elle le vendre directement sans mettre la carte grise à son nom, sachant que le véhicule n'a pas roulé depuis le décès mais que le décès était il y a plus de 3 mois ?",
+    theme: 'Immatriculation',
+    operators: ['ANTS / France titres'],
+    complexity: 'Complexe',
+  },
+  {
+    question: "Quel cerfa dois-je fournir pour une demande d'aide au logement à la CAF ?",
+    theme: 'Logement',
+    operators: ['CAF'],
+    complexity: 'Simple',
+  },
+  {
+    question:
+      "L'usagère, âgée de 57 ans, est en accident de travail depuis presque 6 mois suite à une mission d'intérim. Elle est par ailleurs reconnue travailleur handicapé. Elle va passer en longue maladie mais n'a pas d'employeur puisque sa mission d'intérim s'est terminée depuis. Elle vit seule et n'a pas d'enfant. Quels sont ses droits financiers ? A-t-elle droit au RSA ?",
+    theme: 'RSA',
+    operators: ['CAF'],
     complexity: 'Complexe',
   },
   {
     question:
-      "Comment signaler un changement d'adresse auprès des administrations en une seule fois ?",
-    theme: 'Démarches',
-    operator: 'ANTS',
+      "Quelle est le montant maximum pour un couple qui souhaite bénéficier de l'ASPA ?",
+    theme: 'ASPA',
+    operators: ['CARSAT'],
     complexity: 'Simple',
+  },
+  {
+    question: 'Combien faut-il de trimestres cotisés pour une retraite à taux plein ?',
+    theme: 'Retraite',
+    operators: ['CARSAT'],
+    complexity: 'Simple',
+  },
+  {
+    question:
+      "Une usagère souhaite savoir si le fait d'être à mi-temps thérapeutique pour une durée de 6 mois engendre un changement dans la date de départ à la retraite ou sur le montant de sa retraite ?",
+    theme: 'Retraite',
+    operators: ['CARSAT'],
+    complexity: 'Intermédiaire',
+  },
+  {
+    question:
+      "L'usager ne comprend pas pourquoi sa pension de retraite a diminué alors qu'il y a eu une revalorisation des retraites de 5,3% au premier janvier 2024. Pourquoi est-ce que sa pension de retraite diminue ?",
+    theme: 'Retraite',
+    operators: ['CARSAT'],
+    complexity: 'Complexe',
+  },
+  {
+    question:
+      'Une usagère part en vacances au Maroc, elle souhaite savoir si les dépenses de santé au Maroc peuvent être prises en charge par la CPAM ?',
+    theme: 'Aides financières',
+    operators: ['CPAM'],
+    complexity: 'Simple',
+  },
+  {
+    question:
+      "L'usager ne perçoit plus sa pension d'invalidité. La CPAM peut-elle arrêter le versement de la prestation après 2 ans de paiement alors que l'usager n'a jamais rencontré de médecin conseil ?",
+    theme: "Pension d'invalidité",
+    operators: ['CPAM'],
+    complexity: 'Intermédiaire',
+  },
+  {
+    question:
+      'Un usager relevant de la MSA travaille maintenant dans le privé depuis 1 an. Comment doit-il faire pour que son dossier soit muté à la CPAM ?',
+    theme: 'Droits',
+    operators: ['CPAM'],
+    complexity: 'Complexe',
+  },
+  {
+    question: "Quelles sont les conditions d'exonération de taxe foncière ?",
+    theme: 'Impôts',
+    operators: ['DGFIP'],
+    complexity: 'Simple',
+  },
+  {
+    question:
+      "Comment est calculé le montant de la taxe d'ordure ménagère pour des locations foncières ?",
+    theme: 'Impôts',
+    operators: ['DGFIP'],
+    complexity: 'Simple',
+  },
+  {
+    question:
+      "Sur GMBI, est-ce qu'un bien apparaît sur les espaces des deux conjoints lorsque le bien est en indivision ?",
+    theme: 'GMBI',
+    operators: ['DGFIP'],
+    complexity: 'Intermédiaire',
+  },
+  {
+    question:
+      "L'usager a-t-il le droit à des indemnités France travail après une démission ?",
+    theme: 'Emploi',
+    operators: ['France travail'],
+    complexity: 'Simple',
+  },
+  {
+    question: 'Quelle est la démarche pour demander son casier judiciaire ?',
+    theme: 'Casier judiciaire',
+    operators: ['Ministère de la Justice'],
+    complexity: 'Simple',
+  },
+  {
+    question:
+      "L'usager est affilié à la MSA. Comment procéder au renouvellement de sa carte vitale ?",
+    theme: 'Carte vitale',
+    operators: ['MSA'],
+    complexity: 'Simple',
+  },
+  {
+    question: 'Comment recourir au médiateur de la Caf ou de la MSA ?',
+    theme: 'Médiation',
+    operators: ['MSA', 'CAF'],
+    complexity: 'Intermédiaire',
+  },
+  {
+    question: 'Comment demander un chèque énergie 2023 non reçu ?',
+    theme: 'Chèque énergie',
+    operators: ['MTE'],
+    complexity: 'Simple',
+  },
+  {
+    question:
+      "Une usagère n'ayant pas fait sa déclaration de revenu fiscal depuis 2021 peut-elle avoir droit au chèque énergie ?",
+    theme: 'Chèque énergie',
+    operators: ['MTE'],
+    complexity: 'Intermédiaire',
   },
 ]
 
@@ -101,7 +207,7 @@ export default function Evaluations() {
       ) : (
         <QuestionDetail
           question={questions[selectedCardIndex].question}
-          operator={questions[selectedCardIndex].operator}
+          operators={questions[selectedCardIndex].operators}
           theme={questions[selectedCardIndex].theme}
           complexity={questions[selectedCardIndex].complexity}
           onBack={handleBack}
@@ -129,7 +235,7 @@ function Questions({ setSelectedCardIndex }) {
           index={index}
           question={question.question}
           theme={question.theme}
-          operator={question.operator}
+          operators={question.operators}
           setSelectedCardIndex={setSelectedCardIndex}
           complexity={question.complexity}
         />
@@ -142,14 +248,14 @@ function QuestionRow({
   index,
   question,
   theme,
-  operator,
+  operators,
   complexity,
   setSelectedCardIndex,
 }: {
   index: number
   question: string
   theme: string
-  operator: string
+  operators: string[]
   complexity: string
   setSelectedCardIndex: (index: number) => void
 }) {
@@ -176,17 +282,26 @@ function QuestionRow({
         <p>{question}</p>
         <div className="flex gap-2 mt-2">
           <span
-            className={`fr-tag fr-text-action-high--blue-france fr-background-action-low--blue-france`}
+            className={
+              'fr-tag fr-text-action-high--blue-france fr-background-action-low--blue-france'
+            }
           >
             {theme}
           </span>
+          {operators.map((operator, index) => (
+            <span
+              key={index}
+              className={
+                'fr-tag fr-text-action-high--blue-france fr-background-action-low--blue-france'
+              }
+            >
+              {operator}
+            </span>
+          ))}
           <span
-            className={`fr-tag fr-text-action-high--blue-france fr-background-action-low--blue-france`}
-          >
-            {operator}
-          </span>
-          <span
-            className={`fr-tag fr-text-action-high--blue-france fr-background-action-low--blue-france`}
+            className={
+              'fr-tag fr-text-action-high--blue-france fr-background-action-low--blue-france'
+            }
           >
             {complexity}
           </span>
@@ -197,7 +312,7 @@ function QuestionRow({
   )
 }
 
-function QuestionDetail({ question, theme, operator, onBack, complexity }) {
+function QuestionDetail({ question, theme, operators, onBack, complexity }) {
   const [isStreamFinished, setIsStreamFinished] = useState(false)
   const [streamId, setStreamId] = useState(null)
 
@@ -213,7 +328,7 @@ function QuestionDetail({ question, theme, operator, onBack, complexity }) {
           setIsStreamFinished={setIsStreamFinished}
           setStreamId={setStreamId}
           theme={theme}
-          operator={operator}
+          operators={operators}
           complexity={complexity}
         />
         <EvaluationPannel
@@ -445,14 +560,14 @@ function EvaluationPannel({
 function AnswerPannel({
   theme,
   question,
-  operator,
+  operators,
   setIsStreamFinished,
   complexity,
   setStreamId,
 }: {
   theme: string
   question: string
-  operator: string
+  operators: string
   setIsStreamFinished: (value: boolean) => void
   complexity: string
   setStreamId: (value: number) => void
@@ -464,7 +579,7 @@ function AnswerPannel({
   const prompt = {
     chat_type: 'evaluations',
     themes: [theme],
-    operator: [operator],
+    operators: [operators],
   }
 
   // Auto-scroll to bottom when new content is added
@@ -555,7 +670,7 @@ function AnswerPannel({
                 {theme}
               </p>
               <p className="fr-tag fr-tag--sm fr-background-contrast--blue-france">
-                {operator}
+                {operators}
               </p>
               <p className="fr-tag fr-tag--sm fr-background-contrast--blue-france">
                 {complexity}
