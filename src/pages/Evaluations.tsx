@@ -3,44 +3,30 @@ const modelMode: string = import.meta.env.VITE_MODEL_MODE as string
 const modelTemperature: number = import.meta.env.VITE_MODEL_TEMPERATURE as number
 
 import { chatUrl, streamUrl, useAddFeedback } from '@api'
+import { fr } from '@codegouvfr/react-dsfr'
 import { Notice } from '@codegouvfr/react-dsfr/Notice'
 import StarIcon from '@mui/icons-material/Star'
 import Box from '@mui/material/Box'
 import Rating from '@mui/material/Rating'
-import { useFetch } from '@utils/hooks'
-import { setHeaders } from '@utils/setData'
-import { TextWithSources } from 'components/Sources/TextWithSources'
-import { EventSourcePolyfill } from 'event-source-polyfill'
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { onCloseStream } from '../utils/eventsEmitter'
-import { useNavigate, useLocation } from 'react-router-dom'
 import {
-  negativeTags,
-  positiveTags,
   type NegativeFeedbackArray,
   type NegativeReason,
   type PositiveFeedbackArray,
   type PositiveReason,
+  negativeTags,
+  positiveTags,
 } from '@types'
-import { LoadingSpinner } from 'components/LoadingSpinner'
-import { set } from 'valibot'
+import { useFetch } from '@utils/hooks'
+import { setHeaders } from '@utils/setData'
 import Separator from 'components/Global/Separator'
-import { fr } from '@codegouvfr/react-dsfr'
+import { LoadingSpinner } from 'components/LoadingSpinner'
+import { TextWithSources } from 'components/Sources/TextWithSources'
+import { EventSourcePolyfill } from 'event-source-polyfill'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { onCloseStream } from '../utils/eventsEmitter'
 //import ShowError from 'components/Error/ShowError'
 
-const difficultyLevels = ['Simple', 'Intermédiaire', 'Complexe']
-function difficultyLevelsToColor(difficulty: string) {
-  switch (difficulty) {
-    case 'Simple':
-      return fr.colors.decisions.background.alt.greenEmeraude.active
-    case 'Intermédiaire':
-      return fr.colors.decisions.background.actionLow.yellowTournesol.default
-    case 'Complexe':
-      return fr.colors.decisions.background.open.redMarianne.active
-    default:
-      return 'fr-tag--blue'
-  }
-}
 const questions = [
   {
     question:
@@ -240,12 +226,6 @@ function Questions({ navigate }) {
     setFilteredQuestions(shuffledQuestions)
   }, [evaluatedQuestions])
 
-  const handleEvaluation = (index) => {
-    const newEvaluatedQuestions = [...evaluatedQuestions, index]
-    localStorage.setItem('evaluatedQuestions', JSON.stringify(newEvaluatedQuestions))
-    setEvaluatedQuestions(newEvaluatedQuestions)
-  }
-
   return (
     <div className="flex flex-col">
       {filteredQuestions.length > 0 ? (
@@ -262,7 +242,6 @@ function Questions({ navigate }) {
                 state: { selectedCardIndex: question.originalIndex },
               })
             }
-            onEvaluate={() => handleEvaluation(question.originalIndex)}
           />
         ))
       ) : (
@@ -281,7 +260,6 @@ function QuestionRow({
   operators,
   complexity,
   onSelect,
-  onEvaluate,
 }: {
   index: number
   question: string
@@ -289,11 +267,9 @@ function QuestionRow({
   operators: string[]
   complexity: string
   onSelect: () => void
-  onEvaluate: () => void
 }) {
   const handleClick = () => {
     onSelect()
-    onEvaluate()
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -368,6 +344,7 @@ function QuestionDetail({ question, theme, operators, onBack, complexity }) {
           isStreamFinished={isStreamFinished}
           onBack={onBack}
           streamId={streamId}
+          question={question}
         />
       </div>
     </div>
@@ -378,10 +355,12 @@ function EvaluationPannel({
   isStreamFinished,
   onBack,
   streamId,
+  question,
 }: {
   isStreamFinished: boolean
   onBack: () => void
   streamId: number | null
+  question: string
 }) {
   const [positiveFeedback, setPositiveFeedback] = useState<PositiveFeedbackArray>([])
   const [negativeFeedback, setNegativeFeedback] = useState<NegativeFeedbackArray>([])
@@ -407,6 +386,13 @@ function EvaluationPannel({
     setNegativeFeedback((prev) =>
       prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
     )
+  }
+  const addQuestionToLocalStorage = (questionIndex: number) => {
+    const evaluatedQuestions = JSON.parse(
+      localStorage.getItem('evaluatedQuestions') || '[]',
+    )
+    const updatedQuestions = [...evaluatedQuestions, questionIndex]
+    localStorage.setItem('evaluatedQuestions', JSON.stringify(updatedQuestions))
   }
   const handleSubmit = () => {
     setShowErrorNotice(false)
@@ -452,6 +438,8 @@ function EvaluationPannel({
               return newProgress
             })
           }, intervalTime)
+          const questionIndex = questions.findIndex((q) => q.question === question)
+          addQuestionToLocalStorage(questionIndex)
         },
         onError: (error) => {
           setShowErrorNotice(true)
@@ -805,8 +793,8 @@ function AlertNotice({
           </span>
           <a
             target="_blank"
-            rel="noopener external"
-            title="[À MODIFIER - Intitulé] - nouvelle fenêtre"
+            rel="noopener external noreferrer"
+            title="Formulaire de contact"
             href="/contact"
             className="fr-notice__link"
           >
