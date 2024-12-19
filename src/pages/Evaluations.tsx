@@ -3,7 +3,6 @@ const modelMode: string = import.meta.env.VITE_MODEL_MODE as string
 const modelTemperature: number = import.meta.env.VITE_MODEL_TEMPERATURE as number
 
 import { chatUrl, streamUrl, useAddFeedback } from '@api'
-import { fr } from '@codegouvfr/react-dsfr'
 import { Notice } from '@codegouvfr/react-dsfr/Notice'
 import StarIcon from '@mui/icons-material/Star'
 import Box from '@mui/material/Box'
@@ -190,8 +189,8 @@ export default function Evaluations() {
           <p>
             Dans le cadre de l’expérimentation, nous entamons une phase de ré-évaluation
             du modèle proposé sur des questions pré-définies. Le travail s’effectue sur un
-            échantillon de X questions à évaluer. Nous en présentons à chaque évaluation 5
-            de manière aléatoire.
+            échantillon de 21 questions à évaluer. Nous en présentons à chaque évaluation
+            5 de manière aléatoire.
           </p>
           <Questions navigate={navigate} />
         </>
@@ -281,15 +280,14 @@ function QuestionRow({
 
   return (
     <>
-      <div
-        className="min-h-[15vh] cursor-pointer p-4 hover:bg-gray-100 focus:bg-gray-200 transition flex flex-col justify-center"
+      <button
+        type="button"
+        className="min-h-[15vh] cursor-pointer p-6 hover:bg-gray-100 focus:bg-gray-200 transition flex flex-col text-left"
         onClick={handleClick}
-        onKeyDown={handleKeyDown}
         tabIndex={0}
-        role="button"
       >
-        <p>{question}</p>
-        <div className="flex gap-2 mt-2">
+        <p className="text-left">{question}</p>
+        <div className="flex gap-2 fr-mt-2w">
           <span
             className={
               'fr-tag fr-text-action-high--blue-france fr-background-action-low--blue-france'
@@ -297,9 +295,9 @@ function QuestionRow({
           >
             {theme}
           </span>
-          {operators.map((operator, index) => (
+          {operators.map((operator, idx) => (
             <span
-              key={index}
+              key={idx}
               className={
                 'fr-tag fr-text-action-high--blue-france fr-background-action-low--blue-france'
               }
@@ -315,7 +313,7 @@ function QuestionRow({
             {complexity}
           </span>
         </div>
-      </div>
+      </button>
       <Separator />
     </>
   )
@@ -707,7 +705,7 @@ function AnswerPannel({
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className="shadow-inner fr-mt-1v rounded-lg fr-px-2w h-[50vh] overflow-scroll"
+            className="shadow-inner fr-mt-1v rounded-lg fr-px-2w h-[50vh] overflow-y-scroll"
           >
             <p>
               <TextWithSources text={response} />
