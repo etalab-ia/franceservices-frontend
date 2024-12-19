@@ -7,101 +7,197 @@ import { Notice } from '@codegouvfr/react-dsfr/Notice'
 import StarIcon from '@mui/icons-material/Star'
 import Box from '@mui/material/Box'
 import Rating from '@mui/material/Rating'
-import { useFetch } from '@utils/hooks'
-import { setHeaders } from '@utils/setData'
-import { TextWithSources } from 'components/Sources/TextWithSources'
-import { EventSourcePolyfill } from 'event-source-polyfill'
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { onCloseStream } from '../utils/eventsEmitter'
 import {
-  negativeTags,
-  positiveTags,
   type NegativeFeedbackArray,
   type NegativeReason,
   type PositiveFeedbackArray,
   type PositiveReason,
+  negativeTags,
+  positiveTags,
 } from '@types'
-import { LoadingSpinner } from 'components/LoadingSpinner'
-import { set } from 'valibot'
+import { useFetch } from '@utils/hooks'
+import { setHeaders } from '@utils/setData'
 import Separator from 'components/Global/Separator'
-import { fr } from '@codegouvfr/react-dsfr'
+import { LoadingSpinner } from 'components/LoadingSpinner'
+import { TextWithSources } from 'components/Sources/TextWithSources'
+import { EventSourcePolyfill } from 'event-source-polyfill'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { onCloseStream } from '../utils/eventsEmitter'
 //import ShowError from 'components/Error/ShowError'
 
-const difficultyLevels = ['Simple', 'Intermédiaire', 'Complexe']
-function difficultyLevelsToColor(difficulty: string) {
-  switch (difficulty) {
-    case 'Simple':
-      return fr.colors.decisions.background.alt.greenEmeraude.active
-    case 'Intermédiaire':
-      return fr.colors.decisions.background.actionLow.yellowTournesol.default
-    case 'Complexe':
-      return fr.colors.decisions.background.open.redMarianne.active
-    default:
-      return 'fr-tag--blue'
-  }
-}
 const questions = [
   {
     question:
-      'Un usager relevant de la msa travaille maintenant dans le privé depuis 1 an. comment doit il faire pour que son dossier soit muté à la cpam ?',
-    theme: 'Retraite',
-    operator: 'CPAM',
-    complexity: 'Complexe',
-  },
-  {
-    question:
-      "Quels sont les documents nécessaires pour faire une demande de prime d'activité ?",
-    theme: 'Prime',
-    operator: 'CAF',
+      'Comment changer le titulaire sur la carte grise suite au décès du conjoint ?',
+    theme: 'Immatriculation',
+    operators: ['ANTS / France titres'],
     complexity: 'Simple',
   },
   {
     question:
-      "Existe-t-il une aide sociale pour participer au coût d'un déménagement réalisé par un professionnel?",
-    theme: 'Déménagement',
-    operator: 'CAF',
+      "L'usager souhaite faire la carte grise d'un véhicule acquis en 2021 mais n'a plus le certificat de cession. Comment faire ?",
+    theme: 'Immatriculation',
+    operators: ['ANTS / France titres'],
     complexity: 'Intermédiaire',
   },
   {
     question:
-      "Une personne en EHPAD souhaite faire une demande d'APL à la CAF. Quelles sont les pièces à joindre à sa demande ?",
-    theme: 'APL',
-    operator: 'CAF',
+      "Une usagère, dont son frère est décédé et était titulaire de la carte grise, a hérité du véhicule. Si elle ne veut pas conserver le véhicule, peut-elle le vendre directement sans mettre la carte grise à son nom, sachant que le véhicule n'a pas roulé depuis le décès mais que le décès était il y a plus de 3 mois ?",
+    theme: 'Immatriculation',
+    operators: ['ANTS / France titres'],
+    complexity: 'Complexe',
+  },
+  {
+    question: "Quel cerfa dois-je fournir pour une demande d'aide au logement à la CAF ?",
+    theme: 'Logement',
+    operators: ['CAF'],
+    complexity: 'Simple',
+  },
+  {
+    question:
+      "L'usagère, âgée de 57 ans, est en accident de travail depuis presque 6 mois suite à une mission d'intérim. Elle est par ailleurs reconnue travailleur handicapé. Elle va passer en longue maladie mais n'a pas d'employeur puisque sa mission d'intérim s'est terminée depuis. Elle vit seule et n'a pas d'enfant. Quels sont ses droits financiers ? A-t-elle droit au RSA ?",
+    theme: 'RSA',
+    operators: ['CAF'],
     complexity: 'Complexe',
   },
   {
     question:
-      "Comment signaler un changement d'adresse auprès des administrations en une seule fois ?",
-    theme: 'Démarches',
-    operator: 'ANTS',
+      "Quelle est le montant maximum pour un couple qui souhaite bénéficier de l'ASPA ?",
+    theme: 'ASPA',
+    operators: ['CARSAT'],
     complexity: 'Simple',
+  },
+  {
+    question: 'Combien faut-il de trimestres cotisés pour une retraite à taux plein ?',
+    theme: 'Retraite',
+    operators: ['CARSAT'],
+    complexity: 'Simple',
+  },
+  {
+    question:
+      "Une usagère souhaite savoir si le fait d'être à mi-temps thérapeutique pour une durée de 6 mois engendre un changement dans la date de départ à la retraite ou sur le montant de sa retraite ?",
+    theme: 'Retraite',
+    operators: ['CARSAT'],
+    complexity: 'Intermédiaire',
+  },
+  {
+    question:
+      "L'usager ne comprend pas pourquoi sa pension de retraite a diminué alors qu'il y a eu une revalorisation des retraites de 5,3% au premier janvier 2024. Pourquoi est-ce que sa pension de retraite diminue ?",
+    theme: 'Retraite',
+    operators: ['CARSAT'],
+    complexity: 'Complexe',
+  },
+  {
+    question:
+      'Une usagère part en vacances au Maroc, elle souhaite savoir si les dépenses de santé au Maroc peuvent être prises en charge par la CPAM ?',
+    theme: 'Aides financières',
+    operators: ['CPAM'],
+    complexity: 'Simple',
+  },
+  {
+    question:
+      "L'usager ne perçoit plus sa pension d'invalidité. La CPAM peut-elle arrêter le versement de la prestation après 2 ans de paiement alors que l'usager n'a jamais rencontré de médecin conseil ?",
+    theme: "Pension d'invalidité",
+    operators: ['CPAM'],
+    complexity: 'Intermédiaire',
+  },
+  {
+    question:
+      'Un usager relevant de la MSA travaille maintenant dans le privé depuis 1 an. Comment doit-il faire pour que son dossier soit muté à la CPAM ?',
+    theme: 'Droits',
+    operators: ['CPAM'],
+    complexity: 'Complexe',
+  },
+  {
+    question: "Quelles sont les conditions d'exonération de taxe foncière ?",
+    theme: 'Impôts',
+    operators: ['DGFIP'],
+    complexity: 'Simple',
+  },
+  {
+    question:
+      "Comment est calculé le montant de la taxe d'ordure ménagère pour des locations foncières ?",
+    theme: 'Impôts',
+    operators: ['DGFIP'],
+    complexity: 'Simple',
+  },
+  {
+    question:
+      "Sur GMBI, est-ce qu'un bien apparaît sur les espaces des deux conjoints lorsque le bien est en indivision ?",
+    theme: 'GMBI',
+    operators: ['DGFIP'],
+    complexity: 'Intermédiaire',
+  },
+  {
+    question:
+      "L'usager a-t-il le droit à des indemnités France travail après une démission ?",
+    theme: 'Emploi',
+    operators: ['France travail'],
+    complexity: 'Simple',
+  },
+  {
+    question: 'Quelle est la démarche pour demander son casier judiciaire ?',
+    theme: 'Casier judiciaire',
+    operators: ['Ministère de la Justice'],
+    complexity: 'Simple',
+  },
+  {
+    question:
+      "L'usager est affilié à la MSA. Comment procéder au renouvellement de sa carte vitale ?",
+    theme: 'Carte vitale',
+    operators: ['MSA'],
+    complexity: 'Simple',
+  },
+  {
+    question: 'Comment recourir au médiateur de la Caf ou de la MSA ?',
+    theme: 'Médiation',
+    operators: ['MSA', 'CAF'],
+    complexity: 'Intermédiaire',
+  },
+  {
+    question: 'Comment demander un chèque énergie 2023 non reçu ?',
+    theme: 'Chèque énergie',
+    operators: ['MTE'],
+    complexity: 'Simple',
+  },
+  {
+    question:
+      "Une usagère n'ayant pas fait sa déclaration de revenu fiscal depuis 2021 peut-elle avoir droit au chèque énergie ?",
+    theme: 'Chèque énergie',
+    operators: ['MTE'],
+    complexity: 'Intermédiaire',
   },
 ]
 
 export default function Evaluations() {
-  const [selectedCardIndex, setSelectedCardIndex] = useState(null)
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  // Determine whether we're on the panel or the questions list
+  const selectedCardIndex = location.state?.selectedCardIndex ?? null
 
   const handleBack = () => {
-    setSelectedCardIndex(null)
+    navigate('/evaluations', { state: null })
   }
 
   return (
-    <div className="flex flex-col gap-4  mt-8 min-h-screen fr-container">
+    <div className="flex flex-col gap-4 mt-8 min-h-screen fr-container">
       {selectedCardIndex === null ? (
         <>
           <h3>Sélectionnez une question</h3>
           <p>
-            Dans le cadre de l’expérimentation nous entamons une phase de ré-évaluation du
-            modèle proposé sur des questions pré-définies. Le travail s’effectue sur un
-            échantillon de X questions à évaluer. Nous en présentons à chaque évaluation 5
-            de manière aléatoire.
+            Dans le cadre de l’expérimentation, nous entamons une phase de ré-évaluation
+            du modèle proposé sur des questions pré-définies. Le travail s’effectue sur un
+            échantillon de 21 questions à évaluer. Nous en présentons à chaque évaluation
+            5 de manière aléatoire.
           </p>
-          <Questions setSelectedCardIndex={setSelectedCardIndex} />
+          <Questions navigate={navigate} />
         </>
       ) : (
         <QuestionDetail
           question={questions[selectedCardIndex].question}
-          operator={questions[selectedCardIndex].operator}
+          operators={questions[selectedCardIndex].operators}
           theme={questions[selectedCardIndex].theme}
           complexity={questions[selectedCardIndex].complexity}
           onBack={handleBack}
@@ -111,29 +207,47 @@ export default function Evaluations() {
   )
 }
 
-function Questions({ setSelectedCardIndex }) {
-  // const { data: questionList, error, isLoading } = useGetEvaluationQuestions()
-  // if (error) {
-  //   console.error(error)
-  //   //@ts-expect-error
-  //   return <ShowError message={error.message} errorNumber={error.status} />
-  // }
+function Questions({ navigate }) {
+  const [filteredQuestions, setFilteredQuestions] = useState([])
+  const [evaluatedQuestions, setEvaluatedQuestions] = useState(
+    JSON.parse(localStorage.getItem('evaluatedQuestions') || '[]'),
+  )
+
   useEffect(() => {
-    console.log('render')
-  }, [])
+    const unevaluatedQuestions = questions.filter(
+      (q, index) => !evaluatedQuestions.includes(index),
+    )
+    const shuffledQuestions = unevaluatedQuestions
+      .map((q, index) => ({ ...q, originalIndex: questions.indexOf(q) }))
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 5)
+
+    setFilteredQuestions(shuffledQuestions)
+  }, [evaluatedQuestions])
+
   return (
     <div className="flex flex-col">
-      {questions.map((question, index) => (
-        <QuestionRow
-          key={index}
-          index={index}
-          question={question.question}
-          theme={question.theme}
-          operator={question.operator}
-          setSelectedCardIndex={setSelectedCardIndex}
-          complexity={question.complexity}
-        />
-      ))}
+      {filteredQuestions.length > 0 ? (
+        filteredQuestions.map((question, idx) => (
+          <QuestionRow
+            key={idx}
+            index={question.originalIndex}
+            question={question.question}
+            theme={question.theme}
+            operators={question.operators}
+            complexity={question.complexity}
+            onSelect={() =>
+              navigate('/evaluations', {
+                state: { selectedCardIndex: question.originalIndex },
+              })
+            }
+          />
+        ))
+      ) : (
+        <p className="font-bold fr-text--xl self-center justify-self-center fr-mt-4w">
+          Il n'y a plus de questions à évaluer. Merci pour votre contribution !
+        </p>
+      )}
     </div>
   )
 }
@@ -142,19 +256,19 @@ function QuestionRow({
   index,
   question,
   theme,
-  operator,
+  operators,
   complexity,
-  setSelectedCardIndex,
+  onSelect,
 }: {
   index: number
   question: string
   theme: string
-  operator: string
+  operators: string[]
   complexity: string
-  setSelectedCardIndex: (index: number) => void
+  onSelect: () => void
 }) {
   const handleClick = () => {
-    setSelectedCardIndex(index)
+    onSelect()
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -166,38 +280,46 @@ function QuestionRow({
 
   return (
     <>
-      <div
-        className="min-h-[15vh] cursor-pointer p-4 hover:bg-gray-100 focus:bg-gray-200  transition flex flex-col justify-center"
+      <button
+        type="button"
+        className="min-h-[15vh] cursor-pointer p-6 hover:bg-gray-100 focus:bg-gray-200 transition flex flex-col text-left"
         onClick={handleClick}
-        onKeyDown={handleKeyDown}
         tabIndex={0}
-        role="button"
       >
-        <p>{question}</p>
-        <div className="flex gap-2 mt-2">
+        <p className="text-left">{question}</p>
+        <div className="flex gap-2 fr-mt-2w">
           <span
-            className={`fr-tag fr-text-action-high--blue-france fr-background-action-low--blue-france`}
+            className={
+              'fr-tag fr-text-action-high--blue-france fr-background-action-low--blue-france'
+            }
           >
             {theme}
           </span>
+          {operators.map((operator, idx) => (
+            <span
+              key={idx}
+              className={
+                'fr-tag fr-text-action-high--blue-france fr-background-action-low--blue-france'
+              }
+            >
+              {operator}
+            </span>
+          ))}
           <span
-            className={`fr-tag fr-text-action-high--blue-france fr-background-action-low--blue-france`}
-          >
-            {operator}
-          </span>
-          <span
-            className={`fr-tag fr-text-action-high--blue-france fr-background-action-low--blue-france`}
+            className={
+              'fr-tag fr-text-action-high--blue-france fr-background-action-low--blue-france'
+            }
           >
             {complexity}
           </span>
         </div>
-      </div>
+      </button>
       <Separator />
     </>
   )
 }
 
-function QuestionDetail({ question, theme, operator, onBack, complexity }) {
+function QuestionDetail({ question, theme, operators, onBack, complexity }) {
   const [isStreamFinished, setIsStreamFinished] = useState(false)
   const [streamId, setStreamId] = useState(null)
 
@@ -213,13 +335,14 @@ function QuestionDetail({ question, theme, operator, onBack, complexity }) {
           setIsStreamFinished={setIsStreamFinished}
           setStreamId={setStreamId}
           theme={theme}
-          operator={operator}
+          operators={operators}
           complexity={complexity}
         />
         <EvaluationPannel
           isStreamFinished={isStreamFinished}
           onBack={onBack}
           streamId={streamId}
+          question={question}
         />
       </div>
     </div>
@@ -230,10 +353,12 @@ function EvaluationPannel({
   isStreamFinished,
   onBack,
   streamId,
+  question,
 }: {
   isStreamFinished: boolean
   onBack: () => void
   streamId: number | null
+  question: string
 }) {
   const [positiveFeedback, setPositiveFeedback] = useState<PositiveFeedbackArray>([])
   const [negativeFeedback, setNegativeFeedback] = useState<NegativeFeedbackArray>([])
@@ -260,9 +385,15 @@ function EvaluationPannel({
       prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
     )
   }
+  const addQuestionToLocalStorage = (questionIndex: number) => {
+    const evaluatedQuestions = JSON.parse(
+      localStorage.getItem('evaluatedQuestions') || '[]',
+    )
+    const updatedQuestions = [...evaluatedQuestions, questionIndex]
+    localStorage.setItem('evaluatedQuestions', JSON.stringify(updatedQuestions))
+  }
   const handleSubmit = () => {
     setShowErrorNotice(false)
-    // TODO: BACK END LOGIC
     if (isSubmitDisabled) return
     if (!streamId) {
       setShowErrorNotice(true)
@@ -305,6 +436,8 @@ function EvaluationPannel({
               return newProgress
             })
           }, intervalTime)
+          const questionIndex = questions.findIndex((q) => q.question === question)
+          addQuestionToLocalStorage(questionIndex)
         },
         onError: (error) => {
           setShowErrorNotice(true)
@@ -445,14 +578,14 @@ function EvaluationPannel({
 function AnswerPannel({
   theme,
   question,
-  operator,
+  operators,
   setIsStreamFinished,
   complexity,
   setStreamId,
 }: {
   theme: string
   question: string
-  operator: string
+  operators: string
   setIsStreamFinished: (value: boolean) => void
   complexity: string
   setStreamId: (value: number) => void
@@ -464,7 +597,7 @@ function AnswerPannel({
   const prompt = {
     chat_type: 'evaluations',
     themes: [theme],
-    operator: [operator],
+    operators: operators,
   }
 
   // Auto-scroll to bottom when new content is added
@@ -555,7 +688,7 @@ function AnswerPannel({
                 {theme}
               </p>
               <p className="fr-tag fr-tag--sm fr-background-contrast--blue-france">
-                {operator}
+                {operators}
               </p>
               <p className="fr-tag fr-tag--sm fr-background-contrast--blue-france">
                 {complexity}
@@ -572,7 +705,7 @@ function AnswerPannel({
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className="shadow-inner fr-mt-1v rounded-lg fr-px-2w h-[50vh] overflow-scroll"
+            className="shadow-inner fr-mt-1v rounded-lg fr-px-2w h-[50vh] overflow-y-scroll"
           >
             <p>
               <TextWithSources text={response} />
@@ -658,8 +791,8 @@ function AlertNotice({
           </span>
           <a
             target="_blank"
-            rel="noopener external"
-            title="[À MODIFIER - Intitulé] - nouvelle fenêtre"
+            rel="noopener external noreferrer"
+            title="Formulaire de contact"
             href="/contact"
             className="fr-notice__link"
           >
