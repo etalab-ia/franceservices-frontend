@@ -13,6 +13,7 @@ import { TextWithSources } from 'components/Sources/TextWithSources'
 import { EventSourcePolyfill } from 'event-source-polyfill'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { onCloseStream } from '../utils/eventsEmitter'
+import { useNavigate, useLocation } from 'react-router-dom'
 import {
   negativeTags,
   positiveTags,
@@ -185,24 +186,28 @@ const questions = [
 ]
 
 export default function Evaluations() {
-  const [selectedCardIndex, setSelectedCardIndex] = useState(null)
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  // Determine whether we're on the panel or the questions list
+  const selectedCardIndex = location.state?.selectedCardIndex ?? null
 
   const handleBack = () => {
-    setSelectedCardIndex(null)
+    navigate('/evaluations', { state: null })
   }
 
   return (
-    <div className="flex flex-col gap-4  mt-8 min-h-screen fr-container">
+    <div className="flex flex-col gap-4 mt-8 min-h-screen fr-container">
       {selectedCardIndex === null ? (
         <>
           <h3>Sélectionnez une question</h3>
           <p>
-            Dans le cadre de l’expérimentation nous entamons une phase de ré-évaluation du
-            modèle proposé sur des questions pré-définies. Le travail s’effectue sur un
+            Dans le cadre de l’expérimentation, nous entamons une phase de ré-évaluation
+            du modèle proposé sur des questions pré-définies. Le travail s’effectue sur un
             échantillon de X questions à évaluer. Nous en présentons à chaque évaluation 5
             de manière aléatoire.
           </p>
-          <Questions setSelectedCardIndex={setSelectedCardIndex} />
+          <Questions navigate={navigate} />
         </>
       ) : (
         <QuestionDetail
@@ -217,29 +222,54 @@ export default function Evaluations() {
   )
 }
 
-function Questions({ setSelectedCardIndex }) {
-  // const { data: questionList, error, isLoading } = useGetEvaluationQuestions()
-  // if (error) {
-  //   console.error(error)
-  //   //@ts-expect-error
-  //   return <ShowError message={error.message} errorNumber={error.status} />
-  // }
+function Questions({ navigate }) {
+  const [filteredQuestions, setFilteredQuestions] = useState([])
+  const [evaluatedQuestions, setEvaluatedQuestions] = useState(
+    JSON.parse(localStorage.getItem('evaluatedQuestions') || '[]'),
+  )
+
   useEffect(() => {
-    console.log('render')
-  }, [])
+    const unevaluatedQuestions = questions.filter(
+      (q, index) => !evaluatedQuestions.includes(index),
+    )
+    const shuffledQuestions = unevaluatedQuestions
+      .map((q, index) => ({ ...q, originalIndex: questions.indexOf(q) }))
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 5)
+
+    setFilteredQuestions(shuffledQuestions)
+  }, [evaluatedQuestions])
+
+  const handleEvaluation = (index) => {
+    const newEvaluatedQuestions = [...evaluatedQuestions, index]
+    localStorage.setItem('evaluatedQuestions', JSON.stringify(newEvaluatedQuestions))
+    setEvaluatedQuestions(newEvaluatedQuestions)
+  }
+
   return (
     <div className="flex flex-col">
-      {questions.map((question, index) => (
-        <QuestionRow
-          key={index}
-          index={index}
-          question={question.question}
-          theme={question.theme}
-          operators={question.operators}
-          setSelectedCardIndex={setSelectedCardIndex}
-          complexity={question.complexity}
-        />
-      ))}
+      {filteredQuestions.length > 0 ? (
+        filteredQuestions.map((question, idx) => (
+          <QuestionRow
+            key={idx}
+            index={question.originalIndex}
+            question={question.question}
+            theme={question.theme}
+            operators={question.operators}
+            complexity={question.complexity}
+            onSelect={() =>
+              navigate('/evaluations', {
+                state: { selectedCardIndex: question.originalIndex },
+              })
+            }
+            onEvaluate={() => handleEvaluation(question.originalIndex)}
+          />
+        ))
+      ) : (
+        <p className="font-bold fr-text--xl self-center justify-self-center fr-mt-4w">
+          Il n'y a plus de questions à évaluer. Merci pour votre contribution !
+        </p>
+      )}
     </div>
   )
 }
@@ -250,17 +280,20 @@ function QuestionRow({
   theme,
   operators,
   complexity,
-  setSelectedCardIndex,
+  onSelect,
+  onEvaluate,
 }: {
   index: number
   question: string
   theme: string
   operators: string[]
   complexity: string
-  setSelectedCardIndex: (index: number) => void
+  onSelect: () => void
+  onEvaluate: () => void
 }) {
   const handleClick = () => {
-    setSelectedCardIndex(index)
+    onSelect()
+    onEvaluate()
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -273,7 +306,7 @@ function QuestionRow({
   return (
     <>
       <div
-        className="min-h-[15vh] cursor-pointer p-4 hover:bg-gray-100 focus:bg-gray-200  transition flex flex-col justify-center"
+        className="min-h-[15vh] cursor-pointer p-4 hover:bg-gray-100 focus:bg-gray-200 transition flex flex-col justify-center"
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         tabIndex={0}
@@ -377,7 +410,6 @@ function EvaluationPannel({
   }
   const handleSubmit = () => {
     setShowErrorNotice(false)
-    // TODO: BACK END LOGIC
     if (isSubmitDisabled) return
     if (!streamId) {
       setShowErrorNotice(true)
@@ -579,7 +611,7 @@ function AnswerPannel({
   const prompt = {
     chat_type: 'evaluations',
     themes: [theme],
-    operators: [operators],
+    operators: operators,
   }
 
   // Auto-scroll to bottom when new content is added
