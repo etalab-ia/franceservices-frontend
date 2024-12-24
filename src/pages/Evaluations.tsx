@@ -465,7 +465,7 @@ function EvaluationPannel({
                 </div>
               </div>
               {/* Feedback tags*/}
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-4">
                 {/* Positive tags */}
                 <div className="flex gap-2 items-center">
                   <span className={'fr-icon-thumbs-up'} />
@@ -486,7 +486,7 @@ function EvaluationPannel({
                 {/* Negative tags */}
                 <div className="flex items-center gap-2">
                   <span className={'fr-icon-thumbs-down '} />
-                  <div className="flex gap-2">
+                  <div className="  flex flex-1 flex-wrap gap-2">
                     {Object.entries(negativeTags).map(([tagKey, tagValue]) => (
                       <button
                         key={tagKey}

@@ -140,7 +140,13 @@ export type ChatCompletion = {
  ****************************************************************/
 
 export type PositiveReason = 'clair' | 'synthetique' | 'complet' | 'sources_fiables'
-export type NegativeReason = 'incorrect' | 'incoherent' | 'manque_de_sources'
+export type NegativeReason =
+  | 'erreurs_grammaires'
+  | 'hallucinations'
+  | 'imprecisions'
+  | 'inconsistance'
+  | 'manque_de_sources'
+  | 'trop_long'
 
 export type PositiveFeedbackArray = Array<PositiveReason>
 export type NegativeFeedbackArray = Array<NegativeReason>
@@ -156,9 +162,12 @@ export const positiveTags: {
 export const negativeTags: {
   [index: string]: NegativeReason
 } = {
-  Incorrect: 'incorrect',
-  Incohérent: 'incoherent',
   'Manque de sources': 'manque_de_sources',
+  Hallucinations: 'hallucinations',
+  'Erreurs grammaticales': 'erreurs_grammaires',
+  Inconsistance: 'inconsistance',
+  Imprécisions: 'imprecisions',
+  'Trop long': 'trop_long',
 }
 
 /**œ
