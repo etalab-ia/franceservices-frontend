@@ -163,10 +163,10 @@ export const negativeTags: {
   [index: string]: NegativeReason
 } = {
   'Manque de sources': 'manque_de_sources',
-  Hallucinations: 'hallucinations',
-  'Erreurs grammaticales': 'erreurs_grammaires',
-  Inconsistance: 'inconsistance',
-  Imprécisions: 'imprecisions',
+  'Les éléments sont faux': 'hallucinations',
+  'Erreurs de grammaire': 'erreurs_grammaires',
+  Incohérent: 'inconsistance',
+  Imprécis: 'imprecisions',
   'Trop long': 'trop_long',
 }
 
