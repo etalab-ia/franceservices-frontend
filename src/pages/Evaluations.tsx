@@ -24,6 +24,7 @@ import { EventSourcePolyfill } from 'event-source-polyfill'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { onCloseStream } from '../utils/eventsEmitter'
+import { fr } from '@codegouvfr/react-dsfr'
 //import ShowError from 'components/Error/ShowError'
 
 const questions = [
@@ -185,12 +186,12 @@ export default function Evaluations() {
     <div className="flex flex-col gap-4 mt-8 min-h-screen fr-container">
       {selectedCardIndex === null ? (
         <>
-          <h3>Sélectionnez une question</h3>
+          <h3>Sélectionnez une question pour évaluer Albert</h3>
           <p>
-            Dans le cadre de l’expérimentation, nous entamons une phase de ré-évaluation
-            du modèle proposé sur des questions pré-définies. Le travail s’effectue sur un
-            échantillon de 21 questions à évaluer. Nous en présentons à chaque évaluation
-            5 de manière aléatoire.
+            Explorez et évaluez la pertinence des réponses générées par notre modèle IA à
+            travers cet échantillon de questions prédéfinies. <br />
+            Votre expertise nous aidera à mesurer la qualité de notre assistant
+            conversationnel.
           </p>
           <Questions navigate={navigate} />
         </>
@@ -271,18 +272,11 @@ function QuestionRow({
     onSelect()
   }
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault()
-      handleClick()
-    }
-  }
-
   return (
     <>
       <button
         type="button"
-        className="min-h-[15vh] cursor-pointer p-6 hover:bg-gray-100 focus:bg-gray-200 transition flex flex-col text-left"
+        className="min-h-[10vh] cursor-pointer p-6 hover:bg-gray-100 focus:bg-gray-200 transition flex flex-col text-left"
         onClick={handleClick}
         tabIndex={0}
       >
@@ -306,9 +300,10 @@ function QuestionRow({
             </span>
           ))}
           <span
-            className={
-              'fr-tag fr-text-action-high--blue-france fr-background-action-low--blue-france'
-            }
+            style={{
+              backgroundColor: fr.colors.decisions.background.alt.brownCafeCreme.default,
+            }}
+            className={'fr-tag fr-text-action-high--blue-france'}
           >
             {complexity}
           </span>
@@ -454,7 +449,7 @@ function EvaluationPannel({
       >
         <div className="flex flex-col px-4">
           <div className="h-full flex flex-col">
-            <p className="font-bold fr-text--lg ">Comment qualifiez-vous la réponse ?</p>
+            <p className="font-bold fr-text--lg ">Qualifer la réponse</p>
             <div className="flex flex-col gap-8 ">
               {/* Global rating */}
 
@@ -465,7 +460,7 @@ function EvaluationPannel({
                 </div>
               </div>
               {/* Feedback tags*/}
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-8">
                 {/* Positive tags */}
                 <div className="flex gap-2 items-center">
                   <span className={'fr-icon-thumbs-up'} />
@@ -484,9 +479,9 @@ function EvaluationPannel({
                   </div>
                 </div>
                 {/* Negative tags */}
-                <div className="flex items-center gap-2">
-                  <span className={'fr-icon-thumbs-down '} />
-                  <div className="  flex flex-1 flex-wrap gap-2">
+                <div className="flex items-start gap-2">
+                  <span className="fr-icon-thumbs-down mt-2" />
+                  <div className="flex flex-1 flex-wrap gap-2">
                     {Object.entries(negativeTags).map(([tagKey, tagValue]) => (
                       <button
                         key={tagKey}
@@ -504,7 +499,7 @@ function EvaluationPannel({
               {/* Comments field */}
               <div>
                 <div className="flex items-center gap-2">
-                  <p className="font-bold">Complétez votre évaluation</p>
+                  <p className="font-bold">Commentaires complémentaires</p>
                   <p className="text-xs fr-text-mention--grey">(optionnel)</p>
                 </div>
                 <textarea
@@ -682,7 +677,7 @@ function AnswerPannel({
       >
         <div className="fr-text--lg fr-mb-2w">
           <div className="flex gap-3">
-            <p className="fr-text--lg font-bold">Votre séléction de question</p>
+            <p className="fr-text--lg font-bold">Question sélectionnée</p>
             <div className="flex gap-2 fr-mb-4w">
               <p className="fr-tag fr-tag--sm fr-background-contrast--blue-france">
                 {theme}
@@ -690,12 +685,18 @@ function AnswerPannel({
               <p className="fr-tag fr-tag--sm fr-background-contrast--blue-france">
                 {operators}
               </p>
-              <p className="fr-tag fr-tag--sm fr-background-contrast--blue-france">
+              <p
+                style={{
+                  backgroundColor:
+                    fr.colors.decisions.background.alt.brownCafeCreme.default,
+                }}
+                className="fr-tag fr-tag--sm"
+              >
                 {complexity}
               </p>
             </div>
           </div>
-          <div className="fr-px-2w fr-py-3v inline-flex w-full rounded fr-background-alt--blue-france">
+          <div className="fr-px-2w fr-py-3v fr-text--md inline-flex w-full rounded fr-background-alt--blue-france">
             {question}
           </div>
         </div>
@@ -730,16 +731,11 @@ function AnswerPannel({
 }
 
 const labels: { [index: string]: string } = {
-  0.5: 'Inutile',
-  1: 'Inutile+',
-  1.5: 'Médiocre',
-  2: 'Médiocre+',
-  2.5: 'Passable',
-  3: 'Passable+',
-  3.5: 'Bon',
-  4: 'Bon+',
-  4.5: 'Excellent',
-  5: 'Excellent+',
+  1: 'Inutile',
+  2: 'Médiocre',
+  3: 'Passable',
+  4: 'Bon',
+  5: 'Excellent',
 }
 
 function getLabelText(value: number) {
