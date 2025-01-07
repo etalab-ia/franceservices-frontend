@@ -480,7 +480,7 @@ function EvaluationPannel({
                 </div>
                 {/* Negative tags */}
                 <div className="flex items-start gap-2">
-                  <span className="fr-icon-thumbs-down mt-2" />
+                  <span className="fr-icon-thumbs-down mt-2.5" />
                   <div className="flex flex-1 flex-wrap gap-2">
                     {Object.entries(negativeTags).map(([tagKey, tagValue]) => (
                       <button
