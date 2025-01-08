@@ -57,7 +57,7 @@ Nous utilisons [ViteJS](https://vitejs.dev/) pour construire le projet donc chaq
 **VITE_ENVIRONMENT_NAME** -- une variable optionnelle utilisée pour afficher des fonctionnalités spécifiques pour les usagers de France Services.  
 
 **VITE_MODEL_NAME** -- le modèle à utiliser pour les requêtes, vous pouvez trouver une liste ici [ici](https://huggingface.co/AgentPublic)  
-**VITE_MODEL_MODE** -- chaque modèle possède plusieurs modes lui permettant de répondre différemment: rag, rag-gt  
+**VITE_MODEL_MODE** -- chaque modèle possède plusieurs modes lui permettant de répondre différemment: rag, rag-gt-operators-llama 
 **VITE_MODEL_TEMPERATURE** -- la température utilisée par le modèle pour générer la réponse. Entre 1 et 100  
 
  ## API 
