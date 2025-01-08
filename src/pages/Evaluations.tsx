@@ -186,12 +186,16 @@ export default function Evaluations() {
     <div className="flex flex-col gap-4 mt-8 min-h-screen fr-container">
       {selectedCardIndex === null ? (
         <>
-          <h3>Sélectionnez une question pour évaluer Albert</h3>
+          <h3>Sélectionner une question pour évaluer Albert</h3>
           <p>
             Explorez et évaluez la pertinence des réponses générées par notre modèle IA à
             travers cet échantillon de questions prédéfinies. <br />
             Votre expertise nous aidera à mesurer la qualité de notre assistant
             conversationnel.
+          </p>
+          <p>
+            Sélectionnez une question ci-dessous, les 5 questions s'affichent de manière
+            aléatoire sur 22 à évaluer.
           </p>
           <Questions navigate={navigate} />
         </>
@@ -449,7 +453,7 @@ function EvaluationPannel({
       >
         <div className="flex flex-col px-4">
           <div className="h-full flex flex-col">
-            <p className="font-bold fr-text--lg ">Qualifer la réponse</p>
+            <p className="font-bold fr-text--lg ">Qualifier la réponse</p>
             <div className="flex flex-col gap-8 ">
               {/* Global rating */}
 
@@ -734,8 +738,8 @@ const labels: { [index: string]: string } = {
   1: 'Inutile',
   2: 'Médiocre',
   3: 'Passable',
-  4: 'Bon',
-  5: 'Excellent',
+  4: 'Bonne',
+  5: 'Excellente',
 }
 
 function getLabelText(value: number) {
