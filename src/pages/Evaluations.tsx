@@ -774,7 +774,7 @@ export function HoverRating({ value, setValue }) {
         }}
         emptyIcon={
           <StarIcon
-            style={{ opacity: 0.55, border: 2, borderColor: 'white' }}
+            style={{ opacity: 0.2, color: 'var(--text-default-grey)' }}
             fontSize="inherit"
           />
         }
