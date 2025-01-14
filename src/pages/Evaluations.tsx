@@ -26,6 +26,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { onCloseStream } from '../utils/eventsEmitter'
 import { fr } from '@codegouvfr/react-dsfr'
 //import ShowError from 'components/Error/ShowError'
+import { useStreamText } from 'hooks/useStreamText'
 
 const questions = [
   {
@@ -591,7 +592,14 @@ function AnswerPannel({
 }) {
   const scrollRef = useRef(null)
   const [response, setResponse] = useState('')
+  const [isStreaming, setIsStreaming] = useState(false)
   const [isUserScrolledUp, setIsUserScrolledUp] = useState(false)
+
+  const displayedText = useStreamText({
+    text: response,
+    isStreaming,
+    speed: 0,
+  })
 
   const prompt = {
     chat_type: 'evaluations',
@@ -654,11 +662,13 @@ function AnswerPannel({
     stream_chat.onmessage = (e) => {
       const jsonData = JSON.parse(e.data)
       setResponse((prev) => prev + jsonData.choices[0].delta.content)
+      setIsStreaming(true)
 
       if (jsonData.choices[0].finish_reason === 'stop') {
         stream_chat.close()
         setIsUserScrolledUp(false)
         setIsStreamFinished(true)
+        setIsStreaming(false)
       }
     }
 
@@ -713,7 +723,7 @@ function AnswerPannel({
             className="shadow-inner fr-mt-1v rounded-lg fr-px-2w h-[50vh] overflow-y-scroll"
           >
             <p>
-              <TextWithSources text={response} />
+              <TextWithSources text={displayedText} />
             </p>
           </div>
         </div>
