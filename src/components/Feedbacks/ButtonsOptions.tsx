@@ -24,21 +24,7 @@ export function ButtonsOptions<T extends PositiveReason | NegativeReason>({
   setButtonsType,
   setOtherReason,
 }: ButtonsOptionsProps<T>) {
-  console.log(
-    'isFirst:',
-    isFirst,
-    'buttonsType:',
-    buttonsType,
-    'reasons:',
-    reasons,
-    'setReasons:',
-    setReasons,
-    'setButtonsType:',
-    setButtonsType,
-  )
-
   const handleClick = (reasonValue: T) => {
-    console.log('handleclick:', 'reasonValue:', reasonValue)
     if (reasons.includes(reasonValue)) {
       setReasons(reasons.filter((reason) => reason !== reasonValue))
     } else {

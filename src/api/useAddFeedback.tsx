@@ -15,10 +15,9 @@ interface AddFeedbackParams {
 }
 
 const addFeedback = async ({ feedback, streamId }: AddFeedbackParams) => {
-  console.log('addFeedback', feedback, streamId)
   const authToken = localStorage.getItem('authToken')
   const data = {
-    is_good: !feedback.isGood,
+    is_good: feedback.isGood === null ? null : !feedback.isGood,
     message: feedback.message,
     positives: feedback.positives ? feedback.positives : [],
     negatives: feedback.negatives ? feedback.negatives : [],
