@@ -626,10 +626,6 @@ function AnswerPannel({
     }
   }, [])
 
-  useEffect(() => {
-    console.log('render response panel')
-  }, [])
-
   async function askAlbert() {
     const headers = setHeaders(false)
     const stream_data = {
