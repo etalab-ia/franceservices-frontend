@@ -6,7 +6,8 @@ on:
       - main
       - staging
       - dev
-
+  workflow_call: # reusable workflow
+  workflow_dispatch: # manual triggering
 env:
   IMAGE_NAME: ghcr.io/${{ github.repository }}/frontend
   IMAGE_TAG: ${{ github.sha }}
